@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic
 {
-    internal class FilesOperations
+    public class FilesOperations
     {
         public static void AppendToCSV()
         {
