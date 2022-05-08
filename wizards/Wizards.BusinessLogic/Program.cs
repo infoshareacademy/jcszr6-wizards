@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Media;
 
-namespace wizards
+namespace Wizards.BusinessLogic
 {
     internal class Program
     {

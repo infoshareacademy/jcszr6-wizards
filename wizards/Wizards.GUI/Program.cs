@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace wizard.gui
+namespace Wizards.GUI
 {
     internal class Program
     {

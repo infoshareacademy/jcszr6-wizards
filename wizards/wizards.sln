@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "wizards", "wizards\wizards.csproj", "{EF4DBBD5-2FD8-419C-A180-95D6E151E0F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.BusinessLogic", "Wizards.BusinessLogic\Wizards.BusinessLogic.csproj", "{EF4DBBD5-2FD8-419C-A180-95D6E151E0F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "wizard.gui", "wizard.gui\wizard.gui.csproj", "{2539CA12-3A17-4677-9685-152CAA265C04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.GUI", "Wizards.GUI\Wizards.GUI.csproj", "{2539CA12-3A17-4677-9685-152CAA265C04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

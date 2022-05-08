@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace wizards
+namespace Wizards.BusinessLogic
 {
     internal class MainMenu
     {

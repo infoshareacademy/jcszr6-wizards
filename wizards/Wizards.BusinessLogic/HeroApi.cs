@@ -7,7 +7,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace wizards
+namespace Wizards.BusinessLogic
 {
     public class HeroApi
     {
