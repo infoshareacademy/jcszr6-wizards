@@ -18,12 +18,12 @@ namespace Wizards.GUI
                 }
             }
 
-            //if (OperatingSystem.IsWindows())
-            //{
-            //    SoundPlayer player = new SoundPlayer(@"Fun_House.wav");
-            //    player.Load();
-            //    player.PlayLooping();
-            //}
+            if (OperatingSystem.IsWindows())
+            {
+                SoundPlayer player = new SoundPlayer(@"MenuMusic-1.wav");
+                player.Load();
+                player.PlayLooping();
+            }
 
             bool showMenu = true;
             while (showMenu)
