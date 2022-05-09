@@ -10,17 +10,15 @@ namespace Wizards.BusinessLogic
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int AttackIncrease { get; set; }
-        public int DefenceIncrease { get;  set; }
-        public int ItemEndurance { get; set; }
+        public int BuyPrice { get; set; }
+        public int SellPrice { get; set; }
 
-        public Item(int id, string name, int attack, int defence)
+        public Item(int id, string name, int buyPrice, int sellPrice)
         {
             this.Id = id;
             this.Name = name;
-            this.AttackIncrease = attack;
-            this.DefenceIncrease = defence;
-            this.ItemEndurance = 100;
+            this.BuyPrice = buyPrice;
+            this.SellPrice = sellPrice;
         }
 
         public Item()

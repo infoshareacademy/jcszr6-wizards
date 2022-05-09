@@ -15,6 +15,8 @@ namespace Wizards.BusinessLogic
         public int CurrentHealth { get; set; }
         public int Attack { get; set; }
         public int Defence { get; set; }
+        public int Gold { get; set; }
+        public int RankPoints { get; set; }
         public List<Item> itemList = new List<Item>();
         
         public Hero(int id, string nick)
@@ -25,6 +27,8 @@ namespace Wizards.BusinessLogic
             this.CurrentHealth = MaxHealth;
             this.Attack = 10;
             this.Defence = 5;
+            this.Gold = 0;
+            this.RankPoints = 0;
         }
 
         public Hero()
