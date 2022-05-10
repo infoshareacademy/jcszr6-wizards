@@ -17,8 +17,12 @@ namespace Wizards.BusinessLogic
         public int Defence { get; set; }
         public int Gold { get; set; }
         public int RankPoints { get; set; }
-        public List<Item> itemList = new List<Item>();
-        
+        public int MatchPlayedToday { get; set; }
+        public int TotalMatchPlayed { get; set; }
+        public int TotalMatchWin { get; set; }
+        public int TotalMatchLoose { get; set; }
+        public List<Item> Inventory = new List<Item>();
+
         public Hero(int id, string nick)
         {
             this.Id = id;
@@ -29,16 +33,20 @@ namespace Wizards.BusinessLogic
             this.Defence = 5;
             this.Gold = 0;
             this.RankPoints = 0;
+            this.MatchPlayedToday = 0;
+            this.TotalMatchPlayed = 0;
+            this.TotalMatchWin = 0;
+            this.TotalMatchLoose = 0;
         }
 
         public Hero()
         {
-            
+
         }
 
         public void AddItem(Item item)
         {
-            this.itemList.Add(item);
+            this.Inventory.Add(item);
         }
 
     }

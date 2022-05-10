@@ -23,7 +23,6 @@ namespace Wizards.BusinessLogic
             this.Password =password;
             this.Email =email;
             this.DateOfBirth =dateOfBirth;
-            
         }
 
         public Player()

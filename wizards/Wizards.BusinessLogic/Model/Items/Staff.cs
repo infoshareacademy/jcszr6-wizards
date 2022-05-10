@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic.Model.Items
 {
-    internal class Armor : Item
+    internal class Staff : Item
     {
-        public int DefenceIncrease { get; set; }
+        public int AttackIncrease { get; set; }
         public int ItemEndurance { get; set; }
         public int RepairCostPerEndurance { get; set; }
 
-        public Armor(int id, string name, int buyPrice, int sellPrice, int defenceIncrease)
+        public Staff(int id, string name, int buyPrice, int sellPrice, int attackIncrease)
         {
             base.Id = id;
             base.Name = name;
             base.BuyPrice = buyPrice;
             base.SellPrice = sellPrice;
-            this.DefenceIncrease = defenceIncrease;
+            this.AttackIncrease = attackIncrease;
             this.ItemEndurance = 100;
-            this.RepairCostPerEndurance = (int)Math.Round(BuyPrice/100.0);
+            this.RepairCostPerEndurance = (int)Math.Round(BuyPrice / 100.0);
         }
 
-        public Armor()
+        public Staff()
         {
             
         }
