@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Media;
+using Newtonsoft.Json;
+using Wizards.BusinessLogic;
+using Wizards.BusinessLogic.Model.Items;
 
 namespace Wizards.GUI
 {
@@ -8,6 +13,7 @@ namespace Wizards.GUI
     {
         static void Main(string[] args)
         {
+
             Console.Write("Ładowanie Unreal Engine 5: ");
             using (var progress = new ProgressBar())
             {

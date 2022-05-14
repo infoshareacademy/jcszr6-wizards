@@ -7,16 +7,26 @@ using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic
 {
-    internal class Hero
+    public class Hero
     {
         public int Id { get; set; }
         public string NickName { get; set; }
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
         public int Attack { get; set; }
-        public int Defence { get; set; }
-        public List<Item> itemList = new List<Item>();
-        
+        public int Defense { get; set; }
+        public int Gold { get; set; }
+        public int RankPoints { get; set; }
+        public int MatchPlayedToday { get; set; }
+        public int TotalMatchPlayed { get; set; }
+        public int TotalMatchWin { get; set; }
+        public int TotalMatchLoose { get; set; }
+        public List<Item> Inventory { get; set; }
+        public List<Item> Equipped { get; set; }
+        public Restriction Restrictions { get; set; }
+
+        // funkcja swap(List<item> source, List<Item> target, Item source, Item target)
+
         public Hero(int id, string nick)
         {
             this.Id = id;
@@ -24,18 +34,18 @@ namespace Wizards.BusinessLogic
             this.MaxHealth = 300;
             this.CurrentHealth = MaxHealth;
             this.Attack = 10;
-            this.Defence = 5;
+            this.Defense = 5;
+            this.Gold = 0;
+            this.RankPoints = 0;
+            this.MatchPlayedToday = 0;
+            this.TotalMatchPlayed = 0;
+            this.TotalMatchWin = 0;
+            this.TotalMatchLoose = 0;
         }
 
         public Hero()
         {
-            
-        }
 
-        public void AddItem(Item item)
-        {
-            this.itemList.Add(item);
         }
-
     }
 }
