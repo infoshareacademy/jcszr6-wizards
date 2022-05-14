@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic
 {
-    internal class Player
+    public class Player
     {
         public int Id { get; set; }
         public string UserName { get;  set; }
@@ -14,7 +14,7 @@ namespace Wizards.BusinessLogic
         public string Email { get;  set; }
         public DateTime DateOfBirth { get; set; }
         
-        public List<Hero> heros = new List<Hero>();
+        public List<Hero> Heroes = new List<Hero>();
 
         public Player(int id, string userName, string password, string email, DateTime dateOfBirth)
         {
