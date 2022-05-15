@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Wizards.BusinessLogic;
 
 
@@ -31,6 +32,10 @@ namespace Wizards.GUI
             Console.ResetColor();
             Console.WriteLine($"Ver.: {version}");
             Console.WriteLine();
+
+
+
+
             Console.WriteLine("Choose an option:\n");
             Console.WriteLine("1) Logowanie,");
             Console.WriteLine("2) Założenie konta,");
@@ -38,10 +43,16 @@ namespace Wizards.GUI
             Console.WriteLine("4) Odczyt z CSV,");
             Console.WriteLine("5) Zapis do CSV,");
             Console.WriteLine("9) Wyjście.\n");
+            Console.WriteLine("0) Nowe menu.\n");
             Console.Write("Wybierz opcję: ");
 
             switch (Console.ReadLine())
             {
+                case "0":
+                    Console.WriteLine("Nowe Menu\n");
+                    ScrollMenu.DisplayMenu();
+                    Console.ReadLine();
+                    return true;
                 case "1":
                     Console.WriteLine("Wybrałeś zalogowanie");
                     Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
@@ -67,14 +78,49 @@ namespace Wizards.GUI
                     Console.WriteLine("A więc żegnaj.");
                     Console.WriteLine();
                     Console.Write("Zwalnianie zasobów systemowych: ");
-                    using (var progress = new ProgressBar())
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    ManualResetEventSlim finishEvent = new ManualResetEventSlim();
+                    finishEvent.Reset();
+
+                    DustInTheWind.ConsoleTools.Controls.Spinners.ProgressBar progressBar = new DustInTheWind.ConsoleTools.Controls.Spinners.ProgressBar();
+
+                    Task.Run<Task>(async () =>
                     {
-                        for (int i = 0; i <= 100; i++)
+                        progressBar.Display();
+
+                        for (int i = 0; i < 100; i++)
                         {
-                            progress.Report((double)i / 100);
-                            Thread.Sleep(20);
+                            await Task.Delay(100);
+                            progressBar.Value++;
                         }
-                    }
+
+                        finishEvent.Set();
+                    });
+
+                    finishEvent.Wait();
+
+                    progressBar.Close();
+
+                    //using (var progress = new ProgressBar())
+                    //{
+                    //    for (int i = 0; i <= 100; i++)
+                    //    {
+                    //        progress.Report((double)i / 100);
+                    //        Thread.Sleep(20);
+                    //    }
+                    //}
 
                     return false;
                 default:
@@ -96,4 +142,7 @@ namespace Wizards.GUI
         }
 
     }
+
+
 }
+
