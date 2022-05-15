@@ -13,7 +13,6 @@ namespace Wizards.GUI
     {
         static void Main(string[] args)
         {
-
             Console.Write("Ładowanie Unreal Engine 5: ");
             using (var progress = new ProgressBar())
             {
