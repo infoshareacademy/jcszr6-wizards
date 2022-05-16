@@ -50,7 +50,7 @@ namespace Wizards.GUI
             {
                 case "0":
                     Console.WriteLine("Nowe Menu\n");
-                    ScrollMenu.DisplayMenu();
+                    //ScrollMenu.DisplayMenu();
                     Console.ReadLine();
                     return true;
                 case "1":
@@ -139,6 +139,8 @@ namespace Wizards.GUI
             Console.WriteLine("Paweł Dawicki\n");
             Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
             Console.ReadKey();
+            Console.Clear();
+            //ScrollMenu.DisplayMenu();
         }
 
     }

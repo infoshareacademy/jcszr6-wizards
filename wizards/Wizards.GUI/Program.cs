@@ -27,27 +27,27 @@ namespace Wizards.GUI
             //    }
             //}
 
-            ManualResetEventSlim finishEvent = new ManualResetEventSlim();
-            finishEvent.Reset();
+            //ManualResetEventSlim finishEvent = new ManualResetEventSlim();
+            //finishEvent.Reset();
 
-            DustInTheWind.ConsoleTools.Controls.Spinners.ProgressBar progressBar = new DustInTheWind.ConsoleTools.Controls.Spinners.ProgressBar();
+            //DustInTheWind.ConsoleTools.Controls.Spinners.ProgressBar progressBar = new DustInTheWind.ConsoleTools.Controls.Spinners.ProgressBar();
 
-            Task.Run<Task>(async () =>
-            {
-                progressBar.Display();
+            //Task.Run<Task>(async () =>
+            //{
+            //    progressBar.Display();
 
-                for (int i = 0; i < 100; i++)
-                {
-                    await Task.Delay(100);
-                    progressBar.Value++;
-                }
+            //    for (int i = 0; i < 100; i++)
+            //    {
+            //        await Task.Delay(100);
+            //        progressBar.Value++;
+            //    }
 
-                finishEvent.Set();
-            });
+            //    finishEvent.Set();
+            //});
 
-            finishEvent.Wait();
+            //finishEvent.Wait();
 
-            progressBar.Close();
+            //progressBar.Close();
 
 
             //if (OperatingSystem.IsWindows())
@@ -57,14 +57,19 @@ namespace Wizards.GUI
             //    player.PlayLooping();
             //}
 
-            bool showMenu = true;
-            while (showMenu)
-            {
-                showMenu = MainMenu.ShowMenu();
-            }
-        }
-    }
+            //bool showMenu = true;
+            //while (showMenu)
+            //{
+            //    showMenu = MainMenu.ShowMenu();
+            //}
 
+            //ScrollMenu.DisplayMenu();
+            ScrollMenu.DisplayMenu2();
+
+        }
+
+
+    }
 
 
 }
