@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading;
-using System.Media;
-using Newtonsoft.Json;
-using Wizards.BusinessLogic;
-using Wizards.BusinessLogic.Model.Items;
-using System.Threading.Tasks;
 using DustInTheWind.ConsoleTools.Controls.Menus.MenuItems;
 using DustInTheWind.ConsoleTools.Controls.Menus;
 
@@ -16,12 +8,12 @@ namespace Wizards.GUI
     internal class ScrollMainMenu
     {
 
-        public static void DisplayMenu()
+        public static void DisplayScrollMenu()
         {
 
 
 
-            DustInTheWind.ConsoleTools.Controls.Menus.ScrollMenu scrollMenu = new DustInTheWind.ConsoleTools.Controls.Menus.ScrollMenu
+            ScrollMenu scrollMenu = new ScrollMenu
             {
 
                 Margin = 1,                
