@@ -57,7 +57,7 @@ namespace Wizards.GUI
 
                 new SeparatorMenuItem(),
 
-                new YesNoMenuItem
+                new LabelMenuItem
                 {
                     Text = "Zakończ grę",
                     Command = new Exit()
