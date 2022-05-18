@@ -31,19 +31,19 @@ namespace Wizards.GUI.Menu
 
                 new LabelMenuItem
                 {
-                    Text = "Wyszukaj gracza po dacie",
+                    Text = "Wyszukaj gracza po dacie urodzenia",
                     Command = new SearchPalyerByDateHeroMenuClassItem()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Wyszukiwanie itemu po rodzaju",
+                    Text = "Wyszukiwanie przedmiotu po rodzaju",
                     Command = new SearchItemsByTypeItemMenuCLassItem()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Wyszukiwanie przedmiotow nalezacych do gracza",
+                    Text = "Wyszukiwanie przedmiotow należących do gracza",
                     Command = new SearchPlayerItemsMenuCLassItem()
                 },
 
@@ -51,7 +51,7 @@ namespace Wizards.GUI.Menu
 
                 new LabelMenuItem
                 {
-                    Text = "To main menu",
+                    Text = "Powrót",
                     Command = new ToMainMenu()
                 },
 

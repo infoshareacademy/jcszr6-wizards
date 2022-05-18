@@ -51,7 +51,7 @@ namespace Wizards.GUI
 
                 new LabelMenuItem
                 {
-                    Text = "Authors",
+                    Text = "Autorzy",
                     Command = new ShowAuthors()
                 },
 
@@ -59,7 +59,7 @@ namespace Wizards.GUI
 
                 new YesNoMenuItem
                 {
-                    Text = "Exit",
+                    Text = "Zakończ grę",
                     Command = new Exit()
                 },
 

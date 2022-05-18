@@ -161,7 +161,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Dodaj Item");
+            Console.WriteLine("Dodaj przedmiot");
             Console.ReadKey();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
@@ -200,7 +200,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Edytuj Item");
+            Console.WriteLine("Edytuj przedmiot");
             Console.ReadKey();
             Menu.ScrollSubMenuEdit.DisplayScrollSubMenuEdit();
         }
@@ -212,7 +212,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Wyszukaj gracza po nazwieEdytuj Item");
+            Console.WriteLine("Wyszukaj gracza po nazwie");
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
         }
@@ -237,7 +237,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Wyszukiwanie itemu po rodzaju");
+            Console.WriteLine("Wyszukiwanie przedmiot po jego rodzaju");
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
         }
@@ -250,7 +250,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Wyszukiwanie przedmiotow nalezacych do gracza");
+            Console.WriteLine("Wyszukiwanie przedmiotow należących do gracza");
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
         }

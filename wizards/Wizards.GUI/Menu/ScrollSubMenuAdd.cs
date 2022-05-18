@@ -37,7 +37,7 @@ namespace Wizards.GUI.Menu
 
                 new LabelMenuItem
                 {
-                    Text = "Dodaj item",
+                    Text = "Dodaj przedmiot",
                     Command = new AddItemMenuCLassItem()
                 },
 
@@ -45,7 +45,7 @@ namespace Wizards.GUI.Menu
 
                 new LabelMenuItem
                 {
-                    Text = "To main menu",
+                    Text = "Powrót",
                     Command = new ToMainMenu()
                 },
 
