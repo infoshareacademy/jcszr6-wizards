@@ -7,10 +7,22 @@
 
   <ItemGroup>
     <None Remove="Model\Items\data.json" />
+    <None Remove="Text\Json\Creator.json" />
+    <None Remove="Text\Json\Menu.json" />
+    <None Remove="Text\Json\Value Errors.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Data\data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Creator.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Menu.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Value Errors.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -30,10 +42,6 @@
     <None Update="music.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ConsoleDataInput\" />
   </ItemGroup>
 
 </Project>

@@ -6,24 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Text\Creator.json" />
-    <None Remove="Text\Menu.json" />
-    <None Remove="Text\Value Errors.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Text\Json\Creator.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Text\Json\Menu.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Text\Json\Value Errors.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
   </ItemGroup>
@@ -39,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Creators\" />
     <Folder Include="Screen\" />
   </ItemGroup>
 

@@ -1,7 +1,8 @@
 ﻿namespace Wizards.GUI
 {
-    public enum ValueErrorsMsg
+    public enum MenuMsg
     {
         Default = 0,
+
     }
 }

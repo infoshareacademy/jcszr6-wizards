@@ -1,0 +1,10 @@
+{
+  "Default": "Domyślny tekst Błędnej wrtości!",
+  "ToShort": "Podany tekst jest za krótki!",
+  "ToLong": "Podany tekst jest za długi!",
+  "IsNull": "Podany tekst jest pusty!",
+  "HasRestrictedWord": "Podany tekst zawiera niedozwolone słowo!",
+  "HasRestrictedCharacter": "Podany tekst zawiera nieprawidłowy znak lub symbol!",
+  "NumberToHigh": "Podana liczba jest zbyt duża", 
+  "NumberToLow":  "Podana liczba jest zbyt mała" 
+}
