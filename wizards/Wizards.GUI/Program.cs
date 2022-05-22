@@ -6,6 +6,9 @@ using System.Media;
 using Newtonsoft.Json;
 using Wizards.BusinessLogic;
 using Wizards.BusinessLogic.Model.Items;
+using System.Threading.Tasks;
+using DustInTheWind.ConsoleTools.Controls.Menus.MenuItems;
+using DustInTheWind.ConsoleTools.Controls.Menus;
 
 namespace Wizards.GUI
 {
@@ -15,14 +18,8 @@ namespace Wizards.GUI
         {
 
             Console.Write("Ładowanie Unreal Engine 5: ");
-            using (var progress = new ProgressBar())
-            {
-                for (int i = 0; i <= 100; i++)
-                {
-                    progress.Report((double)i / 100);
-                    Thread.Sleep(20);
-                }
-            }
+
+            ProgressBar.DisplayProgressBar();
 
             if (OperatingSystem.IsWindows())
             {
@@ -31,11 +28,12 @@ namespace Wizards.GUI
                 player.PlayLooping();
             }
 
-            bool showMenu = true;
-            while (showMenu)
-            {
-                showMenu = MainMenu.ShowMenu();
-            }
+            ScrollMainMenu.DisplayScrollMenu();
+
         }
+
+
     }
+
+
 }
