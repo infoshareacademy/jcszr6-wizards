@@ -9,57 +9,48 @@ namespace Wizards.BusinessLogic
 {
     public class FilesOperations
     {
-        public static void AppendToCSV()
+        public static void IsJson()
         {
-            ////var list = Heros.GetContacts();
-            //foreach (var c in list)
-            //{
-            //    File.AppendAllText("hero.csv", $"{c.Name},{c.Phone}\n");
-            //}
-            Console.WriteLine("Dodano na koniec");
-            Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
-            Console.ReadKey();
+            string dataDirectory;
+            var directory = new DirectoryInfo(Environment.CurrentDirectory);
+            var jsonFile = "data.json";
+
+            while (!directory.GetFiles("*.sln").Any())
+            {
+                directory = directory.Parent;
+            }
+            dataDirectory = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data");
+            Console.WriteLine($"{dataDirectory}");
+            var path = Path.Combine($"{dataDirectory}", $"{jsonFile}");
+
+            var isData = Directory.Exists(path);
+
+            if (isData == false)
+            {
+                Console.WriteLine($"Data json on directory {path} don't exist.");
+                Console.WriteLine("Create json");
+                JsonSetup.JsonCreate();
+            }
+
+            Console.WriteLine($"Data json on {path} exist.");
 
         }
-        public static void ReadCSVFile()
+
+        //public static void RemoveJson()
+        //{
+        //    Console.WriteLine("*************************");
+        //    Console.WriteLine($"{}");
+        //    File.Delete();
+        //}
+
+
+        public static void PrintJson()
         {
-            //var lines = File.ReadAllLines("hero.csv");
-            //var list = new List<Hero>();
-            //foreach (var line in lines)
-            //{
-            //    var values = line.Split(',');
-            //    if (values.Length == 2)
-            //    {
-            //        var contact = new Hero() { Name = values[0], Phone = values[1] };
-            //        list.Add(contact);
-            //    }
-            //}
-            //Console.Clear();
-            //Console.WriteLine("Lista bohaterów w Wizards:");
-            //Console.WriteLine();
-            //list.ForEach(x => Console.WriteLine($"{x.Name}\t{x.Phone}"));
             Console.WriteLine("Przeczytano plik");
             Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
             Console.ReadKey();
         }
+
     }
-    //public class Heros
-    //{
-    //    public static List<Hero> GetContacts()
-    //    {
-    //        return new List<Hero>()
-    //        {
-    //            new Hero(){Name="Adrian Zamysłowski", Phone="333-444-555"},
-    //            new Hero(){Name="Jakub Oczko", Phone="669-444-777"},
-    //            new Hero(){Name="Paweł Grajnert", Phone="222-444-888"},
-    //            new Hero(){Name="Paweł Dawicki", Phone="000-111-222"},
-    //        };
-    //    }
-    //}
-    //public class Hero
-    //{
-    //    public string Name { get; set; }
-    //    public string Phone { get; set; }
-    //}
 }
 

@@ -36,7 +36,13 @@ namespace Wizards.GUI
         {
             Console.Clear();
             Console.WriteLine("Uaktualnij dane");
+            FilesOperations.IsJson();
+
+
             Console.ReadKey();
+
+            //FilesOperations.RemoveJson();
+            //Console.ReadKey();
             ScrollMainMenu.DisplayScrollMenu();
         }
     }
@@ -101,7 +107,7 @@ namespace Wizards.GUI
             Console.WriteLine("A więc żegnaj.");
             Console.WriteLine();
             Console.Write("Zwalnianie zasobów systemowych: ");
-            ProgressBar.DisplayProgressBar();
+            //ProgressBar.DisplayProgressBar();
             Environment.Exit(0);
 
         }

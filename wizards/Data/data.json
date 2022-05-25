@@ -1,0 +1,2696 @@
+[
+  {
+    "Heroes": [
+      {
+        "Id": 1100,
+        "NickName": "wizard-1100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3420,
+        "RankPoints": 6012,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 39,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 84,
+            "Id": 1101,
+            "Name": "staff-1101",
+            "BuyPrice": 8426,
+            "SellPrice": 6320
+          },
+          {
+            "AttackIncrease": 25,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 41,
+            "Id": 1102,
+            "Name": "staff-1102",
+            "BuyPrice": 4105,
+            "SellPrice": 3079
+          },
+          {
+            "DefenceIncrease": 22,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 44,
+            "Id": 1103,
+            "Name": "armor-1103",
+            "BuyPrice": 4402,
+            "SellPrice": 3302
+          },
+          {
+            "DefenceIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 67,
+            "Id": 1104,
+            "Name": "armor-1104",
+            "BuyPrice": 6703,
+            "SellPrice": 5027
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 26,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 78,
+            "Id": 1191,
+            "Name": "staff-1191",
+            "BuyPrice": 7840,
+            "SellPrice": 5880
+          },
+          {
+            "DefenceIncrease": 17,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 70,
+            "Id": 1192,
+            "Name": "armor-1192",
+            "BuyPrice": 6987,
+            "SellPrice": 5240
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 1200,
+        "NickName": "wizard-1200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4086,
+        "RankPoints": 95475,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 23,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 65,
+            "Id": 1201,
+            "Name": "armor-1201",
+            "BuyPrice": 6461,
+            "SellPrice": 4846
+          },
+          {
+            "DefenceIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 58,
+            "Id": 1202,
+            "Name": "armor-1202",
+            "BuyPrice": 5807,
+            "SellPrice": 4355
+          },
+          {
+            "AttackIncrease": 13,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 54,
+            "Id": 1203,
+            "Name": "staff-1203",
+            "BuyPrice": 5395,
+            "SellPrice": 4046
+          },
+          {
+            "AttackIncrease": 11,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 77,
+            "Id": 1204,
+            "Name": "staff-1204",
+            "BuyPrice": 7726,
+            "SellPrice": 5794
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 5,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 73,
+            "Id": 1291,
+            "Name": "staff-1291",
+            "BuyPrice": 7334,
+            "SellPrice": 5500
+          },
+          {
+            "DefenceIncrease": 36,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 25,
+            "Id": 1292,
+            "Name": "armor-1292",
+            "BuyPrice": 2485,
+            "SellPrice": 1864
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 1000,
+    "UserName": "test-player-1",
+    "Password": "test_1",
+    "Email": "testplayer1@wizards.com",
+    "DateOfBirth": "1991-08-12T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 2100,
+        "NickName": "wizard-2100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3411,
+        "RankPoints": 32086,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 2101,
+            "Name": "staff-2101",
+            "BuyPrice": 2834,
+            "SellPrice": 2126
+          },
+          {
+            "AttackIncrease": 32,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 66,
+            "Id": 2102,
+            "Name": "staff-2102",
+            "BuyPrice": 6616,
+            "SellPrice": 4962
+          },
+          {
+            "AttackIncrease": 44,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 30,
+            "Id": 2103,
+            "Name": "staff-2103",
+            "BuyPrice": 3047,
+            "SellPrice": 2285
+          },
+          {
+            "AttackIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 2104,
+            "Name": "staff-2104",
+            "BuyPrice": 2766,
+            "SellPrice": 2074
+          },
+          {
+            "AttackIncrease": 25,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 64,
+            "Id": 2105,
+            "Name": "staff-2105",
+            "BuyPrice": 6429,
+            "SellPrice": 4822
+          },
+          {
+            "AttackIncrease": 26,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 95,
+            "Id": 2106,
+            "Name": "staff-2106",
+            "BuyPrice": 9479,
+            "SellPrice": 7109
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 2191,
+            "Name": "staff-2191",
+            "BuyPrice": 2811,
+            "SellPrice": 2108
+          },
+          {
+            "DefenceIncrease": 31,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 43,
+            "Id": 2192,
+            "Name": "armor-2192",
+            "BuyPrice": 4322,
+            "SellPrice": 3242
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 2200,
+        "NickName": "wizard-2200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 894,
+        "RankPoints": 22908,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 37,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 14,
+            "Id": 2201,
+            "Name": "staff-2201",
+            "BuyPrice": 1391,
+            "SellPrice": 1043
+          },
+          {
+            "AttackIncrease": 37,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 52,
+            "Id": 2202,
+            "Name": "staff-2202",
+            "BuyPrice": 5203,
+            "SellPrice": 3902
+          },
+          {
+            "AttackIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 81,
+            "Id": 2203,
+            "Name": "staff-2203",
+            "BuyPrice": 8078,
+            "SellPrice": 6058
+          },
+          {
+            "AttackIncrease": 23,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 94,
+            "Id": 2204,
+            "Name": "staff-2204",
+            "BuyPrice": 9363,
+            "SellPrice": 7022
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 40,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 39,
+            "Id": 2291,
+            "Name": "staff-2291",
+            "BuyPrice": 3888,
+            "SellPrice": 2916
+          },
+          {
+            "DefenceIncrease": 44,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 71,
+            "Id": 2292,
+            "Name": "armor-2292",
+            "BuyPrice": 7148,
+            "SellPrice": 5361
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 2000,
+    "UserName": "test-player-2",
+    "Password": "test_2",
+    "Email": "testplayer2@wizards.com",
+    "DateOfBirth": "1992-05-06T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 3100,
+        "NickName": "wizard-3100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 1418,
+        "RankPoints": 91355,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 21,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 98,
+            "Id": 3101,
+            "Name": "staff-3101",
+            "BuyPrice": 9793,
+            "SellPrice": 7345
+          },
+          {
+            "DefenceIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 94,
+            "Id": 3102,
+            "Name": "armor-3102",
+            "BuyPrice": 9350,
+            "SellPrice": 7012
+          },
+          {
+            "AttackIncrease": 11,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 96,
+            "Id": 3103,
+            "Name": "staff-3103",
+            "BuyPrice": 9562,
+            "SellPrice": 7172
+          },
+          {
+            "DefenceIncrease": 42,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 13,
+            "Id": 3104,
+            "Name": "armor-3104",
+            "BuyPrice": 1286,
+            "SellPrice": 964
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 34,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 40,
+            "Id": 3191,
+            "Name": "staff-3191",
+            "BuyPrice": 3991,
+            "SellPrice": 2993
+          },
+          {
+            "DefenceIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 21,
+            "Id": 3192,
+            "Name": "armor-3192",
+            "BuyPrice": 2123,
+            "SellPrice": 1592
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 3200,
+        "NickName": "wizard-3200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4411,
+        "RankPoints": 24332,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 33,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 47,
+            "Id": 3201,
+            "Name": "armor-3201",
+            "BuyPrice": 4652,
+            "SellPrice": 3489
+          },
+          {
+            "DefenceIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 86,
+            "Id": 3202,
+            "Name": "armor-3202",
+            "BuyPrice": 8644,
+            "SellPrice": 6483
+          },
+          {
+            "DefenceIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 52,
+            "Id": 3203,
+            "Name": "armor-3203",
+            "BuyPrice": 5181,
+            "SellPrice": 3886
+          },
+          {
+            "DefenceIncrease": 16,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 25,
+            "Id": 3204,
+            "Name": "armor-3204",
+            "BuyPrice": 2475,
+            "SellPrice": 1856
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 50,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 72,
+            "Id": 3291,
+            "Name": "staff-3291",
+            "BuyPrice": 7228,
+            "SellPrice": 5421
+          },
+          {
+            "DefenceIncrease": 22,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 51,
+            "Id": 3292,
+            "Name": "armor-3292",
+            "BuyPrice": 5101,
+            "SellPrice": 3826
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 3000,
+    "UserName": "test-player-3",
+    "Password": "test_3",
+    "Email": "testplayer3@wizards.com",
+    "DateOfBirth": "1993-09-12T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 4100,
+        "NickName": "wizard-4100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4351,
+        "RankPoints": 18132,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 35,
+            "Id": 4101,
+            "Name": "armor-4101",
+            "BuyPrice": 3537,
+            "SellPrice": 2653
+          },
+          {
+            "AttackIncrease": 33,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 55,
+            "Id": 4102,
+            "Name": "staff-4102",
+            "BuyPrice": 5460,
+            "SellPrice": 4095
+          },
+          {
+            "DefenceIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 22,
+            "Id": 4103,
+            "Name": "armor-4103",
+            "BuyPrice": 2202,
+            "SellPrice": 1652
+          },
+          {
+            "DefenceIncrease": 17,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 96,
+            "Id": 4104,
+            "Name": "armor-4104",
+            "BuyPrice": 9561,
+            "SellPrice": 7171
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 25,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 51,
+            "Id": 4191,
+            "Name": "staff-4191",
+            "BuyPrice": 5077,
+            "SellPrice": 3808
+          },
+          {
+            "DefenceIncrease": 34,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 31,
+            "Id": 4192,
+            "Name": "armor-4192",
+            "BuyPrice": 3119,
+            "SellPrice": 2339
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 4000,
+    "UserName": "test-player-4",
+    "Password": "test_4",
+    "Email": "testplayer4@wizards.com",
+    "DateOfBirth": "1994-07-11T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 5100,
+        "NickName": "wizard-5100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3401,
+        "RankPoints": 1321,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 35,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 14,
+            "Id": 5101,
+            "Name": "staff-5101",
+            "BuyPrice": 1425,
+            "SellPrice": 1069
+          },
+          {
+            "DefenceIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 79,
+            "Id": 5102,
+            "Name": "armor-5102",
+            "BuyPrice": 7898,
+            "SellPrice": 5924
+          },
+          {
+            "AttackIncrease": 26,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 16,
+            "Id": 5103,
+            "Name": "staff-5103",
+            "BuyPrice": 1625,
+            "SellPrice": 1219
+          },
+          {
+            "DefenceIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 53,
+            "Id": 5104,
+            "Name": "armor-5104",
+            "BuyPrice": 5344,
+            "SellPrice": 4008
+          },
+          {
+            "DefenceIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 16,
+            "Id": 5105,
+            "Name": "armor-5105",
+            "BuyPrice": 1602,
+            "SellPrice": 1202
+          },
+          {
+            "AttackIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 38,
+            "Id": 5106,
+            "Name": "staff-5106",
+            "BuyPrice": 3760,
+            "SellPrice": 2820
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 29,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 57,
+            "Id": 5191,
+            "Name": "staff-5191",
+            "BuyPrice": 5727,
+            "SellPrice": 4295
+          },
+          {
+            "DefenceIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 11,
+            "Id": 5192,
+            "Name": "armor-5192",
+            "BuyPrice": 1135,
+            "SellPrice": 851
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 5000,
+    "UserName": "test-player-5",
+    "Password": "test_5",
+    "Email": "testplayer5@wizards.com",
+    "DateOfBirth": "1995-05-25T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 6100,
+        "NickName": "wizard-6100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 2571,
+        "RankPoints": 32170,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 32,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 70,
+            "Id": 6101,
+            "Name": "staff-6101",
+            "BuyPrice": 6960,
+            "SellPrice": 5220
+          },
+          {
+            "DefenceIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 18,
+            "Id": 6102,
+            "Name": "armor-6102",
+            "BuyPrice": 1831,
+            "SellPrice": 1373
+          },
+          {
+            "AttackIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 80,
+            "Id": 6103,
+            "Name": "staff-6103",
+            "BuyPrice": 7961,
+            "SellPrice": 5971
+          },
+          {
+            "AttackIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 62,
+            "Id": 6104,
+            "Name": "staff-6104",
+            "BuyPrice": 6232,
+            "SellPrice": 4674
+          },
+          {
+            "AttackIncrease": 33,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 76,
+            "Id": 6105,
+            "Name": "staff-6105",
+            "BuyPrice": 7604,
+            "SellPrice": 5703
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 18,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 60,
+            "Id": 6191,
+            "Name": "staff-6191",
+            "BuyPrice": 5982,
+            "SellPrice": 4486
+          },
+          {
+            "DefenceIncrease": 27,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 86,
+            "Id": 6192,
+            "Name": "armor-6192",
+            "BuyPrice": 8566,
+            "SellPrice": 6424
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 6200,
+        "NickName": "wizard-6200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 1365,
+        "RankPoints": 16553,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 33,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 31,
+            "Id": 6201,
+            "Name": "staff-6201",
+            "BuyPrice": 3058,
+            "SellPrice": 2294
+          },
+          {
+            "AttackIncrease": 47,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 12,
+            "Id": 6202,
+            "Name": "staff-6202",
+            "BuyPrice": 1239,
+            "SellPrice": 929
+          },
+          {
+            "DefenceIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 87,
+            "Id": 6203,
+            "Name": "armor-6203",
+            "BuyPrice": 8710,
+            "SellPrice": 6532
+          },
+          {
+            "DefenceIncrease": 13,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 83,
+            "Id": 6204,
+            "Name": "armor-6204",
+            "BuyPrice": 8265,
+            "SellPrice": 6199
+          },
+          {
+            "AttackIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 57,
+            "Id": 6205,
+            "Name": "staff-6205",
+            "BuyPrice": 5729,
+            "SellPrice": 4297
+          },
+          {
+            "DefenceIncrease": 17,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 23,
+            "Id": 6206,
+            "Name": "armor-6206",
+            "BuyPrice": 2266,
+            "SellPrice": 1700
+          },
+          {
+            "DefenceIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 85,
+            "Id": 6207,
+            "Name": "armor-6207",
+            "BuyPrice": 8514,
+            "SellPrice": 6386
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 33,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 76,
+            "Id": 6291,
+            "Name": "staff-6291",
+            "BuyPrice": 7575,
+            "SellPrice": 5681
+          },
+          {
+            "DefenceIncrease": 46,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 11,
+            "Id": 6292,
+            "Name": "armor-6292",
+            "BuyPrice": 1051,
+            "SellPrice": 788
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 6300,
+        "NickName": "wizard-6300",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4537,
+        "RankPoints": 1268,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 17,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 92,
+            "Id": 6301,
+            "Name": "armor-6301",
+            "BuyPrice": 9196,
+            "SellPrice": 6897
+          },
+          {
+            "AttackIncrease": 37,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 24,
+            "Id": 6302,
+            "Name": "staff-6302",
+            "BuyPrice": 2421,
+            "SellPrice": 1816
+          },
+          {
+            "AttackIncrease": 41,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 20,
+            "Id": 6303,
+            "Name": "staff-6303",
+            "BuyPrice": 1951,
+            "SellPrice": 1463
+          },
+          {
+            "AttackIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 6304,
+            "Name": "staff-6304",
+            "BuyPrice": 2814,
+            "SellPrice": 2110
+          },
+          {
+            "AttackIncrease": 23,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 13,
+            "Id": 6305,
+            "Name": "staff-6305",
+            "BuyPrice": 1252,
+            "SellPrice": 939
+          },
+          {
+            "DefenceIncrease": 15,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 100,
+            "Id": 6306,
+            "Name": "armor-6306",
+            "BuyPrice": 9991,
+            "SellPrice": 7493
+          },
+          {
+            "AttackIncrease": 32,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 85,
+            "Id": 6307,
+            "Name": "staff-6307",
+            "BuyPrice": 8477,
+            "SellPrice": 6358
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 13,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 16,
+            "Id": 6391,
+            "Name": "staff-6391",
+            "BuyPrice": 1614,
+            "SellPrice": 1210
+          },
+          {
+            "DefenceIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 27,
+            "Id": 6392,
+            "Name": "armor-6392",
+            "BuyPrice": 2698,
+            "SellPrice": 2024
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 6000,
+    "UserName": "test-player-6",
+    "Password": "test_6",
+    "Email": "testplayer6@wizards.com",
+    "DateOfBirth": "1996-02-07T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 7100,
+        "NickName": "wizard-7100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4465,
+        "RankPoints": 23627,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 31,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 12,
+            "Id": 7101,
+            "Name": "staff-7101",
+            "BuyPrice": 1172,
+            "SellPrice": 879
+          },
+          {
+            "DefenceIncrease": 43,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 73,
+            "Id": 7102,
+            "Name": "armor-7102",
+            "BuyPrice": 7327,
+            "SellPrice": 5495
+          },
+          {
+            "AttackIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 77,
+            "Id": 7103,
+            "Name": "staff-7103",
+            "BuyPrice": 7749,
+            "SellPrice": 5812
+          },
+          {
+            "AttackIncrease": 26,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 62,
+            "Id": 7104,
+            "Name": "staff-7104",
+            "BuyPrice": 6246,
+            "SellPrice": 4684
+          },
+          {
+            "AttackIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 81,
+            "Id": 7105,
+            "Name": "staff-7105",
+            "BuyPrice": 8127,
+            "SellPrice": 6095
+          },
+          {
+            "DefenceIncrease": 42,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 76,
+            "Id": 7106,
+            "Name": "armor-7106",
+            "BuyPrice": 7637,
+            "SellPrice": 5728
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 63,
+            "Id": 7191,
+            "Name": "staff-7191",
+            "BuyPrice": 6291,
+            "SellPrice": 4718
+          },
+          {
+            "DefenceIncrease": 40,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 57,
+            "Id": 7192,
+            "Name": "armor-7192",
+            "BuyPrice": 5654,
+            "SellPrice": 4240
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 7200,
+        "NickName": "wizard-7200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3702,
+        "RankPoints": 96439,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 40,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 99,
+            "Id": 7201,
+            "Name": "staff-7201",
+            "BuyPrice": 9872,
+            "SellPrice": 7404
+          },
+          {
+            "DefenceIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 34,
+            "Id": 7202,
+            "Name": "armor-7202",
+            "BuyPrice": 3382,
+            "SellPrice": 2536
+          },
+          {
+            "DefenceIncrease": 35,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 39,
+            "Id": 7203,
+            "Name": "armor-7203",
+            "BuyPrice": 3929,
+            "SellPrice": 2947
+          },
+          {
+            "AttackIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 83,
+            "Id": 7204,
+            "Name": "staff-7204",
+            "BuyPrice": 8321,
+            "SellPrice": 6241
+          },
+          {
+            "DefenceIncrease": 41,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 48,
+            "Id": 7205,
+            "Name": "armor-7205",
+            "BuyPrice": 4751,
+            "SellPrice": 3563
+          },
+          {
+            "AttackIncrease": 30,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 7206,
+            "Name": "staff-7206",
+            "BuyPrice": 2772,
+            "SellPrice": 2079
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 36,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 68,
+            "Id": 7291,
+            "Name": "staff-7291",
+            "BuyPrice": 6818,
+            "SellPrice": 5114
+          },
+          {
+            "DefenceIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 95,
+            "Id": 7292,
+            "Name": "armor-7292",
+            "BuyPrice": 9525,
+            "SellPrice": 7144
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 7300,
+        "NickName": "wizard-7300",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3940,
+        "RankPoints": 34255,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 13,
+            "Id": 7301,
+            "Name": "armor-7301",
+            "BuyPrice": 1327,
+            "SellPrice": 995
+          },
+          {
+            "DefenceIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 48,
+            "Id": 7302,
+            "Name": "armor-7302",
+            "BuyPrice": 4820,
+            "SellPrice": 3615
+          },
+          {
+            "AttackIncrease": 41,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 34,
+            "Id": 7303,
+            "Name": "staff-7303",
+            "BuyPrice": 3389,
+            "SellPrice": 2542
+          },
+          {
+            "AttackIncrease": 21,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 63,
+            "Id": 7304,
+            "Name": "staff-7304",
+            "BuyPrice": 6290,
+            "SellPrice": 4718
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 24,
+            "Id": 7391,
+            "Name": "staff-7391",
+            "BuyPrice": 2433,
+            "SellPrice": 1825
+          },
+          {
+            "DefenceIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 89,
+            "Id": 7392,
+            "Name": "armor-7392",
+            "BuyPrice": 8863,
+            "SellPrice": 6647
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 7000,
+    "UserName": "test-player-7",
+    "Password": "test_7",
+    "Email": "testplayer7@wizards.com",
+    "DateOfBirth": "1997-09-06T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 8100,
+        "NickName": "wizard-8100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4051,
+        "RankPoints": 55275,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 12,
+            "Id": 8101,
+            "Name": "staff-8101",
+            "BuyPrice": 1159,
+            "SellPrice": 869
+          },
+          {
+            "DefenceIncrease": 24,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 79,
+            "Id": 8102,
+            "Name": "armor-8102",
+            "BuyPrice": 7933,
+            "SellPrice": 5950
+          },
+          {
+            "AttackIncrease": 42,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 58,
+            "Id": 8103,
+            "Name": "staff-8103",
+            "BuyPrice": 5777,
+            "SellPrice": 4333
+          },
+          {
+            "AttackIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 85,
+            "Id": 8104,
+            "Name": "staff-8104",
+            "BuyPrice": 8475,
+            "SellPrice": 6356
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 5,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 13,
+            "Id": 8191,
+            "Name": "staff-8191",
+            "BuyPrice": 1312,
+            "SellPrice": 984
+          },
+          {
+            "DefenceIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 98,
+            "Id": 8192,
+            "Name": "armor-8192",
+            "BuyPrice": 9760,
+            "SellPrice": 7320
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 8200,
+        "NickName": "wizard-8200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 159,
+        "RankPoints": 43842,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 25,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 88,
+            "Id": 8201,
+            "Name": "staff-8201",
+            "BuyPrice": 8786,
+            "SellPrice": 6590
+          },
+          {
+            "DefenceIncrease": 11,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 72,
+            "Id": 8202,
+            "Name": "armor-8202",
+            "BuyPrice": 7155,
+            "SellPrice": 5366
+          },
+          {
+            "AttackIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 8203,
+            "Name": "staff-8203",
+            "BuyPrice": 2837,
+            "SellPrice": 2128
+          },
+          {
+            "DefenceIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 40,
+            "Id": 8204,
+            "Name": "armor-8204",
+            "BuyPrice": 3977,
+            "SellPrice": 2983
+          },
+          {
+            "AttackIncrease": 21,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 25,
+            "Id": 8205,
+            "Name": "staff-8205",
+            "BuyPrice": 2494,
+            "SellPrice": 1870
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 29,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 45,
+            "Id": 8291,
+            "Name": "staff-8291",
+            "BuyPrice": 4466,
+            "SellPrice": 3350
+          },
+          {
+            "DefenceIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 86,
+            "Id": 8292,
+            "Name": "armor-8292",
+            "BuyPrice": 8573,
+            "SellPrice": 6430
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 8000,
+    "UserName": "test-player-8",
+    "Password": "test_8",
+    "Email": "testplayer8@wizards.com",
+    "DateOfBirth": "1998-01-19T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 9100,
+        "NickName": "wizard-9100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4726,
+        "RankPoints": 44205,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 36,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 26,
+            "Id": 9101,
+            "Name": "armor-9101",
+            "BuyPrice": 2623,
+            "SellPrice": 1967
+          },
+          {
+            "AttackIncrease": 30,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 40,
+            "Id": 9102,
+            "Name": "staff-9102",
+            "BuyPrice": 3994,
+            "SellPrice": 2996
+          },
+          {
+            "DefenceIncrease": 25,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 14,
+            "Id": 9103,
+            "Name": "armor-9103",
+            "BuyPrice": 1379,
+            "SellPrice": 1034
+          },
+          {
+            "AttackIncrease": 23,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 46,
+            "Id": 9104,
+            "Name": "staff-9104",
+            "BuyPrice": 4598,
+            "SellPrice": 3448
+          },
+          {
+            "DefenceIncrease": 21,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 41,
+            "Id": 9105,
+            "Name": "armor-9105",
+            "BuyPrice": 4124,
+            "SellPrice": 3093
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 50,
+            "Id": 9191,
+            "Name": "staff-9191",
+            "BuyPrice": 4961,
+            "SellPrice": 3721
+          },
+          {
+            "DefenceIncrease": 13,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 9192,
+            "Name": "armor-9192",
+            "BuyPrice": 2843,
+            "SellPrice": 2132
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 9200,
+        "NickName": "wizard-9200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3401,
+        "RankPoints": 96497,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 46,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 9201,
+            "Name": "armor-9201",
+            "BuyPrice": 2776,
+            "SellPrice": 2082
+          },
+          {
+            "AttackIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 39,
+            "Id": 9202,
+            "Name": "staff-9202",
+            "BuyPrice": 3903,
+            "SellPrice": 2927
+          },
+          {
+            "AttackIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 56,
+            "Id": 9203,
+            "Name": "staff-9203",
+            "BuyPrice": 5554,
+            "SellPrice": 4166
+          },
+          {
+            "DefenceIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 60,
+            "Id": 9204,
+            "Name": "armor-9204",
+            "BuyPrice": 5980,
+            "SellPrice": 4485
+          },
+          {
+            "AttackIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 72,
+            "Id": 9205,
+            "Name": "staff-9205",
+            "BuyPrice": 7196,
+            "SellPrice": 5397
+          },
+          {
+            "DefenceIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 73,
+            "Id": 9206,
+            "Name": "armor-9206",
+            "BuyPrice": 7308,
+            "SellPrice": 5481
+          },
+          {
+            "AttackIncrease": 34,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 12,
+            "Id": 9207,
+            "Name": "staff-9207",
+            "BuyPrice": 1181,
+            "SellPrice": 886
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 40,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 95,
+            "Id": 9291,
+            "Name": "staff-9291",
+            "BuyPrice": 9515,
+            "SellPrice": 7136
+          },
+          {
+            "DefenceIncrease": 30,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 84,
+            "Id": 9292,
+            "Name": "armor-9292",
+            "BuyPrice": 8358,
+            "SellPrice": 6268
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 9000,
+    "UserName": "test-player-9",
+    "Password": "test_9",
+    "Email": "testplayer9@wizards.com",
+    "DateOfBirth": "1999-12-18T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 10100,
+        "NickName": "wizard-10100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 2881,
+        "RankPoints": 42946,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 41,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 21,
+            "Id": 10101,
+            "Name": "armor-10101",
+            "BuyPrice": 2082,
+            "SellPrice": 1562
+          },
+          {
+            "AttackIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 30,
+            "Id": 10102,
+            "Name": "staff-10102",
+            "BuyPrice": 2964,
+            "SellPrice": 2223
+          },
+          {
+            "AttackIncrease": 14,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 97,
+            "Id": 10103,
+            "Name": "staff-10103",
+            "BuyPrice": 9721,
+            "SellPrice": 7291
+          },
+          {
+            "AttackIncrease": 34,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 70,
+            "Id": 10104,
+            "Name": "staff-10104",
+            "BuyPrice": 6996,
+            "SellPrice": 5247
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 15,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 92,
+            "Id": 10191,
+            "Name": "staff-10191",
+            "BuyPrice": 9241,
+            "SellPrice": 6931
+          },
+          {
+            "DefenceIncrease": 50,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 45,
+            "Id": 10192,
+            "Name": "armor-10192",
+            "BuyPrice": 4484,
+            "SellPrice": 3363
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 10000,
+    "UserName": "test-player-10",
+    "Password": "test_10",
+    "Email": "testplayer10@wizards.com",
+    "DateOfBirth": "2000-04-08T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 11100,
+        "NickName": "wizard-11100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3558,
+        "RankPoints": 94137,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 39,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 33,
+            "Id": 11101,
+            "Name": "armor-11101",
+            "BuyPrice": 3342,
+            "SellPrice": 2506
+          },
+          {
+            "DefenceIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 69,
+            "Id": 11102,
+            "Name": "armor-11102",
+            "BuyPrice": 6900,
+            "SellPrice": 5175
+          },
+          {
+            "AttackIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 35,
+            "Id": 11103,
+            "Name": "staff-11103",
+            "BuyPrice": 3506,
+            "SellPrice": 2630
+          },
+          {
+            "DefenceIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 62,
+            "Id": 11104,
+            "Name": "armor-11104",
+            "BuyPrice": 6244,
+            "SellPrice": 4683
+          },
+          {
+            "DefenceIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 74,
+            "Id": 11105,
+            "Name": "armor-11105",
+            "BuyPrice": 7434,
+            "SellPrice": 5576
+          },
+          {
+            "AttackIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 12,
+            "Id": 11106,
+            "Name": "staff-11106",
+            "BuyPrice": 1243,
+            "SellPrice": 932
+          },
+          {
+            "AttackIncrease": 40,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 76,
+            "Id": 11107,
+            "Name": "staff-11107",
+            "BuyPrice": 7618,
+            "SellPrice": 5714
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 16,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 90,
+            "Id": 11191,
+            "Name": "staff-11191",
+            "BuyPrice": 9010,
+            "SellPrice": 6758
+          },
+          {
+            "DefenceIncrease": 33,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 20,
+            "Id": 11192,
+            "Name": "armor-11192",
+            "BuyPrice": 2034,
+            "SellPrice": 1526
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 11200,
+        "NickName": "wizard-11200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3273,
+        "RankPoints": 50890,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 15,
+            "Id": 11201,
+            "Name": "staff-11201",
+            "BuyPrice": 1522,
+            "SellPrice": 1142
+          },
+          {
+            "AttackIncrease": 13,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 83,
+            "Id": 11202,
+            "Name": "staff-11202",
+            "BuyPrice": 8253,
+            "SellPrice": 6190
+          },
+          {
+            "AttackIncrease": 50,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 33,
+            "Id": 11203,
+            "Name": "staff-11203",
+            "BuyPrice": 3331,
+            "SellPrice": 2498
+          },
+          {
+            "DefenceIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 25,
+            "Id": 11204,
+            "Name": "armor-11204",
+            "BuyPrice": 2452,
+            "SellPrice": 1839
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 13,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 53,
+            "Id": 11291,
+            "Name": "staff-11291",
+            "BuyPrice": 5257,
+            "SellPrice": 3943
+          },
+          {
+            "DefenceIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 81,
+            "Id": 11292,
+            "Name": "armor-11292",
+            "BuyPrice": 8116,
+            "SellPrice": 6087
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 11300,
+        "NickName": "wizard-11300",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3738,
+        "RankPoints": 60627,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 38,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 60,
+            "Id": 11301,
+            "Name": "staff-11301",
+            "BuyPrice": 5958,
+            "SellPrice": 4468
+          },
+          {
+            "DefenceIncrease": 31,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 48,
+            "Id": 11302,
+            "Name": "armor-11302",
+            "BuyPrice": 4767,
+            "SellPrice": 3575
+          },
+          {
+            "DefenceIncrease": 37,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 65,
+            "Id": 11303,
+            "Name": "armor-11303",
+            "BuyPrice": 6520,
+            "SellPrice": 4890
+          },
+          {
+            "DefenceIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 58,
+            "Id": 11304,
+            "Name": "armor-11304",
+            "BuyPrice": 5821,
+            "SellPrice": 4366
+          },
+          {
+            "AttackIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 56,
+            "Id": 11305,
+            "Name": "staff-11305",
+            "BuyPrice": 5595,
+            "SellPrice": 4196
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 35,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 82,
+            "Id": 11391,
+            "Name": "staff-11391",
+            "BuyPrice": 8176,
+            "SellPrice": 6132
+          },
+          {
+            "DefenceIncrease": 25,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 99,
+            "Id": 11392,
+            "Name": "armor-11392",
+            "BuyPrice": 9893,
+            "SellPrice": 7420
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 11000,
+    "UserName": "test-player-11",
+    "Password": "test_11",
+    "Email": "testplayer11@wizards.com",
+    "DateOfBirth": "2001-06-06T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 12100,
+        "NickName": "wizard-12100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 3634,
+        "RankPoints": 86071,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "AttackIncrease": 50,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 85,
+            "Id": 12101,
+            "Name": "staff-12101",
+            "BuyPrice": 8474,
+            "SellPrice": 6356
+          },
+          {
+            "AttackIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 19,
+            "Id": 12102,
+            "Name": "staff-12102",
+            "BuyPrice": 1915,
+            "SellPrice": 1436
+          },
+          {
+            "AttackIncrease": 36,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 50,
+            "Id": 12103,
+            "Name": "staff-12103",
+            "BuyPrice": 4970,
+            "SellPrice": 3728
+          },
+          {
+            "AttackIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 82,
+            "Id": 12104,
+            "Name": "staff-12104",
+            "BuyPrice": 8232,
+            "SellPrice": 6174
+          },
+          {
+            "DefenceIncrease": 35,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 41,
+            "Id": 12105,
+            "Name": "armor-12105",
+            "BuyPrice": 4124,
+            "SellPrice": 3093
+          },
+          {
+            "AttackIncrease": 5,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 38,
+            "Id": 12106,
+            "Name": "staff-12106",
+            "BuyPrice": 3773,
+            "SellPrice": 2830
+          },
+          {
+            "AttackIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 27,
+            "Id": 12107,
+            "Name": "staff-12107",
+            "BuyPrice": 2672,
+            "SellPrice": 2004
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 32,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 53,
+            "Id": 12191,
+            "Name": "staff-12191",
+            "BuyPrice": 5296,
+            "SellPrice": 3972
+          },
+          {
+            "DefenceIncrease": 38,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 54,
+            "Id": 12192,
+            "Name": "armor-12192",
+            "BuyPrice": 5388,
+            "SellPrice": 4041
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 12000,
+    "UserName": "test-player-12",
+    "Password": "test_12",
+    "Email": "testplayer12@wizards.com",
+    "DateOfBirth": "2002-07-04T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 13100,
+        "NickName": "wizard-13100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 454,
+        "RankPoints": 17364,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 32,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 39,
+            "Id": 13101,
+            "Name": "armor-13101",
+            "BuyPrice": 3872,
+            "SellPrice": 2904
+          },
+          {
+            "DefenceIncrease": 46,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 53,
+            "Id": 13102,
+            "Name": "armor-13102",
+            "BuyPrice": 5268,
+            "SellPrice": 3951
+          },
+          {
+            "DefenceIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 39,
+            "Id": 13103,
+            "Name": "armor-13103",
+            "BuyPrice": 3949,
+            "SellPrice": 2962
+          },
+          {
+            "AttackIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 43,
+            "Id": 13104,
+            "Name": "staff-13104",
+            "BuyPrice": 4283,
+            "SellPrice": 3212
+          },
+          {
+            "AttackIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 33,
+            "Id": 13105,
+            "Name": "staff-13105",
+            "BuyPrice": 3269,
+            "SellPrice": 2452
+          },
+          {
+            "DefenceIncrease": 44,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 99,
+            "Id": 13106,
+            "Name": "armor-13106",
+            "BuyPrice": 9869,
+            "SellPrice": 7402
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 24,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 62,
+            "Id": 13191,
+            "Name": "staff-13191",
+            "BuyPrice": 6166,
+            "SellPrice": 4624
+          },
+          {
+            "DefenceIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 70,
+            "Id": 13192,
+            "Name": "armor-13192",
+            "BuyPrice": 6995,
+            "SellPrice": 5246
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 13200,
+        "NickName": "wizard-13200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 1674,
+        "RankPoints": 68287,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 88,
+            "Id": 13201,
+            "Name": "armor-13201",
+            "BuyPrice": 8770,
+            "SellPrice": 6578
+          },
+          {
+            "DefenceIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 19,
+            "Id": 13202,
+            "Name": "armor-13202",
+            "BuyPrice": 1883,
+            "SellPrice": 1412
+          },
+          {
+            "AttackIncrease": 29,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 27,
+            "Id": 13203,
+            "Name": "staff-13203",
+            "BuyPrice": 2731,
+            "SellPrice": 2048
+          },
+          {
+            "AttackIncrease": 50,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 56,
+            "Id": 13204,
+            "Name": "staff-13204",
+            "BuyPrice": 5645,
+            "SellPrice": 4234
+          },
+          {
+            "AttackIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 92,
+            "Id": 13205,
+            "Name": "staff-13205",
+            "BuyPrice": 9204,
+            "SellPrice": 6903
+          },
+          {
+            "AttackIncrease": 23,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 47,
+            "Id": 13206,
+            "Name": "staff-13206",
+            "BuyPrice": 4663,
+            "SellPrice": 3497
+          },
+          {
+            "AttackIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 74,
+            "Id": 13207,
+            "Name": "staff-13207",
+            "BuyPrice": 7382,
+            "SellPrice": 5536
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 31,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 64,
+            "Id": 13291,
+            "Name": "staff-13291",
+            "BuyPrice": 6433,
+            "SellPrice": 4825
+          },
+          {
+            "DefenceIncrease": 17,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 40,
+            "Id": 13292,
+            "Name": "armor-13292",
+            "BuyPrice": 4004,
+            "SellPrice": 3003
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 13300,
+        "NickName": "wizard-13300",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 2464,
+        "RankPoints": 89984,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 34,
+            "Id": 13301,
+            "Name": "armor-13301",
+            "BuyPrice": 3375,
+            "SellPrice": 2531
+          },
+          {
+            "DefenceIncrease": 5,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 90,
+            "Id": 13302,
+            "Name": "armor-13302",
+            "BuyPrice": 9012,
+            "SellPrice": 6759
+          },
+          {
+            "AttackIncrease": 10,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 79,
+            "Id": 13303,
+            "Name": "staff-13303",
+            "BuyPrice": 7937,
+            "SellPrice": 5953
+          },
+          {
+            "AttackIncrease": 15,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 70,
+            "Id": 13304,
+            "Name": "staff-13304",
+            "BuyPrice": 6979,
+            "SellPrice": 5234
+          },
+          {
+            "DefenceIncrease": 46,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 86,
+            "Id": 13305,
+            "Name": "armor-13305",
+            "BuyPrice": 8619,
+            "SellPrice": 6464
+          },
+          {
+            "AttackIncrease": 20,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 76,
+            "Id": 13306,
+            "Name": "staff-13306",
+            "BuyPrice": 7579,
+            "SellPrice": 5684
+          },
+          {
+            "DefenceIncrease": 47,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 71,
+            "Id": 13307,
+            "Name": "armor-13307",
+            "BuyPrice": 7110,
+            "SellPrice": 5332
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 35,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 88,
+            "Id": 13391,
+            "Name": "staff-13391",
+            "BuyPrice": 8787,
+            "SellPrice": 6590
+          },
+          {
+            "DefenceIncrease": 42,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 50,
+            "Id": 13392,
+            "Name": "armor-13392",
+            "BuyPrice": 5031,
+            "SellPrice": 3773
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 13000,
+    "UserName": "test-player-13",
+    "Password": "test_13",
+    "Email": "testplayer13@wizards.com",
+    "DateOfBirth": "2003-11-06T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 14100,
+        "NickName": "wizard-14100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 4571,
+        "RankPoints": 57924,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 37,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 13,
+            "Id": 14101,
+            "Name": "armor-14101",
+            "BuyPrice": 1251,
+            "SellPrice": 938
+          },
+          {
+            "AttackIncrease": 35,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 10,
+            "Id": 14102,
+            "Name": "staff-14102",
+            "BuyPrice": 1050,
+            "SellPrice": 788
+          },
+          {
+            "DefenceIncrease": 28,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 85,
+            "Id": 14103,
+            "Name": "armor-14103",
+            "BuyPrice": 8481,
+            "SellPrice": 6361
+          },
+          {
+            "DefenceIncrease": 12,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 21,
+            "Id": 14104,
+            "Name": "armor-14104",
+            "BuyPrice": 2141,
+            "SellPrice": 1606
+          },
+          {
+            "AttackIncrease": 6,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 52,
+            "Id": 14105,
+            "Name": "staff-14105",
+            "BuyPrice": 5161,
+            "SellPrice": 3871
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 50,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 90,
+            "Id": 14191,
+            "Name": "staff-14191",
+            "BuyPrice": 9043,
+            "SellPrice": 6782
+          },
+          {
+            "DefenceIncrease": 11,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 71,
+            "Id": 14192,
+            "Name": "armor-14192",
+            "BuyPrice": 7104,
+            "SellPrice": 5328
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 14200,
+        "NickName": "wizard-14200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 1181,
+        "RankPoints": 13187,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 18,
+            "Id": 14201,
+            "Name": "armor-14201",
+            "BuyPrice": 1790,
+            "SellPrice": 1342
+          },
+          {
+            "DefenceIncrease": 16,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 73,
+            "Id": 14202,
+            "Name": "armor-14202",
+            "BuyPrice": 7278,
+            "SellPrice": 5458
+          },
+          {
+            "DefenceIncrease": 18,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 17,
+            "Id": 14203,
+            "Name": "armor-14203",
+            "BuyPrice": 1702,
+            "SellPrice": 1276
+          },
+          {
+            "AttackIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 72,
+            "Id": 14204,
+            "Name": "staff-14204",
+            "BuyPrice": 7216,
+            "SellPrice": 5412
+          },
+          {
+            "DefenceIncrease": 44,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 93,
+            "Id": 14205,
+            "Name": "armor-14205",
+            "BuyPrice": 9335,
+            "SellPrice": 7001
+          },
+          {
+            "AttackIncrease": 15,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 65,
+            "Id": 14206,
+            "Name": "staff-14206",
+            "BuyPrice": 6509,
+            "SellPrice": 4882
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 43,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 22,
+            "Id": 14291,
+            "Name": "staff-14291",
+            "BuyPrice": 2241,
+            "SellPrice": 1681
+          },
+          {
+            "DefenceIncrease": 41,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 56,
+            "Id": 14292,
+            "Name": "armor-14292",
+            "BuyPrice": 5643,
+            "SellPrice": 4232
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 14000,
+    "UserName": "test-player-14",
+    "Password": "test_14",
+    "Email": "testplayer14@wizards.com",
+    "DateOfBirth": "2004-04-05T00:00:00"
+  },
+  {
+    "Heroes": [
+      {
+        "Id": 15100,
+        "NickName": "wizard-15100",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 999,
+        "RankPoints": 16917,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 9,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 96,
+            "Id": 15101,
+            "Name": "armor-15101",
+            "BuyPrice": 9629,
+            "SellPrice": 7222
+          },
+          {
+            "DefenceIncrease": 8,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 15102,
+            "Name": "armor-15102",
+            "BuyPrice": 2804,
+            "SellPrice": 2103
+          },
+          {
+            "DefenceIncrease": 27,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 41,
+            "Id": 15103,
+            "Name": "armor-15103",
+            "BuyPrice": 4067,
+            "SellPrice": 3050
+          },
+          {
+            "DefenceIncrease": 21,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 73,
+            "Id": 15104,
+            "Name": "armor-15104",
+            "BuyPrice": 7253,
+            "SellPrice": 5440
+          },
+          {
+            "AttackIncrease": 37,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 24,
+            "Id": 15105,
+            "Name": "staff-15105",
+            "BuyPrice": 2382,
+            "SellPrice": 1786
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 26,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 36,
+            "Id": 15191,
+            "Name": "staff-15191",
+            "BuyPrice": 3598,
+            "SellPrice": 2698
+          },
+          {
+            "DefenceIncrease": 11,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 84,
+            "Id": 15192,
+            "Name": "armor-15192",
+            "BuyPrice": 8432,
+            "SellPrice": 6324
+          }
+        ],
+        "Restrictions": 1
+      },
+      {
+        "Id": 15200,
+        "NickName": "wizard-15200",
+        "MaxHealth": 300,
+        "CurrentHealth": 300,
+        "Attack": 10,
+        "Defense": 5,
+        "Gold": 1231,
+        "RankPoints": 74134,
+        "MatchPlayedToday": 0,
+        "TotalMatchPlayed": 0,
+        "TotalMatchWin": 0,
+        "TotalMatchLoose": 0,
+        "Inventory": [
+          {
+            "DefenceIncrease": 42,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 45,
+            "Id": 15201,
+            "Name": "armor-15201",
+            "BuyPrice": 4530,
+            "SellPrice": 3398
+          },
+          {
+            "DefenceIncrease": 15,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 77,
+            "Id": 15202,
+            "Name": "armor-15202",
+            "BuyPrice": 7690,
+            "SellPrice": 5768
+          },
+          {
+            "DefenceIncrease": 24,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 28,
+            "Id": 15203,
+            "Name": "armor-15203",
+            "BuyPrice": 2818,
+            "SellPrice": 2114
+          },
+          {
+            "DefenceIncrease": 19,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 46,
+            "Id": 15204,
+            "Name": "armor-15204",
+            "BuyPrice": 4606,
+            "SellPrice": 3454
+          },
+          {
+            "DefenceIncrease": 45,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 15,
+            "Id": 15205,
+            "Name": "armor-15205",
+            "BuyPrice": 1473,
+            "SellPrice": 1105
+          },
+          {
+            "AttackIncrease": 30,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 55,
+            "Id": 15206,
+            "Name": "staff-15206",
+            "BuyPrice": 5523,
+            "SellPrice": 4142
+          }
+        ],
+        "Equipped": [
+          {
+            "AttackIncrease": 49,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 19,
+            "Id": 15291,
+            "Name": "staff-15291",
+            "BuyPrice": 1933,
+            "SellPrice": 1450
+          },
+          {
+            "DefenceIncrease": 31,
+            "ItemEndurance": 100,
+            "RepairCostPerEndurance": 33,
+            "Id": 15292,
+            "Name": "armor-15292",
+            "BuyPrice": 3332,
+            "SellPrice": 2499
+          }
+        ],
+        "Restrictions": 1
+      }
+    ],
+    "Id": 15000,
+    "UserName": "test-player-15",
+    "Password": "test_15",
+    "Email": "testplayer15@wizards.com",
+    "DateOfBirth": "2005-02-16T00:00:00"
+  }
+]
