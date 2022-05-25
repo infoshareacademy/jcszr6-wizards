@@ -10,63 +10,46 @@ namespace Wizards.BusinessLogic
 {
     public class FilesOperations
     {
-        public static string IsJson()
+        public static void JsonCreate(int playersCount = 15)
         {
-            string dataDirectory;
-            var directory = new DirectoryInfo(Environment.CurrentDirectory);
-            var jsonFile = "data.json";
-
-            while (!directory.GetFiles("*.sln").Any())
-            {
-                directory = directory.Parent;
-            }
-            dataDirectory = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data");
-            Console.WriteLine($"Data directory:\n{dataDirectory}\n");
-            var path = Path.Combine($"{dataDirectory}", $"{jsonFile}");
-
-            var isData = Directory.Exists(path);
-
-            if (isData == false)
-            {
-                Console.WriteLine($"Data json on directory:\n{path}\ndon't exist.\n");
-                Console.WriteLine("Create json");
-                Console.WriteLine(File.Exists(path));
-                //CreateJson();
-                
-            }
-            else
-            {
-                Console.WriteLine($"Data json on path\n{path}\nexist.");
-            }
-
-            return path;
-
-        }
-
-        public static void RemoveJson()
-        {
-            string path = IsJson();
-            Console.WriteLine("*************************");
-            Console.WriteLine($"{path}");
-            File.Delete(path);
-        }
-
-        public static void CreateJson(int playersCount = 15)
-        {
-            string path = IsJson();
+            string path = GetJsonDirectory();
             string json = JsonConvert.SerializeObject(JsonSetup.PlayersListGenerator(playersCount));
             Console.WriteLine("Json created.");
             File.WriteAllText(path, json.ToString());
         }
 
-
-        public static void PrintJson()
+        public static string GetJsonDirectory()
         {
-            Console.WriteLine("Przeczytano plik");
-            Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
-            Console.ReadKey();
+            string result;
+            var directory = new DirectoryInfo(Environment.CurrentDirectory);
+
+            while (!directory.GetFiles("*.sln").Any())
+            {
+                directory = directory.Parent;
+            }
+            result = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data", "data.json");
+            return result;
         }
 
+        public static void JsonRead()
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, "Data", "data.json");
+            var dataFile = File.ReadAllText(path);
+            var jsonString = JsonConvert.DeserializeObject<List<Player>>(dataFile);
+
+            foreach (Player player in jsonString)
+            {
+                Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
+            }
+        }
+
+        public static void RemoveJson()
+        {
+            string path = GetJsonDirectory();
+            Console.WriteLine("*************************");
+            Console.WriteLine($"{path}");
+            File.Delete(path);
+        }
     }
 }
 

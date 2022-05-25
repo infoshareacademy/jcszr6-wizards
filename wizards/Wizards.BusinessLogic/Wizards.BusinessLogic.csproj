@@ -24,6 +24,9 @@
     <None Update="487.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Data\data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Fun_House.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

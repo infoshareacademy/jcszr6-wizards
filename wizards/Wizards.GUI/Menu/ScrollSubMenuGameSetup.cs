@@ -2,18 +2,16 @@
 using DustInTheWind.ConsoleTools.Controls.Menus.MenuItems;
 using DustInTheWind.ConsoleTools.Controls.Menus;
 
-
-namespace Wizards.GUI
+namespace Wizards.GUI.Menu
 {
-    internal class ScrollMainMenu
+    internal class ScrollSubMenuGameSetup
     {
-
-        public static void DisplayScrollMenu()
+        public static void DisplayScrollSubMenuGameSetup()
         {
 
 
 
-            ScrollMenu scrollMenu = new ScrollMenu
+            ScrollMenu scrollSubMenuEdit = new ScrollMenu
             {
 
                 Margin = 1,
@@ -23,52 +21,32 @@ namespace Wizards.GUI
 
             };
 
-            scrollMenu.AddItems(new IMenuItem[]
+            scrollSubMenuEdit.AddItems(new IMenuItem[]
             {
-                new YesNoMenuItem
+                new LabelMenuItem
                 {
-                    Text = "Rozpocznij grę",
-                    Command = new Game()
+                    Text = "Wygeneruj nowy seed gry",
+                    Command = new NewJsocnFile()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Dodaj element",
-                    Command = new AddElement()
+                    Text = "Skasuj Json-a",
+                    Command = new DelJsonFile()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Edycja",
-                    Command = new EditElement()
-                },
-
-                new LabelMenuItem
-                {
-                    Text = "Wyszukiwanie",
-                    Command = new Search()
-                },
-
-                new LabelMenuItem
-                {
-                    Text = "Autorzy",
-                    Command = new ShowAuthors()
+                    Text = "Pokaż seeda",
+                    Command = new ShowJsonSeed()
                 },
 
                 new SeparatorMenuItem(),
 
                 new LabelMenuItem
                 {
-                    Text = "Game Setup",
-                    Command = new GameSetup()
-                },
-
-                new SeparatorMenuItem(),
-
-                new LabelMenuItem
-                {
-                    Text = "Zakończ grę",
-                    Command = new Exit()
+                    Text = "Powrót",
+                    Command = new ToMainMenu()
                 },
 
                 });
@@ -84,17 +62,13 @@ namespace Wizards.GUI
 | $$$    \$$$| $$|  $$    \\$$    $$| $$       \$$    $$|       $$      
  \$$      \$$ \$$ \$$$$$$$$ \$$$$$$$ \$$        \$$$$$$$ \$$$$$$$                                                                                                                                                  
 ";
-            string version = "0.1";
 
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(logo);
             Console.ResetColor();
-            Console.WriteLine($"Ver.: {version}");
 
-            scrollMenu.Display();
+            scrollSubMenuEdit.Display();
         }
-
     }
 }
-

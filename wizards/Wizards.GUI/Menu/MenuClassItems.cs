@@ -28,21 +28,16 @@ namespace Wizards.GUI
 
     }
 
-    internal class RefreshData : ICommand
+    internal class Game : ICommand
     {
         bool ICommand.IsActive => true;
 
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Uaktualnij dane\n");
-            FilesOperations.IsJson();
-
+            Console.WriteLine("Gra\n");
 
             Console.ReadKey();
-
-            //FilesOperations.RemoveJson();
-            //Console.ReadKey();
             ScrollMainMenu.DisplayScrollMenu();
         }
     }
@@ -95,7 +90,21 @@ namespace Wizards.GUI
         }
     }
 
+    internal class GameSetup : ICommand
+    {
+        bool ICommand.IsActive => true;
 
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Game Setup");
+
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
+
+            Console.ReadKey();
+            ScrollMainMenu.DisplayScrollMenu();
+        }
+    }
 
     public class Exit : ICommand
     {
@@ -260,6 +269,47 @@ namespace Wizards.GUI
             Console.WriteLine("Wyszukiwanie przedmiotow należących do gracza");
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
+        }
+    }
+
+    internal class NewJsocnFile : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Nowy Json file");
+            FilesOperations.JsonCreate();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();  
+        }
+    }
+    internal class DelJsonFile : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Nowy Json file");
+            FilesOperations.RemoveJson();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
+        }
+    }
+
+    internal class ShowJsonSeed : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Nowy Json file");
+            FilesOperations.JsonRead();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
         }
     }
 }
