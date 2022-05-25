@@ -121,26 +121,26 @@ namespace Wizards.BusinessLogic
             return item;
         }
 
-        public static void JsonCreate(int playersCount = 15)
-        {
-            string path = GetJsonDirectory();
-            string json = JsonConvert.SerializeObject(PlayersListGenerator(playersCount));
-            Console.WriteLine("Json created.");
-            File.WriteAllText(path, json.ToString());
-        }
+        //public static void JsonCreate(int playersCount = 15)
+        //{
+        //    string path = GetJsonDirectory();
+        //    string json = JsonConvert.SerializeObject(PlayersListGenerator(playersCount));
+        //    Console.WriteLine("Json created.");
+        //    File.WriteAllText(path, json.ToString());
+        //}
 
-        public static string GetJsonDirectory()
-        {
-            string result;
-            var directory = new DirectoryInfo(Environment.CurrentDirectory);
+        //public static string GetJsonDirectory()
+        //{
+        //    string result;
+        //    var directory = new DirectoryInfo(Environment.CurrentDirectory);
 
-            while (!directory.GetFiles("*.sln").Any())
-            {
-                directory = directory.Parent;
-            }
-            result = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data", "data.json");
-            return result;
-        }
+        //    while (!directory.GetFiles("*.sln").Any())
+        //    {
+        //        directory = directory.Parent;
+        //    }
+        //    result = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data", "data.json");
+        //    return result;
+        //}
 
         public static void JsonRead()
         {

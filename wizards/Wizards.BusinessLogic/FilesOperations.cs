@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Wizards.BusinessLogic
 {
     public class FilesOperations
     {
-        public static void IsJson()
+        public static string IsJson()
         {
             string dataDirectory;
             var directory = new DirectoryInfo(Environment.CurrentDirectory);
@@ -20,28 +21,43 @@ namespace Wizards.BusinessLogic
                 directory = directory.Parent;
             }
             dataDirectory = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data");
-            Console.WriteLine($"{dataDirectory}");
+            Console.WriteLine($"Data directory:\n{dataDirectory}\n");
             var path = Path.Combine($"{dataDirectory}", $"{jsonFile}");
 
             var isData = Directory.Exists(path);
 
             if (isData == false)
             {
-                Console.WriteLine($"Data json on directory {path} don't exist.");
+                Console.WriteLine($"Data json on directory:\n{path}\ndon't exist.\n");
                 Console.WriteLine("Create json");
-                JsonSetup.JsonCreate();
+                Console.WriteLine(File.Exists(path));
+                //CreateJson();
+                
+            }
+            else
+            {
+                Console.WriteLine($"Data json on path\n{path}\nexist.");
             }
 
-            Console.WriteLine($"Data json on {path} exist.");
+            return path;
 
         }
 
-        //public static void RemoveJson()
-        //{
-        //    Console.WriteLine("*************************");
-        //    Console.WriteLine($"{}");
-        //    File.Delete();
-        //}
+        public static void RemoveJson()
+        {
+            string path = IsJson();
+            Console.WriteLine("*************************");
+            Console.WriteLine($"{path}");
+            File.Delete(path);
+        }
+
+        public static void CreateJson(int playersCount = 15)
+        {
+            string path = IsJson();
+            string json = JsonConvert.SerializeObject(JsonSetup.PlayersListGenerator(playersCount));
+            Console.WriteLine("Json created.");
+            File.WriteAllText(path, json.ToString());
+        }
 
 
         public static void PrintJson()

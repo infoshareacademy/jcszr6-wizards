@@ -35,7 +35,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Uaktualnij dane");
+            Console.WriteLine("Uaktualnij dane\n");
             FilesOperations.IsJson();
 
 
