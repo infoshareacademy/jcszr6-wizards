@@ -8,6 +8,7 @@
         IsNull,
         HasRestrictedWord,
         HasRestrictedCharacter,
+        AlredyInUse,
         NumberToHigh,
         NumberToLow,
     }

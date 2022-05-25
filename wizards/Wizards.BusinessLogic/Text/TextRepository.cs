@@ -8,38 +8,32 @@ namespace Wizards.GUI
 {
     public static class TextRepository
     {
-        private static Dictionary<MenuMsg, string> Menu = new Dictionary<MenuMsg, string>();
-        private static Dictionary<CreatorMsg, string> Creator = new Dictionary<CreatorMsg, string>();
-        private static Dictionary<ValueErrorsMsg, string> ValueErrors = new Dictionary<ValueErrorsMsg, string>();
+        private static readonly Dictionary<MenuMsg, string> Menu;
+        private static readonly Dictionary<CreatorMsg, string> Creator;
+        private static readonly Dictionary<ValueErrorsMsg, string> ValueErrors;
+        public static readonly List<string> RestrictedWords;
 
         static TextRepository()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, "Text","Json");
-            
-            var dataFile = File.ReadAllText(Path.Combine(path, "Menu.json"));
-            Menu = JsonConvert.DeserializeObject<Dictionary<MenuMsg,string>>(dataFile);
+            string path = Path.Combine(Environment.CurrentDirectory, "Text", "Json");
 
-            dataFile = File.ReadAllText(Path.Combine(path, "Creator.json"));
-            Creator = JsonConvert.DeserializeObject<Dictionary<CreatorMsg, string>>(dataFile);
-
-            dataFile = File.ReadAllText(Path.Combine(path, "Value Errors.json"));
-            ValueErrors = JsonConvert.DeserializeObject<Dictionary<ValueErrorsMsg, string>>(dataFile);
+            Menu = LoadObjectFromFile<Dictionary<MenuMsg, string>>(Path.Combine(path, "Menu.json"));
+            Creator = LoadObjectFromFile<Dictionary<CreatorMsg, string>>(Path.Combine(path, "Creator.json"));
+            ValueErrors = LoadObjectFromFile<Dictionary<ValueErrorsMsg, string>>(Path.Combine(path, "Value Errors.json"));
+            RestrictedWords = LoadObjectFromFile<List<string>>(Path.Combine(path, "RestrictedWords.json"));
         }
 
-        public static string Get(MenuMsg msg)
+        private static T LoadObjectFromFile<T>(string filePath)
         {
-            return Menu[msg];
+            string loadedDataFromFile = File.ReadAllText(filePath);
+            var convertedObject = JsonConvert.DeserializeObject<T>(loadedDataFromFile);
+
+            return convertedObject;
         }
 
-        public static string Get(CreatorMsg msg)
-        {
-            return Creator[msg];
-        }
-
-        public static string Get(ValueErrorsMsg msg)
-        {
-            return ValueErrors[msg];
-        }
+        public static string Get(MenuMsg msg) { return Menu[msg]; }
+        public static string Get(CreatorMsg msg) { return Creator[msg]; }
+        public static string Get(ValueErrorsMsg msg) { return ValueErrors[msg]; }
 
     }
 }

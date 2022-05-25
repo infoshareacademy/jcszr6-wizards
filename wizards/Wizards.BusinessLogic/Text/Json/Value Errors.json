@@ -5,6 +5,7 @@
   "IsNull": "Podany tekst jest pusty!",
   "HasRestrictedWord": "Podany tekst zawiera niedozwolone słowo!",
   "HasRestrictedCharacter": "Podany tekst zawiera nieprawidłowy znak lub symbol!",
-  "NumberToHigh": "Podana liczba jest zbyt duża", 
-  "NumberToLow":  "Podana liczba jest zbyt mała" 
+  "AlredyInUse": "Podana wartość jest już używana!",
+  "NumberToHigh": "Podana liczba jest zbyt duża!", 
+  "NumberToLow":  "Podana liczba jest zbyt mała!" 
 }
