@@ -7,24 +7,23 @@ namespace Wizards.BusinessLogic
 {
     public class ValueValidator
     {
-        private readonly List<char> allowedInterpunktors = new List<char>()
-        {
-            '!','(',')','*','+',',','.','-','/',':',';','=','?'
-        };
-
         public bool AllowLetters { get; set; }
         public bool AllowDigits { get; set; }
-        public bool AllowInterpunktors { get; set; }
+        public bool AllowSpecialCharacters { get; set; }
         public bool AllowSpace { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
+        private readonly List<char> allowedSpecialCharacters = new()
+        {
+            '!','(',')','*','+',',','.','-','/',':',';','=','?'
+        };
         public List<string> AlredyInUseValues { get; set; }
 
         public ValueValidator()
         {
             AllowLetters = true;
             AllowDigits = true;
-            AllowInterpunktors = false;
+            AllowSpecialCharacters = false;
             AllowSpace = true;
             Min = 0;
             Max = 50;
@@ -72,6 +71,21 @@ namespace Wizards.BusinessLogic
             return true;
         }
 
+        public bool Validate(int inputValue)
+        {
+            if (inputValue > Max)
+            {
+                throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.NumberToHigh));
+            }
+
+            if (inputValue < Min)
+            {
+                throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.NumberToLow));
+            }
+
+            return true;
+        }
+
         private bool CheckInUse(string value)
         {
             if (AlredyInUseValues == null)
@@ -89,44 +103,34 @@ namespace Wizards.BusinessLogic
 
         private bool CheckCharacters(string value)
         {
-            bool checkLetters = CheckLetters(value);
-            bool checkDigits = CheckDigits(value);
-            bool checkInterpunktors = CHeckSpecialCharacters(value);
-            bool checkSpace = CheckSpace(value);
-
-            return (checkLetters && checkDigits && checkInterpunktors && checkSpace);
+            return (CheckLetters(value) && CheckDigits(value) && CheckSpecialCharacters(value) && CheckSpace(value));
         }
 
         private bool CheckSpace(string value)
         {
-            bool checkSpace = true;
-
             if (value.Contains(' ') && !AllowSpace)
             {
-                checkSpace = false;
+                return false;
             }
 
-            return checkSpace;
+            return true;
         }
 
-        private bool CHeckSpecialCharacters(string value)
+        private bool CheckSpecialCharacters(string value)
         {
-            bool checkSpecialCharacters = false;
-
-            if (AllowInterpunktors && value.Where(v => 
-                        !char.IsLetter(v) && 
-                        !char.IsDigit(v) &&
-                        v != ' ')
-                    .All(v => allowedInterpunktors.Contains(v)))
+            if (AllowSpecialCharacters && value
+                    .Where(v => !char.IsLetter(v) && !char.IsDigit(v) && v != ' ')
+                    .All(v => allowedSpecialCharacters.Contains(v)))
             {
-                checkSpecialCharacters = true;
+                return true;
             }
-            else if (!AllowInterpunktors && !value.Any(v => !char.IsLetter(v) && !char.IsDigit(v) && v != ' '))
+            
+            if (!AllowSpecialCharacters && !value.Any(v => !char.IsLetter(v) && !char.IsDigit(v) && v != ' '))
             {
-                checkSpecialCharacters = true;
+                return true;
             }
 
-            return checkSpecialCharacters;
+            return false;
         }
 
         private bool CheckDigits(string value)
@@ -141,20 +145,19 @@ namespace Wizards.BusinessLogic
 
         private bool CheckLetters(string value)
         {
-            bool checkLetters = false;
-
             if (AllowLetters && value
                     .Where(c => char.IsLetter(c))
                     .All(c => c >= 97 && c <= 122))
             {
-                checkLetters = true;
+                return true;
             }
-            else if (!AllowLetters && !value.Any(v => char.IsLetter(v)))
+            
+            if (!AllowLetters && !value.Any(v => char.IsLetter(v)))
             {
-                checkLetters = true;
+                return true;
             }
 
-            return checkLetters;
+            return false;
         }
     }
 }

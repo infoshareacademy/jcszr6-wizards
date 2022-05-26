@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Creators\" />
     <Folder Include="Screen\" />
   </ItemGroup>
 
