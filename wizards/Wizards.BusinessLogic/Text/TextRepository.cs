@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
-using Wizards.BusinessLogic;
 
-namespace Wizards.GUI
+
+namespace Wizards.BusinessLogic
 {
     public static class TextRepository
     {

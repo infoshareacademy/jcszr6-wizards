@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Wizards.GUI;
 
-namespace Wizards.BusinessLogic.ConsoleDataInput
+
+namespace Wizards.BusinessLogic
 {
     public class ValueValidator
     {

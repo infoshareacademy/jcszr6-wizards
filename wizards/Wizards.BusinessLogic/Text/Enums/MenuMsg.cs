@@ -1,4 +1,4 @@
-﻿namespace Wizards.GUI
+﻿namespace Wizards.BusinessLogic
 {
     public enum MenuMsg
     {
