@@ -19,14 +19,14 @@ namespace Wizards.GUI
 
             Console.Write("Ładowanie Unreal Engine 5: ");
 
-            //ProgressBar.DisplayProgressBar();
+            ProgressBar.DisplayProgressBar();
 
-            //if (OperatingSystem.IsWindows())
-            //{
-            //    SoundPlayer player = new SoundPlayer(@"MenuMusic-1.wav");
-            //    player.Load();
-            //    player.PlayLooping();
-            //}
+            if (OperatingSystem.IsWindows())
+            {
+                SoundPlayer player = new SoundPlayer(@"MenuMusic-1.wav");
+                player.Load();
+                player.PlayLooping();
+            }
 
             ScrollMainMenu.DisplayScrollMenu();
 

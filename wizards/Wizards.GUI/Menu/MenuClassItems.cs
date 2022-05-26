@@ -116,7 +116,7 @@ namespace Wizards.GUI
             Console.WriteLine("A więc żegnaj.");
             Console.WriteLine();
             Console.Write("Zwalnianie zasobów systemowych: ");
-            //ProgressBar.DisplayProgressBar();
+            ProgressBar.DisplayProgressBar();
             Environment.Exit(0);
 
         }
