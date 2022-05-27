@@ -37,11 +37,18 @@ namespace Wizards.GUI
             Console.Clear();
             Console.WriteLine("Gra\n");
 
+            FilesOperations.LoadGameData();
             FilesOperations.PrintRepoPlayers();
-            FilesOperations.SaveGame();
+            //FilesOperations.SaveGameData();
+
+            Console.Clear();
+            Console.WriteLine("Dodaj element");
+
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
 
             Console.ReadKey();
             ScrollMainMenu.DisplayScrollMenu();
+
         }
     }
 
@@ -313,6 +320,49 @@ namespace Wizards.GUI
             FilesOperations.JsonRead();
             Console.ReadKey();
             Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
+        }
+    }
+
+    internal class ShowGameData : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Obecny stan gry:\n");
+            FilesOperations.PrintRepoPlayers();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
+        }
+    }
+    internal class LoadGameData : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Ładownie stanu gry:\n");
+            FilesOperations.LoadGameData();
+            Console.WriteLine("Załadowano stan gry, wciśnij przycisk aby powrócić.");
+            Console.ReadKey();
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
+        }
+    }
+
+    internal class SaveGameData : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Ładownie stanu gry:\n");
+            FilesOperations.SaveGameData();
+            Console.WriteLine("Zapisano stan gry, wciśnij przycisk aby powrócić.");
+            Console.ReadKey();
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
         }
     }
 }
