@@ -37,6 +37,9 @@ namespace Wizards.GUI
             Console.Clear();
             Console.WriteLine("Gra\n");
 
+            FilesOperations.PrintRepoPlayers();
+            FilesOperations.SaveGame();
+
             Console.ReadKey();
             ScrollMainMenu.DisplayScrollMenu();
         }

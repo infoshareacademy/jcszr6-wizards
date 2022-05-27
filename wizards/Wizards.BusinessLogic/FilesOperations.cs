@@ -36,7 +36,7 @@ namespace Wizards.BusinessLogic
             string path = Path.Combine(Environment.CurrentDirectory, "Data", "data.json");
             var dataFile = File.ReadAllText(path);
             var jsonString = JsonConvert.DeserializeObject<List<Player>>(dataFile);
-
+            Console.WriteLine($"Path: {path}");
             foreach (Player player in jsonString)
             {
                 Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
@@ -49,6 +49,36 @@ namespace Wizards.BusinessLogic
             Console.WriteLine("*************************");
             Console.WriteLine($"{path}");
             File.Delete(path);
+        }
+
+        public static void PrintRepoPlayers()
+        {
+            var players = Repository.GetAllPlayers();
+            foreach (var player in players)
+            {
+                Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
+            }
+        }
+
+        public static void SaveGame()
+        {
+            var path = GetJsonDirectory();
+            Console.WriteLine($"{path}");
+            string json = JsonConvert.SerializeObject(Repository.GetAllPlayers());
+
+            Console.WriteLine("Json created.");
+            File.WriteAllText(path, json.ToString());
+
+        }
+
+        public static void LoadGame()
+        {
+            var path = GetJsonDirectory();
+            Console.WriteLine($"{path}");
+            var dataFile = File.ReadAllText(path);
+            
+            //?? = JsonConvert.DeserializeObject<List<Player>>(dataFile);
+
         }
     }
 }
