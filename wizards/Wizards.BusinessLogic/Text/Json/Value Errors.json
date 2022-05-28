@@ -9,5 +9,6 @@
   "NumberToHigh": "Podana liczba jest zbyt duża!",
   "NumberToLow": "Podana liczba jest zbyt mała!",
   "IsNotNumber": "Podana wartość musi być liczbą!",
-  "DateNotCorrect": "Podana data jest nieprawidłowa!" 
+  "DateNotCorrect": "Podana data jest nieprawidłowa!",
+  "InvalidKey": "Wybrany klawisz jest nieprawidłowy!"
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Wizards.GUI.Screen
+namespace Wizards.GUI
 {
     public class Message
     {

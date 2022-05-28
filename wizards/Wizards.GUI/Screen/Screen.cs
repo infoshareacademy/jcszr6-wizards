@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Wizards.GUI.Screen
+namespace Wizards.GUI
 {
     public class Screen
     {

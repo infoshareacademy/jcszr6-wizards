@@ -86,6 +86,16 @@ namespace Wizards.BusinessLogic
             return true;
         }
 
+        public bool Validate(char key, char[] expectedKeys)
+        {
+            if (!expectedKeys.Contains(key))
+            {
+                throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.InvalidKey));
+            }
+
+            return true;
+        }
+
         private bool CheckInUse(string value)
         {
             if (AlredyInUseValues == null)

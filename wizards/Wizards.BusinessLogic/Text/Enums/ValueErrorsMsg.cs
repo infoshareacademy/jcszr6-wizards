@@ -12,6 +12,7 @@
         NumberToHigh,
         NumberToLow,
         IsNotNumber,
-        DateNotCorrect
+        DateNotCorrect,
+        InvalidKey
     }
 }
