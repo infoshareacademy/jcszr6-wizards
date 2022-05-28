@@ -7,7 +7,7 @@ namespace Wizards.BusinessLogic
 {
     public static class Repository
     {
-        private static List<Player> Players = new List<Player>();
+        public static List<Player> Players = new List<Player>();
 
         static Repository()
         {
@@ -16,9 +16,5 @@ namespace Wizards.BusinessLogic
             Players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
         }
 
-        public static List<Player> GetAllPlayers()
-        {
-            return Players;
-        }
     }
 }

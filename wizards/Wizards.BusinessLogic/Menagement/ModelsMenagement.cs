@@ -6,7 +6,7 @@ namespace Wizards.BusinessLogic
     {
         public void AddPlayer(Player playerToAdd)
         {
-            throw new NotImplementedException();
+            Repository.Players.Add(playerToAdd);
         }
         
         public void AddHeroToPlayer(Hero heroToAdd, Player playerToAddFor)
@@ -36,7 +36,7 @@ namespace Wizards.BusinessLogic
 
         public void RemovePlayer(Player playerToRemove)
         {
-            throw new NotImplementedException();
+            Repository.Players.Remove(playerToRemove);
         }
 
         public void RemoveHeroFromPlayer(Hero heroToRemove, Player playerToRemoveFrom)

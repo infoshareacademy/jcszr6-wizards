@@ -11,5 +11,7 @@
         AlredyInUse,
         NumberToHigh,
         NumberToLow,
+        IsNotNumber,
+        DateNotCorrect
     }
 }

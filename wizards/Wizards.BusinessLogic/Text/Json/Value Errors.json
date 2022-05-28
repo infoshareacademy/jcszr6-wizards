@@ -7,5 +7,7 @@
   "HasRestrictedCharacter": "Podany tekst zawiera nieprawidłowy znak lub symbol!",
   "AlredyInUse": "Podana wartość jest już używana!",
   "NumberToHigh": "Podana liczba jest zbyt duża!",
-  "NumberToLow": "Podana liczba jest zbyt mała!"
+  "NumberToLow": "Podana liczba jest zbyt mała!",
+  "IsNotNumber": "Podana wartość musi być liczbą!",
+  "DateNotCorrect": "Podana data jest nieprawidłowa!" 
 }
