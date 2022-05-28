@@ -1,3 +1,11 @@
 {
-   "Default": "Domyślny tekst kreatora"
+  "Default": "Domyślny tekst kreatora",
+  "Title": "Tworzenie nowego gracza!\n\n",
+  "EnterUserName": "Wprowadź nazwę użytkownika: ",
+  "EnterPassword": "Wprowadź hasło: " ,
+  "EnterEmail": "Wprowadź adres email: " ,
+  "EnterBirthDate": "Ustaw datę urodzenia.\n" ,
+  "EnterDay": "Podaj dzień: " ,
+  "EnterMonth": "Podaj miesiąc: ",
+  "EnterYear": "Podaj rok: "
 }
