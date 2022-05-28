@@ -5,8 +5,8 @@ namespace Wizards.GUI
 {
     public class UserInput
     {
-        private ValueValidator _validator;
-        private Screen _screen;
+        public ValueValidator Validator { get; set; }
+        public Screen Screen { get; set; }
 
         public string GetText()
         {
@@ -19,13 +19,13 @@ namespace Wizards.GUI
 
                 try
                 {
-                    isValid = _validator.Validate(result);
+                    isValid = Validator.Validate(result);
                 }
                 catch (InvalidValueException e)
                 {
                     isValid = false;
-                    _screen.AddMessage(new Message(e.Message,ConsoleColor.Red));
-                    _screen.Refresh();
+                    Screen.AddMessage(new Message(e.Message,ConsoleColor.Red));
+                    Screen.Refresh();
                 }
             } while (!isValid);
 
@@ -44,13 +44,13 @@ namespace Wizards.GUI
 
                 try
                 {
-                    isValid = _validator.Validate(result);
+                    isValid = Validator.Validate(result);
                 }
                 catch (InvalidValueException e)
                 {
                     isValid = false;
-                    _screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
-                    _screen.Refresh();
+                    Screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
+                    Screen.Refresh();
                 }
             } while (!isValid);
 
@@ -68,13 +68,13 @@ namespace Wizards.GUI
 
                 try
                 {
-                    isValid = _validator.Validate(result, expectedKeys);
+                    isValid = Validator.Validate(result, expectedKeys);
                 }
                 catch (InvalidValueException e)
                 {
                     isValid = false;
-                    _screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
-                    _screen.Refresh();
+                    Screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
+                    Screen.Refresh();
                 }
 
             } while (!isValid);
