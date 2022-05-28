@@ -15,7 +15,7 @@ namespace Wizards.BusinessLogic
         public int Max { get; set; }
         private readonly List<char> allowedSpecialCharacters = new()
         {
-            '!','(',')','*','+',',','.','-','/',':',';','=','?'
+            '(',')','*','+','-','/',',','.',':',';','=','?','!','#','@','$','%','^','&','[',']','{','}','<','>','|','_','\\'
         };
         public List<string> AlredyInUseValues { get; set; }
 
@@ -128,9 +128,8 @@ namespace Wizards.BusinessLogic
 
         private bool CheckSpecialCharacters(string value)
         {
-            if (AllowSpecialCharacters && value
-                    .Where(v => !char.IsLetter(v) && !char.IsDigit(v) && v != ' ')
-                    .All(v => allowedSpecialCharacters.Contains(v)))
+            var filtredText = value.Where(v => !char.IsLetter(v) && !char.IsDigit(v) && v != ' ').ToList();
+            if (AllowSpecialCharacters && !filtredText.Any(v => !allowedSpecialCharacters.Contains(v)))
             {
                 return true;
             }
