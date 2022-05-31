@@ -6,110 +6,187 @@ namespace Wizards.GUI.Creators
 {
     public class PlayerCreator
     {
-        private ValueValidator _userNameValidator;
-        private ValueValidator _passwordValidator;
-        private ValueValidator _emailValidator;
-        private ValueValidator _dayValidator;
-        private ValueValidator _monthValidator;
-        private ValueValidator _yearValidator;
-        private ValueValidator _yesNoValidator;
         private Screen _screen;
         private UserInput _inputer;
+        private ModelsMenagement _modelsMenagement;
+        private Player _player;
         public PlayerCreator()
         {
-            _userNameValidator = new ValueValidator
-            {
-                AlredyInUseValues = Repository.Players.Select(p => p.UserName).ToList(),
-                AllowSpecialCharacters = true,
-                AllowSpace = false,
-                Min = 3,
-                Max = 20
-            };
-
-            _passwordValidator = new ValueValidator
-            {
-                AllowSpecialCharacters = true,
-                Min = 6,
-                Max = 25
-            };
-
-            _emailValidator = new ValueValidator
-            {
-                AlredyInUseValues = Repository.Players.Select(p=>p.Email).ToList(),
-                AllowSpecialCharacters = true,
-                AllowSpace = false,
-                Min = 5,
-                Max = 100
-            };
-
-            _dayValidator = new ValueValidator
-            {
-                Min = 1,
-                Max = 31
-            };
-            _monthValidator = new ValueValidator
-            {
-                Min = 1,
-                Max = 12
-            };
-            _yearValidator = new ValueValidator
-            {
-                Min = 1900,
-                Max = DateTime.Now.Year,
-            };
-
-            _yesNoValidator = new ValueValidator();
             _screen = new Screen();
             _inputer = new UserInput();
             _inputer.Screen = _screen;
+            _modelsMenagement = new ModelsMenagement();
+            _player = new Player();
         }
         public void Run()
         {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.Title)));
 
+            var userName = SetUserName();
+            var password = SetPassword();
+            var email = SetEmail();
+            var birthDate = SetBirthDate();
+            
+            var createdPlayer = new Player(1, userName, password, email, birthDate);
+            _modelsMenagement.AddPlayer(createdPlayer);
+
+            AddHeroes();
+
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.PlayerAdded)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.PressKeyToExit)));
+            _screen.Refresh();
+            _inputer.WaitForKey();
+        }
+
+        private string SetUserName()
+        {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterUserName)));
             _screen.Refresh();
-            _inputer.Validator = _userNameValidator;
+
+            var validator = new ValueValidator()
+            {
+                AllowSpecialCharacters = true,
+                AllowSpace = false,
+                Min = 3,
+                Max = 20,
+                AlredyInUseValues = Repository.Players.Select(p => p.UserName).ToList()
+            };
+
+            _inputer.Validator = validator;
+
             string userName = _inputer.GetText();
-            _screen.AddMessage(new Message($"{userName}\n",ConsoleColor.Green));
-            
+
+            _screen.AddMessage(new Message(userName, ConsoleColor.Green));
+
+            return userName;
+        }
+
+        private string SetPassword()
+        {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterPassword)));
             _screen.Refresh();
-            _inputer.Validator = _passwordValidator;
-            string password = _inputer.GetText();
-            _screen.AddMessage(new Message($"Hasło przyjęte\n", ConsoleColor.Green));
 
+            var validator = new ValueValidator()
+            {
+                AllowSpecialCharacters = true,
+                AllowSpace = false,
+                Min = 8,
+                Max = 50
+            };
+
+            _inputer.Validator = validator;
+            
+            string password = _inputer.GetText();
+            
+            _screen.AddMessage(new Message("Hasło przyjęte", ConsoleColor.Green));
+            
+            return password;
+        }
+
+        private string SetEmail()
+        {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterEmail)));
             _screen.Refresh();
-            _inputer.Validator = _emailValidator;
-            string email = _inputer.GetText();
-            _screen.AddMessage(new Message($"{email}\n", ConsoleColor.Green));
 
+            var validator = new ValueValidator()
+            {
+                AllowSpecialCharacters = true,
+                AllowSpace = false,
+                Min = 5,
+                AlredyInUseValues = Repository.Players.Select(p => p.Email).ToList()
+            };
+            
+            _inputer.Validator = validator;
+            
+            string email = _inputer.GetText();
+            
+            _screen.AddMessage(new Message(email, ConsoleColor.Green));
+            
+            return email;
+        }
+
+        private DateTime SetBirthDate()
+        {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterBirthDate)));
 
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterDay)));
-            _screen.Refresh();
-            _inputer.Validator = _dayValidator;
-            int day = _inputer.GetNumber();
-            _screen.AddMessage(new Message($"{day}\n", ConsoleColor.Green));
+            DateTime birthDate;
+            var validator = new ValueValidator();
+            _inputer.Validator = validator;
 
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterMonth)));
-            _screen.Refresh();
-            _inputer.Validator = _monthValidator;
-            int month = _inputer.GetNumber();
-            _screen.AddMessage(new Message($"{month}\n", ConsoleColor.Green));
 
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterYear)));
-            _screen.Refresh();
-            _inputer.Validator = _yearValidator;
-            int year = _inputer.GetNumber();
-            _screen.AddMessage(new Message($"{year}\n", ConsoleColor.Green));
+            do
+            {
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterDay)));
+                _screen.Refresh();
 
-            DateTime birthDate = new ValueConverter().ToDate(day, month, year);
+                validator.Min = 1;
+                validator.Max = 31;
+                
+                int day = _inputer.GetNumber();
+                _screen.AddMessage(new Message($"{day}", ConsoleColor.Green));
 
-            var menage = new ModelsMenagement();
-            var createdPlayer = new Player(1, userName, password, email, birthDate);
-            menage.AddPlayer(createdPlayer);
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterMonth)));
+                _screen.Refresh();
+                
+                validator.Max = 12;
+                int month = _inputer.GetNumber();
+                _screen.AddMessage(new Message($"{month}", ConsoleColor.Green));
+
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterYear)));
+                _screen.Refresh();
+                
+                validator.Min = 1900;
+                validator.Max = DateTime.Now.Year;
+                
+                int year = _inputer.GetNumber();
+                _screen.AddMessage(new Message($"{year}", ConsoleColor.Green));
+
+                try
+                {
+                    birthDate = new ValueConverter().ToDate(day, month, year);
+                    break;
+                }
+                catch (InvalidValueException e)
+                {
+                    _screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
+                    _screen.Refresh();
+                    Console.ReadKey(true);
+                    _screen.RemoveLastMessages(1);
+                    _screen.Refresh();
+                }
+
+            } while (true);
+
+            return birthDate;
         }
+
+        private void AddHeroes()
+        {
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHeroes)));
+            _screen.Refresh();
+
+            var validator = new ValueValidator();
+            _inputer.Validator = validator;
+
+            char yesNoAnswer = _inputer.GetKey(new []{'y','n'});
+
+            if (yesNoAnswer == 'n')
+                return;
+
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HowManyHeroes)));
+            _screen.Refresh();
+
+            validator.Min = 1;
+            validator.Max = 5;
+
+            int heroCountToAdd = _inputer.GetNumber();
+
+            for (int i = 0; i < heroCountToAdd; i++)
+            {
+                new HeroCreator(_player).Run();
+            }
+        }
+
+
     }
 }

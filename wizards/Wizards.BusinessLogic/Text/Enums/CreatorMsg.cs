@@ -10,6 +10,12 @@
         EnterBirthDate,
         EnterDay,
         EnterMonth,
-        EnterYear
+        EnterYear,
+        EnterNickName,
+        WantToAddHeroes,
+        PlayerAdded,
+        HowManyHeroes,
+        HeroAdded,
+        PressKeyToExit
     }
 }

@@ -1,11 +1,17 @@
 {
-  "Default": "Domyślny tekst kreatora",
-  "Title": "Tworzenie nowego gracza!\n\n",
-  "EnterUserName": "Wprowadź nazwę użytkownika: ",
-  "EnterPassword": "Wprowadź hasło: " ,
-  "EnterEmail": "Wprowadź adres email: " ,
-  "EnterBirthDate": "Ustaw datę urodzenia.\n" ,
-  "EnterDay": "Podaj dzień: " ,
-  "EnterMonth": "Podaj miesiąc: ",
-  "EnterYear": "Podaj rok: "
+  "Default": "Domyślny tekst kreatora\n",
+  "Title": "Tworzenie nowego gracza!\n",
+  "EnterUserName": "\nWprowadź nazwę użytkownika: ",
+  "EnterPassword": "\nWprowadź hasło: ",
+  "EnterEmail": "\nWprowadź adres email: ",
+  "EnterBirthDate": "\nUstaw datę urodzenia.",
+  "EnterDay": "\nPodaj dzień: ",
+  "EnterMonth": "\nPodaj miesiąc: ",
+  "EnterYear": "\nPodaj rok: ",
+  "PlayerAdded": "\nGracz został pomyślnie dodany do bazy danych!\n",
+  "WantToAddHeroes": "\nCzy chcesz dodać bohatera? (y / n): ",
+  "HowManyHeroes": "\nIlu bohaterów chcesz dodać (min 1 max 5): ",
+  "EnterNickName": "\nPodaj nick postaci: ",
+  "HeroAdded": "\nBohater został pomyślnie utworzony.\n",
+  "PressKeyToExit": "\n wcisnij dowolny klawisz, aby zakonczyć kreator." 
 }
