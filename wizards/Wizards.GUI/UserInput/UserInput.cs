@@ -80,7 +80,7 @@ namespace Wizards.GUI
 
         private bool HandleException(InvalidValueException e)
         {
-            Screen.AddMessage(new Message($"\n{e.Message}", ConsoleColor.Red));
+            Screen.AddMessage(new Message($"{e.Message}", ConsoleColor.Red));
             Screen.Refresh();
             Screen.RemoveLastMessages(1);
 
