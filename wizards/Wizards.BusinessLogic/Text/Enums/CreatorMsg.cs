@@ -3,7 +3,8 @@
     public enum CreatorMsg
     {
         Default = 0,
-        Title,
+        PlayerCreatorTitle,
+        DateOfBirth,
         EnterUserName,
         EnterPassword,
         EnterEmail,
@@ -12,10 +13,15 @@
         EnterMonth,
         EnterYear,
         EnterNickName,
-        WantToAddHeroes,
-        PlayerAdded,
-        HowManyHeroes,
-        HeroAdded,
-        PressKeyToExit
+        HeroCreated,
+        HeroesCount,
+        PlayerCreated,
+        PressKeyToExit,
+        WantToAddHero,
+        WantToAddAnotherHero,
+        WantToAddItem,
+        HeroCreatorTitle,
+        ItemsCount,
+        WantToAddAnotherItem
     }
 }

@@ -10,6 +10,7 @@ namespace Wizards.GUI.Creators
         private UserInput _inputer;
         private ModelsMenagement _modelsMenagement;
         private Player _player;
+        private Hero _createdHero;
 
         public HeroCreator(Player player)
         {
@@ -18,18 +19,27 @@ namespace Wizards.GUI.Creators
             _inputer.Screen = _screen;
             _modelsMenagement = new ModelsMenagement();
             _player = player;
+            _createdHero = new Hero();
+        }
+        public HeroCreator(Player player, Hero hero) : this(player)
+        {
+            _createdHero = hero;
         }
 
         public void Run()
         {
-            var nickName = SetNickName();
-            var id = _player.Id * 100 + _player.Heroes.Count + 1;
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HeroCreatorTitle)));
 
-            var hero = new Hero(id, nickName);
-            _modelsMenagement.AddHeroToPlayer(hero, _player);
+            _createdHero.NickName = SetNickName();
+            _createdHero.Id = _player.Id * 100 + _player.Heroes.Count + 1;
+            _modelsMenagement.AddHeroToPlayer(_createdHero, _player);
 
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HeroAdded)));
+            AddItemsToHero();
+
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HeroCreated), ConsoleColor.Green));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.PressKeyToExit), ConsoleColor.Cyan));
             _screen.Refresh();
+            _inputer.WaitForKey();
         }
 
         private string SetNickName()
@@ -39,9 +49,6 @@ namespace Wizards.GUI.Creators
 
             var validator = new ValueValidator()
             {
-                AllowLetters = true,
-                AllowSpace = true,
-                AllowSpecialCharacters = false,
                 AllowDigits = false,
                 Min = 3,
                 Max = 17,
@@ -56,5 +63,36 @@ namespace Wizards.GUI.Creators
 
             return nickName;
         }
+        private void AddItemsToHero()
+        {
+            var validator = new ValueValidator();
+            _inputer.Validator = validator;
+
+            _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.ItemsCount)}"));
+            _screen.AddMessage(new Message($"{_createdHero.Equipped.Count + _createdHero.Inventory.Count}", ConsoleColor.Green));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
+            _screen.Refresh();
+
+            char yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
+
+            if (yesNoAnswer == 'n')
+                return;
+
+            do
+            {
+                new ItemCreator(_createdHero).Run();
+
+                _screen.RemoveLastMessages(3);
+                _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.ItemsCount)}"));
+                _screen.AddMessage(new Message($"{_createdHero.Equipped.Count + _createdHero.Inventory.Count}", ConsoleColor.Green));
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddAnotherItem)));
+                _screen.Refresh();
+
+                yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
+
+            } while (yesNoAnswer == 'y');
+
+        }
+
     }
 }
