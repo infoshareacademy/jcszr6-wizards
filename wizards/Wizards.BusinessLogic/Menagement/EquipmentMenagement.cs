@@ -29,8 +29,8 @@ namespace Wizards.BusinessLogic
 
             if (_hero.Equipped.Count < 2)
             {
-                _hero.Inventory.Remove(itemToEquip);
                 _hero.Equipped.Add(itemToEquip);
+                _hero.Inventory.Remove(itemToEquip);
             }
 
             SortEquipment(_hero);
