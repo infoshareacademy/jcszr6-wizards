@@ -12,14 +12,9 @@ namespace Wizards.GUI
             messages.Add(msg);
         }
 
-        public void RemoveMessage(int msgIndex)
+        public void RemoveLastMessages(int numberOfLastMessagesToDelete)
         {
-            messages.RemoveAt(msgIndex);
-        }
-
-        public void RemoveMessage(Message msg)
-        {
-            messages.Remove(msg);
+            messages.RemoveRange(messages.Count - numberOfLastMessagesToDelete, numberOfLastMessagesToDelete);
         }
 
         public void ClearMessages()
@@ -36,6 +31,8 @@ namespace Wizards.GUI
                 Console.BackgroundColor = message.BackColor;
                 Console.Write(message.Text);
             }
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
     }

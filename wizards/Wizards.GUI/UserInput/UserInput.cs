@@ -23,9 +23,7 @@ namespace Wizards.GUI
                 }
                 catch (InvalidValueException e)
                 {
-                    isValid = false;
-                    Screen.AddMessage(new Message(e.Message,ConsoleColor.Red));
-                    Screen.Refresh();
+                    isValid = HandleException(e);
                 }
             } while (!isValid);
 
@@ -35,22 +33,18 @@ namespace Wizards.GUI
         public int GetNumber()
         {
             bool isValid;
-            int result;
+            int result = 0;
 
             do
             {
-                
-                result = new ValueConverter().ToIntNumber(Console.ReadLine());
-
                 try
                 {
+                    result = new ValueConverter().ToIntNumber(Console.ReadLine());
                     isValid = Validator.Validate(result);
                 }
                 catch (InvalidValueException e)
                 {
-                    isValid = false;
-                    Screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
-                    Screen.Refresh();
+                    isValid = HandleException(e);
                 }
             } while (!isValid);
 
@@ -72,14 +66,25 @@ namespace Wizards.GUI
                 }
                 catch (InvalidValueException e)
                 {
-                    isValid = false;
-                    Screen.AddMessage(new Message(e.Message, ConsoleColor.Red));
-                    Screen.Refresh();
+                    isValid = HandleException(e);
                 }
-
             } while (!isValid);
 
             return result;
+        }
+
+        public void WaitForKey()
+        {
+            Console.ReadKey();
+        }
+
+        private bool HandleException(InvalidValueException e)
+        {
+            Screen.AddMessage(new Message($"\n{e.Message}", ConsoleColor.Red));
+            Screen.Refresh();
+            Screen.RemoveLastMessages(1);
+
+            return false;
         }
     }
 }

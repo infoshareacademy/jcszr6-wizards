@@ -8,7 +8,7 @@ namespace Wizards.GUI
         public ConsoleColor TextColor { get; private set; }
         public ConsoleColor BackColor { get; private set; }
 
-        public Message(string text, ConsoleColor textColor = ConsoleColor.DarkGray, ConsoleColor backColor = ConsoleColor.Black)
+        public Message(string text, ConsoleColor textColor = ConsoleColor.Gray, ConsoleColor backColor = ConsoleColor.Black)
         {
             Text = text;
             TextColor = textColor;
