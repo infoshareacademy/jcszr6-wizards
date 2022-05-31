@@ -144,7 +144,8 @@ namespace Wizards.BusinessLogic
 
         private bool CheckDigits(string value)
         {
-            if (!AllowDigits && !value.Any(v => char.IsDigit(v)))
+            var test = value.Any(v => char.IsDigit(v));
+            if (!AllowDigits && test)
             {
                 return false;
             }
