@@ -28,7 +28,8 @@ namespace Wizards.GUI.Creators
 
         public void Run()
         {
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.PlayerCreatorTitle)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.PlayerCreatorTitle),ConsoleColor.Cyan));
+            _screen.Refresh();
 
             _player.UserName = SetUserName();
             _player.Password = SetPassword();
@@ -57,9 +58,9 @@ namespace Wizards.GUI.Creators
                 AllowSpace = false,
                 Min = 3,
                 Max = 20,
-                AlredyInUseValues = Repository.Players.Select(p => p.UserName).ToList()
             };
-
+            
+            validator.AlredyInUseValues = Repository.Players.Select(p => p.UserName).ToList();
             _inputer.Validator = validator;
 
             string userName = _inputer.GetText();
@@ -101,7 +102,8 @@ namespace Wizards.GUI.Creators
                 AllowSpecialCharacters = true,
                 AllowSpace = false,
                 Min = 5,
-                AlredyInUseValues = Repository.Players.Select(p => p.Email).ToList()
+                AlredyInUseValues = Repository.Players.Select(p => p.Email).ToList(),
+                CheckIsMail = true
             };
 
             _inputer.Validator = validator;
@@ -131,19 +133,20 @@ namespace Wizards.GUI.Creators
                 validator.Max = 31;
 
                 int day = _inputer.GetNumber();
-
+                _screen.RemoveLastMessages(1);
+                
                 if (!isValid)
                 {
                     _screen.RemoveLastMessages(1);
                 }
-                _screen.RemoveLastMessages(1);
+                
                 _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterMonth)));
                 _screen.Refresh();
 
                 validator.Max = 12;
                 int month = _inputer.GetNumber();
-
                 _screen.RemoveLastMessages(1);
+                
                 _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EnterYear)));
                 _screen.Refresh();
 
@@ -184,7 +187,6 @@ namespace Wizards.GUI.Creators
 
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHero)));
             _screen.Refresh();
-            _screen.RemoveLastMessages(3 + _player.Heroes.Count);
 
             char yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
@@ -193,13 +195,14 @@ namespace Wizards.GUI.Creators
 
             do
             {
+                _screen.RemoveLastMessages(3 + _player.Heroes.Count);
+
                 new HeroCreator(_player).Run();
 
                 new HeroPrinter(_screen).PrintPlayersHeroes(_player);
                 
                 _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddAnotherHero)));
                 _screen.Refresh();
-                _screen.RemoveLastMessages(3 + _player.Heroes.Count);
 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 

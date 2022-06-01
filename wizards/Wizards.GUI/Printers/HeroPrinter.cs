@@ -29,7 +29,7 @@ namespace Wizards.GUI.Printers
 
         public void PrintHeroInfo(Hero hero, int index)
         {
-            string heroText = String.Format("\n\t{0,-5} | {1,-20} | {2,-20} | {3,-30} |", $"{index}.", hero.NickName, $"Złoto: {hero.Gold}", $"Punkty rankingu: {hero.RankPoints}");
+            string heroText = String.Format("\n\t{0,-3} | {1,-17} | {2,-20} | {3,-25} |", $"{index}.", hero.NickName, $"Złoto: {hero.Gold}", $"Punkty rankingu: {hero.RankPoints}");
             _screen.AddMessage(new Message(heroText, ConsoleColor.Magenta));
         }
     }

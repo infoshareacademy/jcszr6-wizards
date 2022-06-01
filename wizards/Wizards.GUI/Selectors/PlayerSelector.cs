@@ -42,7 +42,7 @@ namespace Wizards.GUI.Selectors
 
                 _screen.AddMessage(new Message(TextRepository.Get(SelectorsMsg.PlayerNotExist),ConsoleColor.Red));
                 _screen.Refresh();
-                _screen.RemoveLastMessages(3);
+                _screen.RemoveLastMessages(5);
                 _inputer.WaitForKey();
 
             } while (true);
@@ -51,7 +51,7 @@ namespace Wizards.GUI.Selectors
             
         }
 
-        public Player Get()
+        public Player ReturnPlayer()
         {
             return _player;
         }

@@ -36,7 +36,7 @@ namespace Wizards.GUI.Selectors
             _screen.AddMessage(new Message(TextRepository.Get(SelectorsMsg.HeroSelected), ConsoleColor.Cyan));
         }
 
-        public Hero Get()
+        public Hero ReturnHero()
         {
             return _hero;
         }

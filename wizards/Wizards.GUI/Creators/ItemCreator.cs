@@ -29,7 +29,8 @@ namespace Wizards.GUI.Creators
 
         public void Run()
         {
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.ItemCreatorTitle)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.ItemCreatorTitle), ConsoleColor.Cyan));
+            _screen.AddMessage(new Message($"Bohater: {_hero.NickName}\n"));
             _screen.Refresh();
 
             var itemType = SetTypeOfItem();

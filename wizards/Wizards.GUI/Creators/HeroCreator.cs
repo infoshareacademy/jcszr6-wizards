@@ -29,7 +29,9 @@ namespace Wizards.GUI.Creators
 
         public void Run()
         {
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HeroCreatorTitle)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HeroCreatorTitle), ConsoleColor.Cyan));
+            _screen.AddMessage(new Message($"Gracz: {_player.UserName}\n"));
+            _screen.Refresh();
 
             new HeroPrinter(_screen).PrintPlayersHeroes(_player);
             
@@ -75,7 +77,6 @@ namespace Wizards.GUI.Creators
 
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
             _screen.Refresh();
-            _screen.RemoveLastMessages(5 + _createdHero.Inventory.Count + _createdHero.Equipped.Count);
 
             char yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
@@ -84,13 +85,14 @@ namespace Wizards.GUI.Creators
 
             do
             {
+                _screen.RemoveLastMessages(5 + _createdHero.Inventory.Count + _createdHero.Equipped.Count);
+                
                 new ItemCreator(_createdHero).Run();
 
                 new ItemPrinter(_screen).PrintAllHeroesItems(_createdHero);
 
                 _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddAnotherItem)));
                 _screen.Refresh();
-                _screen.RemoveLastMessages(5 + _createdHero.Inventory.Count + _createdHero.Equipped.Count);
                 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
