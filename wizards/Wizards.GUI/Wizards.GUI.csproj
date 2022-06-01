@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Selectors\" />
     <Folder Include="UserInput\" />
     <Folder Include="Screen\" />
   </ItemGroup>

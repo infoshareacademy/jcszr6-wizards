@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Wizards.BusinessLogic;
+using Wizards.GUI.Creators;
+using Wizards.GUI.Selectors;
 
 
 namespace Wizards.GUI
@@ -134,9 +136,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
-            Console.Clear();
-            Console.WriteLine("Dodaj gracza");
-            Console.ReadKey();
+            new PlayerCreator().Run();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -146,10 +146,12 @@ namespace Wizards.GUI
         bool ICommand.IsActive => true;
 
         void ICommand.Execute()
-        {
-            Console.Clear();
-            Console.WriteLine("Dodaj bohatera");
-            Console.ReadKey();
+        { 
+            var playerSelector = new PlayerSelector();
+            playerSelector.Select();
+
+            new HeroCreator(playerSelector.Get()).Run();
+
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -160,9 +162,14 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
-            Console.Clear();
-            Console.WriteLine("Dodaj przedmiot");
-            Console.ReadKey();
+            var playerSelector = new PlayerSelector();
+            playerSelector.Select();
+
+            var heroSelector = new HeroSelector(playerSelector.Get());
+            heroSelector.Select();
+            
+            new ItemCreator(heroSelector.Get()).Run();
+
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
