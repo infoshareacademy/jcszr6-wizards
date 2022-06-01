@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Wizards.BusinessLogic;
+using Wizards.GUI.Printers;
 
 namespace Wizards.GUI.Creators
 {
@@ -179,7 +180,11 @@ namespace Wizards.GUI.Creators
             var validator = new ValueValidator();
             _inputer.Validator = validator;
 
-            PrintPlayersHeroesInfo();
+            new HeroPrinter(_screen).PrintPlayersHeroes(_player);
+
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHero)));
+            _screen.Refresh();
+            _screen.RemoveLastMessages(3 + _player.Heroes.Count);
 
             char yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
@@ -190,21 +195,15 @@ namespace Wizards.GUI.Creators
             {
                 new HeroCreator(_player).Run();
 
-                PrintPlayersHeroesInfo();
+                new HeroPrinter(_screen).PrintPlayersHeroes(_player);
+                
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddAnotherHero)));
+                _screen.Refresh();
+                _screen.RemoveLastMessages(3 + _player.Heroes.Count);
 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
             } while (yesNoAnswer == 'y');
-        }
-
-        private void PrintPlayersHeroesInfo()
-        {
-            _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.HeroesCount)}"));
-            _screen.AddMessage(new Message($"{_player.Heroes.Count}", ConsoleColor.Green));
-            _player.Heroes.ForEach(h => _screen.AddMessage(new Message($"\n\t\t{h.NickName}", ConsoleColor.Magenta)));
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHero)));
-            _screen.Refresh();
-            _screen.RemoveLastMessages(3 + _player.Heroes.Count);
         }
     }
 }

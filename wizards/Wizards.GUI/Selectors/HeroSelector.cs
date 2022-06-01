@@ -1,5 +1,6 @@
 ﻿using System;
 using Wizards.BusinessLogic;
+using Wizards.GUI.Printers;
 
 namespace Wizards.GUI.Selectors
 {
@@ -22,20 +23,15 @@ namespace Wizards.GUI.Selectors
         {
             _screen.AddMessage(new Message(TextRepository.Get(SelectorsMsg.SelectHero)));
 
-            var heroes = _player.Heroes;
-
-            for (int i = 0; i < heroes.Count; i++)
-            {
-                _screen.AddMessage(new Message($"\n\t{i + 1}. {heroes[i].NickName}", ConsoleColor.Magenta));
-            }
-
+            new HeroPrinter(_screen).PrintPlayersHeroes(_player);
+            
             _screen.AddMessage(new Message(TextRepository.Get(SelectorsMsg.EnterNumberOfHero)));
             _screen.Refresh();
 
-            _inputer.Validator = new ValueValidator() { Min = 1, Max = heroes.Count };
+            _inputer.Validator = new ValueValidator() { Min = 1, Max = _player.Heroes.Count };
             int index = _inputer.GetNumber();
 
-            _hero = heroes[index - 1];
+            _hero = _player.Heroes[index - 1];
 
             _screen.AddMessage(new Message(TextRepository.Get(SelectorsMsg.HeroSelected), ConsoleColor.Cyan));
         }
