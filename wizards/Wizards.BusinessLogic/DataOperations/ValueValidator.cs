@@ -11,8 +11,10 @@ namespace Wizards.BusinessLogic
         public bool AllowDigits { get; set; }
         public bool AllowSpecialCharacters { get; set; }
         public bool AllowSpace { get; set; }
+        public bool CheckIsMail { get; set; }
         public int Min { get; set; }
         public int Max { get; set; }
+        
         private readonly List<char> allowedSpecialCharacters = new()
         {
             '(',')','*','+','-','/',',','.',':',';','=','?','!','#','@','$','%','^','&','[',']','{','}','<','>','|','_','\\'
@@ -25,6 +27,7 @@ namespace Wizards.BusinessLogic
             AllowDigits = true;
             AllowSpecialCharacters = false;
             AllowSpace = true;
+            CheckIsMail = false;
             Min = 0;
             Max = 50;
         }
@@ -68,6 +71,11 @@ namespace Wizards.BusinessLogic
                 throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.AlredyInUse));
             }
 
+            if (!CheckIsMailCorrect(value))
+            {
+                throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.MailNotCorrect));
+            }
+
             return true;
         }
 
@@ -96,14 +104,21 @@ namespace Wizards.BusinessLogic
             return true;
         }
 
-        private bool CheckInUse(string value)
+        private bool CheckCharacters(string value)
         {
-            if (AlredyInUseValues == null)
+            return (CheckLetters(value) && CheckDigits(value) && CheckSpecialCharacters(value) && CheckSpace(value));
+        }
+
+        private bool CheckLetters(string value)
+        {
+            if (AllowLetters && value
+                    .Where(c => char.IsLetter(c))
+                    .All(c => c >= 97 && c <= 122))
             {
-                return false;
+                return true;
             }
 
-            if (AlredyInUseValues.Any(a => a == value))
+            if (!AllowLetters && !value.Any(v => char.IsLetter(v)))
             {
                 return true;
             }
@@ -111,14 +126,9 @@ namespace Wizards.BusinessLogic
             return false;
         }
 
-        private bool CheckCharacters(string value)
+        private bool CheckDigits(string value)
         {
-            return (CheckLetters(value) && CheckDigits(value) && CheckSpecialCharacters(value) && CheckSpace(value));
-        }
-
-        private bool CheckSpace(string value)
-        {
-            if (value.Contains(' ') && !AllowSpace)
+            if (!AllowDigits && value.Any(v => char.IsDigit(v)))
             {
                 return false;
             }
@@ -142,9 +152,9 @@ namespace Wizards.BusinessLogic
             return false;
         }
 
-        private bool CheckDigits(string value)
+        private bool CheckSpace(string value)
         {
-            if (!AllowDigits && value.Any(v => char.IsDigit(v)))
+            if (value.Contains(' ') && !AllowSpace)
             {
                 return false;
             }
@@ -152,21 +162,32 @@ namespace Wizards.BusinessLogic
             return true;
         }
 
-        private bool CheckLetters(string value)
+        private bool CheckInUse(string value)
         {
-            if (AllowLetters && value
-                    .Where(c => char.IsLetter(c))
-                    .All(c => c >= 97 && c <= 122))
+            if (AlredyInUseValues == null)
             {
-                return true;
+                return false;
             }
-            
-            if (!AllowLetters && !value.Any(v => char.IsLetter(v)))
+
+            if (AlredyInUseValues.Any(a => a.ToLower() == value.ToLower()))
             {
                 return true;
             }
 
             return false;
         }
+
+        private bool CheckIsMailCorrect(string value)
+        {
+            char[] chars = { '@', '.' };
+
+            if (CheckIsMail)
+            {
+                return (chars.All(c => value.Contains(c)));
+            }
+
+            return true;
+        }
+
     }
 }

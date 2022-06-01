@@ -13,6 +13,8 @@
         NumberToLow,
         IsNotNumber,
         DateNotCorrect,
-        InvalidKey
+        InvalidKey,
+        DateIsInFuture,
+        MailNotCorrect
     }
 }

@@ -10,5 +10,7 @@
   "NumberToLow": "\nPodana liczba jest zbyt mała!",
   "IsNotNumber": "\nPodana wartość musi być liczbą!",
   "DateNotCorrect": "\nPodana data jest nieprawidłowa!",
-  "InvalidKey": "\nWybrany klawisz jest nieprawidłowy!"
+  "InvalidKey": "\nWybrany klawisz jest nieprawidłowy!",
+  "DateIsInFuture": "Podana data nie może być z przyszłości!",
+  "MailNotCorrect": "Adres mailowy jest nieprawidłowy." 
 }

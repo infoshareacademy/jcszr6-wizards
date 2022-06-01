@@ -22,6 +22,11 @@ namespace Wizards.BusinessLogic
 
             if (DateTime.TryParse($"{day}-{month}-{year}", out date))
             {
+                if (date > DateTime.Now)
+                {
+                    throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.DateIsInFuture));
+                }
+
                 return date;
             }
 
