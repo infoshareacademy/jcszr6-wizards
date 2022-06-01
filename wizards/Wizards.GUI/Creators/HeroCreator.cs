@@ -77,7 +77,6 @@ namespace Wizards.GUI.Creators
 
             do
             {
-                _screen.RemoveLastMessages(5 + _createdHero.Inventory.Count + _createdHero.Equipped.Count);
                 new ItemCreator(_createdHero).Run();
 
                 PrintHeroesItemInfo();
@@ -98,6 +97,7 @@ namespace Wizards.GUI.Creators
             _createdHero.Equipped.ForEach(i => _screen.AddMessage(new Message($"\n\t\t{i.Name}", ConsoleColor.Yellow)));
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
             _screen.Refresh();
+            _screen.RemoveLastMessages(5 + _createdHero.Inventory.Count + _createdHero.Equipped.Count);
         }
     }
 }

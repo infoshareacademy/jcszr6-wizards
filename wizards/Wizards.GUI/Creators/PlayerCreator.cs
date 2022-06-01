@@ -78,7 +78,7 @@ namespace Wizards.GUI.Creators
                 AllowSpecialCharacters = true,
                 AllowSpace = false,
                 Min = 8,
-                Max = 50
+                Max = 60
             };
 
             _inputer.Validator = validator;
@@ -190,8 +190,6 @@ namespace Wizards.GUI.Creators
             {
                 new HeroCreator(_player).Run();
 
-                _screen.RemoveLastMessages(3 + _player.Heroes.Count);
-                
                 PrintPlayersHeroesInfo();
 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
@@ -206,6 +204,7 @@ namespace Wizards.GUI.Creators
             _player.Heroes.ForEach(h => _screen.AddMessage(new Message($"\n\t\t{h.NickName}", ConsoleColor.Magenta)));
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHero)));
             _screen.Refresh();
+            _screen.RemoveLastMessages(3 + _player.Heroes.Count);
         }
     }
 }

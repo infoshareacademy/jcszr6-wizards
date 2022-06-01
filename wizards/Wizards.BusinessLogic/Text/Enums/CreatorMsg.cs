@@ -29,6 +29,7 @@
         EnterItemName,
         EnterAttackInceaseValue,
         EnterDefenseInceaseValue,
-        WantToEquip
+        WantToEquip,
+        ItemCreated
     }
 }

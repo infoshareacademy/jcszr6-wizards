@@ -26,5 +26,6 @@
   "EnterItemName": "\nPodaj nazwę przedmiotu: ",
   "EnterDefenseInceaseValue": "\nPodaj wartość bonusu do obrony (min 5, max 50): ",
   "EnterAttackInceaseValue": "\nPodaj wartość bonusu do ataku (min 5, max 50): ",
-  "WantToEquip": "\nCzy chcesz założyć utworzony przedmiot? (y / n): "
+  "WantToEquip": "\nCzy chcesz założyć utworzony przedmiot? (y / n): ",
+  "ItemCreated": "\n\nPrzedmiot został pomyślnie utworzony!" 
 }

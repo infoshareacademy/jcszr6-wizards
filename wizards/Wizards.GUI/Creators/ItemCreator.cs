@@ -46,6 +46,10 @@ namespace Wizards.GUI.Creators
             _modelsMenagement.AddItemToInventory(_createdItem,_hero);
 
             EquipItemIfUserWants();
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.ItemCreated),ConsoleColor.Green));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.PressKeyToExit),ConsoleColor.Cyan));
+            _screen.Refresh();
+            _inputer.WaitForKey();
         }
 
         private Weapon SetWeapon()
@@ -125,8 +129,8 @@ namespace Wizards.GUI.Creators
             var validator = new ValueValidator()
             {
                 AllowDigits = false,
-                Min = 3,
-                Max = 17,
+                Min = 2,
+                Max = 35,
             };
 
             _inputer.Validator = validator;
@@ -142,7 +146,7 @@ namespace Wizards.GUI.Creators
         {
             var validator = new ValueValidator()
             {
-                Min = 10,
+                Min = 5,
                 Max = 50,
             };
 
