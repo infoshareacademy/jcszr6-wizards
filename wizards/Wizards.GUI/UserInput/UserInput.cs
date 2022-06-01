@@ -17,6 +17,9 @@ namespace Wizards.GUI
             {
                 result = Console.ReadLine();
 
+                if (Validator == null)
+                    return result;
+
                 try
                 {
                     isValid = Validator.Validate(result);
@@ -40,6 +43,10 @@ namespace Wizards.GUI
                 try
                 {
                     result = new ValueConverter().ToIntNumber(Console.ReadLine());
+                    
+                    if (Validator == null)
+                        return result;
+
                     isValid = Validator.Validate(result);
                 }
                 catch (InvalidValueException e)
@@ -59,6 +66,9 @@ namespace Wizards.GUI
             do
             {
                 result = Console.ReadKey().KeyChar;
+                
+                if (Validator == null)
+                    return result;
 
                 try
                 {
