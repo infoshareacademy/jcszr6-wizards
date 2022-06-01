@@ -19,7 +19,7 @@
   "WantToAddItem": "\nCzy chcesz dodać bohaterowi przedmioty? (y / n): ",
   "HeroCreatorTitle": "\nKreator bohatera.\n",
   "InventoryItemsCount": "\n\nLiczba przedmiotów w Inwentarzu: ",
-  "EquipmentItemsCount": "\n\nLiczba przedmiotów w Inwentarzu: ",
+  "EquipmentItemsCount": "\nLiczba przedmiotów w Ekwipunku: ",
   "WantToAddAnotherItem": "\nCzy chcesz dodać bohaterowi kolejne przedmioty? (y / n): ",
   "ItemCreatorTitle": "\nKreator przedmiotu.\n",
   "GetTypeOfItem": "\nWybierz typ przedmiotu (b - broń / z - zbroja): ",

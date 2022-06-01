@@ -22,6 +22,11 @@ namespace Wizards.GUI.Creators
             _hero = hero;
         }
 
+        public ItemCreator(Hero hero, Item item) : this(hero)
+        {
+            _createdItem = item;
+        }
+
         public void Run()
         {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.ItemCreatorTitle)));
@@ -40,7 +45,7 @@ namespace Wizards.GUI.Creators
             
             _modelsMenagement.AddItemToInventory(_createdItem,_hero);
 
-            EquipItemIfPlayerWants();
+            EquipItemIfUserWants();
         }
 
         private Weapon SetWeapon()
@@ -75,7 +80,7 @@ namespace Wizards.GUI.Creators
             return new Armor(id, name, buyPrice, sellPrice, attributeIncreaseValue);
         }
 
-        private void EquipItemIfPlayerWants()
+        private void EquipItemIfUserWants()
         {
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToEquip)));
             _screen.Refresh();
@@ -100,11 +105,13 @@ namespace Wizards.GUI.Creators
             
             if (userKey == 'b')
             {
+                _screen.AddMessage(new Message("Broń",ConsoleColor.Green));
                 return typeof(Weapon);
             }
             
             if (userKey == 'z')
             {
+                _screen.AddMessage(new Message("Zbroja", ConsoleColor.Green));
                 return typeof(Armor);
             }
 

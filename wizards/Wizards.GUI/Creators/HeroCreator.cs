@@ -31,7 +31,7 @@ namespace Wizards.GUI.Creators
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.HeroCreatorTitle)));
 
             _createdHero.NickName = SetNickName();
-            _createdHero.Id = _player.Id * 100 + _player.Heroes.Count + 1;
+            _createdHero.Id = _player.Id + (_player.Heroes.Count + 1) * 100;
             _modelsMenagement.AddHeroToPlayer(_createdHero, _player);
 
             AddItemsToHero();
@@ -68,12 +68,7 @@ namespace Wizards.GUI.Creators
             var validator = new ValueValidator();
             _inputer.Validator = validator;
 
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.InventoryItemsCount)));
-            _screen.AddMessage(new Message($"{_createdHero.Inventory.Count}",ConsoleColor.Green));
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EquipmentItemsCount)));
-            _screen.AddMessage(new Message($"{_createdHero.Equipped.Count}", ConsoleColor.Green));
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
-            _screen.Refresh();
+            PrintHeroesItemInfo();
 
             char yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
@@ -82,15 +77,10 @@ namespace Wizards.GUI.Creators
 
             do
             {
+                _screen.RemoveLastMessages(5 + _createdHero.Inventory.Count + _createdHero.Equipped.Count);
                 new ItemCreator(_createdHero).Run();
 
-                _screen.RemoveLastMessages(5);
-                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.InventoryItemsCount)));
-                _screen.AddMessage(new Message($"{_createdHero.Inventory.Count}", ConsoleColor.Green));
-                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EquipmentItemsCount)));
-                _screen.AddMessage(new Message($"{_createdHero.Equipped.Count}", ConsoleColor.Green));
-                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
-                _screen.Refresh();
+                PrintHeroesItemInfo();
 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
@@ -98,5 +88,16 @@ namespace Wizards.GUI.Creators
 
         }
 
+        private void PrintHeroesItemInfo()
+        {
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.InventoryItemsCount)));
+            _screen.AddMessage(new Message($"{_createdHero.Inventory.Count}", ConsoleColor.Green));
+            _createdHero.Inventory.ForEach(i => _screen.AddMessage(new Message($"\n\t\t{i.Name}", ConsoleColor.Yellow)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EquipmentItemsCount)));
+            _screen.AddMessage(new Message($"{_createdHero.Equipped.Count}", ConsoleColor.Green));
+            _createdHero.Equipped.ForEach(i => _screen.AddMessage(new Message($"\n\t\t{i.Name}", ConsoleColor.Yellow)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
+            _screen.Refresh();
+        }
     }
 }

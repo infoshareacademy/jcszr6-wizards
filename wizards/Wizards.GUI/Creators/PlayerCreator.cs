@@ -33,7 +33,7 @@ namespace Wizards.GUI.Creators
             _player.Password = SetPassword();
             _player.Email = SetEmail();
             _player.DateOfBirth = SetBirthDate();
-            _player.Id = Repository.Players.Max(p => p.Id) + 1;
+            _player.Id = (Repository.Players.Count + 1) * 10000;
             
             _modelsMenagement.AddPlayer(_player);
 
@@ -179,10 +179,7 @@ namespace Wizards.GUI.Creators
             var validator = new ValueValidator();
             _inputer.Validator = validator;
 
-            _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.HeroesCount)}"));
-            _screen.AddMessage(new Message($"{_player.Heroes.Count}", ConsoleColor.Green));
-            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHero)));
-            _screen.Refresh();
+            PrintPlayersHeroesInfo();
 
             char yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
@@ -193,15 +190,22 @@ namespace Wizards.GUI.Creators
             {
                 new HeroCreator(_player).Run();
 
-                _screen.RemoveLastMessages(3);
-                _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.HeroesCount)}"));
-                _screen.AddMessage(new Message($"{_player.Heroes.Count}", ConsoleColor.Green));
-                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddAnotherHero)));
-                _screen.Refresh();
+                _screen.RemoveLastMessages(3 + _player.Heroes.Count);
+                
+                PrintPlayersHeroesInfo();
 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });
 
             } while (yesNoAnswer == 'y');
+        }
+
+        private void PrintPlayersHeroesInfo()
+        {
+            _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.HeroesCount)}"));
+            _screen.AddMessage(new Message($"{_player.Heroes.Count}", ConsoleColor.Green));
+            _player.Heroes.ForEach(h => _screen.AddMessage(new Message($"\n\t\t{h.NickName}", ConsoleColor.Magenta)));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddHero)));
+            _screen.Refresh();
         }
     }
 }
