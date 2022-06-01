@@ -17,7 +17,14 @@
   "WantToAddAnotherHero": "\nCzy chcesz stworzyć kolejnego bohatera? (y / n): ",
   "WantToAddHero": "\nCzy chcesz dodać bohatera? (y / n): ",
   "WantToAddItem": "\nCzy chcesz dodać bohaterowi przedmioty? (y / n): ",
-  "HeroCreatorTitle": "\nKreator bohatera.",
-  "ItemsCount": "\n\nLiczba posiadanych przedmiotów: ",
-  "WantToAddAnotherItem": "\nCzy chcesz dodać bohaterowi kolejne przedmioty: " 
+  "HeroCreatorTitle": "\nKreator bohatera.\n",
+  "InventoryItemsCount": "\n\nLiczba przedmiotów w Inwentarzu: ",
+  "EquipmentItemsCount": "\n\nLiczba przedmiotów w Inwentarzu: ",
+  "WantToAddAnotherItem": "\nCzy chcesz dodać bohaterowi kolejne przedmioty? (y / n): ",
+  "ItemCreatorTitle": "\nKreator przedmiotu.\n",
+  "GetTypeOfItem": "\nWybierz typ przedmiotu (b - broń / z - zbroja): ",
+  "EnterItemName": "\nPodaj nazwę przedmiotu: ",
+  "EnterDefenseInceaseValue": "\nPodaj wartość bonusu do obrony (min 5, max 50): ",
+  "EnterAttackInceaseValue": "\nPodaj wartość bonusu do ataku (min 5, max 50): ",
+  "WantToEquip": "\nCzy chcesz założyć utworzony przedmiot? (y / n): "
 }

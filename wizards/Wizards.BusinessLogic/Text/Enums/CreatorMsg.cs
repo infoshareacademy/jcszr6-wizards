@@ -21,7 +21,14 @@
         WantToAddAnotherHero,
         WantToAddItem,
         HeroCreatorTitle,
-        ItemsCount,
-        WantToAddAnotherItem
+        InventoryItemsCount,
+        EquipmentItemsCount,
+        WantToAddAnotherItem,
+        ItemCreatorTitle,
+        GetTypeOfItem,
+        EnterItemName,
+        EnterAttackInceaseValue,
+        EnterDefenseInceaseValue,
+        WantToEquip
     }
 }

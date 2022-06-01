@@ -68,8 +68,10 @@ namespace Wizards.GUI.Creators
             var validator = new ValueValidator();
             _inputer.Validator = validator;
 
-            _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.ItemsCount)}"));
-            _screen.AddMessage(new Message($"{_createdHero.Equipped.Count + _createdHero.Inventory.Count}", ConsoleColor.Green));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.InventoryItemsCount)));
+            _screen.AddMessage(new Message($"{_createdHero.Inventory.Count}",ConsoleColor.Green));
+            _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EquipmentItemsCount)));
+            _screen.AddMessage(new Message($"{_createdHero.Equipped.Count}", ConsoleColor.Green));
             _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
             _screen.Refresh();
 
@@ -82,10 +84,12 @@ namespace Wizards.GUI.Creators
             {
                 new ItemCreator(_createdHero).Run();
 
-                _screen.RemoveLastMessages(3);
-                _screen.AddMessage(new Message($"{TextRepository.Get(CreatorMsg.ItemsCount)}"));
-                _screen.AddMessage(new Message($"{_createdHero.Equipped.Count + _createdHero.Inventory.Count}", ConsoleColor.Green));
-                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddAnotherItem)));
+                _screen.RemoveLastMessages(5);
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.InventoryItemsCount)));
+                _screen.AddMessage(new Message($"{_createdHero.Inventory.Count}", ConsoleColor.Green));
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.EquipmentItemsCount)));
+                _screen.AddMessage(new Message($"{_createdHero.Equipped.Count}", ConsoleColor.Green));
+                _screen.AddMessage(new Message(TextRepository.Get(CreatorMsg.WantToAddItem)));
                 _screen.Refresh();
 
                 yesNoAnswer = _inputer.GetKey(new[] { 'y', 'n' });

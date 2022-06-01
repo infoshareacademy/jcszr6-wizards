@@ -4,7 +4,7 @@ using Wizards.BusinessLogic.Model.Items;
 
 namespace Wizards.BusinessLogic
 {
-    internal class EquipmentMenagement
+    public class EquipmentMenagement
     {
         private Hero _hero;
 
