@@ -137,6 +137,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
+            new AddModel().AddPlayer();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -147,6 +148,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
+            new AddModel().AddHero();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -157,6 +159,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
+            new AddModel().AddItem();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }

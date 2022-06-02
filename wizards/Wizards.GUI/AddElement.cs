@@ -4,9 +4,9 @@ using Wizards.GUI.Creators;
 using Wizards.GUI.Printers;
 using Wizards.GUI.Selectors;
 
-namespace Wizards.GUI.AddElements
+namespace Wizards.GUI
 {
-    public class AddElement
+    public class AddModel
     {
         public void AddPlayer()
         {
