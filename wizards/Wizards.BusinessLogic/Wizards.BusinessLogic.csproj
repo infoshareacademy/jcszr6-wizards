@@ -7,10 +7,30 @@
 
   <ItemGroup>
     <None Remove="Model\Items\data.json" />
+    <None Remove="Text\Json\Creator.json" />
+    <None Remove="Text\Json\Menu.json" />
+    <None Remove="Text\Json\RestrictedWords.json" />
+    <None Remove="Text\Json\Selectors.json" />
+    <None Remove="Text\Json\Value Errors.json" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Data\data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Creator.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Menu.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\RestrictedWords.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Selectors.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Text\Json\Value Errors.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
