@@ -1,0 +1,15 @@
+{
+  "Default": "\nDomyślny tekst selektora\n",
+  "SelectPlayer": "\nZaloguj się na swoje konto gracza.\n\n",
+  "EnterUserName": "\nNazwa użytkownika: ",
+  "EnterPassword": "\nHasło: ",
+  "PlayerNotExist": "\nNieprawidłowe dane logowania! Kliknij dowolny klawisz aby spróbować ponownie. ",
+  "PlayerSelected": "\n\nZalogowano pomyślnie!",
+  "SelectHero": "\nWybieranie bohatera.\n",
+  "EnterNumberOfHero": "\n\nWpisz numer bohatera, którego chcesz wybrać: ",
+  "HeroSelected": "\nBohater został pomyślnie wybrany. ",
+  "SelectItem": "\nWybieranie przedmiotu z inwentarza.",
+  "EnterNumberOfItem": "\nWpisz numer przedmiotu, który chcesz wybrać: ",
+  "ItemSelected": "\nPrzedmiot został pomyślnie wybrany. "
+
+}

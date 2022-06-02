@@ -78,8 +78,6 @@ namespace Wizards.BusinessLogic
             var dataFile = File.ReadAllText(path);
             
             Repository.Players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
-
         }
     }
 }
-
