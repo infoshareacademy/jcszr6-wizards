@@ -148,10 +148,10 @@ namespace Wizards.BusinessLogic
             var dataFile = File.ReadAllText(path);
             var jsonString = JsonConvert.DeserializeObject<List<Player>>(dataFile);
 
-            foreach (Player player in jsonString)
-            {
-                Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
-            }
+            //foreach (Player player in jsonString)
+            //{
+            //    Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
+            //}
         }
     }
 }

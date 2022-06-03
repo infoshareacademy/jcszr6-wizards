@@ -43,23 +43,6 @@ namespace Wizards.BusinessLogic
             Console.ReadKey();
         }
     }
-    //public class Heros
-    //{
-    //    public static List<Hero> GetContacts()
-    //    {
-    //        return new List<Hero>()
-    //        {
-    //            new Hero(){Name="Adrian Zamysłowski", Phone="333-444-555"},
-    //            new Hero(){Name="Jakub Oczko", Phone="669-444-777"},
-    //            new Hero(){Name="Paweł Grajnert", Phone="222-444-888"},
-    //            new Hero(){Name="Paweł Dawicki", Phone="000-111-222"},
-    //        };
-    //    }
-    //}
-    //public class Hero
-    //{
-    //    public string Name { get; set; }
-    //    public string Phone { get; set; }
-    //}
+
 }
 

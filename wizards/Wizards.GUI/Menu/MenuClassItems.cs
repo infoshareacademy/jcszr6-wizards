@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Wizards.BusinessLogic;
+using Wizards.GUI.Creators;
+using Wizards.GUI.Printers;
+using Wizards.GUI.Selectors;
 
 
 namespace Wizards.GUI
@@ -134,9 +137,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
-            Console.Clear();
-            Console.WriteLine("Dodaj gracza");
-            Console.ReadKey();
+            new AddModel().AddPlayer();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -147,9 +148,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
-            Console.Clear();
-            Console.WriteLine("Dodaj bohatera");
-            Console.ReadKey();
+            new AddModel().AddHero();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -160,9 +159,7 @@ namespace Wizards.GUI
 
         void ICommand.Execute()
         {
-            Console.Clear();
-            Console.WriteLine("Dodaj przedmiot");
-            Console.ReadKey();
+            new AddModel().AddItem();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }

@@ -7,7 +7,8 @@ namespace Wizards.BusinessLogic
 {
     public static class Repository
     {
-        private static List<Player> Players = new List<Player>();
+        public static List<Player> Players = new List<Player>();
+        
         static Repository()
         {
             string path = Path.Combine(Environment.CurrentDirectory, "Data", "data.json");

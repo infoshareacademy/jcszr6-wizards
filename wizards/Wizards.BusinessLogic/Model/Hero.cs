@@ -21,8 +21,9 @@ namespace Wizards.BusinessLogic
         public int TotalMatchPlayed { get; set; }
         public int TotalMatchWin { get; set; }
         public int TotalMatchLoose { get; set; }
-        public List<Item> Inventory { get; set; }
-        public List<Item> Equipped { get; set; }
+        
+        public List<Item> Inventory = new List<Item>();
+        public List<Item> Equipped = new List<Item>();
         public Restriction Restrictions { get; set; }
 
         // funkcja swap(List<item> source, List<Item> target, Item source, Item target)
