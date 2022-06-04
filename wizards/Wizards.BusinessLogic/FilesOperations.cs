@@ -33,7 +33,7 @@ namespace Wizards.BusinessLogic
 
         public static void JsonRead()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, "Data", "data.json");
+            string path = Path.Combine(Environment.CurrentDirectory, "Data", "data3.json");
             var dataFile = File.ReadAllText(path);
             var jsonString = JsonConvert.DeserializeObject<List<Player>>(dataFile);
             Console.WriteLine($"Path: {path}");
@@ -56,7 +56,8 @@ namespace Wizards.BusinessLogic
             //var players = Repository.Players;
             foreach (var player in Repository.Players)
             {
-                Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
+                //Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
+                Console.WriteLine($"{player.UserName} | {player.Email}");
             }
         }
 

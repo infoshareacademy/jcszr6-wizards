@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Wizards.BusinessLogic;
+using Wizards.BusinessLogic.Searching;
 using Wizards.GUI.Creators;
 using Wizards.GUI.Printers;
 using Wizards.GUI.Selectors;
@@ -40,7 +41,7 @@ namespace Wizards.GUI
             Console.Clear();
             Console.WriteLine("Gra\n");
 
-            FilesOperations.LoadGameData();
+            //FilesOperations.LoadGameData();
             FilesOperations.PrintRepoPlayers();
             //FilesOperations.SaveGameData();
 
@@ -164,6 +165,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             new AddModel().AddPlayer();
+            FilesOperations.SaveGameData();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -175,6 +177,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             new AddModel().AddHero();
+            FilesOperations.SaveGameData();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -186,6 +189,7 @@ namespace Wizards.GUI
         void ICommand.Execute()
         {
             new AddModel().AddItem();
+            FilesOperations.SaveGameData();
             Menu.ScrollSubMenuAdd.DisplayScrollSubMenuAdd();
         }
     }
@@ -236,6 +240,7 @@ namespace Wizards.GUI
         {
             Console.Clear();
             Console.WriteLine("Wyszukaj gracza po nazwie");
+            SearchingByName.Name();
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
         }
@@ -248,23 +253,24 @@ namespace Wizards.GUI
         {
             Console.Clear();
             Console.WriteLine("Wyszukaj gracza po dacie");
+            SearchingByBirthday.Birthday();
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
         }
     }
 
-    internal class SearchItemsByTypeItemMenuCLassItem : ICommand
-    {
-        bool ICommand.IsActive => true;
+    //internal class SearchItemsByTypeItemMenuCLassItem : ICommand
+    //{
+    //    bool ICommand.IsActive => true;
 
-        void ICommand.Execute()
-        {
-            Console.Clear();
-            Console.WriteLine("Wyszukiwanie przedmiot po jego rodzaju");
-            Console.ReadKey();
-            Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
-        }
-    }
+    //    void ICommand.Execute()
+    //    {
+    //        Console.Clear();
+    //        Console.WriteLine("Wyszukiwanie przedmiot po jego rodzaju");
+    //        Console.ReadKey();
+    //        Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
+    //    }
+    //}
 
     internal class SearchPlayerItemsMenuCLassItem : ICommand
     {
@@ -274,6 +280,7 @@ namespace Wizards.GUI
         {
             Console.Clear();
             Console.WriteLine("Wyszukiwanie przedmiotow należących do gracza");
+            SearchingItemsByPlayerID.Search();
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
         }

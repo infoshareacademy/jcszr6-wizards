@@ -35,11 +35,11 @@ namespace Wizards.GUI.Menu
                     Command = new SearchPalyerByDateHeroMenuClassItem()
                 },
 
-                new LabelMenuItem
-                {
-                    Text = "Wyszukiwanie przedmiotu po rodzaju",
-                    Command = new SearchItemsByTypeItemMenuCLassItem()
-                },
+                //new LabelMenuItem
+                //{
+                //    Text = "Wyszukiwanie przedmiotu po rodzaju",
+                //    Command = new SearchItemsByTypeItemMenuCLassItem()
+                //},
 
                 new LabelMenuItem
                 {

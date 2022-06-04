@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic.Searching
 {
-    internal class SearchingItemsByPlayerID
+    public class SearchingItemsByPlayerID
     {
         //Jako klient chciałbym znaleźć wszystkie przedmioty należące do gracza o konkretnym ID wprowadzonym przez użytkownika, 
         //aby być zawsze na bieżąco z wynikami w aplikacji.
@@ -14,7 +14,7 @@ namespace Wizards.BusinessLogic.Searching
         public static void Search()
         {
 
-            var listPlayers = Repository.Players;
+            var listPlayers = Repository.GetAllPlayers();
 
             var playersOrderByID = listPlayers.OrderBy(i => i.Id).ToList();
 
