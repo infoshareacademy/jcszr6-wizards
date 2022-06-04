@@ -27,8 +27,9 @@ namespace Wizards.GUI
                 player.Load();
                 player.PlayLooping();
             }
-
+            FilesOperations.LoadGameData();
             ScrollMainMenu.DisplayScrollMenu();
+
 
         }
 

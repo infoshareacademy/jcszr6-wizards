@@ -31,16 +31,27 @@ namespace Wizards.GUI
 
     }
 
-    internal class RefreshData : ICommand
+    internal class Game : ICommand
     {
         bool ICommand.IsActive => true;
 
         void ICommand.Execute()
         {
             Console.Clear();
-            Console.WriteLine("Uaktualnij dane");
+            Console.WriteLine("Gra\n");
+
+            FilesOperations.LoadGameData();
+            FilesOperations.PrintRepoPlayers();
+            //FilesOperations.SaveGameData();
+
+            Console.Clear();
+            Console.WriteLine("Dodaj element");
+
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
+
             Console.ReadKey();
             ScrollMainMenu.DisplayScrollMenu();
+
         }
     }
 
@@ -92,7 +103,21 @@ namespace Wizards.GUI
         }
     }
 
+    internal class GameSetup : ICommand
+    {
+        bool ICommand.IsActive => true;
 
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Game Setup");
+
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
+
+            Console.ReadKey();
+            ScrollMainMenu.DisplayScrollMenu();
+        }
+    }
 
     public class Exit : ICommand
     {
@@ -105,6 +130,7 @@ namespace Wizards.GUI
             Console.WriteLine();
             Console.Write("Zwalnianie zasobów systemowych: ");
             ProgressBar.DisplayProgressBar();
+            Environment.Exit(0);
 
         }
     }
@@ -250,6 +276,90 @@ namespace Wizards.GUI
             Console.WriteLine("Wyszukiwanie przedmiotow należących do gracza");
             Console.ReadKey();
             Menu.ScrollSubMenuSearch.DisplayScrollSubMenuSearch();
+        }
+    }
+
+    internal class NewJsocnFile : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Nowy Json file");
+            FilesOperations.JsonCreate();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();  
+        }
+    }
+    internal class DelJsonFile : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Nowy Json file");
+            FilesOperations.RemoveJson();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
+        }
+    }
+
+    internal class ShowJsonSeed : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Nowy Json file");
+            FilesOperations.JsonRead();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGameSetup.DisplayScrollSubMenuGameSetup();
+        }
+    }
+
+    internal class ShowGameData : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Obecny stan gry:\n");
+            FilesOperations.PrintRepoPlayers();
+            Console.ReadKey();
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
+        }
+    }
+    internal class LoadGameData : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Ładownie stanu gry:\n");
+            FilesOperations.LoadGameData();
+            Console.WriteLine("Załadowano stan gry, wciśnij przycisk aby powrócić.");
+            Console.ReadKey();
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
+        }
+    }
+
+    internal class SaveGameData : ICommand
+    {
+        bool ICommand.IsActive => true;
+
+        void ICommand.Execute()
+        {
+            Console.Clear();
+            Console.WriteLine("Ładownie stanu gry:\n");
+            FilesOperations.SaveGameData();
+            Console.WriteLine("Zapisano stan gry, wciśnij przycisk aby powrócić.");
+            Console.ReadKey();
+            Menu.ScrollSubMenuGame.DisplayScrollSubMenuGame();
         }
     }
 }

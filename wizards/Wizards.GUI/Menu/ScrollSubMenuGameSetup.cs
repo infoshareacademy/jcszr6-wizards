@@ -4,9 +4,9 @@ using DustInTheWind.ConsoleTools.Controls.Menus;
 
 namespace Wizards.GUI.Menu
 {
-    internal class ScrollSubMenuEdit
+    internal class ScrollSubMenuGameSetup
     {
-        public static void DisplayScrollSubMenuEdit()
+        public static void DisplayScrollSubMenuGameSetup()
         {
 
 
@@ -25,20 +25,20 @@ namespace Wizards.GUI.Menu
             {
                 new LabelMenuItem
                 {
-                    Text = "Edytuj gracza",
-                    Command = new EditPlayerMenuClassItem()
+                    Text = "Wygeneruj nowy seed gry",
+                    Command = new NewJsocnFile()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Edytuj bohatera",
-                    Command = new EditHeroMenuClassItem()
+                    Text = "Skasuj Json-a",
+                    Command = new DelJsonFile()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Edytuj przedmiot",
-                    Command = new EditItemMenuCLassItem()
+                    Text = "Pokaż seeda",
+                    Command = new ShowJsonSeed()
                 },
 
                 new SeparatorMenuItem(),

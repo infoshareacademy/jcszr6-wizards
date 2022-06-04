@@ -16,19 +16,19 @@ namespace Wizards.GUI
             ScrollMenu scrollMenu = new ScrollMenu
             {
 
-                Margin = 1,                
-                EraseAfterClose = false,
+                Margin = 1,
                 HorizontalAlignment = DustInTheWind.ConsoleTools.Controls.HorizontalAlignment.Left,
                 ItemsHorizontalAlignment = DustInTheWind.ConsoleTools.Controls.HorizontalAlignment.Left,
-                
+                EraseAfterClose = true
+
             };
 
             scrollMenu.AddItems(new IMenuItem[]
             {
-                new YesNoMenuItem
+                new LabelMenuItem
                 {
-                    Text = "Uaktualnij dane",
-                    Command = new RefreshData()
+                    Text = "Gra",
+                    Command = new Game()
                 },
 
                 new LabelMenuItem
@@ -53,6 +53,14 @@ namespace Wizards.GUI
                 {
                     Text = "Autorzy",
                     Command = new ShowAuthors()
+                },
+
+                new SeparatorMenuItem(),
+
+                new LabelMenuItem
+                {
+                    Text = "Game Setup",
+                    Command = new GameSetup()
                 },
 
                 new SeparatorMenuItem(),

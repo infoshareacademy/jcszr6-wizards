@@ -4,14 +4,14 @@ using DustInTheWind.ConsoleTools.Controls.Menus;
 
 namespace Wizards.GUI.Menu
 {
-    internal class ScrollSubMenuEdit
+    internal class ScrollSubMenuGame
     {
-        public static void DisplayScrollSubMenuEdit()
+        public static void DisplayScrollSubMenuGame()
         {
 
 
 
-            ScrollMenu scrollSubMenuEdit = new ScrollMenu
+            ScrollMenu scrollSubMenuGame = new ScrollMenu
             {
 
                 Margin = 1,
@@ -21,24 +21,24 @@ namespace Wizards.GUI.Menu
 
             };
 
-            scrollSubMenuEdit.AddItems(new IMenuItem[]
+            scrollSubMenuGame.AddItems(new IMenuItem[]
             {
                 new LabelMenuItem
                 {
-                    Text = "Edytuj gracza",
-                    Command = new EditPlayerMenuClassItem()
+                    Text = "Wyświelt stan gry",
+                    Command = new ShowGameData()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Edytuj bohatera",
-                    Command = new EditHeroMenuClassItem()
+                    Text = "Wczytaj grę",
+                    Command = new LoadGameData()
                 },
 
                 new LabelMenuItem
                 {
-                    Text = "Edytuj przedmiot",
-                    Command = new EditItemMenuCLassItem()
+                    Text = "Zapisz grę",
+                    Command = new SaveGameData()
                 },
 
                 new SeparatorMenuItem(),
@@ -68,7 +68,7 @@ namespace Wizards.GUI.Menu
             Console.WriteLine(logo);
             Console.ResetColor();
 
-            scrollSubMenuEdit.Display();
+            scrollSubMenuGame.Display();
         }
     }
 }
