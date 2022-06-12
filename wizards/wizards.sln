@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.BusinessLogic", "Wi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.GUI", "Wizards.GUI\Wizards.GUI.csproj", "{2539CA12-3A17-4677-9685-152CAA265C04}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardsWeb", "WizardsWeb\WizardsWeb.csproj", "{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2539CA12-3A17-4677-9685-152CAA265C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2539CA12-3A17-4677-9685-152CAA265C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2539CA12-3A17-4677-9685-152CAA265C04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
