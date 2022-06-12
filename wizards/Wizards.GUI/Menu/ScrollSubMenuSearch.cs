@@ -15,9 +15,9 @@ namespace Wizards.GUI.Menu
             {
 
                 Margin = 1,
-                EraseAfterClose = false,
                 HorizontalAlignment = DustInTheWind.ConsoleTools.Controls.HorizontalAlignment.Left,
                 ItemsHorizontalAlignment = DustInTheWind.ConsoleTools.Controls.HorizontalAlignment.Left,
+                EraseAfterClose = true
 
             };
 
@@ -35,11 +35,11 @@ namespace Wizards.GUI.Menu
                     Command = new SearchPalyerByDateHeroMenuClassItem()
                 },
 
-                new LabelMenuItem
-                {
-                    Text = "Wyszukiwanie przedmiotu po rodzaju",
-                    Command = new SearchItemsByTypeItemMenuCLassItem()
-                },
+                //new LabelMenuItem
+                //{
+                //    Text = "Wyszukiwanie przedmiotu po rodzaju",
+                //    Command = new SearchItemsByTypeItemMenuCLassItem()
+                //},
 
                 new LabelMenuItem
                 {

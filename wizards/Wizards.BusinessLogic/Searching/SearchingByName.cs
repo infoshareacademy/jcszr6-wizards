@@ -18,8 +18,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Name()
         {
 
-            var listPlayers = new List<Player>();
-
+            var listPlayers = Repository.GetAllPlayers();
             var listByNames = listPlayers.OrderBy(n => n.UserName).ToList();
 
             Console.WriteLine("Wpisz nazwę gracza: ");
@@ -34,8 +33,6 @@ namespace Wizards.BusinessLogic.Searching
                 }
             }
             Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
-            Console.ReadKey();
-
         }
     }
 }

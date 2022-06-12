@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic.Searching
 {
-    internal class SearchingByBirthday
+    public class SearchingByBirthday
     {
         //Jako klient chciałbym znaleźć graczy, którzy będą odpowiadać kryterium "data urodzenia*"* (zakres od-do) wprowadzonemu przez użytkownika, aby być zawsze na bieżąco z wynikami w aplikacji.
         //    Ta funkcjonalność powinna być możliwa do wybrania z menu konsolowego.
@@ -15,7 +15,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Birthday()
         {
 
-            var listPlayers = new List<Player>();
+            var listPlayers = Repository.GetAllPlayers();
 
             var listByBirthdays = listPlayers.OrderBy(n => n.UserName).ToList();
         
@@ -36,7 +36,6 @@ namespace Wizards.BusinessLogic.Searching
                 }
             }
             Console.WriteLine("Wciśnij dowolny przycisk, aby wrócić do poprzedniego okna.");
-            Console.ReadKey();
         }
     }
 }

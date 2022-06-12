@@ -15,9 +15,10 @@ namespace Wizards.GUI.Menu
             {
 
                 Margin = 1,
-                EraseAfterClose = false,
                 HorizontalAlignment = DustInTheWind.ConsoleTools.Controls.HorizontalAlignment.Left,
                 ItemsHorizontalAlignment = DustInTheWind.ConsoleTools.Controls.HorizontalAlignment.Left,
+                EraseAfterClose = true
+
 
             };
 
@@ -47,6 +48,8 @@ namespace Wizards.GUI.Menu
                 {
                     Text = "Powrót",
                     Command = new ToMainMenu()
+                    
+                    
                 },
 
                 });
