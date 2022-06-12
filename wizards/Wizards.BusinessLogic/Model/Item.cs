@@ -12,7 +12,7 @@ namespace Wizards.BusinessLogic
         public string Name { get; set; }
         public int BuyPrice { get; set; }
         public int SellPrice { get; set; }
-
+        
         public Item(int id, string name, int buyPrice, int sellPrice)
         {
             this.Id = id;

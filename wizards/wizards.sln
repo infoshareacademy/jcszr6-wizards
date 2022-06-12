@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.GUI", "Wizards.GUI\Wizards.GUI.csproj", "{2539CA12-3A17-4677-9685-152CAA265C04}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WizardsWeb", "WizardsWeb\WizardsWeb.csproj", "{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EF4DBBD5-2FD8-419C-A180-95D6E151E0F6} = {EF4DBBD5-2FD8-419C-A180-95D6E151E0F6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
