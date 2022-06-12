@@ -3,7 +3,7 @@
 namespace Wizards.BusinessLogic
 {
     [Flags]
-    public enum Restriction
+    public enum HeroSpecialisation
     {
         None = 0,
         Wizard

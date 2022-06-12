@@ -24,7 +24,7 @@ namespace Wizards.BusinessLogic
         
         public List<Item> Inventory = new List<Item>();
         public List<Item> Equipped = new List<Item>();
-        public Restriction Restrictions { get; set; }
+        public HeroSpecialisation Restrictions { get; set; }
 
         // funkcja swap(List<item> source, List<Item> target, Item source, Item target)
 

@@ -56,7 +56,7 @@ namespace Wizards.BusinessLogic
             hero.Inventory = CreateItemList(id);
             hero.Gold = new Random().Next(0, 5001);
             hero.RankPoints = new Random().Next(0, 100001);
-            hero.Restrictions = Restriction.Wizard;
+            hero.Restrictions = HeroSpecialisation.Wizard;
 
             int bPrice1 = new Random().Next(1000, 10001);
             int sPrice1 = (int)Math.Round(bPrice1 * 0.75m, 0);
