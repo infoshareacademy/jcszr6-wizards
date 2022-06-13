@@ -31,18 +31,23 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
                         </li>
                         <li class="nav-item">
-                            <a type="button" class="btn btn-outline-light me-2" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a type="button" class="btn btn-outline-light me-2"asp-area="" asp-controller="SignUp" asp-action="Index">SignUp</a>
+                            <a class="nav-link text-white disabled" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark disabled" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+
+
+
+
                     </ul>
+                    <div class="d-none d-md-block">
+
+                        <a type="button" class="btn btn-outline-light me-2" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
+                        <a type="button" class="btn btn-warning me-2" asp-area="" asp-controller="SignUp" asp-action="Index">SignUp</a>
+
+                    </div>
                 </div>
             </div>
+
         </nav>
     </header>
     <div class="container">
