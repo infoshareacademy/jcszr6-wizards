@@ -6,6 +6,7 @@ namespace Wizards.BusinessLogic
     {
         public void AddPlayer(Player playerToAdd)
         {
+            playerToAdd.Id = (Repository.Players.Count + 1) * 10000;
             Repository.Players.Add(playerToAdd);
         }
         

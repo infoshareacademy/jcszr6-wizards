@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Wizards.BusinessLogic;
 
 namespace WizardsWeb.Controllers
 {
@@ -14,7 +16,8 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var player = Repository.Players.Single(p => p.Id == id);
+            return View(player);
         }
 
         // GET: PlayerController/Create
@@ -26,15 +29,21 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Player player)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(player);
+            }
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                new ModelsMenagement().AddPlayer(player);
+                return RedirectToAction("Details", new { id = player.Id } );
             }
             catch
             {
-                return View();
+                return View(player);
             }
         }
 

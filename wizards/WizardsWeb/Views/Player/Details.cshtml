@@ -1,0 +1,63 @@
+﻿@using System.Linq
+@model Wizards.BusinessLogic.Player
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @nameof(Model.UserName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.UserName
+        </dd>
+        <dt class = "col-sm-2">
+            @nameof(Model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Email
+        </dd>
+        <dt class = "col-sm-2">
+            @nameof(Model.DateOfBirth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.DateOfBirth
+        </dd>
+    </dl>
+    
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                <label asp-for="Heroes.First().NickName"></label>
+            </th>
+            <th>
+                <label asp-for="Heroes.First().Restrictions"></label>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var hero in Model.Heroes)
+            {
+                <tr>
+                    <td>
+                        @hero.NickName
+                    </td>
+                    <td>
+                        @hero.Restrictions
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-controller="Home" asp-action="Index">Back to Home Page</a>
+</div>
