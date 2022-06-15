@@ -12,17 +12,38 @@ namespace Wizards.BusinessLogic.Services.FileOperations
         public void UpdateGameData()
         {
             var path = GetJsonDirectory();
+            
+            if (!Directory.Exists(Path.GetDirectoryName(path)))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             var json = JsonConvert.SerializeObject(Repository.GetAllPlayers());
-            File.WriteAllText(path, json);
+            
+            //File.WriteAllText(path, json);
+
+            using (var writer = File.CreateText(path))
+            {
+                writer.Write(json);
+            }
+
         }
 
         public void LoadGameData()
         {
             var path = GetJsonDirectory();
+            
             if (File.Exists(path))
             {
-                var dataFile = File.ReadAllText(path);
+                string dataFile;
+                
+                using (var reader = File.OpenText(path))
+                {
+                    dataFile = reader.ReadToEnd();
+                }
+                
                 var players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
+            
                 Repository.UpdateAllPlayers(players);
             }
         }
@@ -36,8 +57,10 @@ namespace Wizards.BusinessLogic.Services.FileOperations
             {
                 directory = directory.Parent;
             }
+            
             result = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data", "data.json");
             return result;
+            //return Path.Combine(Environment.CurrentDirectory, "Data", "data.json");
         }
     }
 }
