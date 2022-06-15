@@ -2,36 +2,13 @@
 @model Wizards.BusinessLogic.Player
 
 @{
-    ViewData["Title"] = $"Logged as {Model.UserName}";
+    ViewData["Title"] = $"Player: {Model.UserName}";
 }
 
 <div>
     <div class="row">
         <div class="col-sm-4">
-            <h2>@Model.UserName</h2>
-            <h4>Player account</h4>
-            <a asp-action="Edit" asp-route-id="@Model.Id">Edit Player's Profile</a>
-            <hr />
-            <dl>
-                <dt class="col-sm-5">
-                    <label asp-for="UserName"></label>
-                </dt>
-                <dd class="col-sm-4">
-                    @Model.UserName
-                </dd>
-                <dt class="col-sm-5">
-                    <label asp-for="Email"></label>
-                </dt>
-                <dd class="col-sm-4">
-                    @Model.Email
-                </dd>
-                <dt class="col-sm-5">
-                    <label asp-for="DateOfBirth"></label>
-                </dt>
-                <dd class="col-sm-4">
-                    @Model.DateOfBirth.Date.ToString("d")
-                </dd>
-            </dl>
+            <partial name="_PlayerInfo" model="Model"/>
         </div>
         <div class="col-sm-6">
             <partial name="_PlayersHeroes" model="Model.Heroes" />
