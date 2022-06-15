@@ -1,30 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wizards.BusinessLogic.Services.FileOperations;
 
 namespace Wizards.BusinessLogic.Services
 {
     public class PlayerService : IPlayerService
     {
         private List<Player> _players;
+        private IGameDataService _gameDataService;
 
-        public PlayerService()
+        public PlayerService(IGameDataService gameDataService)
         {
+            _gameDataService = gameDataService;
+            _gameDataService.LoadGameData();
             _players = Repository.GetAllPlayers();
         }
 
         public void Add(Player player)
         {
             //TODO: Validate player!
+            
             player.SetId(GetUniqueId());
             _players.Add(player);
+
             Repository.UpdateAllPlayers(_players);
+            _gameDataService.UpdateGameData();
         }
 
         public void DeleteById(int id)
         {
             var player = GetById(id);
             _players.Remove(player);
+            
+            _gameDataService.UpdateGameData();
         }
 
         public void Update(int id, Player player)
@@ -35,6 +44,8 @@ namespace Wizards.BusinessLogic.Services
             playerToUpdate.Password = player.Password;
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;
+
+            _gameDataService.UpdateGameData();
         }
 
         public IEnumerable<Player> GetAll()
