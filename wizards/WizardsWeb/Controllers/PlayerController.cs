@@ -2,11 +2,19 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.BusinessLogic;
+using Wizards.BusinessLogic.Services;
 
 namespace WizardsWeb.Controllers
 {
     public class PlayerController : Controller
     {
+        private IPlayerService _playerService;
+
+        public PlayerController(IPlayerService playerService)
+        {
+            _playerService = playerService;
+        }
+
         // GET: PlayerController
         public ActionResult Index()
         {
@@ -16,7 +24,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
         {
-            var player = Repository.Players.Single(p => p.Id == id);
+            var player = _playerService.GetById(id);
             return View(player);
         }
 
@@ -38,8 +46,8 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                new ModelsMenagement().AddPlayer(player);
-                return RedirectToAction("Details", new { id = player.Id } );
+                _playerService.Add(player);
+                return RedirectToAction(nameof(Details), new { id = player.Id });
             }
             catch
             {
@@ -56,15 +64,21 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Player player)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(player);
+            }
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                _playerService.Update(id, player);
+                return RedirectToAction(nameof(Details), new { id = player.Id });
             }
             catch
             {
-                return View();
+                return View(player);
             }
         }
 
