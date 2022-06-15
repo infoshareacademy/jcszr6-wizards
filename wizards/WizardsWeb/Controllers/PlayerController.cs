@@ -22,8 +22,9 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string userName, string password)
         {
+            var id = _playerService.GetIdByLogin(userName, password);
             var player = _playerService.GetById(id);
             return View(player);
         }
@@ -47,7 +48,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 _playerService.Add(player);
-                return RedirectToAction(nameof(Details), new { id = player.Id });
+                return RedirectToAction(nameof(Details), new { userName = player.UserName, passwoerd = player.Password});
             }
             catch
             {

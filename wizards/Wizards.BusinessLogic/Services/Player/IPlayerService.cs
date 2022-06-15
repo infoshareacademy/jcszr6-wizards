@@ -11,5 +11,6 @@ namespace Wizards.BusinessLogic.Services
         void Update(int id, Player player);
         IEnumerable<Player> GetAll();
         Player GetById(int id);
+        int GetIdByLogin(string userName, string password);
     }
 }
