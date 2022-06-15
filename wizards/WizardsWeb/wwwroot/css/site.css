@@ -73,3 +73,6 @@ body {
     line-height: 60px; /* Vertically center the text there */
 }
 
+.flex-shrink-0 {
+    flex-shrink: 0 !important;
+}
