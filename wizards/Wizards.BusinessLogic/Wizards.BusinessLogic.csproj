@@ -15,9 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Data\data.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Text\Json\Creator.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
