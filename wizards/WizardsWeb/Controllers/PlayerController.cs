@@ -48,7 +48,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 _playerService.Add(player);
-                return RedirectToAction(nameof(Details), new { userName = player.UserName, passwoerd = player.Password});
+                return RedirectToAction(nameof(Details), new { userName = player.UserName, password = player.Password});
             }
             catch
             {
