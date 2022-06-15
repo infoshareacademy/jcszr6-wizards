@@ -57,9 +57,16 @@ namespace Wizards.BusinessLogic.Services
 
         private int GetUniqueId()
         {
-            var maxId = _players.Max(p => p.Id);
+            
             var uniqueId = 1;
+            
+            if (_players.Count == 0)
+            {
+                return uniqueId;
+            }
 
+            int maxId = _players.Max(p => p.Id);
+            
             if (maxId < _players.Count)
             {
                 while (_players.Any(p => p.Id == uniqueId))
