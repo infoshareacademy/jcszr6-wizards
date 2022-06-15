@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Wizards.BusinessLogic.Hero>
+
+<h2>Player's Heroes</h2>
+<br/>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            <label asp-for="First().NickName"></label>
+        </th>
+        <th>
+            <label asp-for="First().Restrictions"></label>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var hero in Model)
+    {
+        <tr>
+            <td>
+                @hero.NickName
+            </td>
+            <td>
+                @hero.Restrictions
+            </td>
+            <td>
+                <button asp-action="Details" asp-route-id="@hero.Id">Play this Character</button> |
+                <button asp-action="Delete" asp-route-id="@hero.Id">Delete</button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
