@@ -18,6 +18,7 @@
         MailNotCorrect,
         DateToLow,
         DateToHigh,
-        UserToYoung
+        UserToYoung,
+        PasswordNotHard
     }
 }

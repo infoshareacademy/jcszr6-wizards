@@ -10,5 +10,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
         public List<IStringValidationTask> EmailTasks { get; set; }
         public List<IDateValidationTask> DateOfBirthTasks { get; set; }
         public IStringAlredyInUse AlredyInUseTask { get; set; }
+
+        public PlayerValidationSettings() { }
     }
 }

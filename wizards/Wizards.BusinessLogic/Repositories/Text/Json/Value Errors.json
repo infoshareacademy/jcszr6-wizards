@@ -9,11 +9,12 @@
   "MailNotCorrect": "is not correct email format!",
   "NumberToLow": "is to low! Min. value: ",
   "NumberToHigh": "is to high! Max. value: ",
-  "DateToLow": "Date is to low! Min. date: " ,
+  "DateToLow": "Date is to low! Min. date: ",
   "DateToHigh": "Date is to high! Max. date: ",
   "UserToYoung": "The minimum age to play this game is: ",
   "DateInFuture": "Date cannot be in future!",
   "DateNotCorrect": "Date is not correct!",
   "IsNotNumber": "is not number!",
-  "InvalidKey": "key is not correct!"
+  "InvalidKey": "key is not correct!",
+  "PasswordNotHard": "should contains at least one Upper case letter, one digit and one special character."
 }

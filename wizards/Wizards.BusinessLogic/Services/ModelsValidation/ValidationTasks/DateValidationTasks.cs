@@ -4,33 +4,45 @@ using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
 
 namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
 {
-    public class DateRange : IDateValidationTask
+    public class DateMin : IDateValidationTask
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public DateRange(DateTime startDate, DateTime endDate)
+        public DateTime Date { get; set; }
+        
+        public DateMin(DateTime startDate)
         {
-            StartDate = startDate;
-            EndDate = endDate;
+            Date = startDate;
         }
-        public DateRange() { }
+        public DateMin() { }
 
         public ValidationState Validate(DateTime value)
         {
-            if (value.Date < StartDate.Date)
+            if (value.Date < Date.Date)
             {
-                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.DateToLow)}{StartDate.Date:d}");
-            }
-
-            if (value.Date > EndDate.Date)
-            {
-                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.DateToHigh)}{EndDate.Date:d}");
+                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.DateToLow)}{Date.Date:d}");
             }
 
             return new ValidationState(true);
         }
     }
+    public class DateMax : IDateValidationTask
+    {
+        public DateTime Date { get; set; }
+        public DateMax(DateTime maxDate)
+        {
+            Date = maxDate;
+        }
+        public DateMax() { }
 
+        public ValidationState Validate(DateTime value)
+        {
+            if (value.Date > Date.Date)
+            {
+                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.DateToHigh)}{Date.Date:d}");
+            }
+
+            return new ValidationState(true);
+        }
+    }
     public class RestrictedAge : IDateValidationTask
     {
         public int MinimumAge { get; set; }

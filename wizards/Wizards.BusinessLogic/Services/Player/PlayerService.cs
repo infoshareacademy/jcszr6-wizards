@@ -14,7 +14,7 @@ namespace Wizards.BusinessLogic.Services
         {
             _gameDataService = gameDataService;
             _gameDataService.LoadGameData();
-            _players = Repository.GetAllPlayers();
+            _players = GameDataRepository.GetAllPlayers();
         }
 
         public void Add(Player player)
@@ -24,7 +24,7 @@ namespace Wizards.BusinessLogic.Services
             player.SetId(GetUniqueId());
             _players.Add(player);
 
-            Repository.UpdateAllPlayers(_players);
+            GameDataRepository.UpdateAllPlayers(_players);
             _gameDataService.UpdateGameData();
         }
 

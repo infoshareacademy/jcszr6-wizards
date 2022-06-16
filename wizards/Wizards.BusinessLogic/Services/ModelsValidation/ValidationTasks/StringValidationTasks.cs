@@ -18,24 +18,16 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
 
     }
 
-    public partial class StringRange : IStringValidationTask
+    public partial class StringMinLength : IStringValidationTask
     {
         public int MinLength { get; set; }
-        public int MaxLength { get; set; }
-        public StringRange(int minLength, int maxLength)
+        public StringMinLength(int minLength)
         {
             MinLength = minLength;
-            MaxLength = maxLength;
         }
-        public StringRange() { }
 
         public ValidationState Validate(string value)
         {
-            if (value.Length > MaxLength)
-            {
-                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.ToLong)}{MaxLength}");
-            }
-
             if (value.Length < MinLength)
             {
                 return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.ToShort)}{MinLength}");
@@ -44,7 +36,24 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
             return new ValidationState(true);
         }
     }
+    public partial class StringMaxLength : IStringValidationTask
+    {
+        public int MaxLength { get; set; }
+        public StringMaxLength(int maxLength)
+        {
+            MaxLength = maxLength;
+        }
 
+        public ValidationState Validate(string value)
+        {
+            if (value.Length > MaxLength)
+            {
+                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.ToLong)}{MaxLength}");
+            }
+
+            return new ValidationState(true);
+        }
+    }
     public class AllowedCharacters : IStringValidationTask
     {
         public string AllowedChars { get; set; }

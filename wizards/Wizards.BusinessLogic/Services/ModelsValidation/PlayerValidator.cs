@@ -9,7 +9,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
         public PlayerValidationSettings Settings { get; private set; }
         public PlayerValidator()
         {
-            
+            Settings = ValidationSettingsRepository.GetPlayersValidationSettings();
         }
         public void Validate(Player player)
         {
@@ -25,7 +25,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
                 task.Validate(playerUserName);
             }
 
-            Settings.AlredyInUseTask.Validate(playerUserName, Repository.GetAllPlayers().Select(p=>p.UserName).ToList());
+            Settings.AlredyInUseTask.Validate(playerUserName, GameDataRepository.GetAllPlayers().Select(p=>p.UserName).ToList());
         }
         private void ValidatePassword(string playerPassword)
         {
@@ -41,7 +41,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
                 task.Validate(playerEmail);
             }
 
-            Settings.AlredyInUseTask.Validate(playerEmail, Repository.GetAllPlayers().Select(p => p.Email).ToList());
+            Settings.AlredyInUseTask.Validate(playerEmail, GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
         }
 
         private void ValidateDateOfBirth(DateTime playerDateOfBirth)

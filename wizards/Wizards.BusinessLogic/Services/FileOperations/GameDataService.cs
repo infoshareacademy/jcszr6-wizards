@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,9 +17,7 @@ namespace Wizards.BusinessLogic.Services.FileOperations
                 Directory.CreateDirectory(path);
             }
 
-            var json = JsonConvert.SerializeObject(Repository.GetAllPlayers());
-            
-            //File.WriteAllText(path, json);
+            var json = JsonConvert.SerializeObject(GameDataRepository.GetAllPlayers());
 
             using (var writer = File.CreateText(path))
             {
@@ -44,7 +41,7 @@ namespace Wizards.BusinessLogic.Services.FileOperations
                 
                 var players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
             
-                Repository.UpdateAllPlayers(players);
+                GameDataRepository.UpdateAllPlayers(players);
             }
         }
 
@@ -60,7 +57,6 @@ namespace Wizards.BusinessLogic.Services.FileOperations
             
             result = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data", "data.json");
             return result;
-            //return Path.Combine(Environment.CurrentDirectory, "Data", "data.json");
         }
     }
 }
