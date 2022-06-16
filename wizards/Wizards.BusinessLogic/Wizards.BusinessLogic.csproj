@@ -49,4 +49,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\ModelsValidation\Elements\XML\" />
+  </ItemGroup>
+
 </Project>
