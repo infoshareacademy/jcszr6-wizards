@@ -22,23 +22,44 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
         {
             foreach (var task in Settings.UserNameTasks)
             {
-                task.Validate(playerUserName);
+                var result = task.Validate(playerUserName);
+
+                if (!result.IsValid)
+                {
+                    throw new InvalidValueException("User Name ", result.Message);
+                }
             }
 
-            Settings.AlredyInUseTask.Validate(playerUserName, GameDataRepository.GetAllPlayers().Select(p=>p.UserName).ToList());
+            var inUse = Settings.AlredyInUseTask.Validate(playerUserName, GameDataRepository.GetAllPlayers().Select(p=>p.UserName).ToList());
+            
+            if (!inUse.IsValid)
+            {
+                throw new InvalidValueException("User Name ", inUse.Message);
+            }
+
         }
         private void ValidatePassword(string playerPassword)
         {
             foreach (var task in Settings.PasswordTasks)
             {
-                task.Validate(playerPassword);
+                var result = task.Validate(playerPassword);
+
+                if (!result.IsValid)
+                {
+                    throw new InvalidValueException("User Name ", result.Message);
+                }
             }
         }
         private void ValidateEmail(string playerEmail)
         {
             foreach (var task in Settings.EmailTasks)
             {
-                task.Validate(playerEmail);
+                var result = task.Validate(playerEmail);
+
+                if (!result.IsValid)
+                {
+                    throw new InvalidValueException("User Name ", result.Message);
+                }
             }
 
             Settings.AlredyInUseTask.Validate(playerEmail, GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
@@ -48,7 +69,12 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
         {
             foreach (var task in Settings.DateOfBirthTasks)
             {
-                task.Validate(playerDateOfBirth);
+                var result = task.Validate(playerDateOfBirth);
+
+                if (!result.IsValid)
+                {
+                    throw new InvalidValueException("User Name ", result.Message);
+                }
             }
         }
     }
