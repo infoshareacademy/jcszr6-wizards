@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Wizards.BusinessLogic
+namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
 {
 
     [Serializable]

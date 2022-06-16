@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
 
 namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
 {

@@ -49,8 +49,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\ModelsValidation\ValidationTasks\" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
+﻿using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
+
+namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
 {
     public class NumberRange : INumberValidationTask
     {

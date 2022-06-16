@@ -1,4 +1,4 @@
-﻿namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
+﻿namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
 {
     public class ValidationState
     {
