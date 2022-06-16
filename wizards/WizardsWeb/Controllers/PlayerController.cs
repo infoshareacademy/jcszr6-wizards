@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.BusinessLogic;
 using Wizards.BusinessLogic.Services;
+using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
 
 namespace WizardsWeb.Controllers
 {
@@ -50,8 +51,9 @@ namespace WizardsWeb.Controllers
                 _playerService.Add(player);
                 return RedirectToAction(nameof(Details), new { userName = player.UserName, password = player.Password});
             }
-            catch
+            catch (InvalidValueException exception)
             {
+                ModelState.AddModelError(exception.NameOfElement, exception.MyMessage);
                 return View(player);
             }
         }

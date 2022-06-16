@@ -2,26 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using Wizards.BusinessLogic.Services.FileOperations;
+using Wizards.BusinessLogic.Services.ModelsValidation;
 
 namespace Wizards.BusinessLogic.Services
 {
     public class PlayerService : IPlayerService
     {
         private List<Player> _players;
-        private IGameDataService _gameDataService;
+        private readonly IGameDataService _gameDataService;
+        private readonly IPlayerValidator _playerValidator;
 
-        public PlayerService(IGameDataService gameDataService)
+        public PlayerService(IGameDataService gameDataService, IPlayerValidator playerValidator)
         {
             _gameDataService = gameDataService;
             _gameDataService.LoadGameData();
+            _playerValidator = playerValidator;
             _players = GameDataRepository.GetAllPlayers();
         }
 
         public void Add(Player player)
         {
-            //TODO: Validate player!
-            
             player.SetId(GetUniqueId());
+            _playerValidator.Validate(player);
             _players.Add(player);
 
             GameDataRepository.UpdateAllPlayers(_players);
@@ -38,9 +40,10 @@ namespace Wizards.BusinessLogic.Services
 
         public void Update(int id, Player player)
         {
-            //TODO: Validate player!
+            _playerValidator.Validate(player);
+            
             var playerToUpdate = GetById(id);
-
+            
             playerToUpdate.Password = player.Password;
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Wizards.BusinessLogic.Services;
 using Wizards.BusinessLogic.Services.FileOperations;
+using Wizards.BusinessLogic.Services.ModelsValidation;
 
 namespace WizardsWeb
 {
@@ -25,6 +26,7 @@ namespace WizardsWeb
             
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IGameDataService, GameDataService>();
+            services.AddTransient<IPlayerValidator, PlayerValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
