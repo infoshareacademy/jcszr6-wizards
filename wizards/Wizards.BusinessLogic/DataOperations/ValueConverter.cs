@@ -24,7 +24,7 @@ namespace Wizards.BusinessLogic
             {
                 if (date > DateTime.Now)
                 {
-                    throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.DateIsInFuture));
+                    throw new InvalidValueException(TextRepository.Get(ValueErrorsMsg.DateInFuture));
                 }
 
                 return date;
