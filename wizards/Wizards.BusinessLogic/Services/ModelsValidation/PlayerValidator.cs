@@ -26,7 +26,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    throw new InvalidValueException("User Name ", result.Message);
+                    throw new InvalidValueException("UserName", $"User Name {result.Message}");
                 }
             }
 
@@ -34,7 +34,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             
             if (!inUse.IsValid)
             {
-                throw new InvalidValueException("User Name ", inUse.Message);
+                throw new InvalidValueException("UserName", $"User Name {inUse.Message}");
             }
 
         }
@@ -46,7 +46,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    throw new InvalidValueException("User Name ", result.Message);
+                    throw new InvalidValueException("Password", $"Password {result.Message}");
                 }
             }
         }
@@ -58,11 +58,16 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    throw new InvalidValueException("User Name ", result.Message);
+                    throw new InvalidValueException("Email", result.Message);
                 }
             }
 
-            Settings.AlredyInUseTask.Validate(playerEmail, GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
+            var inUse = Settings.AlredyInUseTask.Validate(playerEmail, GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
+
+            if (!inUse.IsValid)
+            {
+                throw new InvalidValueException("Email",$"Email {inUse.Message}");
+            }
         }
 
         private void ValidateDateOfBirth(DateTime playerDateOfBirth)
@@ -73,7 +78,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    throw new InvalidValueException("User Name ", result.Message);
+                    throw new InvalidValueException("DateOfBirth", result.Message);
                 }
             }
         }

@@ -17,7 +17,7 @@ namespace Wizards.BusinessLogic
 
         static TextRepository()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, "Text", "Json");
+            string path = Path.Combine(Environment.CurrentDirectory,"..", "Wizards.BusinessLogic", "Repositories", "Text", "Json");
 
             Menu = LoadObjectFromFile<Dictionary<MenuMsg, string>>(Path.Combine(path, "Menu.json"));
             Creator = LoadObjectFromFile<Dictionary<CreatorMsg, string>>(Path.Combine(path, "Creator.json"));

@@ -15,7 +15,6 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
 
             return new ValidationState(true);
         }
-
     }
 
     public partial class StringMinLength : IStringValidationTask
@@ -65,7 +64,8 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
 
         public ValidationState Validate(string value)
         {
-            var isValid = value.ToLower().Any(c => !AllowedChars.Contains(c));
+            value = value.ToLower();
+            var isValid = !value.Any(c => !AllowedChars.Contains(c));
 
             if (!isValid)
             {
@@ -83,7 +83,8 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
         public ValidationState Validate(string value)
         {
             var restrictedWords = TextRepository.RestrictedWords;
-            var isValid = !restrictedWords.Any(w => value.ToLower().Contains(w));
+            value = value.ToLower();
+            var isValid = !restrictedWords.Any(w => value.Contains(w));
 
             if (!isValid)
             {
