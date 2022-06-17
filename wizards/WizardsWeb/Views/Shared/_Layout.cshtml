@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark text-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WizardsWeb</a>
+                <a class="navbar-brand" style="color:#FFD700" asp-area="" asp-controller="Home" asp-action="Index">Wizards</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,46 +43,31 @@
         </nav>
     </header>
 
-    <div class="container-fluid pb-3 flex-grow-1 d-flex flex-column flex-sm-row overflow-auto">
-        <div class="row flex-grow-sm-1 flex-grow-0">
-            <aside class="col-sm-3 flex-grow-sm-1 flex-shrink-1 flex-grow-0 sticky-top pb-sm-0 pb-3">
-                <div class="bg-light border rounded-3 p-1 h-100 sticky-top">
-                    <ul class="nav nav-pills flex-sm-column flex-row mb-auto justify-content-between text-truncate">
+    <div class="container-fluid pb-3">
+        <div class="row">
+            <aside class="col-sm-3">
+                <div class="bg-dark text-white h-100">
+                    <ul class="nav flex-sm-column">
                         <li class="nav-item">
-                            <a href="#" class="nav-link px-2 text-truncate">
-                                <i class="bi bi-house fs-5"></i>
-                                <span class="d-none d-sm-inline">Home</span>
-                            </a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-truncate">
-                                <i class="bi bi-speedometer fs-5"></i>
-                                <span class="d-none d-sm-inline">Dashboard</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="News" asp-action="Index">News</a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-truncate">
-                                <i class="bi bi-card-text fs-5"></i>
-                                <span class="d-none d-sm-inline">Orders</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="About" asp-action="Index">About</a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-truncate">
-                                <i class="bi bi-bricks fs-5"></i>
-                                <span class="d-none d-sm-inline">Products</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
                         </li>
-                        <li>
-                            <a href="#" class="nav-link px-2 text-truncate">
-                                <i class="bi bi-people fs-5"></i>
-                                <span class="d-none d-sm-inline">Customers</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link text-white disabled" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
                 </div>
             </aside>
-            <main class="col overflow-auto h-100">
-                <div class="bg-light border rounded-3 p-3">
+            <main class="col">
+                <div class="bg-light border p-3">
 
                     <div class="container">
                         <main role="main" class="pb-3">
@@ -105,9 +90,9 @@
         </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted navbar-light bg-dark box-shadow">
         <div class="container">
-            &copy; 2022 - WizardsWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - WizardsWeb - <a href="https://github.com/infoshareacademy/jcszr6-wizards.git" target="_blank"> GIT Repository</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
