@@ -7,7 +7,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 {
     public class PlayerValidator : IPlayerValidator
     {
-        private PlayerValidationSettings _settings;
+        private readonly PlayerValidationSettings _settings;
         private Dictionary<string,string> _modelStatesData;
         private bool _isValid;
         public PlayerValidator()
