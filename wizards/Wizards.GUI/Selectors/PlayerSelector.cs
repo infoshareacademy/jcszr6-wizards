@@ -35,7 +35,7 @@ namespace Wizards.GUI.Selectors
                 var password = _inputer.GetText();
                 _screen.AddMessage(new Message("Hasło wprowadzone.",ConsoleColor.Green));
 
-                _player = Repository.Players.FirstOrDefault(p => p.UserName == userName && p.Password == password);
+                _player = GameDataRepository.Players.FirstOrDefault(p => p.UserName == userName && p.Password == password);
 
                 if (_player != null)
                     break;

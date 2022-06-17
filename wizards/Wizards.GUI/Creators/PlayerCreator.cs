@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Wizards.BusinessLogic;
+using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
 using Wizards.GUI.Printers;
 
 namespace Wizards.GUI.Creators
@@ -35,7 +36,7 @@ namespace Wizards.GUI.Creators
             _player.Password = SetPassword();
             _player.Email = SetEmail();
             _player.DateOfBirth = SetBirthDate();
-            _player.Id = (Repository.Players.Count + 1) * 10000;
+            _player.Id = (GameDataRepository.Players.Count + 1) * 10000;
             
             _modelsMenagement.AddPlayer(_player);
 
@@ -60,7 +61,7 @@ namespace Wizards.GUI.Creators
                 Max = 20,
             };
             
-            validator.AlredyInUseValues = Repository.Players.Select(p => p.UserName).ToList();
+            validator.AlredyInUseValues = GameDataRepository.Players.Select(p => p.UserName).ToList();
             _inputer.Validator = validator;
 
             string userName = _inputer.GetText();
@@ -102,7 +103,7 @@ namespace Wizards.GUI.Creators
                 AllowSpecialCharacters = true,
                 AllowSpace = false,
                 Min = 5,
-                AlredyInUseValues = Repository.Players.Select(p => p.Email).ToList(),
+                AlredyInUseValues = GameDataRepository.Players.Select(p => p.Email).ToList(),
                 CheckIsMail = true
             };
 

@@ -15,7 +15,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Birthday()
         {
 
-            var listPlayers = Repository.GetAllPlayers();
+            var listPlayers = GameDataRepository.GetAllPlayers();
 
             var listByBirthdays = listPlayers.OrderBy(n => n.UserName).ToList();
         

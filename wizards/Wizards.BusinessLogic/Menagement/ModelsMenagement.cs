@@ -6,7 +6,8 @@ namespace Wizards.BusinessLogic
     {
         public void AddPlayer(Player playerToAdd)
         {
-            Repository.Players.Add(playerToAdd);
+            playerToAdd.Id = (GameDataRepository.Players.Count + 1) * 10000;
+            GameDataRepository.Players.Add(playerToAdd);
         }
         
         public void AddHeroToPlayer(Hero heroToAdd, Player playerToAddFor)
@@ -36,7 +37,7 @@ namespace Wizards.BusinessLogic
 
         public void RemovePlayer(Player playerToRemove)
         {
-            Repository.Players.Remove(playerToRemove);
+            GameDataRepository.Players.Remove(playerToRemove);
         }
 
         public void RemoveHeroFromPlayer(Hero heroToRemove, Player playerToRemoveFrom)

@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Wizards.BusinessLogic
+namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
 {
 
     [Serializable]
     public class InvalidValueException : Exception
     {
-
+        public string MyMessage { get; private set; }
+        public string NameOfElement { get; private set; }
         public InvalidValueException()
         {
         }
 
+        public InvalidValueException(string nameOfElement, string myMessage)
+        {
+            NameOfElement = nameOfElement;
+            MyMessage = myMessage;
+        }
         public InvalidValueException(string message) : base(message)
         {
         }

@@ -54,7 +54,7 @@ namespace Wizards.BusinessLogic
         public static void PrintRepoPlayers()
         {
             //var players = Repository.Players;
-            foreach (var player in Repository.Players)
+            foreach (var player in GameDataRepository.Players)
             {
                 //Console.WriteLine($"{player.UserName} | {player.Email} | {player.Heroes[0].NickName} | {player.Heroes[0].Equipped[0].Name}");
                 Console.WriteLine($"{player.UserName} | {player.Email}");
@@ -65,7 +65,7 @@ namespace Wizards.BusinessLogic
         {
             var path = GetJsonDirectory();
             Console.WriteLine($"{path}");
-            string json = JsonConvert.SerializeObject(Repository.Players);
+            string json = JsonConvert.SerializeObject(GameDataRepository.Players);
 
             Console.WriteLine("Json created.");
             File.WriteAllText(path, json.ToString());
@@ -78,7 +78,7 @@ namespace Wizards.BusinessLogic
             Console.WriteLine($"{path}");
             var dataFile = File.ReadAllText(path);
             
-            Repository.Players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
+            GameDataRepository.Players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
         }
     }
 }

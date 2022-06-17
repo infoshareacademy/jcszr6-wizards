@@ -57,7 +57,7 @@ namespace Wizards.GUI.Creators
                 AllowDigits = false,
                 Min = 3,
                 Max = 17,
-                AlredyInUseValues = Repository.Players.SelectMany(p => p.Heroes.Select(h => h.NickName)).ToList()
+                AlredyInUseValues = GameDataRepository.Players.SelectMany(p => p.Heroes.Select(h => h.NickName)).ToList()
             };
 
             _inputer.Validator = validator;

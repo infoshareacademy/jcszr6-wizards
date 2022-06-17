@@ -5,21 +5,26 @@ using Newtonsoft.Json;
 
 namespace Wizards.BusinessLogic
 {
-    public static class Repository
+    public static class GameDataRepository
     {
         public static List<Player> Players = new List<Player>();
         
-        static Repository()
+        static GameDataRepository()
         {
-            string path = Path.Combine(Environment.CurrentDirectory, "Data", "data.json");
-            var dataFile = File.ReadAllText(path);
-            Players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
-            
+
         }
         
         public static List<Player> GetAllPlayers()
         {
             return Players;
+        }
+
+        public static void UpdateAllPlayers(List<Player> players)
+        {
+            if (players != null)
+            {
+                Players = players;
+            }
         }
     }
 }

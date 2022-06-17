@@ -14,7 +14,11 @@
         IsNotNumber,
         DateNotCorrect,
         InvalidKey,
-        DateIsInFuture,
-        MailNotCorrect
+        DateInFuture,
+        MailNotCorrect,
+        DateToLow,
+        DateToHigh,
+        UserToYoung,
+        PasswordNotHard
     }
 }
