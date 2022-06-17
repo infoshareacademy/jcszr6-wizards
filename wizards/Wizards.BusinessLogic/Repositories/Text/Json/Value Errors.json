@@ -16,5 +16,5 @@
   "DateNotCorrect": "Date is not correct!",
   "IsNotNumber": "is not number!",
   "InvalidKey": "key is not correct!",
-  "PasswordNotHard": "should contains at least one Upper case letter, one digit and one special character."
+  "PasswordNotHard": "should contains one upper case letter, one digit and one special character."
 }

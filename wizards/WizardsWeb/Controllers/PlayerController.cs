@@ -51,9 +51,13 @@ namespace WizardsWeb.Controllers
                 _playerService.Add(player);
                 return RedirectToAction(nameof(Details), new { userName = player.UserName, password = player.Password});
             }
-            catch (InvalidValueException exception)
+            catch (InvalidModelException exception)
             {
-                ModelState.AddModelError(exception.NameOfElement, exception.MyMessage);
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError(data.Key, data.Value);
+                }
+                
                 return View(player);
             }
         }
