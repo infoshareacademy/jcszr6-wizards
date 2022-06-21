@@ -9,7 +9,7 @@
             <label asp-for="First().NickName"></label>
         </th>
         <th>
-            <label asp-for="First().Restrictions"></label>
+            <label asp-for="First().Profession"></label>
         </th>
     </tr>
     </thead>
@@ -21,7 +21,7 @@
                 @hero.NickName
             </td>
             <td>
-                @hero.Restrictions
+                @hero.Profession
             </td>
             <td>
                 <button asp-action="Details" asp-route-id="@hero.Id">Play</button> |

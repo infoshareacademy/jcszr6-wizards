@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Wizards.BusinessLogic
 {
@@ -34,7 +29,7 @@ namespace Wizards.BusinessLogic
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         
-        public List<Hero> Heroes = new List<Hero>();
+        public List<Hero> Heroes = new();
 
         public Player()
         {
