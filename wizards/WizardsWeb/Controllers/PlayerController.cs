@@ -39,13 +39,15 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Player player)
+        public ActionResult Create(PlayerForCreate playerForCreate)
         {
             if (!ModelState.IsValid)
             {
-                return View(player);
+                return View(playerForCreate);
             }
 
+            var player = playerForCreate.ToPlayer();
+            
             try
             {
                 _playerService.Add(player);
