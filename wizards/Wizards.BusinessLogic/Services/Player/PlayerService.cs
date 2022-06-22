@@ -23,7 +23,7 @@ namespace Wizards.BusinessLogic.Services
         public void Add(Player player)
         {
             player.SetId(GetUniqueId());
-            _playerValidator.Validate(player);
+            _playerValidator.ValidateForCreate(player);
             _players.Add(player);
 
             GameDataRepository.UpdateAllPlayers(_players);
@@ -40,13 +40,23 @@ namespace Wizards.BusinessLogic.Services
 
         public void Update(int id, Player player)
         {
-            _playerValidator.Validate(player);
+            _playerValidator.ValidateForUpdate(player);
             
             var playerToUpdate = GetById(id);
             
-            playerToUpdate.Password = player.Password;
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;
+
+            _gameDataService.UpdateGameData();
+        }
+
+        public void UpdatePassword(int id, Player player)
+        {
+            _playerValidator.ValidateForPasswordUpdate(player);
+
+            var playerToUpdate = GetById(id);
+
+            playerToUpdate.Password = player.Password;
 
             _gameDataService.UpdateGameData();
         }

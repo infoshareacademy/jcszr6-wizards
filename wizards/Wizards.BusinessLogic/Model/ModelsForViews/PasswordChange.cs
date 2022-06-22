@@ -4,7 +4,7 @@ namespace Wizards.BusinessLogic
 {
     public class PasswordChange
     {
-        public Player Player { get; set; }
+        public int Id { get; set; }
         public string OldPassword { get; set; }
 
         [Required]
@@ -27,18 +27,13 @@ namespace Wizards.BusinessLogic
 
         public PasswordChange(Player player)
         {
-            Player = player;
+            Id = player.Id;
+            OldPassword = player.Password;
         }
 
         public Player GetPlayerWithNewPassword()
         {
-            return new Player()
-            {
-                Id = Player.Id,
-                Password = this.NewPassword,
-                Email= Player.Email,
-                DateOfBirth= Player.DateOfBirth,
-            };
+            return new Player() { Id= this.Id, Password = this.NewPassword };
         }
     }
 }

@@ -1,34 +1,51 @@
 ﻿@model Wizards.BusinessLogic.Player
 
-<h4>Player</h4>
+<h3>Edit Player's Profile</h3>
+<h5>@Model.UserName</h5>
+<a asp-action="Details" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Back To Details</a>
 <hr />
 <div class="row">
     <div class="col-md-4">
+        <button
+            class="btn-primary"
+            asp-action="EditPassword"
+            asp-route-userName="@Model.UserName"
+            asp-route-password="@Model.Password">
+            Edit Password
+        </button>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <input asp-for="Id" hidden="true"/>
+                <input asp-for="UserName" hidden="true"/>
+                <input asp-for="Password" hidden="true"/>
+            </div>
+            <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" class="form-control"/>
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
+                <input asp-for="DateOfBirth" class="form-control"/>
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary"/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="EditPassword" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Edit Password</a>
-    <br/>
-    <a asp-action="Delete" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Delete Account</a>
-    <br/>
-    <a asp-action="Details" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Back To Details</a>
+    <br/><hr/><br/>
+    <button
+        class="btn-danger"
+        asp-action="Delete"
+        asp-route-userName="@Model.UserName"
+        asp-route-password="@Model.Password">
+        Delete Account
+    </button>
 </div>
 
 @section Scripts {

@@ -8,20 +8,34 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
     public class PlayerValidator : IPlayerValidator
     {
         private readonly PlayerValidationSettings _settings;
-        private Dictionary<string,string> _modelStatesData;
+        private Dictionary<string, string> _modelStatesData;
         private bool _isValid;
         public PlayerValidator()
         {
             _settings = ValidationSettingsRepository.GetPlayersValidationSettings();
-            _modelStatesData = new Dictionary<string,string>();
+            _modelStatesData = new Dictionary<string, string>();
         }
 
-        public void Validate(Player player)
+        public void ValidateForCreate(Player player)
         {
             _isValid = true;
 
             ValidateUserName(player.UserName);
             ValidatePassword(player.Password);
+            ValidateEmail(player.Email);
+            ValidateDateOfBirth(player.DateOfBirth);
+            CheckInUse(player);
+
+            if (!_isValid)
+            {
+                throw new InvalidModelException(_modelStatesData);
+            }
+        }
+
+        public void ValidateForUpdate(Player player)
+        {
+            _isValid = true;
+
             ValidateEmail(player.Email);
             ValidateDateOfBirth(player.DateOfBirth);
 
@@ -31,6 +45,19 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             }
         }
 
+        public void ValidateForPasswordUpdate(Player player)
+        {
+            _isValid = true;
+
+            ValidatePassword(player.Password);
+
+            if (!_isValid)
+            {
+                throw new InvalidModelException(_modelStatesData);
+            }
+        }
+
+
         private void ValidateUserName(string playerUserName)
         {
             foreach (var task in _settings.UserNameTasks)
@@ -39,18 +66,10 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    _modelStatesData.Add("UserName", $"User Name {result.Message}");
                     _isValid = false;
+                    _modelStatesData.Add("UserName", $"User Name {result.Message}");
                     return;
                 }
-            }
-
-            var inUse = _settings.AlredyInUseTask.Validate(playerUserName, GameDataRepository.GetAllPlayers().Select(p=>p.UserName).ToList());
-            
-            if (!inUse.IsValid)
-            {
-                _modelStatesData.Add("UserName", $"User Name {inUse.Message}");
-                _isValid = false;
             }
         }
 
@@ -62,8 +81,8 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    _modelStatesData.Add("Password", $"Password {result.Message}");
                     _isValid = false;
+                    _modelStatesData.Add("Password", $"Password {result.Message}");
                     return;
                 }
             }
@@ -77,18 +96,10 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
 
                 if (!result.IsValid)
                 {
-                    _modelStatesData.Add("Email", result.Message);
                     _isValid = false;
+                    _modelStatesData.Add("Email", result.Message);
                     return;
                 }
-            }
-
-            var inUse = _settings.AlredyInUseTask.Validate(playerEmail, GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
-
-            if (!inUse.IsValid)
-            {
-                _isValid = false;
-                _modelStatesData.Add("Email",$"Email {inUse.Message}");
             }
         }
 
@@ -103,6 +114,27 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
                     _isValid = false;
                     _modelStatesData.Add("DateOfBirth", result.Message);
                 }
+            }
+        }
+
+        private void CheckInUse(Player player)
+        {
+            var inUseUsername = _settings.AlredyInUseTask.Validate(player.UserName,
+                GameDataRepository.GetAllPlayers().Select(p => p.UserName).ToList());
+
+            if (!inUseUsername.IsValid)
+            {
+                _isValid = false;
+                _modelStatesData.Add("UserName", $"User Name {inUseUsername.Message}");
+            }
+
+            var inUseEmail = _settings.AlredyInUseTask.Validate(player.Email,
+                GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
+
+            if (!inUseEmail.IsValid)
+            {
+                _isValid = false;
+                _modelStatesData.Add("Email", $"Email {inUseEmail.Message}");
             }
         }
     }
