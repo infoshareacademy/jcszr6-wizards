@@ -5,11 +5,13 @@ namespace Wizards.BusinessLogic
     public class PasswordChange
     {
         public int Id { get; set; }
-        public string OldPassword { get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
 
         [Required]
         [Display(Name ="Enter actual Password")]
-        [Compare("OldPassword", ErrorMessage = "Incorrect actual Password!")]
+        [Compare("Password", ErrorMessage = "Incorrect actual Password!")]
+        [DataType(DataType.Password)]
         public string EnterOldPassword { get; set; }
 
         [Required]
@@ -28,12 +30,18 @@ namespace Wizards.BusinessLogic
         public PasswordChange(Player player)
         {
             Id = player.Id;
-            OldPassword = player.Password;
+            UserName = player.UserName;
+            Password = player.Password;
+        }
+
+        public PasswordChange()
+        {
+            
         }
 
         public Player GetPlayerWithNewPassword()
         {
-            return new Player() { Id= this.Id, Password = this.NewPassword };
+            return new Player() { Id= this.Id, Password = this.NewPassword, UserName = this.UserName};
         }
     }
 }

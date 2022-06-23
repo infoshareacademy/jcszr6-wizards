@@ -125,14 +125,14 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                _playerService.Update(player.Id, player);
-                return RedirectToAction(nameof(Edit));
+                _playerService.UpdatePassword(player.Id, player);
+                return RedirectToAction(nameof(Edit), new {userName = player.UserName, password = player.Password});
             }
             catch (InvalidModelException exception)
             {
                 foreach (var data in exception.ModelStatesData)
                 {
-                    ModelState.AddModelError(data.Key, data.Value);
+                    ModelState.AddModelError("NewPassword", data.Value);
                 }
 
                 return View(passwordChange);
