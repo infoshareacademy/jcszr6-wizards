@@ -1,0 +1,58 @@
+﻿@model Wizards.BusinessLogic.PlayerForDelete
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete Player's Account</h2>
+<br/>
+<h3 class="alert-danger">Are you sure you want to delete your Player account?</h3>
+<h4 class="alert-danger">All created characters and progress made on this account will be lost!</h4>
+<hr />
+<div>
+    <dl class="row">
+        <dt class="col-sm-5">
+            <label asp-for="UserName"></label>
+        </dt>
+        <dd class="col-sm-5">
+            @Model.UserName
+        </dd>
+        <dt class="col-sm-5">
+            <label asp-for="Email"></label>
+        </dt>
+        <dd class="col-sm-5">
+            @Model.Email
+        </dd>
+        <dt class="col-sm-5">
+            <label asp-for="DateOfBirth"></label>
+        </dt>
+        <dd class="col-sm-5">
+            @Model.DateOfBirth.Date.ToString("d")
+        </dd>
+        <dt class="col-sm-5">
+            <label asp-for="HeroesCount"></label>
+        </dt>
+        <dd class="col-sm-5">
+            @Model.HeroesCount
+        </dd>
+
+    </dl>
+</div>
+<div class="col-md-6">
+    <form asp-action="Delete">
+        <div class="form-group">
+            <input asp-for="Id" hidden="True"/>
+            <input asp-for="UserName" hidden="True"/>
+            <input asp-for="Password" hidden="True"/>
+            <input asp-for="Email" hidden="True"/>
+            <input asp-for="DateOfBirth" hidden="True"/>
+            <input asp-for="HeroesCount" hidden="True"/>
+            
+            <label asp-for="PasswordToConfirmDelete" class="control-label"></label>
+            <input asp-for="PasswordToConfirmDelete" class="form-control"/>
+            <span asp-validation-for="PasswordToConfirmDelete" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Edit" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Cancel</a>
+    </form>
+</div>

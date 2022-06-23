@@ -6,13 +6,13 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <button
+        <a
             class="btn-primary"
             asp-action="EditPassword"
             asp-route-userName="@Model.UserName"
             asp-route-password="@Model.Password">
             Edit Password
-        </button>
+        </a>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -39,13 +39,7 @@
 
 <div>
     <br/><hr/><br/>
-    <button
-        class="btn-danger"
-        asp-action="Delete"
-        asp-route-userName="@Model.UserName"
-        asp-route-password="@Model.Password">
-        Delete Account
-    </button>
+    <a class="btn-danger" asp-action="Delete" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Delete Account</a>
 </div>
 
 @section Scripts {

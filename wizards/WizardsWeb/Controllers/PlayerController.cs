@@ -141,23 +141,32 @@ namespace WizardsWeb.Controllers
 
 
         // GET: PlayerController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string userName, string password)
         {
-            return View();
+            var id = _playerService.GetIdByLogin(userName, password);
+            var player = _playerService.GetById(id);
+            var playerForDelete = new PlayerForDelete(player);
+            return View(playerForDelete);
         }
 
         // POST: PlayerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(PlayerForDelete playerForDelete)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(playerForDelete);
+            }
+            
             try
             {
-                return RedirectToAction(nameof(Index));
+                _playerService.DeleteById(playerForDelete.Id);
+                return RedirectToAction(nameof(Index),"Home");
             }
             catch
             {
-                return View();
+                return View(playerForDelete);
             }
         }
     }
