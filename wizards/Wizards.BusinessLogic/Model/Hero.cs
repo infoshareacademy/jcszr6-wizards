@@ -11,6 +11,7 @@ namespace Wizards.BusinessLogic
     {
         public int Id { get; set; }
         public string NickName { get; set; }
+        public int IdIcon { get; set; }
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
         public int Attack { get; set; }
@@ -21,7 +22,7 @@ namespace Wizards.BusinessLogic
         public int TotalMatchPlayed { get; set; }
         public int TotalMatchWin { get; set; }
         public int TotalMatchLoose { get; set; }
-        
+
         public List<Item> Inventory = new List<Item>();
         public List<Item> Equipped = new List<Item>();
         public HeroSpecialisation Restrictions { get; set; }
