@@ -1,0 +1,26 @@
+﻿@model Wizards.BusinessLogic.Player
+
+<h2>@Model.UserName</h2>
+<h4>Player account</h4>
+<a asp-action="Edit" asp-route-id="@Model.Id">Edit Player's Profile</a>
+<hr />
+<dl>
+    <dt class="col-sm-5">
+        <label asp-for="UserName"></label>
+    </dt>
+    <dd class="col-sm-5">
+        @Model.UserName
+    </dd>
+    <dt class="col-sm-5">
+        <label asp-for="Email"></label>
+    </dt>
+    <dd class="col-sm-5">
+        @Model.Email
+    </dd>
+    <dt class="col-sm-5">
+        <label asp-for="DateOfBirth"></label>
+    </dt>
+    <dd class="col-sm-5">
+        @Model.DateOfBirth.Date.ToString("d")
+    </dd>
+</dl>

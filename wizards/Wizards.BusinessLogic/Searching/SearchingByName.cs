@@ -18,7 +18,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Name()
         {
 
-            var listPlayers = Repository.GetAllPlayers();
+            var listPlayers = GameDataRepository.GetAllPlayers();
             var listByNames = listPlayers.OrderBy(n => n.UserName).ToList();
 
             Console.WriteLine("Wpisz nazwę gracza: ");

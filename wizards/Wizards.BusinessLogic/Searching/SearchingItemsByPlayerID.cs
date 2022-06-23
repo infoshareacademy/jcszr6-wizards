@@ -14,7 +14,7 @@ namespace Wizards.BusinessLogic.Searching
         public static void Search()
         {
 
-            var listPlayers = Repository.GetAllPlayers();
+            var listPlayers = GameDataRepository.GetAllPlayers();
 
             var playersOrderByID = listPlayers.OrderBy(i => i.Id).ToList();
 
