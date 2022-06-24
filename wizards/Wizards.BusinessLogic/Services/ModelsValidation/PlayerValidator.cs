@@ -10,6 +10,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
         private readonly PlayerValidationSettings _settings;
         private Dictionary<string, string> _modelStatesData;
         private bool _isValid;
+
         public PlayerValidator()
         {
             _settings = ValidationSettingsRepository.GetPlayersValidationSettings();
@@ -56,7 +57,6 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
                 throw new InvalidModelException(_modelStatesData);
             }
         }
-
 
         private void ValidateUserName(string playerUserName)
         {

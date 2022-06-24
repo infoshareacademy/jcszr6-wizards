@@ -24,10 +24,9 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/Details/5
-        public ActionResult Details(string userName, string password)
+        public ActionResult Details(int id)
         {
-            var id = _playerService.GetIdByLogin(userName, password);
-            var player = _playerService.GetById(id);
+            var player = _playerService.Get(id);
             return View(player);
         }
 
@@ -52,7 +51,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 _playerService.Add(player);
-                return RedirectToAction(nameof(Details), new { userName = player.UserName, password = player.Password });
+                return RedirectToAction(nameof(Details), new { id = player.Id });
             }
             catch (InvalidModelException exception)
             {
@@ -61,15 +60,14 @@ namespace WizardsWeb.Controllers
                     ModelState.AddModelError(data.Key, data.Value);
                 }
 
-                return View(player);
+                return View(playerForCreate);
             }
         }
 
         // GET: PlayerController/Edit/5
-        public ActionResult Edit(string userName, string password)
+        public ActionResult Edit(int id)
         {
-            var id = _playerService.GetIdByLogin(userName, password);
-            var player = _playerService.GetById(id);
+            var player = _playerService.Get(id);
             return View(player);
         }
 
@@ -87,9 +85,9 @@ namespace WizardsWeb.Controllers
             {
                 _playerService.Update(player.Id, player);
 
-                var playerToDetails = _playerService.GetById(player.Id);
-                
-                return RedirectToAction(nameof(Details), new { userName = playerToDetails.UserName, password = playerToDetails.Password });
+                var playerToDetails = _playerService.Get(player.Id);
+
+                return RedirectToAction(nameof(Details), new { id = playerToDetails.Id });
             }
             catch (InvalidModelException exception)
             {
@@ -103,10 +101,9 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/EditPassword/5
-        public ActionResult EditPassword(string userName, string password)
+        public ActionResult EditPassword(int id)
         {
-            var id = _playerService.GetIdByLogin(userName, password);
-            var player = _playerService.GetById(id);
+            var player = _playerService.Get(id);
             var passwordChage = new PasswordChange(player);
             return View(passwordChage);
         }
@@ -126,7 +123,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 _playerService.UpdatePassword(player.Id, player);
-                return RedirectToAction(nameof(Edit), new {userName = player.UserName, password = player.Password});
+                return RedirectToAction(nameof(Edit), new { id = player.Id });
             }
             catch (InvalidModelException exception)
             {
@@ -141,10 +138,9 @@ namespace WizardsWeb.Controllers
 
 
         // GET: PlayerController/Delete/5
-        public ActionResult Delete(string userName, string password)
+        public ActionResult Delete(int id)
         {
-            var id = _playerService.GetIdByLogin(userName, password);
-            var player = _playerService.GetById(id);
+            var player = _playerService.Get(id);
             var playerForDelete = new PlayerForDelete(player);
             return View(playerForDelete);
         }
@@ -158,11 +154,11 @@ namespace WizardsWeb.Controllers
             {
                 return View(playerForDelete);
             }
-            
+
             try
             {
-                _playerService.DeleteById(playerForDelete.Id);
-                return RedirectToAction(nameof(Index),"Home");
+                _playerService.Delete(playerForDelete.Id);
+                return RedirectToAction(nameof(Index), "Home");
             }
             catch
             {

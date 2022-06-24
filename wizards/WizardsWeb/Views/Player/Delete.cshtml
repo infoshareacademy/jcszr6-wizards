@@ -53,6 +53,6 @@
             <span asp-validation-for="PasswordToConfirmDelete" class="text-danger"></span>
         </div>
         <input type="submit" value="Delete" class="btn btn-danger" />
-        <a asp-action="Edit" asp-route-userName="@Model.UserName" asp-route-password="@Model.Password">Cancel</a>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Cancel</a>
     </form>
 </div>

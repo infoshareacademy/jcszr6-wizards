@@ -30,9 +30,9 @@ namespace Wizards.BusinessLogic.Services
             _gameDataService.UpdateGameData();
         }
 
-        public void DeleteById(int id)
+        public void Delete(int id)
         {
-            var player = GetById(id);
+            var player = Get(id);
             _players.Remove(player);
             
             _gameDataService.UpdateGameData();
@@ -42,7 +42,7 @@ namespace Wizards.BusinessLogic.Services
         {
             _playerValidator.ValidateForUpdate(player);
             
-            var playerToUpdate = GetById(id);
+            var playerToUpdate = Get(id);
             
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;
@@ -54,7 +54,7 @@ namespace Wizards.BusinessLogic.Services
         {
             _playerValidator.ValidateForPasswordUpdate(player);
 
-            var playerToUpdate = GetById(id);
+            var playerToUpdate = Get(id);
 
             playerToUpdate.Password = player.Password;
 
@@ -66,55 +66,29 @@ namespace Wizards.BusinessLogic.Services
             return _players.AsEnumerable();
         }
 
-        public Player GetById(int id)
+        public Player Get(int id)
         {
-            var player = _players.FirstOrDefault(p => p.Id == id);
+            var player = _players.SingleOrDefault(p => p.Id == id);
 
             if (player != null)
             {
                 return player;
             }
 
-            throw new NullReferenceException($"There is no Player with id{id}!");
-        }
-
-        public int GetIdByLogin(string userName, string password)
-        {
-            var player = _players.FirstOrDefault(p => p.UserName == userName && p.Password == password);
-
-            if (player != null)
-            {
-                return player.Id;
-            }
-
-            throw new NullReferenceException("Login data incorrect!");
+            throw new NullReferenceException($"There is no Player with id: {id}!");
         }
 
         private int GetUniqueId()
         {
-            
-            var uniqueId = 1;
-            
-            if (_players.Count == 0)
-            {
-                return uniqueId;
-            }
+            int newId;
 
-            int maxId = _players.Max(p => p.Id);
-            
-            if (maxId < _players.Count)
+            do
             {
-                while (_players.Any(p => p.Id == uniqueId))
-                {
-                    uniqueId++;
-                }
-            }
-            else
-            {
-                uniqueId = maxId + 1;
-            }
+                newId = BitConverter.ToInt32(Guid.NewGuid().ToByteArray());
+            } 
+            while (GameDataRepository.GetAllPlayers().Any(p => p.Id == newId) || newId <= 0);
 
-            return uniqueId;
+            return newId;
         }
     }
 }
