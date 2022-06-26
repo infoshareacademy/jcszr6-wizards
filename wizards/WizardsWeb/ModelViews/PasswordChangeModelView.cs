@@ -7,11 +7,9 @@ namespace WizardsWeb.ModelViews
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        public string Password { get; set; }
 
         [Required]
         [Display(Name ="Enter actual Password")]
-        [Compare("Password", ErrorMessage = "Incorrect actual Password!")]
         [DataType(DataType.Password)]
         public string EnterOldPassword { get; set; }
 
@@ -28,21 +26,16 @@ namespace WizardsWeb.ModelViews
         [Compare("NewPassword", ErrorMessage = "New Password and Confirm new Password should be the same!")]
         public string ConfirmPassword { get; set; }
 
+        public PasswordChangeModelView() { }
         public PasswordChangeModelView(Player player)
         {
             Id = player.Id;
             UserName = player.UserName;
-            Password = player.Password;
         }
 
-        public PasswordChangeModelView()
+        public Player ToPlayer()
         {
-            
-        }
-
-        public Player GetPlayerWithNewPassword()
-        {
-            return new Player() { Id= this.Id, Password = this.NewPassword, UserName = this.UserName};
+            return new Player() { Id= this.Id, Password = this.NewPassword};
         }
     }
 }

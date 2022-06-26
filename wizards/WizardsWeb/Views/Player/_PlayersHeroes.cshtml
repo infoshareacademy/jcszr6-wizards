@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Wizards.BusinessLogic.Hero>
+﻿@model WizardsWeb.ModelViews.PlayerDetailsModelView
 
 <h2>Player's Heroes</h2>
 <br/>
@@ -6,15 +6,15 @@
     <thead>
     <tr>
         <th>
-            <label asp-for="First().NickName"></label>
+            <label asp-for="Heroes.First().NickName"></label>
         </th>
         <th>
-            <label asp-for="First().Profession"></label>
+            <label asp-for="Heroes.First().Profession"></label>
         </th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var hero in Model)
+    @foreach (var hero in Model.Heroes)
     {
         <tr>
             <td>

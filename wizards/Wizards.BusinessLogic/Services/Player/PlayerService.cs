@@ -21,7 +21,7 @@ namespace Wizards.BusinessLogic.Services
 
         public void Add(Player player)
         {
-            player.SetId(GetUniqueId());
+            player.Id = GetUniqueId();
             _playerValidator.ValidateForCreate(player);
             
             _players.Add(player);

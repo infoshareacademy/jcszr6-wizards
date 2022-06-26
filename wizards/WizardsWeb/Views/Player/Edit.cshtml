@@ -1,4 +1,4 @@
-﻿@model Wizards.BusinessLogic.Player
+﻿@model WizardsWeb.ModelViews.PlayerEditModelView
 
 <h3>Edit Player's Profile</h3>
 <h5>@Model.UserName</h5>
@@ -11,8 +11,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input asp-for="Id" hidden="true"/>
-                <input asp-for="UserName" hidden="true"/>
-                <input asp-for="Password" hidden="true"/>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>

@@ -1,4 +1,4 @@
-﻿@model Wizards.BusinessLogic.Player
+﻿@model WizardsWeb.ModelViews.PlayerDetailsModelView
 
 @{
     ViewData["Title"] = $"Player: {Model.UserName}";
@@ -10,7 +10,7 @@
             <partial name="_PlayerInfo" model="Model"/>
         </div>
         <div class="col-sm-6">
-            <partial name="_PlayersHeroes" model="Model.Heroes" />
+            <partial name="_PlayersHeroes" model="Model" />
         </div>
     </div>
 

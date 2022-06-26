@@ -18,17 +18,12 @@ namespace WizardsWeb.Controllers
             _playerService = playerService;
         }
 
-        // GET: PlayerController
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         // GET: PlayerController/Details/5
         public ActionResult Details(int id)
         {
             var player = _playerService.Get(id);
-            return View(player);
+            var playerDetails = new PlayerDetailsModelView(player);
+            return View(playerDetails);
         }
 
         // GET: PlayerController/Create
@@ -69,17 +64,22 @@ namespace WizardsWeb.Controllers
         public ActionResult Edit(int id)
         {
             var player = _playerService.Get(id);
-            return View(player);
+            var playerEdit = new PlayerEditModelView(player);
+            return View(playerEdit);
         }
 
         // POST: PlayerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Player player)
+        public ActionResult Edit(PlayerEditModelView playerEdit)
         {
+            var userName = _playerService.Get(playerEdit.Id).UserName;
+            playerEdit.UserName = userName;
+            var player = playerEdit.ToPlayer();
+
             if (!ModelState.IsValid)
             {
-                return View(player);
+                return View(playerEdit);
             }
 
             try
@@ -87,7 +87,7 @@ namespace WizardsWeb.Controllers
                 _playerService.Update(player.Id, player);
 
                 var playerToDetails = _playerService.Get(player.Id);
-
+                
                 return RedirectToAction(nameof(Details), new { id = playerToDetails.Id });
             }
             catch (InvalidModelException exception)
@@ -97,7 +97,7 @@ namespace WizardsWeb.Controllers
                     ModelState.AddModelError(data.Key, data.Value);
                 }
 
-                return View(player);
+                return View(playerEdit);
             }
         }
 
@@ -114,12 +114,20 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EditPassword(PasswordChangeModelView passwordChange)
         {
+            var playerInfo = _playerService.Get(passwordChange.Id);
+            passwordChange.UserName = playerInfo.UserName;
+            var player = passwordChange.ToPlayer();
+
+            if (playerInfo.Password != passwordChange.EnterOldPassword)
+            {
+                ModelState.AddModelError("EnterOldPassword", "Incorrect actual Password!");
+                return View(passwordChange);
+            }
             if (!ModelState.IsValid)
             {
                 return View(passwordChange);
             }
 
-            var player = passwordChange.GetPlayerWithNewPassword();
 
             try
             {
@@ -151,6 +159,14 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(PlayerDeleteModelView playerForDelete)
         {
+            var playerInfo = _playerService.Get(playerForDelete.Id);
+            if (playerInfo.Password != playerForDelete.PasswordToConfirmDelete)
+            {
+                ModelState.AddModelError("PasswordToConfirmDelete", "Invalid Password!");
+            }
+            
+            playerForDelete = new PlayerDeleteModelView(playerInfo);
+
             if (!ModelState.IsValid)
             {
                 return View(playerForDelete);
