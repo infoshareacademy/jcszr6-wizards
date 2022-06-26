@@ -57,7 +57,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
             var highestAllowedDateOfBirth = DateTime.Now.Date.AddYears(-MinimumAge);
             if (value.Date > highestAllowedDateOfBirth.Date)
             {
-                return new ValidationState(false, TextRepository.Get(ValueErrorsMsg.UserToYoung));
+                return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.UserToYoung)}{MinimumAge}");
             }
 
             return new ValidationState(true);

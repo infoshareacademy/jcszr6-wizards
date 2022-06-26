@@ -2,6 +2,8 @@
 {
     public interface IPlayerValidator
     {
-        void Validate(Player player);
+        void ValidateForCreate(Player player);
+        void ValidateForUpdate(Player player);
+        void ValidateForPasswordUpdate(Player player);
     }
 }
