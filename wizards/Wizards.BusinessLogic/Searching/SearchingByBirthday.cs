@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wizards.BusinessLogic.Services.FileOperations;
 
 namespace Wizards.BusinessLogic.Searching
 {
@@ -15,7 +16,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Birthday()
         {
 
-            var listPlayers = GameDataRepository.GetAllPlayers();
+            var listPlayers = new List<Player>();
 
             var listByBirthdays = listPlayers.OrderBy(n => n.UserName).ToList();
         

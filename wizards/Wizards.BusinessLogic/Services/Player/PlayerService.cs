@@ -9,25 +9,24 @@ namespace Wizards.BusinessLogic.Services
     public class PlayerService : IPlayerService
     {
         private List<Player> _players;
-        private readonly IGameDataService _gameDataService;
+        private readonly IGameDataRepository _gameDataRepository;
         private readonly IPlayerValidator _playerValidator;
 
-        public PlayerService(IGameDataService gameDataService, IPlayerValidator playerValidator)
+        public PlayerService(IGameDataRepository gameDataRepository, IPlayerValidator playerValidator)
         {
-            _gameDataService = gameDataService;
-            _gameDataService.LoadGameData();
+            _gameDataRepository = gameDataRepository;
             _playerValidator = playerValidator;
-            _players = GameDataRepository.GetAllPlayers();
+            _players = _gameDataRepository.Get();
         }
 
         public void Add(Player player)
         {
             player.SetId(GetUniqueId());
             _playerValidator.ValidateForCreate(player);
+            
             _players.Add(player);
-
-            GameDataRepository.UpdateAllPlayers(_players);
-            _gameDataService.UpdateGameData();
+            
+            _gameDataRepository.Update(_players);
         }
 
         public void Delete(int id)
@@ -35,7 +34,7 @@ namespace Wizards.BusinessLogic.Services
             var player = Get(id);
             _players.Remove(player);
             
-            _gameDataService.UpdateGameData();
+            _gameDataRepository.Update(_players);
         }
 
         public void Update(int id, Player player)
@@ -47,7 +46,7 @@ namespace Wizards.BusinessLogic.Services
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;
 
-            _gameDataService.UpdateGameData();
+            _gameDataRepository.Update(_players);
         }
 
         public void UpdatePassword(int id, Player player)
@@ -58,7 +57,7 @@ namespace Wizards.BusinessLogic.Services
 
             playerToUpdate.Password = player.Password;
 
-            _gameDataService.UpdateGameData();
+            _gameDataRepository.Update(_players);
         }
 
         public IEnumerable<Player> GetAll()
@@ -86,7 +85,7 @@ namespace Wizards.BusinessLogic.Services
             {
                 newId = BitConverter.ToInt32(Guid.NewGuid().ToByteArray());
             } 
-            while (GameDataRepository.GetAllPlayers().Any(p => p.Id == newId) || newId <= 0);
+            while (_players.Any(p => p.Id == newId) || newId <= 0);
 
             return newId;
         }

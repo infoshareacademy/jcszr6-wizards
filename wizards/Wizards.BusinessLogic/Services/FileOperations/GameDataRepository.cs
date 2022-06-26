@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Wizards.BusinessLogic.Services.FileOperations
 {
-    public class GameDataService : IGameDataService
+    public class GameDataRepository : IGameDataRepository
     {
-        public void UpdateGameData()
+        public void Update(List<Player> players)
         {
             var path = GetJsonDirectory();
             
@@ -17,16 +17,15 @@ namespace Wizards.BusinessLogic.Services.FileOperations
                 Directory.CreateDirectory(path);
             }
 
-            var json = JsonConvert.SerializeObject(GameDataRepository.GetAllPlayers());
+            var json = JsonConvert.SerializeObject(players);
 
             using (var writer = File.CreateText(path))
             {
                 writer.Write(json);
             }
-
         }
 
-        public void LoadGameData()
+        public List<Player> Get()
         {
             var path = GetJsonDirectory();
             
@@ -39,10 +38,10 @@ namespace Wizards.BusinessLogic.Services.FileOperations
                     dataFile = reader.ReadToEnd();
                 }
                 
-                var players = JsonConvert.DeserializeObject<List<Player>>(dataFile);
-            
-                GameDataRepository.UpdateAllPlayers(players);
+                return JsonConvert.DeserializeObject<List<Player>>(dataFile);
             }
+
+            return new List<Player>();
         }
 
         private static string GetJsonDirectory()

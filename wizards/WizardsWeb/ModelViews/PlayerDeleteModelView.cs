@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Wizards.BusinessLogic;
 
-namespace Wizards.BusinessLogic
+namespace WizardsWeb.ModelViews
 {
-    public class PlayerForDelete
+    public class PlayerDeleteModelView
     {
         public int Id { get; set; }
 
@@ -28,7 +29,7 @@ namespace Wizards.BusinessLogic
 
         public int HeroesCount = new();
 
-        public PlayerForDelete(Player player)
+        public PlayerDeleteModelView(Player player)
         {
             Id = player.Id;
             UserName = player.UserName;
@@ -38,7 +39,7 @@ namespace Wizards.BusinessLogic
             HeroesCount = player.Heroes.Count;
         }
 
-        public PlayerForDelete()
+        public PlayerDeleteModelView()
         {
             
         }

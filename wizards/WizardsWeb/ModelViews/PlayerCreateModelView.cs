@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Wizards.BusinessLogic;
 
-namespace Wizards.BusinessLogic
+namespace WizardsWeb.ModelViews
 {
-    public class PlayerForCreate
+    public class PlayerCreateModelView
     {
         [Required]
         [Display(Name = "User Name")]

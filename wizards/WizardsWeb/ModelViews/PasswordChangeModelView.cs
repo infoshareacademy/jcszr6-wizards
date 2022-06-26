@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Wizards.BusinessLogic;
 
-namespace Wizards.BusinessLogic
+namespace WizardsWeb.ModelViews
 {
-    public class PasswordChange
+    public class PasswordChangeModelView
     {
         public int Id { get; set; }
         public string UserName { get; set; }
@@ -27,14 +28,14 @@ namespace Wizards.BusinessLogic
         [Compare("NewPassword", ErrorMessage = "New Password and Confirm new Password should be the same!")]
         public string ConfirmPassword { get; set; }
 
-        public PasswordChange(Player player)
+        public PasswordChangeModelView(Player player)
         {
             Id = player.Id;
             UserName = player.UserName;
             Password = player.Password;
         }
 
-        public PasswordChange()
+        public PasswordChangeModelView()
         {
             
         }

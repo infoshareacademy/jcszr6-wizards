@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wizards.BusinessLogic;
 using Wizards.BusinessLogic.Services;
 using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
+using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers
 {
@@ -39,7 +40,7 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PlayerForCreate playerForCreate)
+        public ActionResult Create(PlayerCreateModelView playerForCreate)
         {
             if (!ModelState.IsValid)
             {
@@ -104,14 +105,14 @@ namespace WizardsWeb.Controllers
         public ActionResult EditPassword(int id)
         {
             var player = _playerService.Get(id);
-            var passwordChage = new PasswordChange(player);
+            var passwordChage = new PasswordChangeModelView(player);
             return View(passwordChage);
         }
 
         // POST: PlayerController/EditPassword/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPassword(PasswordChange passwordChange)
+        public ActionResult EditPassword(PasswordChangeModelView passwordChange)
         {
             if (!ModelState.IsValid)
             {
@@ -141,14 +142,14 @@ namespace WizardsWeb.Controllers
         public ActionResult Delete(int id)
         {
             var player = _playerService.Get(id);
-            var playerForDelete = new PlayerForDelete(player);
+            var playerForDelete = new PlayerDeleteModelView(player);
             return View(playerForDelete);
         }
 
         // POST: PlayerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(PlayerForDelete playerForDelete)
+        public ActionResult Delete(PlayerDeleteModelView playerForDelete)
         {
             if (!ModelState.IsValid)
             {

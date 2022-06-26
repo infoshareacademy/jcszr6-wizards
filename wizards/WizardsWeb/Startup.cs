@@ -25,7 +25,7 @@ namespace WizardsWeb
             services.AddControllersWithViews();
             
             services.AddTransient<IPlayerService, PlayerService>();
-            services.AddTransient<IGameDataService, GameDataService>();
+            services.AddTransient<IGameDataRepository, GameDataRepository>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
         }
 

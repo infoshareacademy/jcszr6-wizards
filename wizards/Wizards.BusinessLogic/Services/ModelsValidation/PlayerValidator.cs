@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Wizards.BusinessLogic.Services.FileOperations;
 using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
 
 namespace Wizards.BusinessLogic.Services.ModelsValidation
@@ -10,11 +11,13 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
         private readonly PlayerValidationSettings _settings;
         private Dictionary<string, string> _modelStatesData;
         private bool _isValid;
+        private readonly IGameDataRepository _gameDataRepository;
 
-        public PlayerValidator()
+        public PlayerValidator(IGameDataRepository gameDataRepository)
         {
             _settings = ValidationSettingsRepository.GetPlayersValidationSettings();
             _modelStatesData = new Dictionary<string, string>();
+            _gameDataRepository = gameDataRepository;
         }
 
         public void ValidateForCreate(Player player)
@@ -120,7 +123,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
         private void CheckInUse(Player player)
         {
             var inUseUsername = _settings.AlredyInUseTask.Validate(player.UserName,
-                GameDataRepository.GetAllPlayers().Select(p => p.UserName).ToList());
+                _gameDataRepository.Get().Select(p => p.UserName).ToList());
 
             if (!inUseUsername.IsValid)
             {
@@ -129,7 +132,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             }
 
             var inUseEmail = _settings.AlredyInUseTask.Validate(player.Email,
-                GameDataRepository.GetAllPlayers().Select(p => p.Email).ToList());
+                _gameDataRepository.Get().Select(p => p.Email).ToList());
 
             if (!inUseEmail.IsValid)
             {
