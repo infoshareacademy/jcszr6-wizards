@@ -14,14 +14,15 @@ namespace Wizards.BusinessLogic
         public int DailyRewardEnergy { get; set; }
 
         // Offensive
-        public int AttackPower { get; set; }
-        public int MaxMagicEnergy { get; set; }
-        public int CurrentMagicEnergy { get; set; }
+        public int Damage { get; set; }
+        public int Precision { get; set; }
+        public int Specialization { get; set; }
 
         // Defensive
-        public int Defense { get; set; }
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
+        public int Reflex { get; set; }
+        public int Defense { get; set; }
 
         // Economic
         public int Gold { get; set; }
