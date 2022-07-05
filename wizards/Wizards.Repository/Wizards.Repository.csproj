@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Repositories\Text\Json\Creator.json" />
+    <None Remove="Repositories\Text\Json\RestrictedWords.json" />
+    <None Remove="Repositories\Text\Json\Selectors.json" />
+    <None Remove="Repositories\Text\Json\Value Errors.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Repositories\Text\Json\Creator.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Repositories\Text\Json\RestrictedWords.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Repositories\Text\Json\Selectors.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Repositories\Text\Json\Value Errors.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wizards.Core\Wizards.Core.csproj" />
+  </ItemGroup>
+
+</Project>
