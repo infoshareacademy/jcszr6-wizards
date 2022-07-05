@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wizards.BusinessLogic.Services.FileOperations;
+﻿using Wizards.Core.Model;
+using System.Collections;
 
-namespace Wizards.BusinessLogic.Searching
+
+namespace Wizards.Services.Searching
 {
     public class SearchingByBirthday
     {
@@ -16,7 +13,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Birthday()
         {
 
-            var listPlayers = new List<Player>();
+            var listPlayers = new List<Core.Model.Player>();
 
             var listByBirthdays = listPlayers.OrderBy(n => n.UserName).ToList();
         

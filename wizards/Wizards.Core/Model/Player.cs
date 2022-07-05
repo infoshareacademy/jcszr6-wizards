@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Wizards.BusinessLogic
+﻿namespace Wizards.Core.Model
 {
     public class Player
     {

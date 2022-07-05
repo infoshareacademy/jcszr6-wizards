@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wizards.BusinessLogic.Searching
+﻿namespace Wizards.Services.Searching
 {
     public class SearchingItemsByPlayerID
     {
@@ -14,7 +8,7 @@ namespace Wizards.BusinessLogic.Searching
         public static void Search()
         {
 
-            var listPlayers = new List<Player>();
+            var listPlayers = new List<Core.Model.Player>();
 
             var playersOrderByID = listPlayers.OrderBy(i => i.Id).ToList();
 
@@ -42,7 +36,7 @@ namespace Wizards.BusinessLogic.Searching
 
                 Console.WriteLine("Przedmioty w ekwipunku");
 
-                hero.Equipped.ForEach(i => Console.WriteLine($"{i.Id}, {i.Name}"));
+                hero.Inventory.ForEach(i => Console.WriteLine($"{i.Id}, {i.Name}"));
             });
         }
     }

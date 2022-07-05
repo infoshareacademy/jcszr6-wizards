@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Wizards.BusinessLogic.Services.FileOperations;
-using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
+﻿using Wizards.Repository.FileOperations;
+using Wizards.Services.Validation.Elements;
+using Wizards.Services.Validation.Settings;
 
-namespace Wizards.BusinessLogic.Services.ModelsValidation
+namespace Wizards.Services.Validation
 {
     public class PlayerValidator : IPlayerValidator
     {
         private readonly PlayerValidationSettings _settings;
         private Dictionary<string, string> _modelStatesData;
         private bool _isValid;
-        private readonly IGameDataRepository _gameDataRepository;
+        private readonly IWizardsRepository _wizardsRepository;
 
-        public PlayerValidator(IGameDataRepository gameDataRepository)
+        public PlayerValidator(IWizardsRepository wizardsRepository)
         {
             _settings = ValidationSettingsRepository.GetPlayersValidationSettings();
             _modelStatesData = new Dictionary<string, string>();
-            _gameDataRepository = gameDataRepository;
+            _wizardsRepository = wizardsRepository;
         }
 
-        public void ValidateForCreate(Player player)
+        public void ValidateForCreate(Core.Model.Player player)
         {
             _isValid = true;
 
@@ -36,7 +34,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             }
         }
 
-        public void ValidateForUpdate(Player player)
+        public void ValidateForUpdate(Core.Model.Player player)
         {
             _isValid = true;
 
@@ -49,7 +47,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             }
         }
 
-        public void ValidateForPasswordUpdate(Player player)
+        public void ValidateForPasswordUpdate(Core.Model.Player player)
         {
             _isValid = true;
 
@@ -120,10 +118,10 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             }
         }
 
-        private void CheckInUse(Player player)
+        private void CheckInUse(Core.Model.Player player)
         {
             var inUseUsername = _settings.AlredyInUseTask.Validate(player.UserName,
-                _gameDataRepository.Get().Select(p => p.UserName).ToList());
+                _wizardsRepository.GetAll().Select(p => p.UserName).ToList());
 
             if (!inUseUsername.IsValid)
             {
@@ -132,7 +130,7 @@ namespace Wizards.BusinessLogic.Services.ModelsValidation
             }
 
             var inUseEmail = _settings.AlredyInUseTask.Validate(player.Email,
-                _gameDataRepository.Get().Select(p => p.Email).ToList());
+                _wizardsRepository.GetAll().Select(p => p.Email).ToList());
 
             if (!inUseEmail.IsValid)
             {

@@ -1,4 +1,4 @@
-﻿namespace Wizards.BusinessLogic;
+﻿namespace Wizards.Core.Model.Enums;
 
 public enum ItemType
 {

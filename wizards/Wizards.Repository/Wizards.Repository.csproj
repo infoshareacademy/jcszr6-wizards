@@ -7,25 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Repositories\Text\Json\Creator.json" />
     <None Remove="Repositories\Text\Json\RestrictedWords.json" />
-    <None Remove="Repositories\Text\Json\Selectors.json" />
     <None Remove="Repositories\Text\Json\Value Errors.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Repositories\Text\Json\Creator.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Repositories\Text\Json\RestrictedWords.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Repositories\Text\Json\Selectors.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Repositories\Text\Json\Value Errors.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>

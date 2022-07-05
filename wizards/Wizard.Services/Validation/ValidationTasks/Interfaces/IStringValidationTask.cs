@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
+﻿using Wizards.Services.Validation.Elements;
 
-namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
+namespace Wizards.Services.Validation.ValidationTasks.Interfaces
 {
     public interface IStringValidationTask
     {

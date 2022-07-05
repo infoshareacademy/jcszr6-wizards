@@ -1,4 +1,7 @@
-﻿namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
+﻿using Wizards.Repository.Repositories.Text;
+using Wizards.Repository.Repositories.Text.Enums;
+
+namespace Wizards.Services.Validation.Elements
 {
     public class ValidationState
     {

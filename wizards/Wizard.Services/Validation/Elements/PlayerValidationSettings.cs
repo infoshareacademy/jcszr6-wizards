@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks;
+﻿using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
-namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
+namespace Wizards.Services.Validation.Elements
 {
     public class PlayerValidationSettings
     {

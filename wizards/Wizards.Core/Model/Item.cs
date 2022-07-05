@@ -1,8 +1,6 @@
-﻿
+﻿using Wizards.Core.Model.Enums;
 
-using System.Collections.Generic;
-
-namespace Wizards.BusinessLogic
+namespace Wizards.Core.Model
 {
     public class Item
     {

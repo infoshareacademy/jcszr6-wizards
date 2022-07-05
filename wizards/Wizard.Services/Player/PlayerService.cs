@@ -1,32 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Wizards.BusinessLogic.Services.FileOperations;
-using Wizards.BusinessLogic.Services.ModelsValidation;
+﻿using Wizards.Repository.FileOperations;
+using Wizards.Services.Validation;
 
-namespace Wizards.BusinessLogic.Services
+namespace Wizards.Services.Player
 {
     public class PlayerService : IPlayerService
     {
-        private List<Player> _players;
-        private readonly IGameDataRepository _gameDataRepository;
+        private List<Core.Model.Player> _players;
+        private readonly IWizardsRepository _wizardsRepository;
         private readonly IPlayerValidator _playerValidator;
 
-        public PlayerService(IGameDataRepository gameDataRepository, IPlayerValidator playerValidator)
+        public PlayerService(IWizardsRepository wizardsRepository, IPlayerValidator playerValidator)
         {
-            _gameDataRepository = gameDataRepository;
+            _wizardsRepository = wizardsRepository;
             _playerValidator = playerValidator;
-            _players = _gameDataRepository.Get();
+            _players = _wizardsRepository.GetAll();
         }
 
-        public void Add(Player player)
+        public void Add(Core.Model.Player player)
         {
             player.Id = GetUniqueId();
             _playerValidator.ValidateForCreate(player);
             
             _players.Add(player);
             
-            _gameDataRepository.Update(_players);
+            _wizardsRepository.Update(_players);
         }
 
         public void Delete(int id)
@@ -34,10 +31,10 @@ namespace Wizards.BusinessLogic.Services
             var player = Get(id);
             _players.Remove(player);
             
-            _gameDataRepository.Update(_players);
+            _wizardsRepository.Update(_players);
         }
 
-        public void Update(int id, Player player)
+        public void Update(int id, Core.Model.Player player)
         {
             _playerValidator.ValidateForUpdate(player);
             
@@ -46,10 +43,10 @@ namespace Wizards.BusinessLogic.Services
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;
 
-            _gameDataRepository.Update(_players);
+            _wizardsRepository.Update(_players);
         }
 
-        public void UpdatePassword(int id, Player player)
+        public void UpdatePassword(int id, Core.Model.Player player)
         {
             _playerValidator.ValidateForPasswordUpdate(player);
 
@@ -57,15 +54,15 @@ namespace Wizards.BusinessLogic.Services
 
             playerToUpdate.Password = player.Password;
 
-            _gameDataRepository.Update(_players);
+            _wizardsRepository.Update(_players);
         }
 
-        public IEnumerable<Player> GetAll()
+        public IEnumerable<Core.Model.Player> GetAll()
         {
             return _players.AsEnumerable();
         }
 
-        public Player Get(int id)
+        public Core.Model.Player Get(int id)
         {
             var player = _players.SingleOrDefault(p => p.Id == id);
 

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
-using Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks;
+﻿using Wizards.Repository.Repositories.Text;
+using Wizards.Repository.Repositories.Text.Enums;
+using Wizards.Services.Validation.Elements;
+using Wizards.Services.Validation.ValidationTasks;
+using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
-namespace Wizards.BusinessLogic
+namespace Wizards.Services.Validation.Settings
 {
     public static class ValidationSettingsRepository
     {

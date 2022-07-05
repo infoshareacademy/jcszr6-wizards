@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Wizards.Core.Model.Enums;
 
-namespace Wizards.BusinessLogic
+namespace Wizards.Core.Model
 {
     public class Hero
     {

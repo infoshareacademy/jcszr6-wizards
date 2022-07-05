@@ -1,8 +1,9 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
+﻿using Wizards.Repository.Repositories.Text;
+using Wizards.Repository.Repositories.Text.Enums;
+using Wizards.Services.Validation.Elements;
+using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
-namespace Wizards.BusinessLogic.Services.ModelsValidation.ValidationTasks
+namespace Wizards.Services.Validation.ValidationTasks
 {
     public class DateMin : IDateValidationTask
     {

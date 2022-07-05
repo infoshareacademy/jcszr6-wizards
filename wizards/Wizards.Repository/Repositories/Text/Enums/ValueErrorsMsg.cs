@@ -1,4 +1,4 @@
-﻿namespace Wizards.BusinessLogic
+﻿namespace Wizards.Repository.Repositories.Text.Enums
 {
     public enum ValueErrorsMsg
     {

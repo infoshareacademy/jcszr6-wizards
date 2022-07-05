@@ -1,12 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wizards.BusinessLogic.Searching
+﻿namespace Wizards.Services.Searching
 {
     public class SearchingByName
     {
@@ -18,7 +10,7 @@ namespace Wizards.BusinessLogic.Searching
         static public void Name()
         {
 
-            var listPlayers = new List<Player>();
+            var listPlayers = new List<Core.Model.Player>();
             var listByNames = listPlayers.OrderBy(n => n.UserName).ToList();
 
             Console.WriteLine("Wpisz nazwę gracza: ");

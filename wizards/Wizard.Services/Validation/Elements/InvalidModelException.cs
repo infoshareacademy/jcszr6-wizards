@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace Wizards.BusinessLogic.Services.ModelsValidation.Elements
+namespace Wizards.Services.Validation.Elements
 {
     [Serializable]
     public class InvalidModelException : Exception

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Wizards.Core.Model;
 
-namespace Wizards.BusinessLogic.Services.FileOperations
+namespace Wizards.Repository.FileOperations
 {
-    public class GameDataRepository : IGameDataRepository
+    public class WizardsRepository : IWizardsRepository
     {
         public void Update(List<Player> players)
         {
@@ -25,7 +22,7 @@ namespace Wizards.BusinessLogic.Services.FileOperations
             }
         }
 
-        public List<Player> Get()
+        public List<Player> GetAll()
         {
             var path = GetJsonDirectory();
             
@@ -54,7 +51,7 @@ namespace Wizards.BusinessLogic.Services.FileOperations
                 directory = directory.Parent;
             }
             
-            result = Path.Combine(directory.FullName, "Wizards.BusinessLogic", "Data", "data.json");
+            result = Path.Combine(directory.FullName, "Wizards.Repository", "Data", "data.json");
             return result;
         }
     }
