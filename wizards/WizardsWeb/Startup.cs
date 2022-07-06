@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wizards.BusinessLogic.Services;
-using Wizards.BusinessLogic.Services.FileOperations;
-using Wizards.BusinessLogic.Services.ModelsValidation;
+using Wizards.Repository.FileOperations;
+using Wizards.Services.Player;
+using Wizards.Services.Validation;
 
 namespace WizardsWeb
 {
@@ -25,7 +24,7 @@ namespace WizardsWeb
             services.AddControllersWithViews();
             
             services.AddTransient<IPlayerService, PlayerService>();
-            services.AddTransient<IGameDataRepository, GameDataRepository>();
+            services.AddTransient<IWizardsRepository, WizardsRepository>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
         }
 

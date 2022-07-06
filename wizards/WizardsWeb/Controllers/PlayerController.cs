@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Wizards.BusinessLogic;
-using Wizards.BusinessLogic.Services;
-using Wizards.BusinessLogic.Services.ModelsValidation.Elements;
+using Wizards.Services.Player;
+using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers

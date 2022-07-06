@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Wizards.BusinessLogic;
+using Wizards.Core.Model;
 
 namespace WizardsWeb.ModelViews
 {
