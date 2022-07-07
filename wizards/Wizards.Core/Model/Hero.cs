@@ -17,12 +17,11 @@ namespace Wizards.Core.Model
         // Economic
         public int Gold { get; set; }
 
-        public List<Item> Inventory = new();
+        public List<Item> Inventory  { get; set; }
 
-        public Statistics Statistics { get; set; }
+    public Statistics Statistics { get; set; }
 
         public int StatisticsId { get; set; }
-
         public Player Player { get; set; }
 
     }

@@ -68,6 +68,9 @@ namespace Wizards.Repository
             modelBuilder.Entity<Player>()
                 .Property(p => p.DateOfBirth)
                 .HasColumnType("date");
+            modelBuilder.Entity<Player>()
+                .HasMany(p => p.Heroes)
+                .WithOne(h => h.Player);
 
 
             modelBuilder.Entity<Hero>()
@@ -180,6 +183,13 @@ namespace Wizards.Repository
             modelBuilder.Entity<ItemAttributes>()
                 .Property(ia => ia.Defense)
                 .IsRequired();
+
+            modelBuilder.Entity<HeroItem>()
+                .HasKey(hi => new { hi.HeroId, hi.ItemId });
+            modelBuilder.Entity<HeroItem>()
+                .HasOne(hi => hi.Hero)
+                .WithMany(h => h.Inventory)
+                .HasForeignKey(hi => hi.HeroId);
         }
     }
 

@@ -8,4 +8,6 @@ public class HeroItem
     public int ItemId { get; set; }
     public Item Item { get; set; }
     public bool InUse { get; set; }
+
+
 }
