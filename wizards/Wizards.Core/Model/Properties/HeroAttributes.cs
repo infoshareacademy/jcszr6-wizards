@@ -2,6 +2,7 @@
 
 public class HeroAttributes
 {
+    public int Id { get; set; }
     public int DailyRewardEnergy { get; set; }
 
     // Offensive
@@ -14,4 +15,6 @@ public class HeroAttributes
     public int CurrentHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
+
+    public Hero Hero { get; set; }
 }

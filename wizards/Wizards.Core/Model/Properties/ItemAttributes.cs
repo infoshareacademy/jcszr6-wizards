@@ -2,6 +2,7 @@
 
 public class ItemAttributes
 {
+    public int Id { get; set; }
     public double ItemEndurance { get; set; }
 
     // Offensive
@@ -14,4 +15,6 @@ public class ItemAttributes
     public int CurrentHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
+
+    public Item Item { get; set; }
 }

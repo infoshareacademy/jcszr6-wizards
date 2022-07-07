@@ -50,7 +50,136 @@ namespace Wizards.Repository
         {
             base.OnModelCreating(modelBuilder);
 
-           //modelBuilder.Entity<Pl>
+            modelBuilder.Entity<Player>()
+                .Property(p => p.Id);
+            modelBuilder.Entity<Player>()
+                .Property(p => p.UserName)
+                .HasMaxLength(maxLength: 30).IsRequired();
+            modelBuilder.Entity<Player>()
+                .HasIndex(p => p.UserName).IsUnique();
+            modelBuilder.Entity<Player>()
+                .Property(p => p.Password)
+                .HasMaxLength(50);
+            modelBuilder.Entity<Player>()
+                .Property(p => p.Email)
+                .HasMaxLength(50);
+            modelBuilder.Entity<Player>()
+                .HasIndex(p => p.Email).IsUnique();
+            modelBuilder.Entity<Player>()
+                .Property(p => p.DateOfBirth)
+                .HasColumnType("date");
+
+
+            modelBuilder.Entity<Hero>()
+                .Property(h => h.Id);
+            modelBuilder.Entity<Hero>()
+                .Property(h => h.NickName)
+                .HasMaxLength(maxLength: 20).IsRequired();
+            modelBuilder.Entity<Hero>()
+                .HasIndex(h => h.NickName).IsUnique();
+            modelBuilder.Entity<Hero>()
+                .Property(h => h.Profession);
+            modelBuilder.Entity<Hero>()
+                .Property(h => h.AvatarImageNumber);
+            modelBuilder.Entity<Hero>()
+                .Property(h => h.Gold);
+            modelBuilder.Entity<Hero>()
+                .HasOne(h => h.Attributes)
+                .WithOne(ha => ha.Hero)
+                .HasForeignKey<Hero>(h => h.AttributesId);
+            modelBuilder.Entity<Hero>()
+                .HasOne(h => h.Statistics)
+                .WithOne(s => s.Hero)
+                .HasForeignKey<Hero>(h => h.StatisticsId);
+
+            modelBuilder.Entity<HeroAttributes>()
+              .Property(ha => ha.Id);
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.DailyRewardEnergy)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.Damage)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.Precision)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.Specialization)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.MaxHealth)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.CurrentHealth)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.Reflex)
+                .IsRequired();
+            modelBuilder.Entity<HeroAttributes>()
+                .Property(ha => ha.Defense)
+                .IsRequired();
+
+            modelBuilder.Entity<Statistics>()
+                .Property(s => s.Id);
+            modelBuilder.Entity<Statistics>()
+                .Property(s => s.RankPoints)
+                .IsRequired();
+            modelBuilder.Entity<Statistics>()
+                .Property(s => s.TotalMatchPlayed)
+                .IsRequired();
+            modelBuilder.Entity<Statistics>()
+                .Property(s => s.TotalMatchWin)
+                .IsRequired();
+            modelBuilder.Entity<Statistics>()
+                .Property(s => s.TotalMatchLoose)
+                .IsRequired();
+
+          
+
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Id);
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Name)
+                .HasMaxLength(maxLength: 20).IsRequired();
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Type);
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Restriction);
+            modelBuilder.Entity<Item>()
+                .Property(i => i.BuyPrice).IsRequired();
+            modelBuilder.Entity<Item>()
+                .Property(i => i.SellPrice).IsRequired();
+            modelBuilder.Entity<Item>()
+                .HasOne(i => i.Attributes)
+                .WithOne(ia => ia.Item)
+                .HasForeignKey<Item>(i => i.AttributesId);
+
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.Id);
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.ItemEndurance)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.Damage)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.Precision)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.Specialization)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.MaxHealth)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.CurrentHealth)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.Reflex)
+                .IsRequired();
+            modelBuilder.Entity<ItemAttributes>()
+                .Property(ia => ia.Defense)
+                .IsRequired();
         }
     }
 

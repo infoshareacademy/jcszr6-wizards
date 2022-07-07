@@ -12,16 +12,18 @@ namespace Wizards.Core.Model
 
         public HeroAttributes Attributes { get; set; }
 
+        public int AttributesId { get; set; }
+
         // Economic
         public int Gold { get; set; }
 
         public List<Item> Inventory = new();
 
         public Statistics Statistics { get; set; }
-        
-        public Hero()
-        {
 
-        }
+        public int StatisticsId { get; set; }
+
+        public Player Player { get; set; }
+
     }
 }
