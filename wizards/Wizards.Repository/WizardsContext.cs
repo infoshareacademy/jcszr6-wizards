@@ -137,7 +137,7 @@ namespace Wizards.Repository
                 .Property(s => s.TotalMatchLoose)
                 .IsRequired();
 
-          
+
 
             modelBuilder.Entity<Item>()
                 .Property(i => i.Id);
@@ -190,6 +190,12 @@ namespace Wizards.Repository
                 .HasOne(hi => hi.Hero)
                 .WithMany(h => h.Inventory)
                 .HasForeignKey(hi => hi.HeroId);
+
+            modelBuilder.Entity<HeroItem>()
+                .HasOne(hi => hi.Item)
+                .WithMany(i => i.Heroes)
+                .HasForeignKey(hi => hi.ItemId);
+
         }
     }
 

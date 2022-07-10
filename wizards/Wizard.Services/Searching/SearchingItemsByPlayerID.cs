@@ -32,11 +32,11 @@
 
                 Console.WriteLine("Przedmioty w inwentarzu");
 
-                hero.Inventory.ForEach(i => Console.WriteLine($"{i.Id}, {i.Name}"));
+                //hero.Inventory.ForEach(i => Console.WriteLine($"{i.Id}, {i.Name}"));
 
                 Console.WriteLine("Przedmioty w ekwipunku");
 
-                hero.Inventory.ForEach(i => Console.WriteLine($"{i.Id}, {i.Name}"));
+                //hero.Inventory.ForEach(i => Console.WriteLine($"{i.Id}, {i.Name}"));
             });
         }
     }
