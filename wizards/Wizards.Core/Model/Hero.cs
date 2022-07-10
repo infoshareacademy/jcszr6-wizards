@@ -1,4 +1,5 @@
 ﻿using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.ManyToManyTables;
 
 namespace Wizards.Core.Model
 {
@@ -17,7 +18,7 @@ namespace Wizards.Core.Model
         // Economic
         public int Gold { get; set; }
 
-        public List<Item> Inventory  { get; set; }
+        public List<HeroItem> Inventory  { get; set; }
 
     public Statistics Statistics { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.ManyToManyTables;
 
 namespace Wizards.Core.Model
 {
@@ -18,7 +19,7 @@ namespace Wizards.Core.Model
         public int BuyPrice { get; set; }
         public int SellPrice { get; set; }
         
-        public List<Hero> Heroes { get; set; }
+        public List<HeroItem> Heroes { get; set; }
 
     }
 }
