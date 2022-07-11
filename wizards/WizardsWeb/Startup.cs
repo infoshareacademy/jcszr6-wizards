@@ -41,6 +41,7 @@ namespace WizardsWeb
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext)
         {
             wizardsContext.Database.Migrate();
+            
 
             if (env.IsDevelopment())
             {

@@ -71,6 +71,7 @@ namespace Wizards.Repository
             modelBuilder.Entity<Player>()
                 .HasMany(p => p.Heroes)
                 .WithOne(h => h.Player);
+            
 
 
             modelBuilder.Entity<Hero>()
