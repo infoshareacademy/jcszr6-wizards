@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Wizards.Repository.Repositories.Text.Enums;
+using Wizards.Repository.TextRepo.Enums;
 
-namespace Wizards.Repository.Repositories.Text
+namespace Wizards.Repository.TextRepo
 {
     public static class TextRepository
     {
@@ -11,7 +11,7 @@ namespace Wizards.Repository.Repositories.Text
 
         static TextRepository()
         {
-            string path = Path.Combine(Environment.CurrentDirectory,"..", "Wizards.Repository", "Repositories", "Text", "Json");
+            string path = Path.Combine(Environment.CurrentDirectory,"..", "Wizards.Repository", "TextRepo", "Json");
 
             ValueErrors = LoadObjectFromFile<Dictionary<ValueErrorsMsg, string>>(Path.Combine(path, "Value Errors.json"));
             RestrictedWords = LoadObjectFromFile<List<string>>(Path.Combine(path, "RestrictedWords.json"));

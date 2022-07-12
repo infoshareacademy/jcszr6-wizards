@@ -1,4 +1,5 @@
-﻿using Wizards.Repository.FileOperations;
+﻿using Wizards.Core.Interfaces;
+using Wizards.Core.Model;
 using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.Settings;
 
@@ -9,24 +10,24 @@ namespace Wizards.Services.Validation
         private readonly PlayerValidationSettings _settings;
         private Dictionary<string, string> _modelStatesData;
         private bool _isValid;
-        private readonly IWizardsRepository _wizardsRepository;
+        private readonly IPlayerRepository _playerRepository;
 
-        public PlayerValidator(IWizardsRepository wizardsRepository)
+        public PlayerValidator(IPlayerRepository playerRepository)
         {
-            _settings = ValidationSettingsRepository.GetPlayersValidationSettings();
+            _settings = ValidationSettingsFactory.GetPlayersValidationSettings();
             _modelStatesData = new Dictionary<string, string>();
-            _wizardsRepository = wizardsRepository;
+            _playerRepository = playerRepository;
         }
 
-        public void ValidateForCreate(Core.Model.Player player)
+        public async Task ValidateForCreate(Player player)
         {
             _isValid = true;
 
             ValidateUserName(player.UserName);
+            await CheckUserNameInUse(player);
             ValidatePassword(player.Password);
-            ValidateEmail(player.Email);
+            await ValidateEmail(player.Email);
             ValidateDateOfBirth(player.DateOfBirth);
-            CheckInUse(player);
 
             if (!_isValid)
             {
@@ -34,11 +35,11 @@ namespace Wizards.Services.Validation
             }
         }
 
-        public void ValidateForUpdate(Core.Model.Player player)
+        public async Task ValidateForUpdate(Player player)
         {
             _isValid = true;
 
-            ValidateEmail(player.Email);
+            await ValidateEmail(player.Email);
             ValidateDateOfBirth(player.DateOfBirth);
 
             if (!_isValid)
@@ -47,7 +48,7 @@ namespace Wizards.Services.Validation
             }
         }
 
-        public void ValidateForPasswordUpdate(Core.Model.Player player)
+        public void ValidateForPasswordUpdate(Player player)
         {
             _isValid = true;
 
@@ -89,7 +90,7 @@ namespace Wizards.Services.Validation
             }
         }
 
-        private void ValidateEmail(string playerEmail)
+        private async Task ValidateEmail(string playerEmail)
         {
             foreach (var task in _settings.EmailTasks)
             {
@@ -102,6 +103,16 @@ namespace Wizards.Services.Validation
                     return;
                 }
             }
+            
+            var inUseEmail = _settings.AlredyInUseTask.Validate(playerEmail,
+                await _playerRepository.GetAllEmails());
+
+            if (!inUseEmail.IsValid)
+            {
+                _isValid = false;
+                _modelStatesData.Add("Email", $"Email {inUseEmail.Message}");
+            }
+
         }
 
         private void ValidateDateOfBirth(DateTime playerDateOfBirth)
@@ -118,24 +129,15 @@ namespace Wizards.Services.Validation
             }
         }
 
-        private void CheckInUse(Core.Model.Player player)
+        private async Task CheckUserNameInUse(Player player)
         {
             var inUseUsername = _settings.AlredyInUseTask.Validate(player.UserName,
-                _wizardsRepository.GetAll().Select(p => p.UserName).ToList());
+                await _playerRepository.GetAllUserNames());
 
             if (!inUseUsername.IsValid)
             {
                 _isValid = false;
                 _modelStatesData.Add("UserName", $"User Name {inUseUsername.Message}");
-            }
-
-            var inUseEmail = _settings.AlredyInUseTask.Validate(player.Email,
-                _wizardsRepository.GetAll().Select(p => p.Email).ToList());
-
-            if (!inUseEmail.IsValid)
-            {
-                _isValid = false;
-                _modelStatesData.Add("Email", $"Email {inUseEmail.Message}");
             }
         }
     }

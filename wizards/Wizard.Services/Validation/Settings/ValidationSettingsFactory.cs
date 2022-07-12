@@ -1,16 +1,16 @@
-﻿using Wizards.Repository.Repositories.Text;
-using Wizards.Repository.Repositories.Text.Enums;
+﻿using Wizards.Repository.TextRepo;
+using Wizards.Repository.TextRepo.Enums;
 using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.ValidationTasks;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
 namespace Wizards.Services.Validation.Settings
 {
-    public static class ValidationSettingsRepository
+    public static class ValidationSettingsFactory
     {
         private static PlayerValidationSettings _playerSettings;
 
-        static ValidationSettingsRepository()
+        static ValidationSettingsFactory()
         {
             _playerSettings = new PlayerValidationSettings()
             {
@@ -20,14 +20,14 @@ namespace Wizards.Services.Validation.Settings
                     new StringMinLength(3),
                     new StringMaxLength(20),
                     new RestrictedWords(),
-                    new AllowedCharacters("abcdefghijklmnopqrstuvwxyząàáâäćçęèéêëíîïłńñóôöùúûüźż1234567890-_"),
+                    new AllowedCharacters("abcdefghijklmnopqrstuvwxyz1234567890-_"),
                 },
                 AlredyInUseTask = new AlredyInUse(),
                 PasswordTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
                     new StringMinLength(8),
-                    new AllowedCharacters("abcdefghijklmnopqrstuvwxyząàáâäćçęèéêëíîïłńñóôöùúûüźż1234567890,.;:?!'@#$%^&*()_+-=`~"),
+                    new AllowedCharacters("abcdefghijklmnopqrstuvwxyz1234567890,.;:?!'@#$%^&*()_+-=`~"),
                     new IsPasswordHardEnough()
                 },
                 EmailTasks = new List<IStringValidationTask>()
@@ -46,38 +46,6 @@ namespace Wizards.Services.Validation.Settings
         public static PlayerValidationSettings GetPlayersValidationSettings()
         {
             return _playerSettings;
-        }
-    }
-
-    public class IsPasswordHardEnough : IStringValidationTask
-    {
-        public ValidationState Validate(string value)
-        {
-            bool hasOneUpper = true;
-            bool hasOneDigit = true;
-            bool hasOneSpecial = true;
-
-            if (!value.Any(c => char.IsUpper(c)))
-            {
-                hasOneUpper = false;
-            }
-
-            if (!value.Any(c => char.IsDigit(c)))
-            {
-                hasOneDigit = false;
-            }
-
-            if (!value.Any(c => char.IsPunctuation(c) || char.IsSymbol(c)))
-            {
-                hasOneSpecial = false;
-            }
-
-            if (hasOneUpper && hasOneDigit && hasOneSpecial)
-            {
-                return new ValidationState(true);
-            }
-
-            return new ValidationState(false, TextRepository.Get(ValueErrorsMsg.PasswordNotHard));
         }
     }
 }

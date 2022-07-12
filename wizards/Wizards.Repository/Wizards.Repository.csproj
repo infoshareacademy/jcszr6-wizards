@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Repositories\Text\Json\RestrictedWords.json" />
-    <None Remove="Repositories\Text\Json\Value Errors.json" />
+    <None Remove="TextRepo\Json\RestrictedWords.json" />
+    <None Remove="TextRepo\Json\Value Errors.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Repositories\Text\Json\RestrictedWords.json">
+    <Content Include="TextRepo\Json\RestrictedWords.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Repositories\Text\Json\Value Errors.json">
+    <Content Include="TextRepo\Json\Value Errors.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -36,6 +36,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Wizards.Core\Wizards.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repository\" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using Wizards.Repository.Repositories.Text;
-using Wizards.Repository.Repositories.Text.Enums;
+﻿using Wizards.Repository.TextRepo;
+using Wizards.Repository.TextRepo.Enums;
 using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
@@ -21,6 +21,7 @@ namespace Wizards.Services.Validation.ValidationTasks
     public partial class StringMinLength : IStringValidationTask
     {
         public int MinLength { get; set; }
+
         public StringMinLength(int minLength)
         {
             MinLength = minLength;
@@ -36,9 +37,11 @@ namespace Wizards.Services.Validation.ValidationTasks
             return new ValidationState(true);
         }
     }
+
     public partial class StringMaxLength : IStringValidationTask
     {
         public int MaxLength { get; set; }
+
         public StringMaxLength(int maxLength)
         {
             MaxLength = maxLength;
@@ -54,14 +57,19 @@ namespace Wizards.Services.Validation.ValidationTasks
             return new ValidationState(true);
         }
     }
+
     public class AllowedCharacters : IStringValidationTask
     {
         public string AllowedChars { get; set; }
+
         public AllowedCharacters(string allowedChars)
         {
             AllowedChars = allowedChars;
         }
-        public AllowedCharacters() { }
+
+        public AllowedCharacters()
+        {
+        }
 
         public ValidationState Validate(string value)
         {
@@ -70,7 +78,7 @@ namespace Wizards.Services.Validation.ValidationTasks
 
             if (!isValid)
             {
-                var characters = $"[ {string.Join(" ",value.Where(c => !AllowedChars.Contains(c)).ToList())} ]";
+                var characters = $"[ {string.Join(" ", value.Where(c => !AllowedChars.Contains(c)).ToList())} ]";
                 return new ValidationState(false,
                     $"{TextRepository.Get(ValueErrorsMsg.HasRestrictedCharacter)}{characters}");
             }
@@ -102,13 +110,13 @@ namespace Wizards.Services.Validation.ValidationTasks
         {
             int dotPosition = 0;
             int atPosition = 0;
-            
-            if (value.Contains("@") && value.Contains("."))
+
+            if (value.Contains('@') && value.Contains('.'))
             {
-                atPosition = value.ToLower().IndexOf("@");
-                dotPosition = value.ToLower().IndexOf(".", atPosition + 1);
+                atPosition = value.ToLower().IndexOf('@');
+                dotPosition = value.ToLower().IndexOf('.', atPosition + 1);
             }
-            
+
             var isValid = (dotPosition < value.Length &&
                            dotPosition > 0 &&
                            atPosition > 0);
@@ -122,7 +130,7 @@ namespace Wizards.Services.Validation.ValidationTasks
         }
     }
 
-    public class AlredyInUse :IStringAlredyInUse
+    public class AlredyInUse : IStringAlredyInUse
     {
         public ValidationState Validate(string value, List<string> usedValues)
         {
@@ -136,5 +144,37 @@ namespace Wizards.Services.Validation.ValidationTasks
             return new ValidationState(true);
         }
 
+    }
+
+    public class IsPasswordHardEnough : IStringValidationTask
+    {
+        public ValidationState Validate(string value)
+        {
+            bool hasOneUpper = true;
+            bool hasOneDigit = true;
+            bool hasOneSpecial = true;
+
+            if (!value.Any(c => char.IsUpper(c)))
+            {
+                hasOneUpper = false;
+            }
+
+            if (!value.Any(c => char.IsDigit(c)))
+            {
+                hasOneDigit = false;
+            }
+
+            if (!value.Any(c => char.IsPunctuation(c) || char.IsSymbol(c)))
+            {
+                hasOneSpecial = false;
+            }
+
+            if (hasOneUpper && hasOneDigit && hasOneSpecial)
+            {
+                return new ValidationState(true);
+            }
+
+            return new ValidationState(false, TextRepository.Get(ValueErrorsMsg.PasswordNotHard));
+        }
     }
 }

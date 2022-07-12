@@ -3,11 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wizards.Repository.FileOperations;
-using Wizards.Services.Player;
 using Wizards.Services.Validation;
 using Wizards.Repository;
 using Microsoft.EntityFrameworkCore;
+using Wizards.Core.Interfaces;
+using Wizards.Repository.Repository;
+using Wizards.Services.PlayerService;
 
 namespace WizardsWeb
 {
@@ -25,15 +26,14 @@ namespace WizardsWeb
         {
             services.AddControllersWithViews();
             
+
+            services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IPlayerService, PlayerService>();
-            services.AddTransient<IWizardsRepository, WizardsRepository>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
 
-            var connectionString = Configuration.GetConnectionString("WizardDatabase");
-
             
-
-
+            
+            var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
         }
 
