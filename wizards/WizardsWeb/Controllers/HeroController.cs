@@ -2,12 +2,20 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Wizards.Services.HeroService;
 using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers
 {
     public class HeroController : Controller
     {
+        private readonly IHeroService _heroService;
+
+        public HeroController(IHeroService heroService)
+        {
+            _heroService = heroService;
+        }
         // GET: HeroController
         public async Task<ActionResult> Index()
         {
@@ -17,7 +25,8 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            return View();
+            var hero = await _heroService.Get(id);
+            return View(hero);
         }
 
         // GET: HeroController/Create
@@ -57,6 +66,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
+                await _heroService.Add(heroCreate.PlayerId, hero);
                 return RedirectToAction(nameof(Details), new {id = hero.Id});
             }
             catch

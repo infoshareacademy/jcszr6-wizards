@@ -40,4 +40,9 @@ public class HeroRepository : IHeroRepository
         _wizardsContext.Heroes.Remove(hero);
         await _wizardsContext.SaveChangesAsync();
     }
+
+    public Task<List<string>> GetAllNickNames()
+    {
+        return _wizardsContext.Heroes.Select(h => h.NickName).ToListAsync();
+    }
 }

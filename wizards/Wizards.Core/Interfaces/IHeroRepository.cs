@@ -9,4 +9,5 @@ public interface IHeroRepository
     Task Add(Player player, Hero hero);
     Task Update(Hero hero);
     Task Remove(Hero hero);
+    Task<List<string>> GetAllNickNames();
 }

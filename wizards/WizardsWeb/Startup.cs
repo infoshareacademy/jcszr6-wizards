@@ -8,6 +8,7 @@ using Wizards.Repository;
 using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Repository.Repository;
+using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 
 namespace WizardsWeb
@@ -31,7 +32,9 @@ namespace WizardsWeb
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
 
-            
+            services.AddTransient<IHeroRepository, HeroRepository>();
+            services.AddTransient<IHeroService, HeroService>();
+            services.AddTransient<IHeroValidator, HeroValidator>();
             
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
