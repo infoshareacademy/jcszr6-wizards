@@ -1,0 +1,45 @@
+﻿@model WizardsWeb.ModelViews.HeroCreateModelView
+
+@{
+    ViewData["Title"] = "Set Profession";
+}
+
+<h1>Create New Hero</h1>
+<br/>
+<h3>Choose Profession of your hero</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <h5>Sorcerer</h5>
+        <p>Sorcerers are using the power of natural elements to deal damage and protect themselves. They are using staffs, spellbooks or sceprets.</p>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SetProfession">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="PlayerId" hidden="true" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Profession" class="control-label"></label>
+                <select asp-for="Profession" class="form-control">
+                    <option value="Sorcerer">Sorcerer</option>
+                </select>
+                <span asp-validation-for="Profession" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Set Profession" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.PlayerId">Leave Creator</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

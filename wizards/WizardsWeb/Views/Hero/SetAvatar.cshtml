@@ -1,0 +1,47 @@
+﻿@model WizardsWeb.ModelViews.HeroCreateModelView
+
+@{
+    ViewData["Title"] = "Set Avatar";
+}
+
+<h1>Create New Hero</h1>
+<br/>
+<h3>Choose Avatar of your hero</h3>
+<hr />
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SetAvatar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="PlayerId" hidden="true" />
+                <input asp-for="Profession" hidden="true" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AvatarImageNumber" class="control-label"></label>
+                <select asp-for="AvatarImageNumber" class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <span asp-validation-for="AvatarImageNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Set Avatar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.PlayerId">Leave Creator</a>
+    <br/>
+    <a asp-action="SetProfession" asp-route-heroCreate="Model">Back to Profession choice</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

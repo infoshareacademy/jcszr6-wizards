@@ -9,6 +9,8 @@ namespace WizardsWeb.ModelViews;
 
 public class HeroCreateModelView
 {
+    public int PlayerId { get; set; }
+    
     [Required]
     [MinLength(3)]
     [MaxLength(20)]
