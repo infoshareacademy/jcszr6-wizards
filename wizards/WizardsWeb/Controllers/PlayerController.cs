@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Wizards.Services.Player;
+using Wizards.Services.PlayerService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews;
 
@@ -8,7 +9,7 @@ namespace WizardsWeb.Controllers
 {
     public class PlayerController : Controller
     {
-        private IPlayerService _playerService;
+        private readonly IPlayerService _playerService;
 
         public PlayerController(IPlayerService playerService)
         {
@@ -16,9 +17,9 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            var player = _playerService.Get(id);
+            var player = await _playerService.Get(id);
             var playerDetails = new PlayerDetailsModelView(player);
             return View(playerDetails);
         }
@@ -32,7 +33,7 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(PlayerCreateModelView playerForCreate)
+        public async Task<ActionResult> Create(PlayerCreateModelView playerForCreate)
         {
             if (!ModelState.IsValid)
             {
@@ -43,7 +44,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                _playerService.Add(player);
+                await _playerService.Add(player);
                 return RedirectToAction(nameof(Details), new { id = player.Id });
             }
             catch (InvalidModelException exception)
@@ -58,9 +59,9 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var player = _playerService.Get(id);
+            var player = await _playerService.Get(id);
             var playerEdit = new PlayerEditModelView(player);
             return View(playerEdit);
         }
@@ -68,9 +69,9 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(PlayerEditModelView playerEdit)
+        public async Task<ActionResult> Edit(PlayerEditModelView playerEdit)
         {
-            var userName = _playerService.Get(playerEdit.Id).UserName;
+            var userName = (await _playerService.Get(playerEdit.Id)).UserName;
             playerEdit.UserName = userName;
             var player = playerEdit.ToPlayer();
 
@@ -81,10 +82,10 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                _playerService.Update(player.Id, player);
+                await _playerService.Update(player.Id, player);
 
-                var playerToDetails = _playerService.Get(player.Id);
-                
+                var playerToDetails = await _playerService.Get(player.Id);
+
                 return RedirectToAction(nameof(Details), new { id = playerToDetails.Id });
             }
             catch (InvalidModelException exception)
@@ -99,9 +100,9 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/EditPassword/5
-        public ActionResult EditPassword(int id)
+        public async Task<ActionResult> EditPassword(int id)
         {
-            var player = _playerService.Get(id);
+            var player = await _playerService.Get(id);
             var passwordChage = new PasswordChangeModelView(player);
             return View(passwordChage);
         }
@@ -109,9 +110,9 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/EditPassword/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditPassword(PasswordChangeModelView passwordChange)
+        public async Task<ActionResult> EditPassword(PasswordChangeModelView passwordChange)
         {
-            var playerInfo = _playerService.Get(passwordChange.Id);
+            var playerInfo = await _playerService.Get(passwordChange.Id);
             passwordChange.UserName = playerInfo.UserName;
             var player = passwordChange.ToPlayer();
 
@@ -128,7 +129,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                _playerService.UpdatePassword(player.Id, player);
+                await _playerService.UpdatePassword(player.Id, player);
                 return RedirectToAction(nameof(Edit), new { id = player.Id });
             }
             catch (InvalidModelException exception)
@@ -144,9 +145,9 @@ namespace WizardsWeb.Controllers
 
 
         // GET: PlayerController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var player = _playerService.Get(id);
+            var player = await _playerService.Get(id);
             var playerForDelete = new PlayerDeleteModelView(player);
             return View(playerForDelete);
         }
@@ -154,14 +155,14 @@ namespace WizardsWeb.Controllers
         // POST: PlayerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(PlayerDeleteModelView playerForDelete)
+        public async Task<ActionResult> Delete(PlayerDeleteModelView playerForDelete)
         {
-            var playerInfo = _playerService.Get(playerForDelete.Id);
+            var playerInfo = await _playerService.Get(playerForDelete.Id);
             if (playerInfo.Password != playerForDelete.PasswordToConfirmDelete)
             {
                 ModelState.AddModelError("PasswordToConfirmDelete", "Invalid Password!");
             }
-            
+
             playerForDelete = new PlayerDeleteModelView(playerInfo);
 
             if (!ModelState.IsValid)
@@ -171,7 +172,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                _playerService.Delete(playerForDelete.Id);
+                await _playerService.Delete(playerForDelete.Id);
                 return RedirectToAction(nameof(Index), "Home");
             }
             catch

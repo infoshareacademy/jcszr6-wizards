@@ -1,4 +1,4 @@
-﻿namespace Wizards.Repository.Repositories.Text.Enums
+﻿namespace Wizards.Repository.TextRepo.Enums
 {
     public enum ValueErrorsMsg
     {

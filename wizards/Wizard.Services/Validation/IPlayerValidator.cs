@@ -1,9 +1,11 @@
-﻿namespace Wizards.Services.Validation
+﻿using Wizards.Core.Model;
+
+namespace Wizards.Services.Validation
 {
     public interface IPlayerValidator
     {
-        void ValidateForCreate(Core.Model.Player player);
-        void ValidateForUpdate(Core.Model.Player player);
-        void ValidateForPasswordUpdate(Core.Model.Player player);
+        Task ValidateForCreate(Player player);
+        Task ValidateForUpdate(Player player);
+        void ValidateForPasswordUpdate(Player player);
     }
 }

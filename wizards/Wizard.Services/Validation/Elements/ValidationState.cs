@@ -1,5 +1,5 @@
-﻿using Wizards.Repository.Repositories.Text;
-using Wizards.Repository.Repositories.Text.Enums;
+﻿using Wizards.Repository.TextRepo;
+using Wizards.Repository.TextRepo.Enums;
 
 namespace Wizards.Services.Validation.Elements
 {

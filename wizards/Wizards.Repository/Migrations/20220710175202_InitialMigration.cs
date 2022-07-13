@@ -229,7 +229,7 @@ namespace Wizards.Repository.Migrations
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Adam17', 'Adam17_123', 'adam17@wizards.com', '2004-07-08T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Komandos99', 'Komandos99_123', 'komandos99@wizards.com', '1985-03-22T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kajtek', 'Kajtek_123', 'kajtek@wizards.com', '1995-03-09T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kr�lArtur', 'Kr�lArtur_123', 'kr�lartur@wizards.com', '1983-02-17T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('KrolArtur', 'KrolArtur_123', 'krolartur@wizards.com', '1983-02-17T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Lamusek', 'Lamusek_123', 'lamusek@wizards.com', '2001-10-24T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Mordeczka11', 'Mordeczka11_123', 'mordeczka11@wizards.com', '1984-01-25T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Bartosz28', 'Bartosz28_123', 'bartosz28@wizards.com', '1994-12-23T00:00:00'); " +
@@ -260,10 +260,10 @@ namespace Wizards.Repository.Migrations
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('YakushiMamushi', 'YakushiMamushi_123', 'yakushimamushi@wizards.com', '1985-01-16T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Laleczka', 'Laleczka_123', 'laleczka@wizards.com', '2006-03-17T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Calineczka', 'Calineczka_123', 'calineczka@wizards.com', '2004-06-28T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kubu�Puchatek', 'Kubu�Puchatek_123', 'kubu�puchatek@wizards.com', '2001-01-21T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Londy�skiMagazynier', 'Londy�skiMagazynier_123', 'londy�skimagazynier@wizards.com', '1995-08-01T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('KubusPuchatek', 'KubusPuchatek_123', 'kubuspuchatek@wizards.com', '2001-01-21T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('LondynskiMagazynier', 'LondynskiMagazynier_123', 'londynskimagazynier@wizards.com', '1995-08-01T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kopacz', 'Kopacz_123', 'kopacz@wizards.com', '1989-02-14T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Bia�yKogut', 'Bia�yKogut_123', 'bia�ykogut@wizards.com', '1983-05-24T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('BialyKogut', 'Bia�yKogut_123', 'bialykogut@wizards.com', '1983-05-24T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Grabarz', 'Grabarz_123', 'grabarz@wizards.com', '2009-03-08T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Anastazja', 'Anastazja_123', 'anastazja@wizards.com', '2005-05-08T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Mareczek', 'Mareczek_123', 'mareczek@wizards.com', '1997-03-02T00:00:00'); " +
@@ -282,16 +282,16 @@ namespace Wizards.Repository.Migrations
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('SkrzypekNaDachu', 'SkrzypekNaDachu_123', 'skrzypeknadachu@wizards.com', '1999-08-03T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Szparka29', 'Szparka29_123', 'szparka29@wizards.com', '2000-09-01T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Lemur', 'Lemur_123', 'lemur@wizards.com', '2005-01-19T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kr�lJulian', 'Kr�lJulian_123', 'kr�ljulian@wizards.com', '1987-10-19T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('KrolJulian', 'KrolJulian_123', 'kroljulian@wizards.com', '1987-10-19T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Merlin', 'Merlin_123', 'merlin@wizards.com', '1997-05-11T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Merlin19', 'Merlin19_123', 'merlin19@wizards.com', '2008-09-28T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Papie�LeonVI', 'Papie�LeonVI_123', 'papie�leonvi@wizards.com', '1986-01-21T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('PapiezLeonVI', 'PapiezLeonVI_123', 'papiezleonvi@wizards.com', '1986-01-21T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Dastan', 'Dastan_123', 'dastan@wizards.com', '2000-01-19T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Wolontariusz', 'Wolontariusz_123', 'wolontariusz@wizards.com', '2002-07-09T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kabanosek77', 'Kabanosek77_123', 'kabanosek77@wizards.com', '2003-05-02T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Ka�asznikXD', 'Ka�asznikXD_123', 'ka�asznikxd@wizards.com', '1995-11-06T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('KalasznikXD', 'KalasznikXD_123', 'kalasznikxd@wizards.com', '1995-11-06T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Mistrzunio', 'Mistrzunio_123', 'mistrzunio@wizards.com', '2007-05-24T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('WielkiDr�g19', 'WielkiDr�g19_123', 'wielkidr�g19@wizards.com', '1997-09-28T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('WielkiDrag19', 'WielkiDrag19_123', 'wielkidrag19@wizards.com', '1997-09-28T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Gargamel', 'Gargamel_123', 'gargamel@wizards.com', '1980-02-12T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('UrukHai', 'UrukHai_123', 'urukhai@wizards.com', '1984-06-11T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Artemida', 'Artemida_123', 'artemida@wizards.com', '1981-12-24T00:00:00'); " +
@@ -304,12 +304,12 @@ namespace Wizards.Repository.Migrations
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Witkacy', 'Witkacy_123', 'witkacy@wizards.com', '1994-07-10T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Wokulski', 'Wokulski_123', 'wokulski@wizards.com', '1991-11-08T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Maro', 'Maro_123', 'maro@wizards.com', '2010-04-05T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('JanPawe�II', 'JanPawe�II_123', 'janpawe�ii@wizards.com', '1983-03-19T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('JanPawelII', 'JanPawelII_123', 'janpawelii@wizards.com', '1983-03-19T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Szymonek', 'Szymonek_123', 'szymonek@wizards.com', '1986-03-20T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Cyklop', 'Cyklop_123', 'cyklop@wizards.com', '1988-11-20T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Krystian', 'Krystian_123', 'krystian@wizards.com', '2000-03-01T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('FryderykChopin', 'FryderykChopin_123', 'fryderykchopin@wizards.com', '1988-03-05T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Jad�Ursusem', 'Jad�Ursusem_123', 'jad�ursusem@wizards.com', '1990-05-21T00:00:00'); " +
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('JadeUrsusem', 'JadeUrsusem_123', 'jadeursusem@wizards.com', '1990-05-21T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Niobe', 'Niobe_123', 'niobe@wizards.com', '1992-10-23T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Gagarin', 'Gagarin_123', 'gagarin@wizards.com', '1986-04-01T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kurczaaaak', 'Kurczaaaak_123', 'kurczaaaak@wizards.com', '2003-06-07T00:00:00'); " +
