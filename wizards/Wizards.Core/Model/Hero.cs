@@ -20,7 +20,7 @@ namespace Wizards.Core.Model
 
         public List<HeroItem> Inventory  { get; set; }
 
-    public Statistics Statistics { get; set; }
+        public Statistics Statistics { get; set; }
 
         public int StatisticsId { get; set; }
         public Player Player { get; set; }
