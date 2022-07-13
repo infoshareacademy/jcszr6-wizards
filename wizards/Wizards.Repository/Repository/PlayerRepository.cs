@@ -19,7 +19,7 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players.ToListAsync();
     }
 
-    public async Task<Player> Get(int id)
+    public async Task<Player?> Get(int id)
     {
         return await _wizardsContext.Players.FindAsync(id);
     }
