@@ -14,10 +14,10 @@
     <div class="row">
         @for (int i = 1; i <= 7; i++)
         {
-            var image = $"Avatars/Wizard-{i}.png";
+            var image = $"Images/Hero/Avatars/Wizard-{i}.png";
             <div class="col-sm-3">
                 <div class="row" align="center">
-                    <img src="@image" width="210" height="280"/>
+                    <img src="~/@image" width="210" height="280"/>
                 </div>
                 <div class="row">
                     <div align="center"><input asp-for="AvatarImageNumber" type="radio" value="@i"/></div>

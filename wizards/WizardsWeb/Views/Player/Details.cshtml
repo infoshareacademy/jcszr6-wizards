@@ -5,17 +5,16 @@
     ViewData["Title"] = $"Player: {Model.UserName}";
 }
 
-<div>
-    <div class="row">
-        <div class="col-sm-4">
-            <partial name="_PlayerInfo" model="Model"/>
-        </div>
-        <div class="col-sm-6">
-            <partial name="_PlayersHeroes" model="Model" />
-        </div>
-    </div>
 
+<div class="row">
+    <div class="col-sm-4">
+        <partial name="_PlayerInfo" model="Model" />
+    </div>
+    <div class="col-sm-8">
+        <partial name="_PlayersHeroes" model="Model" />
+    </div>
 </div>
+
 
 <div>
     <a asp-controller="Home" asp-action="Index">Back to Home Page</a>
