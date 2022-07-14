@@ -16,12 +16,16 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task<List<Player>> GetAll()
     {
-        return await _wizardsContext.Players.ToListAsync();
+        return await _wizardsContext.Players
+            .Include(p => p.Heroes)
+            .ToListAsync();
     }
 
     public async Task<Player?> Get(int id)
     {
-        return await _wizardsContext.Players.FindAsync(id);
+        return await _wizardsContext.Players
+            .Include(p => p.Heroes)
+            .SingleOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task Add(Player player)

@@ -55,12 +55,13 @@ namespace Wizards.Services.Validation.Settings
                 },
                 AvatarTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(1, 5)
+                    new NumberRange(1, 7)
                 },
                 ProfessionTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 1)
-                }
+                },
+                AlredyInUseTask = new AlredyInUse()
             };
         }
 

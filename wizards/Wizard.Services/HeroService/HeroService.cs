@@ -22,7 +22,26 @@ public class HeroService : IHeroService
     public async Task Add(int playerId, Hero hero)
     {
         await _heroValidator.ValidateForCreate(hero);
-        
+        hero.Gold = 0;
+        hero.Attributes = new HeroAttributes()
+        {
+            Damage = 10,
+            Precision = 5,
+            Specialization = 0,
+            DailyRewardEnergy = 10,
+            MaxHealth = 25,
+            Defense = 0,
+            Reflex = 0
+        };
+
+        hero.Statistics = new Statistics()
+        {
+            RankPoints = 0,
+            TotalMatchPlayed = 0,
+            TotalMatchLoose = 0,
+            TotalMatchWin = 0
+        };
+
         var player = await _playerService.Get(playerId);
         
         await _heroRepository.Add(player, hero);

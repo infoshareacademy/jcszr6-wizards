@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Wizards.Core.Model.Enums;
 using Wizards.Services.HeroService;
+using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers
@@ -32,8 +34,12 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Create
         public ActionResult StartCreation(int playerId)
         {
-            ModelState.Clear();
-            return View("SetProfession", new HeroCreateModelView(){PlayerId = playerId});
+            return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId });
+        }
+
+        public ActionResult SetProfessionView(int playerId, HeroProfession profession)
+        {
+            return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId, Profession = profession });
         }
 
         [HttpPost]
@@ -44,9 +50,14 @@ namespace WizardsWeb.Controllers
             return View("SetAvatar", heroCreate);
         }
 
+        public ActionResult SetAvatarView(int playerId, HeroProfession profession, int avatar)
+        {
+            return View("SetAvatar", new HeroCreateModelView() { PlayerId = playerId, Profession = profession, AvatarImageNumber = avatar});
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SetAvatar(HeroCreateModelView heroCreate)
+        public ActionResult SetAvatar(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
             return View("Create", heroCreate);
@@ -67,10 +78,15 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Add(heroCreate.PlayerId, hero);
-                return RedirectToAction(nameof(Details), new {id = hero.Id});
+                return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
-            catch
+            catch (InvalidModelException exception)
             {
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError(data.Key, data.Value);
+                }
+
                 return View(heroCreate);
             }
         }
