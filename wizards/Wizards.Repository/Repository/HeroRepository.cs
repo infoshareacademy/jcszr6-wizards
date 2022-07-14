@@ -20,7 +20,10 @@ public class HeroRepository : IHeroRepository
 
     public async Task<Hero?> Get(int id)
     {
-        return await _wizardsContext.Heroes.FindAsync(id);
+        return await _wizardsContext.Heroes.Include(h => h.Attributes)
+            .Include(h => h.Statistics)
+            .Include(h => h.Inventory)
+            .SingleOrDefaultAsync(h => h.Id == id);
     }
 
     public async Task Add(Player player, Hero hero)

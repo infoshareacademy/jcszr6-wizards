@@ -1,0 +1,55 @@
+﻿@model WizardsWeb.ModelViews.HeroDeleteModelView
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete Hero</h1>
+<br/>
+<h3 class="alert-danger">Are you sure you want to delete @Model.NickName?</h3>
+<h4 class="alert-danger">All progress made on this character will be lost!</h4>
+<hr />
+
+<div>
+    <h4>HeroDeleteModelView</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            <label asp-for="NickName">Nick Name</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.NickName
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="Statistics.RankPoints">Earned Rank Points</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Statistics.RankPoints
+        </dd>
+        <dt class = "col-sm-2">
+            <label asp-for="Statistics.TotalMatchPlayed">Total Match Played</label>
+        </dt>
+        <dd class = "col-sm-10">
+            @Model.Statistics.TotalMatchPlayed
+        </dd>
+        <dt class = "col-sm-2">
+            <label>Win Ratio</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.WinRatio()
+        </dd>
+
+    </dl>
+    
+    <form asp-action="Delete">
+        <div class="form-group">
+            <input asp-for="Id" hidden="true"/>
+            <input asp-for="PlayerId" hidden="true"/>
+            
+            <input asp-for="ConfirmNickName" class="form-control"/>
+            <span asp-validation-for="ConfirmNickName" class="text-danger"></span>
+        </div>
+        <input type="submit" value="Delete" class="btn btn-danger"/> |
+        <a asp-action="Details" asp-controller="Player" asp-route-id="@Model.PlayerId">Cancel</a>
+    </form>
+</div>

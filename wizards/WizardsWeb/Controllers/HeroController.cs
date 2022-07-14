@@ -113,23 +113,37 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id, int playerId)
         {
-            return View();
+            var hero = await _heroService.Get(id);
+            var heroDelete = new HeroDeleteModelView(hero);
+            heroDelete.PlayerId = playerId;
+            return View(heroDelete);
         }
 
         // POST: HeroController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
         {
+            var heroOriginalModel = await _heroService.Get(heroDelete.Id);
+
+            if (heroOriginalModel.NickName != heroDelete.ConfirmNickName)
+            {
+                ModelState.AddModelError("ConfirmNickName", "Invalid Nick Name!");
+                heroDelete.Statistics = heroOriginalModel.Statistics;
+                heroDelete.NickName = heroOriginalModel.NickName;
+                return View(heroDelete);
+            }
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _heroService.Delete(heroDelete.Id);
+                return RedirectToAction(nameof(Details), "Player", new { id = heroDelete.PlayerId});
             }
             catch
             {
-                return View();
+                return View(heroDelete);
             }
         }
     }

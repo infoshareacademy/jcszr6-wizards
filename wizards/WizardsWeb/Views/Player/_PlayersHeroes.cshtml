@@ -36,7 +36,7 @@
                 </td>
                 <td>
                     <a type="button" class="btn btn-primary" asp-controller="Hero" asp-action="Details" asp-route-id="@hero.Id">Play this Hero</a> 
-                    <a type="button" class="btn btn-danger" asp-controller="Hero" asp-action="Delete" asp-route-id="@hero.Id">Delete</a>
+                    <a type="button" class="btn btn-danger" asp-controller="Hero" asp-action="Delete" asp-route-id="@hero.Id" asp-route-playerId="@Model.Id">Delete</a>
                 </td>
             </tr>
         }
