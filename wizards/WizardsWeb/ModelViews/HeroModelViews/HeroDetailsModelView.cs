@@ -23,6 +23,8 @@ public class HeroDetailsModelView
         this.Profession = hero.Profession;
         this.AvatarImageNumber = hero.AvatarImageNumber;
         this.Gold = hero.Gold;
+        this.Statistics = new StatisticsModelView(hero.Statistics);
+        this.Attributes = new HeroAttributesModelView(hero.Attributes);
     }
 
     public string GetWinRatio()

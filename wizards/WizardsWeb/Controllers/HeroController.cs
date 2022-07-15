@@ -25,10 +25,11 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details(int id, int playerId)
         {
             var hero = await _heroService.Get(id);
-            return View(hero);
+            var heroDetails = new HeroDetailsModelView(hero) {PlayerId = playerId};
+            return View(heroDetails);
         }
 
         // GET: HeroController/Create
@@ -78,7 +79,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Add(heroCreate.PlayerId, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                return RedirectToAction(nameof(Details), new { id = hero.Id, playerId = heroCreate.PlayerId });
             }
             catch (InvalidModelException exception)
             {

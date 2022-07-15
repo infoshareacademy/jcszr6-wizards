@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Wizards.Core.Model;
 
 namespace WizardsWeb.ModelViews.Properties;
 
@@ -18,6 +19,14 @@ public class StatisticsModelView
     [DisplayFormat(DataFormatString = "{0:##,###}")]
     public int TotalMatchLoose { get; set; }
 
+    public StatisticsModelView(Statistics statistics)
+    {
+        Id = statistics.Id;
+        RankPoints = statistics.RankPoints;
+        TotalMatchPlayed = statistics.TotalMatchPlayed;
+        TotalMatchWin = statistics.TotalMatchWin;
+        TotalMatchLoose = statistics.TotalMatchLoose;
+    }
 
     public string GetWinRatio()
     {
