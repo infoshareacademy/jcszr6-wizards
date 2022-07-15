@@ -22,14 +22,4 @@ public class HeroCreateModelView
     public int AvatarImageNumber { get; set; }
 
     public HeroCreateModelView() { }
-
-    public Hero ToHero()
-    {
-        return new Hero()
-        {
-            NickName = this.NickName,
-            AvatarImageNumber = this.AvatarImageNumber,
-            Profession = this.Profession,
-        };
-    }
 }

@@ -1,22 +1,27 @@
 ﻿using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
 using Wizards.Services.HeroService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews;
+using WizardsWeb.ModelViews.Properties;
 
 namespace WizardsWeb.Controllers
 {
     public class HeroController : Controller
     {
         private readonly IHeroService _heroService;
+        private readonly IMapper _mapper;
 
-        public HeroController(IHeroService heroService)
+        public HeroController(IHeroService heroService, IMapper mapper)
         {
             _heroService = heroService;
+            _mapper = mapper;
         }
         // GET: HeroController
         public async Task<ActionResult> Index()
@@ -28,7 +33,9 @@ namespace WizardsWeb.Controllers
         public async Task<ActionResult> Details(int id, int playerId)
         {
             var hero = await _heroService.Get(id);
-            var heroDetails = new HeroDetailsModelView(hero) {PlayerId = playerId};
+            var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
+            heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
+            heroDetails.PlayerId = playerId;
             return View(heroDetails);
         }
 
@@ -74,7 +81,7 @@ namespace WizardsWeb.Controllers
                 return View(heroCreate);
             }
 
-            var hero = heroCreate.ToHero();
+            var hero = _mapper.Map<Hero>(heroCreate);
 
             try
             {
@@ -117,7 +124,8 @@ namespace WizardsWeb.Controllers
         public async Task<ActionResult> Delete(int id, int playerId)
         {
             var hero = await _heroService.Get(id);
-            var heroDelete = new HeroDeleteModelView(hero);
+            var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
+            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
             heroDelete.PlayerId = playerId;
             return View(heroDelete);
         }
@@ -135,7 +143,8 @@ namespace WizardsWeb.Controllers
             }
             
             var playerId = heroDelete.PlayerId;
-            heroDelete = new HeroDeleteModelView(heroOriginalModel);
+            heroDelete = _mapper.Map<HeroDeleteModelView>(heroOriginalModel);
+            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(heroOriginalModel);
             heroDelete.PlayerId = playerId;
 
             if (!ModelState.IsValid)

@@ -16,19 +16,9 @@ public class HeroAttributesModelView
     public int Specialization { get; set; }
 
     // Defensive
-    public int Health { get; set; }
+    public int MaxHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
 
-    public HeroAttributesModelView(HeroAttributes heroAttributes)
-    {
-        Id=heroAttributes.Id;
-        DailyRewardEnergy=heroAttributes.DailyRewardEnergy;
-        Damage=heroAttributes.Damage;
-        Precision=heroAttributes.Precision;
-        Specialization=heroAttributes.Specialization;
-        Health = heroAttributes.MaxHealth;
-        Reflex=heroAttributes.Reflex;
-        Defense=heroAttributes.Defense;
-    }
+    public HeroAttributesModelView() { }
 }

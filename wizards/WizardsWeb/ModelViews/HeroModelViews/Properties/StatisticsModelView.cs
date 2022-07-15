@@ -7,28 +7,24 @@ public class StatisticsModelView
 {
     public int Id { get; set; }
 
-    [DisplayFormat(DataFormatString = "{0:##,###}")]
+    [Display(Name = "Rank Points")]
     public int RankPoints { get; set; }
-    
-    [DisplayFormat(DataFormatString = "{0:##,###}")]
+
+    [Display(Name = "Total match played")]
     public int TotalMatchPlayed { get; set; }
-    
-    [DisplayFormat(DataFormatString = "{0:##,###}")]
+
+    [Display(Name = "Total match won")]
     public int TotalMatchWin { get; set; }
 
-    [DisplayFormat(DataFormatString = "{0:##,###}")]
+    [Display(Name = "Total match lost")]
     public int TotalMatchLoose { get; set; }
 
-    public StatisticsModelView(Statistics statistics)
-    {
-        Id = statistics.Id;
-        RankPoints = statistics.RankPoints;
-        TotalMatchPlayed = statistics.TotalMatchPlayed;
-        TotalMatchWin = statistics.TotalMatchWin;
-        TotalMatchLoose = statistics.TotalMatchLoose;
-    }
+    [Display(Name = "Win rate")]
+    public string WinRatio => GetWinRatio();
 
-    public string GetWinRatio()
+    public StatisticsModelView() { }
+
+    private string GetWinRatio()
     {
         float winRatio = 0f;
 
@@ -37,6 +33,6 @@ public class StatisticsModelView
             winRatio = (float)((float)TotalMatchWin / (float)TotalMatchPlayed);
         }
 
-        return $"{winRatio:0.000}";
+        return $"{winRatio:P}";
     }
 }

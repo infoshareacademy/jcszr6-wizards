@@ -1,0 +1,16 @@
+﻿@model WizardsWeb.ModelViews.Properties.HeroBasicsModelView
+
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/@Model.ProfessionImageAddress" width="100" height="100"/>
+    </div>
+    <div class="col-md-8">
+        <h3>@Model.NickName</h3>
+        <h4>@Model.Profession.ToString()</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <img src="~/@Model.AvatarImageAddress" width="330" height="440" />
+    </div>
+</div>
