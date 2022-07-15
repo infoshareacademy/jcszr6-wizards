@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="HeroService\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
 
 </Project>
