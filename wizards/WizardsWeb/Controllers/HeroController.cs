@@ -127,12 +127,18 @@ namespace WizardsWeb.Controllers
         public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
         {
             var heroOriginalModel = await _heroService.Get(heroDelete.Id);
-
+            
             if (heroOriginalModel.NickName != heroDelete.ConfirmNickName)
             {
                 ModelState.AddModelError("ConfirmNickName", "Invalid Nick Name!");
-                heroDelete.Statistics = heroOriginalModel.Statistics;
-                heroDelete.NickName = heroOriginalModel.NickName;
+            }
+            
+            var playerId = heroDelete.PlayerId;
+            heroDelete = new HeroDeleteModelView(heroOriginalModel);
+            heroDelete.PlayerId = playerId;
+
+            if (!ModelState.IsValid)
+            {
                 return View(heroDelete);
             }
 
