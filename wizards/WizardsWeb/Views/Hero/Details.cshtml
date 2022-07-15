@@ -1,0 +1,26 @@
+﻿@model WizardsWeb.ModelViews.HeroDetailsModelView
+
+@{
+    ViewData["Title"] = $"{Model.NickName}";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <partial name="_HeroAvatar" model="Model"/>
+    </div>
+    <div class="col-md-6">
+        <a type="button" class="btn btn-warning" asp-action="Equipment">Equipment</a><br /><br />
+        <a type="button" class="btn btn-warning" asp-action="Merchant">Merchant</a><br /><br />
+        <a type="button" class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit Hero</a><br /><br />
+        <a type="button" class="btn btn-warning" asp-controller="Player" asp-action="Details" asp-route-id="@Model.PlayerId">Back to Hero choice</a><br /><br />
+        <a type="button" class="btn btn-warning" asp-action="ArenaPvP">PvP Arena</a><br /><br />
+    </div>
+    <div class="col-md-4">
+        <partial name="_HeroAttributes" model="Model.Attributes"/>
+        <partial name="_HeroStatistics" model="Model.Attributes"/>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

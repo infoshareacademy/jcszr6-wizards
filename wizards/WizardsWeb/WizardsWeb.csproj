@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Wizard.Services\Wizards.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ModelViews\HeroModelViews\Properties\" />
+  </ItemGroup>
+
 </Project>
