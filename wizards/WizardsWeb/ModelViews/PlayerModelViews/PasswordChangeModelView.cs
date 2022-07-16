@@ -27,15 +27,5 @@ namespace WizardsWeb.ModelViews
         public string ConfirmPassword { get; set; }
 
         public PasswordChangeModelView() { }
-        public PasswordChangeModelView(Player player)
-        {
-            Id = player.Id;
-            UserName = player.UserName;
-        }
-
-        public Player ToPlayer()
-        {
-            return new Player() { Id= this.Id, Password = this.NewPassword};
-        }
     }
 }

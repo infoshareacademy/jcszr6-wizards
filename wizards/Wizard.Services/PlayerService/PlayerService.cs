@@ -29,10 +29,9 @@ namespace Wizards.Services.PlayerService
 
         public async Task Update(int id, Player player)
         {
-            var playerToUpdate = await Get(id);
-            player.Password = playerToUpdate.Password;
-            
             await _playerValidator.Validate(player);
+            
+            var playerToUpdate = await Get(id);
             
             playerToUpdate.Email = player.Email;
             playerToUpdate.DateOfBirth = player.DateOfBirth;
@@ -42,12 +41,10 @@ namespace Wizards.Services.PlayerService
 
         public async Task UpdatePassword(int id, Player player)
         {
-            var playerToUpdate = await Get(id);
-            player.Email = playerToUpdate.Email;
-            player.DateOfBirth = playerToUpdate.DateOfBirth;
-            
             await _playerValidator.Validate(player);
 
+            var playerToUpdate = await Get(id);
+            
             playerToUpdate.Password = player.Password;
 
             await _playerRepository.Update(playerToUpdate);

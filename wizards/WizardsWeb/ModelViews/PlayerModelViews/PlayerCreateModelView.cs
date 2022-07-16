@@ -33,16 +33,5 @@ namespace WizardsWeb.ModelViews
         [Display(Name = "Date of birth")]
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
-
-        public Player ToPlayer()
-        {
-            return new Player()
-            {
-                UserName = this.UserName,
-                Password = this.Password,
-                Email = this.Email,
-                DateOfBirth = this.DateOfBirth,
-            };
-        }
     }
 }
