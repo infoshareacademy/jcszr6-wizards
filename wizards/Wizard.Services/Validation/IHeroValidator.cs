@@ -4,6 +4,5 @@ namespace Wizards.Services.Validation;
 
 public interface IHeroValidator
 {
-    Task ValidateForCreate(Hero hero);
-    public void ValidateForEdit(Hero hero);
+    Task Validate(Hero hero);
 }

@@ -19,14 +19,21 @@ namespace Wizards.Services.Validation
             _playerRepository = playerRepository;
         }
 
-        public async Task ValidateForCreate(Player player)
+        public async Task Validate(Player player)
         {
             _isValid = true;
-
-            ValidateUserName(player.UserName);
-            await CheckUserNameInUse(player);
+            
+            if ( !await _playerRepository.Exist(player.Id))
+            {
+                ValidateUserName(player.UserName);
+                await UserNameInUse(player.UserName);
+            }
             ValidatePassword(player.Password);
-            await ValidateEmail(player.Email);
+            ValidateEmail(player.Email);
+            if (!await _playerRepository.Exist(player.Id, player.Email))
+            {
+                await EmailInUse(player.Email);
+            }
             ValidateDateOfBirth(player.DateOfBirth);
 
             if (!_isValid)
@@ -35,30 +42,6 @@ namespace Wizards.Services.Validation
             }
         }
 
-        public async Task ValidateForUpdate(Player player)
-        {
-            _isValid = true;
-
-            await ValidateEmail(player.Email);
-            ValidateDateOfBirth(player.DateOfBirth);
-
-            if (!_isValid)
-            {
-                throw new InvalidModelException(_modelStatesData);
-            }
-        }
-
-        public void ValidateForPasswordUpdate(Player player)
-        {
-            _isValid = true;
-
-            ValidatePassword(player.Password);
-
-            if (!_isValid)
-            {
-                throw new InvalidModelException(_modelStatesData);
-            }
-        }
 
         private void ValidateUserName(string playerUserName)
         {
@@ -90,7 +73,7 @@ namespace Wizards.Services.Validation
             }
         }
 
-        private async Task ValidateEmail(string playerEmail)
+        private void ValidateEmail(string playerEmail)
         {
             foreach (var task in _settings.EmailTasks)
             {
@@ -103,16 +86,6 @@ namespace Wizards.Services.Validation
                     return;
                 }
             }
-            
-            var inUseEmail = _settings.AlredyInUseTask.Validate(playerEmail,
-                await _playerRepository.GetAllEmails());
-
-            if (!inUseEmail.IsValid)
-            {
-                _isValid = false;
-                _modelStatesData.Add("Email", $"Email {inUseEmail.Message}");
-            }
-
         }
 
         private void ValidateDateOfBirth(DateTime playerDateOfBirth)
@@ -129,15 +102,27 @@ namespace Wizards.Services.Validation
             }
         }
 
-        private async Task CheckUserNameInUse(Player player)
+        private async Task UserNameInUse(string playerUserName)
         {
-            var inUseUsername = _settings.AlredyInUseTask.Validate(player.UserName,
+            var inUseUsername = _settings.AlredyInUseTask.Validate(playerUserName,
                 await _playerRepository.GetAllUserNames());
 
             if (!inUseUsername.IsValid)
             {
                 _isValid = false;
                 _modelStatesData.Add("UserName", $"User Name {inUseUsername.Message}");
+            }
+        }
+
+        private async Task EmailInUse(string playerEmail)
+        {
+            var inUseEmail = _settings.AlredyInUseTask.Validate(playerEmail,
+                await _playerRepository.GetAllEmails());
+
+            if (!inUseEmail.IsValid)
+            {
+                _isValid = false;
+                _modelStatesData.Add("Email", $"Email {inUseEmail.Message}");
             }
         }
     }

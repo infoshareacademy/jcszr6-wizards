@@ -24,7 +24,7 @@ public class HeroService : IHeroService
 
     public async Task Add(int playerId, Hero hero)
     {
-        await _heroValidator.ValidateForCreate(hero);
+        await _heroValidator.Validate(hero);
         hero.Gold = 0;
         hero.Attributes = _propertiesFactory.GetHeroAttributes(hero.Profession);
         hero.Statistics = _propertiesFactory.GetStatistics();
@@ -40,13 +40,13 @@ public class HeroService : IHeroService
         await _heroRepository.Remove(hero);
     }
 
-    public async Task Update(int id, Hero hero)
+    public async Task ChangeNickName(int id, Hero hero)
     {
-        _heroValidator.ValidateForEdit(hero);
-        
         var heroToUpdate = await Get(id);
+        hero.AvatarImageNumber = heroToUpdate.AvatarImageNumber;
+        
+        await _heroValidator.Validate(hero);
 
-        heroToUpdate.AvatarImageNumber = hero.AvatarImageNumber;
         heroToUpdate.NickName = hero.NickName;
 
         await _heroRepository.Update(heroToUpdate);

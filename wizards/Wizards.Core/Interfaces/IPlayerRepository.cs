@@ -9,8 +9,11 @@ public interface IPlayerRepository
     Task Add(Player player);
     Task Remove(Player player);
     Task Update(Player player);
+
     Task<List<string>> GetAllUserNames();
     Task<List<string>> GetAllEmails();
+    Task<bool> Exist(int id);
+    Task<bool> Exist(int id, string email);
 
     Task<List<Player>> GetByUserName(string userName);
     Task<List<Player>> GetByEmailAddress(string addressEmail);

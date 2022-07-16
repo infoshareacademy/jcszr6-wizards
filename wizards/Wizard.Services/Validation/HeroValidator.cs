@@ -19,36 +19,23 @@ public class HeroValidator : IHeroValidator
         _heroRepository = heroRepository;
     }
 
-    public async Task ValidateForCreate(Hero hero)
+    public async Task Validate(Hero hero)
     {
         _isValid = true;
 
-        ValidateNickName(hero.NickName);
-        ValidateProfession((int)hero.Profession);
+        if (!await _heroRepository.Exist(hero.Id, hero.NickName))
+        {
+            ValidateNickName(hero.NickName);
+            await NickNameInUse(hero.NickName);
+        }
         ValidateAvatar(hero.AvatarImageNumber);
-        await CheckInUse(hero.NickName);
+        ValidateProfession((int)hero.Profession);
 
         if (!_isValid)
         {
             throw new InvalidModelException(_modelStatesData);
         }
     }
-
-    public void ValidateForEdit(Hero hero)
-    {
-        _isValid = true;
-
-        ValidateNickName(hero.NickName);
-        ValidateProfession((int)hero.Profession);
-        ValidateAvatar(hero.AvatarImageNumber);
-        
-
-        if (!_isValid)
-        {
-            throw new InvalidModelException(_modelStatesData);
-        }
-    }
-
 
     private void ValidateNickName(string heroNickName)
     {
@@ -96,7 +83,7 @@ public class HeroValidator : IHeroValidator
         }
     }
 
-    private async Task CheckInUse(string heroNickName)
+    private async Task NickNameInUse(string heroNickName)
     {
         var inUseNickname = _settings.AlredyInUseTask.Validate(heroNickName,
             await _heroRepository.GetAllNickNames());
