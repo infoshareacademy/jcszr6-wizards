@@ -17,5 +17,7 @@ public class HeroProfile : Profile
         CreateMap<Hero, HeroDeleteModelView>();
         CreateMap<Hero, HeroDetailsModelView>();
         CreateMap<Hero, HeroBasicsModelView>();
+
+        CreateMap<Hero, HeroEditModelView>().ReverseMap();
     }
 }

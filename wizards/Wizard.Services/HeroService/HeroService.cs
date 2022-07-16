@@ -40,12 +40,11 @@ public class HeroService : IHeroService
         await _heroRepository.Remove(hero);
     }
 
-    public async Task ChangeNickName(int id, Hero hero)
+    public async Task Update(int id, Hero hero)
     {
-        var heroToUpdate = await Get(id);
-        hero.AvatarImageNumber = heroToUpdate.AvatarImageNumber;
-        
         await _heroValidator.Validate(hero);
+        
+        var heroToUpdate = await Get(id);
 
         heroToUpdate.NickName = hero.NickName;
 
@@ -62,5 +61,17 @@ public class HeroService : IHeroService
         }
 
         throw new NullReferenceException($"There is no Hero with id: {id}!");
+    }
+
+    public async Task<bool> CanChangeNickName(int id)
+    {
+        var hero = await Get(id);
+        return (hero.Gold >= 2500);
+    }
+
+    public async Task<bool> CanChangeAvatar(int id)
+    {
+        var hero = await Get(id);
+        return (hero.Gold >= 2500);
     }
 }

@@ -100,23 +100,94 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditNickName(int id, int playerId)
         {
-            return View();
+            var hero = _heroService.Get(id);
+            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+            heroEdit.PlayerId = playerId;
+            return View(heroEdit);
         }
 
         // POST: HeroController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> EditNickname(HeroEditModelView heroEdit)
         {
+            var originalHero = await _heroService.Get(heroEdit.Id);
+            heroEdit.AvatarImageNumber = originalHero.AvatarImageNumber;
+
+            if (!await _heroService.CanChangeNickName(heroEdit.Id))
+            {
+                ModelState.AddModelError("NickName", "You don't have enough gold!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(heroEdit);
+            }
+
+            var hero = _mapper.Map<Hero>(heroEdit);
+            hero.Profession = originalHero.Profession;
+
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _heroService.Update(hero.Id, hero);
+                return RedirectToAction(nameof(Details), new { id = hero.Id, playerId = heroEdit.PlayerId });
             }
-            catch
+            catch (InvalidModelException exception)
             {
-                return View();
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError(data.Key, data.Value);
+                }
+
+                return View(heroEdit);
+            }
+        }
+
+        // GET: HeroController/Edit/5
+        public ActionResult EditAvatar(int id, int playerId)
+        {
+            var hero = _heroService.Get(id);
+            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+            heroEdit.PlayerId = playerId;
+            return View(heroEdit);
+        }
+
+        // POST: HeroController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditAvatar(HeroEditModelView heroEdit)
+        {
+            var originalHero = await _heroService.Get(heroEdit.Id);
+            heroEdit.NickName = originalHero.NickName;
+
+            if (!await _heroService.CanChangeAvatar(heroEdit.Id))
+            {
+                ModelState.AddModelError("NickName","You don't have enough gold!");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(heroEdit);
+            }
+
+            var hero = _mapper.Map<Hero>(heroEdit);
+            hero.Profession = originalHero.Profession;
+
+            try
+            {
+                await _heroService.Update(hero.Id, hero);
+                return RedirectToAction(nameof(Details), new { id = hero.Id, playerId = heroEdit.PlayerId });
+            }
+            catch (InvalidModelException exception)
+            {
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError(data.Key, data.Value);
+                }
+
+                return View(heroEdit);
             }
         }
 
