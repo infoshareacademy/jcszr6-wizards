@@ -10,4 +10,6 @@ public interface IHeroService
     Task<Hero> Get(int id);
     Task<bool> CanChangeNickName(int id);
     Task<bool> CanChangeAvatar(int id);
+    int GetChangeNickNameCost();
+    int GetChangeAvatarCost();
 }

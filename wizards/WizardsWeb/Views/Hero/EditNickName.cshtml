@@ -1,0 +1,38 @@
+﻿@model WizardsWeb.ModelViews.HeroEditModelView
+
+@{
+    ViewData["Title"] = "Edit Name";
+}
+
+<h3>Edit Hero's Name</h3>
+<hr/><br/>
+This operation costs: @($"{Model.Cost:##,##0}") gold!<br />
+Your gold: @($"{Model.Gold:##,##0}")<br/>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditNickName">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="Id" hidden="true" />
+                <input asp-for="PlayerId" hidden="true" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NickName" class="control-label"></label>
+                <input asp-for="NickName" class="form-control" />
+                <span asp-validation-for="NickName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@Model.Id" asp-route-playerId="@Model.PlayerId">Back to Details</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,42 @@
+﻿@model WizardsWeb.ModelViews.HeroEditModelView
+
+@{
+    ViewData["Title"] = "Edit Avatar";
+}
+
+<h3>Edit Hero's Avatar</h3>
+<hr/><br/>
+This operation costs: @($"{Model.Cost:##,##0}") gold!<br />
+Your gold: @($"{Model.Gold:##,##0}")<br/>
+<hr/>
+<form asp-action="EditAvatar">
+    <input asp-for="Id" hidden="true"/>
+    <input asp-for="PlayerId" hidden="true"/>
+    <div class="row">
+        @for (int i = 1; i <= 7; i++)
+        {
+            var image = $"Images/Hero/Avatars/Wizard-{i}.png";
+            <div class="col-sm-3">
+                <div class="row" align="center">
+                    <img src="~/@image" width="210" height="280"/>
+                </div>
+                <div class="row">
+                    <div align="center"><input asp-for="AvatarImageNumber" type="radio" value="@i"/></div>
+                </div>
+            </div>
+        }
+    </div>
+    <span asp-validation-for="AvatarImageNumber" class="text-danger"></span>
+    <hr/>
+    <div class="form-group">
+        <input type="submit" value="Set Avatar" class="btn btn-primary"/>
+    </div>
+</form>
+
+<div>
+    <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@Model.Id" asp-route-playerId="@Model.PlayerId">Back to Details</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

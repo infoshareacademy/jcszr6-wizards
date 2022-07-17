@@ -46,7 +46,17 @@ public class HeroService : IHeroService
         
         var heroToUpdate = await Get(id);
 
-        heroToUpdate.NickName = hero.NickName;
+        if (heroToUpdate.NickName != hero.NickName && await CanChangeNickName(heroToUpdate.Id))
+        {
+            heroToUpdate.NickName = hero.NickName;
+            heroToUpdate.Gold -= GetChangeNickNameCost();
+        }
+
+        if (heroToUpdate.AvatarImageNumber != hero.AvatarImageNumber && await CanChangeAvatar(heroToUpdate.Id))
+        {
+            heroToUpdate.AvatarImageNumber = hero.AvatarImageNumber;
+            heroToUpdate.Gold -= GetChangeAvatarCost();
+        }
 
         await _heroRepository.Update(heroToUpdate);
     }
@@ -66,12 +76,22 @@ public class HeroService : IHeroService
     public async Task<bool> CanChangeNickName(int id)
     {
         var hero = await Get(id);
-        return (hero.Gold >= 2500);
+        return (hero.Gold >= GetChangeNickNameCost());
     }
 
     public async Task<bool> CanChangeAvatar(int id)
     {
         var hero = await Get(id);
-        return (hero.Gold >= 2500);
+        return (hero.Gold >= GetChangeAvatarCost());
+    }
+
+    public int GetChangeNickNameCost()
+    {
+        return 2500;
+    }
+
+    public int GetChangeAvatarCost()
+    {
+        return 2500;
     }
 }
