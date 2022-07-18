@@ -41,6 +41,8 @@ public class HeroRepository : IHeroRepository
     public async Task Remove(Hero hero)
     {
         _wizardsContext.Heroes.Remove(hero);
+        _wizardsContext.HeroAttributes.Remove(hero.Attributes);
+        _wizardsContext.Statistics.Remove(hero.Statistics);
         await _wizardsContext.SaveChangesAsync();
     }
 

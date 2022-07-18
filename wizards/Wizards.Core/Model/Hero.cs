@@ -12,7 +12,6 @@ namespace Wizards.Core.Model
         public int AvatarImageNumber { get; set; }
 
         public HeroAttributes Attributes { get; set; }
-
         public int AttributesId { get; set; }
 
         // Economic
@@ -21,9 +20,10 @@ namespace Wizards.Core.Model
         public List<HeroItem> Inventory  { get; set; }
 
         public Statistics Statistics { get; set; }
-
         public int StatisticsId { get; set; }
+
         public Player Player { get; set; }
+        public int PlayerId { get; set; }
 
     }
 }

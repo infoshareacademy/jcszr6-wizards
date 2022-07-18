@@ -7,10 +7,10 @@
 <div class="row">
     <div class="col-md-5">
         <partial name="_HeroBasicPresentation" model="@Model.Basics"/><br/>
-        <a type="button" class="btn btn-primary" asp-action="EditNickName" asp-route-id="@Model.Id" asp-route-playerId="@Model.PlayerId">
+        <a type="button" class="btn btn-primary" asp-action="EditNickName" asp-route-id="@Model.Id">
             Edit Name
         </a>
-        <a type="button" class="btn btn-primary" asp-action="EditAvatar" asp-route-id="@Model.Id" asp-route-playerId="@Model.PlayerId">
+        <a type="button" class="btn btn-primary" asp-action="EditAvatar" asp-route-id="@Model.Id">
             Edit Avatar
         </a>
     </div>

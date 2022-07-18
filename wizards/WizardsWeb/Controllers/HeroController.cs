@@ -30,12 +30,11 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Details/5
-        public async Task<ActionResult> Details(int id, int playerId)
+        public async Task<ActionResult> Details(int id)
         {
             var hero = await _heroService.Get(id);
             var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
             heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-            heroDetails.PlayerId = playerId;
             return View(heroDetails);
         }
 
@@ -86,7 +85,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Add(heroCreate.PlayerId, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id, playerId = heroCreate.PlayerId });
+                return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
             catch (InvalidModelException exception)
             {
@@ -100,11 +99,10 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Edit/5
-        public async Task<ActionResult> EditNickName(int id, int playerId)
+        public async Task<ActionResult> EditNickName(int id)
         {
             var hero = await _heroService.Get(id);
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-            heroEdit.PlayerId = playerId;
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
             return View(heroEdit);
         }
@@ -135,7 +133,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Update(hero.Id, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id, playerId = heroEdit.PlayerId });
+                return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
             catch (InvalidModelException exception)
             {
@@ -149,11 +147,10 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Edit/5
-        public async Task<ActionResult> EditAvatar(int id, int playerId)
+        public async Task<ActionResult> EditAvatar(int id)
         {
             var hero = await _heroService.Get(id);
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-            heroEdit.PlayerId = playerId;
             heroEdit.Cost = _heroService.GetChangeAvatarCost();
             return View(heroEdit);
         }
@@ -185,7 +182,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Update(hero.Id, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id, playerId = heroEdit.PlayerId });
+                return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
             catch (InvalidModelException exception)
             {
@@ -199,12 +196,11 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Delete/5
-        public async Task<ActionResult> Delete(int id, int playerId)
+        public async Task<ActionResult> Delete(int id)
         {
             var hero = await _heroService.Get(id);
             var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-            heroDelete.PlayerId = playerId;
             return View(heroDelete);
         }
 
@@ -220,10 +216,8 @@ namespace WizardsWeb.Controllers
                 ModelState.AddModelError("ConfirmNickName", "Invalid Nick Name!");
             }
 
-            var playerId = heroDelete.PlayerId;
             heroDelete = _mapper.Map<HeroDeleteModelView>(heroOriginalModel);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(heroOriginalModel);
-            heroDelete.PlayerId = playerId;
 
             if (!ModelState.IsValid)
             {
