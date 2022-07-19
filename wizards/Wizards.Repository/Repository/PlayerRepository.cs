@@ -36,7 +36,25 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task Remove(Player player)
     {
+        foreach (var hero in player.Heroes)
+        {
+            var statistics = await _wizardsContext.Statistics.SingleOrDefaultAsync(s => s.Id == hero.StatisticsId);
+            
+            if (statistics != null)
+            {
+                _wizardsContext.Statistics.Remove(statistics);
+            }
+            
+            var attributes = await _wizardsContext.HeroAttributes.SingleOrDefaultAsync(ha => ha.Id == hero.AttributesId);
+            
+            if (attributes!= null)
+            {
+                _wizardsContext.HeroAttributes.Remove(attributes);
+            }
+        }
+
         _wizardsContext.Players.Remove(player);
+        
         await _wizardsContext.SaveChangesAsync();
     }
 
