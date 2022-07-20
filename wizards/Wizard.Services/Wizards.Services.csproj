@@ -10,4 +10,9 @@
     <ProjectReference Include="..\Wizards.Repository\Wizards.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="HeroService\" />
+    <Folder Include="Factories\" />
+  </ItemGroup>
+
 </Project>

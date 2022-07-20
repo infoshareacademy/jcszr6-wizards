@@ -24,14 +24,6 @@ namespace WizardsWeb.ModelViews
 
         public List<Hero> Heroes = new();
 
-        public PlayerDetailsModelView(Player player)
-        {
-            this.Id = player.Id;
-            this.UserName = player.UserName;
-            this.Password = player.Password;
-            this.Email = player.Email;
-            this.DateOfBirth = player.DateOfBirth;
-            this.Heroes = player.Heroes;
-        }
+        public PlayerDetailsModelView() { }
     }
 }

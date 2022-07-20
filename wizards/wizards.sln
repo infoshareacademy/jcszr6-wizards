@@ -5,11 +5,11 @@ VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WizardsWeb", "WizardsWeb\WizardsWeb.csproj", "{9515C09C-CF2C-450A-9DA2-EC4EF360C3C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.Core", "Wizards.Core\Wizards.Core.csproj", "{0E42EF92-848E-4624-95C0-21710431FA90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.Core", "Wizards.Core\Wizards.Core.csproj", "{0E42EF92-848E-4624-95C0-21710431FA90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.Repository", "Wizards.Repository\Wizards.Repository.csproj", "{E7A6468F-DE00-4805-8B71-6916C31A3A98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.Repository", "Wizards.Repository\Wizards.Repository.csproj", "{E7A6468F-DE00-4805-8B71-6916C31A3A98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.Services", "Wizard.Services\Wizards.Services.csproj", "{A9933089-DC4C-4B51-9E0D-893AF1588484}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.Services", "Wizard.Services\Wizards.Services.csproj", "{A9933089-DC4C-4B51-9E0D-893AF1588484}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

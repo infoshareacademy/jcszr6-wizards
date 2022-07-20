@@ -315,7 +315,8 @@ namespace Wizards.Repository.Migrations
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kurczaaaak', 'Kurczaaaak_123', 'kurczaaaak@wizards.com', '2003-06-07T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Wojownik', 'Wojownik_123', 'wojownik@wizards.com', '1995-01-16T00:00:00'); " +
                                 "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('JohnyWalker', 'JohnyWalker_123', 'johnywalker@wizards.com', '2002-08-21T00:00:00'); " +
-                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kanapka-17', 'Komornik_123', 'testowy.email@xd.pl', '1995-10-23T00:00:00');");
+                                "INSERT INTO Players(UserName, Password, Email, DateOfBirth) VALUES('Kanapka-17', 'Komornik_123', 'testowy.email@xd.pl', '1995-10-23T00:00:00');"
+                                 );
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

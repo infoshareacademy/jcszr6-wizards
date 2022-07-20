@@ -17,7 +17,7 @@ namespace Wizards.Services.PlayerService
 
         public async Task Add(Player player)
         {
-            await _playerValidator.ValidateForCreate(player);
+            await _playerValidator.Validate(player);
             await _playerRepository.Add(player);
         }
 
@@ -29,7 +29,7 @@ namespace Wizards.Services.PlayerService
 
         public async Task Update(int id, Player player)
         {
-            await _playerValidator.ValidateForUpdate(player);
+            await _playerValidator.Validate(player);
             
             var playerToUpdate = await Get(id);
             
@@ -41,10 +41,10 @@ namespace Wizards.Services.PlayerService
 
         public async Task UpdatePassword(int id, Player player)
         {
-            _playerValidator.ValidateForPasswordUpdate(player);
+            await _playerValidator.Validate(player);
 
             var playerToUpdate = await Get(id);
-
+            
             playerToUpdate.Password = player.Password;
 
             await _playerRepository.Update(playerToUpdate);

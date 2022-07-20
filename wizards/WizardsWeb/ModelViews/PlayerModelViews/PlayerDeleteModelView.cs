@@ -27,14 +27,5 @@ namespace WizardsWeb.ModelViews
         public int HeroesCount = new();
 
         public PlayerDeleteModelView() { }
-        public PlayerDeleteModelView(Player player)
-        {
-            Id = player.Id;
-            UserName = player.UserName;
-            Email = player.Email;
-            DateOfBirth = player.DateOfBirth;
-            HeroesCount = player.Heroes.Count;
-        }
-
     }
 }

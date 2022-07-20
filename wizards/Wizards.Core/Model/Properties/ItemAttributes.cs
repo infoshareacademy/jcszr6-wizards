@@ -3,7 +3,6 @@
 public class ItemAttributes
 {
     public int Id { get; set; }
-    public double ItemEndurance { get; set; }
 
     // Offensive
     public int Damage { get; set; }

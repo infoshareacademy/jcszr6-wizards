@@ -1,0 +1,64 @@
+﻿@model WizardsWeb.ModelViews.Properties.HeroAttributesModelView
+
+<h4>Attributes</h4>
+<hr />
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="DailyRewardEnergy"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.DailyRewardEnergy:##,##0}")
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="Damage"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.Damage:##,##0}")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="Precision"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.Precision:##,##0}")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="Specialization"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.Specialization:##,##0}")
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="MaxHealth"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.MaxHealth:##,##0}")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="Reflex"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.Reflex:##,##0}")
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <label asp-for="Defense"></label>
+        </div>
+        <div class="col-md-4">
+            @($"{Model.Defense:##,##0}")
+        </div>
+    </div>
+</div>

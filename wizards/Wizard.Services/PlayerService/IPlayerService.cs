@@ -1,11 +1,13 @@
-﻿namespace Wizards.Services.PlayerService
+﻿using Wizards.Core.Model;
+
+namespace Wizards.Services.PlayerService
 {
     public interface IPlayerService
     {
-        Task Add(Core.Model.Player player);
+        Task Add(Player player);
         Task Delete(int id);
-        Task Update(int id, Core.Model.Player player);
-        Task UpdatePassword(int id, Core.Model.Player player);
-        Task<Core.Model.Player> Get(int id);
+        Task Update(int id, Player player);
+        Task UpdatePassword(int id, Player player);
+        Task<Player> Get(int id);
     }
 }

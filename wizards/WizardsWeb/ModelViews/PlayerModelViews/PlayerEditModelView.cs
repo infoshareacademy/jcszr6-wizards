@@ -22,23 +22,5 @@ namespace WizardsWeb.ModelViews
         public DateTime DateOfBirth { get; set; }
 
         public PlayerEditModelView() { }
-
-        public PlayerEditModelView(Player player)
-        {
-            this.Id = player.Id;
-            this.UserName = player.UserName;
-            this.Email = player.Email;
-            this.DateOfBirth = player.DateOfBirth;
-        }
-
-        public Player ToPlayer()
-        {
-            return new Player()
-            {
-                Id = this.Id,
-                Email = this.Email,
-                DateOfBirth = this.DateOfBirth,
-            };
-        }
     }
 }

@@ -9,6 +9,7 @@ namespace Wizards.Services.Validation.Settings
     public static class ValidationSettingsFactory
     {
         private static PlayerValidationSettings _playerSettings;
+        private static HeroValidationSettings _heroSettings;
 
         static ValidationSettingsFactory()
         {
@@ -41,11 +42,37 @@ namespace Wizards.Services.Validation.Settings
                     new RestrictedAge(10)
                 }
             };
+
+            _heroSettings = new HeroValidationSettings()
+            {
+                NickNameTasks = new List<IStringValidationTask>()
+                {
+                    new IsNull(),
+                    new StringMinLength(3),
+                    new StringMaxLength(20),
+                    new RestrictedWords(),
+                    new AllowedCharacters("abcdefghijklmnoprstuvwxyz ")
+                },
+                AvatarTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(1, 7)
+                },
+                ProfessionTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(0, 1)
+                },
+                AlredyInUseTask = new AlredyInUse()
+            };
         }
 
         public static PlayerValidationSettings GetPlayersValidationSettings()
         {
             return _playerSettings;
+        }
+
+        public static HeroValidationSettings GetHeroValidationSettings()
+        {
+            return _heroSettings;
         }
     }
 }

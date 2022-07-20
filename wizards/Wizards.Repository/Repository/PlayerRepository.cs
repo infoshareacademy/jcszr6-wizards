@@ -16,12 +16,16 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task<List<Player>> GetAll()
     {
-        return await _wizardsContext.Players.ToListAsync();
+        return await _wizardsContext.Players
+            .Include(p => p.Heroes)
+            .ToListAsync();
     }
 
-    public async Task<Player> Get(int id)
+    public async Task<Player?> Get(int id)
     {
-        return await _wizardsContext.Players.FindAsync(id);
+        return await _wizardsContext.Players
+            .Include(p => p.Heroes)
+            .SingleOrDefaultAsync(p => p.Id == id);
     }
 
     public async Task Add(Player player)
@@ -32,7 +36,25 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task Remove(Player player)
     {
+        foreach (var hero in player.Heroes)
+        {
+            var statistics = await _wizardsContext.Statistics.SingleOrDefaultAsync(s => s.Id == hero.StatisticsId);
+            
+            if (statistics != null)
+            {
+                _wizardsContext.Statistics.Remove(statistics);
+            }
+            
+            var attributes = await _wizardsContext.HeroAttributes.SingleOrDefaultAsync(ha => ha.Id == hero.AttributesId);
+            
+            if (attributes!= null)
+            {
+                _wizardsContext.HeroAttributes.Remove(attributes);
+            }
+        }
+
         _wizardsContext.Players.Remove(player);
+        
         await _wizardsContext.SaveChangesAsync();
     }
 
@@ -52,6 +74,16 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players.Select(p => p.Email).ToListAsync();
     }
 
+    public async Task<bool> Exist(int id)
+    {
+        return await _wizardsContext.Players.AnyAsync(p => p.Id == id);
+    }
+
+    public async Task<bool> Exist(int id, string email)
+    {
+        return await _wizardsContext.Players.AnyAsync(p => p.Id == id && p.Email == email);
+    }
+
     public async Task<List<Player>> GetByUserName(string userName)
     {
         return await _wizardsContext.Players
@@ -68,15 +100,15 @@ public class PlayerRepository : IPlayerRepository
 
     public async Task<List<Player>> GetByYearRange(int startYear, int endYear)
     {
-        return await _wizardsContext.Players.Where(p => 
-            p.DateOfBirth.Year >= startYear && 
+        return await _wizardsContext.Players.Where(p =>
+            p.DateOfBirth.Year >= startYear &&
             p.DateOfBirth.Year <= endYear).ToListAsync();
     }
 
     public async Task<List<Player>> GetByRankPointsRange(int lowRankPoints, int highRankPoints)
     {
         return await _wizardsContext.Players.Where(p =>
-            p.Heroes.Select(h => h.Statistics.RankPoints).Sum() >= lowRankPoints && 
+            p.Heroes.Select(h => h.Statistics.RankPoints).Sum() >= lowRankPoints &&
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints).ToListAsync();
     }
 }

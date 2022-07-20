@@ -8,6 +8,8 @@ using Wizards.Repository;
 using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Repository.Repository;
+using Wizards.Services.Factories;
+using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 
 namespace WizardsWeb
@@ -31,17 +33,23 @@ namespace WizardsWeb
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
 
-            
-            
+            services.AddTransient<IHeroRepository, HeroRepository>();
+            services.AddTransient<IHeroService, HeroService>();
+            services.AddTransient<IHeroValidator, HeroValidator>();
+            services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
+
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
+
+            var profileAssembly = typeof(Startup).Assembly;
+            services.AddAutoMapper(profileAssembly);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext)
         {
             wizardsContext.Database.Migrate();
-            
 
             if (env.IsDevelopment())
             {

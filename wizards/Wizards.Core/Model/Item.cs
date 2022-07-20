@@ -11,6 +11,7 @@ namespace Wizards.Core.Model
         public string Name { get; set; }
         public ItemType Type { get; set; }
         public ProfessionRestriction Restriction { get; set; }
+        public int Tier { get; set; }
 
         public ItemAttributes Attributes { get; set; }
         public int AttributesId { get; set; }

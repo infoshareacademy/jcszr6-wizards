@@ -1,0 +1,60 @@
+﻿@model WizardsWeb.ModelViews.HeroCreateModelView
+@using Wizards.Core.Model.Enums
+
+@{
+    ViewData["Title"] = "Set Profession";
+}
+
+<h1>Create New Hero</h1>
+<br />
+<h3>Choose Profession of your hero</h3>
+
+
+<form asp-action="SetProfession">
+    <input asp-for="PlayerId" hidden="true" />
+    <hr/>
+    <div class="row">
+        <div class="col-md-1" align="center">
+            <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer"/>
+        </div>
+        <div class="col-md-2" align="center">
+            <img src="~/Images/Hero/Professions/Sorcerer.png" width="100" height="100"/>
+        </div>
+        <div class="col-md-7">
+            <h5>Sorcerer</h5>
+            <p>
+                Sorcerers are using the power of natural elements to deal high damage and protect themselves. 
+                They are using staffs, spell-books or scepters as weapons.
+                Theirs power is as wild as element they use. 
+            </p>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-1" align="center">
+            <input asp-for="Profession" type="radio" value="@HeroProfession.Necromancer" disabled="true"/>
+        </div>
+        <div class="col-md-2" align="center">
+            <img src="~/Images/Hero/Professions/Necromancer.png" width="100" height="100"/>
+        </div>
+        <div class="col-md-7">
+            <h5>Necromancer</h5>
+            <p>Coming soon...</p>
+        </div>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <input type="submit" value="Set profession" class="btn btn-primary"/>
+    </div>
+</form>
+
+<div>
+    <br />
+    <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.PlayerId">Leave Creator</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

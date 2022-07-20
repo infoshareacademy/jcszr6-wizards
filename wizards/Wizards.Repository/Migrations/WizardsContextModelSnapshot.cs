@@ -37,7 +37,9 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Gold")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("NickName")
                         .IsRequired()
@@ -131,6 +133,9 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("SellPrice")
                         .HasColumnType("int");
 
+                    b.Property<int>("Tier")
+                        .HasColumnType("int");
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -158,9 +163,6 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<int>("Defense")
                         .HasColumnType("int");
-
-                    b.Property<double>("ItemEndurance")
-                        .HasColumnType("float");
 
                     b.Property<int>("MaxHealth")
                         .HasColumnType("int");
@@ -191,7 +193,14 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("InUse")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<double>("ItemEndurance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(100.0);
 
                     b.HasKey("HeroId", "ItemId");
 
@@ -246,16 +255,24 @@ namespace Wizards.Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("RankPoints")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("TotalMatchLoose")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("TotalMatchPlayed")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("TotalMatchWin")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 

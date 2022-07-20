@@ -2,33 +2,46 @@
 @model WizardsWeb.ModelViews.PlayerDetailsModelView
 
 <h2>Player's Heroes</h2>
-<br/>
+<br />
+<a type="button" class="btn btn-warning" asp-controller="Hero" asp-action="StartCreation" asp-route-playerId="@Model.Id">Create New Hero</a>
+<br />
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            <label asp-for="Heroes.First().NickName"></label>
-        </th>
-        <th>
-            <label asp-for="Heroes.First().Profession"></label>
-        </th>
-    </tr>
+        <tr>
+            <th>
+                <label asp-for="Heroes.First().AvatarImageNumber">Avatar</label>
+            </th>
+            <th>
+                <label asp-for="Heroes.First().NickName">Nick Name</label>
+            </th>
+            <th>
+                <label asp-for="Heroes.First().Profession">Profession</label>
+            </th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var hero in Model.Heroes)
-    {
-        <tr>
-            <td>
-                @hero.NickName
-            </td>
-            <td>
-                @hero.Profession
-            </td>
-            <td>
-                <button asp-action="Details" asp-route-id="@hero.Id">Play</button> |
-                <button asp-action="Delete" asp-route-id="@hero.Id">Delete</button>
-            </td>
-        </tr>
-    }
+        @foreach (var hero in Model.Heroes)
+        {
+            var avatar = $"Images/Hero/Avatars/Wizard-{hero.AvatarImageNumber}.png";
+            <tr>
+                <td>
+                    <img src="~/@avatar" width="90" height="120" />
+                </td>
+                <td>
+                    @hero.NickName
+                </td>
+                <td>
+                    @hero.Profession
+                </td>
+                <td>
+                    <a type="button" class="btn btn-primary" asp-controller="Hero" asp-action="Details" asp-route-id="@hero.Id">
+                        Play Character
+                    </a> 
+                    <a type="button" class="btn btn-danger" asp-controller="Hero" asp-action="Delete" asp-route-id="@hero.Id">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
