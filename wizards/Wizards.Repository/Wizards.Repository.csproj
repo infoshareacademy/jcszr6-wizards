@@ -38,8 +38,4 @@
     <ProjectReference Include="..\Wizards.Core\Wizards.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
 </Project>
