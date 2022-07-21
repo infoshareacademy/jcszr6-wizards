@@ -9,7 +9,7 @@ using Wizards.Core.Model;
 
 namespace Wizards.Repository.Repository
 {
-    internal class ItemRepository : IItemRepository
+    public class ItemRepository : IItemRepository
 
     {
         private readonly WizardsContext _wizardsContext;
