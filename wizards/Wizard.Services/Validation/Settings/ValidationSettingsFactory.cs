@@ -10,6 +10,7 @@ namespace Wizards.Services.Validation.Settings
     {
         private static PlayerValidationSettings _playerSettings;
         private static HeroValidationSettings _heroSettings;
+        private static ItemValidationSettings _itemSettings;
 
         static ValidationSettingsFactory()
         {
@@ -63,6 +64,67 @@ namespace Wizards.Services.Validation.Settings
                 },
                 AlredyInUseTask = new AlredyInUse()
             };
+
+            _itemSettings = new ItemValidationSettings()
+            {
+                NameTasks = new List<IStringValidationTask>()
+                {
+                    new IsNull(),
+                    new StringMinLength(3),
+                    new StringMaxLength(50),
+                    new RestrictedWords(),
+                    new AllowedCharacters("abcdefghijklmnoprstuvwxyz ()-+=/:")
+                },
+                TypeTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(0, 10)
+                },
+                RestrictionsTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(0, 10)
+                },
+                TierTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(1, 5)
+                },
+                BuyPriceTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(1, 100_000)
+                },
+                SellPriceTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(1, 100_000)
+                },
+                DamageTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(-10, 50)
+                },
+                PrecisionTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(-10, 50)
+                },
+                SpecjalizationTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(-10, 50)
+                },
+                MaxHealthTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(25, 300)
+                },
+                CurrentHealthTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(25, 300)
+                },
+                ReflexTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(-10, 50)
+                },
+                DefenseTasks = new List<INumberValidationTask>()
+                {
+                    new NumberRange(-10, 50)
+                },
+                AlredyInUseTask = new AlredyInUse()
+            };
         }
 
         public static PlayerValidationSettings GetPlayersValidationSettings()
@@ -73,6 +135,11 @@ namespace Wizards.Services.Validation.Settings
         public static HeroValidationSettings GetHeroValidationSettings()
         {
             return _heroSettings;
+        }
+
+        public static ItemValidationSettings GetItemValidationSettings()
+        {
+            return _itemSettings;
         }
     }
 }
