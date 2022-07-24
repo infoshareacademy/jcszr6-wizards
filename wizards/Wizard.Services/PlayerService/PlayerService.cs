@@ -45,7 +45,7 @@ namespace Wizards.Services.PlayerService
 
             var playerToUpdate = await Get(id);
             
-            playerToUpdate.Password = player.Password;
+            //playerToUpdate.Password = player.Password;
 
             await _playerRepository.Update(playerToUpdate);
         }

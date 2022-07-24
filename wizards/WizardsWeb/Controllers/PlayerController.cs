@@ -84,7 +84,7 @@ namespace WizardsWeb.Controllers
             }
 
             var player = _mapper.Map<Player>(playerEdit);
-            player.Password = originalPlayer.Password;
+            //player.Password = originalPlayer.Password;
 
             try
             {
@@ -118,10 +118,10 @@ namespace WizardsWeb.Controllers
             var originalPlayer = await _playerService.Get(passwordChange.Id);
             passwordChange.UserName = originalPlayer.UserName;
 
-            if (originalPlayer.Password != passwordChange.EnterOldPassword)
-            {
-                ModelState.AddModelError("EnterOldPassword", "Incorrect actual Password!");
-            }
+            //if (originalPlayer.Password != passwordChange.EnterOldPassword)
+            //{
+            //    ModelState.AddModelError("EnterOldPassword", "Incorrect actual Password!");
+            //}
 
             if (!ModelState.IsValid)
             {
@@ -165,10 +165,10 @@ namespace WizardsWeb.Controllers
             var originalPlayer = await _playerService.Get(playerDelete.Id);
             playerDelete.UserName = originalPlayer.UserName;
 
-            if (originalPlayer.Password != playerDelete.PasswordToConfirmDelete)
-            {
-                ModelState.AddModelError("PasswordToConfirmDelete", "Invalid Password!");
-            }
+            //if (originalPlayer.Password != playerDelete.PasswordToConfirmDelete)
+            //{
+            //    ModelState.AddModelError("PasswordToConfirmDelete", "Invalid Password!");
+            //}
 
             if (!ModelState.IsValid)
             {

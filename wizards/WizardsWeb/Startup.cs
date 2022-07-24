@@ -11,6 +11,8 @@ using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
+using Wizards.Core.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace WizardsWeb
 {
@@ -27,7 +29,7 @@ namespace WizardsWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
+
 
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IPlayerService, PlayerService>();
@@ -38,11 +40,26 @@ namespace WizardsWeb
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
 
+            services.AddIdentity<Player, IdentityRole<int>>(
+                options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    //Other options go here
+
+                })
+                .AddEntityFrameworkStores<WizardsContext>(); 
+            ;
+
+            services.AddRazorPages();
+
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
 
             var profileAssembly = typeof(Startup).Assembly;
             services.AddAutoMapper(profileAssembly);
+
+
+
 
         }
 
@@ -66,14 +83,19 @@ namespace WizardsWeb
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
             });
+
+
         }
     }
 }

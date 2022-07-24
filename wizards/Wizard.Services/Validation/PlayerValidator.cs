@@ -28,7 +28,7 @@ namespace Wizards.Services.Validation
                 ValidateUserName(player.UserName);
                 await UserNameInUse(player.UserName);
             }
-            ValidatePassword(player.Password);
+            //ValidatePassword(player.Password);
             ValidateEmail(player.Email);
             if (!await _playerRepository.Exist(player.Id, player.Email))
             {
