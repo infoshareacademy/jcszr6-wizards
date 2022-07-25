@@ -48,7 +48,12 @@ namespace WizardsWeb.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            
+            [Display(Name = "User Name")]
+            [MinLength(3)]
+            [MaxLength(20)]
+            public string UserName { get; set; }
+
+            [Required]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
@@ -62,6 +67,11 @@ namespace WizardsWeb.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Date of birth")]
+            [DataType(DataType.Date)]
+            public DateTime DateOfBirth { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -76,7 +86,8 @@ namespace WizardsWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Player { UserName = Input.Email, Email = Input.Email, Password = Input.Password };
+                //var user = new Player { UserName = Input.Email, Email = Input.Email, Password = Input.Password };
+                var user = new Player { UserName = Input.UserName, Email = Input.Email, DateOfBirth = Input.DateOfBirth };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -93,14 +104,15 @@ namespace WizardsWeb.Areas.Identity.Pages.Account
                     //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                     //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
+                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //{
+                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    //}
+                    //else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        //return LocalRedirect(returnUrl);
+                        return RedirectToAction("Details", "Player", new {id = 1});
                     }
                 }
                 foreach (var error in result.Errors)
