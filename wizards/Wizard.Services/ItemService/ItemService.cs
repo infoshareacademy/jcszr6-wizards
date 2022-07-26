@@ -5,19 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
+using Wizards.Services.Validation;
 
 namespace Wizards.Services.ItemService
 {
     internal class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
+        private readonly IItemValidator _itemValidator;
 
-        public ItemService(IItemRepository itemRepository)
+        public ItemService(IItemRepository itemRepository, IItemValidator itemValidator)
         {
             _itemRepository = itemRepository;
+            _itemValidator = itemValidator;
         }
         public async Task Add(Item item)
         {
+            await _itemValidator.Validate(item);
             await _itemRepository.Add(item);
         }
 
@@ -43,7 +47,16 @@ namespace Wizards.Services.ItemService
 
         public async Task Update(Item item)
         {
-            await _itemRepository.Update(item);
+            await _itemValidator.Validate(item);
+
+            var itemToUpdate = await Get(item.Id);
+            itemToUpdate.Name = item.Name;
+            itemToUpdate.Tier = item.Tier;
+            itemToUpdate.BuyPrice = item.BuyPrice;
+            itemToUpdate.SellPrice = item.SellPrice;
+            itemToUpdate.Attributes = item.Attributes;
+            //w atrybutach są przekazane referencje (może będzie trzeba zminić)
+            await _itemRepository.Update(itemToUpdate);
         }
     }
 }
