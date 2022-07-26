@@ -19,7 +19,7 @@ namespace Wizards.Services.Validation.Elements
         
         public List<INumberValidationTask> DamageTasks { get; set; }
         public List<INumberValidationTask> PrecisionTasks { get; set; }
-        public List<INumberValidationTask> SpecjalizationTasks { get; set; }
+        public List<INumberValidationTask> SpecializationTasks { get; set; }
         public List<INumberValidationTask> MaxHealthTasks { get; set; }
         public List<INumberValidationTask> CurrentHealthTasks { get; set; }
         public List<INumberValidationTask> ReflexTasks { get; set; }

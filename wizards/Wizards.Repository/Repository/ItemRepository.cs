@@ -35,6 +35,11 @@ namespace Wizards.Repository.Repository
             return await _wizardsContext.Items.ToListAsync();
         }
 
+        public async Task<List<string>> GetAllNames()
+        {
+            return await _wizardsContext.Items.Select(i => i.Name).ToListAsync();
+        }
+
         public async Task Remove(Item item)
         {
             _wizardsContext.Remove(item);

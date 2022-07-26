@@ -103,7 +103,7 @@ namespace Wizards.Services.Validation.Settings
                 {
                     new NumberRange(-10, 50)
                 },
-                SpecjalizationTasks = new List<INumberValidationTask>()
+                SpecializationTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(-10, 50)
                 },
