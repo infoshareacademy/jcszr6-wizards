@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+using Wizards.Core.Model;
 using Wizards.Services.ItemService;
 using WizardsWeb.ModelViews.ItemModelViews;
 
@@ -37,15 +39,23 @@ namespace WizardsWeb.Controllers
         // POST: ItemController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ItemCreateModelView itemCreate)
+        public async Task<ActionResult> Create(ItemCreateModelView itemCreate)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(itemCreate);
+            }
+
+            var item = _mapper.Map<Item>(itemCreate);
+
             try
             {
+                await _itemService.Add(item);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(itemCreate);
             }
         }
 
