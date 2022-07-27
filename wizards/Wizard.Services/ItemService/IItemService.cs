@@ -7,7 +7,7 @@ using Wizards.Core.Model;
 
 namespace Wizards.Services.ItemService
 {
-    internal interface IItemService
+    public interface IItemService
     {
         Task<List<Item>> GetAll();
         Task<Item> Get(int id);

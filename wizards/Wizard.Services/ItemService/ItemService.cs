@@ -9,7 +9,7 @@ using Wizards.Services.Validation;
 
 namespace Wizards.Services.ItemService
 {
-    internal class ItemService : IItemService
+    public class ItemService : IItemService
     {
         private readonly IItemRepository _itemRepository;
         private readonly IItemValidator _itemValidator;

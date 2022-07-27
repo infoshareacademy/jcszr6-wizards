@@ -27,7 +27,9 @@ namespace Wizards.Repository.Repository
 
         public async Task<Item> Get(int id)
         {
-            return await _wizardsContext.Items.SingleOrDefaultAsync(i => i.Id == id);
+            return await _wizardsContext.Items
+                .Include(i => i.Attributes)
+                .SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public async Task<List<Item>> GetAll()

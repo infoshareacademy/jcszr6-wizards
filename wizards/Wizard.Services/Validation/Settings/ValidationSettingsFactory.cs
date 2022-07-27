@@ -109,11 +109,11 @@ namespace Wizards.Services.Validation.Settings
                 },
                 MaxHealthTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(25, 300)
+                    new NumberRange(25, 500)
                 },
                 CurrentHealthTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(25, 300)
+                    new NumberRange(25, 500)
                 },
                 ReflexTasks = new List<INumberValidationTask>()
                 {
