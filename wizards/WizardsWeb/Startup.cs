@@ -11,6 +11,7 @@ using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
+using Wizards.Services.SearchService;
 
 namespace WizardsWeb
 {
@@ -37,6 +38,12 @@ namespace WizardsWeb
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
+
+
+
+            services.AddTransient<ISearchService, SearchService>();
+
+
 
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
