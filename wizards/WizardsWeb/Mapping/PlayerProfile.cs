@@ -2,7 +2,7 @@
 using AutoMapper;
 using Wizards.Core.Model;
 using WizardsWeb.ModelViews;
-using WizardsWeb.ModelViews.PlayerDetailsDto;
+using WizardsWeb.ModelViews.RankingModelViews;
 
 
 namespace WizardsWeb.Mapping;

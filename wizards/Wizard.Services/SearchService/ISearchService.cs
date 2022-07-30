@@ -11,7 +11,8 @@ namespace Wizards.Services.SearchService
     {
 
         Task<List<Player>> GetAll();
-        Task ByUsername(string username);
+        Task<List<Player>> ByUsername(string username);
+
         Task ByBirthday(int fromYear, int toYear);
         Task ByEmail(string email);
         

@@ -1,5 +1,4 @@
-﻿namespace WizardsWeb.ModelViews.PlayerDetailsDto
-{
+﻿namespace WizardsWeb.ModelViews.RankingModelViews;
     public class PlayerDetailsDto
     {
         public string UserName { get; set; }
@@ -8,4 +7,4 @@
         public int RankNumber { get; set; }
         public int GoldHeroNumber { get; set; }
     }
-}
+

@@ -88,7 +88,7 @@ public class PlayerRepository : IPlayerRepository
     public async Task<List<Player>> GetByUserName(string userName)
     {
         return await _wizardsContext.Players
-            .Where(p => p.UserName.Contains(userName, StringComparison.OrdinalIgnoreCase))
+            .Where(p => p.UserName.ToLower().Contains(userName.ToLower()))
             .ToListAsync();
     }
 

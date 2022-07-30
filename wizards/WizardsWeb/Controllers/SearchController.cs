@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGeneration;
 using Wizards.Services.SearchService;
 using WizardsWeb.ModelViews;
-using WizardsWeb.ModelViews.PlayerDetailsDto;
-using WizardsWeb.ModelViews.SearchModelViews;
+using WizardsWeb.ModelViews.RankingModelViews;
+
 
 
 namespace WizardsWeb.Controllers
@@ -28,21 +28,51 @@ namespace WizardsWeb.Controllers
         }
 
 
+        public async Task<ActionResult> Index()
+        {
+            var players = await _searchService.GetAll();
+            var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
+            return View(new RankingModelViews()
+                { PlayerDetailsDto = playerDetails});
+
+        }
 
 
-        public async Task<ActionResult> Index(SearchModelView searchModelView)
+        [HttpPost]
+        public async Task<ActionResult> Index(RankingModelViews ranking)
         // GET: SearchController/Index
         {
 
-            var playersDto = new List<PlayerDetailsDto>();
-            var players = await  _searchService.GetAll();
-            var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
-            var model = playerDetails;
-            if (searchModelView.DateOfBirth == null && searchModelView.Email == null && searchModelView.UserName == null)
+
+            //var players = await _searchService.GetAll();
+            //var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
+            //var model = playerDetails;
+
+            if (ranking == null)
             {
+                return RedirectToAction("Index");
+            }
+
+            var playersDetails = new List<PlayerDetailsDto>();
+
+            if (ranking.UserName != null)
+
+            {
+                var filtredPlayers = await _searchService.ByUsername(ranking.UserName);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
+
 
             }
-            
+
+            ranking.PlayerDetailsDto = playersDetails;
+
+
+
+            //if (searchModelView.DateOfBirth == null && searchModelView.Email == null && searchModelView.UserName == null)
+            //{
+
+            //}
+
             //int i = 0;
             //foreach (var player in playerDetails)
             //{
@@ -50,9 +80,11 @@ namespace WizardsWeb.Controllers
             //    player.GoldHeroNumber = players[i].Heroes.Sum(x => x.Gold);
             //    i++;
             //}
-         return View(model);
+            return View(ranking);
         }
 
+
+      
 
         // GET: SearchController/AllUsers
         public ActionResult AllUsers()

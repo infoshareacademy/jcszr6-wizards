@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <Folder Include="ModelViews\HeroModelViews\Properties\" />
+    <Folder Include="ModelViews\PlayerDetailsDto\" />
   </ItemGroup>
 
 </Project>

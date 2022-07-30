@@ -28,9 +28,9 @@ namespace Wizards.Services.SearchService
         }
 
 
-        public async Task ByUsername(string username)
+        public async Task<List<Player>> ByUsername(string username)
         {
-            await _playerRepository.GetByUserName(username);
+            return await _playerRepository.GetByUserName(username);
         }
 
 
