@@ -42,13 +42,11 @@
 <div class="col-md-6">
     <form asp-action="Delete">
         <div class="form-group">
-            <input asp-for="Id" hidden="True"/>
-            
             <label asp-for="PasswordToConfirmDelete" class="control-label"></label>
             <input asp-for="PasswordToConfirmDelete" class="form-control"/>
             <span asp-validation-for="PasswordToConfirmDelete" class="text-danger"></span>
         </div>
         <input type="submit" value="Delete" class="btn btn-danger" />
     </form>
-    <a type="button" class="btn btn-success"  asp-action="Edit" asp-route-id="@Model.Id">Cancel</a>
+    <a type="button" class="btn btn-success"  asp-action="Edit">Cancel</a>
 </div>

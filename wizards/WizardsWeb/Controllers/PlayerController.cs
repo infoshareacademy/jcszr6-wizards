@@ -62,7 +62,10 @@ namespace WizardsWeb.Controllers
                 _userManager.Options.Password.RequireNonAlphanumeric = true;
                 _userManager.Options.Password.RequiredLength = 8;
 
+
                 var user = new Player { UserName = playerCreate.UserName, Email = playerCreate.Email, DateOfBirth = playerCreate.DateOfBirth };
+                
+                //_playerService.ValidateForCreate(user);
                 
                 var result = await _userManager.CreateAsync(user, playerCreate.Password);
                 
@@ -70,6 +73,11 @@ namespace WizardsWeb.Controllers
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction(nameof(Details));
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
                 }
 
                 return View(playerCreate);
@@ -127,7 +135,8 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(PlayerEditModelView playerEdit)
         {
-            var originalPlayer = await _playerService.Get(playerEdit.Id);
+            var playerId = Int32.Parse(_userManager.GetUserId(User));
+            var originalPlayer = await _playerService.Get(playerId);
             playerEdit.UserName = originalPlayer.UserName;
 
             if (!ModelState.IsValid)
@@ -136,12 +145,12 @@ namespace WizardsWeb.Controllers
             }
 
             var player = _mapper.Map<Player>(playerEdit);
-            //player.Password = originalPlayer.Password;
+            player.Id = playerId;
 
             try
             {
-                await _playerService.Update(player.Id, player);
-                return RedirectToAction(nameof(Details), new { id = player.Id });
+                await _playerService.Update(playerId, player);
+                return RedirectToAction(nameof(Details));
             }
             catch (InvalidModelException exception)
             {
@@ -168,27 +177,31 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditPassword(PasswordChangeModelView passwordChange)
         {
-            var originalPlayer = await _playerService.Get(passwordChange.Id);
+            
+            var originalPlayer = await _playerService.Get(Int32.Parse(_userManager.GetUserId(User)));
+            
             passwordChange.UserName = originalPlayer.UserName;
-
-            //if (originalPlayer.Password != passwordChange.EnterOldPassword)
-            //{
-            //    ModelState.AddModelError("EnterOldPassword", "Incorrect actual Password!");
-            //}
 
             if (!ModelState.IsValid)
             {
                 return View(passwordChange);
             }
 
-            var player = _mapper.Map<Player>(passwordChange);
-            player.Email = originalPlayer.Email;
-            player.DateOfBirth = originalPlayer.DateOfBirth;
-
             try
             {
-                await _playerService.UpdatePassword(player.Id, player);
-                return RedirectToAction(nameof(Edit), new { id = player.Id });
+                var result = await _userManager.ChangePasswordAsync(originalPlayer, passwordChange.EnterOldPassword, passwordChange.NewPassword);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(Edit));
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(passwordChange);
             }
             catch (InvalidModelException exception)
             {

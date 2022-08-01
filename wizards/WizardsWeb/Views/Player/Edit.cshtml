@@ -7,14 +7,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <a type="button" class="btn btn-primary" asp-action="EditPassword" asp-route-id="@Model.Id">Edit Password</a><br/><br/>
-        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a>
+        <a type="button" class="btn btn-primary" asp-action="EditPassword">Edit Password</a><br/><br/>
+        <a type="button" class="btn btn-danger" asp-action="Delete">Delete Account</a>
         <br/>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="Id" hidden="true"/>
-            </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control"/>

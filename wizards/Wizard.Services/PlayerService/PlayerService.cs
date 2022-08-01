@@ -34,6 +34,8 @@ namespace Wizards.Services.PlayerService
             var playerToUpdate = await Get(id);
             
             playerToUpdate.Email = player.Email;
+            playerToUpdate.NormalizedEmail = player.Email.ToUpper();
+
             playerToUpdate.DateOfBirth = player.DateOfBirth;
 
             await _playerRepository.Update(playerToUpdate);
