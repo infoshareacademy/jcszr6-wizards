@@ -1,11 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Model;
 using Wizards.Core.Model.ManyToManyTables;
 
 namespace Wizards.Repository
 {
-    public class WizardsContext : DbContext
+    public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
     {
+        public WizardsContext(DbContextOptions<WizardsContext> options)
+            : base(options)
+        {
+        }
 
         private readonly bool _useLazyLoading;
 
@@ -43,7 +49,6 @@ namespace Wizards.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Player>()
                 .Property(p => p.Id);
             modelBuilder.Entity<Player>()
@@ -53,9 +58,9 @@ namespace Wizards.Repository
             modelBuilder.Entity<Player>()
                 .HasIndex(p => p.UserName)
                 .IsUnique();
-            modelBuilder.Entity<Player>()
-                .Property(p => p.Password)
-                .HasMaxLength(50);
+            //modelBuilder.Entity<Player>()
+            //    .Property(p => p.Password)
+                //.HasMaxLength(50);
             modelBuilder.Entity<Player>()
                 .Property(p => p.Email)
                 .HasMaxLength(50)
