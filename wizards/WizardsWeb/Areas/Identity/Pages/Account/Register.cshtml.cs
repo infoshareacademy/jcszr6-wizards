@@ -83,12 +83,17 @@ namespace WizardsWeb.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            
             if (ModelState.IsValid)
             {
                 //var user = new Player { UserName = Input.Email, Email = Input.Email, Password = Input.Password };
+                
                 var user = new Player { UserName = Input.UserName, Email = Input.Email, DateOfBirth = Input.DateOfBirth };
+                
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -108,12 +113,12 @@ namespace WizardsWeb.Areas.Identity.Pages.Account
                     //{
                     //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     //}
-                    //else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        //return LocalRedirect(returnUrl);
-                        return RedirectToAction("Details", "Player", new {id = 1});
-                    }
+
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    
+                    //return LocalRedirect(returnUrl);
+                    
+                    return RedirectToAction("Details", "Player");
                 }
                 foreach (var error in result.Errors)
                 {

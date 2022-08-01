@@ -8,6 +8,10 @@ namespace Wizards.Core.Model
         //public string UserName { get;  set; }
         //public string Password { get; set; }
         //public string Email { get;  set; }
+
+        //public int? ActiveHeroId { get; set; }
+        //public int? ActiveItemId { get; set; }
+        
         public DateTime DateOfBirth { get; set; }
 
         public List<Hero> Heroes = new();

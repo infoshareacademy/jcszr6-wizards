@@ -49,7 +49,6 @@ namespace Wizards.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Player>()
                 .Property(p => p.Id);
             modelBuilder.Entity<Player>()
