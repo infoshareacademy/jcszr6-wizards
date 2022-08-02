@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Wizards.Core.Model;
 using Wizards.Services.ItemService;
+using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.ItemModelViews;
 
 namespace WizardsWeb.Controllers
@@ -53,12 +54,16 @@ namespace WizardsWeb.Controllers
                 await _itemService.Add(item);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (InvalidModelException exception)
             {
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError(data.Key, data.Value);
+                }
+
                 return View(itemCreate);
             }
         }
-
         // GET: ItemController/Edit/5
         public ActionResult Edit(int id)
         {

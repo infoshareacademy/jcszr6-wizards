@@ -22,6 +22,7 @@ namespace Wizards.Services.ItemService
         public async Task Add(Item item)
         {
             await _itemValidator.Validate(item);
+            item.Attributes.CurrentHealth = item.Attributes.MaxHealth;
             await _itemRepository.Add(item);
         }
 

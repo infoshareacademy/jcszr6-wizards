@@ -47,7 +47,7 @@ namespace WizardsWeb.ModelViews.ItemModelViews
 
         [Required]
         [Display(Name = "Max Health")]
-        [Range(25, 500)]
+        [Range(0, 500)]
         public int MaxHealth { get; set; }
 
         [Required]

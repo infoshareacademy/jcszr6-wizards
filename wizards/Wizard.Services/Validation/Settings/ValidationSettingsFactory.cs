@@ -89,11 +89,11 @@ namespace Wizards.Services.Validation.Settings
                 },
                 BuyPriceTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(1, 100_000)
+                    new NumberRange(0, 100_000)
                 },
                 SellPriceTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(1, 100_000)
+                    new NumberRange(0, 100_000)
                 },
                 DamageTasks = new List<INumberValidationTask>()
                 {
@@ -109,11 +109,11 @@ namespace Wizards.Services.Validation.Settings
                 },
                 MaxHealthTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(25, 500)
+                    new NumberRange(0, 500)
                 },
                 CurrentHealthTasks = new List<INumberValidationTask>()
                 {
-                    new NumberRange(25, 500)
+                    new NumberRange(0, 500)
                 },
                 ReflexTasks = new List<INumberValidationTask>()
                 {
