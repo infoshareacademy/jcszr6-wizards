@@ -24,9 +24,12 @@ namespace Wizards.Services.Validation
         {
             ValidateName(item.Name);
 
-            ValidateType(item.Type);
+            if (await _itemRepository.Get(item.Id) != null)
+            {
+                ValidateType(item.Type);
 
-            ValidateRestriction(item.Restriction);
+                ValidateRestriction(item.Restriction);
+            }
 
             ValidateTier(item.Tier);
 

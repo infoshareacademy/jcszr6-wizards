@@ -22,7 +22,6 @@ namespace Wizards.Services.ItemService
         public async Task Add(Item item)
         {
             await _itemValidator.Validate(item);
-            item.Attributes.CurrentHealth = item.Attributes.MaxHealth;
             await _itemRepository.Add(item);
         }
 
@@ -55,8 +54,13 @@ namespace Wizards.Services.ItemService
             itemToUpdate.Tier = item.Tier;
             itemToUpdate.BuyPrice = item.BuyPrice;
             itemToUpdate.SellPrice = item.SellPrice;
-            itemToUpdate.Attributes = item.Attributes;
-            //w atrybutach są przekazane referencje (może będzie trzeba zminić)
+            itemToUpdate.Attributes.Damage = item.Attributes.Damage;
+            itemToUpdate.Attributes.Precision = item.Attributes.Precision;
+            itemToUpdate.Attributes.Specialization = item.Attributes.Specialization;
+            itemToUpdate.Attributes.MaxHealth = item.Attributes.MaxHealth;
+            itemToUpdate.Attributes.Reflex = item.Attributes.Reflex;
+            itemToUpdate.Attributes.Defense = item.Attributes.Defense;
+
             await _itemRepository.Update(itemToUpdate);
         }
     }

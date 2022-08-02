@@ -65,23 +65,40 @@ namespace WizardsWeb.Controllers
             }
         }
         // GET: ItemController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            var item = await _itemService.Get(id);
+            var itemEdit = _mapper.Map<ItemEditModelView>(item);
+            return View(itemEdit);
         }
 
         // POST: ItemController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(ItemEditModelView itemEdit)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(itemEdit);
+            }
+
+            var orginalItem = await _itemService.Get(itemEdit.Id);
+
+            var item = _mapper.Map<Item>(itemEdit);
+
             try
             {
+                await _itemService.Update(item);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (InvalidModelException exception)
             {
-                return View();
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError(data.Key, data.Value);
+                }
+
+                return View(itemEdit);
             }
         }
 
