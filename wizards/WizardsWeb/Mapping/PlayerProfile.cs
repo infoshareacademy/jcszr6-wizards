@@ -8,16 +8,16 @@ public class PlayerProfile : Profile
 {
     public PlayerProfile()
     {
-        CreateMap<PlayerCreateModelView, Player>()
-            .ForMember(dto => dto.Password, 
-                expr =>expr.MapFrom(s => s.Password));
+        //CreateMap<PlayerCreateModelView, Player>()
+        //    .ForMember(dto => dto.Password, 
+        //        expr =>expr.MapFrom(s => s.Password));
 
         CreateMap<Player, PlayerEditModelView>()
             .ReverseMap();
 
-        CreateMap<PasswordChangeModelView, Player>()
-            .ForMember(dto => dto.Password, 
-                expr => expr.MapFrom(s => s.NewPassword));
+        //CreateMap<PasswordChangeModelView, Player>()
+        //    .ForMember(dto => dto.Password, 
+        //        expr => expr.MapFrom(s => s.NewPassword));
 
         CreateMap<Player, PasswordChangeModelView>()
             .ForMember(dto => dto.EnterOldPassword, expr => expr.Ignore())
