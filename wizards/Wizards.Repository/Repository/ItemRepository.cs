@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 
@@ -23,6 +18,11 @@ namespace Wizards.Repository.Repository
         {
             await _wizardsContext.AddAsync(item);
             await _wizardsContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> Exists(int id, string name)
+        {
+            return await _wizardsContext.Items.AnyAsync(i => i.Id == id && i.Name == name);
         }
 
         public async Task<Item> Get(int id)

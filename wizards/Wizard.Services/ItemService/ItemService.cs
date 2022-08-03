@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wizards.Core.Interfaces;
+﻿using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Services.Validation;
 
@@ -28,10 +23,12 @@ namespace Wizards.Services.ItemService
         public async Task<Item> Get(int id)
         {
             var result = await _itemRepository.Get(id);
+
             if (result == null)
             {
                 throw new NullReferenceException($"There is no Item with Id:{id}");
             }
+
             return result;
         }
 
@@ -50,6 +47,7 @@ namespace Wizards.Services.ItemService
             await _itemValidator.Validate(item);
 
             var itemToUpdate = await Get(item.Id);
+
             itemToUpdate.Name = item.Name;
             itemToUpdate.Tier = item.Tier;
             itemToUpdate.BuyPrice = item.BuyPrice;

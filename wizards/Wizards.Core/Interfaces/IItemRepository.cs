@@ -15,5 +15,6 @@ namespace Wizards.Core.Interfaces
         Task Update(Item item);
         Task Remove(Item item);
         Task<List<string>> GetAllNames();
+        Task<bool> Exists(int id, string name);
     }
 }

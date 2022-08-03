@@ -82,8 +82,6 @@ namespace WizardsWeb.Controllers
                 return View(itemEdit);
             }
 
-            var orginalItem = await _itemService.Get(itemEdit.Id);
-
             var item = _mapper.Map<Item>(itemEdit);
 
             try

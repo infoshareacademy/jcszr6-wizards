@@ -22,6 +22,8 @@ namespace Wizards.Services.Validation
         }
         public async Task Validate(Item item)
         {
+            _isValid = true;
+
             ValidateName(item.Name);
 
             if (await _itemRepository.Get(item.Id) != null)
@@ -39,7 +41,15 @@ namespace Wizards.Services.Validation
 
             ValidateAttributes(item.Attributes);
 
-            await ValidateNameInUse(item.Name);
+            if (!await _itemRepository.Exists(item.Id, item.Name))
+            {
+                await ValidateNameInUse(item.Name);
+            }
+
+            if (!_isValid)
+            {
+                throw new InvalidModelException(_modelStatesData);
+            }
         }      
 
         private void ValidateName(string name)
@@ -146,12 +156,16 @@ namespace Wizards.Services.Validation
             ValidateSingleAttribute(attributes.Precision, _settings.PrecisionTasks, "Precision");
             ValidateSingleAttribute(attributes.Specialization, _settings.SpecializationTasks, "Specialization");
             ValidateSingleAttribute(attributes.MaxHealth, _settings.MaxHealthTasks, "Max Health");
-            ValidateSingleAttribute(attributes.CurrentHealth, _settings.CurrentHealthTasks, "Current Health");
             ValidateSingleAttribute(attributes.Reflex, _settings.ReflexTasks, "Reflex");
             ValidateSingleAttribute(attributes.Defense, _settings.DefenseTasks, "Defense");
         }
         private async Task ValidateNameInUse(string name)
         {
+            if (_modelStatesData.Keys.Contains("Name"))
+            {
+                return;
+            }
+
             var inUseName = _settings.AlredyInUseTask.Validate(name, await _itemRepository.GetAllNames());
             if (!inUseName.IsValid)
             {

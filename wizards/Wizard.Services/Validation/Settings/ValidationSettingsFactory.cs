@@ -1,6 +1,4 @@
-﻿using Wizards.Repository.TextRepo;
-using Wizards.Repository.TextRepo.Enums;
-using Wizards.Services.Validation.Elements;
+﻿using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.ValidationTasks;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
@@ -108,10 +106,6 @@ namespace Wizards.Services.Validation.Settings
                     new NumberRange(-10, 50)
                 },
                 MaxHealthTasks = new List<INumberValidationTask>()
-                {
-                    new NumberRange(0, 500)
-                },
-                CurrentHealthTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 500)
                 },
