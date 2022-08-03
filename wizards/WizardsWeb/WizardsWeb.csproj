@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <Folder Include="ModelViews\HeroModelViews\Properties\" />
-    <Folder Include="Mapping\" />
   </ItemGroup>
 
 </Project>

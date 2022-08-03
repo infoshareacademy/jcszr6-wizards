@@ -11,6 +11,7 @@ using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
+using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
 
@@ -39,7 +40,11 @@ namespace WizardsWeb
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
-
+            
+            services.AddTransient<IItemRepository, ItemRepository>();
+            services.AddTransient<IItemService, ItemService>();
+            services.AddTransient<IItemValidator, ItemValidator>();
+            
             services.AddIdentity<Player, IdentityRole<int>>(
                 options =>
                 {
