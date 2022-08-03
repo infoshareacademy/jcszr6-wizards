@@ -13,8 +13,8 @@ namespace Wizards.Services.SearchService
         Task<List<Player>> GetAll();
         Task<List<Player>> ByUsername(string username);
 
-        Task ByBirthday(int fromYear, int toYear);
-        Task ByEmail(string email);
+        Task<List<Player>> ByBirthday(int fromYear, int toYear);
+        Task<List<Player>> ByEmail(string email);
         
     }
 }

@@ -33,7 +33,7 @@ namespace WizardsWeb.Controllers
             var players = await _searchService.GetAll();
             var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
             return View(new RankingModelViews()
-                { PlayerDetailsDto = playerDetails});
+            { PlayerDetailsDto = playerDetails });
 
         }
 
@@ -55,15 +55,15 @@ namespace WizardsWeb.Controllers
 
             var playersDetails = new List<PlayerDetailsDto>();
 
+
             if (ranking.UserName != null)
 
             {
                 var filtredPlayers = await _searchService.ByUsername(ranking.UserName);
                 playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
-
-
             }
 
+         
             ranking.PlayerDetailsDto = playersDetails;
 
 
@@ -84,7 +84,92 @@ namespace WizardsWeb.Controllers
         }
 
 
-      
+
+        public async Task<ActionResult> SearchByUserName(RankingModelViews ranking)
+            // GET: SearchController/Index
+        {
+            
+
+            if (ranking == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var playersDetails = new List<PlayerDetailsDto>();
+
+
+            if (ranking.UserName != null)
+
+            {
+                var filtredPlayers = await _searchService.ByUsername(ranking.UserName);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
+            }
+            
+
+            ranking.PlayerDetailsDto = playersDetails;
+
+
+            return View(ranking);
+        }
+
+
+        public async Task<ActionResult> SearchByEmail(RankingModelViews ranking)
+            // GET: SearchController/Index
+        {
+
+
+            if (ranking == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var playersDetails = new List<PlayerDetailsDto>();
+
+
+            if (ranking.Email != null)
+
+            {
+                var filtredPlayers = await _searchService.ByEmail(ranking.Email);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
+            }
+
+            ranking.PlayerDetailsDto = playersDetails;
+
+
+            return View(ranking);
+        }
+
+
+        public async Task<ActionResult> SearchByDate(RankingModelViews ranking)
+            // GET: SearchController/Index
+        {
+
+
+            if (ranking == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var playersDetails = new List<PlayerDetailsDto>();
+
+
+            if (ranking.FromDate != null && ranking.ToDate != null)
+
+            {
+                var filtredPlayers = await _searchService.ByBirthday(ranking.FromDate, ranking.ToDate);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
+            }
+
+
+            ranking.PlayerDetailsDto = playersDetails;
+
+
+            return View(ranking);
+        }
+
+
+
+
 
         // GET: SearchController/AllUsers
         public ActionResult AllUsers()

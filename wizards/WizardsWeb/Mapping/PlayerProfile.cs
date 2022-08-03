@@ -38,6 +38,7 @@ public class PlayerProfile : Profile
             .ForMember(dto => dto.UserName, expr => expr.MapFrom(x => x.UserName))
             .ForMember(dto => dto.HeroNumber, expr => expr.MapFrom(x => x.Heroes.Count))
             .ForMember(dto => dto.RankNumber, expr => expr.MapFrom(x => x.Heroes.Sum(x=>x.Statistics.RankPoints)))
-            .ForMember(dto => dto.GoldHeroNumber, expr => expr.MapFrom(x => x.Heroes.Sum(x => x.Gold)));
+            .ForMember(dto => dto.GoldHeroNumber, expr => expr.MapFrom(x => x.Heroes.Sum(x => x.Gold)))
+            .ForMember(dto => dto.DateOfBirth, expr => expr.MapFrom(x => x.DateOfBirth.Year));
     }
 }

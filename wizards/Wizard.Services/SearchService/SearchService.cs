@@ -35,16 +35,16 @@ namespace Wizards.Services.SearchService
 
 
 
-        public async Task ByBirthday(int fromYear, int toYear)
+        public async Task<List<Player>> ByBirthday(int fromYear, int toYear)
         {
-            await _playerRepository.GetByYearRange(fromYear, toYear);
+           return await _playerRepository.GetByYearRange(fromYear, toYear);
         }
 
 
 
-        public async Task ByEmail(string email)
+        public async Task<List<Player>> ByEmail(string email)
         {
-            await _playerRepository.GetByEmailAddress(email);
+            return await _playerRepository.GetByEmailAddress(email);
         }
 
 
