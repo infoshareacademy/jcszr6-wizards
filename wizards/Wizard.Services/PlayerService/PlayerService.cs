@@ -12,20 +12,28 @@ namespace Wizards.Services.PlayerService
         private readonly IPlayerRepository _playerRepository;
         private readonly IPlayerValidator _playerValidator;
         private readonly UserManager<Player> _userManager;
-        
+
 
         public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator, UserManager<Player> userManager)
         {
             _playerRepository = playerRepository;
             _playerValidator = playerValidator;
             _userManager = userManager;
+
+            _userManager.UserValidators.Clear();
+            _userManager.PasswordValidators.Clear();
         }
 
         public async Task Create(Player player, string password)
         {
             await _playerValidator.Validate(player, password);
 
-            await _userManager.CreateAsync(player, password);
+            var result = await _userManager.CreateAsync(player, password);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidDataException("Uexpected Error!");
+            }
         }
 
         public async Task Delete(int id, string passwordConfirm)
@@ -61,9 +69,12 @@ namespace Wizards.Services.PlayerService
 
             await _playerValidator.Validate(playerToUpdate, currentPassword, newPassword);
 
-            await _userManager.ChangePasswordAsync(playerToUpdate, currentPassword, newPassword);
-
-            await _playerRepository.Update(playerToUpdate);
+            var result = await _userManager.ChangePasswordAsync(playerToUpdate, currentPassword, newPassword);
+            
+            if (!result.Succeeded)
+            {
+                throw new InvalidDataException("Uexpected Error!");
+            }
         }
 
         public async Task<Player> Get(int id)
@@ -80,7 +91,14 @@ namespace Wizards.Services.PlayerService
 
         public int GetId(ClaimsPrincipal user)
         {
-            return Int32.Parse(_userManager.GetUserId(user));
+            var textId = _userManager.GetUserId(user);
+
+            if (textId == null)
+            {
+                throw new NullReferenceException("No Player Logged in!");
+            }
+
+            return Int32.Parse(textId);
         }
 
     }

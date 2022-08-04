@@ -6,8 +6,6 @@ namespace WizardsWeb.ModelViews
 {
     public class PlayerEditModelView
     {
-        public int Id { get; set; }
-
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 

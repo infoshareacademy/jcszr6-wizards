@@ -27,16 +27,25 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController  "LocalHost4449987/Details"
         public async Task<ActionResult> Details()
         {
-            var playerId = _playerService.GetId(User);
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
 
+            var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerDetails = _mapper.Map<PlayerDetailsModelView>(player);
             return View(playerDetails);
         }
 
         // GET: PlayerController/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                await _signInManager.SignOutAsync();
+            }
+
             return View();
         }
 
@@ -103,6 +112,11 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Edit/5
         public async Task<ActionResult> Edit()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerEdit = _mapper.Map<PlayerEditModelView>(player);
@@ -145,9 +159,15 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/EditPassword/5
         public async Task<ActionResult> EditPassword()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var passwordChage = _mapper.Map<PasswordChangeModelView>(player);
+            
             return View(passwordChage);
         }
 
@@ -187,9 +207,15 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Delete/5
         public async Task<ActionResult> Delete()
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerForDelete = _mapper.Map<PlayerDeleteModelView>(player);
+            
             return View(playerForDelete);
         }
 
@@ -200,7 +226,9 @@ namespace WizardsWeb.Controllers
         {
             var playerId = _playerService.GetId(User);
             var originalPlayer = await _playerService.Get(playerId);
-            playerDelete.UserName = originalPlayer.UserName;
+            var passwordConfirm = playerDelete.PasswordConfirm;
+            
+            playerDelete = _mapper.Map<PlayerDeleteModelView>(originalPlayer);
 
             if (!ModelState.IsValid)
             {
@@ -209,8 +237,9 @@ namespace WizardsWeb.Controllers
 
             try
             {
+                await _playerService.Delete(playerId, passwordConfirm);
+                
                 await _signInManager.SignOutAsync();
-                await _playerService.Delete(playerId, playerDelete.PasswordConfirm);
                 
                 return RedirectToAction(nameof(Index), "Home");
             }

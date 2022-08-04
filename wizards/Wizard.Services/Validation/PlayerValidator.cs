@@ -56,6 +56,7 @@ namespace Wizards.Services.Validation
 
             if (!await _userManager.CheckPasswordAsync(player, currentPassword))
             {
+                _isValid = false;
                 _modelStatesData.Add("CurrentPassword", "Current Password is not correct!");
             }
 
