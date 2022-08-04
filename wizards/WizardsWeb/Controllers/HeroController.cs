@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
 using Wizards.Services.HeroService;
+using Wizards.Services.PlayerService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.Properties;
@@ -17,35 +19,54 @@ namespace WizardsWeb.Controllers
     {
         private readonly IHeroService _heroService;
         private readonly IMapper _mapper;
+        private readonly SignInManager<Player> _signInManager;
+        private readonly IPlayerService _playerService;
 
-        public HeroController(IHeroService heroService, IMapper mapper)
+        public HeroController(IHeroService heroService, IMapper mapper, SignInManager<Player> signInManager, IPlayerService playerService)
         {
             _heroService = heroService;
             _mapper = mapper;
+            _signInManager = signInManager;
+            _playerService = playerService;
         }
-        // GET: HeroController
-        public async Task<ActionResult> Index()
-        {
-            return View();
-        }
-
+        
         // GET: HeroController/Details/5
         public async Task<ActionResult> Details(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!await _heroService.HasPlayerHero(User, id))
+            {
+                return RedirectToAction("Details", "Player");
+            }
+
             var hero = await _heroService.Get(id);
             var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
             heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
+
             return View(heroDetails);
         }
 
         // GET: HeroController/Create
         public ActionResult StartCreation(int playerId)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId });
         }
 
         public ActionResult SetProfessionView(int playerId, HeroProfession profession)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId, Profession = profession });
         }
 
@@ -59,6 +80,10 @@ namespace WizardsWeb.Controllers
 
         public ActionResult SetAvatarView(int playerId, HeroProfession profession, int avatar)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View("SetAvatar", new HeroCreateModelView() { PlayerId = playerId, Profession = profession, AvatarImageNumber = avatar });
         }
 
@@ -75,6 +100,8 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(HeroCreateModelView heroCreate)
         {
+            var playerId = _playerService.GetId(User);
+
             if (!ModelState.IsValid)
             {
                 return View(heroCreate);
@@ -84,7 +111,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Add(heroCreate.PlayerId, hero);
+                await _heroService.Add(playerId, hero);
                 return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
             catch (InvalidModelException exception)
@@ -101,6 +128,16 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Edit/5
         public async Task<ActionResult> EditNickName(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!await _heroService.HasPlayerHero(User, id))
+            {
+                return RedirectToAction("Details", "Player");
+            }
+
+
             var hero = await _heroService.Get(id);
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
@@ -149,6 +186,15 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Edit/5
         public async Task<ActionResult> EditAvatar(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!await _heroService.HasPlayerHero(User, id))
+            {
+                return RedirectToAction("Details", "Player");
+            }
+
             var hero = await _heroService.Get(id);
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeAvatarCost();
@@ -198,6 +244,15 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
+            if (!_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            if (!await _heroService.HasPlayerHero(User, id))
+            {
+                return RedirectToAction("Details", "Player");
+            }
+
             var hero = await _heroService.Get(id);
             var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);

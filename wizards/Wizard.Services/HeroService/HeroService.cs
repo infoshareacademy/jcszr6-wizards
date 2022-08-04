@@ -1,4 +1,5 @@
-﻿using Wizards.Core.Interfaces;
+﻿using System.Security.Claims;
+using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Services.Factories;
 using Wizards.Services.PlayerService;
@@ -71,6 +72,16 @@ public class HeroService : IHeroService
         }
 
         throw new NullReferenceException($"There is no Hero with id: {id}!");
+    }
+
+    public async Task<bool> HasPlayerHero(ClaimsPrincipal user, int heroId)
+    {
+        var playerId = _playerService.GetId(user);
+        var player = await _playerService.Get(playerId);
+
+        var result = player.Heroes.Any(h => h.Id == heroId);
+        
+        return result;
     }
 
     public async Task<bool> CanChangeNickName(int id)
