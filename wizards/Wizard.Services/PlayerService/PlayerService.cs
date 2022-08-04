@@ -1,6 +1,9 @@
-﻿using Wizards.Core.Interfaces;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Services.Validation;
+using Wizards.Services.Validation.Elements;
 
 namespace Wizards.Services.PlayerService
 {
@@ -8,46 +11,57 @@ namespace Wizards.Services.PlayerService
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IPlayerValidator _playerValidator;
+        private readonly UserManager<Player> _userManager;
+        
 
-        public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator)
+        public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator, UserManager<Player> userManager)
         {
             _playerRepository = playerRepository;
             _playerValidator = playerValidator;
+            _userManager = userManager;
         }
 
-        public async Task Add(Player player)
+        public async Task Create(Player player, string password)
         {
-            await _playerValidator.Validate(player);
-            await _playerRepository.Add(player);
+            await _playerValidator.Validate(player, password);
+
+            await _userManager.CreateAsync(player, password);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int id, string passwordConfirm)
         {
             var player = await Get(id);
-            await _playerRepository.Remove(player);
+
+            if (!await _userManager.CheckPasswordAsync(player, passwordConfirm))
+            {
+                var message = new Dictionary<string, string>();
+                message.Add("ConfirmPassword", "Password is not correct!");
+                throw new InvalidModelException(message);
+            }
+
+            await _userManager.DeleteAsync(player);
         }
 
-        public async Task Update(int id, Player player)
+        public async Task Update(Player player)
         {
             await _playerValidator.Validate(player);
-            
-            var playerToUpdate = await Get(id);
-            
+
+            var playerToUpdate = await Get(player.Id);
+
             playerToUpdate.Email = player.Email;
             playerToUpdate.NormalizedEmail = player.Email.ToUpper();
-
             playerToUpdate.DateOfBirth = player.DateOfBirth;
 
             await _playerRepository.Update(playerToUpdate);
         }
 
-        public async Task UpdatePassword(int id, Player player)
+        public async Task ChangePassword(int id, string currentPassword, string newPassword)
         {
-            await _playerValidator.Validate(player);
-
             var playerToUpdate = await Get(id);
-            
-            //playerToUpdate.Password = player.Password;
+
+            await _playerValidator.Validate(playerToUpdate, currentPassword, newPassword);
+
+            await _userManager.ChangePasswordAsync(playerToUpdate, currentPassword, newPassword);
 
             await _playerRepository.Update(playerToUpdate);
         }
@@ -62,6 +76,11 @@ namespace Wizards.Services.PlayerService
             }
 
             throw new NullReferenceException($"There is no Player with id: {id}!");
+        }
+
+        public int GetId(ClaimsPrincipal user)
+        {
+            return Int32.Parse(_userManager.GetUserId(user));
         }
 
     }

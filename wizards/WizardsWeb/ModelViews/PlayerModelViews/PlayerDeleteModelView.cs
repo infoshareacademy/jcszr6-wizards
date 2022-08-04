@@ -14,7 +14,7 @@ namespace WizardsWeb.ModelViews
         [Required]
         [Display(Name = "Confirm deleting Player's Account with Password")]
         [DataType(DataType.Password)]
-        public string PasswordToConfirmDelete { get; set; }
+        public string PasswordConfirm { get; set; }
 
         [Display(Name = "Email addres")]
         [EmailAddress]

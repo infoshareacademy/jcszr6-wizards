@@ -11,7 +11,7 @@ namespace WizardsWeb.ModelViews
         [Required]
         [Display(Name ="Enter actual Password")]
         [DataType(DataType.Password)]
-        public string EnterOldPassword { get; set; }
+        public string CurrentPassword { get; set; }
 
         [Required]
         [Display(Name = "Enter new Password")]

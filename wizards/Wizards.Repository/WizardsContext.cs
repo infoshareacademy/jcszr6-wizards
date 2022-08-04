@@ -58,9 +58,6 @@ namespace Wizards.Repository
             modelBuilder.Entity<Player>()
                 .HasIndex(p => p.UserName)
                 .IsUnique();
-            //modelBuilder.Entity<Player>()
-            //    .Property(p => p.Password)
-                //.HasMaxLength(50);
             modelBuilder.Entity<Player>()
                 .Property(p => p.Email)
                 .HasMaxLength(50)
@@ -163,12 +160,17 @@ namespace Wizards.Repository
                 .Property(i => i.Id);
             modelBuilder.Entity<Item>()
                 .Property(i => i.Name)
-                .HasMaxLength(maxLength: 20)
+                .HasMaxLength(maxLength: 50)
                 .IsRequired();
             modelBuilder.Entity<Item>()
-                .Property(i => i.Type);
+                .Property(i => i.Type)
+                .IsRequired();
             modelBuilder.Entity<Item>()
-                .Property(i => i.Restriction);
+                .Property(i => i.Restriction)
+                .IsRequired();
+            modelBuilder.Entity<Item>()
+                .Property(i => i.Tier)
+                .IsRequired();
             modelBuilder.Entity<Item>()
                 .Property(i => i.BuyPrice)
                 .IsRequired();
@@ -182,7 +184,7 @@ namespace Wizards.Repository
 
 
             modelBuilder.Entity<ItemAttributes>()
-                .Property(ia => ia.Id);
+                .HasKey(ia => ia.Id);
             modelBuilder.Entity<ItemAttributes>()
                 .Property(ia => ia.Damage)
                 .IsRequired();
@@ -196,9 +198,6 @@ namespace Wizards.Repository
                 .Property(ia => ia.MaxHealth)
                 .IsRequired();
             modelBuilder.Entity<ItemAttributes>()
-                .Property(ia => ia.CurrentHealth)
-                .IsRequired();
-            modelBuilder.Entity<ItemAttributes>()
                 .Property(ia => ia.Reflex)
                 .IsRequired();
             modelBuilder.Entity<ItemAttributes>()
@@ -207,7 +206,7 @@ namespace Wizards.Repository
 
 
             modelBuilder.Entity<HeroItem>()
-                .HasKey(hi => new { hi.HeroId, hi.ItemId });
+                .HasKey(hi => hi.Id);
             modelBuilder.Entity<Hero>()
                 .HasMany(h => h.Inventory)
                 .WithOne(hi => hi.Hero)

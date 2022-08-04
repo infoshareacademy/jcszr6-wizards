@@ -14,22 +14,20 @@ namespace WizardsWeb.Controllers
     {
         private readonly IPlayerService _playerService;
         private readonly IMapper _mapper;
-        private readonly UserManager<Player> _userManager;
         private readonly SignInManager<Player> _signInManager;
 
 
-        public PlayerController(IPlayerService playerService, IMapper mapper, UserManager<Player> userManager, SignInManager<Player> signInManager)
+        public PlayerController(IPlayerService playerService, IMapper mapper, SignInManager<Player> signInManager)
         {
             _playerService = playerService;
             _mapper = mapper;
-            _userManager = userManager;
             _signInManager = signInManager;
         }
 
         // GET: PlayerController  "LocalHost4449987/Details"
         public async Task<ActionResult> Details()
         {
-            var playerId = Int32.Parse(_userManager.GetUserId(User));
+            var playerId = _playerService.GetId(User);
 
             var player = await _playerService.Get(playerId);
             var playerDetails = _mapper.Map<PlayerDetailsModelView>(player);
@@ -50,37 +48,18 @@ namespace WizardsWeb.Controllers
             if (!ModelState.IsValid)
             {
                 return View(playerCreate);
-            }
+            } 
+            
+            var player = _mapper.Map<Player>(playerCreate);
 
             try
             {
-                _userManager.Options.User.RequireUniqueEmail = true;
-                _userManager.Options.User.AllowedUserNameCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_";
-                _userManager.Options.Password.RequireDigit = true;
-                _userManager.Options.Password.RequireLowercase = true;
-                _userManager.Options.Password.RequireUppercase = true;
-                _userManager.Options.Password.RequireNonAlphanumeric = true;
-                _userManager.Options.Password.RequiredLength = 8;
 
-
-                var user = new Player { UserName = playerCreate.UserName, Email = playerCreate.Email, DateOfBirth = playerCreate.DateOfBirth };
+                await _playerService.Create(player, playerCreate.Password);
                 
-                //_playerService.ValidateForCreate(user);
+                await _signInManager.SignInAsync(player, isPersistent: false);
                 
-                var result = await _userManager.CreateAsync(user, playerCreate.Password);
-                
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction(nameof(Details));
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-
-                return View(playerCreate);
+                return RedirectToAction("Details");
             }
             catch (InvalidModelException exception)
             {
@@ -109,7 +88,7 @@ namespace WizardsWeb.Controllers
                 return RedirectToAction("Details", "Player");
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            ModelState.AddModelError(string.Empty, "Invalid login attempt!");
             
             return View(playerLogIn);
         }
@@ -124,7 +103,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Edit/5
         public async Task<ActionResult> Edit()
         {
-            var playerId = Int32.Parse(_userManager.GetUserId(User));
+            var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerEdit = _mapper.Map<PlayerEditModelView>(player);
             return View(playerEdit);
@@ -135,7 +114,7 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(PlayerEditModelView playerEdit)
         {
-            var playerId = Int32.Parse(_userManager.GetUserId(User));
+            var playerId = _playerService.GetId(User);
             var originalPlayer = await _playerService.Get(playerId);
             playerEdit.UserName = originalPlayer.UserName;
 
@@ -149,7 +128,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _playerService.Update(playerId, player);
+                await _playerService.Update(player);
                 return RedirectToAction(nameof(Details));
             }
             catch (InvalidModelException exception)
@@ -166,7 +145,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/EditPassword/5
         public async Task<ActionResult> EditPassword()
         {
-            var playerId = Int32.Parse(_userManager.GetUserId(User));
+            var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var passwordChage = _mapper.Map<PasswordChangeModelView>(player);
             return View(passwordChage);
@@ -177,8 +156,8 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditPassword(PasswordChangeModelView passwordChange)
         {
-            
-            var originalPlayer = await _playerService.Get(Int32.Parse(_userManager.GetUserId(User)));
+            var playerId = _playerService.GetId(User);
+            var originalPlayer = await _playerService.Get(playerId);
             
             passwordChange.UserName = originalPlayer.UserName;
 
@@ -189,25 +168,15 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                var result = await _userManager.ChangePasswordAsync(originalPlayer, passwordChange.EnterOldPassword, passwordChange.NewPassword);
-
-                if (result.Succeeded)
-                {
-                    return RedirectToAction(nameof(Edit));
-                }
-
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
-
-                return View(passwordChange);
+                await _playerService.ChangePassword(playerId, passwordChange.CurrentPassword, passwordChange.NewPassword);
+                
+                return RedirectToAction(nameof(Edit));
             }
             catch (InvalidModelException exception)
             {
                 foreach (var data in exception.ModelStatesData)
                 {
-                    ModelState.AddModelError("NewPassword", data.Value);
+                    ModelState.AddModelError(data.Key, data.Value);
                 }
 
                 return View(passwordChange);
@@ -218,7 +187,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Delete/5
         public async Task<ActionResult> Delete()
         {
-            var playerId = Int32.Parse(_userManager.GetUserId(User));
+            var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerForDelete = _mapper.Map<PlayerDeleteModelView>(player);
             return View(playerForDelete);
@@ -229,13 +198,9 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(PlayerDeleteModelView playerDelete)
         {
-            var originalPlayer = await _playerService.Get(playerDelete.Id);
+            var playerId = _playerService.GetId(User);
+            var originalPlayer = await _playerService.Get(playerId);
             playerDelete.UserName = originalPlayer.UserName;
-
-            //if (originalPlayer.Password != playerDelete.PasswordToConfirmDelete)
-            //{
-            //    ModelState.AddModelError("PasswordToConfirmDelete", "Invalid Password!");
-            //}
 
             if (!ModelState.IsValid)
             {
@@ -244,11 +209,18 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _playerService.Delete(playerDelete.Id);
+                await _signInManager.SignOutAsync();
+                await _playerService.Delete(playerId, playerDelete.PasswordConfirm);
+                
                 return RedirectToAction(nameof(Index), "Home");
             }
-            catch
+            catch (InvalidModelException exception)
             {
+                foreach (var data in exception.ModelStatesData)
+                {
+                    ModelState.AddModelError("PasswordConfirm", data.Value);
+                }
+
                 return View(playerDelete);
             }
         }
