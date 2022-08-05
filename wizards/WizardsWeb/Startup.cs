@@ -13,6 +13,7 @@ using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
+using Wizards.Services.PermissionService;
 
 namespace WizardsWeb
 {
@@ -30,7 +31,6 @@ namespace WizardsWeb
         {
             services.AddControllersWithViews();
 
-
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
@@ -40,15 +40,16 @@ namespace WizardsWeb
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
 
-            services.AddIdentity<Player, IdentityRole<int>>(
-                options =>
-                {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    //Other options go here
+            services.AddTransient<IPermissionService, PermissionService>();
 
-                })
-                .AddEntityFrameworkStores<WizardsContext>(); 
-            ;
+            services.AddIdentity<Player, IdentityRole<int>>(
+                    options =>
+                    {
+                        options.SignIn.RequireConfirmedAccount = false;
+                        //Other options go here
+
+                    })
+                .AddEntityFrameworkStores<WizardsContext>();
 
             services.AddRazorPages();
 
@@ -58,7 +59,7 @@ namespace WizardsWeb
             var profileAssembly = typeof(Startup).Assembly;
             services.AddAutoMapper(profileAssembly);
 
-
+            
 
 
         }

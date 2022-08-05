@@ -1,13 +1,10 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
 using Wizards.Services.HeroService;
+using Wizards.Services.PermissionService;
 using Wizards.Services.PlayerService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews;
@@ -19,55 +16,50 @@ namespace WizardsWeb.Controllers
     {
         private readonly IHeroService _heroService;
         private readonly IMapper _mapper;
-        private readonly SignInManager<Player> _signInManager;
         private readonly IPlayerService _playerService;
+        private readonly IPermissionService _permissionService;
 
-        public HeroController(IHeroService heroService, IMapper mapper, SignInManager<Player> signInManager, IPlayerService playerService)
+        public HeroController(
+            IHeroService heroService, IMapper mapper, 
+            IPlayerService playerService, IPermissionService permissionService)
         {
             _heroService = heroService;
             _mapper = mapper;
-            _signInManager = signInManager;
+            _permissionService = permissionService;
             _playerService = playerService;
         }
         
         // GET: HeroController/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            if (!await _heroService.HasPlayerHero(User, id))
-            {
-                return RedirectToAction("Details", "Player");
-            }
-
             var hero = await _heroService.Get(id);
             var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
             heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
 
-            return View(heroDetails);
+            var permissionResult = _permissionService.HasPermission(User, hero);
+
+            return HandlePermissions(permissionResult, View(heroDetails));
         }
 
         // GET: HeroController/Create
-        public ActionResult StartCreation(int playerId)
+        public ActionResult StartCreation()
         {
-            if (!_signInManager.IsSignedIn(User))
+            if (!_permissionService.IsLoggedIn(User))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Player");
             }
 
-            return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId });
+            return View("SetProfession", new HeroCreateModelView());
         }
 
-        public ActionResult SetProfessionView(int playerId, HeroProfession profession)
+        public ActionResult SetProfessionView(HeroProfession profession)
         {
-            if (!_signInManager.IsSignedIn(User))
+            if (!_permissionService.IsLoggedIn(User))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Player");
             }
 
-            return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId, Profession = profession });
+            return View("SetProfession", new HeroCreateModelView() { Profession = profession });
         }
 
         [HttpPost]
@@ -78,13 +70,14 @@ namespace WizardsWeb.Controllers
             return View("SetAvatar", heroCreate);
         }
 
-        public ActionResult SetAvatarView(int playerId, HeroProfession profession, int avatar)
+        public ActionResult SetAvatarView(HeroProfession profession, int avatar)
         {
-            if (!_signInManager.IsSignedIn(User))
+            if (!_permissionService.IsLoggedIn(User))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Player");
             }
-            return View("SetAvatar", new HeroCreateModelView() { PlayerId = playerId, Profession = profession, AvatarImageNumber = avatar });
+
+            return View("SetAvatar", new HeroCreateModelView() { Profession = profession, AvatarImageNumber = avatar });
         }
 
         [HttpPost]
@@ -128,20 +121,14 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Edit/5
         public async Task<ActionResult> EditNickName(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            if (!await _heroService.HasPlayerHero(User, id))
-            {
-                return RedirectToAction("Details", "Player");
-            }
-
-
             var hero = await _heroService.Get(id);
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
-            return View(heroEdit);
+
+            var permissionResult = _permissionService.HasPermission(User, hero);
+
+            return HandlePermissions(permissionResult, View(heroEdit));
+
         }
 
         // POST: HeroController/Edit/5
@@ -186,19 +173,13 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Edit/5
         public async Task<ActionResult> EditAvatar(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            if (!await _heroService.HasPlayerHero(User, id))
-            {
-                return RedirectToAction("Details", "Player");
-            }
-
             var hero = await _heroService.Get(id);
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeAvatarCost();
-            return View(heroEdit);
+
+            var permissionResult = _permissionService.HasPermission(User, hero);
+
+            return HandlePermissions(permissionResult, View(heroEdit));
         }
 
         // POST: HeroController/Edit/5
@@ -244,19 +225,14 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            if (!await _heroService.HasPlayerHero(User, id))
-            {
-                return RedirectToAction("Details", "Player");
-            }
-
             var hero = await _heroService.Get(id);
             var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-            return View(heroDelete);
+
+
+            var permissionResult = _permissionService.HasPermission(User, hero);
+
+            return HandlePermissions(permissionResult, View(heroDelete));
         }
 
         // POST: HeroController/Delete/5
@@ -282,12 +258,27 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Delete(heroDelete.Id);
-                return RedirectToAction(nameof(Details), "Player", new { id = heroDelete.PlayerId });
+                return RedirectToAction(nameof(Details), "Player");
             }
             catch
             {
                 return View(heroDelete);
             }
+        }
+
+        private ActionResult HandlePermissions(PermissionResult permissionResult, ActionResult result)
+        {
+            if (permissionResult == PermissionResult.UserNotLoggedIn)
+            {
+                return RedirectToAction("Login", "Player");
+            }
+
+            if (permissionResult == PermissionResult.PermissionDenied)
+            {
+                return RedirectToAction("Details", "Player");
+            }
+
+            return result;
         }
     }
 }

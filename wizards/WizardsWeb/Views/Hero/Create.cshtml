@@ -13,7 +13,6 @@
         <form asp-action="Create">
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="PlayerId" hidden="true"/>
             <input asp-for="AvatarImageNumber" hidden="true"/>
             <input asp-for="Profession" hidden="true"/>
             <div class="form-group">
@@ -35,7 +34,7 @@
         Leave Creator
     </a>
     <br/>
-    <a asp-action="SetAvatarView" asp-route-playerId="@Model.PlayerId" asp-route-profession="@Model.Profession" asp-route-avatar="@Model.AvatarImageNumber">
+    <a asp-action="SetAvatarView" asp-route-profession="@Model.Profession" asp-route-avatar="@Model.AvatarImageNumber">
         Back to Avatar choice
     </a>
 </div>

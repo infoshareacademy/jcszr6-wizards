@@ -89,6 +89,18 @@ namespace Wizards.Services.PlayerService
             throw new NullReferenceException($"There is no Player with id: {id}!");
         }
 
+        public async Task<Player> Get(ClaimsPrincipal user)
+        {
+            var player = await _userManager.GetUserAsync(user);
+
+            if (player == null)
+            {
+                throw new NullReferenceException("No Player Logged in!");
+            }
+
+            return player;
+        }
+
         public int GetId(ClaimsPrincipal user)
         {
             var textId = _userManager.GetUserId(user);

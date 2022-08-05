@@ -8,7 +8,6 @@
 <br />
 <h3>Choose Avatar of your hero</h3>
 <form asp-action="SetAvatar">
-    <input asp-for="PlayerId" hidden="true" />
     <input asp-for="Profession" hidden="true" />
     <hr />
     <div class="row">
@@ -35,7 +34,7 @@
     <br />
     <a asp-controller="Player" asp-action="Details">Leave Creator</a>
     <br/>
-    <a asp-action="SetProfessionView" asp-route-playerId="@Model.PlayerId" asp-route-profession="@Model.Profession">Back to Profession choice</a>
+    <a asp-action="SetProfessionView" asp-route-profession="@Model.Profession">Back to Profession choice</a>
 </div>
 
 @section Scripts {

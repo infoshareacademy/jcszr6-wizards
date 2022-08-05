@@ -11,7 +11,6 @@ Your gold: @($"{Model.Gold:##,##0}")<br/>
 <hr/>
 <form asp-action="EditAvatar">
     <input asp-for="Id" hidden="true"/>
-    <input asp-for="PlayerId" hidden="true"/>
     <div class="row">
         @for (int i = 1; i <= 7; i++)
         {

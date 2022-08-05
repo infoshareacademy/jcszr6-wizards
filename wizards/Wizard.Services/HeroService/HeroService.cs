@@ -26,6 +26,7 @@ public class HeroService : IHeroService
     public async Task Add(int playerId, Hero hero)
     {
         await _heroValidator.Validate(hero);
+        
         hero.Gold = 0;
         hero.Attributes = _propertiesFactory.GetHeroAttributes(hero.Profession);
         hero.Statistics = _propertiesFactory.GetStatistics();

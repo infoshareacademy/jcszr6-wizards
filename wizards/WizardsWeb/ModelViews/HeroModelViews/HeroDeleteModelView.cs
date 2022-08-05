@@ -8,7 +8,6 @@ namespace WizardsWeb.ModelViews;
 public class HeroDeleteModelView
 {
     public int Id { get; set; }
-    public int PlayerId { get; set; }
     public HeroBasicsModelView Basics { get; set; }
     public int  Gold { get; set; }
     public StatisticsModelView Statistics { get; set; }
