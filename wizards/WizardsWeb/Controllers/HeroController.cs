@@ -20,7 +20,7 @@ namespace WizardsWeb.Controllers
         private readonly IPermissionService _permissionService;
 
         public HeroController(
-            IHeroService heroService, IMapper mapper, 
+            IHeroService heroService, IMapper mapper,
             IPlayerService playerService, IPermissionService permissionService)
         {
             _heroService = heroService;
@@ -28,7 +28,7 @@ namespace WizardsWeb.Controllers
             _permissionService = permissionService;
             _playerService = playerService;
         }
-        
+
         // GET: HeroController/Details/5
         public async Task<ActionResult> Details(int id)
         {
@@ -44,22 +44,18 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Create
         public ActionResult StartCreation()
         {
-            if (!_permissionService.IsLoggedIn(User))
-            {
-                return RedirectToAction("Login", "Player");
-            }
+            var model = new HeroCreateModelView();
 
-            return View("SetProfession", new HeroCreateModelView());
+            var permissionResult = _permissionService.HasPermission(User);
+
+            return HandlePermissions(permissionResult, View("SetProfession", model));
         }
 
-        public ActionResult SetProfessionView(HeroProfession profession)
+        public ActionResult SetProfessionView(HeroCreateModelView heroCreate)
         {
-            if (!_permissionService.IsLoggedIn(User))
-            {
-                return RedirectToAction("Login", "Player");
-            }
+            var permissionResult = _permissionService.HasPermission(User);
 
-            return View("SetProfession", new HeroCreateModelView() { Profession = profession });
+            return HandlePermissions(permissionResult, View("SetProfession", heroCreate));
         }
 
         [HttpPost]
@@ -70,14 +66,13 @@ namespace WizardsWeb.Controllers
             return View("SetAvatar", heroCreate);
         }
 
-        public ActionResult SetAvatarView(HeroProfession profession, int avatar)
+        public ActionResult SetAvatarView(HeroCreateModelView heroCreate)
         {
-            if (!_permissionService.IsLoggedIn(User))
-            {
-                return RedirectToAction("Login", "Player");
-            }
-
-            return View("SetAvatar", new HeroCreateModelView() { Profession = profession, AvatarImageNumber = avatar });
+            var permissionResult = _permissionService.HasPermission(User);
+            
+            ModelState.Clear();
+            
+            return HandlePermissions(permissionResult, View("SetAvatar", heroCreate));
         }
 
         [HttpPost]
@@ -268,6 +263,11 @@ namespace WizardsWeb.Controllers
 
         private ActionResult HandlePermissions(PermissionResult permissionResult, ActionResult result)
         {
+            if (permissionResult == PermissionResult.PermissionGranted)
+            {
+                return result;
+            }
+
             if (permissionResult == PermissionResult.UserNotLoggedIn)
             {
                 return RedirectToAction("Login", "Player");
@@ -278,7 +278,7 @@ namespace WizardsWeb.Controllers
                 return RedirectToAction("Details", "Player");
             }
 
-            return result;
+            return RedirectToAction("Index", "Home");
         }
     }
 }

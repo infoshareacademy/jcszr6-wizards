@@ -39,12 +39,17 @@ public class PermissionService : IPermissionService
         return PermissionResult.PermissionDenied;
     }
 
-    public bool IsLoggedIn(ClaimsPrincipal user)
+    public PermissionResult HasPermission(ClaimsPrincipal user)
     {
-        return _signInManager.IsSignedIn(user);
+        if (!_signInManager.IsSignedIn(user))
+        {
+            return PermissionResult.UserNotLoggedIn;
+        }
+
+        return PermissionResult.PermissionGranted;
     }
 
-    public async Task<PermissionResult> HasPermission(ClaimsPrincipal user, HeroItem item)
+    public PermissionResult HasPermission(ClaimsPrincipal user, HeroItem item)
     {
         //TODO: Next step: implement this method after adding Inventory and merchant feature
         throw new NotImplementedException();

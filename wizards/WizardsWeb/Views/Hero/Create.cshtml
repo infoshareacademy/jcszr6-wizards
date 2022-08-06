@@ -34,9 +34,11 @@
         Leave Creator
     </a>
     <br/>
-    <a asp-action="SetAvatarView" asp-route-profession="@Model.Profession" asp-route-avatar="@Model.AvatarImageNumber">
-        Back to Avatar choice
-    </a>
+    <form asp-action="SetAvatarView">
+        <input asp-for="AvatarImageNumber" hidden="true"/>
+        <input asp-for="Profession" hidden="true"/>
+        <input type="submit" value="Back" class="btn btn-primary"/>
+    </form>
 </div>
 
 @section Scripts {

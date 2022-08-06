@@ -34,11 +34,15 @@
     <br />
     <a asp-controller="Player" asp-action="Details">Leave Creator</a>
     <br/>
-    <a asp-action="SetProfessionView" asp-route-profession="@Model.Profession">Back to Profession choice</a>
+    <form asp-action="SetProfessionView">
+        <input asp-for="AvatarImageNumber" hidden="true"/>
+        <input asp-for="Profession" hidden="true"/>
+        <input type="submit" value="Back" class="btn btn-primary"/>
+    </form>
 </div>
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
