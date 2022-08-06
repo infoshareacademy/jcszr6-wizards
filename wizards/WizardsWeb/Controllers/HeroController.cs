@@ -2,7 +2,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
 using Wizards.Services.HeroService;
 using Wizards.Services.PermissionService;
 using Wizards.Services.PlayerService;

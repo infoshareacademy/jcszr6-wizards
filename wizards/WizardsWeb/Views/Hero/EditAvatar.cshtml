@@ -5,11 +5,12 @@
 }
 
 <h3>Edit Hero's Avatar</h3>
-<hr/><br/>
-This operation costs: @($"{Model.Cost:##,##0}") gold!<br />
-Your gold: @($"{Model.Gold:##,##0}")<br/>
-<hr/>
 <form asp-action="EditAvatar">
+    <hr/>
+    <span>This operation costs: </span><span class="font-weight-bold">@($"{Model.Cost:##,##0}")</span><span> gold!</span><br />
+    <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br/>
+    <span asp-validation-for="AvatarImageNumber" class="text-danger font-weight-bold"></span>
+    <hr/>
     <input asp-for="Id" hidden="true"/>
     <div class="row">
         @for (int i = 1; i <= 7; i++)
@@ -25,16 +26,12 @@ Your gold: @($"{Model.Gold:##,##0}")<br/>
             </div>
         }
     </div>
-    <span asp-validation-for="AvatarImageNumber" class="text-danger"></span>
     <hr/>
-    <div class="form-group">
+    <div class="btn-group">
+        <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@Model.Id">Back to Details</a>
         <input type="submit" value="Set Avatar" class="btn btn-primary"/>
     </div>
 </form>
-
-<div>
-    <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@Model.Id">Back to Details</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -16,10 +16,17 @@
             var image = $"Images/Hero/Avatars/Wizard-{i}.png";
             <div class="col-sm-3">
                 <div class="row" align="center">
-                    <img src="~/@image" width="210" height="280"/>
+                    <img src="~/@image" width="210" height="280" />
                 </div>
                 <div class="row">
-                    <div align="center"><input asp-for="AvatarImageNumber" type="radio" value="@i"/></div>
+                    @if (i == 1)
+                    {
+                        <input asp-for="AvatarImageNumber" type="radio" value="@i" checked />
+                    }
+                    else
+                    {
+                        <input asp-for="AvatarImageNumber" type="radio" value="@i" />
+                    }
                 </div>
             </div>
         }
@@ -31,13 +38,13 @@
 </form>
 
 <div>
-    <br />
-    <a asp-controller="Player" asp-action="Details">Leave Creator</a>
-    <br/>
     <form asp-action="SetProfessionView">
-        <input asp-for="AvatarImageNumber" hidden="true"/>
-        <input asp-for="Profession" hidden="true"/>
-        <input type="submit" value="Back" class="btn btn-primary"/>
+        <input asp-for="Profession" hidden="true" />
+        <input asp-for="AvatarImageNumber" hidden="true" />
+        <div class="btn-group">
+            <input type="submit" asp-controller="Hero" asp-action="SetProfessionView" value="Back" class="btn btn-warning" />
+            <a class="btn btn-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
+        </div>
     </form>
 </div>
 

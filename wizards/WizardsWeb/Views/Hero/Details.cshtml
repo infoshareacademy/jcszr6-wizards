@@ -6,13 +6,15 @@
 
 <div class="row">
     <div class="col-md-5">
-        <partial name="_HeroBasicPresentation" model="@Model.Basics"/><br/>
-        <a type="button" class="btn btn-primary" asp-action="EditNickName" asp-route-id="@Model.Id">
-            Edit Name
-        </a>
-        <a type="button" class="btn btn-primary" asp-action="EditAvatar" asp-route-id="@Model.Id">
-            Edit Avatar
-        </a>
+        <partial name="_HeroBasicPresentation" model="@Model.Basics" /><br />
+        <div class="btn-group">
+            <a class="btn btn-primary" asp-action="EditNickName" asp-route-id="@Model.Id">
+                Edit Name
+            </a>
+            <a class="btn btn-primary" asp-action="EditAvatar" asp-route-id="@Model.Id">
+                Edit Avatar
+            </a>
+        </div>
     </div>
     <div class="col-md-3">
         <a type="button" class="btn btn-warning" asp-action="Equipment">Equipment</a><br /><br />
@@ -21,7 +23,7 @@
         <a type="button" class="btn btn-warning" asp-action="ArenaPvP">PvP Arena</a><br /><br />
     </div>
     <div class="col-md-4">
-        <partial name="_HeroAttributes" model="Model.Attributes"/><br/><br/>
-        <partial name="_HeroStatistics" model="Model.Statistics"/>
+        <partial name="_HeroAttributes" model="Model.Attributes" /><br /><br />
+        <partial name="_HeroStatistics" model="Model.Statistics" />
     </div>
 </div>

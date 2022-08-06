@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model;
 
 namespace WizardsWeb.ModelViews.Properties;
 
