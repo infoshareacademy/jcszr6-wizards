@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
@@ -10,6 +11,7 @@ using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers
 {
+    [Authorize]
     public class PlayerController : Controller
     {
         private readonly IPlayerService _playerService;
@@ -26,11 +28,6 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Details
         public async Task<ActionResult> Details()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerDetails = _mapper.Map<PlayerDetailsModelView>(player);
@@ -38,19 +35,17 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: PlayerController/Create
+        [AllowAnonymous]
         public async Task<ActionResult> Create()
         {
-            if (_signInManager.IsSignedIn(User))
-            {
-                await _signInManager.SignOutAsync();
-            }
-
+            await _signInManager.SignOutAsync();
             return View();
         }
 
         // POST: PlayerController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<ActionResult> Create(PlayerCreateModelView playerCreate)
         {
             if (!ModelState.IsValid)
@@ -64,8 +59,7 @@ namespace WizardsWeb.Controllers
             {
                 await _playerService.Create(player, playerCreate.Password);
                 await _signInManager.SignInAsync(player, isPersistent: false);
-                
-                return RedirectToAction("Details");
+                return RedirectToAction(nameof(Details));
             }
             catch (Exception exception)
             {
@@ -74,6 +68,7 @@ namespace WizardsWeb.Controllers
             }
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -81,35 +76,31 @@ namespace WizardsWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(PlayerLogInModelView playerLogIn)
         {
             var result = await _signInManager.PasswordSignInAsync(playerLogIn.UserName, playerLogIn.Password, false, lockoutOnFailure: false);
             
             if (result.Succeeded)
             {
-                return RedirectToAction("Details", "Player");
+                return RedirectToAction(nameof(Details));
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt!");
             
             return View(playerLogIn);
         }
-
+        
+        [AllowAnonymous]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            
             return RedirectToAction(nameof(Index), "Home");
         }
 
         // GET: PlayerController/Edit
         public async Task<ActionResult> Edit()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerEdit = _mapper.Map<PlayerEditModelView>(player);
@@ -148,11 +139,6 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/EditPassword
         public async Task<ActionResult> EditPassword()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var passwordChage = _mapper.Map<PasswordChangeModelView>(player);
@@ -178,7 +164,6 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _playerService.ChangePassword(playerId, passwordChange.CurrentPassword, passwordChange.NewPassword);
-                
                 return RedirectToAction(nameof(Edit));
             }
             catch (Exception exception)
@@ -191,11 +176,6 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Delete
         public async Task<ActionResult> Delete()
         {
-            if (!_signInManager.IsSignedIn(User))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             var playerId = _playerService.GetId(User);
             var player = await _playerService.Get(playerId);
             var playerForDelete = _mapper.Map<PlayerDeleteModelView>(player);
@@ -222,9 +202,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _playerService.Delete(playerId, passwordConfirm);
-                await _signInManager.SignOutAsync();
-                
-                return RedirectToAction(nameof(Index), "Home");
+                return RedirectToAction(nameof(Logout));
             }
             catch (Exception exception)
             {

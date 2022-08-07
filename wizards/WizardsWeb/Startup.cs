@@ -47,12 +47,18 @@ namespace WizardsWeb
                     {
                         options.SignIn.RequireConfirmedAccount = false;
                         //Other options go here
-
                     })
                 .AddEntityFrameworkStores<WizardsContext>();
 
-            services.AddRazorPages();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Player/Login/";
+                options.AccessDeniedPath = "/Home/Index/";
+                options.LogoutPath = "/Home/Index/";
+            });
 
+            services.AddRazorPages();
+            
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
 

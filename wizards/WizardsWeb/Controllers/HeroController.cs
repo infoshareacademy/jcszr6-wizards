@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
 using Wizards.Services.HeroService;
@@ -12,6 +13,7 @@ using WizardsWeb.ModelViews.Properties;
 
 namespace WizardsWeb.Controllers
 {
+    [Authorize]
     public class HeroController : Controller
     {
         private readonly IHeroService _heroService;
@@ -42,15 +44,13 @@ namespace WizardsWeb.Controllers
         public ActionResult StartCreation()
         {
             var model = new HeroCreateModelView();
-            var permissionResult = _permissionService.HasPermission(User);
-            return HandleHeroPermissions(permissionResult, View("SetProfession", model));
+            return View("SetProfession", model);
         }
 
         public ActionResult SetProfessionView(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
-            var permissionResult = _permissionService.HasPermission(User);
-            return HandleHeroPermissions(permissionResult, View("SetProfession", heroCreate));
+            return View("SetProfession", heroCreate);
         }
 
         [HttpPost]
@@ -58,15 +58,13 @@ namespace WizardsWeb.Controllers
         public ActionResult SetProfession(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
-            var permissionResult = _permissionService.HasPermission(User);
-            return HandleHeroPermissions(permissionResult, View("SetAvatar", heroCreate));
+            return View("SetAvatar", heroCreate);
         }
 
         public ActionResult SetAvatarView(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
-            var permissionResult = _permissionService.HasPermission(User);
-            return HandleHeroPermissions(permissionResult, View("SetAvatar", heroCreate));
+            return View("SetAvatar", heroCreate);
         }
 
         [HttpPost]
@@ -74,8 +72,7 @@ namespace WizardsWeb.Controllers
         public ActionResult SetAvatar(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
-            var permissionResult = _permissionService.HasPermission(User);
-            return HandleHeroPermissions(permissionResult, View("Create", heroCreate));
+            return View("Create", heroCreate);
         }
 
         // POST: HeroController/Create
@@ -88,11 +85,11 @@ namespace WizardsWeb.Controllers
                 return View(heroCreate);
             }
 
+            var playerId = _playerService.GetId(User);
+            var hero = _mapper.Map<Hero>(heroCreate);
+
             try
             {
-                var playerId = _playerService.GetId(User);
-                var hero = _mapper.Map<Hero>(heroCreate);
-
                 await _heroService.Add(playerId, hero);
                 return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
@@ -228,10 +225,6 @@ namespace WizardsWeb.Controllers
             if (permissionResult == PermissionResult.PermissionGranted)
             {
                 return resultWhenGranted;
-            }
-            if (permissionResult == PermissionResult.UserNotLoggedIn)
-            {
-                return RedirectToAction("Login", "Player");
             }
             if (permissionResult == PermissionResult.PermissionDenied)
             {
