@@ -12,8 +12,8 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    [Migration("20220725191538_initial")]
-    partial class initial
+    [Migration("20220807224749_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -259,8 +259,8 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Restriction")
                         .HasColumnType("int");
@@ -318,13 +318,13 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Wizards.Core.Model.ManyToManyTables.HeroItem", b =>
                 {
-                    b.Property<int>("HeroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("HeroId")
                         .HasColumnType("int");
 
                     b.Property<bool>("InUse")
@@ -337,7 +337,12 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(100.0);
 
-                    b.HasKey("HeroId", "ItemId");
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HeroId");
 
                     b.HasIndex("ItemId");
 
@@ -354,6 +359,18 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<int?>("ActiveHeroId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int?>("ActiveItemId")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Wizards.Repository.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,8 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ActiveHeroId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    ActiveItemId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -218,7 +220,7 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Restriction = table.Column<int>(type: "int", nullable: false),
                     Tier = table.Column<int>(type: "int", nullable: false),
@@ -278,15 +280,16 @@ namespace Wizards.Repository.Migrations
                 name: "HeroItems",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     HeroId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     InUse = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     ItemEndurance = table.Column<double>(type: "float", nullable: false, defaultValue: 100.0)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HeroItems", x => new { x.HeroId, x.ItemId });
+                    table.PrimaryKey("PK_HeroItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_HeroItems_Heroes_HeroId",
                         column: x => x.HeroId,
@@ -374,6 +377,11 @@ namespace Wizards.Repository.Migrations
                 table: "Heroes",
                 column: "StatisticsId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HeroItems_HeroId",
+                table: "HeroItems",
+                column: "HeroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HeroItems_ItemId",
