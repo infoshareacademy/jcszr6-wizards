@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
 using Wizards.Services.PlayerService;
-using Wizards.Services.Validation.Elements;
+using WizardsWeb.Helpers;
 using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers
@@ -16,7 +16,6 @@ namespace WizardsWeb.Controllers
         private readonly IMapper _mapper;
         private readonly SignInManager<Player> _signInManager;
 
-
         public PlayerController(IPlayerService playerService, IMapper mapper, SignInManager<Player> signInManager)
         {
             _playerService = playerService;
@@ -24,7 +23,7 @@ namespace WizardsWeb.Controllers
             _signInManager = signInManager;
         }
 
-        // GET: PlayerController  "LocalHost4449987/Details"
+        // GET: PlayerController/Details
         public async Task<ActionResult> Details()
         {
             if (!_signInManager.IsSignedIn(User))
@@ -63,20 +62,14 @@ namespace WizardsWeb.Controllers
 
             try
             {
-
                 await _playerService.Create(player, playerCreate.Password);
-                
                 await _signInManager.SignInAsync(player, isPersistent: false);
                 
                 return RedirectToAction("Details");
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(playerCreate);
             }
         }
@@ -109,7 +102,7 @@ namespace WizardsWeb.Controllers
             return RedirectToAction(nameof(Index), "Home");
         }
 
-        // GET: PlayerController/Edit/5
+        // GET: PlayerController/Edit
         public async Task<ActionResult> Edit()
         {
             if (!_signInManager.IsSignedIn(User))
@@ -123,7 +116,7 @@ namespace WizardsWeb.Controllers
             return View(playerEdit);
         }
 
-        // POST: PlayerController/Edit/5
+        // POST: PlayerController/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(PlayerEditModelView playerEdit)
@@ -145,18 +138,14 @@ namespace WizardsWeb.Controllers
                 await _playerService.Update(player);
                 return RedirectToAction(nameof(Details));
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(playerEdit);
             }
         }
 
-        // GET: PlayerController/EditPassword/5
+        // GET: PlayerController/EditPassword
         public async Task<ActionResult> EditPassword()
         {
             if (!_signInManager.IsSignedIn(User))
@@ -171,7 +160,7 @@ namespace WizardsWeb.Controllers
             return View(passwordChage);
         }
 
-        // POST: PlayerController/EditPassword/5
+        // POST: PlayerController/EditPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditPassword(PasswordChangeModelView passwordChange)
@@ -192,19 +181,14 @@ namespace WizardsWeb.Controllers
                 
                 return RedirectToAction(nameof(Edit));
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(passwordChange);
             }
         }
 
-
-        // GET: PlayerController/Delete/5
+        // GET: PlayerController/Delete
         public async Task<ActionResult> Delete()
         {
             if (!_signInManager.IsSignedIn(User))
@@ -219,7 +203,7 @@ namespace WizardsWeb.Controllers
             return View(playerForDelete);
         }
 
-        // POST: PlayerController/Delete/5
+        // POST: PlayerController/Delete
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(PlayerDeleteModelView playerDelete)
@@ -238,18 +222,13 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _playerService.Delete(playerId, passwordConfirm);
-                
                 await _signInManager.SignOutAsync();
                 
                 return RedirectToAction(nameof(Index), "Home");
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError("PasswordConfirm", data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(playerDelete);
             }
         }

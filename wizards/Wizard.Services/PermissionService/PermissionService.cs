@@ -22,6 +22,16 @@ public class PermissionService : IPermissionService
         _signInManager = signInManager;
     }
 
+    public PermissionResult HasPermission(ClaimsPrincipal user)
+    {
+        if (!_signInManager.IsSignedIn(user))
+        {
+            return PermissionResult.UserNotLoggedIn;
+        }
+
+        return PermissionResult.PermissionGranted;
+    }
+
     public PermissionResult HasPermission(ClaimsPrincipal user, Hero hero)
     {
         if (!_signInManager.IsSignedIn(user))
@@ -37,16 +47,6 @@ public class PermissionService : IPermissionService
         }
 
         return PermissionResult.PermissionDenied;
-    }
-
-    public PermissionResult HasPermission(ClaimsPrincipal user)
-    {
-        if (!_signInManager.IsSignedIn(user))
-        {
-            return PermissionResult.UserNotLoggedIn;
-        }
-
-        return PermissionResult.PermissionGranted;
     }
 
     public PermissionResult HasPermission(ClaimsPrincipal user, HeroItem item)

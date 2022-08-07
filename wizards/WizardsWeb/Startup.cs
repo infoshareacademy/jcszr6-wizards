@@ -58,10 +58,6 @@ namespace WizardsWeb
 
             var profileAssembly = typeof(Startup).Assembly;
             services.AddAutoMapper(profileAssembly);
-
-            
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

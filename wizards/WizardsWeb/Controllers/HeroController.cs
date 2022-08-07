@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
 using Wizards.Services.HeroService;
 using Wizards.Services.PermissionService;
 using Wizards.Services.PlayerService;
-using Wizards.Services.Validation.Elements;
+using WizardsWeb.Helpers;
 using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.Properties;
 
@@ -18,9 +19,7 @@ namespace WizardsWeb.Controllers
         private readonly IPlayerService _playerService;
         private readonly IPermissionService _permissionService;
 
-        public HeroController(
-            IHeroService heroService, IMapper mapper,
-            IPlayerService playerService, IPermissionService permissionService)
+        public HeroController(IHeroService heroService, IMapper mapper, IPlayerService playerService, IPermissionService permissionService)
         {
             _heroService = heroService;
             _mapper = mapper;
@@ -36,25 +35,22 @@ namespace WizardsWeb.Controllers
             heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
 
             var permissionResult = _permissionService.HasPermission(User, hero);
-
-            return HandlePermissions(permissionResult, View(heroDetails));
+            return HandleHeroPermissions(permissionResult, View(heroDetails));
         }
 
         // GET: HeroController/Create
         public ActionResult StartCreation()
         {
             var model = new HeroCreateModelView();
-
             var permissionResult = _permissionService.HasPermission(User);
-
-            return HandlePermissions(permissionResult, View("SetProfession", model));
+            return HandleHeroPermissions(permissionResult, View("SetProfession", model));
         }
 
         public ActionResult SetProfessionView(HeroCreateModelView heroCreate)
         {
+            ModelState.Clear();
             var permissionResult = _permissionService.HasPermission(User);
-
-            return HandlePermissions(permissionResult, View("SetProfession", heroCreate));
+            return HandleHeroPermissions(permissionResult, View("SetProfession", heroCreate));
         }
 
         [HttpPost]
@@ -62,16 +58,15 @@ namespace WizardsWeb.Controllers
         public ActionResult SetProfession(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
-            return View("SetAvatar", heroCreate);
+            var permissionResult = _permissionService.HasPermission(User);
+            return HandleHeroPermissions(permissionResult, View("SetAvatar", heroCreate));
         }
 
         public ActionResult SetAvatarView(HeroCreateModelView heroCreate)
         {
-            var permissionResult = _permissionService.HasPermission(User);
-            
             ModelState.Clear();
-            
-            return HandlePermissions(permissionResult, View("SetAvatar", heroCreate));
+            var permissionResult = _permissionService.HasPermission(User);
+            return HandleHeroPermissions(permissionResult, View("SetAvatar", heroCreate));
         }
 
         [HttpPost]
@@ -79,7 +74,8 @@ namespace WizardsWeb.Controllers
         public ActionResult SetAvatar(HeroCreateModelView heroCreate)
         {
             ModelState.Clear();
-            return View("Create", heroCreate);
+            var permissionResult = _permissionService.HasPermission(User);
+            return HandleHeroPermissions(permissionResult, View("Create", heroCreate));
         }
 
         // POST: HeroController/Create
@@ -87,27 +83,22 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(HeroCreateModelView heroCreate)
         {
-            var playerId = _playerService.GetId(User);
-
             if (!ModelState.IsValid)
             {
                 return View(heroCreate);
             }
 
-            var hero = _mapper.Map<Hero>(heroCreate);
-
             try
             {
+                var playerId = _playerService.GetId(User);
+                var hero = _mapper.Map<Hero>(heroCreate);
+
                 await _heroService.Add(playerId, hero);
                 return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(heroCreate);
             }
         }
@@ -120,9 +111,7 @@ namespace WizardsWeb.Controllers
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
 
             var permissionResult = _permissionService.HasPermission(User, hero);
-
-            return HandlePermissions(permissionResult, View(heroEdit));
-
+            return HandleHeroPermissions(permissionResult, View(heroEdit));
         }
 
         // POST: HeroController/Edit/5
@@ -130,15 +119,12 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditNickName(HeroEditModelView heroEdit)
         {
+            var newNickName = heroEdit.NickName;
             var originalHero = await _heroService.Get(heroEdit.Id);
-            heroEdit.AvatarImageNumber = originalHero.AvatarImageNumber;
-            heroEdit.Gold = originalHero.Gold;
+            
+            heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
+            heroEdit.NickName = newNickName;
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
-
-            if (!await _heroService.CanChangeNickName(heroEdit.Id))
-            {
-                ModelState.AddModelError("NickName", "You don't have enough gold!");
-            }
 
             if (!ModelState.IsValid)
             {
@@ -146,20 +132,15 @@ namespace WizardsWeb.Controllers
             }
 
             var hero = _mapper.Map<Hero>(heroEdit);
-            hero.Profession = originalHero.Profession;
-
+            
             try
             {
                 await _heroService.Update(hero.Id, hero);
                 return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(heroEdit);
             }
         }
@@ -172,8 +153,7 @@ namespace WizardsWeb.Controllers
             heroEdit.Cost = _heroService.GetChangeAvatarCost();
 
             var permissionResult = _permissionService.HasPermission(User, hero);
-
-            return HandlePermissions(permissionResult, View(heroEdit));
+            return HandleHeroPermissions(permissionResult, View(heroEdit));
         }
 
         // POST: HeroController/Edit/5
@@ -181,37 +161,25 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditAvatar(HeroEditModelView heroEdit)
         {
+            var newAvatarNumber = heroEdit.AvatarImageNumber;
             var originalHero = await _heroService.Get(heroEdit.Id);
-            heroEdit.NickName = originalHero.NickName;
-            heroEdit.Gold = originalHero.Gold;
+
+            heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
+            heroEdit.AvatarImageNumber = newAvatarNumber;
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
+
             ModelState.Clear();
 
-            if (!await _heroService.CanChangeAvatar(heroEdit.Id))
-            {
-                ModelState.AddModelError("AvatarImageNumber", "You don't have enough gold!");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View(heroEdit);
-            }
-
             var hero = _mapper.Map<Hero>(heroEdit);
-            hero.Profession = originalHero.Profession;
 
             try
             {
                 await _heroService.Update(hero.Id, hero);
                 return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(heroEdit);
             }
         }
@@ -223,10 +191,8 @@ namespace WizardsWeb.Controllers
             var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
 
-
             var permissionResult = _permissionService.HasPermission(User, hero);
-
-            return HandlePermissions(permissionResult, View(heroDelete));
+            return HandleHeroPermissions(permissionResult, View(heroDelete));
         }
 
         // POST: HeroController/Delete/5
@@ -235,12 +201,8 @@ namespace WizardsWeb.Controllers
         public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
         {
             var heroOriginalModel = await _heroService.Get(heroDelete.Id);
-
-            if (heroOriginalModel.NickName != heroDelete.ConfirmNickName)
-            {
-                ModelState.AddModelError("ConfirmNickName", "Invalid Nick Name!");
-            }
-
+            var confirmNickName = heroDelete.ConfirmNickName;
+            
             heroDelete = _mapper.Map<HeroDeleteModelView>(heroOriginalModel);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(heroOriginalModel);
 
@@ -251,27 +213,26 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Delete(heroDelete.Id);
+                await _heroService.Delete(heroDelete.Id, confirmNickName);
                 return RedirectToAction(nameof(Details), "Player");
             }
-            catch
+            catch (Exception exception)
             {
+                ModelState.AddModelErrorByException(exception);
                 return View(heroDelete);
             }
         }
 
-        private ActionResult HandlePermissions(PermissionResult permissionResult, ActionResult result)
+        private ActionResult HandleHeroPermissions(PermissionResult permissionResult, ActionResult resultWhenGranted)
         {
             if (permissionResult == PermissionResult.PermissionGranted)
             {
-                return result;
+                return resultWhenGranted;
             }
-
             if (permissionResult == PermissionResult.UserNotLoggedIn)
             {
                 return RedirectToAction("Login", "Player");
             }
-
             if (permissionResult == PermissionResult.PermissionDenied)
             {
                 return RedirectToAction("Details", "Player");
