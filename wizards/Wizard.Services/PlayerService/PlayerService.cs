@@ -24,11 +24,11 @@ namespace Wizards.Services.PlayerService
             _userManager.PasswordValidators.Clear();
         }
 
-        public async Task Create(Player player, string password)
+        public async Task Create(Player newPlayer, string password)
         {
-            await _playerValidator.Validate(player, password);
+            await _playerValidator.Validate(newPlayer, password);
 
-            var result = await _userManager.CreateAsync(player, password);
+            var result = await _userManager.CreateAsync(newPlayer, password);
 
             if (!result.Succeeded)
             {
@@ -36,9 +36,9 @@ namespace Wizards.Services.PlayerService
             }
         }
 
-        public async Task Delete(int id, string passwordConfirm)
+        public async Task Delete(ClaimsPrincipal user, string passwordConfirm)
         {
-            var player = await Get(id);
+            var player = await Get(user);
 
             if (!await _userManager.CheckPasswordAsync(player, passwordConfirm))
             {
@@ -63,9 +63,9 @@ namespace Wizards.Services.PlayerService
             await _playerRepository.Update(playerToUpdate);
         }
 
-        public async Task ChangePassword(int id, string currentPassword, string newPassword)
+        public async Task ChangePassword(ClaimsPrincipal user, string currentPassword, string newPassword)
         {
-            var playerToUpdate = await Get(id);
+            var playerToUpdate = await Get(user);
 
             await _playerValidator.Validate(playerToUpdate, currentPassword, newPassword);
 
@@ -100,18 +100,5 @@ namespace Wizards.Services.PlayerService
 
             return player;
         }
-
-        public int GetId(ClaimsPrincipal user)
-        {
-            var textId = _userManager.GetUserId(user);
-
-            if (textId == null)
-            {
-                throw new NullReferenceException("No Player Logged in!");
-            }
-
-            return Int32.Parse(textId);
-        }
-
     }
 }

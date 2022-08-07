@@ -23,7 +23,7 @@ public class HeroService : IHeroService
         _propertiesFactory = propertiesFactory;
     }
 
-    public async Task Add(int playerId, Hero hero)
+    public async Task Add(ClaimsPrincipal user, Hero hero)
     {
         await _heroValidator.Validate(hero);
         
@@ -31,7 +31,7 @@ public class HeroService : IHeroService
         hero.Attributes = _propertiesFactory.GetHeroAttributes(hero.Profession);
         hero.Statistics = _propertiesFactory.GetStatistics();
 
-        var player = await _playerService.Get(playerId);
+        var player = await _playerService.Get(user);
         
         await _heroRepository.Add(player, hero);
     }

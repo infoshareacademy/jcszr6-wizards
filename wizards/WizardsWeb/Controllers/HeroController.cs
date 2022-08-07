@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
 using Wizards.Services.HeroService;
-using Wizards.Services.PermissionService;
-using Wizards.Services.PlayerService;
-using WizardsWeb.Helpers;
+using Wizards.Services.Helpers;
 using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.Properties;
 
@@ -18,21 +16,14 @@ namespace WizardsWeb.Controllers
     {
         private readonly IHeroService _heroService;
         private readonly IMapper _mapper;
-        private readonly IPlayerService _playerService;
-        private readonly IPermissionService _permissionService;
-        private readonly IAuthorizationService _authorizationService;
-
-        public HeroController(IHeroService heroService, IMapper mapper, IPlayerService playerService, IPermissionService permissionService, IAuthorizationService authorizationService)
+        
+        public HeroController(IHeroService heroService, IMapper mapper)
         {
             _heroService = heroService;
             _mapper = mapper;
-            _permissionService = permissionService;
-            _playerService = playerService;
-            _authorizationService = authorizationService;
         }
 
         // GET: HeroController/Details/5
-        // [Authorize(Policy = "HeroOwnerPolicy")]
         public async Task<ActionResult> Details(int id)
         {
             var hero = await _heroService.Get(id);
@@ -87,12 +78,11 @@ namespace WizardsWeb.Controllers
                 return View(heroCreate);
             }
 
-            var playerId = _playerService.GetId(User);
             var hero = _mapper.Map<Hero>(heroCreate);
 
             try
             {
-                await _heroService.Add(playerId, hero);
+                await _heroService.Add(User, hero);
                 return RedirectToAction(nameof(Details), new { id = hero.Id });
             }
             catch (Exception exception)
@@ -109,8 +99,7 @@ namespace WizardsWeb.Controllers
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
 
-            var permissionResult = _permissionService.HasPermission(User, hero);
-            return HandleHeroPermissions(permissionResult, View(heroEdit));
+            return View(heroEdit);
         }
 
         // POST: HeroController/Edit/5
@@ -151,8 +140,7 @@ namespace WizardsWeb.Controllers
             var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeAvatarCost();
 
-            var permissionResult = _permissionService.HasPermission(User, hero);
-            return HandleHeroPermissions(permissionResult, View(heroEdit));
+            return View(heroEdit);
         }
 
         // POST: HeroController/Edit/5
@@ -190,8 +178,7 @@ namespace WizardsWeb.Controllers
             var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
 
-            var permissionResult = _permissionService.HasPermission(User, hero);
-            return HandleHeroPermissions(permissionResult, View(heroDelete));
+            return View(heroDelete);
         }
 
         // POST: HeroController/Delete/5
@@ -222,18 +209,5 @@ namespace WizardsWeb.Controllers
             }
         }
 
-        private ActionResult HandleHeroPermissions(PermissionResult permissionResult, ActionResult resultWhenGranted)
-        {
-            if (permissionResult == PermissionResult.PermissionGranted)
-            {
-                return resultWhenGranted;
-            }
-            if (permissionResult == PermissionResult.PermissionDenied)
-            {
-                return RedirectToAction("Details", "Player");
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Wizards.Core.Model;
+using Wizards.Services.Helpers;
 using Wizards.Services.PlayerService;
 
 namespace Wizards.Services.AuthorizationElements;
@@ -15,7 +16,7 @@ public class HeroAuthorizationHandler : AuthorizationHandler<HeroOwnerRequiremen
 
     protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, HeroOwnerRequirement requirement, Hero resource)
     {
-        var playerId = _playerService.GetId(context.User);
+        var playerId = context.User.GetId();
         
         if (playerId == resource.PlayerId)
         {

@@ -15,7 +15,7 @@ using Wizards.Services.PlayerService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Services.AuthorizationElements;
-using Wizards.Services.PermissionService;
+using Wizards.Services.Selector;
 
 namespace WizardsWeb
 {
@@ -42,7 +42,7 @@ namespace WizardsWeb
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
 
-            services.AddTransient<IPermissionService, PermissionService>();
+            services.AddTransient<ISelector, Selector>();
 
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
@@ -76,8 +76,6 @@ namespace WizardsWeb
             });
             services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
             
-            //services.AddSingleton<IAuthorizationMiddlewareResultHandler, HeroAuthorizationMiddlewareResultHandler>();
-
             services.AddRazorPages();
         }
 

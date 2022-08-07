@@ -5,7 +5,7 @@ namespace Wizards.Services.HeroService;
 
 public interface IHeroService
 {
-    Task Add(int playerId, Hero hero);
+    Task Add(ClaimsPrincipal user, Hero hero);
     Task Delete(int id, string confirmNickName);
     Task Update(int id, Hero hero);
     Task<Hero> Get(int id);

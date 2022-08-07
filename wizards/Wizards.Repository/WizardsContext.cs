@@ -50,7 +50,7 @@ namespace Wizards.Repository
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Player>()
-                .Property(p => p.Id);
+                .HasKey(p => p.Id);
             modelBuilder.Entity<Player>()
                 .Property(p => p.UserName)
                 .HasMaxLength(maxLength: 30)
@@ -75,6 +75,14 @@ namespace Wizards.Repository
                 .HasForeignKey(h => h.PlayerId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Player>()
+                .Property(p => p.ActiveHeroId)
+                .IsRequired()
+                .HasDefaultValue(0);
+            modelBuilder.Entity<Player>()
+                .Property(p => p.ActiveItemId)
+                .IsRequired()
+                .HasDefaultValue(0);
 
 
             modelBuilder.Entity<Hero>()

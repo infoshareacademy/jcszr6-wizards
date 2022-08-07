@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
 using Wizards.Services.PlayerService;
-using WizardsWeb.Helpers;
+using Wizards.Services.Helpers;
 using WizardsWeb.ModelViews;
 
 namespace WizardsWeb.Controllers
@@ -28,8 +28,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Details
         public async Task<ActionResult> Details()
         {
-            var playerId = _playerService.GetId(User);
-            var player = await _playerService.Get(playerId);
+            var player = await _playerService.Get(User);
             var playerDetails = _mapper.Map<PlayerDetailsModelView>(player);
             return View(playerDetails);
         }
@@ -101,8 +100,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Edit
         public async Task<ActionResult> Edit()
         {
-            var playerId = _playerService.GetId(User);
-            var player = await _playerService.Get(playerId);
+            var player = await _playerService.Get(User);
             var playerEdit = _mapper.Map<PlayerEditModelView>(player);
             return View(playerEdit);
         }
@@ -112,8 +110,7 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(PlayerEditModelView playerEdit)
         {
-            var playerId = _playerService.GetId(User);
-            var originalPlayer = await _playerService.Get(playerId);
+            var originalPlayer = await _playerService.Get(User);
             playerEdit.UserName = originalPlayer.UserName;
 
             if (!ModelState.IsValid)
@@ -122,7 +119,7 @@ namespace WizardsWeb.Controllers
             }
 
             var player = _mapper.Map<Player>(playerEdit);
-            player.Id = playerId;
+            player.Id = User.GetId();
 
             try
             {
@@ -139,8 +136,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/EditPassword
         public async Task<ActionResult> EditPassword()
         {
-            var playerId = _playerService.GetId(User);
-            var player = await _playerService.Get(playerId);
+            var player = await _playerService.Get(User);
             var passwordChage = _mapper.Map<PasswordChangeModelView>(player);
             
             return View(passwordChage);
@@ -151,8 +147,7 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditPassword(PasswordChangeModelView passwordChange)
         {
-            var playerId = _playerService.GetId(User);
-            var originalPlayer = await _playerService.Get(playerId);
+            var originalPlayer = await _playerService.Get(User);
             
             passwordChange.UserName = originalPlayer.UserName;
 
@@ -163,7 +158,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _playerService.ChangePassword(playerId, passwordChange.CurrentPassword, passwordChange.NewPassword);
+                await _playerService.ChangePassword(User, passwordChange.CurrentPassword, passwordChange.NewPassword);
                 return RedirectToAction(nameof(Edit));
             }
             catch (Exception exception)
@@ -176,8 +171,7 @@ namespace WizardsWeb.Controllers
         // GET: PlayerController/Delete
         public async Task<ActionResult> Delete()
         {
-            var playerId = _playerService.GetId(User);
-            var player = await _playerService.Get(playerId);
+            var player = await _playerService.Get(User);
             var playerForDelete = _mapper.Map<PlayerDeleteModelView>(player);
             
             return View(playerForDelete);
@@ -188,8 +182,7 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(PlayerDeleteModelView playerDelete)
         {
-            var playerId = _playerService.GetId(User);
-            var originalPlayer = await _playerService.Get(playerId);
+            var originalPlayer = await _playerService.Get(User);
             var passwordConfirm = playerDelete.PasswordConfirm;
             
             playerDelete = _mapper.Map<PlayerDeleteModelView>(originalPlayer);
@@ -201,7 +194,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _playerService.Delete(playerId, passwordConfirm);
+                await _playerService.Delete(User, passwordConfirm);
                 return RedirectToAction(nameof(Logout));
             }
             catch (Exception exception)
