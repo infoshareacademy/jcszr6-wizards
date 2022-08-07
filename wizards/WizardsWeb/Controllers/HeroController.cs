@@ -20,24 +20,26 @@ namespace WizardsWeb.Controllers
         private readonly IMapper _mapper;
         private readonly IPlayerService _playerService;
         private readonly IPermissionService _permissionService;
+        private readonly IAuthorizationService _authorizationService;
 
-        public HeroController(IHeroService heroService, IMapper mapper, IPlayerService playerService, IPermissionService permissionService)
+        public HeroController(IHeroService heroService, IMapper mapper, IPlayerService playerService, IPermissionService permissionService, IAuthorizationService authorizationService)
         {
             _heroService = heroService;
             _mapper = mapper;
             _permissionService = permissionService;
             _playerService = playerService;
+            _authorizationService = authorizationService;
         }
 
         // GET: HeroController/Details/5
+        // [Authorize(Policy = "HeroOwnerPolicy")]
         public async Task<ActionResult> Details(int id)
         {
             var hero = await _heroService.Get(id);
             var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
             heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
 
-            var permissionResult = _permissionService.HasPermission(User, hero);
-            return HandleHeroPermissions(permissionResult, View(heroDetails));
+            return View(heroDetails);
         }
 
         // GET: HeroController/Create
@@ -118,7 +120,7 @@ namespace WizardsWeb.Controllers
         {
             var newNickName = heroEdit.NickName;
             var originalHero = await _heroService.Get(heroEdit.Id);
-            
+
             heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
             heroEdit.NickName = newNickName;
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
@@ -129,7 +131,7 @@ namespace WizardsWeb.Controllers
             }
 
             var hero = _mapper.Map<Hero>(heroEdit);
-            
+
             try
             {
                 await _heroService.Update(hero.Id, hero);
@@ -199,7 +201,7 @@ namespace WizardsWeb.Controllers
         {
             var heroOriginalModel = await _heroService.Get(heroDelete.Id);
             var confirmNickName = heroDelete.ConfirmNickName;
-            
+
             heroDelete = _mapper.Map<HeroDeleteModelView>(heroOriginalModel);
             heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(heroOriginalModel);
 

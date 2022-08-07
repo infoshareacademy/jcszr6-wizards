@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
+using Wizards.Services.AuthorizationElements;
 using Wizards.Services.PermissionService;
 
 namespace WizardsWeb
@@ -42,6 +44,14 @@ namespace WizardsWeb
 
             services.AddTransient<IPermissionService, PermissionService>();
 
+            var connectionString = Configuration.GetConnectionString("WizardDatabase");
+            services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
+
+            var profileAssembly = typeof(Startup).Assembly;
+            services.AddAutoMapper(profileAssembly);
+
+            
+            // Identity necessary trash section
             services.AddIdentity<Player, IdentityRole<int>>(
                     options =>
                     {
@@ -50,6 +60,7 @@ namespace WizardsWeb
                     })
                 .AddEntityFrameworkStores<WizardsContext>();
 
+            // Simple Authorization configure
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Player/Login/";
@@ -57,13 +68,17 @@ namespace WizardsWeb
                 options.LogoutPath = "/Home/Index/";
             });
 
-            services.AddRazorPages();
+            // Haevy dark implementations of policy Authorization DO NOT TOUCH!
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("HeroOwnerPolicy", policy =>
+                    policy.Requirements.Add(new HeroOwnerRequirement()));
+            });
+            services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
             
-            var connectionString = Configuration.GetConnectionString("WizardDatabase");
-            services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
+            //services.AddSingleton<IAuthorizationMiddlewareResultHandler, HeroAuthorizationMiddlewareResultHandler>();
 
-            var profileAssembly = typeof(Startup).Assembly;
-            services.AddAutoMapper(profileAssembly);
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -97,8 +112,6 @@ namespace WizardsWeb
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
-
-
         }
     }
 }

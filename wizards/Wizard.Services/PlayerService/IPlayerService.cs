@@ -11,6 +11,7 @@ namespace Wizards.Services.PlayerService
         Task ChangePassword(int id, string currentPassword, string newPassword);
         Task<Player> Get(int id);
         Task<Player> Get(ClaimsPrincipal user);
+        Task SetActiveHero(Player player, int heroId);
         int GetId(ClaimsPrincipal user);
     }
 }
