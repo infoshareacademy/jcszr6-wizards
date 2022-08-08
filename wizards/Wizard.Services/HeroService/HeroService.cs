@@ -63,7 +63,15 @@ public class HeroService : IHeroService
         await _heroRepository.Update(heroToUpdate);
     }
 
-    public async Task<Hero> Get(int id)
+    public async Task<Hero> Get(ClaimsPrincipal user)
+    {
+        var ownerPlayer = await _playerService.Get(user);
+        var id = ownerPlayer.ActiveHeroId;
+
+        return await Get(id);
+    }
+
+    private async Task<Hero> Get(int id)
     {
         var hero = await _heroRepository.Get(id);
 

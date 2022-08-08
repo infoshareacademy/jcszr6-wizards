@@ -11,7 +11,6 @@
     <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br/>
     <span asp-validation-for="AvatarImageNumber" class="text-danger font-weight-bold"></span>
     <hr/>
-    <input asp-for="Id" hidden="true"/>
     <div class="row">
         @for (int i = 1; i <= 7; i++)
         {
@@ -28,7 +27,7 @@
     </div>
     <hr/>
     <div class="btn-group">
-        <a type="button" class="btn btn-warning" asp-action="Details" asp-route-id="@Model.Id">Back to Details</a>
+        <a type="button" class="btn btn-warning" asp-action="Details">Back to Details</a>
         <input type="submit" value="Set Avatar" class="btn btn-primary"/>
     </div>
 </form>

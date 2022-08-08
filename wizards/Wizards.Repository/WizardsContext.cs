@@ -50,8 +50,6 @@ namespace Wizards.Repository
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Player>()
-                .HasKey(p => p.Id);
-            modelBuilder.Entity<Player>()
                 .Property(p => p.UserName)
                 .HasMaxLength(maxLength: 30)
                 .IsRequired();

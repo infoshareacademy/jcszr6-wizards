@@ -5,8 +5,6 @@ namespace WizardsWeb.ModelViews;
 
 public class HeroEditModelView
 {
-    public int Id { get; set; }
-
     [Required]
     [MinLength(3)]
     [MaxLength(20)]

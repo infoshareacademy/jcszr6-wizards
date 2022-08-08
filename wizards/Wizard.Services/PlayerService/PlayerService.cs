@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
+using Wizards.Services.Helpers;
 using Wizards.Services.Validation;
 using Wizards.Services.Validation.Elements;
 
@@ -14,7 +15,8 @@ namespace Wizards.Services.PlayerService
         private readonly UserManager<Player> _userManager;
 
 
-        public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator, UserManager<Player> userManager)
+        public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator,
+            UserManager<Player> userManager)
         {
             _playerRepository = playerRepository;
             _playerValidator = playerValidator;
@@ -70,7 +72,7 @@ namespace Wizards.Services.PlayerService
             await _playerValidator.Validate(playerToUpdate, currentPassword, newPassword);
 
             var result = await _userManager.ChangePasswordAsync(playerToUpdate, currentPassword, newPassword);
-            
+
             if (!result.Succeeded)
             {
                 throw new InvalidDataException("Uexpected Error!");
@@ -91,14 +93,7 @@ namespace Wizards.Services.PlayerService
 
         public async Task<Player> Get(ClaimsPrincipal user)
         {
-            var player = await _userManager.GetUserAsync(user);
-
-            if (player == null)
-            {
-                throw new NullReferenceException("No Player Logged in!");
-            }
-
-            return player;
+            return await _playerRepository.Get(user.GetId());
         }
     }
 }

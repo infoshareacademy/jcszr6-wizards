@@ -16,7 +16,7 @@ namespace WizardsWeb.Controllers
     {
         private readonly IHeroService _heroService;
         private readonly IMapper _mapper;
-        
+
         public HeroController(IHeroService heroService, IMapper mapper)
         {
             _heroService = heroService;
@@ -24,13 +24,19 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details()
         {
-            var hero = await _heroService.Get(id);
-            var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
-            heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-
-            return View(heroDetails);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
+                heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
+                return View(heroDetails);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // GET: HeroController/Create
@@ -83,7 +89,7 @@ namespace WizardsWeb.Controllers
             try
             {
                 await _heroService.Add(User, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                return RedirectToAction("SelectHero", "Selector", new { id = hero.Id, actionName = "Details" });
             }
             catch (Exception exception)
             {
@@ -93,13 +99,19 @@ namespace WizardsWeb.Controllers
         }
 
         // GET: HeroController/Edit/5
-        public async Task<ActionResult> EditNickName(int id)
+        public async Task<ActionResult> EditNickName()
         {
-            var hero = await _heroService.Get(id);
-            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-            heroEdit.Cost = _heroService.GetChangeNickNameCost();
-
-            return View(heroEdit);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+                heroEdit.Cost = _heroService.GetChangeNickNameCost();
+                return View(heroEdit);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // POST: HeroController/Edit/5
@@ -108,7 +120,7 @@ namespace WizardsWeb.Controllers
         public async Task<ActionResult> EditNickName(HeroEditModelView heroEdit)
         {
             var newNickName = heroEdit.NickName;
-            var originalHero = await _heroService.Get(heroEdit.Id);
+            var originalHero = await _heroService.Get(User);
 
             heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
             heroEdit.NickName = newNickName;
@@ -123,8 +135,8 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Update(hero.Id, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                await _heroService.Update(originalHero.Id, hero);
+                return RedirectToAction(nameof(Details));
             }
             catch (Exception exception)
             {
@@ -136,11 +148,17 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Edit/5
         public async Task<ActionResult> EditAvatar(int id)
         {
-            var hero = await _heroService.Get(id);
-            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-            heroEdit.Cost = _heroService.GetChangeAvatarCost();
-
-            return View(heroEdit);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+                heroEdit.Cost = _heroService.GetChangeAvatarCost();
+                return View(heroEdit);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // POST: HeroController/Edit/5
@@ -149,7 +167,7 @@ namespace WizardsWeb.Controllers
         public async Task<ActionResult> EditAvatar(HeroEditModelView heroEdit)
         {
             var newAvatarNumber = heroEdit.AvatarImageNumber;
-            var originalHero = await _heroService.Get(heroEdit.Id);
+            var originalHero = await _heroService.Get(User);
 
             heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
             heroEdit.AvatarImageNumber = newAvatarNumber;
@@ -161,8 +179,8 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Update(hero.Id, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                await _heroService.Update(originalHero.Id, hero);
+                return RedirectToAction(nameof(Details));
             }
             catch (Exception exception)
             {
@@ -174,11 +192,17 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            var hero = await _heroService.Get(id);
-            var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
-            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-
-            return View(heroDelete);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
+                heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
+                return View(heroDelete);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // POST: HeroController/Delete/5
@@ -186,11 +210,11 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
         {
-            var heroOriginalModel = await _heroService.Get(heroDelete.Id);
+            var originalHero = await _heroService.Get(User);
             var confirmNickName = heroDelete.ConfirmNickName;
 
-            heroDelete = _mapper.Map<HeroDeleteModelView>(heroOriginalModel);
-            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(heroOriginalModel);
+            heroDelete = _mapper.Map<HeroDeleteModelView>(originalHero);
+            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(originalHero);
 
             if (!ModelState.IsValid)
             {
@@ -199,7 +223,7 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Delete(heroDelete.Id, confirmNickName);
+                await _heroService.Delete(originalHero.Id, confirmNickName);
                 return RedirectToAction(nameof(Details), "Player");
             }
             catch (Exception exception)
@@ -208,6 +232,5 @@ namespace WizardsWeb.Controllers
                 return View(heroDelete);
             }
         }
-
     }
 }
