@@ -12,6 +12,7 @@ using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
+using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Services.AuthorizationElements;
@@ -33,6 +34,7 @@ namespace WizardsWeb
         {
             services.AddControllersWithViews();
 
+            // Busines Logic Services Configuration
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
@@ -44,23 +46,27 @@ namespace WizardsWeb
 
             services.AddTransient<ISelector, Selector>();
 
+            services.AddTransient<IItemRepository, ItemRepository>();
+            services.AddTransient<IItemService, ItemService>();
+            services.AddTransient<IItemValidator, ItemValidator>();
+            
+            // External Packages Configuration
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
 
             var profileAssembly = typeof(Startup).Assembly;
             services.AddAutoMapper(profileAssembly);
 
-            
-            // Identity necessary trash section
-            services.AddIdentity<Player, IdentityRole<int>>(
-                    options =>
+            // Identity necessary configuration
+            services.AddIdentity<Player, IdentityRole<int>>(options =>
                     {
                         options.SignIn.RequireConfirmedAccount = false;
-                        //Other options go here
                     })
                 .AddEntityFrameworkStores<WizardsContext>();
+            
+            services.AddRazorPages();
 
-            // Simple Authorization configure
+            // Simple Authorization configuration
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Player/Login/";
@@ -68,15 +74,15 @@ namespace WizardsWeb
                 options.LogoutPath = "/Home/Index/";
             });
 
-            // Haevy dark implementations of policy Authorization DO NOT TOUCH!
+            // Policy for Resource-Based Authorization configuration
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("HeroOwnerPolicy", policy =>
                     policy.Requirements.Add(new HeroOwnerRequirement()));
             });
-            services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
             
-            services.AddRazorPages();
+            // Resource-Based Authorization Handler Configuration
+            services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -108,7 +114,6 @@ namespace WizardsWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
             });
         }
     }
