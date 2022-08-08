@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Wizards.Core.Model;
 using Wizards.Services.Selector;
 
 namespace WizardsWeb.Controllers;
@@ -9,16 +12,33 @@ public class SelectorController : Controller
 {
     private readonly IAuthorizationService _authorizationService;
     private readonly ISelector _selector;
+    private readonly List<string> _allowedHeroActions;
 
     public SelectorController(IAuthorizationService authorizationService, ISelector selector)
     {
         _authorizationService = authorizationService;
         _selector = selector;
+        _allowedHeroActions = new List<string>() { "Details", "Delete" };
     }
 
     public async Task<ActionResult> SelectHero(int id, string actionName)
     {
-        var hero = await _selector.GetHeroAsync(id);
+        if (actionName == null || !_allowedHeroActions.Contains(actionName))
+        {
+            return RedirectToAction("Details", "Player");
+        }
+
+        var hero = new Hero();
+        
+        try
+        {
+            hero = await _selector.GetHeroAsync(id);
+        }
+        catch
+        {
+            return RedirectToAction("Details", "Player");
+        }
+        
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, hero, "HeroOwnerPolicy");
 
         if (authorizationResult.Succeeded)
@@ -26,11 +46,6 @@ public class SelectorController : Controller
             var player = await _selector.GetPlayerAsync(User);
             await _selector.SelectHero(player, id);
             return RedirectToAction(actionName, "Hero");
-        }
-        
-        if (!User.Identity.IsAuthenticated)
-        {
-            return RedirectToAction("Login", "Player");
         }
         
         if (!authorizationResult.Succeeded)
