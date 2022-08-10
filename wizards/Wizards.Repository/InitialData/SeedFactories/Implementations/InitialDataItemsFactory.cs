@@ -4,7 +4,7 @@ using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
 
-public class InitialDataItemFactory : IInitialDataItemsFactory
+public class InitialDataItemsFactory : IInitialDataItemsFactory
 {
     public List<Item> GetItems()
     {

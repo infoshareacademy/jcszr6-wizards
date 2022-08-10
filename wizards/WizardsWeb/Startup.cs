@@ -15,6 +15,7 @@ using Wizards.Services.PlayerService;
 using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
+using Wizards.Repository.InitialData;
 using Wizards.Services.AuthorizationElements;
 using Wizards.Services.Selector;
 
@@ -49,6 +50,8 @@ namespace WizardsWeb
             services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IItemValidator, ItemValidator>();
+
+            services.AddDataInitializer();
             
             // External Packages Configuration
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
