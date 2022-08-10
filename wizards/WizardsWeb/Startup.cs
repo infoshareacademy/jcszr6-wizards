@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -93,12 +92,13 @@ namespace WizardsWeb
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector)
         {
             wizardsContext.Database.Migrate();
-            var result = injector.InjectRolesAndUsersAsync();
-            result.Wait();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                var result = injector.InjectRolesAndUsersAsync();
+                result.Wait();
             }
             else
             {

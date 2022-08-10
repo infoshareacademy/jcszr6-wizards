@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Model;
 using Wizards.Core.Model.ManyToManyTables;
 using Wizards.Repository.DbConfiguration;
-using Wizards.Repository.InitialData;
 
 namespace Wizards.Repository
 {
