@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Model.Enums;
-using Wizards.Services.Factories.Seed.Interfaces;
+using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
-namespace Wizards.Services.Factories.Seed.Implementations;
+namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 public class InitialDataRolesFactory : IInitialDataRolesFactory
 {

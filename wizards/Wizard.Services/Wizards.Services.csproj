@@ -15,8 +15,4 @@
     <Folder Include="AuthorizationElements\Selector\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.7" />
-  </ItemGroup>
-
 </Project>

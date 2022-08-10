@@ -1,6 +1,6 @@
 ﻿using Wizards.Core.Model;
 
-namespace Wizards.Services.Factories.Seed.Interfaces;
+namespace Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 public interface IInitialDataUsersFactory
 {

@@ -39,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DbConfiguration\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 

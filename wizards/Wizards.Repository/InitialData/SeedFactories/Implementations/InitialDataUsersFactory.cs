@@ -1,7 +1,7 @@
 ﻿using Wizards.Core.Model;
-using Wizards.Services.Factories.Seed.Interfaces;
+using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
-namespace Wizards.Services.Factories.Seed.Implementations;
+namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 public class InitialDataUsersFactory : IInitialDataUsersFactory
 {

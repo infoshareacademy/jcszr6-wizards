@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Wizards.Services.Factories.Seed.Interfaces;
+namespace Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 public interface IInitialDataRolesFactory
 {
