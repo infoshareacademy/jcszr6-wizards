@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model;
+﻿using System.ComponentModel.DataAnnotations;
 using Wizards.Core.Model.Enums;
-using Wizards.Core.Model.ManyToManyTables;
 
 namespace WizardsWeb.ModelViews.ItemModelViews
 {

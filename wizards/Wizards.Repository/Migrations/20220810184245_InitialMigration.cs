@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Wizards.Repository.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,6 +30,8 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ActiveHeroId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    ActiveItemId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -218,7 +220,7 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
                     Restriction = table.Column<int>(type: "int", nullable: false),
                     Tier = table.Column<int>(type: "int", nullable: false),
@@ -278,15 +280,16 @@ namespace Wizards.Repository.Migrations
                 name: "HeroItems",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     HeroId = table.Column<int>(type: "int", nullable: false),
                     ItemId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     InUse = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     ItemEndurance = table.Column<double>(type: "float", nullable: false, defaultValue: 100.0)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HeroItems", x => new { x.HeroId, x.ItemId });
+                    table.PrimaryKey("PK_HeroItems", x => x.Id);
                     table.ForeignKey(
                         name: "FK_HeroItems_Heroes_HeroId",
                         column: x => x.HeroId,
@@ -299,6 +302,80 @@ namespace Wizards.Repository.Migrations
                         principalTable: "Items",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "ItemAttributes",
+                columns: new[] { "Id", "CurrentHealth", "Damage", "Defense", "MaxHealth", "Precision", "Reflex", "Specialization" },
+                values: new object[,]
+                {
+                    { 1, 0, 7, 0, 0, 15, 0, -8 },
+                    { 2, 0, 14, 0, 0, 20, 0, -6 },
+                    { 3, 0, 21, 0, 0, 25, 0, -4 },
+                    { 4, 0, 28, 0, 0, 30, 0, -2 },
+                    { 5, 0, 35, 0, 0, 35, 0, 0 },
+                    { 6, 0, 8, 0, 0, -8, 0, 30 },
+                    { 7, 0, 16, 0, 0, -6, 0, 35 },
+                    { 8, 0, 24, 0, 0, -4, 0, 40 },
+                    { 9, 0, 32, 0, 0, -2, 0, 45 },
+                    { 10, 0, 40, 0, 0, 0, 0, 50 },
+                    { 11, 0, 9, 0, 0, 12, 0, 3 },
+                    { 12, 0, 18, 0, 0, 14, 0, 6 },
+                    { 13, 0, 27, 0, 0, 16, 0, 9 },
+                    { 14, 0, 36, 0, 0, 18, 0, 12 },
+                    { 15, 0, 45, 0, 0, 20, 0, 15 },
+                    { 16, 0, 0, -8, 25, 0, 15, 0 },
+                    { 17, 0, 0, -6, 75, 0, 20, 0 },
+                    { 18, 0, 0, -4, 125, 0, 25, 0 },
+                    { 19, 0, 0, -2, 175, 0, 30, 0 },
+                    { 20, 0, 0, 0, 225, 0, 35, 0 },
+                    { 21, 0, 0, 30, 25, 0, -8, 0 },
+                    { 22, 0, 0, 35, 75, 0, -6, 0 },
+                    { 23, 0, 0, 40, 125, 0, -4, 0 },
+                    { 24, 0, 0, 45, 175, 0, -2, 0 },
+                    { 25, 0, 0, 50, 225, 0, 0, 0 },
+                    { 26, 0, 0, 15, 25, 0, 4, 0 },
+                    { 27, 0, 0, 20, 75, 0, 8, 0 },
+                    { 28, 0, 0, 25, 125, 0, 12, 0 },
+                    { 29, 0, 0, 30, 175, 0, 16, 0 },
+                    { 30, 0, 0, 35, 225, 0, 20, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Items",
+                columns: new[] { "Id", "AttributesId", "BuyPrice", "Name", "Restriction", "SellPrice", "Tier", "Type" },
+                values: new object[,]
+                {
+                    { 1, 1, 100, "Normal Staff", 1, 80, 1, 0 },
+                    { 2, 2, 600, "Fine Staff", 1, 480, 2, 0 },
+                    { 3, 3, 3000, "Great Staff", 1, 2400, 3, 0 },
+                    { 4, 4, 12000, "Enchanted Staff", 1, 9600, 4, 0 },
+                    { 5, 5, 36000, "Masterpiece Staff", 1, 28800, 5, 0 },
+                    { 6, 6, 100, "Normal Spell-book", 1, 80, 1, 0 },
+                    { 7, 7, 600, "Fine Spell-book", 1, 480, 2, 0 },
+                    { 8, 8, 3000, "Great Spell-book", 1, 2400, 3, 0 },
+                    { 9, 9, 12000, "Enchanted Spell-book", 1, 9600, 4, 0 },
+                    { 10, 10, 36000, "Masterpiece Spell-book", 1, 28800, 5, 0 },
+                    { 11, 11, 100, "Normal Scepter", 1, 80, 1, 0 },
+                    { 12, 12, 600, "Fine Scepter", 1, 480, 2, 0 },
+                    { 13, 13, 3000, "Great Scepter", 1, 2400, 3, 0 },
+                    { 14, 14, 12000, "Enchanted Scepter", 1, 9600, 4, 0 },
+                    { 15, 15, 36000, "Masterpiece Scepter", 1, 28800, 5, 0 },
+                    { 16, 16, 50, "Normal Vestments", 1, 40, 1, 1 },
+                    { 17, 17, 300, "Fine Vestments", 1, 240, 2, 1 },
+                    { 18, 18, 1500, "Great Vestments", 1, 1200, 3, 1 },
+                    { 19, 19, 6000, "Enchanted Vestments", 1, 4800, 4, 1 },
+                    { 20, 20, 18000, "Masterpiece Vestments", 1, 14400, 5, 1 },
+                    { 21, 21, 50, "Normal Mantle", 1, 40, 1, 1 },
+                    { 22, 22, 300, "Fine Mantle", 1, 240, 2, 1 },
+                    { 23, 23, 1500, "Great Mantle", 1, 1200, 3, 1 },
+                    { 24, 24, 6000, "Enchanted Mantle", 1, 4800, 4, 1 },
+                    { 25, 25, 18000, "Masterpiece Mantle", 1, 14400, 5, 1 },
+                    { 26, 26, 50, "Normal Overcoat", 1, 40, 1, 1 },
+                    { 27, 27, 300, "Fine Overcoat", 1, 240, 2, 1 },
+                    { 28, 28, 1500, "Great Overcoat", 1, 1200, 3, 1 },
+                    { 29, 29, 6000, "Enchanted Overcoat", 1, 4800, 4, 1 },
+                    { 30, 30, 18000, "Masterpiece Overcoat", 1, 14400, 5, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -374,6 +451,11 @@ namespace Wizards.Repository.Migrations
                 table: "Heroes",
                 column: "StatisticsId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HeroItems_HeroId",
+                table: "HeroItems",
+                column: "HeroId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HeroItems_ItemId",

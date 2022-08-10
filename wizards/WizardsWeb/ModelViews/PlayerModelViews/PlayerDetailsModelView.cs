@@ -7,12 +7,8 @@ namespace WizardsWeb.ModelViews
 {
     public class PlayerDetailsModelView
     {
-        public int Id { get; set; }
-
         [Display(Name = "User Name")]
         public string UserName { get; set; }
-
-        public string Password { get; set; }
 
         [Display(Name = "Email addres")]
         [EmailAddress]

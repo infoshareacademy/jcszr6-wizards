@@ -1,6 +1,11 @@
-﻿using Wizards.Core.Interfaces;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
+using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
+using Wizards.Core.Model.Enums;
+using Wizards.Services.Helpers;
 using Wizards.Services.Validation;
+using Wizards.Services.Validation.Elements;
 
 namespace Wizards.Services.PlayerService
 {
@@ -8,46 +13,72 @@ namespace Wizards.Services.PlayerService
     {
         private readonly IPlayerRepository _playerRepository;
         private readonly IPlayerValidator _playerValidator;
+        private readonly UserManager<Player> _userManager;
 
-        public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator)
+
+        public PlayerService(IPlayerRepository playerRepository, IPlayerValidator playerValidator,
+            UserManager<Player> userManager)
         {
             _playerRepository = playerRepository;
             _playerValidator = playerValidator;
+            _userManager = userManager;
+
+            _userManager.UserValidators.Clear();
+            _userManager.PasswordValidators.Clear();
         }
 
-        public async Task Add(Player player)
+        public async Task Create(Player newPlayer, string password)
+        {
+            await _playerValidator.Validate(newPlayer, password);
+
+            var result = await _userManager.CreateAsync(newPlayer, password);
+            result = await _userManager.AddToRoleAsync(newPlayer, UserRoles.RegularUser.ToString());
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidDataException("Uexpected Error!");
+            }
+        }
+
+        public async Task Delete(ClaimsPrincipal user, string passwordConfirm)
+        {
+            var player = await Get(user);
+
+            if (!await _userManager.CheckPasswordAsync(player, passwordConfirm))
+            {
+                var message = new Dictionary<string, string>();
+                message.Add("ConfirmPassword", "Password is not correct!");
+                throw new InvalidModelException(message);
+            }
+
+            await _userManager.DeleteAsync(player);
+        }
+
+        public async Task Update(Player player)
         {
             await _playerValidator.Validate(player);
-            await _playerRepository.Add(player);
-        }
 
-        public async Task Delete(int id)
-        {
-            var player = await Get(id);
-            await _playerRepository.Remove(player);
-        }
+            var playerToUpdate = await Get(player.Id);
 
-        public async Task Update(int id, Player player)
-        {
-            await _playerValidator.Validate(player);
-            
-            var playerToUpdate = await Get(id);
-            
             playerToUpdate.Email = player.Email;
+            playerToUpdate.NormalizedEmail = player.Email.ToUpper();
             playerToUpdate.DateOfBirth = player.DateOfBirth;
 
             await _playerRepository.Update(playerToUpdate);
         }
 
-        public async Task UpdatePassword(int id, Player player)
+        public async Task ChangePassword(ClaimsPrincipal user, string currentPassword, string newPassword)
         {
-            await _playerValidator.Validate(player);
+            var playerToUpdate = await Get(user);
 
-            var playerToUpdate = await Get(id);
-            
-            //playerToUpdate.Password = player.Password;
+            await _playerValidator.Validate(playerToUpdate, currentPassword, newPassword);
 
-            await _playerRepository.Update(playerToUpdate);
+            var result = await _userManager.ChangePasswordAsync(playerToUpdate, currentPassword, newPassword);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidDataException("Uexpected Error!");
+            }
         }
 
         public async Task<Player> Get(int id)
@@ -62,5 +93,9 @@ namespace Wizards.Services.PlayerService
             throw new NullReferenceException($"There is no Player with id: {id}!");
         }
 
+        public async Task<Player> Get(ClaimsPrincipal user)
+        {
+            return await _playerRepository.Get(user.GetId());
+        }
     }
 }

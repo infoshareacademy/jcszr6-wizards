@@ -1,17 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model;
 
 namespace WizardsWeb.ModelViews
 {
     public class PasswordChangeModelView
     {
-        public int Id { get; set; }
         public string UserName { get; set; }
 
         [Required]
         [Display(Name ="Enter actual Password")]
         [DataType(DataType.Password)]
-        public string EnterOldPassword { get; set; }
+        public string CurrentPassword { get; set; }
 
         [Required]
         [Display(Name = "Enter new Password")]

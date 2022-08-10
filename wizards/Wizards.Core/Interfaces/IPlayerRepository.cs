@@ -19,4 +19,7 @@ public interface IPlayerRepository
     Task<List<Player>> GetByEmailAddress(string addressEmail);
     Task<List<Player>> GetByYearRange(int startYear, int endYear);
     Task<List<Player>> GetByRankPointsRange(int lowRankPoints, int highRankPoints);
+
+    Task SetActiveHero(Player player, int heroId);
+    Task SetActiveItem(Player player, int itemId);
 }

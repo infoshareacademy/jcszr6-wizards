@@ -33,7 +33,8 @@ namespace Wizards.Services.Validation.Settings
                 EmailTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
-                    new IsEmail()
+                    new IsEmail(),
+                    new RestrictedWords()
                 },
                 DateOfBirthTasks = new List<IDateValidationTask>()
                 {

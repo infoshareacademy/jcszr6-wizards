@@ -3,18 +3,13 @@
 
 <h3>Edit Player's Profile</h3>
 <h5>@Model.UserName</h5>
-<a asp-action="Details" asp-route-id="@Model.Id">Back To Details</a>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <a type="button" class="btn btn-primary" asp-action="EditPassword" asp-route-id="@Model.Id">Edit Password</a><br/><br/>
-        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Delete Account</a>
-        <br/>
+        <a type="button" class="btn btn-primary" asp-action="EditPassword">Edit Password</a><br/><br/>
+        <a type="button" class="btn btn-danger" asp-action="Delete">Delete Account</a><br/><br/>
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="Id" hidden="true"/>
-            </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control"/>
@@ -25,8 +20,9 @@
                 <input asp-for="DateOfBirth" class="form-control"/>
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary"/>
+            <div class="btn-group">
+                <a class="btn btn-warning" asp-action="Details">Back To Details</a>
+                <input type="submit" value="Save Changes" class="btn btn-primary"/>
             </div>
         </form>
     </div>

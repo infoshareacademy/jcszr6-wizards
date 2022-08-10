@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +15,9 @@ using Wizards.Services.PlayerService;
 using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
+using Wizards.Repository.InitialData;
+using Wizards.Services.AuthorizationElements;
+using Wizards.Services.Selector;
 
 namespace WizardsWeb
 {
@@ -31,7 +35,7 @@ namespace WizardsWeb
         {
             services.AddControllersWithViews();
 
-
+            // Busines Logic Services Configuration
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerValidator, PlayerValidator>();
@@ -40,42 +44,61 @@ namespace WizardsWeb
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
-            
+
+            services.AddTransient<ISelector, Selector>();
+
             services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IItemValidator, ItemValidator>();
+
+            services.AddDataInitializer();
             
-            services.AddIdentity<Player, IdentityRole<int>>(
-                options =>
-                {
-                    options.SignIn.RequireConfirmedAccount = false;
-                    //Other options go here
-
-                })
-                .AddEntityFrameworkStores<WizardsContext>(); 
-            ;
-
-            services.AddRazorPages();
-
+            // External Packages Configuration
             var connectionString = Configuration.GetConnectionString("WizardDatabase");
             services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
 
             var profileAssembly = typeof(Startup).Assembly;
             services.AddAutoMapper(profileAssembly);
 
+            // Identity necessary configuration
+            services.AddIdentity<Player, IdentityRole<int>>(options =>
+                    {
+                        options.SignIn.RequireConfirmedAccount = false;
+                    })
+                .AddEntityFrameworkStores<WizardsContext>();
+            
+            services.AddRazorPages();
 
+            // Simple Authorization configuration
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Player/Login/";
+                options.AccessDeniedPath = "/Home/Index/";
+                options.LogoutPath = "/Home/Index/";
+            });
 
-
+            // Policy for Resource-Based Authorization configuration
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("HeroOwnerPolicy", policy =>
+                    policy.Requirements.Add(new HeroOwnerRequirement()));
+            });
+            
+            // Resource-Based Authorization Handler Configuration
+            services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector)
         {
             wizardsContext.Database.Migrate();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
+                var result = injector.InjectRolesAndUsersAsync();
+                result.Wait();
             }
             else
             {
@@ -97,10 +120,7 @@ namespace WizardsWeb
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
             });
-
-
         }
     }
 }

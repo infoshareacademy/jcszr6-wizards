@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
 
 
@@ -7,8 +6,6 @@ namespace WizardsWeb.ModelViews;
 
 public class HeroCreateModelView
 {
-    public int PlayerId { get; set; }
-    
     [Required]
     [MinLength(3)]
     [MaxLength(20)]

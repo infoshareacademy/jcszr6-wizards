@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
-using System.Linq;
 
 namespace Wizards.Repository.Repository;
 
@@ -110,5 +109,17 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players.Where(p =>
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() >= lowRankPoints &&
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints).ToListAsync();
+    }
+
+    public async Task SetActiveHero(Player player, int heroId)
+    {
+        player.ActiveHeroId = heroId;
+        await _wizardsContext.SaveChangesAsync();
+    }
+
+    public async Task SetActiveItem(Player player, int itemId)
+    {
+        player.ActiveItemId = itemId;
+        await _wizardsContext.SaveChangesAsync();
     }
 }
