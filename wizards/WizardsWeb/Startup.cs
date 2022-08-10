@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -89,9 +90,11 @@ namespace WizardsWeb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector)
         {
             wizardsContext.Database.Migrate();
+            var result = injector.InjectRolesAndUsersAsync();
+            result.Wait();
 
             if (env.IsDevelopment())
             {

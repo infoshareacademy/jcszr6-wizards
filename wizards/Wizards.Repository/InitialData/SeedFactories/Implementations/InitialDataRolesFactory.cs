@@ -6,14 +6,14 @@ namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 public class InitialDataRolesFactory : IInitialDataRolesFactory
 {
-    public  List<IdentityRole> GetRolesAsync()
+    public  List<IdentityRole<int>> GetRolesAsync()
     {
-        var result = new List<IdentityRole>();
+        var result = new List<IdentityRole<int>>();
         var roles = Enum.GetNames(typeof(UserRoles)).ToList();
 
         foreach (var role in roles)
         {
-            result.Add(new IdentityRole(role));
+            result.Add(new IdentityRole<int>(role));
         }
 
         return result;

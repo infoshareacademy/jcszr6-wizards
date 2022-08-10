@@ -12,8 +12,7 @@ namespace Wizards.Repository
     {
 
         private readonly bool _useLazyLoading;
-        private readonly IInitialDataInjector _initialDataInjector;
-
+        
         public WizardsContext()
         {
         }
@@ -22,9 +21,8 @@ namespace Wizards.Repository
         {
             _useLazyLoading = useLazyLoading;
         }
-        public WizardsContext(DbContextOptions<WizardsContext> options, IInitialDataInjector initialDataInjector) : base(options)
+        public WizardsContext(DbContextOptions<WizardsContext> options) : base(options)
         {
-            _initialDataInjector = initialDataInjector;
         }
 
         public DbSet<Player> Players { get; set; }
@@ -55,7 +53,7 @@ namespace Wizards.Repository
             
             modelBuilder.ConfigureEntities();
 
-            _initialDataInjector.InjectGameDataAsync(modelBuilder);
+            modelBuilder.DataSeed();
         }
     }
 

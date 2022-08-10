@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Model;
 using Wizards.Core.Model.ManyToManyTables;
+using Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 namespace Wizards.Repository.DbConfiguration;
 
@@ -18,6 +19,13 @@ public static class DbConfigurator
         SetItemAttributesConfiguration(modelBuilder);
 
         SetHeroItemConfiguration(modelBuilder);
+    }
+
+    public static void DataSeed(this ModelBuilder modelBuilder)
+    {
+        var itemsFactory = new InitialDataItemsFactory();
+        modelBuilder.Entity<ItemAttributes>().HasData(itemsFactory.GetAttributes());
+        modelBuilder.Entity<Item>().HasData(itemsFactory.GetItems());
     }
 
     private static void SetPlayerConfiguration(ModelBuilder modelBuilder)

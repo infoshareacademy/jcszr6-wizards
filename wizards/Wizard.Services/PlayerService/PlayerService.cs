@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
+using Wizards.Core.Model.Enums;
 using Wizards.Services.Helpers;
 using Wizards.Services.Validation;
 using Wizards.Services.Validation.Elements;
@@ -31,6 +32,7 @@ namespace Wizards.Services.PlayerService
             await _playerValidator.Validate(newPlayer, password);
 
             var result = await _userManager.CreateAsync(newPlayer, password);
+            result = await _userManager.AddToRoleAsync(newPlayer, UserRoles.RegularUser.ToString());
 
             if (!result.Succeeded)
             {

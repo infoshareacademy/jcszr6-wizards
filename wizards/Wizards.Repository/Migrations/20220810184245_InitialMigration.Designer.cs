@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wizards.Repository;
 
@@ -11,9 +12,10 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    partial class WizardsContextModelSnapshot : ModelSnapshot
+    [Migration("20220810184245_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
