@@ -10,5 +10,5 @@ public interface IHeroItemRepository
     Task AddItemToHeroAsync(Hero hero, HeroItem heroItem);
     Task AddAsync(HeroItem heroItem);
     Task Update(HeroItem heroItem);
-    Task DeleteAsync(int id);
+    Task DeleteAsync(HeroItem heroItem);
 }

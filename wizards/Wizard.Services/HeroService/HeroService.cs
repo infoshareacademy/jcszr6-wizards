@@ -93,6 +93,38 @@ public class HeroService : IHeroService
         return 2500;
     }
 
+    public async Task SpendGold(Hero hero, int goldToSpend)
+    {
+        if (goldToSpend < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(goldToSpend), message: "Gold cannot be less than zero!");
+        }
+
+        if (hero == null)
+        {
+            throw new NullReferenceException("Invalid Hero!");
+        }
+
+        hero.Gold -= goldToSpend;
+        await _heroRepository.Update(hero);
+    }
+
+    public async Task ClaimGold(Hero hero, int goldToClaim)
+    {
+        if (goldToClaim < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(goldToClaim), message:"Gold cannot be less than zero!");
+        }
+
+        if (hero == null)
+        {
+            throw new NullReferenceException("Invalid Hero!");
+        }
+
+        hero.Gold += goldToClaim;
+        await _heroRepository.Update(hero);
+    }
+
     private void ChangeNickName(Hero heroToUpdate, string nickName)
     {
         if (heroToUpdate.NickName == nickName)

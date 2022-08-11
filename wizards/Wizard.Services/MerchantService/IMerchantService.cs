@@ -7,9 +7,7 @@ namespace Wizards.Services.MerchantService;
 
 public interface IMerchantService
 {
-    Task BuyItemAsync(int itemId, int heroId);
-    Task SellItemAsync(int heroItemId);
-    Task<HeroItem> GetHeroItemAsync(ClaimsPrincipal user);
-    Task<Item> GetItemAsync(int id);
-    Task<List<Item>> GetMerchantStorageAsync(ProfessionRestriction professionRestriction);
+    Task BuyItemAsync(int itemId, ClaimsPrincipal user);
+    Task SellItemAsync(ClaimsPrincipal user);
+    Task<List<Item>> GetMerchantStorageAsync(ClaimsPrincipal user);
 }

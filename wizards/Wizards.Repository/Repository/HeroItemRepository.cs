@@ -38,8 +38,9 @@ public class HeroItemRepository : IHeroItemRepository
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(HeroItem heroItem)
     {
-        throw new NotImplementedException();
+        _wizardsContext.HeroItems.Remove(heroItem);
+        await _wizardsContext.SaveChangesAsync();
     }
 }

@@ -3,6 +3,9 @@ using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
 using Wizards.Core.Model.ManyToManyTables;
+using Wizards.Services.Helpers;
+using Wizards.Services.HeroService;
+using Wizards.Services.Validation.Elements;
 
 namespace Wizards.Services.MerchantService;
 
@@ -10,42 +13,67 @@ public class MerchantService : IMerchantService
 {
     private readonly IHeroItemRepository _heroItemRepository;
     private readonly IItemRepository _itemRepository;
-    private readonly IHeroRepository _heroRepository;
+    private readonly IHeroService _heroService;
 
-    public MerchantService(IHeroItemRepository heroItemRepository, IItemRepository itemRepository, IHeroRepository heroRepository)
+    public MerchantService(IHeroItemRepository heroItemRepository, IItemRepository itemRepository, IHeroService heroService)
     {
         _heroItemRepository = heroItemRepository;
         _itemRepository = itemRepository;
-        _heroRepository = heroRepository;
+        _heroService = heroService;
     }
 
-    public async Task BuyItemAsync(int itemId, int heroId)
+    public async Task BuyItemAsync(int itemId, ClaimsPrincipal user)
     {
-        var hero = await _heroRepository.Get(heroId);
+        var hero = await _heroService.Get(user);
         var item = await _itemRepository.Get(itemId);
 
-        var heroItem = new HeroItem() { HeroId = heroId, ItemId = itemId, InUse = false, ItemEndurance = 100d, };
+        if (!CanBuy(hero, item))
+        {
+            var message = new Dictionary<string, string>();
+            message.Add("Gold", "You have not enough gold!");
+            throw new InvalidModelException(message);
+        }
+
+        var heroItem = new HeroItem() { HeroId = hero.Id, ItemId = itemId, InUse = false, ItemEndurance = 100d };
 
         await _heroItemRepository.AddAsync(heroItem);
+        await _heroService.SpendGold(hero, item.BuyPrice);
     }
 
-    public Task SellItemAsync(int heroItemId)
+    public async Task SellItemAsync(ClaimsPrincipal user)
     {
-        throw new NotImplementedException();
+        var hero = await _heroService.Get(user);
+        HeroItem heroItem = new HeroItem();
+        //var heroItem = await _inventoryService.Get(user);
+        var calculatedSellPrice = (int)Math.Round((heroItem.Item.SellPrice * heroItem.ItemEndurance), 0);
+
+        await _heroItemRepository.DeleteAsync(heroItem);
+        await _heroService.ClaimGold(hero, calculatedSellPrice);
     }
 
-    public Task<HeroItem> GetHeroItemAsync(ClaimsPrincipal user)
+    public async Task<List<Item>> GetMerchantStorageAsync(ClaimsPrincipal user)
     {
-        throw new NotImplementedException();
+        var hero = await _heroService.Get(user);
+        var professionRestriction = Enum.Parse<ProfessionRestriction>(hero.Profession.ToString());
+        
+        var result = await _itemRepository.GetAll(professionRestriction);
+        result.AddRange(await _itemRepository.GetAll(ProfessionRestriction.All));
+
+        return result;
     }
 
-    public Task<Item> GetItemAsync(int id)
+    private bool CanBuy(Hero hero, Item item)
     {
-        throw new NotImplementedException();
-    }
+        if (hero == null || item == null)
+        {
+            return false;
+        }
 
-    public Task<List<Item>> GetMerchantStorageAsync(ProfessionRestriction professionRestriction)
-    {
-        throw new NotImplementedException();
+        if (hero.Gold >= item.BuyPrice)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

@@ -17,6 +17,7 @@ using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Repository.InitialData;
 using Wizards.Services.AuthorizationElements;
+using Wizards.Services.MerchantService;
 using Wizards.Services.Selector;
 
 namespace WizardsWeb
@@ -50,6 +51,9 @@ namespace WizardsWeb
             services.AddTransient<IItemRepository, ItemRepository>();
             services.AddTransient<IItemService, ItemService>();
             services.AddTransient<IItemValidator, ItemValidator>();
+
+            services.AddTransient<IHeroItemRepository, HeroItemRepository>();
+            services.AddTransient<IMerchantService, MerchantService>();
 
             services.AddDataInitializer();
             
