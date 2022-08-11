@@ -45,10 +45,6 @@
                                 <a class="nav-link text-white disabled" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
                         </ul>
-                        @*<div>
-                        <a type="button" class="btn btn-outline-light me-2" asp-area="" asp-controller="Login" asp-action="Index">Login</a>
-                        <a type="button" class="btn btn-warning me-2" asp-area="" asp-controller="Player" asp-action="Create">SignUp</a>
-                        </div>*@
 
                         <partial name="_LoginPartial" />
 
@@ -85,6 +81,8 @@
 
                         <div class="container">
                             <main role="main" class="pb-3">
+                                Are you lost wizard?
+
                                 @RenderBody()
                             </main>
                         </div>
