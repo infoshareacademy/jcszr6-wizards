@@ -1,19 +1,19 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model WizardsWeb.ModelViews.PlayerDetailsModelView
 
-<h2>@Model.UserName</h2>
-<h4>Player account</h4>
-<a class="btn btn-primary" asp-action="Edit">Edit Player's Profile</a>
+@*<h2>@Model.UserName</h2>*@
+<h2>Player card information</h2>
+@*<a class="btn btn-primary" asp-action="Edit">Edit Player's Profile</a>*@
 <hr />
 <div class="row">
-    <div class="col-12">
+@*    <div class="col-12">
         <label asp-for="UserName" class="font-weight-bold"></label>
     </div>
     <div class="col-12">
         <label>@Model.UserName</label>
     </div>
     <div class="col-12">
-        <label asp-for="1" class="font-weight-bold"></label>
+        <label asp-for="Email" class="font-weight-bold"></label>
     </div>
     <div class="col-12">
         <label>@Model.Email</label>
@@ -24,17 +24,18 @@
     <div class="col-12">
         <label>@Model.DateOfBirth.Date.ToString("d")</label>
     </div>
-</div>
-    *********
+</div>*@
 
-@*    <div class="col-12">
+    <div class="col-12">
         <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
-                    <h6 class="my-0">UserName:</h6>
+                    <h6 class="my-0">User name:</h6>
                     <small class="text-muted">
                         <label>@Model.UserName</label>
                     </small>
+                    <hr />
+                    <a class="btn btn-outline-danger btn-block" asp-action="Edit">Edit Player's Profile</a>
                 </div>
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -47,23 +48,12 @@
             </li>
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div>
-                    <h6 class="my-0">DateOfBirth:</h6>
+                    <h6 class="my-0">Date of birth:</h6>
                     <small class="text-muted">
                         <label>@Model.DateOfBirth.Date.ToString("d")</label>
                     </small>
                 </div>
             </li>
-        </ul>*@
-
-        @*          <li class="list-group-item d-flex justify-content-between lh-sm">
-        <div>
-        <h6 class="my-0">Second product</h6>
-        <small class="text-muted">Brief description</small>
-        </div>
-        <span class="text-muted">$8</span>
-        </li>*@
-
-
-
-@*    </div>
-</div>*@
+        </ul>
+    </div>
+</div>
