@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
+using Wizards.Core.Model.Enums;
 
 namespace Wizards.Repository.Repository
 {
@@ -34,7 +35,16 @@ namespace Wizards.Repository.Repository
 
         public async Task<List<Item>> GetAll()
         {
-            return await _wizardsContext.Items.ToListAsync();
+            return await _wizardsContext.Items
+                .Include(i => i.Attributes)
+                .ToListAsync();
+        }
+        public async Task<List<Item>> GetAll(ProfessionRestriction professionRestriction)
+        {
+            return await _wizardsContext.Items
+                .Include(i => i.Attributes)
+                .Where(i => i.Restriction == professionRestriction)
+                .ToListAsync();
         }
 
         public async Task<List<string>> GetAllNames()
