@@ -5,6 +5,7 @@ using Wizards.Core.Model.Enums;
 using Wizards.Core.Model.ManyToManyTables;
 using Wizards.Services.Helpers;
 using Wizards.Services.HeroService;
+using Wizards.Services.Inventory;
 using Wizards.Services.Validation.Elements;
 
 namespace Wizards.Services.MerchantService;
@@ -14,12 +15,14 @@ public class MerchantService : IMerchantService
     private readonly IHeroItemRepository _heroItemRepository;
     private readonly IItemRepository _itemRepository;
     private readonly IHeroService _heroService;
+    private readonly IInventoryService _inventoryService;
 
-    public MerchantService(IHeroItemRepository heroItemRepository, IItemRepository itemRepository, IHeroService heroService)
+    public MerchantService(IHeroItemRepository heroItemRepository, IItemRepository itemRepository, IHeroService heroService, IInventoryService inventoryService)
     {
         _heroItemRepository = heroItemRepository;
         _itemRepository = itemRepository;
         _heroService = heroService;
+        _inventoryService = inventoryService;
     }
 
     public async Task BuyItemAsync(int itemId, ClaimsPrincipal user)
@@ -43,9 +46,8 @@ public class MerchantService : IMerchantService
     public async Task SellItemAsync(ClaimsPrincipal user)
     {
         var hero = await _heroService.Get(user);
-        HeroItem heroItem = new HeroItem();
-        //var heroItem = await _inventoryService.Get(user);
-        var calculatedSellPrice = (int)Math.Round((heroItem.Item.SellPrice * heroItem.ItemEndurance), 0);
+        var heroItem = await _inventoryService.GetHeroItem(user);
+        var calculatedSellPrice = (int)Math.Round(heroItem.Item.SellPrice * (heroItem.ItemEndurance / 100d), 0);
 
         await _heroItemRepository.DeleteAsync(heroItem);
         await _heroService.ClaimGold(hero, calculatedSellPrice);
