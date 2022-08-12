@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Wizards.Core.Model.Enums;
-using WizardsWeb.ModelViews.Inventory;
 using WizardsWeb.ModelViews.Inventory.Properties;
 
 namespace WizardsWeb.ModelViews.Merchant;

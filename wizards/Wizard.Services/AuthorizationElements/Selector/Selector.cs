@@ -9,13 +9,14 @@ namespace Wizards.Services.Selector;
 public class Selector : ISelector
 {
     private readonly IHeroRepository _heroRepository;
+    private readonly IHeroItemRepository _heroItemRepository;
     private readonly IPlayerRepository _playerRepository;
 
-    public Selector(IPlayerRepository playerRepository, IHeroRepository heroRepository)
+    public Selector(IPlayerRepository playerRepository, IHeroRepository heroRepository, IHeroItemRepository heroItemRepository)
     {
         _playerRepository = playerRepository;
         _heroRepository = heroRepository;
-        // TODO: Add injection of IHeroItemRepository
+        _heroItemRepository = heroItemRepository;
     }
     public async Task<Player> GetPlayerAsync(ClaimsPrincipal user)
     {
@@ -43,12 +44,23 @@ public class Selector : ISelector
 
     public async Task<HeroItem> GetHeroItemAsync(int id)
     {
-        //TODO: implement this method after creating HeroItemRepository;
-        throw new NotImplementedException();
+        var result = await _heroItemRepository.GetAsync(id);
+
+        if (result == null)
+        {
+            throw new NullReferenceException();
+        }
+
+        return result;
     }
 
     public async Task SelectHero(Player player, int heroId)
     {
+        if (player == null)
+        {
+            return;
+        }
+
         if (player.Heroes.Any(h => h.Id == heroId))
         {
             await _playerRepository.SetActiveHero(player, heroId);
@@ -57,7 +69,19 @@ public class Selector : ISelector
 
     public async Task SelectItem(Player player, int itemId)
     {
-        if (player.Heroes.SelectMany(h => h.Inventory).Any(i => i.ItemId == itemId))
+        if (player == null)
+        {
+            return;
+        }
+
+        var hero = await _heroRepository.Get(player.ActiveHeroId);
+
+        if (hero == null)
+        {
+            return;
+        }
+
+        if (hero.Inventory.Any(i => i.ItemId == itemId))
         {
             await _playerRepository.SetActiveItem(player, itemId);
         }

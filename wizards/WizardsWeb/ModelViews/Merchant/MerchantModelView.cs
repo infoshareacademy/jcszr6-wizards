@@ -1,6 +1,4 @@
-﻿using WizardsWeb.ModelViews.Inventory;
-
-namespace WizardsWeb.ModelViews.Merchant;
+﻿namespace WizardsWeb.ModelViews.Merchant;
 
 public class MerchantModelView
 {

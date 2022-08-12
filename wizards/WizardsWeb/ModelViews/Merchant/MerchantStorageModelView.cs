@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using WizardsWeb.ModelViews.ItemModelViews;
 
 namespace WizardsWeb.ModelViews.Merchant;
 

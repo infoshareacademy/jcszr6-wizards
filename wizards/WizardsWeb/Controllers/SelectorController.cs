@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +15,16 @@ public class SelectorController : Controller
     private readonly IAuthorizationService _authorizationService;
     private readonly ISelector _selector;
     private readonly List<string> _allowedHeroActions;
+    private readonly List<string> _allowedItemActions;
 
     public SelectorController(IAuthorizationService authorizationService, ISelector selector)
     {
         _authorizationService = authorizationService;
         _selector = selector;
-        _allowedHeroActions = new List<string>() { "Details", "Delete" };
+        _allowedHeroActions = GetAllowedActions(typeof(HeroController));
+
+        // TODO: uncomment when the InventoryController will be added:
+        //_allowedItemActions = GetAllowedActions(typeof(InventoryController));
     }
 
     public async Task<ActionResult> SelectHero(int id, string actionName)
@@ -28,7 +35,7 @@ public class SelectorController : Controller
         }
 
         var hero = new Hero();
-        
+
         try
         {
             hero = await _selector.GetHeroAsync(id);
@@ -37,7 +44,7 @@ public class SelectorController : Controller
         {
             return RedirectToAction("Details", "Player");
         }
-        
+
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, hero, "HeroOwnerPolicy");
 
         if (authorizationResult.Succeeded)
@@ -46,7 +53,7 @@ public class SelectorController : Controller
             await _selector.SelectHero(player, id);
             return RedirectToAction(actionName, "Hero");
         }
-        
+
         if (!authorizationResult.Succeeded)
         {
             return RedirectToAction("Details", "Player");
@@ -58,5 +65,25 @@ public class SelectorController : Controller
     public async Task<ActionResult> SelectItem(int id, string actionName)
     {
         return RedirectToAction("Index", "Home");
+    }
+
+    private List<string> GetAllowedActions(Type controllerType)
+    {
+        if (controllerType == null || controllerType.BaseType != typeof(Controller))
+        {
+            return new List<string>();
+        }
+
+        var returnedTypes = new List<Type>()
+        {
+            typeof(ActionResult), typeof(IActionResult), typeof(Task<IActionResult>), typeof(Task<ActionResult>)
+        };
+
+        var methodsNames = controllerType.GetMethods()
+            .Where(m => returnedTypes.Contains(m.ReturnType))
+            .Select(m => m.Name)
+            .ToList();
+
+        return methodsNames;
     }
 }
