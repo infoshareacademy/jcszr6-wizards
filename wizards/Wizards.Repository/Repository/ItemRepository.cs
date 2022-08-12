@@ -26,7 +26,7 @@ namespace Wizards.Repository.Repository
             return await _wizardsContext.Items.AnyAsync(i => i.Id == id && i.Name == name);
         }
 
-        public async Task<Item> Get(int id)
+        public async Task<Item?> Get(int id)
         {
             return await _wizardsContext.Items
                 .Include(i => i.Attributes)

@@ -1,4 +1,5 @@
-﻿using Wizards.Core.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.ManyToManyTables;
 
@@ -12,19 +13,17 @@ public class HeroItemRepository : IHeroItemRepository
     {
         _wizardsContext = wizardsContext;
     }
-    public Task<HeroItem> GetAsync(int id)
+    public Task<HeroItem?> GetAsync(int id)
     {
-        throw new NotImplementedException();
+        return _wizardsContext.HeroItems
+            .Include(hi => hi.Item)
+            .ThenInclude(i => i.Attributes)
+            .SingleOrDefaultAsync(hi => hi.Id == id);
     }
 
-    public Task<List<HeroItem>> GetAllAsync()
+    public async Task<List<HeroItem>> GetAllAsync()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task AddItemToHeroAsync(Hero hero, HeroItem heroItem)
-    {
-        throw new NotImplementedException();
+        return await _wizardsContext.HeroItems.ToListAsync();
     }
 
     public async Task AddAsync(HeroItem heroItem)
@@ -33,9 +32,10 @@ public class HeroItemRepository : IHeroItemRepository
         await _wizardsContext.SaveChangesAsync();
     }
 
-    public Task Update(HeroItem heroItem)
+    public async Task UpdateAsync(HeroItem heroItem)
     {
-        throw new NotImplementedException();
+        _wizardsContext.HeroItems.Update(heroItem);
+        await _wizardsContext.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(HeroItem heroItem)

@@ -1,5 +1,4 @@
 ﻿using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.ManyToManyTables;
@@ -56,7 +55,7 @@ public class InventoryService : IInventoryService
         }
 
         heroItem.ItemEndurance = 100.00d;
-        await _heroItemRepository.Update(heroItem);
+        await _heroItemRepository.UpdateAsync(heroItem);
         await _heroService.SpendGold(hero, repairCost);
     }
 
@@ -76,11 +75,11 @@ public class InventoryService : IInventoryService
         if (itemToUnequip != null)
         {
             itemToUnequip.InUse = false;
-            await _heroItemRepository.Update(itemToUnequip);
+            await _heroItemRepository.UpdateAsync(itemToUnequip);
         }
 
         heroItem.InUse = true;
-        await _heroItemRepository.Update(heroItem);
+        await _heroItemRepository.UpdateAsync(heroItem);
     }
 
     public async Task Unequip(ClaimsPrincipal user)
@@ -94,7 +93,7 @@ public class InventoryService : IInventoryService
 
         heroItem.InUse = false;
         
-        await _heroItemRepository.Update(heroItem);
+        await _heroItemRepository.UpdateAsync(heroItem);
     }
 
     private bool CanRepair(Hero hero, int cost)

@@ -5,10 +5,9 @@ namespace Wizards.Core.Interfaces;
 
 public interface IHeroItemRepository
 {
-    Task<HeroItem> GetAsync(int id);
+    Task<HeroItem?> GetAsync(int id);
     Task<List<HeroItem>> GetAllAsync();
-    Task AddItemToHeroAsync(Hero hero, HeroItem heroItem);
     Task AddAsync(HeroItem heroItem);
-    Task Update(HeroItem heroItem);
+    Task UpdateAsync(HeroItem heroItem);
     Task DeleteAsync(HeroItem heroItem);
 }

@@ -7,7 +7,7 @@ namespace Wizards.Core.Interfaces
     {
         Task<List<Item>> GetAll();
         Task<List<Item>> GetAll(ProfessionRestriction professionRestriction);
-        Task<Item> Get(int id);
+        Task<Item?> Get(int id);
         Task Add(Item item);
         Task Update(Item item);
         Task Remove(Item item);
