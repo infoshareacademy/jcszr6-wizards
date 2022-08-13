@@ -1,64 +1,53 @@
 ﻿@model WizardsWeb.ModelViews.Properties.HeroAttributesModelView
 
-<h4>Attributes</h4>
-<hr />
-<div class="col-md-12">
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="DailyRewardEnergy"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.DailyRewardEnergy:##,##0}")
-        </div>
-    </div>
-    <hr/>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="Damage"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.Damage:##,##0}")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="Precision"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.Precision:##,##0}")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="Specialization"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.Specialization:##,##0}")
-        </div>
-    </div>
-    <hr/>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="MaxHealth"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.MaxHealth:##,##0}")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="Reflex"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.Reflex:##,##0}")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="Defense"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.Defense:##,##0}")
-        </div>
+
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h5 class="my-0 font-weight-bold">
+                        Hero attributes
+                    </h5>
+                </div>
+            </li>
+
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <label asp-for="DailyRewardEnergy"></label>
+                @($"{Model.DailyRewardEnergy:##,##0}")
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <label asp-for="Damage"></label>
+                @($"{Model.Damage:##,##0}")
+
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <label asp-for="Precision"></label>
+                        @($"{Model.Precision:##,##0}")
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <label asp-for="Specialization"></label>
+                        @($"{Model.Specialization:##,##0}")
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <label asp-for="MaxHealth"></label>
+                        @($"{Model.MaxHealth:##,##0}")
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <label asp-for="Reflex"></label>
+                        @($"{Model.Reflex:##,##0}")
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                        <label asp-for="Defense"></label>
+                        @($"{Model.Defense:##,##0}")
+            </li>
+        </ul>
     </div>
 </div>

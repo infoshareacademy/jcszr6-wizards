@@ -18,7 +18,7 @@
 
             <li class="list-group-item d-flex justify-content-between lh-sm">
                 <div class="col-md-12">
-                    <img src="~/@Model.AvatarImageAddress" width="330" height="440" />
+                    <img src="~/@Model.AvatarImageAddress" width="100%" height="100%" />
                 </div>
             </li>
 
@@ -48,6 +48,17 @@
                     </div>
                 </div>
             </li>
+
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div class="col-md-12">
+                    <div class="btn-group btn-block">
+                        <a class="btn btn-outline-info" asp-controller="Player" asp-action="Details">
+                            Back to Player details
+                        </a>
+                    </div>
+                </div>
+            </li>
+
 
         </ul>
     </div>
