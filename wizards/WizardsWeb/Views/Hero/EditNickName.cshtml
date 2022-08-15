@@ -4,28 +4,64 @@
     ViewData["Title"] = "Edit Name";
 }
 
-<h3>Edit Hero's Name</h3>
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditNickName">
-            <hr/>
-            <span>This operation costs: </span><span class="font-weight-bold">@($"{Model.Cost:##,##0}")</span><span> gold!</span><br />
-            <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br/>
-            <span asp-validation-for="NickName" class="text-danger font-weight-bold"></span>
-            <hr/>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NickName" class="control-label"></label>
-                <input asp-for="NickName" class="form-control" />
-            </div>
-            <div class="btn-group">
-                <a type="button" class="btn btn-warning" asp-action="Details">Back to Details</a>
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h4 class="my-0 font-weight-bold">
+                        Edit Hero's Name
+                    </h4>
+                </div>
+            </li>
+        </ul>
+        <br />
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <form asp-action="EditNickName">
+                    <hr />
+                    <span>This operation costs: </span><span class="font-weight-bold">@($"{Model.Cost:##,##0}")</span><span> gold!</span><br />
+                    <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br />
+                    <span asp-validation-for="NickName" class="text-danger font-weight-bold"></span>
+                    <hr />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="NickName" class="control-label"></label>
+                        <input asp-for="NickName" class="form-control" />
+                    </div>
+                    <div class="btn-group btn-block">
+                        <a type="button" class="btn btn-outline-warning" asp-action="Details">Back to Details</a>
+                        <input type="submit" value="Save" class="btn btn-outline-primary" />
+                    </div>
+                </form>
+            </li>
+        </ul>
     </div>
-</div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@*    <h3>Edit Hero's Name</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="EditNickName">
+                <hr />
+                <span>This operation costs: </span><span class="font-weight-bold">@($"{Model.Cost:##,##0}")</span><span> gold!</span><br />
+                <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br />
+                <span asp-validation-for="NickName" class="text-danger font-weight-bold"></span>
+                <hr />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NickName" class="control-label"></label>
+                    <input asp-for="NickName" class="form-control" />
+                </div>
+                <div class="btn-group">
+                    <a type="button" class="btn btn-warning" asp-action="Details">Back to Details</a>
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }

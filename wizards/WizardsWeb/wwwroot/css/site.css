@@ -81,19 +81,19 @@ body {
 /*******/
 
 /* HIDE RADIO */
-[type=radio] {
+/*[type=radio] {
     position: absolute;
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-    /* IMAGE STYLES */
-    [type=radio] + img {
+     IMAGE STYLES 
+    [type=radio] + png {
         cursor: pointer;
     }
 
-    /* CHECKED STYLES */
-    [type=radio]:checked + img {
+     CHECKED STYLES 
+    [type=radio]:checked + png {
         outline: 2px solid #f00;
-    }
+    }*/

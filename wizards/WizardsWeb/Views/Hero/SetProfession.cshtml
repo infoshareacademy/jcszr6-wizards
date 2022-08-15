@@ -4,6 +4,27 @@
 @{
     ViewData["Title"] = "Set Profession";
 }
+<header>
+
+    <style>
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+            /* IMAGE STYLES */
+            [type=radio] + img {
+                cursor: pointer;
+            }
+
+            /* CHECKED STYLES */
+            [type=radio]:checked + img {
+                outline: 2px solid #f00;
+            }
+    </style>
+</header>
 
 <div class="row">
     <div class="col">
@@ -34,33 +55,32 @@
                         <form asp-action="SetProfession">
                             <input asp-for="AvatarImageNumber" hidden="true" />
 
-@*                            <div class="row">
-                                <div class="col-md-1" align="center">
-                                    <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer" />
-                                </div>
-                                <div class="col-md-2" align="center">
-                                    <img src="~/Images/Hero/Professions/Sorcerer.png" width="100" height="100" />
-                                </div>
-                                <div class="col-md-7">
-                                    <h5>Sorcerer</h5>
-                                    <p>
-                                        Sorcerers are using the power of natural elements to deal high damage and protect themselves.
-                                        They are using staffs, spell-books or scepters as weapons.
-                                        Theirs power is as wild as element they use.
-                                    </p>
-                                </div>
+                            @*                            <div class="row">
+                            <div class="col-md-1" align="center">
+                            <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer" />
+                            </div>
+                            <div class="col-md-2" align="center">
+                            <img src="~/Images/Hero/Professions/Sorcerer.png" width="100" height="100" />
+                            </div>
+                            <div class="col-md-7">
+                            <h5>Sorcerer</h5>
+                            <p>
+                            Sorcerers are using the power of natural elements to deal high damage and protect themselves.
+                            They are using staffs, spell-books or scepters as weapons.
+                            Theirs power is as wild as element they use.
+                            </p>
+                            </div>
                             </div>*@
 
                             <div class="row">
 
                                 <div class="col-md-1" align="center">
-
                                 </div>
 
                                 <div class="col-md-2" align="center">
                                     <div>
                                         <label>
-                                            <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer" class="border-warning" />
+                                            <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer" />
                                             <img src="~/Images/Hero/Professions/Sorcerer.png" width="100" height="100" />
                                         </label>
                                     </div>
