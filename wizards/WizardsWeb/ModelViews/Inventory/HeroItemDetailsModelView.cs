@@ -18,7 +18,7 @@ public class HeroItemDetailsModelView
     
     // Economic
     [Display(Name = "Item Endurance")]
-    public decimal Endurance { get; set; }
+    public double Endurance { get; set; }
     [Display(Name = "Repair Cost")]
     public int  RepairCost { get; set; }
     [Display(Name = "Sell Price")]

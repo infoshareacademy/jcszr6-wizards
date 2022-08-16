@@ -1,0 +1,18 @@
+﻿@model WizardsWeb.ModelViews.Inventory.InventoryModelView
+
+@{
+    ViewData["Title"] = "ManageInventory";
+}
+
+<h1>Manage Inventory</h1>
+<hr />
+
+
+<div class="row">
+    <div class="col-8">
+        <partial name="_Inventory" model="@Model"/>
+    </div>
+    <div class="col-4">
+        <partial name="_HeroAttributes" model="@Model.Attributes"/>
+    </div>
+</div>

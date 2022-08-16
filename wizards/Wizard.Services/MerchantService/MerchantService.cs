@@ -47,7 +47,7 @@ public class MerchantService : IMerchantService
     {
         var hero = await _heroService.Get(user);
         var heroItem = await _inventoryService.GetHeroItem(user);
-        var calculatedSellPrice = (int)Math.Round(heroItem.Item.SellPrice * (heroItem.ItemEndurance / 100d), 0);
+        var calculatedSellPrice = heroItem.GetCalculatedSellPrice();
 
         await _heroItemRepository.DeleteAsync(heroItem);
         await _heroService.ClaimGold(hero, calculatedSellPrice);

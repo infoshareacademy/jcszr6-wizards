@@ -6,7 +6,7 @@ namespace WizardsWeb.ModelViews.Inventory;
 public class InventoryModelView
 {
     public HeroAttributesModelView Attributes { get; set; }
-    public int ItemTier { get; set; }
+    public double ItemTier { get; set; }
     
     public int Gold { get; set; }
     

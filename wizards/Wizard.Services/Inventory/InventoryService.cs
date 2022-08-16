@@ -2,6 +2,7 @@
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.ManyToManyTables;
+using Wizards.Services.Helpers;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 using Wizards.Services.Validation.Elements;
@@ -45,7 +46,7 @@ public class InventoryService : IInventoryService
         var heroItem = await GetHeroItem(user);
         var hero = await _heroService.Get(user);
 
-        var repairCost = (int)Math.Round(heroItem.Item.BuyPrice * ((100d - heroItem.ItemEndurance) / 100), 0);
+        var repairCost = heroItem.GetCalculatedRepairCost();
 
         if (!CanRepair(hero, repairCost))
         {
