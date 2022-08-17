@@ -25,4 +25,52 @@ public class HeroItemDetailsModelView
     public int  RepairCost { get; set; }
     [Display(Name = "Sell Price")]
     public int SellPrice { get; set; }
+
+    public bool NeedsRepair()
+    {
+        return (RepairCost >= 1 && Endurance < 99);
+    }
+
+    public string GetEnduranceBarColorClass()
+    {
+        var bgColor = "bg-danger";
+        if (Endurance >= 99)
+        {
+            bgColor = "bg-info";
+        }
+        else if (Endurance >= 66)
+        {
+            bgColor = "bg-success";
+        }
+        else if (Endurance >= 33)
+        {
+            bgColor = "bg-warning";
+        }
+
+        return bgColor;
+    }
+
+    public string GetItemTierColor()
+    {
+        var color = "secondary";
+
+        if (Tier == 5)
+        {
+            color = "info";
+        }
+        else if (Tier == 4)
+        {
+            color = "warning";
+        }
+        else if (Tier == 3)
+        {
+            color = "primary";
+        }
+        else if (Tier == 2)
+        {
+            color = "success";
+        }
+
+        return color;
+    }
 }

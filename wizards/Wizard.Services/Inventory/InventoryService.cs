@@ -75,11 +75,11 @@ public class InventoryService : IInventoryService
 
         if (!equippedOnly)
         {
-            itemsToRepair = inventory.Where(hi => hi.ItemEndurance < 100d && hi.GetCalculatedRepairCost() >= 1).ToList();
+            itemsToRepair = inventory.Where(hi => hi.ItemEndurance < 99d && hi.GetCalculatedRepairCost() >= 1).ToList();
         }
         else
         {
-            itemsToRepair = inventory.Where(hi => hi.ItemEndurance < 100d && hi.GetCalculatedRepairCost() >= 1 && hi.InUse).ToList();
+            itemsToRepair = inventory.Where(hi => hi.ItemEndurance < 99d && hi.GetCalculatedRepairCost() >= 1 && hi.InUse).ToList();
         }
 
         var repairCost = itemsToRepair.Sum(hi => hi.GetCalculatedRepairCost());
@@ -100,9 +100,10 @@ public class InventoryService : IInventoryService
 
         foreach (var heroItem in itemsToRepair)
         {
+            var cost = heroItem.GetCalculatedRepairCost();
             heroItem.ItemEndurance = 100.00d;
             await _heroItemRepository.UpdateAsync(heroItem);
-            await _heroService.SpendGold(hero, repairCost);
+            await _heroService.SpendGold(hero, cost);
         }
     }
 

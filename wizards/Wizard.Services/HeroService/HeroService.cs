@@ -105,6 +105,13 @@ public class HeroService : IHeroService
             throw new NullReferenceException("Invalid Hero!");
         }
 
+        if (hero.Gold - goldToSpend < 0)
+        {
+            var message = new Dictionary<string, string>();
+            message.Add("", "You have not enough gold!");
+            throw new InvalidModelException(message);
+        }
+
         hero.Gold -= goldToSpend;
         await _heroRepository.Update(hero);
     }

@@ -7,7 +7,7 @@
     <div class="col-12">
         <partial name="_EnduranceBar" model="@Model"/>
     </div>
-    @if (Model.RepairCost >= 1 && Model.Endurance <= 99)
+    @if (Model.NeedsRepair())
     {
         <div class="col-md-6 text-left">
             <label class="m-0 p-0" asp-for="RepairCost"></label>
@@ -17,9 +17,6 @@
         </div>
         <div class="col-12 p-1">
             <button class="btn btn-info btn-sm btn-block" data-bs-target="#repair-item-@Model.Id" data-bs-toggle="modal">Repair Item</button>
- @*           <a class="btn btn-info btn-sm btn-block" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
-                Repair Item
-            </a>*@
         </div>
     }
     <div class="col-12">
