@@ -26,6 +26,8 @@ public class PlayerProfile : Profile
                 expr => expr.MapFrom(s => s.Heroes.Count))
             .ForMember(dto => dto.PasswordConfirm, 
                 expr => expr.Ignore());
+        
+        CreateMap<Player, PlayerDetailsModelView>();
 
         CreateMap<Player, PlayerDetailsDto>()
             .ForMember(dto => dto.Email, expr => expr.MapFrom(x => x.Email))
