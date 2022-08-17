@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WizardsWeb.ModelViews.Properties;
+using WizardsWeb.ModelViews.HeroModelViews.Properties;
 
-namespace WizardsWeb.ModelViews;
+namespace WizardsWeb.ModelViews.HeroModelViews;
 
 public class HeroDeleteModelView
 {
@@ -11,6 +11,4 @@ public class HeroDeleteModelView
     [Required(ErrorMessage = "You have to enter Nick Name to confirm delete!")]
     [Display(Name = "Enter Nick Name to confirm")]
     public string ConfirmNickName { get; set; }
-
-    public HeroDeleteModelView() { }
 }

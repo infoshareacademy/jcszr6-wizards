@@ -1,5 +1,6 @@
 ﻿using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.Properties;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 namespace Wizards.Repository.InitialData.SeedFactories.Implementations;

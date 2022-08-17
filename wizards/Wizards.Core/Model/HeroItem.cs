@@ -1,4 +1,4 @@
-﻿namespace Wizards.Core.Model.ManyToManyTables;
+﻿namespace Wizards.Core.Model;
 
 public class HeroItem
 {

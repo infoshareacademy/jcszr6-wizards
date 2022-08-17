@@ -1,6 +1,4 @@
-﻿
-
-namespace Wizards.Repository.InitialData;
+﻿namespace Wizards.Repository.InitialData;
 
 public interface IInitialDataInjector
 {

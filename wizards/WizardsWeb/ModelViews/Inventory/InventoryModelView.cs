@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using WizardsWeb.ModelViews.Properties;
+using WizardsWeb.ModelViews.HeroModelViews.Properties;
 
 namespace WizardsWeb.ModelViews.Inventory;
 

@@ -2,7 +2,7 @@
 using System.Linq;
 using WizardsWeb.ModelViews.Inventory;
 
-namespace WizardsWeb.ViewHelpers;
+namespace WizardsWeb.Helpers;
 
 public static class InventoryExtensions
 {

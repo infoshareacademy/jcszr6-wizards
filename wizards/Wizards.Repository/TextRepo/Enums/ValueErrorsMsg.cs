@@ -1,24 +1,23 @@
-﻿namespace Wizards.Repository.TextRepo.Enums
+﻿namespace Wizards.Repository.TextRepo.Enums;
+
+public enum ValueErrorsMsg
 {
-    public enum ValueErrorsMsg
-    {
-        Default = 0,
-        ToShort,
-        ToLong,
-        IsNull,
-        HasRestrictedWord,
-        HasRestrictedCharacter,
-        AlredyInUse,
-        NumberToHigh,
-        NumberToLow,
-        IsNotNumber,
-        DateNotCorrect,
-        InvalidKey,
-        DateInFuture,
-        MailNotCorrect,
-        DateToLow,
-        DateToHigh,
-        UserToYoung,
-        PasswordNotHard
-    }
+    Default = 0,
+    ToShort,
+    ToLong,
+    IsNull,
+    HasRestrictedWord,
+    HasRestrictedCharacter,
+    AlredyInUse,
+    NumberToHigh,
+    NumberToLow,
+    IsNotNumber,
+    DateNotCorrect,
+    InvalidKey,
+    DateInFuture,
+    MailNotCorrect,
+    DateToLow,
+    DateToHigh,
+    UserToYoung,
+    PasswordNotHard
 }

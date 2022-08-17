@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
-using Wizards.Core.Model.ManyToManyTables;
 
 namespace Wizards.Repository.Repository;
 

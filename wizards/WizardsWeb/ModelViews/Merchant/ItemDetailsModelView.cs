@@ -4,7 +4,6 @@ using WizardsWeb.ModelViews.Inventory.Properties;
 
 namespace WizardsWeb.ModelViews.Merchant;
 
-
 public class ItemDetailsModelView
 {
     // Basics

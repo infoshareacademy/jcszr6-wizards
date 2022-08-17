@@ -1,6 +1,6 @@
 ﻿using Wizards.Core.Model.Enums;
 
-namespace WizardsWeb.ModelViews.Properties;
+namespace WizardsWeb.ModelViews.HeroModelViews.Properties;
 
 public class HeroBasicsModelView
 {

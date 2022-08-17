@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WizardsWeb.ModelViews;
+namespace WizardsWeb.ModelViews.PlayerModelViews;
 
 public class PlayerLogInModelView
 {

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Wizards.Core.Model.ManyToManyTables;
-using Wizards.Services.Helpers;
+using Wizards.Core.Model;
 using Wizards.Services.PlayerService;
 
 namespace Wizards.Services.AuthorizationElements;

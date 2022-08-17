@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Wizards.Core.Model;
-using Wizards.Core.Model.ManyToManyTables;
+using Wizards.Core.Model.Properties;
 using Wizards.Services.Helpers;
 using WizardsWeb.ModelViews.Inventory;
 using WizardsWeb.ModelViews.Inventory.Properties;

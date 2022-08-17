@@ -1,5 +1,4 @@
 ﻿using Wizards.Core.Model;
-using Wizards.Core.Model.ManyToManyTables;
 
 namespace Wizards.Core.Interfaces;
 

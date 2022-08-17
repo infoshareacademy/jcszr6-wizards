@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
-using Wizards.Core.Model.ManyToManyTables;
-using Wizards.Services.Selector;
+using Wizards.Services.AuthorizationElements.Selector;
 
 namespace WizardsWeb.Controllers;
 

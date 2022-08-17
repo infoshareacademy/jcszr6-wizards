@@ -1,4 +1,4 @@
-﻿using Wizards.Core.Model.ManyToManyTables;
+﻿using Wizards.Core.Model;
 
 namespace Wizards.Services.Helpers;
 

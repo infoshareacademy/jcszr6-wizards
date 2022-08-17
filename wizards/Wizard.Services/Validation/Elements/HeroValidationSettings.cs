@@ -8,7 +8,4 @@ public class HeroValidationSettings
     public List<INumberValidationTask> AvatarTasks { get; set; }
     public List<INumberValidationTask> ProfessionTasks { get; set; }
     public IStringAlredyInUse AlredyInUseTask { get; set; }
-
-    public HeroValidationSettings() { }
-
 }

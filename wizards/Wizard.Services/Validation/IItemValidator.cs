@@ -1,9 +1,7 @@
 ﻿using Wizards.Core.Model;
 
-namespace Wizards.Services.Validation
+namespace Wizards.Services.Validation;
+public interface IItemValidator
 {
-    public interface IItemValidator
-    {
-        Task Validate(Item item);
-    }
+    Task Validate(Item item);
 }

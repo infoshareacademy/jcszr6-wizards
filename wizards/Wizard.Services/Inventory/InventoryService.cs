@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
-using Wizards.Core.Model.ManyToManyTables;
 using Wizards.Services.Helpers;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;

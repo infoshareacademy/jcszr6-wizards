@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Wizards.Core.Model;
-using WizardsWeb.ModelViews;
+using WizardsWeb.ModelViews.PlayerModelViews;
 
 namespace WizardsWeb.Mapping;
 

@@ -1,5 +1,5 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
+﻿using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.Properties;
 
 namespace Wizards.Services.Factories;
 

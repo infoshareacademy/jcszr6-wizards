@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Wizards.Core.Model.ManyToManyTables;
+using Wizards.Core.Model;
 
 namespace Wizards.Services.Inventory;
 
