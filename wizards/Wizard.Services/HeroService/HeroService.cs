@@ -27,7 +27,8 @@ public class HeroService : IHeroService
     {
         await _heroValidator.Validate(hero);
         
-        hero.Gold = 0;
+        hero.Gold = 100;
+        hero.Inventory = _propertiesFactory.GetStartupEquipment(hero.Profession);
         hero.Attributes = _propertiesFactory.GetHeroAttributes(hero.Profession);
         hero.Statistics = _propertiesFactory.GetStatistics();
 
