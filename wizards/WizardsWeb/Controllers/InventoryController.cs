@@ -34,17 +34,31 @@ namespace WizardsWeb.Controllers
 
             var inventoryModelView = new InventoryModelView();
 
-            inventoryModelView.Equipped.AddRange(mappedItems.Where(hi => hi.Equipped));
-            inventoryModelView.Weapons.AddRange(mappedItems.Where(hi => hi.Type == ItemType.Weapon && !hi.Equipped));
-            inventoryModelView.Armors.AddRange(mappedItems.Where(hi => hi.Type == ItemType.Armor && !hi.Equipped));
-            inventoryModelView.Miscellaneous.AddRange(mappedItems.Where(hi => hi.Type != ItemType.Armor && hi.Type != ItemType.Weapon));
+            inventoryModelView.Equipped.AddRange(mappedItems
+                .Where(hi => hi.IsEquipped)
+                .OrderBy(hi => hi.Type));
+            
+            inventoryModelView.Weapons.AddRange(mappedItems
+                .Where(hi => hi.Type == ItemType.Weapon && !hi.IsEquipped)
+                .OrderByDescending(hi => hi.Tier)
+                .ThenBy(hi=>hi.Name));
+            
+            inventoryModelView.Armors.AddRange(mappedItems
+                .Where(hi => hi.Type == ItemType.Armor && !hi.IsEquipped)
+                .OrderByDescending(hi => hi.Tier)
+                .ThenBy(hi => hi.Name));
+
+            inventoryModelView.Miscellaneous.AddRange(mappedItems
+                .Where(hi => hi.Type != ItemType.Armor && hi.Type != ItemType.Weapon)
+                .OrderByDescending(hi => hi.Tier)
+                .ThenBy(hi => hi.Name));
 
             var hero = await _heroService.Get(User);
             var attributes = hero.Attributes;
 
             inventoryModelView.Attributes = _mapper.Map<HeroAttributesModelView>(attributes);
             inventoryModelView.Gold = hero.Gold;
-            inventoryModelView.ItemTier = hero.GetAvargeItemTier();
+            inventoryModelView.HerosAvargeItemTier = hero.GetAvargeItemTier();
             
             return View(inventoryModelView);
         }

@@ -1,0 +1,71 @@
+﻿@model WizardsWeb.ModelViews.Inventory.Properties.ItemAttributesDetailsModelView
+
+<div class="row p-2">
+    <div class="col-12">
+        <h5>Attributes</h5>
+        <hr/>
+    </div>
+    @if (Model.Damage != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Damage"></label>
+        </div>
+        <div class="col-md-4 text-left">
+            <label class="m-0 p-0 font-weight-bold">@Model.Damage</label>
+        </div>
+    }
+
+    @if (Model.Precision != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Precision"></label>
+        </div>
+        <div class="col-md-4 text-left">
+            <label class="m-0 p-0 font-weight-bold">@Model.Precision</label>
+        </div>
+    }
+
+    @if (Model.Specialization != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Specialization"></label>
+        </div>
+        <div class="col-md-4 text-left">
+            <label class="m-0 p-0 font-weight-bold">@Model.Specialization</label>
+        </div>
+    }
+
+    @if (Model.MaxHealth != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="MaxHealth"></label>
+        </div>
+        <div class="col-md-4 text-left">
+            <label class="m-0 p-0 font-weight-bold">@Model.MaxHealth</label>
+        </div>
+    }
+
+    @if (Model.Reflex != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Reflex"></label>
+        </div>
+        <div class="col-md-4 text-left">
+            <label class="m-0 p-0 font-weight-bold">@Model.Reflex</label>
+        </div>
+    }
+
+    @if (Model.Defense != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Defense"></label>
+        </div>
+        <div class="col-md-4 text-left">
+            <label class="m-0 p-0 font-weight-bold">@Model.Defense</label>
+        </div>
+    }
+    <div class="col-12">
+        <hr />
+        <br class="p-0 m-0"/>
+    </div>
+</div>

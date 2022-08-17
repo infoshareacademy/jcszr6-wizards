@@ -1,18 +1,30 @@
 ﻿@model WizardsWeb.ModelViews.Inventory.InventoryModelView
 
 @{
-    ViewData["Title"] = "ManageInventory";
+    ViewData["Title"] = "Manage Inventory";
 }
 
-<h1>Manage Inventory</h1>
+<h2>Manage Inventory</h2>
 <hr />
-
 
 <div class="row">
     <div class="col-8">
+        <a class="btn btn-warning" asp-controller="Hero" asp-action="Details">Back to Hero</a>
+        <h3>Equipment</h3>
+        <partial name="_ItemIndexDetails" model="@Model.Equipped"/>
+        <hr/>
         <partial name="_Inventory" model="@Model"/>
+        <hr/>
     </div>
     <div class="col-4">
+        <partial name="_HeroSummary" model="@Model"/>
+        <br/>
         <partial name="_HeroAttributes" model="@Model.Attributes"/>
     </div>
 </div>
+
+<script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" 
+    crossorigin="anonymous">
+</script>

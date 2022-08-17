@@ -1,0 +1,33 @@
+﻿@using Wizards.Core.Model.Enums
+@model WizardsWeb.ModelViews.Inventory.HeroItemDetailsModelView
+
+<div class="row p-2">
+    <div class="col-12 text-center">
+        <h5 class="font-weight-bolder">@Model.Name</h5>
+    </div>
+    <div class="col-12 text-center">
+        <span class="font-weight-bold">@Model.Type.ToString()</span>
+    </div>
+    <div class="col-12 text-center">
+        @if (Model.Restriction == ProfessionRestriction.All)
+        {
+            <span class="font-italic font-weight-light">For All Professions</span>
+        }
+        else
+        {
+            <span class="font-italic font-weight-light">@Model.Restriction.ToString() Exclusive</span>
+        }
+    </div>
+    <div class="col-12 text-right">
+        <h5><label class="m-0 p-0 font-weight-bolder" asp-for="Tier"></label>
+        <label class="m-0 p-0 font-weight-bolder">@Model.Tier</label></h5>
+    </div>
+    <div class="col-md-12 text-right">
+        @if (Model.IsEquipped)
+        {
+            <hr class="p-0 m-0"/>
+            <span class="font-italic font-weight-light">Equipped</span>
+            <br />
+        }
+    </div>
+</div>

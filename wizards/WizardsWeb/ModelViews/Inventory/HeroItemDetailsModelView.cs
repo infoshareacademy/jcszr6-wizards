@@ -6,14 +6,16 @@ namespace WizardsWeb.ModelViews.Inventory;
 
 public class HeroItemDetailsModelView
 {
+    public int Id { get; set; }
     // Basics
     public string Name { get; set; }
     public ItemType Type { get; set; }
     public ProfessionRestriction Restriction { get; set; }
+    [Display(Name = "Item Tier")]
     public int Tier { get; set; }
 
     // Attributes
-    public bool Equipped { get; set; }
+    public bool IsEquipped { get; set; }
     public ItemAttributesDetailsModelView Attributes { get; set; }
     
     // Economic

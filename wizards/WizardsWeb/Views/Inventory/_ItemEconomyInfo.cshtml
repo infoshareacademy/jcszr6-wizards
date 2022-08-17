@@ -1,0 +1,57 @@
+﻿@model WizardsWeb.ModelViews.Inventory.HeroItemDetailsModelView
+
+<div class="row p-2">
+    <div class="col-12 text-left">
+        <label class="m-0 p-0 font-weight-lighter" asp-for="Endurance"></label>
+    </div>
+    <div class="col-12">
+        <div class="progress">
+            @{
+                var bgColor = "bg-danger";
+                if (Model.Endurance >= 66)
+                {
+                    bgColor = "bg-success";
+                }
+                else if (Model.Endurance < 66 && Model.Endurance >= 33)
+                {
+                    bgColor = "bg-warning";
+                }
+            }
+            <div class="progress-bar text-dark @bgColor"
+                 role="progressbar"
+                 aria-label="Example with label"
+                 style="width: @($"{Model.Endurance:##0}")%;"
+                 aria-valuenow="@($"{Model.Endurance:##0}")"
+                 aria-valuemin="0"
+                 aria-valuemax="100">
+                @($"{Model.Endurance:##0.00}%")
+            </div>
+        </div>
+    </div>
+    @if (Model.RepairCost >= 1 && Model.Endurance <= 99)
+    {
+        <div class="col-md-6 text-left">
+            <label class="m-0 p-0" asp-for="RepairCost"></label>
+        </div>
+        <div class="col-md-6 text-right">
+            <label class="m-0 p-0 font-weight-bold">@($"{Model.RepairCost:##,##0} Gold")</label>
+        </div>
+        <div class="col-12 p-1">
+            <a class="btn btn-info btn-sm btn-block" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
+                Repair Item
+            </a>
+        </div>
+    }
+    <div class="col-12">
+        <hr />
+    </div>
+    <div class="col-md-6 text-left">
+        <label class="m-0 p-0" asp-for="SellPrice"></label>
+    </div>
+    <div class="col-md-6 text-right">
+        <label class="m-0 p-0 font-weight-bold">@($"{Model.SellPrice:##,##0} Gold")</label>
+    </div>
+    <div class="col-12">
+        <hr />
+    </div>
+</div>

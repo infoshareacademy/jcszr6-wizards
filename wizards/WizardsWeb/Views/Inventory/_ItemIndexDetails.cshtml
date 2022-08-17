@@ -1,0 +1,88 @@
+﻿@using System.Linq
+@model IEnumerable<WizardsWeb.ModelViews.Inventory.HeroItemDetailsModelView>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="FirstOrDefault().Name"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().Type"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().Tier"></label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var color = "secondary";
+            
+            if(item.Tier == 5)
+            {
+                color = "danger";
+            }
+            else if (item.Tier == 4)
+            {
+                color = "warning";
+            }
+            else if (item.Tier == 3)
+            {
+                color = "primary";
+            }
+            else if (item.Tier == 2)
+            {
+                color = "success";
+            }
+            
+            <tr class="table table-@color">
+                <td>
+                    <span class="font-weight-bold">@item.Name</span>
+                </td>
+                <td>
+                    <span class="text-center">@item.Type.ToString()</span>
+                </td>
+                <td>
+                    <span class="text-center">@item.Tier</span>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details-@item.Id">
+                            Details
+                        </button>
+
+                        @if (item.IsEquipped)
+                        {
+                            <a class="btn btn-warning" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
+                        }
+                        else
+                        {
+                            <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
+                        }
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="details-@item.Id" tabindex="-1" aria-labelledby="label-@item.Id" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header table-@color">
+                            <partial name="_ItemBasicInfo" model="item" />
+                        </div>
+                        <div class="modal-body">
+                            <partial name="_ItemAttributesInfo" model="@item.Attributes" />
+                        </div>
+                        <div class="modal-footer">
+                            <partial name="_ItemEconomyInfo" model="item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </tbody>
+</table>
