@@ -35,9 +35,9 @@ namespace Wizards.Services.SearchService
 
 
 
-        public async Task<List<Player>> ByBirthday(int fromYear, int toYear)
+        public async Task<List<Player>> ByRankPoints(int fromRankPoints, int toRankPoints)
         {
-           return await _playerRepository.GetByYearRange(fromYear, toYear);
+           return await _playerRepository.GetByRankPointsRange(fromRankPoints, toRankPoints);
         }
 
 

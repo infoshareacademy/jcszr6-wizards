@@ -9,6 +9,6 @@ namespace WizardsWeb.ModelViews.RankingModelViews;
         public int HeroNumber { get; set; }
         public int RankNumber { get; set; }
         public int GoldHeroNumber { get; set; }
-        public int DateOfBirth { get; set; }
+
 }
 

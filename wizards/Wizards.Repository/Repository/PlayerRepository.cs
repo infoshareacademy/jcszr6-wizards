@@ -117,6 +117,9 @@ public class PlayerRepository : IPlayerRepository
     {
         return await _wizardsContext.Players.Where(p =>
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() >= lowRankPoints &&
-            p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints).ToListAsync();
+            p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints)
+            .Include(p => p.Heroes)
+            .ThenInclude(x => x.Statistics)
+            .ToListAsync();
     }
 }

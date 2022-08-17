@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -26,28 +27,35 @@ namespace WizardsWeb.Controllers
             _mapper = mapper;
 
         }
+        //public async Task<ActionResult> Index(int? page)
+        //{
 
+        //    const int pageSize = 6;
+        //    var players = await _searchService.GetAll();
+        //    var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players).OrderByDescending(n => n.RankNumber)
+        //        .Skip((page ?? 0) * pageSize)
+        //        .Take(pageSize)
+        //        .ToList();
+        //    return View(new RankingModelViews
+        //    {
+        //        PlayerDetailsDto = playerDetails
+        //    });
+        //}
 
         public async Task<ActionResult> Index()
         {
             var players = await _searchService.GetAll();
-            var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
+            var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players).OrderByDescending(n => n.RankNumber).ToList();
             return View(new RankingModelViews()
             { PlayerDetailsDto = playerDetails });
-
         }
+
 
 
         [HttpPost]
         public async Task<ActionResult> Index(RankingModelViews ranking)
         // GET: SearchController/Index
         {
-
-
-            //var players = await _searchService.GetAll();
-            //var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
-            //var model = playerDetails;
-
             if (ranking == null)
             {
                 return RedirectToAction("Index");
@@ -59,150 +67,40 @@ namespace WizardsWeb.Controllers
             if (ranking.UserName != null)
 
             {
+
                 var filtredPlayers = await _searchService.ByUsername(ranking.UserName);
-                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers).OrderByDescending(n => n.RankNumber)
+
+                    .ToList();
+
+                ranking.PlayerDetailsDto = playersDetails;
+                return View(ranking);
             }
-
-         
-            ranking.PlayerDetailsDto = playersDetails;
-
-
-
-            //if (searchModelView.DateOfBirth == null && searchModelView.Email == null && searchModelView.UserName == null)
-            //{
-
-            //}
-
-            //int i = 0;
-            //foreach (var player in playerDetails)
-            //{
-            //    player.RankNumber = players[i].Heroes.Sum(x => x.Statistics.RankPoints);
-            //    player.GoldHeroNumber = players[i].Heroes.Sum(x => x.Gold);
-            //    i++;
-            //}
-            return View(ranking);
-        }
-
-
-
-        public async Task<ActionResult> SearchByUserName(RankingModelViews ranking)
-            // GET: SearchController/Index
-        {
-            
-
-            if (ranking == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var playersDetails = new List<PlayerDetailsDto>();
-
-
-            if (ranking.UserName != null)
-
-            {
-                var filtredPlayers = await _searchService.ByUsername(ranking.UserName);
-                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
-            }
-            
-
-            ranking.PlayerDetailsDto = playersDetails;
-
-
-            return View(ranking);
-        }
-
-
-        public async Task<ActionResult> SearchByEmail(RankingModelViews ranking)
-            // GET: SearchController/Index
-        {
-
-
-            if (ranking == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var playersDetails = new List<PlayerDetailsDto>();
-
 
             if (ranking.Email != null)
 
             {
                 var filtredPlayers = await _searchService.ByEmail(ranking.Email);
-                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers).OrderByDescending(n => n.RankNumber).ToList();
+                ranking.PlayerDetailsDto = playersDetails;
+                return View(ranking);
             }
 
-            ranking.PlayerDetailsDto = playersDetails;
+            if (ranking.FromRankPoints != null && ranking.ToRankPoints != null)
 
-
+            {
+                //const int pageSize = 20;
+                var filtredPlayers = await _searchService.ByRankPoints(ranking.FromRankPoints, ranking.ToRankPoints);
+                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers).OrderByDescending(n => n.RankNumber)
+                    //.Skip((page ?? 0) * pageSize)
+                    //.Take(pageSize)
+                    .ToList();
+                ranking.PlayerDetailsDto = playersDetails;
+                return View(ranking);
+            }
             return View(ranking);
         }
 
-
-        public async Task<ActionResult> SearchByDate(RankingModelViews ranking)
-            // GET: SearchController/Index
-        {
-
-
-            if (ranking == null)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var playersDetails = new List<PlayerDetailsDto>();
-
-
-            if (ranking.FromDate != null && ranking.ToDate != null)
-
-            {
-                var filtredPlayers = await _searchService.ByBirthday(ranking.FromDate, ranking.ToDate);
-                playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers);
-            }
-
-
-            ranking.PlayerDetailsDto = playersDetails;
-
-
-            return View(ranking);
-        }
-
-
-
-
-
-        // GET: SearchController/AllUsers
-        public ActionResult AllUsers()
-        {
-            //return _searchService.GetAll();
-            return View();
-        }
-
-
-
-        // GET: SearchController/SearchUsers
-        public ActionResult SearchUsers()
-        {
-            return View();
-        }
-
-
-        // POST: SearchController/SearchUsers
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-
-        //public async Task SearchUsers(SearchModelView username)
-
-        //{
-        //    var playersDto = new List<PlayerDetailsDto>();
-        //    var players = await _searchService.GetAll();
-        //    var playerDetails = _mapper.Map<List<PlayerDetailsDto>>(players);
-        //    var model = playerDetails;
-        //    return View();
-
-
-
-        //}
 
 
     }

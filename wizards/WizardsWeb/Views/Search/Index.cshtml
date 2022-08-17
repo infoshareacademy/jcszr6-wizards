@@ -5,27 +5,113 @@
 @{
     ViewData["Title"] = "Index";
 }
+<p>
+    <a asp-action="Index">All Players</a>
+</p>
+
+<h1>Search user</h1>
+
+<div class="row">
+    
+
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" class="form-control" placeholder="User name"/>
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+         
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-warning"/>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" placeholder="mail@wizard.com"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
 
 
-<div class="panel-body">
-    <partial name="_Details" model="Model"/>
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-warning"/>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="FromRankPoints" class="control-label"></label>
+                <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
+                <span asp-validation-for="FromRankPoints" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <input asp-for="ToRankPoints" class="form-control" placeholder="To"/>
+                <span asp-validation-for="ToRankPoints" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Search" class="btn btn-warning"/>
+            </div>
+        </form>
+    </div>
+    
 </div>
 
-
-
-@*@section Scripts
-{
-    <script src="~/css/style.css"></script>
-    <script src="~/js/datatable.js"></script>
-}*@
-
-@section Scripts{
-    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#myTable').DataTable()
-        }
-        });
-    </script>
-}
-
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
+               
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.PlayerDetailsDto) {
+        <tr>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.HeroNumber
+            </td>
+            <td>
+                @item.RankNumber
+            </td>
+            <td>
+                @item.GoldHeroNumber
+            </td>
+        </tr>
+    }
+    </tbody>
+    </table>
