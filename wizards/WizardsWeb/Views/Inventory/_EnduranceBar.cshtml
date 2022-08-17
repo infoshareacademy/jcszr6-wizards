@@ -1,0 +1,28 @@
+﻿@model WizardsWeb.ModelViews.Inventory.HeroItemDetailsModelView
+
+<div class="row">
+    <div class="col-12">
+        <div class="progress">
+            @{
+                var bgColor = "bg-danger";
+                if (Model.Endurance >= 66)
+                {
+                    bgColor = "bg-success";
+                }
+                else if (Model.Endurance < 66 && Model.Endurance >= 33)
+                {
+                    bgColor = "bg-warning";
+                }
+            }
+            <div class="progress-bar text-dark @bgColor"
+                 role="progressbar"
+                 aria-label="Example with label"
+                 style="width: @($"{Model.Endurance:##0}")%;"
+                 aria-valuenow="@($"{Model.Endurance:##0}")"
+                 aria-valuemin="0"
+                 aria-valuemax="100">
+                @($"{Model.Endurance:##0.00}%")
+            </div>
+        </div>
+    </div>
+</div>

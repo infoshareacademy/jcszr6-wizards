@@ -98,6 +98,7 @@ namespace WizardsWeb
 
             // Resource-Based Authorization Handler Configuration
             services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
+            services.AddTransient<IAuthorizationHandler, ItemAuthorizationHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

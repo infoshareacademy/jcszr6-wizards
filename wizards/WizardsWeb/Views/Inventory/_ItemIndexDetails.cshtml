@@ -13,6 +13,9 @@
             <th>
                 <label asp-for="FirstOrDefault().Tier"></label>
             </th>
+            <th>
+                <label asp-for="FirstOrDefault().Endurance"></label>
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -23,7 +26,7 @@
             
             if(item.Tier == 5)
             {
-                color = "danger";
+                color = "info";
             }
             else if (item.Tier == 4)
             {
@@ -49,11 +52,14 @@
                     <span class="text-center">@item.Tier</span>
                 </td>
                 <td>
+                    <partial name="_EnduranceBar" model="@item"/>
+                </td>
+                <td>
                     <div class="btn-group">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#details-@item.Id">
+                        <a class="btn btn-primary" data-bs-toggle="modal" href="#details-@item.Id">
                             Details
-                        </button>
+                        </a>
 
                         @if (item.IsEquipped)
                         {
@@ -68,7 +74,7 @@
             </tr>
 
             <!-- Modal -->
-            <div class="modal fade" id="details-@item.Id" tabindex="-1" aria-labelledby="label-@item.Id" aria-hidden="true">
+            <div class="modal fade" id="details-@item.Id" tabindex="-1" aria-labelledby="label-a-@item.Id" aria-hidden="true" tabindex="-1">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header table-@color">
@@ -79,6 +85,31 @@
                         </div>
                         <div class="modal-footer">
                             <partial name="_ItemEconomyInfo" model="item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="repair-item-@item.Id" aria-hidden="true" aria-labelledby="label-b-@item.Id" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header table-@color">
+                            <partial name="_ItemBasicInfo" model="@item"/>
+                        </div>
+                        <div class="modal-body alert alert-warning">
+                            <div class="h5 text-center text-dark">
+                                <span>Do you want to repair this item for </span>
+                                <span class="font-weight-bold">@($"{item.RepairCost:#,##0}")</span>
+                                <span> Gold?</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group col-12">
+                                <button class="btn btn-warning" data-bs-target="#details-@item.Id" data-bs-toggle="modal">No</button>
+                                <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Repair">
+                                    Yes
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

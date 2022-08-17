@@ -81,7 +81,7 @@ public class Selector : ISelector
             return;
         }
 
-        if (hero.Inventory.Any(i => i.ItemId == itemId))
+        if (hero.Inventory.Any(i => i.Id == itemId))
         {
             await _playerRepository.SetActiveItem(player, itemId);
         }
