@@ -1,18 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
 using Wizards.Services.HeroService;
-using Wizards.Services.Validation.Elements;
+using Wizards.Services.Helpers;
 using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.Properties;
 
 namespace WizardsWeb.Controllers
 {
+    [Authorize]
     public class HeroController : Controller
     {
         private readonly IHeroService _heroService;
@@ -23,30 +22,34 @@ namespace WizardsWeb.Controllers
             _heroService = heroService;
             _mapper = mapper;
         }
-        // GET: HeroController
-        public async Task<ActionResult> Index()
-        {
-            return View();
-        }
 
         // GET: HeroController/Details/5
-        public async Task<ActionResult> Details(int id)
+        public async Task<ActionResult> Details()
         {
-            var hero = await _heroService.Get(id);
-            var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
-            heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-            return View(heroDetails);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
+                heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
+                return View(heroDetails);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // GET: HeroController/Create
-        public ActionResult StartCreation(int playerId)
+        public ActionResult StartCreation()
         {
-            return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId });
+            var model = new HeroCreateModelView();
+            return View("SetProfession", model);
         }
 
-        public ActionResult SetProfessionView(int playerId, HeroProfession profession)
+        public ActionResult SetProfessionView(HeroCreateModelView heroCreate)
         {
-            return View("SetProfession", new HeroCreateModelView() { PlayerId = playerId, Profession = profession });
+            ModelState.Clear();
+            return View("SetProfession", heroCreate);
         }
 
         [HttpPost]
@@ -57,9 +60,10 @@ namespace WizardsWeb.Controllers
             return View("SetAvatar", heroCreate);
         }
 
-        public ActionResult SetAvatarView(int playerId, HeroProfession profession, int avatar)
+        public ActionResult SetAvatarView(HeroCreateModelView heroCreate)
         {
-            return View("SetAvatar", new HeroCreateModelView() { PlayerId = playerId, Profession = profession, AvatarImageNumber = avatar });
+            ModelState.Clear();
+            return View("SetAvatar", heroCreate);
         }
 
         [HttpPost]
@@ -84,27 +88,30 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Add(heroCreate.PlayerId, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                await _heroService.Add(User, hero);
+                return RedirectToAction("SelectHero", "Selector", new { id = hero.Id, actionName = "Details" });
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(heroCreate);
             }
         }
 
         // GET: HeroController/Edit/5
-        public async Task<ActionResult> EditNickName(int id)
+        public async Task<ActionResult> EditNickName()
         {
-            var hero = await _heroService.Get(id);
-            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-            heroEdit.Cost = _heroService.GetChangeNickNameCost();
-            return View(heroEdit);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+                heroEdit.Cost = _heroService.GetChangeNickNameCost();
+                return View(heroEdit);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // POST: HeroController/Edit/5
@@ -112,15 +119,12 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditNickName(HeroEditModelView heroEdit)
         {
-            var originalHero = await _heroService.Get(heroEdit.Id);
-            heroEdit.AvatarImageNumber = originalHero.AvatarImageNumber;
-            heroEdit.Gold = originalHero.Gold;
-            heroEdit.Cost = _heroService.GetChangeNickNameCost();
+            var newNickName = heroEdit.NickName;
+            var originalHero = await _heroService.Get(User);
 
-            if (!await _heroService.CanChangeNickName(heroEdit.Id))
-            {
-                ModelState.AddModelError("NickName", "You don't have enough gold!");
-            }
+            heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
+            heroEdit.NickName = newNickName;
+            heroEdit.Cost = _heroService.GetChangeNickNameCost();
 
             if (!ModelState.IsValid)
             {
@@ -128,20 +132,15 @@ namespace WizardsWeb.Controllers
             }
 
             var hero = _mapper.Map<Hero>(heroEdit);
-            hero.Profession = originalHero.Profession;
 
             try
             {
-                await _heroService.Update(hero.Id, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                await _heroService.Update(originalHero.Id, hero);
+                return RedirectToAction(nameof(Details));
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(heroEdit);
             }
         }
@@ -149,10 +148,17 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Edit/5
         public async Task<ActionResult> EditAvatar(int id)
         {
-            var hero = await _heroService.Get(id);
-            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-            heroEdit.Cost = _heroService.GetChangeAvatarCost();
-            return View(heroEdit);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+                heroEdit.Cost = _heroService.GetChangeAvatarCost();
+                return View(heroEdit);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // POST: HeroController/Edit/5
@@ -160,37 +166,25 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EditAvatar(HeroEditModelView heroEdit)
         {
-            var originalHero = await _heroService.Get(heroEdit.Id);
-            heroEdit.NickName = originalHero.NickName;
-            heroEdit.Gold = originalHero.Gold;
+            var newAvatarNumber = heroEdit.AvatarImageNumber;
+            var originalHero = await _heroService.Get(User);
+
+            heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
+            heroEdit.AvatarImageNumber = newAvatarNumber;
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
+
             ModelState.Clear();
 
-            if (!await _heroService.CanChangeAvatar(heroEdit.Id))
-            {
-                ModelState.AddModelError("AvatarImageNumber", "You don't have enough gold!");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View(heroEdit);
-            }
-
             var hero = _mapper.Map<Hero>(heroEdit);
-            hero.Profession = originalHero.Profession;
 
             try
             {
-                await _heroService.Update(hero.Id, hero);
-                return RedirectToAction(nameof(Details), new { id = hero.Id });
+                await _heroService.Update(originalHero.Id, hero);
+                return RedirectToAction(nameof(Details));
             }
-            catch (InvalidModelException exception)
+            catch (Exception exception)
             {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
+                ModelState.AddModelErrorByException(exception);
                 return View(heroEdit);
             }
         }
@@ -198,10 +192,17 @@ namespace WizardsWeb.Controllers
         // GET: HeroController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            var hero = await _heroService.Get(id);
-            var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
-            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-            return View(heroDelete);
+            try
+            {
+                var hero = await _heroService.Get(User);
+                var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
+                heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
+                return View(heroDelete);
+            }
+            catch
+            {
+                return RedirectToAction("Details", "Player");
+            }
         }
 
         // POST: HeroController/Delete/5
@@ -209,15 +210,11 @@ namespace WizardsWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
         {
-            var heroOriginalModel = await _heroService.Get(heroDelete.Id);
+            var originalHero = await _heroService.Get(User);
+            var confirmNickName = heroDelete.ConfirmNickName;
 
-            if (heroOriginalModel.NickName != heroDelete.ConfirmNickName)
-            {
-                ModelState.AddModelError("ConfirmNickName", "Invalid Nick Name!");
-            }
-
-            heroDelete = _mapper.Map<HeroDeleteModelView>(heroOriginalModel);
-            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(heroOriginalModel);
+            heroDelete = _mapper.Map<HeroDeleteModelView>(originalHero);
+            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(originalHero);
 
             if (!ModelState.IsValid)
             {
@@ -226,11 +223,12 @@ namespace WizardsWeb.Controllers
 
             try
             {
-                await _heroService.Delete(heroDelete.Id);
-                return RedirectToAction(nameof(Details), "Player", new { id = heroDelete.PlayerId });
+                await _heroService.Delete(originalHero.Id, confirmNickName);
+                return RedirectToAction(nameof(Details), "Player");
             }
-            catch
+            catch (Exception exception)
             {
+                ModelState.AddModelErrorByException(exception);
                 return View(heroDelete);
             }
         }

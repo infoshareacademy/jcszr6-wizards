@@ -6,11 +6,13 @@
 }
 
 <h2>Delete Player's Account</h2>
-<br/>
-<h3 class="alert-danger">Are you sure you want to delete your Player account?</h3>
-<h4 class="alert-danger">All created characters and progress made on this account will be lost!</h4>
+<br />
+<div class="alert alert-danger font-weight-bold">
+    <h3>Are you sure you want to delete your Player account?</h3>
+    <h4>All created characters and progress made on this account will be lost!</h4>
+</div>
 <hr />
-<div>
+<div class="col-md-5">
     <dl class="row">
         <dt class="col-sm-5">
             <label asp-for="UserName"></label>
@@ -39,16 +41,16 @@
 
     </dl>
 </div>
-<div class="col-md-6">
+<div class="col-md-5">
     <form asp-action="Delete">
         <div class="form-group">
-            <input asp-for="Id" hidden="True"/>
-            
-            <label asp-for="PasswordToConfirmDelete" class="control-label"></label>
-            <input asp-for="PasswordToConfirmDelete" class="form-control"/>
-            <span asp-validation-for="PasswordToConfirmDelete" class="text-danger"></span>
+            <label asp-for="PasswordConfirm" class="control-label"></label>
+            <input asp-for="PasswordConfirm" class="form-control" />
+            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
         </div>
-        <input type="submit" value="Delete" class="btn btn-danger" />
+        <div class="btn-group">
+            <a type="button" class="btn btn-success" asp-action="Edit">Cancel</a>
+            <input type="submit" value="Delete Account" class="btn btn-danger" />
+        </div>
     </form>
-    <a type="button" class="btn btn-success"  asp-action="Edit" asp-route-id="@Model.Id">Cancel</a>
 </div>

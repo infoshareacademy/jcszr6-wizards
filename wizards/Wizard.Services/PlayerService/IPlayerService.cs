@@ -1,13 +1,14 @@
-﻿using Wizards.Core.Model;
+﻿using System.Security.Claims;
+using Wizards.Core.Model;
 
 namespace Wizards.Services.PlayerService
 {
     public interface IPlayerService
     {
-        Task Add(Player player);
-        Task Delete(int id);
-        Task Update(int id, Player player);
-        Task UpdatePassword(int id, Player player);
-        Task<Player> Get(int id);
+        Task Create(Player newPlayer, string password);
+        Task Delete(ClaimsPrincipal user, string passwordConfirm);
+        Task Update(Player player);
+        Task ChangePassword(ClaimsPrincipal user, string currentPassword, string newPassword);
+        Task<Player> Get(ClaimsPrincipal user);
     }
 }

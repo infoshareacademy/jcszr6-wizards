@@ -1,20 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model;
 
 namespace WizardsWeb.ModelViews
 {
     public class PlayerDeleteModelView
     {
-        public int Id { get; set; }
-
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
         [Display(Name = "Confirm deleting Player's Account with Password")]
         [DataType(DataType.Password)]
-        public string PasswordToConfirmDelete { get; set; }
+        public string PasswordConfirm { get; set; }
 
         [Display(Name = "Email addres")]
         [EmailAddress]

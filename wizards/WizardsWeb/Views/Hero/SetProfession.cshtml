@@ -11,7 +11,7 @@
 
 
 <form asp-action="SetProfession">
-    <input asp-for="PlayerId" hidden="true" />
+    <input asp-for="AvatarImageNumber" hidden="true"/>
     <hr/>
     <div class="row">
         <div class="col-md-1" align="center">
@@ -23,9 +23,9 @@
         <div class="col-md-7">
             <h5>Sorcerer</h5>
             <p>
-                Sorcerers are using the power of natural elements to deal high damage and protect themselves. 
+                Sorcerers are using the power of natural elements to deal high damage and protect themselves.
                 They are using staffs, spell-books or scepters as weapons.
-                Theirs power is as wild as element they use. 
+                Theirs power is as wild as element they use.
             </p>
         </div>
     </div>
@@ -44,17 +44,16 @@
     </div>
     <hr/>
     <div class="form-group">
-        <input type="submit" value="Set profession" class="btn btn-primary"/>
+        <input type="submit" asp-action="SetProfession" value="Set profession" class="btn btn-primary"/>
     </div>
 </form>
 
 <div>
-    <br />
-    <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.PlayerId">Leave Creator</a>
+    <a class="btn btn-danger"asp-controller="Player" asp-action="Details">Leave Creator</a>
 </div>
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

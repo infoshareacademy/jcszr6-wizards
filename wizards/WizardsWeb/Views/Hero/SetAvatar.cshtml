@@ -8,7 +8,6 @@
 <br />
 <h3>Choose Avatar of your hero</h3>
 <form asp-action="SetAvatar">
-    <input asp-for="PlayerId" hidden="true" />
     <input asp-for="Profession" hidden="true" />
     <hr />
     <div class="row">
@@ -17,10 +16,17 @@
             var image = $"Images/Hero/Avatars/Wizard-{i}.png";
             <div class="col-sm-3">
                 <div class="row" align="center">
-                    <img src="~/@image" width="210" height="280"/>
+                    <img src="~/@image" width="210" height="280" />
                 </div>
                 <div class="row">
-                    <div align="center"><input asp-for="AvatarImageNumber" type="radio" value="@i"/></div>
+                    @if (i == 1)
+                    {
+                        <input asp-for="AvatarImageNumber" type="radio" value="@i" checked />
+                    }
+                    else
+                    {
+                        <input asp-for="AvatarImageNumber" type="radio" value="@i" />
+                    }
                 </div>
             </div>
         }
@@ -32,14 +38,18 @@
 </form>
 
 <div>
-    <br />
-    <a asp-controller="Player" asp-action="Details" asp-route-id="@Model.PlayerId">Leave Creator</a>
-    <br/>
-    <a asp-action="SetProfessionView" asp-route-playerId="@Model.PlayerId" asp-route-profession="@Model.Profession">Back to Profession choice</a>
+    <form asp-action="SetProfessionView">
+        <input asp-for="Profession" hidden="true" />
+        <input asp-for="AvatarImageNumber" hidden="true" />
+        <div class="btn-group">
+            <input type="submit" asp-controller="Hero" asp-action="SetProfessionView" value="Back" class="btn btn-warning" />
+            <a class="btn btn-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

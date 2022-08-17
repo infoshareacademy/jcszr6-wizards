@@ -3,25 +3,25 @@
 
 <h2>@Model.UserName</h2>
 <h4>Player account</h4>
-<a asp-action="Edit" asp-route-id="@Model.Id">Edit Player's Profile</a>
+<a class="btn btn-primary" asp-action="Edit">Edit Player's Profile</a>
 <hr />
-<dl>
-    <dt class="col-sm-5">
-        <label asp-for="UserName"></label>
-    </dt>
-    <dd class="col-sm-5">
-        @Model.UserName
-    </dd>
-    <dt class="col-sm-5">
-        <label asp-for="Email"></label>
-    </dt>
-    <dd class="col-sm-5">
-        @Model.Email
-    </dd>
-    <dt class="col-sm-5">
-        <label asp-for="DateOfBirth"></label>
-    </dt>
-    <dd class="col-sm-5">
-        @Model.DateOfBirth.Date.ToString("d")
-    </dd>
-</dl>
+<div class="row">
+    <div class="col-12">
+        <label asp-for="UserName" class="font-weight-bold"></label>
+    </div>
+    <div class="col-12">
+        <label>@Model.UserName</label>
+    </div>
+    <div class="col-12">
+        <label asp-for="Email" class="font-weight-bold"></label>
+    </div>
+    <div class="col-12">
+        <label>@Model.Email</label>
+    </div>
+    <div class="col-12">
+        <label asp-for="DateOfBirth" class="font-weight-bold"></label>
+    </div>
+    <div class="col-12">
+        <label>@Model.DateOfBirth.Date.ToString("d")</label>
+    </div>
+</div>

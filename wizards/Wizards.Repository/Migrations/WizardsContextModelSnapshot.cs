@@ -17,10 +17,143 @@ namespace Wizards.Repository.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.6")
+                .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
 
             modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
                 {
@@ -124,8 +257,8 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Restriction")
                         .HasColumnType("int");
@@ -145,6 +278,338 @@ namespace Wizards.Repository.Migrations
                         .IsUnique();
 
                     b.ToTable("Items");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AttributesId = 1,
+                            BuyPrice = 100,
+                            Name = "Normal Staff",
+                            Restriction = 1,
+                            SellPrice = 80,
+                            Tier = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AttributesId = 2,
+                            BuyPrice = 600,
+                            Name = "Fine Staff",
+                            Restriction = 1,
+                            SellPrice = 480,
+                            Tier = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AttributesId = 3,
+                            BuyPrice = 3000,
+                            Name = "Great Staff",
+                            Restriction = 1,
+                            SellPrice = 2400,
+                            Tier = 3,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AttributesId = 4,
+                            BuyPrice = 12000,
+                            Name = "Enchanted Staff",
+                            Restriction = 1,
+                            SellPrice = 9600,
+                            Tier = 4,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AttributesId = 5,
+                            BuyPrice = 36000,
+                            Name = "Masterpiece Staff",
+                            Restriction = 1,
+                            SellPrice = 28800,
+                            Tier = 5,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AttributesId = 6,
+                            BuyPrice = 100,
+                            Name = "Normal Spell-book",
+                            Restriction = 1,
+                            SellPrice = 80,
+                            Tier = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AttributesId = 7,
+                            BuyPrice = 600,
+                            Name = "Fine Spell-book",
+                            Restriction = 1,
+                            SellPrice = 480,
+                            Tier = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AttributesId = 8,
+                            BuyPrice = 3000,
+                            Name = "Great Spell-book",
+                            Restriction = 1,
+                            SellPrice = 2400,
+                            Tier = 3,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AttributesId = 9,
+                            BuyPrice = 12000,
+                            Name = "Enchanted Spell-book",
+                            Restriction = 1,
+                            SellPrice = 9600,
+                            Tier = 4,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AttributesId = 10,
+                            BuyPrice = 36000,
+                            Name = "Masterpiece Spell-book",
+                            Restriction = 1,
+                            SellPrice = 28800,
+                            Tier = 5,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AttributesId = 11,
+                            BuyPrice = 100,
+                            Name = "Normal Scepter",
+                            Restriction = 1,
+                            SellPrice = 80,
+                            Tier = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AttributesId = 12,
+                            BuyPrice = 600,
+                            Name = "Fine Scepter",
+                            Restriction = 1,
+                            SellPrice = 480,
+                            Tier = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AttributesId = 13,
+                            BuyPrice = 3000,
+                            Name = "Great Scepter",
+                            Restriction = 1,
+                            SellPrice = 2400,
+                            Tier = 3,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AttributesId = 14,
+                            BuyPrice = 12000,
+                            Name = "Enchanted Scepter",
+                            Restriction = 1,
+                            SellPrice = 9600,
+                            Tier = 4,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AttributesId = 15,
+                            BuyPrice = 36000,
+                            Name = "Masterpiece Scepter",
+                            Restriction = 1,
+                            SellPrice = 28800,
+                            Tier = 5,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AttributesId = 16,
+                            BuyPrice = 50,
+                            Name = "Normal Vestments",
+                            Restriction = 1,
+                            SellPrice = 40,
+                            Tier = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AttributesId = 17,
+                            BuyPrice = 300,
+                            Name = "Fine Vestments",
+                            Restriction = 1,
+                            SellPrice = 240,
+                            Tier = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AttributesId = 18,
+                            BuyPrice = 1500,
+                            Name = "Great Vestments",
+                            Restriction = 1,
+                            SellPrice = 1200,
+                            Tier = 3,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AttributesId = 19,
+                            BuyPrice = 6000,
+                            Name = "Enchanted Vestments",
+                            Restriction = 1,
+                            SellPrice = 4800,
+                            Tier = 4,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AttributesId = 20,
+                            BuyPrice = 18000,
+                            Name = "Masterpiece Vestments",
+                            Restriction = 1,
+                            SellPrice = 14400,
+                            Tier = 5,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AttributesId = 21,
+                            BuyPrice = 50,
+                            Name = "Normal Mantle",
+                            Restriction = 1,
+                            SellPrice = 40,
+                            Tier = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AttributesId = 22,
+                            BuyPrice = 300,
+                            Name = "Fine Mantle",
+                            Restriction = 1,
+                            SellPrice = 240,
+                            Tier = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AttributesId = 23,
+                            BuyPrice = 1500,
+                            Name = "Great Mantle",
+                            Restriction = 1,
+                            SellPrice = 1200,
+                            Tier = 3,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AttributesId = 24,
+                            BuyPrice = 6000,
+                            Name = "Enchanted Mantle",
+                            Restriction = 1,
+                            SellPrice = 4800,
+                            Tier = 4,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AttributesId = 25,
+                            BuyPrice = 18000,
+                            Name = "Masterpiece Mantle",
+                            Restriction = 1,
+                            SellPrice = 14400,
+                            Tier = 5,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            AttributesId = 26,
+                            BuyPrice = 50,
+                            Name = "Normal Overcoat",
+                            Restriction = 1,
+                            SellPrice = 40,
+                            Tier = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 27,
+                            AttributesId = 27,
+                            BuyPrice = 300,
+                            Name = "Fine Overcoat",
+                            Restriction = 1,
+                            SellPrice = 240,
+                            Tier = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 28,
+                            AttributesId = 28,
+                            BuyPrice = 1500,
+                            Name = "Great Overcoat",
+                            Restriction = 1,
+                            SellPrice = 1200,
+                            Tier = 3,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 29,
+                            AttributesId = 29,
+                            BuyPrice = 6000,
+                            Name = "Enchanted Overcoat",
+                            Restriction = 1,
+                            SellPrice = 4800,
+                            Tier = 4,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            AttributesId = 30,
+                            BuyPrice = 18000,
+                            Name = "Masterpiece Overcoat",
+                            Restriction = 1,
+                            SellPrice = 14400,
+                            Tier = 5,
+                            Type = 1
+                        });
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.ItemAttributes", b =>
@@ -179,17 +644,349 @@ namespace Wizards.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ItemAttributes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CurrentHealth = 0,
+                            Damage = 7,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 15,
+                            Reflex = 0,
+                            Specialization = -8
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CurrentHealth = 0,
+                            Damage = 14,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 20,
+                            Reflex = 0,
+                            Specialization = -6
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CurrentHealth = 0,
+                            Damage = 21,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 25,
+                            Reflex = 0,
+                            Specialization = -4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CurrentHealth = 0,
+                            Damage = 28,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 30,
+                            Reflex = 0,
+                            Specialization = -2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CurrentHealth = 0,
+                            Damage = 35,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 35,
+                            Reflex = 0,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CurrentHealth = 0,
+                            Damage = 8,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -8,
+                            Reflex = 0,
+                            Specialization = 30
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CurrentHealth = 0,
+                            Damage = 16,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -6,
+                            Reflex = 0,
+                            Specialization = 35
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CurrentHealth = 0,
+                            Damage = 24,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -4,
+                            Reflex = 0,
+                            Specialization = 40
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CurrentHealth = 0,
+                            Damage = 32,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -2,
+                            Reflex = 0,
+                            Specialization = 45
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CurrentHealth = 0,
+                            Damage = 40,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 0,
+                            Reflex = 0,
+                            Specialization = 50
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CurrentHealth = 0,
+                            Damage = 9,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 12,
+                            Reflex = 0,
+                            Specialization = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CurrentHealth = 0,
+                            Damage = 18,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 14,
+                            Reflex = 0,
+                            Specialization = 6
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CurrentHealth = 0,
+                            Damage = 27,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 16,
+                            Reflex = 0,
+                            Specialization = 9
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CurrentHealth = 0,
+                            Damage = 36,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 18,
+                            Reflex = 0,
+                            Specialization = 12
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CurrentHealth = 0,
+                            Damage = 45,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 20,
+                            Reflex = 0,
+                            Specialization = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = -8,
+                            MaxHealth = 25,
+                            Precision = 0,
+                            Reflex = 15,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = -6,
+                            MaxHealth = 75,
+                            Precision = 0,
+                            Reflex = 20,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = -4,
+                            MaxHealth = 125,
+                            Precision = 0,
+                            Reflex = 25,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = -2,
+                            MaxHealth = 175,
+                            Precision = 0,
+                            Reflex = 30,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 0,
+                            MaxHealth = 225,
+                            Precision = 0,
+                            Reflex = 35,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 30,
+                            MaxHealth = 25,
+                            Precision = 0,
+                            Reflex = -8,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 35,
+                            MaxHealth = 75,
+                            Precision = 0,
+                            Reflex = -6,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 40,
+                            MaxHealth = 125,
+                            Precision = 0,
+                            Reflex = -4,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 45,
+                            MaxHealth = 175,
+                            Precision = 0,
+                            Reflex = -2,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 50,
+                            MaxHealth = 225,
+                            Precision = 0,
+                            Reflex = 0,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 15,
+                            MaxHealth = 25,
+                            Precision = 0,
+                            Reflex = 4,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 20,
+                            MaxHealth = 75,
+                            Precision = 0,
+                            Reflex = 8,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 25,
+                            MaxHealth = 125,
+                            Precision = 0,
+                            Reflex = 12,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 30,
+                            MaxHealth = 175,
+                            Precision = 0,
+                            Reflex = 16,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CurrentHealth = 0,
+                            Damage = 0,
+                            Defense = 35,
+                            MaxHealth = 225,
+                            Precision = 0,
+                            Reflex = 20,
+                            Specialization = 0
+                        });
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.ManyToManyTables.HeroItem", b =>
                 {
-                    b.Property<int>("HeroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("HeroId")
                         .HasColumnType("int");
 
                     b.Property<bool>("InUse")
@@ -202,7 +999,12 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(100.0);
 
-                    b.HasKey("HeroId", "ItemId");
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HeroId");
 
                     b.HasIndex("ItemId");
 
@@ -217,6 +1019,23 @@ namespace Wizards.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ActiveHeroId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("ActiveItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("date");
 
@@ -225,10 +1044,37 @@ namespace Wizards.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -240,10 +1086,18 @@ namespace Wizards.Repository.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
                     b.HasIndex("UserName")
                         .IsUnique();
 
-                    b.ToTable("Players");
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.Statistics", b =>
@@ -277,6 +1131,57 @@ namespace Wizards.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statistics");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.Player", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.Player", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wizards.Core.Model.Player", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.Player", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
