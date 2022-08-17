@@ -47,17 +47,63 @@ public class InventoryService : IInventoryService
         var hero = await _heroService.Get(user);
 
         var repairCost = heroItem.GetCalculatedRepairCost();
+        if (repairCost <= 0)
+        {
+            var message = new Dictionary<string, string>();
+            message.Add("", "This item cannot be repaired now!");
+            throw new InvalidModelException(message);
+        }
 
         if (!CanRepair(hero, repairCost))
         {
             var message = new Dictionary<string, string>();
-            message.Add("Gold", "You have not enough gold!");
+            message.Add("", "You have not enough gold to repair this item!");
             throw new InvalidModelException(message);
         }
 
         heroItem.ItemEndurance = 100.00d;
         await _heroItemRepository.UpdateAsync(heroItem);
         await _heroService.SpendGold(hero, repairCost);
+    }
+
+    public async Task RepairAllItems(ClaimsPrincipal user, bool equippedOnly = false)
+    {
+        var inventory = await GetHeroInventory(user);
+        var hero = await _heroService.Get(user);
+
+        var itemsToRepair = new List<HeroItem>();
+
+        if (!equippedOnly)
+        {
+            itemsToRepair = inventory.Where(hi => hi.ItemEndurance < 100d && hi.GetCalculatedRepairCost() >= 1).ToList();
+        }
+        else
+        {
+            itemsToRepair = inventory.Where(hi => hi.ItemEndurance < 100d && hi.GetCalculatedRepairCost() >= 1 && hi.InUse).ToList();
+        }
+
+        var repairCost = itemsToRepair.Sum(hi => hi.GetCalculatedRepairCost());
+        
+        if (repairCost <= 0)
+        {
+            var message = new Dictionary<string, string>();
+            message.Add("", "All items are already repaired!");
+            throw new InvalidModelException(message);
+        }
+
+        if (!CanRepair(hero, repairCost))
+        {
+            var message = new Dictionary<string, string>();
+            message.Add("", "You have not enough gold to repair this item!");
+            throw new InvalidModelException(message);
+        }
+
+        foreach (var heroItem in itemsToRepair)
+        {
+            heroItem.ItemEndurance = 100.00d;
+            await _heroItemRepository.UpdateAsync(heroItem);
+            await _heroService.SpendGold(hero, repairCost);
+        }
     }
 
     public async Task Equip(ClaimsPrincipal user)

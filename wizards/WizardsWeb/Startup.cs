@@ -89,7 +89,13 @@ namespace WizardsWeb
                 options.AddPolicy("HeroOwnerPolicy", policy =>
                     policy.Requirements.Add(new HeroOwnerRequirement()));
             });
-            
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ItemOwnerPolicy", policy =>
+                    policy.Requirements.Add(new ItemOwnerRequirement()));
+            });
+
             // Resource-Based Authorization Handler Configuration
             services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
         }

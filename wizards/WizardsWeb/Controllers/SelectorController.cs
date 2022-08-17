@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
+using Wizards.Core.Model.ManyToManyTables;
 using Wizards.Services.Selector;
 
 namespace WizardsWeb.Controllers;
@@ -23,8 +24,7 @@ public class SelectorController : Controller
         _selector = selector;
         _allowedHeroActions = GetAllowedActions(typeof(HeroController));
 
-        // TODO: uncomment when the InventoryController will be added:
-        //_allowedItemActions = GetAllowedActions(typeof(InventoryController));
+        _allowedItemActions = GetAllowedActions(typeof(InventoryController));
     }
 
     public async Task<ActionResult> SelectHero(int id, string actionName)
@@ -64,6 +64,36 @@ public class SelectorController : Controller
 
     public async Task<ActionResult> SelectItem(int id, string actionName)
     {
+        if (actionName == null || !_allowedItemActions.Contains(actionName))
+        {
+            return RedirectToAction("Index", "Inventory");
+        }
+
+        var heroItem = new HeroItem();
+
+        try
+        {
+            heroItem = await _selector.GetHeroItemAsync(id);
+        }
+        catch
+        {
+            return RedirectToAction("Index", "Inventory");
+        }
+
+        var authorizationResult = await _authorizationService.AuthorizeAsync(User, heroItem, "ItemOwnerPolicy");
+
+        if (authorizationResult.Succeeded)
+        {
+            var player = await _selector.GetPlayerAsync(User);
+            await _selector.SelectItem(player, id);
+            return RedirectToAction(actionName, "Inventory");
+        }
+
+        if (!authorizationResult.Succeeded)
+        {
+            return RedirectToAction("Details", "Hero");
+        }
+
         return RedirectToAction("Index", "Home");
     }
 
