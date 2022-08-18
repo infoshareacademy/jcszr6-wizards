@@ -9,7 +9,6 @@ using Wizards.Services.Helpers;
 using Wizards.Services.HeroService;
 using Wizards.Services.MerchantService;
 using Wizards.Services.Validation.Elements;
-using WizardsWeb.ModelViews.Inventory;
 using WizardsWeb.ModelViews.ItemModelViews;
 using WizardsWeb.ModelViews.Merchant;
 
@@ -37,7 +36,7 @@ public class MerchantController : Controller
         }
         catch (Exception e)
         {
-            return Problem("Total Error", "Merchant", 500);
+            return RedirectToAction("Details", "Hero");
         }
     }
 
@@ -74,6 +73,10 @@ public class MerchantController : Controller
     private async Task<MerchantModelView> MerchantModelView()
     {
         var merchantModel = new MerchantModelView();
+        var hero = await _heroService.Get(User);
+        
+        merchantModel.HeroStorage.Gold = hero.Gold;
+        merchantModel.HeroStorage.HeroNickName = hero.NickName;
 
         var items = await _merchantService.GetMerchantStorageAsync(User);
         var merchantItems = _mapper.Map<List<ItemDetailsModelView>>(items);
@@ -95,12 +98,7 @@ public class MerchantController : Controller
             .OrderByDescending(i => i.Tier)
             .ThenBy(i => i.Name)
             .ToList();
-
-        var hero = await _heroService.Get(User);
-
-        merchantModel.HeroStorage.Gold = hero.Gold;
-        merchantModel.HeroStorage.HeroNickName = hero.NickName;
-
+        
         var inventoryItems = _mapper.Map<List<ItemDetailsModelView>>(hero.Inventory);
         inventoryItems.ForEach(i => i.IsInMerchantMode = true);
 

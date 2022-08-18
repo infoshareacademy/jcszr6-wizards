@@ -32,9 +32,15 @@ public class InventoryController : Controller
     // /Inventory/Index/
     public async Task<IActionResult> Index()
     {
-        var inventoryModelView = await InventoryModelView();
-
-        return View(inventoryModelView);
+        try
+        {
+            var inventoryModelView = await InventoryModelView();
+            return View(inventoryModelView);
+        }
+        catch (Exception exception)
+        {
+            return RedirectToAction("Details", "Hero");
+        }
     }
 
     public async Task<ActionResult> Equip()
