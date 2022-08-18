@@ -93,7 +93,7 @@ public class InventoryService : IInventoryService
         if (!CanRepair(hero, repairCost))
         {
             var message = new Dictionary<string, string>();
-            message.Add("", "You have not enough gold to repair this item!");
+            message.Add("", $"You have not enough gold to repair {(!equippedOnly ? "all" : "equipped")} items!");
             throw new InvalidModelException(message);
         }
 

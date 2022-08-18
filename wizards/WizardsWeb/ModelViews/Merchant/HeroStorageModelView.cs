@@ -9,4 +9,11 @@ public class HeroStorageModelView
     public List<HeroItemDetailsModelView> Weapons { get; set; }
     public List<HeroItemDetailsModelView> Armors { get; set; }
     public List<HeroItemDetailsModelView> Miscellaneous { get; set; }
+
+    public HeroStorageModelView()
+    {
+        Weapons = new List<HeroItemDetailsModelView>();
+        Armors = new List<HeroItemDetailsModelView>();
+        Miscellaneous = new List<HeroItemDetailsModelView>();
+    }
 }
