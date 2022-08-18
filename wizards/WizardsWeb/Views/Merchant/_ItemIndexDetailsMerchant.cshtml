@@ -1,0 +1,98 @@
+﻿@model IEnumerable<WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="FirstOrDefault().Name"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().Type"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().Tier"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().BuyPrice"></label>
+            </th>
+            <th>
+                <label>Actions</label>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table table-@item.GetItemTierColor()">
+                <td>
+                    <span class="font-weight-bold">@item.Name</span>
+                </td>
+                <td>
+                    <span class="text-center">@item.Type.ToString()</span>
+                </td>
+                <td>
+                    <span class="text-center">@item.Tier</span>
+                </td>
+                <td>
+                    <span class="text-center">@($"{item.BuyPrice:#,##0}")</span>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <!-- Button trigger modal -->
+                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#merchant-details-@item.Id">
+                            Details
+                        </a>
+                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#buy-item-@item.Id">
+                            Buy
+                        </a>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Modal for Details -->
+            <div class="modal fade" id="merchant-details-@item.Id" tabindex="-1" aria-labelledby="label-merchant-details-@item.Id" aria-hidden="true" tabindex="-1">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header table-@item.GetItemTierColor()">
+                            <partial name="_ItemBasicInfo" model="item" />
+                        </div>
+                        <div class="modal-body">
+                            <partial name="~/Views/Item/_ItemAttributesInfo.cshtml" model="@item.Attributes" />
+                        </div>
+                        <div class="modal-footer">
+                            <partial name="_ItemEconomyInfo" model="item" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal for Buy -->
+            <div class="modal fade" id="buy-item-@item.Id" aria-hidden="true" aria-labelledby="label-buy-@item.Id">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header table-@item.GetItemTierColor()">
+                            <partial name="_ItemBasicInfo" model="@item" />
+                        </div>
+                        <div class="modal-body alert alert-warning">
+                            <div class="h3 text-center text-dark">
+                                <span>Do you want to buy this item for </span>
+                                <span class="font-weight-bold">@($"{item.BuyPrice:#,##0}")</span>
+                                <span> Gold?</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group col-12">
+                                <button class="btn btn-warning" data-bs-dismiss="modal">
+                                    No
+                                </button>
+                                <a class="btn btn-success" asp-controller="Merchant" asp-action="BuyItem" asp-route-id="@item.Id">
+                                    Yes
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </tbody>
+</table>

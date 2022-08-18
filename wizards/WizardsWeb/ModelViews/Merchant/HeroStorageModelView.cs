@@ -1,19 +1,20 @@
 ﻿using System.Collections.Generic;
 using WizardsWeb.ModelViews.Inventory;
+using WizardsWeb.ModelViews.ItemModelViews;
 
 namespace WizardsWeb.ModelViews.Merchant;
 
 public class HeroStorageModelView
 {
     public int Gold { get; set; }
-    public List<HeroItemDetailsModelView> Weapons { get; set; }
-    public List<HeroItemDetailsModelView> Armors { get; set; }
-    public List<HeroItemDetailsModelView> Miscellaneous { get; set; }
+    public List<ItemDetailsModelView> Weapons { get; set; }
+    public List<ItemDetailsModelView> Armors { get; set; }
+    public List<ItemDetailsModelView> Miscellaneous { get; set; }
 
     public HeroStorageModelView()
     {
-        Weapons = new List<HeroItemDetailsModelView>();
-        Armors = new List<HeroItemDetailsModelView>();
-        Miscellaneous = new List<HeroItemDetailsModelView>();
+        Weapons = new List<ItemDetailsModelView>();
+        Armors = new List<ItemDetailsModelView>();
+        Miscellaneous = new List<ItemDetailsModelView>();
     }
 }

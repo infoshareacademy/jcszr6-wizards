@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using WizardsWeb.ModelViews.HeroModelViews.Properties;
+using WizardsWeb.ModelViews.ItemModelViews;
 
 namespace WizardsWeb.ModelViews.Inventory;
 
@@ -11,22 +12,22 @@ public class InventoryModelView
 
     public HeroSummaryModelView HeroSummary { get; set; }
 
-    public List<HeroItemDetailsModelView> Equipped { get; set; }
-    public List<HeroItemDetailsModelView> Weapons { get; set; }
-    public List<HeroItemDetailsModelView> Armors { get; set; }
-    public List<HeroItemDetailsModelView> Miscellaneous { get; set; }
+    public List<ItemDetailsModelView> Equipped { get; set; }
+    public List<ItemDetailsModelView> Weapons { get; set; }
+    public List<ItemDetailsModelView> Armors { get; set; }
+    public List<ItemDetailsModelView> Miscellaneous { get; set; }
 
     public InventoryModelView()
     {
-        Equipped = new List<HeroItemDetailsModelView>();
-        Weapons = new List<HeroItemDetailsModelView>();
-        Armors = new List<HeroItemDetailsModelView>();
-        Miscellaneous = new List<HeroItemDetailsModelView>();
+        Equipped = new List<ItemDetailsModelView>();
+        Weapons = new List<ItemDetailsModelView>();
+        Armors = new List<ItemDetailsModelView>();
+        Miscellaneous = new List<ItemDetailsModelView>();
     }
 
     public int GetRepairCostForAllItems()
     {
-        var inventory = new List<HeroItemDetailsModelView>();
+        var inventory = new List<ItemDetailsModelView>();
         inventory.AddRange(Equipped);
         inventory.AddRange(Weapons);
         inventory.AddRange(Armors);

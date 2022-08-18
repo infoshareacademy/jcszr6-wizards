@@ -2,30 +2,42 @@
 using Wizards.Core.Model.Enums;
 using WizardsWeb.ModelViews.Inventory.Properties;
 
-namespace WizardsWeb.ModelViews.Inventory;
+namespace WizardsWeb.ModelViews.ItemModelViews;
 
-public class HeroItemDetailsModelView
+public class ItemDetailsModelView
 {
     public int Id { get; set; }
+    public int CoreItemId { get; set; }
+    public bool IsMerchantItem { get; set; }
+    public bool IsInMerchantMode { get; set; }
+
     // Basics
     public string Name { get; set; }
     public ItemType Type { get; set; }
     public ProfessionRestriction Restriction { get; set; }
+    
     [Display(Name = "Item Tier")]
     public int Tier { get; set; }
+    public bool IsEquipped { get; set; }
 
     // Attributes
-    public bool IsEquipped { get; set; }
     public ItemAttributesDetailsModelView Attributes { get; set; }
     
     // Economic
     [Display(Name = "Item Endurance")]
     public double Endurance { get; set; }
+    
     [Display(Name = "Repair Cost")]
     public int  RepairCost { get; set; }
+    
     [Display(Name = "Sell Price")]
     public int SellPrice { get; set; }
 
+    [Display(Name = "Buy Price")]
+    public int BuyPrice { get; set; }
+
+
+    // View Logic
     public bool NeedsRepair()
     {
         return (RepairCost >= 1 && Endurance < 99);

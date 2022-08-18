@@ -1,0 +1,108 @@
+﻿@using WizardsWeb.Helpers
+@model IEnumerable<WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            <label asp-for="FirstOrDefault().Name"></label>
+        </th>
+        <th>
+            <label asp-for="FirstOrDefault().Type"></label>
+        </th>
+        <th>
+            <label asp-for="FirstOrDefault().Tier"></label>
+        </th>
+        <th>
+            <label asp-for="FirstOrDefault().Endurance"></label>
+        </th>
+        <th>
+            @if (Model.GetRepairCostForEquipment() >= 1)
+            {
+                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#repair-equipped">
+                    Repair all equipped
+                </button>
+            }
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr class="table table-@item.GetItemTierColor()">
+            <td>
+                <span class="font-weight-bold">@item.Name</span>
+            </td>
+            <td>
+                <span class="text-center">@item.Type.ToString()</span>
+            </td>
+            <td>
+                <span class="text-center">@item.Tier</span>
+            </td>
+            <td>
+                <partial name="~/Views/Item/_ItemEnduranceBar.cshtml" model="@item" />
+            </td>
+            <td>
+                <div class="btn-group">
+                    <!-- Button trigger modal for Details -->
+                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#details-@item.Id">
+                        Details
+                    </a>
+
+                    @if (item.IsEquipped)
+                    {
+                        <a class="btn btn-warning btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
+                    }
+                </div>
+            </td>
+        </tr>
+
+        <!-- Modal for Details -->
+        <div class="modal fade" id="details-@item.Id" tabindex="-1" aria-labelledby="label-a-@item.Id" aria-hidden="true" tabindex="-1">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header table-@item.GetItemTierColor()">
+                        <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="item" />
+                    </div>
+                    <div class="modal-body">
+                        <partial name="~/Views/Item/_ItemAttributesInfo.cshtml" model="@item.Attributes" />
+                    </div>
+                    <div class="modal-footer">
+                        <partial name="~/Views/Item/_ItemEconomyInfo.cshtml" model="item" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for Repair -->
+        <div class="modal fade" id="repair-item-@item.Id" aria-hidden="true" aria-labelledby="label-b-@item.Id" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header table-@item.GetItemTierColor()">
+                        <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@item" />
+                    </div>
+                    <div class="modal-body alert alert-warning">
+                        <div class="h3 text-center text-dark">
+                            <span>Do you want to repair this item for </span>
+                            <span class="font-weight-bold">@($"{item.RepairCost:#,##0}")</span>
+                            <span> Gold?</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="btn-group col-12">
+                            <button class="btn btn-warning" data-bs-target="#details-@item.Id" data-bs-toggle="modal">No</button>
+                            <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Repair">
+                                Yes
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </tbody>
+</table>

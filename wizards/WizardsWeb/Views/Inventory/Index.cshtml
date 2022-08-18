@@ -22,15 +22,15 @@
 <div class="row">
     <div class="col-8">
         <h3>Equipment</h3>
-        <partial name="_ItemIndexDetails" model="@Model.Equipped"/>
+        <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Equipped"/>
         <hr/>
         <partial name="_Inventory" model="@Model"/>
         <hr/>
     </div>
     <div class="col-4">
-        <partial name="_HeroSummary" model="@Model.HeroSummary"/>
+        <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary"/>
         <br/>
-        <partial name="_HeroAttributes" model="@Model.Attributes"/>
+        <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes"/>
     </div>
 </div>
 

@@ -12,6 +12,7 @@ using Wizards.Services.Inventory;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.HeroModelViews.Properties;
 using WizardsWeb.ModelViews.Inventory;
+using WizardsWeb.ModelViews.ItemModelViews;
 
 namespace WizardsWeb.Controllers;
 [Authorize]
@@ -121,7 +122,7 @@ public class InventoryController : Controller
         inventoryModelView.Attributes = _mapper.Map<HeroAttributesModelView>(attributes);
         inventoryModelView.HeroSummary = _mapper.Map<HeroSummaryModelView>(hero);
 
-        var mappedItems = _mapper.Map<List<HeroItemDetailsModelView>>(hero.Inventory);
+        var mappedItems = _mapper.Map<List<ItemDetailsModelView>>(hero.Inventory);
 
         inventoryModelView.Equipped.AddRange(mappedItems
             .Where(hi => hi.IsEquipped)

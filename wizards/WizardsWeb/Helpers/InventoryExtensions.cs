@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using WizardsWeb.ModelViews.Inventory;
+using WizardsWeb.ModelViews.ItemModelViews;
 
 namespace WizardsWeb.Helpers;
 
 public static class InventoryExtensions
 {
-    public static int GetRepairCostForEquipment(this IEnumerable<HeroItemDetailsModelView> equipment)
+    public static int GetRepairCostForEquipment(this IEnumerable<ItemDetailsModelView> equipment)
     {
         var result = 0;
 

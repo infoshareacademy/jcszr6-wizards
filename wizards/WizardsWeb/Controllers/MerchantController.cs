@@ -10,6 +10,7 @@ using Wizards.Services.HeroService;
 using Wizards.Services.MerchantService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.Inventory;
+using WizardsWeb.ModelViews.ItemModelViews;
 using WizardsWeb.ModelViews.Merchant;
 
 namespace WizardsWeb.Controllers;
@@ -99,7 +100,7 @@ public class MerchantController : Controller
 
         merchantModel.HeroStorage.Gold = hero.Gold;
 
-        var inventoryItems = _mapper.Map<List<HeroItemDetailsModelView>>(hero.Inventory);
+        var inventoryItems = _mapper.Map<List<ItemDetailsModelView>>(hero.Inventory);
 
         merchantModel.HeroStorage.Weapons = inventoryItems
             .Where(hi => hi.Type == ItemType.Weapon && !hi.IsEquipped)

@@ -1,11 +1,11 @@
-﻿@model WizardsWeb.ModelViews.Inventory.HeroItemDetailsModelView
+﻿@model WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView
 
 <div class="row p-2">
     <div class="col-12 text-left">
         <label class="m-0 p-0 font-weight-lighter" asp-for="Endurance"></label>
     </div>
     <div class="col-12">
-        <partial name="_EnduranceBar" model="@Model"/>
+        <partial name="~/Views/Item/_ItemEnduranceBar.cshtml" model="@Model"/>
     </div>
     @if (Model.NeedsRepair())
     {
