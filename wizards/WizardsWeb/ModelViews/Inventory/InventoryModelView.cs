@@ -8,10 +8,8 @@ namespace WizardsWeb.ModelViews.Inventory;
 public class InventoryModelView
 {
     public HeroAttributesModelView Attributes { get; set; }
-    [Display(Name = "Item Tier: ")]
-    public double HerosAvargeItemTier { get; set; }
 
-    public int Gold { get; set; }
+    public HeroSummaryModelView HeroSummary { get; set; }
 
     public List<HeroItemDetailsModelView> Equipped { get; set; }
     public List<HeroItemDetailsModelView> Weapons { get; set; }

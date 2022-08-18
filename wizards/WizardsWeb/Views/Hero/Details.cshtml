@@ -5,7 +5,7 @@
 }
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
         <partial name="_HeroBasicPresentation" model="@Model.Basics" /><br />
         <div class="btn-group">
             <a class="btn btn-primary" asp-action="EditNickName">
@@ -16,7 +16,9 @@
             </a>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
+        <partial name="_HeroSummary" model="Model.Summary"/>
+        <br/><br/>
         <a type="button" class="btn btn-warning" asp-controller="Inventory" asp-action="Index">Equipment</a><br /><br />
         <a type="button" class="btn btn-warning" asp-action="Merchant">Merchant</a><br /><br />
         <a type="button" class="btn btn-warning" asp-controller="Player" asp-action="Details">Back to Hero choice</a><br /><br />

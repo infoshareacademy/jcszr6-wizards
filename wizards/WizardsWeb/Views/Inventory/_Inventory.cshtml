@@ -41,17 +41,18 @@
 
 <!-- Modal for All Items Repair -->
 <div class="modal fade" id="repair-all" aria-hidden="true" aria-labelledby="label-repair-all" tabindex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header table-info">
-                <h3>Repairing all equipped items</h3>
+                <div class="col-12 text-center">
+                    <h2>Repairing all equipped items</h2>
+                </div>
             </div>
             <div class="modal-body alert alert-warning">
-                <div class="h5 text-center text-dark">
-                    <span>Do you want to repair all items (including equipped) for </span>
-                    <span class="font-weight-bold">
-                        @($"{Model.GetRepairCostForAllItems():#,##0}")
-                    </span>
+                <div class="h3 text-center text-dark">
+                    <span>Do you want to repair all items (including equipped)</span><br/>
+                    <span>for </span>
+                    <span class="font-weight-bold">@($"{Model.GetRepairCostForAllItems():#,##0}")</span>
                     <span> Gold?</span>
                 </div>
             </div>

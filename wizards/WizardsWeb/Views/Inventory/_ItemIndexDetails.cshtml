@@ -46,17 +46,17 @@
                 <td>
                     <div class="btn-group">
                         <!-- Button trigger modal -->
-                    <a class="btn btn-primary" data-bs-toggle="modal" href="#details-@item.Id">
+                    <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#details-@item.Id">
                             Details
                         </a>
 
                         @if (item.IsEquipped)
                         {
-                            <a class="btn btn-warning" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
+                            <a class="btn btn-warning btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
                         }
                         else
                         {
-                            <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
+                            <a class="btn btn-success btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
                         }
                     </div>
                 </td>
@@ -81,13 +81,13 @@
 
             <!-- Modal for Repair -->
             <div class="modal fade" id="repair-item-@item.Id" aria-hidden="true" aria-labelledby="label-b-@item.Id" tabindex="-1">
-                <div class="modal-dialog">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header table-@item.GetItemTierColor()">
                             <partial name="_ItemBasicInfo" model="@item" />
                         </div>
                         <div class="modal-body alert alert-warning">
-                            <div class="h5 text-center text-dark">
+                            <div class="h3 text-center text-dark">
                                 <span>Do you want to repair this item for </span>
                                 <span class="font-weight-bold">@($"{item.RepairCost:#,##0}")</span>
                                 <span> Gold?</span>
@@ -105,16 +105,18 @@
                 </div>
             </div>
         }
-        
-    <!-- Modal for Equipped Repair -->
-    <div class="modal fade" id="repair-equipped" aria-hidden="true" aria-labelledby="label-repair-equipped" tabindex="-1">
-            <div class="modal-dialog">
+
+        <!-- Modal for Equipped Repair -->
+        <div class="modal fade" id="repair-equipped" aria-hidden="true" aria-labelledby="label-repair-equipped" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header table-info">
-                        <h3>Repairing all equipped items</h3>
+                        <div class="col-12 text-center">
+                            <h2>Repairing all equipped items</h2>
+                        </div>
                     </div>
                     <div class="modal-body alert alert-warning">
-                        <div class="h5 text-center text-dark">
+                        <div class="h3 text-center text-dark">
                             <span>Do you want to repair all equipped items for </span>
                             <span class="font-weight-bold">
                                 @($"{Model.GetRepairCostForEquipment():#,##0}")

@@ -64,7 +64,6 @@ public class InventoryController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-
     public async Task<ActionResult> Repair()
     {
         try
@@ -112,7 +111,6 @@ public class InventoryController : Controller
         return RedirectToAction(nameof(Index));
     }
 
-
     private async Task<InventoryModelView> InventoryModelView()
     {
         var inventoryModelView = new InventoryModelView();
@@ -121,11 +119,9 @@ public class InventoryController : Controller
         var attributes = hero.GetCalculatedAttributes();
 
         inventoryModelView.Attributes = _mapper.Map<HeroAttributesModelView>(attributes);
-        inventoryModelView.Gold = hero.Gold;
-        inventoryModelView.HerosAvargeItemTier = hero.GetAvargeItemTier();
+        inventoryModelView.HeroSummary = _mapper.Map<HeroSummaryModelView>(hero);
 
-        var heroInventory = await _inventoryService.GetHeroInventory(User);
-        var mappedItems = _mapper.Map<List<HeroItemDetailsModelView>>(heroInventory);
+        var mappedItems = _mapper.Map<List<HeroItemDetailsModelView>>(hero.Inventory);
 
         inventoryModelView.Equipped.AddRange(mappedItems
             .Where(hi => hi.IsEquipped)
@@ -145,6 +141,7 @@ public class InventoryController : Controller
             .Where(hi => hi.Type != ItemType.Armor && hi.Type != ItemType.Weapon)
             .OrderByDescending(hi => hi.Tier)
             .ThenBy(hi => hi.Name));
+        
         return inventoryModelView;
     }
 }

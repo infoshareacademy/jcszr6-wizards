@@ -6,6 +6,7 @@ namespace WizardsWeb.ModelViews.HeroModelViews;
 public class HeroDeleteModelView
 {
     public HeroBasicsModelView Basics { get; set; }
+    public HeroSummaryModelView Summary { get; set; }
     public StatisticsModelView Statistics { get; set; }
     
     [Required(ErrorMessage = "You have to enter Nick Name to confirm delete!")]
