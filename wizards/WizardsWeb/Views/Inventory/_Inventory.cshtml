@@ -40,65 +40,71 @@
     </div>
 </div>
 
-<!-- Modal for All Items Repairing -->
-<div class="modal fade" id="repair-all" aria-hidden="true" aria-labelledby="label-repair-all" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header table-info">
-                <div class="col-12 text-center">
-                    <h2>Repairing all equipped items</h2>
+@if (Model.GetRepairCostForAllItems() > 0)
+{
+    <!-- Modal for All Items Repairing -->
+    <div class="modal fade" id="repair-all" aria-hidden="true" aria-labelledby="label-repair-all" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header table-info">
+                    <div class="col-12 text-center">
+                        <h2>Repairing all items</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-body alert alert-warning">
-                <div class="h3 text-center text-dark">
-                    <span>Do you want to repair all items (including equipped)</span><br/>
-                    <span>for </span>
-                    <span class="font-weight-bold">@($"{Model.GetRepairCostForAllItems():#,##0}")</span>
-                    <span> Gold?</span>
+                <div class="modal-body alert alert-warning">
+                    <div class="h3 text-center text-dark">
+                        <span>Do you want to repair all items (including equipped)</span><br/>
+                        <span>for </span>
+                        <span class="font-weight-bold">@($"{Model.GetRepairCostForAllItems():#,##0}")</span>
+                        <span> Gold?</span>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <div class="btn-group col-12">
-                    <button class="btn btn-warning" data-bs-dismiss="modal">
-                        No
-                    </button>
-                    <a class="btn btn-success" asp-controller="Inventory" asp-action="RepairAll">
-                        Yes
-                    </a>
+                <div class="modal-footer">
+                    <div class="btn-group col-12">
+                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                            No
+                        </button>
+                        <a class="btn btn-success" asp-controller="Inventory" asp-action="RepairAll">
+                            Yes
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
 
-<!-- Modal for Equipped Items Repairing -->
-<div class="modal fade" id="repair-equipped" aria-hidden="true" aria-labelledby="label-repair-equipped" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header table-info">
-                <div class="col-12 text-center">
-                    <h2>Repairing all equipped items</h2>
+@if (Model.Equipped.CanShowRepairEquipmentButton())
+{
+    <!-- Modal for Equipped Items Repairing -->
+    <div class="modal fade" id="repair-equipped" aria-hidden="true" aria-labelledby="label-repair-equipped" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header table-info">
+                    <div class="col-12 text-center">
+                        <h2>Repairing all equipped items</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-body alert alert-warning">
-                <div class="h3 text-center text-dark">
-                    <span>Do you want to repair all equipped items for </span>
-                    <span class="font-weight-bold">
-                        @($"{Model.Equipped.GetRepairCostForEquipment():#,##0}")
-                    </span>
-                    <span> Gold?</span>
+                <div class="modal-body alert alert-warning">
+                    <div class="h3 text-center text-dark">
+                        <span>Do you want to repair all equipped items for </span>
+                        <span class="font-weight-bold">
+                            @($"{Model.Equipped.GetRepairCostForEquipment():#,##0}")
+                        </span>
+                        <span> Gold?</span>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <div class="btn-group col-12">
-                    <button class="btn btn-warning" data-bs-dismiss="modal">
-                        No
-                    </button>
-                    <a class="btn btn-success" asp-controller="Inventory" asp-action="RepairEquipped">
-                        Yes
-                    </a>
+                <div class="modal-footer">
+                    <div class="btn-group col-12">
+                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                            No
+                        </button>
+                        <a class="btn btn-success" asp-controller="Inventory" asp-action="RepairEquipped">
+                            Yes
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}

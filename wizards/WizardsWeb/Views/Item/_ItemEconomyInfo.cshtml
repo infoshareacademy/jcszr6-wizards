@@ -7,7 +7,7 @@
     <div class="col-12">
         <partial name="~/Views/Item/_ItemEnduranceBar.cshtml" model="@Model"/>
     </div>
-    @if (Model.NeedsRepair())
+    @if (Model.NeedsRepair() && Model.CanShowRepairElements())
     {
         <div class="col-md-6 text-left">
             <label class="m-0 p-0" asp-for="RepairCost"></label>
@@ -23,10 +23,24 @@
         <hr />
     </div>
     <div class="col-md-6 text-left">
-        <label class="m-0 p-0" asp-for="SellPrice"></label>
+        @if (!Model.IsMerchantItem)
+        {
+            <label class="m-0 p-0" asp-for="SellPrice"></label>
+        }
+        else
+        {
+            <label class="m-0 p-0" asp-for="BuyPrice"></label>
+        }
     </div>
     <div class="col-md-6 text-right">
-        <label class="m-0 p-0 font-weight-bold">@($"{Model.SellPrice:##,##0} Gold")</label>
+        @if (!Model.IsMerchantItem)
+        {
+            <label class="m-0 p-0 font-weight-bold">@($"{Model.SellPrice:##,##0} Gold")</label>
+        }
+        else
+        {
+            <label class="m-0 p-0 font-weight-bold">@($"{Model.BuyPrice:##,##0} Gold")</label>
+        }
     </div>
     <div class="col-12">
         <hr />

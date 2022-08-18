@@ -1,0 +1,109 @@
+﻿@model WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView
+
+<!-- Modal for Details -->
+<div class="modal fade" id="details-@Model.Id" tabindex="-1" aria-labelledby="label-a-@Model.Id" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header table-@Model.GetItemTierColor()">
+                <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="Model" />
+            </div>
+            <div class="modal-body">
+                <partial name="~/Views/Item/_ItemAttributesInfo.cshtml" model="@Model.Attributes" />
+            </div>
+            <div class="modal-footer">
+                <partial name="~/Views/Item/_ItemEconomyInfo.cshtml" model="Model" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.NeedsRepair() && Model.CanShowRepairElements())
+{
+    <!-- Modal for Repair -->
+    <div class="modal fade" id="repair-item-@Model.Id" aria-hidden="true" aria-labelledby="label-b-@Model.Id" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header table-@Model.GetItemTierColor()">
+                    <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
+                </div>
+                <div class="modal-body alert alert-warning">
+                    <div class="h3 text-center text-dark">
+                        <span>Do you want to repair this item for </span>
+                        <span class="font-weight-bold">@($"{Model.RepairCost:#,##0}")</span>
+                        <span> Gold?</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group col-12">
+                        <button class="btn btn-warning" data-bs-target="#details-@Model.Id" data-bs-toggle="modal">
+                            No
+                        </button>
+                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
+                            Yes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (Model.IsMerchantItem)
+{
+    <!-- Modal for Buy -->
+    <div class="modal fade" id="buy-item-@Model.CoreItemId" aria-hidden="true" aria-labelledby="label-buy-@Model.CoreItemId">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header table-@Model.GetItemTierColor()">
+                    <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
+                </div>
+                <div class="modal-body alert alert-warning">
+                    <div class="h3 text-center text-dark">
+                        <span>Do you want to buy this item for </span>
+                        <span class="font-weight-bold">@($"{Model.BuyPrice:#,##0}")</span>
+                        <span> Gold?</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group col-12">
+                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                            No
+                        </button>
+                        <a class="btn btn-success" asp-controller="Merchant" asp-action="BuyItem" asp-route-id="@Model.CoreItemId">
+                            Yes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else if (Model.IsInMerchantMode && !Model.IsMerchantItem)
+{
+    <!-- Modal for Sell -->
+    <div class="modal fade" id="sell-item-@Model.CoreItemId" aria-hidden="true" aria-labelledby="label-sell-@Model.CoreItemId">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header table-@Model.GetItemTierColor()">
+                    <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
+                </div>
+                <div class="modal-body alert alert-danger">
+                    <div class="h3 text-center text-dark">
+                        <span>Do you want to sell this item for </span>
+                        <span class="font-weight-bold">@($"{Model.SellPrice:#,##0}")</span>
+                        <span> Gold?</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btn-group col-12">
+                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                            No
+                        </button>
+                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem">
+                            Yes
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

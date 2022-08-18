@@ -2,9 +2,8 @@
 using Wizards.Core.Model;
 using Wizards.Core.Model.Properties;
 using Wizards.Services.Helpers;
-using WizardsWeb.ModelViews.Inventory;
-using WizardsWeb.ModelViews.Inventory.Properties;
 using WizardsWeb.ModelViews.ItemModelViews;
+using WizardsWeb.ModelViews.ItemModelViews.Properties;
 
 namespace WizardsWeb.Mapping;
 
@@ -18,7 +17,7 @@ public class HeroItemProfile : Profile
 
         CreateMap<HeroItem, ItemDetailsModelView>()
             .ForMember(dto => dto.Id, exp => exp.MapFrom(s => s.Id))
-            .ForMember(dto => dto.CoreItemId, exp => exp.MapFrom(s => s.Item.Id))
+            .ForMember(dto => dto.CoreItemId, exp => exp.MapFrom(s => -s.Item.Id))
             .ForMember(dto => dto.IsMerchantItem, exp => exp.MapFrom(s => false))
             .ForMember(dto => dto.IsInMerchantMode, exp => exp.MapFrom(s => false))
             .ForMember(dto => dto.Name, exp => exp.MapFrom(s => s.Item.Name))
@@ -33,20 +32,13 @@ public class HeroItemProfile : Profile
             .ForMember(dto => dto.BuyPrice, exp => exp.MapFrom(s => s.Item.BuyPrice));
 
         CreateMap<Item, ItemDetailsModelView>()
-            .ForMember(dto => dto.Id, exp => exp.MapFrom(s => 0))
+            .ForMember(dto => dto.Id, exp => exp.MapFrom(s => -s.Id))
             .ForMember(dto => dto.CoreItemId, exp => exp.MapFrom(s => s.Id))
             .ForMember(dto => dto.IsMerchantItem, exp => exp.MapFrom(s => true))
             .ForMember(dto => dto.IsInMerchantMode, exp => exp.MapFrom(s => true))
-            .ForMember(dto => dto.Name, exp => exp.MapFrom(s => s.Name))
-            .ForMember(dto => dto.Type, exp => exp.MapFrom(s => s.Type))
-            .ForMember(dto => dto.Restriction, exp => exp.MapFrom(s => s.Restriction))
-            .ForMember(dto => dto.Tier, exp => exp.MapFrom(s => s.Tier))
             .ForMember(dto => dto.IsEquipped, exp => exp.MapFrom(s => false))
             .ForMember(dto => dto.Attributes, exp => exp.MapFrom(s => s.Attributes))
             .ForMember(dto => dto.Endurance, exp => exp.MapFrom(s => 100d))
-            .ForMember(dto => dto.RepairCost, exp => exp.MapFrom(s => 0))
-            .ForMember(dto => dto.SellPrice, exp => exp.MapFrom(s => s.SellPrice))
-            .ForMember(dto => dto.BuyPrice, exp => exp.MapFrom(s => s.BuyPrice));
+            .ForMember(dto => dto.RepairCost, exp => exp.MapFrom(s => 0));
     }
-
 }

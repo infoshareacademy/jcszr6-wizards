@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Wizards.Core.Model.Enums;
-using WizardsWeb.ModelViews.Inventory.Properties;
+using WizardsWeb.ModelViews.ItemModelViews.Properties;
 
 namespace WizardsWeb.ModelViews.ItemModelViews;
 
@@ -41,6 +41,11 @@ public class ItemDetailsModelView
     public bool NeedsRepair()
     {
         return (RepairCost >= 1 && Endurance < 99);
+    }
+
+    public bool CanShowRepairElements()
+    {
+        return (!IsInMerchantMode && !IsMerchantItem);
     }
 
     public string GetEnduranceBarColorClass()

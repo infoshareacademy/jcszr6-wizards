@@ -121,6 +121,7 @@ public class InventoryController : Controller
 
         inventoryModelView.Attributes = _mapper.Map<HeroAttributesModelView>(attributes);
         inventoryModelView.HeroSummary = _mapper.Map<HeroSummaryModelView>(hero);
+        inventoryModelView.HeroNickName = hero.NickName;
 
         var mappedItems = _mapper.Map<List<ItemDetailsModelView>>(hero.Inventory);
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using WizardsWeb.ModelViews.HeroModelViews.Properties;
 using WizardsWeb.ModelViews.ItemModelViews;
@@ -8,6 +7,7 @@ namespace WizardsWeb.ModelViews.Inventory;
 
 public class InventoryModelView
 {
+    public string HeroNickName { get; set; }
     public HeroAttributesModelView Attributes { get; set; }
 
     public HeroSummaryModelView HeroSummary { get; set; }

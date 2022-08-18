@@ -1,4 +1,4 @@
-﻿@model WizardsWeb.ModelViews.Inventory.Properties.ItemAttributesDetailsModelView
+﻿@model WizardsWeb.ModelViews.ItemModelViews.Properties.ItemAttributesDetailsModelView
 
 <div class="row p-2">
     <div class="col-12">
@@ -10,8 +10,8 @@
         <div class="col-md-8 text-left">
             <label class="m-0 p-0" asp-for="Damage"></label>
         </div>
-        <div class="col-md-4 text-left">
-            <label class="m-0 p-0 font-weight-bold">@Model.Damage</label>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Damage)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Damage)</label>
         </div>
     }
 
@@ -20,8 +20,8 @@
         <div class="col-md-8 text-left">
             <label class="m-0 p-0" asp-for="Precision"></label>
         </div>
-        <div class="col-md-4 text-left">
-            <label class="m-0 p-0 font-weight-bold">@Model.Precision</label>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Precision)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Precision)</label>
         </div>
     }
 
@@ -30,8 +30,8 @@
         <div class="col-md-8 text-left">
             <label class="m-0 p-0" asp-for="Specialization"></label>
         </div>
-        <div class="col-md-4 text-left">
-            <label class="m-0 p-0 font-weight-bold">@Model.Specialization</label>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Specialization)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Specialization)</label>
         </div>
     }
 
@@ -40,8 +40,8 @@
         <div class="col-md-8 text-left">
             <label class="m-0 p-0" asp-for="MaxHealth"></label>
         </div>
-        <div class="col-md-4 text-left">
-            <label class="m-0 p-0 font-weight-bold">@Model.MaxHealth</label>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.MaxHealth)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.MaxHealth)</label>
         </div>
     }
 
@@ -50,8 +50,9 @@
         <div class="col-md-8 text-left">
             <label class="m-0 p-0" asp-for="Reflex"></label>
         </div>
-        <div class="col-md-4 text-left">
-            <label class="m-0 p-0 font-weight-bold">@Model.Reflex</label>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Reflex)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Reflex)</label>
+
         </div>
     }
 
@@ -60,8 +61,8 @@
         <div class="col-md-8 text-left">
             <label class="m-0 p-0" asp-for="Defense"></label>
         </div>
-        <div class="col-md-4 text-left">
-            <label class="m-0 p-0 font-weight-bold">@Model.Defense</label>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Defense)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Defense)</label>
         </div>
     }
     <div class="col-12">
