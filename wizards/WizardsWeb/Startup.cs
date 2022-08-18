@@ -12,6 +12,7 @@ using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
+using Wizards.Services.SearchService;
 using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
@@ -20,6 +21,7 @@ using Wizards.Services.AuthorizationElements;
 using Wizards.Services.AuthorizationElements.Selector;
 using Wizards.Services.Inventory;
 using Wizards.Services.MerchantService;
+
 
 namespace WizardsWeb;
 
@@ -48,6 +50,8 @@ public class Startup
         services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
 
         services.AddTransient<ISelector, Selector>();
+        
+        services.AddTransient<ISearchService, SearchService>();
 
         services.AddTransient<IItemRepository, ItemRepository>();
         services.AddTransient<IItemService, ItemService>();
@@ -119,6 +123,7 @@ public class Startup
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
+        
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
