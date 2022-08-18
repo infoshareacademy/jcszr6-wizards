@@ -1,4 +1,6 @@
 ﻿@using WizardsWeb.Helpers
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Wizards.Core.Model.Enums
 @model IEnumerable<WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView>
 
 <table class="table">
@@ -24,7 +26,7 @@
             }
             else if (Model.CanShowSellPrice())
             {
-                <label asp-for="FirstOrDefault().BuyPrice"></label>
+                <label asp-for="FirstOrDefault().SellPrice"></label>
             }
         </th>
         <th>
@@ -77,11 +79,18 @@
                     }
                     else if (item.IsInMerchantMode && !item.IsMerchantItem)
                     {
-                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#sell-item-@item.Id">Sell</a>
+                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#sell-item-@item.Id">Sell</a>
                     }
                     else if (item.IsMerchantItem)
                     {
-                        <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#buy-item-@item.CoreItemId">Buy</a>
+                        <a class="btn btn-success btn-sm" data-bs-toggle="modal" href="#buy-item-@item.CoreItemId">Buy</a>
+                        
+                        @if (User.IsInRole($"{UserRoles.Admin.ToString()}") || User.IsInRole($"{UserRoles.Moderator.ToString()}"))
+                        {
+                            <a class="btn btn-secondary btn-sm" asp-controller="Item" asp-action="Edit" asp-route-id="@item.CoreItemId">
+                                Edit
+                            </a>
+                        }
                     }
                 </div>
             </td>

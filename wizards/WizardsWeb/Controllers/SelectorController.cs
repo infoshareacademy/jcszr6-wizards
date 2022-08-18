@@ -14,15 +14,17 @@ public class SelectorController : Controller
     private readonly IAuthorizationService _authorizationService;
     private readonly ISelector _selector;
     private readonly List<string> _allowedHeroActions;
-    private readonly List<string> _allowedItemActions;
+    private readonly List<string> _allowedInventoryActions;
+    private readonly List<string> _allowedMerchantActions;
 
     public SelectorController(IAuthorizationService authorizationService, ISelector selector)
     {
         _authorizationService = authorizationService;
         _selector = selector;
         _allowedHeroActions = GetAllowedActions(typeof(HeroController));
-
-        _allowedItemActions = GetAllowedActions(typeof(InventoryController));
+        
+        _allowedMerchantActions = GetAllowedActions(typeof(MerchantController));
+        _allowedInventoryActions = GetAllowedActions(typeof(InventoryController)); 
     }
 
     public async Task<ActionResult> SelectHero(int id, string actionName)
@@ -60,11 +62,18 @@ public class SelectorController : Controller
         return RedirectToAction("Index", "Home");
     }
 
-    public async Task<ActionResult> SelectItem(int id, string actionName)
+    public async Task<ActionResult> SelectItem(int id, string actionName, string controllerName = "Inventory")
     {
-        if (actionName == null || !_allowedItemActions.Contains(actionName))
+        var allowedActions = _allowedInventoryActions;
+        
+        if (controllerName == "Merchant")
         {
-            return RedirectToAction("Index", "Inventory");
+            allowedActions = _allowedMerchantActions;
+        }
+
+        if (actionName == null || !allowedActions.Contains(actionName))
+        {
+            return RedirectToAction("Index", controllerName);
         }
 
         var heroItem = new HeroItem();
@@ -75,7 +84,7 @@ public class SelectorController : Controller
         }
         catch
         {
-            return RedirectToAction("Index", "Inventory");
+            return RedirectToAction("Index", controllerName);
         }
 
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, heroItem, "ItemOwnerPolicy");
@@ -84,7 +93,7 @@ public class SelectorController : Controller
         {
             var player = await _selector.GetPlayerAsync(User);
             await _selector.SelectItem(player, id);
-            return RedirectToAction(actionName, "Inventory");
+            return RedirectToAction(actionName, controllerName);
         }
 
         if (!authorizationResult.Succeeded)

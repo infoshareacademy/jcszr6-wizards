@@ -42,8 +42,7 @@ public class ItemController : Controller
         try
         {
             await _itemService.Add(item);
-            // TODO: CAHNGE REDIRECT TO MECHANT CONTROLLER
-            return RedirectToAction("Index", "Inventory");
+            return RedirectToAction("Index", "Merchant");
         }
         catch (InvalidModelException exception)
         {
@@ -78,8 +77,7 @@ public class ItemController : Controller
         try
         {
             await _itemService.Update(item);
-            // TODO: CAHNGE REDIRECT TO MECHANT CONTROLLER
-            return RedirectToAction("Index", "Inventory");
+            return RedirectToAction("Index", "Merchant");
         }
         catch (InvalidModelException exception)
         {

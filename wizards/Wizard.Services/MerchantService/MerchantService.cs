@@ -32,7 +32,7 @@ public class MerchantService : IMerchantService
         if (!CanBuy(hero, item))
         {
             var message = new Dictionary<string, string>();
-            message.Add("Gold", "You have not enough gold!");
+            message.Add("", "You have not enough gold to buy this item!");
             throw new InvalidModelException(message);
         }
 

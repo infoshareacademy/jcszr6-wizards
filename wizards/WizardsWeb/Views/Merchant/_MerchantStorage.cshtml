@@ -1,0 +1,43 @@
+﻿@using Wizards.Core.Model.Enums
+@model WizardsWeb.ModelViews.Merchant.MerchantStorageModelView
+
+<div class="row">
+    <div class="col-8">
+        <h4>Merchant storage</h4>
+    </div>
+    <div class="col-4">
+        @if (User.IsInRole($"{UserRoles.Admin.ToString()}") || User.IsInRole($"{UserRoles.Moderator.ToString()}"))
+        {
+            <div class="btn-group">
+                <a class="btn btn-secondary btn-sm" asp-controller="Item" asp-action="Create">Create New Item</a>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <ul class="nav nav-pills mb-3" id="pills-merchant-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-merchant-weapons-tab" data-bs-toggle="pill" data-bs-target="#pills-merchant-weapons" type="button" role="tab" aria-controls="pills-merchant-weapons" aria-selected="true">Weapons</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-merchant-armors-tab" data-bs-toggle="pill" data-bs-target="#pills-merchant-armors" type="button" role="tab" aria-controls="pills-merchant-armors" aria-selected="false">Armors</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-merchant-miscs-tab" data-bs-toggle="pill" data-bs-target="#pills-merchant-miscs" type="button" role="tab" aria-controls="pills-merchant-miscs" aria-selected="false">Miscs</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-merchant-tabContent">
+            <div class="tab-pane fade show active" id="pills-merchant-weapons" role="tabpanel" aria-labelledby="pills-merchant-weapons-tab" tabindex="0">
+                <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Weapons" />
+            </div>
+            <div class="tab-pane fade" id="pills-merchant-armors" role="tabpanel" aria-labelledby="pills-merchant-armors-tab" tabindex="0">
+                <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Armors" />
+            </div>
+            <div class="tab-pane fade" id="pills-merchant-miscs" role="tabpanel" aria-labelledby="pills-merchant-miscs-tab" tabindex="0">
+                <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Miscellaneous" />
+            </div>
+        </div>
+    </div>
+</div>

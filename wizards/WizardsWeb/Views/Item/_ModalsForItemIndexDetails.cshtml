@@ -80,7 +80,7 @@ else if (Model.IsMerchantItem)
 else if (Model.IsInMerchantMode && !Model.IsMerchantItem)
 {
     <!-- Modal for Sell -->
-    <div class="modal fade" id="sell-item-@Model.CoreItemId" aria-hidden="true" aria-labelledby="label-sell-@Model.CoreItemId">
+    <div class="modal fade" id="sell-item-@Model.Id" aria-hidden="true" aria-labelledby="label-sell-@Model.Id">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header table-@Model.GetItemTierColor()">
@@ -98,7 +98,7 @@ else if (Model.IsInMerchantMode && !Model.IsMerchantItem)
                         <button class="btn btn-warning" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem">
+                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem" asp-route-controllerName="Merchant">
                             Yes
                         </a>
                     </div>

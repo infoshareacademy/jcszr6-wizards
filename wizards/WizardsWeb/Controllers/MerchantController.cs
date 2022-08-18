@@ -99,8 +99,10 @@ public class MerchantController : Controller
         var hero = await _heroService.Get(User);
 
         merchantModel.HeroStorage.Gold = hero.Gold;
+        merchantModel.HeroStorage.HeroNickName = hero.NickName;
 
         var inventoryItems = _mapper.Map<List<ItemDetailsModelView>>(hero.Inventory);
+        inventoryItems.ForEach(i => i.IsInMerchantMode = true);
 
         merchantModel.HeroStorage.Weapons = inventoryItems
             .Where(hi => hi.Type == ItemType.Weapon && !hi.IsEquipped)
