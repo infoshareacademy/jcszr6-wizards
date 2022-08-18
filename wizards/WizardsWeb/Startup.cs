@@ -12,12 +12,14 @@ using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
+using Wizards.Services.SearchService;
 using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Repository.InitialData;
 using Wizards.Services.AuthorizationElements;
 using Wizards.Services.Selector;
+
 
 namespace WizardsWeb
 {
@@ -44,6 +46,8 @@ namespace WizardsWeb
             services.AddTransient<IHeroService, HeroService>();
             services.AddTransient<IHeroValidator, HeroValidator>();
             services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
+
+            services.AddTransient<ISearchService, SearchService>();
 
             services.AddTransient<ISelector, Selector>();
 

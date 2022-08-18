@@ -17,6 +17,7 @@ public class PlayerRepository : IPlayerRepository
     {
         return await _wizardsContext.Players
             .Include(p => p.Heroes)
+            .ThenInclude(x => x.Statistics)
             .ToListAsync();
     }
 
@@ -86,14 +87,18 @@ public class PlayerRepository : IPlayerRepository
     public async Task<List<Player>> GetByUserName(string userName)
     {
         return await _wizardsContext.Players
-            .Where(p => p.UserName.Contains(userName, StringComparison.OrdinalIgnoreCase))
+            .Where(p => p.UserName.ToLower().Contains(userName.ToLower()))
+            .Include(p => p.Heroes)
+            .ThenInclude(x => x.Statistics)
             .ToListAsync();
     }
 
     public async Task<List<Player>> GetByEmailAddress(string addressEmail)
     {
         return await _wizardsContext.Players
-            .Where(p => p.Email.Contains(addressEmail, StringComparison.OrdinalIgnoreCase))
+            .Where(p => p.Email.ToLower().Contains(addressEmail.ToLower()))
+            .Include(p => p.Heroes)
+            .ThenInclude(x => x.Statistics)
             .ToListAsync();
     }
 
@@ -101,14 +106,20 @@ public class PlayerRepository : IPlayerRepository
     {
         return await _wizardsContext.Players.Where(p =>
             p.DateOfBirth.Year >= startYear &&
-            p.DateOfBirth.Year <= endYear).ToListAsync();
+            p.DateOfBirth.Year <= endYear)
+            .Include(p => p.Heroes)
+            .ThenInclude(x => x.Statistics)
+            .ToListAsync();
     }
 
     public async Task<List<Player>> GetByRankPointsRange(int lowRankPoints, int highRankPoints)
     {
         return await _wizardsContext.Players.Where(p =>
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() >= lowRankPoints &&
-            p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints).ToListAsync();
+            p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints)
+            .Include(p => p.Heroes)
+            .ThenInclude(x => x.Statistics)
+            .ToListAsync();
     }
 
     public async Task SetActiveHero(Player player, int heroId)
