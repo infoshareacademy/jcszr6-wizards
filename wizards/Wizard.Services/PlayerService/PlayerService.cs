@@ -51,7 +51,7 @@ namespace Wizards.Services.PlayerService
                 throw new InvalidModelException(message);
             }
 
-            await _userManager.DeleteAsync(player);
+            await _playerRepository.Remove(player);
         }
 
         public async Task Update(Player player)

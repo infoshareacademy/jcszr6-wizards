@@ -11,7 +11,6 @@ public class ItemAttributes
 
     // Defensive
     public int MaxHealth { get; set; }
-    public int CurrentHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
 
