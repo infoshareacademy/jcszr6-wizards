@@ -114,7 +114,7 @@ public class Startup
         {
             app.UseDeveloperExceptionPage();
 
-            var result = injector.InjectRolesAndUsersAsync();
+            var result = injector.InjectDevelopmentDataAsync();
             result.Wait();
         }
         else

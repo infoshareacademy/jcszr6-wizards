@@ -2,5 +2,5 @@
 
 public interface IInitialDataInjector
 {
-    Task InjectRolesAndUsersAsync();
+    Task InjectDevelopmentDataAsync();
 }

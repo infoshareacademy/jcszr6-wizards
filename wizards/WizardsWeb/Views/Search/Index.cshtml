@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 <p>
-    <a asp-action="Index">All Players</a>
+    <a class="btn btn-primary" asp-action="Index">All Players</a>
 </p>
 
 <h1>Search user</h1>
@@ -73,13 +73,13 @@
                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
 
             </th>
-            <th>
+            <th class="text-center">
                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
             </th>
-            <th>
+            <th class="text-right">
                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
             </th>
-            <th>
+            <th class="text-right">
                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
             </th>
             <th></th>
@@ -95,14 +95,14 @@
                 <td>
                     @item.Email
                 </td>
-                <td>
+                <td class="text-center">
                     @item.HeroNumber
                 </td>
-                <td>
-                    @item.RankNumber
+                <td class="text-right">
+                    @($"{item.RankNumber:#,##0}")
                 </td>
-                <td>
-                    @item.GoldHeroNumber
+                <td class="text-right">
+                    @($"{item.GoldHeroNumber:#,##0}")
                 </td>
             </tr>
         }
