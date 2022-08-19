@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WizardsWeb.ModelViews.Properties;
+namespace WizardsWeb.ModelViews.HeroModelViews.Properties;
 
 public class HeroAttributesModelView
 {
@@ -18,6 +18,4 @@ public class HeroAttributesModelView
     public int MaxHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
-
-    public HeroAttributesModelView() { }
 }

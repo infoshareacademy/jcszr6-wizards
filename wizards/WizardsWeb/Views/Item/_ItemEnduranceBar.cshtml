@@ -1,0 +1,17 @@
+﻿@model WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView
+
+<div class="row">
+    <div class="col-12">
+        <div class="progress">
+            <div class="progress-bar text-dark font-weight-bold @Model.GetEnduranceBarColorClass()"
+                 role="progressbar"
+                 aria-label="Example with label"
+                 style="width: @($"{Model.Endurance:##0}")%;"
+                 aria-valuenow="@($"{Model.Endurance:##0}")"
+                 aria-valuemin="0"
+                 aria-valuemax="100">
+                @($"{Model.Endurance:##0.00}%")
+            </div>
+        </div>
+    </div>
+</div>

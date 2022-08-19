@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WizardsWeb.ModelViews.Properties;
+namespace WizardsWeb.ModelViews.HeroModelViews.Properties;
 
 public class StatisticsModelView
 {
@@ -20,8 +20,6 @@ public class StatisticsModelView
 
     [Display(Name = "Win rate")]
     public string WinRatio => GetWinRatio();
-
-    public StatisticsModelView() { }
 
     private string GetWinRatio()
     {

@@ -13,6 +13,7 @@
   <ItemGroup>
     <Folder Include="HeroService\" />
     <Folder Include="AuthorizationElements\Selector\" />
+    <Folder Include="Inventory\" />
   </ItemGroup>
 
 </Project>

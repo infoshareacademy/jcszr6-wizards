@@ -1,10 +1,18 @@
-﻿using Wizards.Core.Model;
+﻿using Wizards.Core.Interfaces;
+using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.Properties;
 
 namespace Wizards.Services.Factories;
 
 public class HeroPropertiesFactory : IHeroPropertiesFactory
 {
+    private readonly IItemRepository _itemRepository;
+
+    public HeroPropertiesFactory(IItemRepository itemRepository)
+    {
+        _itemRepository = itemRepository;
+    }
     public Statistics GetStatistics()
     {
         return new Statistics()
@@ -36,6 +44,26 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
         return result;
     }
 
+    public List<HeroItem> GetStartupEquipment(HeroProfession profession)
+    {
+        List<HeroItem> result;
+
+        switch (profession)
+        {
+            case HeroProfession.Sorcerer:
+                result = GetSorcererStartupEquipment();
+                break;
+            case HeroProfession.Necromancer:
+                result = GetNecromancerStartupEquipment();
+                break;
+            default:
+                result = new List<HeroItem>();
+                break;
+        }
+
+        return result;
+    }
+    
     private HeroAttributes CreateSorcerersAttributes()
     {
         return new HeroAttributes()
@@ -77,6 +105,37 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             CurrentHealth = 0,
             Reflex = 0,
             Defense = 0
+        };
+    }
+
+    private List<HeroItem> GetSorcererStartupEquipment()
+    {
+        var sorcerersBasicItems = _itemRepository.GetAll(ProfessionRestriction.Sorcerer).Result.Where(hi => hi.Tier == 1);
+
+        var EquippedStartupWeaponId = sorcerersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("staff")).Id;
+        var EquippedStartupArmorId = sorcerersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("vestments")).Id;
+        var AdditionalWeaponId = sorcerersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("book")).Id;
+
+        return new List<HeroItem>()
+        {
+            new(){ItemId = EquippedStartupWeaponId, InUse = true, ItemEndurance = 100d},
+            new(){ItemId = EquippedStartupArmorId, InUse = true, ItemEndurance = 100d},
+            new(){ItemId = AdditionalWeaponId, InUse = false, ItemEndurance = 100d},
+        };
+    }
+    private List<HeroItem> GetNecromancerStartupEquipment()
+    {
+        var necromancersBasicItems = _itemRepository.GetAll(ProfessionRestriction.Necromancer).Result.Where(hi => hi.Tier == 1);
+
+        var EquippedStartupWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("skull")).Id;
+        var EquippedStartupArmorId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("shroud")).Id;
+        var AdditionalWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("doll")).Id;
+
+        return new List<HeroItem>()
+        {
+            new(){ItemId = EquippedStartupWeaponId, InUse = true, ItemEndurance = 100d},
+            new(){ItemId = EquippedStartupArmorId, InUse = true, ItemEndurance = 100d},
+            new(){ItemId = AdditionalWeaponId, InUse = false, ItemEndurance = 100d},
         };
     }
 }

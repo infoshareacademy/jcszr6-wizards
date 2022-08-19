@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using Wizards.Core.Model;
-using Wizards.Core.Model.ManyToManyTables;
 
-namespace Wizards.Services.Selector;
+namespace Wizards.Services.AuthorizationElements.Selector;
 
 public interface ISelector
 {

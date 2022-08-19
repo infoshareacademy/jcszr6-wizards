@@ -1,9 +1,25 @@
-﻿@model WizardsWeb.ModelViews.HeroDeleteModelView
+﻿@model WizardsWeb.ModelViews.HeroModelViews.HeroDeleteModelView
 
 @{
     ViewData["Title"] = "Delete";
 }
 
+<h1>Delete Hero</h1>
+<div class="alert alert-danger">
+    <h3>Are you sure you want to delete @Model.Basics.NickName?</h3>
+    <h4>All progress made on this character will be lost!</h4>
+</div>
+<hr />
+<div>
+    <div class="row">
+        <div class="col-md-4">
+            <partial name="_HeroBasicPresentation" model="@Model.Basics" />
+        </div>
+        <div class="col-md-4">
+            <partial name="_HeroStatistics" model="@Model.Statistics" /><br/><br/>
+            <partial name="_HeroSummary" model="Model.Summary"/>
+        </div>
+    </div>
 
 <div class="row">
     <div class="col">

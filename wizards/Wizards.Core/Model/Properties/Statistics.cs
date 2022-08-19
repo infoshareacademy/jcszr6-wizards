@@ -1,4 +1,4 @@
-﻿namespace Wizards.Core.Model;
+﻿namespace Wizards.Core.Model.Properties;
 
 public class Statistics
 {

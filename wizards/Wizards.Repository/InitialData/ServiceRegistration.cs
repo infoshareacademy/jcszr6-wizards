@@ -10,6 +10,7 @@ public static class ServiceRegistration
     {
         services.AddTransient<IInitialDataRolesFactory, InitialDataRolesFactory>();
         services.AddTransient<IInitialDataUsersFactory, InitialDataUsersFactory>();
+        services.AddTransient<IInitialDataHeroesFactory, InitialDataHeroesFactory>();
         services.AddTransient<IInitialDataItemsFactory, InitialDataItemsFactory>();
 
         services.AddTransient<IInitialDataInjector, InitialDataInjector>();
