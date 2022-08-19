@@ -4,23 +4,6 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete Hero</h1>
-<div class="alert alert-danger">
-    <h3>Are you sure you want to delete @Model.Basics.NickName?</h3>
-    <h4>All progress made on this character will be lost!</h4>
-</div>
-<hr />
-<div>
-    <div class="row">
-        <div class="col-md-4">
-            <partial name="_HeroBasicPresentation" model="@Model.Basics" />
-        </div>
-        <div class="col-md-4">
-            <partial name="_HeroStatistics" model="@Model.Statistics" /><br/><br/>
-            <partial name="_HeroSummary" model="Model.Summary"/>
-        </div>
-    </div>
-
 <div class="row">
     <div class="col">
         <ul class="list-group">
@@ -47,6 +30,7 @@
                 </div>
                 <div class="col-md-4">
                     <partial name="_HeroStatistics" model="@Model.Statistics" />
+                    <partial name="_HeroSummary" model="Model.Summary"/>
                 </div>
 
                 <div class="col-md-4">
@@ -68,19 +52,6 @@
                 </div>
             </div>
 
-            @*            <div class="row">
-            <form asp-action="Delete">
-            <div class="form-group">
-            <label asp-for="ConfirmNickName"></label>
-            <input asp-for="ConfirmNickName" class="form-control" />
-            <span asp-validation-for="ConfirmNickName" class="text-danger"></span>
-            </div>
-            <div class="btn-group">
-            <a type="button" class="btn btn-success" asp-action="Details" asp-controller="Player">Cancel</a>
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            </div>
-            </form>
-            </div>*@
         </div>
     </div>
 </div>
