@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
@@ -16,7 +17,6 @@ public class InitialDataInjector : IInitialDataInjector
     private readonly IHeroRepository _heroRepository;
     private readonly WizardsContext _context;
 
-
     public InitialDataInjector(
         IInitialDataRolesFactory rolesFactory, IInitialDataUsersFactory usersFactory, 
         RoleManager<IdentityRole<int>> roleManager, UserManager<Player> userManager,
@@ -32,63 +32,69 @@ public class InitialDataInjector : IInitialDataInjector
     }
     public async Task InjectDevelopmentDataAsync()
     {
-        var roles = _rolesFactory.GetRolesAsync();
+        if (_roleManager.Roles.Count() != 3)
+        {
+            var roles = _rolesFactory.GetRolesAsync();
+            await AddRoles(roles);
+        }
+        
         var adminUsers = _usersFactory.GetAdminUsersAsync();
+        await AddUsers(adminUsers, UserRoles.Admin);
+
         var moderatorUsers = _usersFactory.GetModeratorUsersAsync();
-        var randomUsers = _usersFactory.GetRandomUsersForTestsAsync();
-        var heroes = _heroesFactory.GetHeroes();
-        var heroesNames = await _heroRepository.GetAllNickNames();
+        await AddUsers(moderatorUsers, UserRoles.Moderator);
 
+        if (_context.Players.Count() < 105)
+        {
+            var randomUsers = _usersFactory.GetRandomUsersForTestsAsync();
+            await AddUsers(randomUsers, UserRoles.RegularUser);
+        }
 
+        if (_context.Heroes.Count() < 240)
+        {
+            var adminsHeroes = _heroesFactory.GetAdminModeratorsHeroesWithEquipment();
+            await AddHeroes(adminsHeroes);
+
+            var heroes = _heroesFactory.GetRandomTestHeroesWithEquipment();
+            await AddHeroes(heroes);
+        }
+    }
+
+    private async Task AddRoles(List<IdentityRole<int>> roles)
+    {
         foreach (var identityRole in roles)
         {
             await _roleManager.CreateAsync(identityRole);
         }
+    }
 
-        foreach (var adminUser in adminUsers)
+    private async Task AddUsers(Dictionary<Player, string> usersData, UserRoles role)
+    {
+        foreach (var userData in usersData)
         {
-            if (await _userManager.FindByNameAsync(adminUser.Key.UserName) == null)
+            if (await _userManager.FindByNameAsync(userData.Key.UserName) == null)
             {
-                var user = adminUser.Key;
-                var password = adminUser.Value;
-                var role = UserRoles.Admin.ToString();
+                var user = userData.Key;
+                var password = userData.Value;
 
                 await _userManager.CreateAsync(user, password);
-                await _userManager.AddToRoleAsync(user, role);
+                await _userManager.AddToRoleAsync(user, role.ToString());
             }
         }
+    }
 
-        foreach (var moderatorUser in moderatorUsers)
-        {
-            if (await _userManager.FindByNameAsync(moderatorUser.Key.UserName) == null)
-            {
-                var user = moderatorUser.Key;
-                var password = moderatorUser.Value;
-
-                await _userManager.CreateAsync(user, password);
-                await _userManager.AddToRoleAsync(user, UserRoles.Moderator.ToString());
-            }
-        }
-        
-        foreach (var randomUser in randomUsers)
-        {
-            if (await _userManager.FindByNameAsync(randomUser.Key.UserName) == null)
-            {
-                var user = randomUser.Key;
-                var password = randomUser.Value;
-
-                await _userManager.CreateAsync(user, password);
-                await _userManager.AddToRoleAsync(user, UserRoles.RegularUser.ToString());
-            }
-        }
+    private async Task AddHeroes(List<Hero> heroes)
+    {
+        var existingHeroesNames = await _heroRepository.GetAllNickNames();
 
         foreach (var hero in heroes)
         {
-            if (!heroesNames.Contains(hero.NickName))
+            if (!existingHeroesNames.Contains(hero.NickName))
             {
                 await _context.Heroes.AddAsync(hero);
-                await _context.SaveChangesAsync();
             }
         }
+
+        await _context.SaveChangesAsync();
     }
 }

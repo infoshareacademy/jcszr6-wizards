@@ -12,7 +12,7 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    [Migration("20220810184245_InitialMigration")]
+    [Migration("20220819113855_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -206,7 +206,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -214,33 +214,29 @@ namespace Wizards.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CurrentHealth")
+                    b.Property<int>("HeroId")
                         .HasColumnType("int");
 
-                    b.Property<int>("DailyRewardEnergy")
-                        .HasColumnType("int");
+                    b.Property<bool>("InUse")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
-                    b.Property<int>("Damage")
-                        .HasColumnType("int");
+                    b.Property<double>("ItemEndurance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(100.0);
 
-                    b.Property<int>("Defense")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxHealth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Precision")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Reflex")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Specialization")
+                    b.Property<int>("ItemId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("HeroAttributes");
+                    b.HasIndex("HeroId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("HeroItems");
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.Item", b =>
@@ -614,405 +610,6 @@ namespace Wizards.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.ItemAttributes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentHealth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Damage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Defense")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MaxHealth")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Precision")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Reflex")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Specialization")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ItemAttributes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CurrentHealth = 0,
-                            Damage = 7,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 15,
-                            Reflex = 0,
-                            Specialization = -8
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CurrentHealth = 0,
-                            Damage = 14,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 20,
-                            Reflex = 0,
-                            Specialization = -6
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CurrentHealth = 0,
-                            Damage = 21,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 25,
-                            Reflex = 0,
-                            Specialization = -4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CurrentHealth = 0,
-                            Damage = 28,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 30,
-                            Reflex = 0,
-                            Specialization = -2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CurrentHealth = 0,
-                            Damage = 35,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 35,
-                            Reflex = 0,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CurrentHealth = 0,
-                            Damage = 8,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -8,
-                            Reflex = 0,
-                            Specialization = 30
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CurrentHealth = 0,
-                            Damage = 16,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -6,
-                            Reflex = 0,
-                            Specialization = 35
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CurrentHealth = 0,
-                            Damage = 24,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -4,
-                            Reflex = 0,
-                            Specialization = 40
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CurrentHealth = 0,
-                            Damage = 32,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -2,
-                            Reflex = 0,
-                            Specialization = 45
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CurrentHealth = 0,
-                            Damage = 40,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 0,
-                            Reflex = 0,
-                            Specialization = 50
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CurrentHealth = 0,
-                            Damage = 9,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 12,
-                            Reflex = 0,
-                            Specialization = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CurrentHealth = 0,
-                            Damage = 18,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 14,
-                            Reflex = 0,
-                            Specialization = 6
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CurrentHealth = 0,
-                            Damage = 27,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 16,
-                            Reflex = 0,
-                            Specialization = 9
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CurrentHealth = 0,
-                            Damage = 36,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 18,
-                            Reflex = 0,
-                            Specialization = 12
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CurrentHealth = 0,
-                            Damage = 45,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 20,
-                            Reflex = 0,
-                            Specialization = 15
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = -8,
-                            MaxHealth = 25,
-                            Precision = 0,
-                            Reflex = 15,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = -6,
-                            MaxHealth = 75,
-                            Precision = 0,
-                            Reflex = 20,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = -4,
-                            MaxHealth = 125,
-                            Precision = 0,
-                            Reflex = 25,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = -2,
-                            MaxHealth = 175,
-                            Precision = 0,
-                            Reflex = 30,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 0,
-                            MaxHealth = 225,
-                            Precision = 0,
-                            Reflex = 35,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 30,
-                            MaxHealth = 25,
-                            Precision = 0,
-                            Reflex = -8,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 35,
-                            MaxHealth = 75,
-                            Precision = 0,
-                            Reflex = -6,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 40,
-                            MaxHealth = 125,
-                            Precision = 0,
-                            Reflex = -4,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 24,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 45,
-                            MaxHealth = 175,
-                            Precision = 0,
-                            Reflex = -2,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 25,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 50,
-                            MaxHealth = 225,
-                            Precision = 0,
-                            Reflex = 0,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 26,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 15,
-                            MaxHealth = 25,
-                            Precision = 0,
-                            Reflex = 4,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 27,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 20,
-                            MaxHealth = 75,
-                            Precision = 0,
-                            Reflex = 8,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 28,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 25,
-                            MaxHealth = 125,
-                            Precision = 0,
-                            Reflex = 12,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 29,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 30,
-                            MaxHealth = 175,
-                            Precision = 0,
-                            Reflex = 16,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 30,
-                            CurrentHealth = 0,
-                            Damage = 0,
-                            Defense = 35,
-                            MaxHealth = 225,
-                            Precision = 0,
-                            Reflex = 20,
-                            Specialization = 0
-                        });
-                });
-
-            modelBuilder.Entity("Wizards.Core.Model.ManyToManyTables.HeroItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("HeroId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("InUse")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<double>("ItemEndurance")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("float")
-                        .HasDefaultValue(100.0);
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HeroId");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("HeroItems");
-                });
-
             modelBuilder.Entity("Wizards.Core.Model.Player", b =>
                 {
                     b.Property<int>("Id")
@@ -1102,7 +699,377 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CurrentHealth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DailyRewardEnergy")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Damage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Defense")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxHealth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Precision")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Reflex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Specialization")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HeroAttributes");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Damage")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Defense")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxHealth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Precision")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Reflex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Specialization")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItemAttributes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Damage = 7,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 15,
+                            Reflex = 0,
+                            Specialization = -8
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Damage = 14,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 20,
+                            Reflex = 0,
+                            Specialization = -6
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Damage = 21,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 25,
+                            Reflex = 0,
+                            Specialization = -4
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Damage = 28,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 30,
+                            Reflex = 0,
+                            Specialization = -2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Damage = 35,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 35,
+                            Reflex = 0,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Damage = 8,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -8,
+                            Reflex = 0,
+                            Specialization = 30
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Damage = 16,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -6,
+                            Reflex = 0,
+                            Specialization = 35
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Damage = 24,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -4,
+                            Reflex = 0,
+                            Specialization = 40
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Damage = 32,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = -2,
+                            Reflex = 0,
+                            Specialization = 45
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Damage = 40,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 0,
+                            Reflex = 0,
+                            Specialization = 50
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Damage = 9,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 12,
+                            Reflex = 0,
+                            Specialization = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Damage = 18,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 14,
+                            Reflex = 0,
+                            Specialization = 6
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Damage = 27,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 16,
+                            Reflex = 0,
+                            Specialization = 9
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Damage = 36,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 18,
+                            Reflex = 0,
+                            Specialization = 12
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Damage = 45,
+                            Defense = 0,
+                            MaxHealth = 0,
+                            Precision = 20,
+                            Reflex = 0,
+                            Specialization = 15
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Damage = 0,
+                            Defense = -8,
+                            MaxHealth = 25,
+                            Precision = 0,
+                            Reflex = 15,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Damage = 0,
+                            Defense = -6,
+                            MaxHealth = 75,
+                            Precision = 0,
+                            Reflex = 20,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Damage = 0,
+                            Defense = -4,
+                            MaxHealth = 125,
+                            Precision = 0,
+                            Reflex = 25,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Damage = 0,
+                            Defense = -2,
+                            MaxHealth = 175,
+                            Precision = 0,
+                            Reflex = 30,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Damage = 0,
+                            Defense = 0,
+                            MaxHealth = 225,
+                            Precision = 0,
+                            Reflex = 35,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Damage = 0,
+                            Defense = 30,
+                            MaxHealth = 25,
+                            Precision = 0,
+                            Reflex = -8,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Damage = 0,
+                            Defense = 35,
+                            MaxHealth = 75,
+                            Precision = 0,
+                            Reflex = -6,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Damage = 0,
+                            Defense = 40,
+                            MaxHealth = 125,
+                            Precision = 0,
+                            Reflex = -4,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Damage = 0,
+                            Defense = 45,
+                            MaxHealth = 175,
+                            Precision = 0,
+                            Reflex = -2,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Damage = 0,
+                            Defense = 50,
+                            MaxHealth = 225,
+                            Precision = 0,
+                            Reflex = 0,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Damage = 0,
+                            Defense = 15,
+                            MaxHealth = 25,
+                            Precision = 0,
+                            Reflex = 4,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Damage = 0,
+                            Defense = 20,
+                            MaxHealth = 75,
+                            Precision = 0,
+                            Reflex = 8,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Damage = 0,
+                            Defense = 25,
+                            MaxHealth = 125,
+                            Precision = 0,
+                            Reflex = 12,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Damage = 0,
+                            Defense = 30,
+                            MaxHealth = 175,
+                            Precision = 0,
+                            Reflex = 16,
+                            Specialization = 0
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Damage = 0,
+                            Defense = 35,
+                            MaxHealth = 225,
+                            Precision = 0,
+                            Reflex = 20,
+                            Specialization = 0
+                        });
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1188,7 +1155,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.HeroAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.Properties.HeroAttributes", "Attributes")
                         .WithOne("Hero")
                         .HasForeignKey("Wizards.Core.Model.Hero", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1200,7 +1167,7 @@ namespace Wizards.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Statistics", "Statistics")
+                    b.HasOne("Wizards.Core.Model.Properties.Statistics", "Statistics")
                         .WithOne("Hero")
                         .HasForeignKey("Wizards.Core.Model.Hero", "StatisticsId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1213,18 +1180,7 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Statistics");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
-                {
-                    b.HasOne("Wizards.Core.Model.ItemAttributes", "Attributes")
-                        .WithOne("Item")
-                        .HasForeignKey("Wizards.Core.Model.Item", "AttributesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Attributes");
-                });
-
-            modelBuilder.Entity("Wizards.Core.Model.ManyToManyTables.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
                 {
                     b.HasOne("Wizards.Core.Model.Hero", "Hero")
                         .WithMany("Inventory")
@@ -1243,15 +1199,20 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Item");
                 });
 
+            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.Properties.ItemAttributes", "Attributes")
+                        .WithOne("Item")
+                        .HasForeignKey("Wizards.Core.Model.Item", "AttributesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attributes");
+                });
+
             modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
                 {
                     b.Navigation("Inventory");
-                });
-
-            modelBuilder.Entity("Wizards.Core.Model.HeroAttributes", b =>
-                {
-                    b.Navigation("Hero")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.Item", b =>
@@ -1259,18 +1220,24 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.ItemAttributes", b =>
-                {
-                    b.Navigation("Item")
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Wizards.Core.Model.Player", b =>
                 {
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+                {
+                    b.Navigation("Hero")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+                {
+                    b.Navigation("Item")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
                 {
                     b.Navigation("Hero")
                         .IsRequired();

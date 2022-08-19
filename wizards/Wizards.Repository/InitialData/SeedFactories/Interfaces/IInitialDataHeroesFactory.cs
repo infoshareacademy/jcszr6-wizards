@@ -4,5 +4,6 @@ namespace Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 public interface IInitialDataHeroesFactory
 {
-    List<Hero> GetHeroes();
+    List<Hero> GetRandomTestHeroesWithEquipment();
+    List<Hero> GetAdminModeratorsHeroesWithEquipment();
 }

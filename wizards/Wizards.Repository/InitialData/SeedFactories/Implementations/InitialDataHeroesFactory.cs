@@ -7,7 +7,7 @@ namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 public class InitialDataHeroesFactory : IInitialDataHeroesFactory
 {
-    public List<Hero> GetHeroes()
+    public List<Hero> GetRandomTestHeroesWithEquipment()
     {
         var result = new List<Hero>();
         var rnd = new Random(DateTime.Now.Millisecond);
@@ -242,6 +242,7 @@ public class InitialDataHeroesFactory : IInitialDataHeroesFactory
         result.Add(new Hero { PlayerId = 23, NickName = "Arnfinn Finnbogisen", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 39345, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 138627, TotalMatchPlayed = 13863, TotalMatchLoose = 9016, TotalMatchWin = 4847 } });
         result.Add(new Hero { PlayerId = 30, NickName = "Athelstan Faransson", AvatarImageNumber = 1, Profession = (HeroProfession)0, Gold = 40663, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 117400, TotalMatchPlayed = 11740, TotalMatchLoose = 7261, TotalMatchWin = 4479 } });
         result.Add(new Hero { PlayerId = 15, NickName = "Lucan the Mercenary", AvatarImageNumber = 6, Profession = (HeroProfession)0, Gold = 47122, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 68585, TotalMatchPlayed = 6859, TotalMatchLoose = 4110, TotalMatchWin = 2749 } });
+        result.Add(new Hero { PlayerId = 82, NickName = "Menelaos Tragedy", AvatarImageNumber = 6, Profession = (HeroProfession)0, Gold = 47122, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 168585, TotalMatchPlayed = 16859, TotalMatchLoose = 4110, TotalMatchWin = 12749 } });
 
 
         foreach (var hero in result)
@@ -259,16 +260,25 @@ public class InitialDataHeroesFactory : IInitialDataHeroesFactory
             }
         }
 
+        return result;
+    }
+
+    public List<Hero> GetAdminModeratorsHeroesWithEquipment()
+    {
+        var rnd = new Random(DateTime.Now.Millisecond);
+        var result = new List<Hero>();
+
         // Data for Admin and Moderator Users
-        result.Add(new Hero { PlayerId = 1, NickName = "Saruman", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
-        result.Add(new Hero { PlayerId = 1, NickName = "Tester A", AvatarImageNumber = 7, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
-        result.Add(new Hero { PlayerId = 2, NickName = "Gandalf", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
-        result.Add(new Hero { PlayerId = 2, NickName = "Tester B", AvatarImageNumber = 5, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
-        result.Add(new Hero { PlayerId = 3, NickName = "Dumbledore", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
-        result.Add(new Hero { PlayerId = 3, NickName = "Tester C", AvatarImageNumber = 6, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
-        result.Add(new Hero { PlayerId = 4, NickName = "Grindelwald", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
-        result.Add(new Hero { PlayerId = 4, NickName = "Tester D", AvatarImageNumber = 5, Profession = (HeroProfession)0, Gold = 200000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
-        result.Add(new Hero { PlayerId = 5, NickName = "Moderator A", AvatarImageNumber = 4, Profession = (HeroProfession)1, Gold = 1000000, Attributes = GetNecroAttr(), Statistics = new Statistics() { RankPoints = 0, TotalMatchPlayed = 0, TotalMatchLoose = 0, TotalMatchWin = 0 } });
+        result.Add(new Hero { PlayerId = 1, NickName = "Rockefeller A", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
+        result.Add(new Hero { PlayerId = 1, NickName = "Freshman A", AvatarImageNumber = 7, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
+        result.Add(new Hero { PlayerId = 2, NickName = "Rockefeller B", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
+        result.Add(new Hero { PlayerId = 2, NickName = "Freshman B", AvatarImageNumber = 5, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
+        result.Add(new Hero { PlayerId = 3, NickName = "Rockefeller C", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
+        result.Add(new Hero { PlayerId = 3, NickName = "Freshman C", AvatarImageNumber = 6, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
+        result.Add(new Hero { PlayerId = 4, NickName = "Rockefeller D", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 150000, TotalMatchPlayed = 15000, TotalMatchLoose = 3000, TotalMatchWin = 12000 }, Inventory = GetAdminInventory(rnd) });
+        result.Add(new Hero { PlayerId = 4, NickName = "Freshman D", AvatarImageNumber = 5, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 100, TotalMatchPlayed = 10, TotalMatchLoose = 3, TotalMatchWin = 7 }, Inventory = GetBasicInventory() });
+        result.Add(new Hero { PlayerId = 5, NickName = "Sorcerer A", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetNecroAttr(), Statistics = new Statistics() { RankPoints = 0, TotalMatchPlayed = 0, TotalMatchLoose = 0, TotalMatchWin = 0 } });
+        result.Add(new Hero { PlayerId = 5, NickName = "Necromancer B", AvatarImageNumber = 4, Profession = (HeroProfession)1, Gold = 2000000, Attributes = GetNecroAttr(), Statistics = new Statistics() { RankPoints = 0, TotalMatchPlayed = 0, TotalMatchLoose = 0, TotalMatchWin = 0 } });
 
         return result;
     }
