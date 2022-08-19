@@ -24,6 +24,8 @@ public class HeroRepository : IHeroRepository
             .Include(h => h.Attributes)
             .Include(h => h.Statistics)
             .Include(h => h.Inventory)
+                .ThenInclude(hi => hi.Item)
+                .ThenInclude(i => i.Attributes)
             .SingleOrDefaultAsync(h => h.Id == id);
     }
 

@@ -1,9 +1,7 @@
 ﻿using Wizards.Services.Validation.Elements;
 
-namespace Wizards.Services.Validation.ValidationTasks.Interfaces
+namespace Wizards.Services.Validation.ValidationTasks.Interfaces;
+public interface IDateValidationTask
 {
-    public interface IDateValidationTask
-    {
-        ValidationState Validate(DateTime value);
-    }
+    ValidationState Validate(DateTime value);
 }

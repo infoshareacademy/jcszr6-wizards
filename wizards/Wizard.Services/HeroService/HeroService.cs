@@ -27,7 +27,8 @@ public class HeroService : IHeroService
     {
         await _heroValidator.Validate(hero);
         
-        hero.Gold = 0;
+        hero.Gold = 100;
+        hero.Inventory = _propertiesFactory.GetStartupEquipment(hero.Profession);
         hero.Attributes = _propertiesFactory.GetHeroAttributes(hero.Profession);
         hero.Statistics = _propertiesFactory.GetStatistics();
 
@@ -91,6 +92,45 @@ public class HeroService : IHeroService
     public int GetChangeAvatarCost()
     {
         return 2500;
+    }
+
+    public async Task SpendGold(Hero hero, int goldToSpend)
+    {
+        if (goldToSpend < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(goldToSpend), message: "Gold cannot be less than zero!");
+        }
+
+        if (hero == null)
+        {
+            throw new NullReferenceException("Invalid Hero!");
+        }
+
+        if (hero.Gold - goldToSpend < 0)
+        {
+            var message = new Dictionary<string, string>();
+            message.Add("", "You have not enough gold!");
+            throw new InvalidModelException(message);
+        }
+
+        hero.Gold -= goldToSpend;
+        await _heroRepository.Update(hero);
+    }
+
+    public async Task ClaimGold(Hero hero, int goldToClaim)
+    {
+        if (goldToClaim < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(goldToClaim), message:"Gold cannot be less than zero!");
+        }
+
+        if (hero == null)
+        {
+            throw new NullReferenceException("Invalid Hero!");
+        }
+
+        hero.Gold += goldToClaim;
+        await _heroRepository.Update(hero);
     }
 
     private void ChangeNickName(Hero heroToUpdate, string nickName)

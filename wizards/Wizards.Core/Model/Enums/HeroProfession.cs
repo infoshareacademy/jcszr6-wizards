@@ -1,9 +1,7 @@
-﻿
-namespace Wizards.Core.Model.Enums
+﻿namespace Wizards.Core.Model.Enums;
+
+public enum HeroProfession
 {
-    public enum HeroProfession
-    {
-        Sorcerer = 0,
-        Necromancer,
-    }
+    Sorcerer = 0,
+    Necromancer,
 }

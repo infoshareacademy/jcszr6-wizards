@@ -1,0 +1,37 @@
+﻿@model WizardsWeb.ModelViews.Merchant.HeroStorageModelView
+
+<div class="row">
+    <div class="col-8">
+        <h4>@(Model.HeroNickName)'s Inventory</h4>
+    </div>
+    <div class="col-4 h4">
+        <span>Gold: </span><span>@($"{Model.Gold:#,##0}")</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <ul class="nav nav-pills mb-3" id="pills-hero-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-hero-weapons-tab" data-bs-toggle="pill" data-bs-target="#pills-hero-weapons" type="button" role="tab" aria-controls="pills-hero-weapons" aria-selected="true">Weapons</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-hero-armors-tab" data-bs-toggle="pill" data-bs-target="#pills-hero-armors" type="button" role="tab" aria-controls="pills-hero-armors" aria-selected="false">Armors</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-hero-miscs-tab" data-bs-toggle="pill" data-bs-target="#pills-hero-miscs" type="button" role="tab" aria-controls="pills-hero-miscs" aria-selected="false">Miscs</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="pills-hero-tabContent">
+            <div class="tab-pane fade show active" id="pills-hero-weapons" role="tabpanel" aria-labelledby="pills-hero-weapons-tab" tabindex="0">
+                <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Weapons" />
+            </div>
+            <div class="tab-pane fade" id="pills-hero-armors" role="tabpanel" aria-labelledby="pills-hero-armors-tab" tabindex="0">
+                <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Armors" />
+            </div>
+            <div class="tab-pane fade" id="pills-hero-miscs" role="tabpanel" aria-labelledby="pills-hero-miscs-tab" tabindex="0">
+                <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Miscellaneous" />
+            </div>
+        </div>
+    </div>
+</div>

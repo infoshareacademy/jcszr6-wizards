@@ -1,124 +1,92 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Wizards.Core.Model;
 using Wizards.Services.ItemService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.ItemModelViews;
 
-namespace WizardsWeb.Controllers
+namespace WizardsWeb.Controllers;
+
+[Authorize(Roles = "Admin, Moderator")]
+public class ItemController : Controller
 {
-    public class ItemController : Controller
+    private readonly IItemService _itemService;
+    private readonly IMapper _mapper;
+
+    public ItemController(IItemService itemService, IMapper mapper)
     {
-        private readonly IItemService _itemService;
-        private readonly IMapper _mapper;
+        _itemService = itemService;
+        _mapper = mapper;
+    }
 
-        public ItemController(IItemService itemService, IMapper mapper)
-        {
-            _itemService = itemService;
-            _mapper = mapper;
-        }
-        // GET: ItemController
-        public ActionResult Index()
-        {
-            return View();
-        }
+    // GET: ItemController/Create
+    public ActionResult Create()
+    {
+        return View();
+    }
 
-        // GET: ItemController/Details/5
-        public ActionResult Details(int id)
+    // POST: ItemController/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Create(ItemCreateModelView itemCreate)
+    {
+        if (!ModelState.IsValid)
         {
-            return View();
-        }
-
-        // GET: ItemController/Create
-        public ActionResult Create()
-        {
-            return View();
+            return View(itemCreate);
         }
 
-        // POST: ItemController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ItemCreateModelView itemCreate)
+        var item = _mapper.Map<Item>(itemCreate);
+
+        try
         {
-            if (!ModelState.IsValid)
+            await _itemService.Add(item);
+            return RedirectToAction("Index", "Merchant");
+        }
+        catch (InvalidModelException exception)
+        {
+            foreach (var data in exception.ModelStatesData)
             {
-                return View(itemCreate);
+                ModelState.AddModelError(data.Key, data.Value);
             }
 
-            var item = _mapper.Map<Item>(itemCreate);
-
-            try
-            {
-                await _itemService.Add(item);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (InvalidModelException exception)
-            {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
-                return View(itemCreate);
-            }
+            return View(itemCreate);
         }
-        // GET: ItemController/Edit/5
-        public async Task<ActionResult> Edit(int id)
+    }
+    // GET: ItemController/Edit/5
+    public async Task<ActionResult> Edit(int id)
+    {
+        var item = await _itemService.Get(id);
+        var itemEdit = _mapper.Map<ItemEditModelView>(item);
+        return View(itemEdit);
+    }
+
+    // POST: ItemController/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Edit(ItemEditModelView itemEdit)
+    {
+        if (!ModelState.IsValid)
         {
-            var item = await _itemService.Get(id);
-            var itemEdit = _mapper.Map<ItemEditModelView>(item);
             return View(itemEdit);
         }
 
-        // POST: ItemController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ItemEditModelView itemEdit)
+        var item = _mapper.Map<Item>(itemEdit);
+
+        try
         {
-            if (!ModelState.IsValid)
-            {
-                return View(itemEdit);
-            }
-
-            var item = _mapper.Map<Item>(itemEdit);
-
-            try
-            {
-                await _itemService.Update(item);
-                return RedirectToAction(nameof(Index));
-            }
-            catch (InvalidModelException exception)
-            {
-                foreach (var data in exception.ModelStatesData)
-                {
-                    ModelState.AddModelError(data.Key, data.Value);
-                }
-
-                return View(itemEdit);
-            }
+            await _itemService.Update(item);
+            return RedirectToAction("Index", "Merchant");
         }
-
-        // GET: ItemController/Delete/5
-        public ActionResult Delete(int id)
+        catch (InvalidModelException exception)
         {
-            return View();
-        }
+            foreach (var data in exception.ModelStatesData)
+            {
+                ModelState.AddModelError(data.Key, data.Value);
+            }
 
-        // POST: ItemController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View(itemEdit);
         }
     }
 }

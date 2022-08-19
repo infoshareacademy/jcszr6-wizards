@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
-namespace WizardsWeb.ModelViews;
+namespace WizardsWeb.ModelViews.HeroModelViews;
 
 public class HeroEditModelView
 {
+    public int Id { get; set; }
+    
     [Required]
     [MinLength(3)]
     [MaxLength(20)]
@@ -14,8 +15,7 @@ public class HeroEditModelView
     [Required]
     public int AvatarImageNumber { get; set; }
 
+    
     public int Cost { get; set; }
     public int Gold { get; set; }
-
-    public HeroEditModelView() { }
 }

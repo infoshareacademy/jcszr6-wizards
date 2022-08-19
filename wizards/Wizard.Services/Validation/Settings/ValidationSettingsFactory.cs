@@ -2,19 +2,19 @@
 using Wizards.Services.Validation.ValidationTasks;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
-namespace Wizards.Services.Validation.Settings
-{
-    public static class ValidationSettingsFactory
-    {
-        private static PlayerValidationSettings _playerSettings;
-        private static HeroValidationSettings _heroSettings;
-        private static ItemValidationSettings _itemSettings;
+namespace Wizards.Services.Validation.Settings;
 
-        static ValidationSettingsFactory()
+public static class ValidationSettingsFactory
+{
+    private static PlayerValidationSettings _playerSettings;
+    private static HeroValidationSettings _heroSettings;
+    private static ItemValidationSettings _itemSettings;
+
+    static ValidationSettingsFactory()
+    {
+        _playerSettings = new PlayerValidationSettings()
         {
-            _playerSettings = new PlayerValidationSettings()
-            {
-                UserNameTasks = new List<IStringValidationTask>()
+            UserNameTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
                     new StringMinLength(3),
@@ -22,30 +22,30 @@ namespace Wizards.Services.Validation.Settings
                     new RestrictedWords(),
                     new AllowedCharacters("abcdefghijklmnopqrstuvwxyz1234567890-_"),
                 },
-                AlredyInUseTask = new AlredyInUse(),
-                PasswordTasks = new List<IStringValidationTask>()
+            AlredyInUseTask = new AlredyInUse(),
+            PasswordTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
                     new StringMinLength(8),
                     new AllowedCharacters("abcdefghijklmnopqrstuvwxyz1234567890,.;:?!'@#$%^&*()_+-=`~"),
                     new IsPasswordHardEnough()
                 },
-                EmailTasks = new List<IStringValidationTask>()
+            EmailTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
                     new IsEmail(),
                     new RestrictedWords()
                 },
-                DateOfBirthTasks = new List<IDateValidationTask>()
+            DateOfBirthTasks = new List<IDateValidationTask>()
                 {
                     new DateMin(new DateTime(1900, 1, 1)),
                     new RestrictedAge(10)
                 }
-            };
+        };
 
-            _heroSettings = new HeroValidationSettings()
-            {
-                NickNameTasks = new List<IStringValidationTask>()
+        _heroSettings = new HeroValidationSettings()
+        {
+            NickNameTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
                     new StringMinLength(3),
@@ -53,20 +53,20 @@ namespace Wizards.Services.Validation.Settings
                     new RestrictedWords(),
                     new AllowedCharacters("abcdefghijklmnoprstuvwxyz ")
                 },
-                AvatarTasks = new List<INumberValidationTask>()
+            AvatarTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(1, 7)
                 },
-                ProfessionTasks = new List<INumberValidationTask>()
+            ProfessionTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 1)
                 },
-                AlredyInUseTask = new AlredyInUse()
-            };
+            AlredyInUseTask = new AlredyInUse()
+        };
 
-            _itemSettings = new ItemValidationSettings()
-            {
-                NameTasks = new List<IStringValidationTask>()
+        _itemSettings = new ItemValidationSettings()
+        {
+            NameTasks = new List<IStringValidationTask>()
                 {
                     new IsNull(),
                     new StringMinLength(3),
@@ -74,67 +74,66 @@ namespace Wizards.Services.Validation.Settings
                     new RestrictedWords(),
                     new AllowedCharacters("abcdefghijklmnoprstuvwxyz ()-+=/:")
                 },
-                TypeTasks = new List<INumberValidationTask>()
+            TypeTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 10)
                 },
-                RestrictionsTasks = new List<INumberValidationTask>()
+            RestrictionsTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 10)
                 },
-                TierTasks = new List<INumberValidationTask>()
+            TierTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(1, 5)
                 },
-                BuyPriceTasks = new List<INumberValidationTask>()
+            BuyPriceTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 100_000)
                 },
-                SellPriceTasks = new List<INumberValidationTask>()
+            SellPriceTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 100_000)
                 },
-                DamageTasks = new List<INumberValidationTask>()
+            DamageTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(-10, 50)
                 },
-                PrecisionTasks = new List<INumberValidationTask>()
+            PrecisionTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(-10, 50)
                 },
-                SpecializationTasks = new List<INumberValidationTask>()
+            SpecializationTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(-10, 50)
                 },
-                MaxHealthTasks = new List<INumberValidationTask>()
+            MaxHealthTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(0, 500)
                 },
-                ReflexTasks = new List<INumberValidationTask>()
+            ReflexTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(-10, 50)
                 },
-                DefenseTasks = new List<INumberValidationTask>()
+            DefenseTasks = new List<INumberValidationTask>()
                 {
                     new NumberRange(-10, 50)
                 },
-                AlredyInUseTask = new AlredyInUse()
-            };
-        }
+            AlredyInUseTask = new AlredyInUse()
+        };
+    }
 
-        public static PlayerValidationSettings GetPlayersValidationSettings()
-        {
-            return _playerSettings;
-        }
+    public static PlayerValidationSettings GetPlayersValidationSettings()
+    {
+        return _playerSettings;
+    }
 
-        public static HeroValidationSettings GetHeroValidationSettings()
-        {
-            return _heroSettings;
-        }
+    public static HeroValidationSettings GetHeroValidationSettings()
+    {
+        return _heroSettings;
+    }
 
-        public static ItemValidationSettings GetItemValidationSettings()
-        {
-            return _itemSettings;
-        }
+    public static ItemValidationSettings GetItemValidationSettings()
+    {
+        return _itemSettings;
     }
 }

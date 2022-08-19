@@ -6,231 +6,225 @@ using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
 using Wizards.Services.HeroService;
 using Wizards.Services.Helpers;
-using WizardsWeb.ModelViews;
-using WizardsWeb.ModelViews.Properties;
+using WizardsWeb.ModelViews.HeroModelViews;
 
-namespace WizardsWeb.Controllers
+namespace WizardsWeb.Controllers;
+[Authorize]
+public class HeroController : Controller
 {
-    [Authorize]
-    public class HeroController : Controller
+    private readonly IHeroService _heroService;
+    private readonly IMapper _mapper;
+
+    public HeroController(IHeroService heroService, IMapper mapper)
     {
-        private readonly IHeroService _heroService;
-        private readonly IMapper _mapper;
+        _heroService = heroService;
+        _mapper = mapper;
+    }
 
-        public HeroController(IHeroService heroService, IMapper mapper)
+    // GET: HeroController/Details/5
+    public async Task<ActionResult> Details()
+    {
+        try
         {
-            _heroService = heroService;
-            _mapper = mapper;
+            var hero = await _heroService.Get(User);
+            var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
+            return View(heroDetails);
+        }
+        catch
+        {
+            return RedirectToAction("Details", "Player");
+        }
+    }
+
+    // GET: HeroController/Create
+    public ActionResult StartCreation()
+    {
+        var model = new HeroCreateModelView();
+        return View("SetProfession", model);
+    }
+
+    public ActionResult SetProfessionView(HeroCreateModelView heroCreate)
+    {
+        ModelState.Clear();
+        return View("SetProfession", heroCreate);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult SetProfession(HeroCreateModelView heroCreate)
+    {
+        ModelState.Clear();
+        return View("SetAvatar", heroCreate);
+    }
+
+    public ActionResult SetAvatarView(HeroCreateModelView heroCreate)
+    {
+        ModelState.Clear();
+        return View("SetAvatar", heroCreate);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public ActionResult SetAvatar(HeroCreateModelView heroCreate)
+    {
+        ModelState.Clear();
+        return View("Create", heroCreate);
+    }
+
+    // POST: HeroController/Create
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Create(HeroCreateModelView heroCreate)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(heroCreate);
         }
 
-        // GET: HeroController/Details/5
-        public async Task<ActionResult> Details()
+        var hero = _mapper.Map<Hero>(heroCreate);
+
+        try
         {
-            try
-            {
-                var hero = await _heroService.Get(User);
-                var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
-                heroDetails.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-                return View(heroDetails);
-            }
-            catch
-            {
-                return RedirectToAction("Details", "Player");
-            }
+            await _heroService.Add(User, hero);
+            return RedirectToAction("SelectHero", "Selector", new { id = hero.Id, actionName = "Details" });
         }
-
-        // GET: HeroController/Create
-        public ActionResult StartCreation()
+        catch (Exception exception)
         {
-            var model = new HeroCreateModelView();
-            return View("SetProfession", model);
+            ModelState.AddModelErrorByException(exception);
+            return View(heroCreate);
         }
+    }
 
-        public ActionResult SetProfessionView(HeroCreateModelView heroCreate)
+    // GET: HeroController/Edit/5
+    public async Task<ActionResult> EditNickName()
+    {
+        try
         {
-            ModelState.Clear();
-            return View("SetProfession", heroCreate);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SetProfession(HeroCreateModelView heroCreate)
-        {
-            ModelState.Clear();
-            return View("SetAvatar", heroCreate);
-        }
-
-        public ActionResult SetAvatarView(HeroCreateModelView heroCreate)
-        {
-            ModelState.Clear();
-            return View("SetAvatar", heroCreate);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult SetAvatar(HeroCreateModelView heroCreate)
-        {
-            ModelState.Clear();
-            return View("Create", heroCreate);
-        }
-
-        // POST: HeroController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(HeroCreateModelView heroCreate)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(heroCreate);
-            }
-
-            var hero = _mapper.Map<Hero>(heroCreate);
-
-            try
-            {
-                await _heroService.Add(User, hero);
-                return RedirectToAction("SelectHero", "Selector", new { id = hero.Id, actionName = "Details" });
-            }
-            catch (Exception exception)
-            {
-                ModelState.AddModelErrorByException(exception);
-                return View(heroCreate);
-            }
-        }
-
-        // GET: HeroController/Edit/5
-        public async Task<ActionResult> EditNickName()
-        {
-            try
-            {
-                var hero = await _heroService.Get(User);
-                var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-                heroEdit.Cost = _heroService.GetChangeNickNameCost();
-                return View(heroEdit);
-            }
-            catch
-            {
-                return RedirectToAction("Details", "Player");
-            }
-        }
-
-        // POST: HeroController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditNickName(HeroEditModelView heroEdit)
-        {
-            var newNickName = heroEdit.NickName;
-            var originalHero = await _heroService.Get(User);
-
-            heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
-            heroEdit.NickName = newNickName;
+            var hero = await _heroService.Get(User);
+            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
             heroEdit.Cost = _heroService.GetChangeNickNameCost();
+            return View(heroEdit);
+        }
+        catch
+        {
+            return RedirectToAction("Details", "Player");
+        }
+    }
 
-            if (!ModelState.IsValid)
-            {
-                return View(heroEdit);
-            }
+    // POST: HeroController/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> EditNickName(HeroEditModelView heroEdit)
+    {
+        var newNickName = heroEdit.NickName;
+        var originalHero = await _heroService.Get(User);
 
-            var hero = _mapper.Map<Hero>(heroEdit);
+        heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
+        heroEdit.NickName = newNickName;
+        heroEdit.Cost = _heroService.GetChangeNickNameCost();
 
-            try
-            {
-                await _heroService.Update(originalHero.Id, hero);
-                return RedirectToAction(nameof(Details));
-            }
-            catch (Exception exception)
-            {
-                ModelState.AddModelErrorByException(exception);
-                return View(heroEdit);
-            }
+        if (!ModelState.IsValid)
+        {
+            return View(heroEdit);
         }
 
-        // GET: HeroController/Edit/5
-        public async Task<ActionResult> EditAvatar(int id)
+        var hero = _mapper.Map<Hero>(heroEdit);
+
+        try
         {
-            try
-            {
-                var hero = await _heroService.Get(User);
-                var heroEdit = _mapper.Map<HeroEditModelView>(hero);
-                heroEdit.Cost = _heroService.GetChangeAvatarCost();
-                return View(heroEdit);
-            }
-            catch
-            {
-                return RedirectToAction("Details", "Player");
-            }
+            await _heroService.Update(originalHero.Id, hero);
+            return RedirectToAction(nameof(Details));
+        }
+        catch (Exception exception)
+        {
+            ModelState.AddModelErrorByException(exception);
+            return View(heroEdit);
+        }
+    }
+
+    // GET: HeroController/Edit/5
+    public async Task<ActionResult> EditAvatar(int id)
+    {
+        try
+        {
+            var hero = await _heroService.Get(User);
+            var heroEdit = _mapper.Map<HeroEditModelView>(hero);
+            heroEdit.Cost = _heroService.GetChangeAvatarCost();
+            return View(heroEdit);
+        }
+        catch
+        {
+            return RedirectToAction("Details", "Player");
+        }
+    }
+
+    // POST: HeroController/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> EditAvatar(HeroEditModelView heroEdit)
+    {
+        var newAvatarNumber = heroEdit.AvatarImageNumber;
+        var originalHero = await _heroService.Get(User);
+
+        heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
+        heroEdit.AvatarImageNumber = newAvatarNumber;
+        heroEdit.Cost = _heroService.GetChangeNickNameCost();
+
+        ModelState.Clear();
+
+        var hero = _mapper.Map<Hero>(heroEdit);
+
+        try
+        {
+            await _heroService.Update(originalHero.Id, hero);
+            return RedirectToAction(nameof(Details));
+        }
+        catch (Exception exception)
+        {
+            ModelState.AddModelErrorByException(exception);
+            return View(heroEdit);
+        }
+    }
+
+    // GET: HeroController/Delete/5
+    public async Task<ActionResult> Delete(int id)
+    {
+        try
+        {
+            var hero = await _heroService.Get(User);
+            var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
+            return View(heroDelete);
+        }
+        catch
+        {
+            return RedirectToAction("Details", "Player");
+        }
+    }
+
+    // POST: HeroController/Delete/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
+    {
+        var originalHero = await _heroService.Get(User);
+        var confirmNickName = heroDelete.ConfirmNickName;
+
+        heroDelete = _mapper.Map<HeroDeleteModelView>(originalHero);
+
+        if (!ModelState.IsValid)
+        {
+            return View(heroDelete);
         }
 
-        // POST: HeroController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditAvatar(HeroEditModelView heroEdit)
+        try
         {
-            var newAvatarNumber = heroEdit.AvatarImageNumber;
-            var originalHero = await _heroService.Get(User);
-
-            heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
-            heroEdit.AvatarImageNumber = newAvatarNumber;
-            heroEdit.Cost = _heroService.GetChangeNickNameCost();
-
-            ModelState.Clear();
-
-            var hero = _mapper.Map<Hero>(heroEdit);
-
-            try
-            {
-                await _heroService.Update(originalHero.Id, hero);
-                return RedirectToAction(nameof(Details));
-            }
-            catch (Exception exception)
-            {
-                ModelState.AddModelErrorByException(exception);
-                return View(heroEdit);
-            }
+            await _heroService.Delete(originalHero.Id, confirmNickName);
+            return RedirectToAction(nameof(Details), "Player");
         }
-
-        // GET: HeroController/Delete/5
-        public async Task<ActionResult> Delete(int id)
+        catch (Exception exception)
         {
-            try
-            {
-                var hero = await _heroService.Get(User);
-                var heroDelete = _mapper.Map<HeroDeleteModelView>(hero);
-                heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(hero);
-                return View(heroDelete);
-            }
-            catch
-            {
-                return RedirectToAction("Details", "Player");
-            }
-        }
-
-        // POST: HeroController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(HeroDeleteModelView heroDelete)
-        {
-            var originalHero = await _heroService.Get(User);
-            var confirmNickName = heroDelete.ConfirmNickName;
-
-            heroDelete = _mapper.Map<HeroDeleteModelView>(originalHero);
-            heroDelete.Basics = _mapper.Map<HeroBasicsModelView>(originalHero);
-
-            if (!ModelState.IsValid)
-            {
-                return View(heroDelete);
-            }
-
-            try
-            {
-                await _heroService.Delete(originalHero.Id, confirmNickName);
-                return RedirectToAction(nameof(Details), "Player");
-            }
-            catch (Exception exception)
-            {
-                ModelState.AddModelErrorByException(exception);
-                return View(heroDelete);
-            }
+            ModelState.AddModelErrorByException(exception);
+            return View(heroDelete);
         }
     }
 }

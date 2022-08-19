@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Wizards.Core.Model.Enums;
 
-
-namespace WizardsWeb.ModelViews;
+namespace WizardsWeb.ModelViews.HeroModelViews;
 
 public class HeroCreateModelView
 {
@@ -17,6 +16,4 @@ public class HeroCreateModelView
     
     [Required]
     public int AvatarImageNumber { get; set; }
-
-    public HeroCreateModelView() { }
 }

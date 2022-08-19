@@ -1,47 +1,42 @@
-﻿@using WizardsWeb.ModelViews.RankingModelViews
-@model WizardsWeb.ModelViews.RankingModelViews.RankingModelViews
-
+﻿@model WizardsWeb.ModelViews.RankingModelViews.RankingModelViews
 
 @{
     ViewData["Title"] = "Index";
 }
 <p>
-    <a asp-action="Index">All Players</a>
+    <a class="btn btn-primary" asp-action="Index">All Players</a>
 </p>
 
 <h1>Search user</h1>
 
 <div class="row">
-    
-
     <div class="col-md-4">
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" placeholder="User name"/>
+                <input asp-for="UserName" class="form-control" placeholder="User name" />
                 <span asp-validation-for="UserName" class="text-danger"></span>
             </div>
-         
+
             <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-warning"/>
+                <input type="submit" value="Search" class="btn btn-warning" />
             </div>
         </form>
     </div>
-    
+
     <div class="col-md-4">
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" placeholder="mail@wizard.com"/>
+                <input asp-for="Email" class="form-control" placeholder="mail@wizard.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-
             <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-warning"/>
+                <input type="submit" value="Search" class="btn btn-warning" />
             </div>
         </form>
     </div>
@@ -49,7 +44,7 @@
     <div class="col-md-4">
         <form asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="form-group">
                 <label asp-for="FromRankPoints" class="control-label"></label>
                 <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
@@ -57,61 +52,59 @@
             </div>
 
             <div class="form-group">
-
-                <input asp-for="ToRankPoints" class="form-control" placeholder="To"/>
+                <input asp-for="ToRankPoints" class="form-control" placeholder="To" />
                 <span asp-validation-for="ToRankPoints" class="text-danger"></span>
             </div>
 
-
             <div class="form-group">
-                <input type="submit" value="Search" class="btn btn-warning"/>
+                <input type="submit" value="Search" class="btn btn-warning" />
             </div>
         </form>
     </div>
-    
 </div>
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
-               
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
+
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+            </th>
+            <th class="text-right">
+                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.PlayerDetailsDto) {
-        <tr>
-            <td>
-                @item.UserName
-            </td>
-            <td>
-                @item.Email
-            </td>
-            <td>
-                @item.HeroNumber
-            </td>
-            <td>
-                @item.RankNumber
-            </td>
-            <td>
-                @item.GoldHeroNumber
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model.PlayerDetailsDto)
+        {
+            <tr>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td class="text-center">
+                    @item.HeroNumber
+                </td>
+                <td class="text-right">
+                    @($"{item.RankNumber:#,##0}")
+                </td>
+                <td class="text-right">
+                    @($"{item.GoldHeroNumber:#,##0}")
+                </td>
+            </tr>
+        }
     </tbody>
-    </table>
+</table>

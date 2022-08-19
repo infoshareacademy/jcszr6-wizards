@@ -11,4 +11,6 @@ public interface IHeroService
     Task<Hero> Get(ClaimsPrincipal user);
     int GetChangeNickNameCost();
     int GetChangeAvatarCost();
+    Task SpendGold(Hero hero, int goldToSpend);
+    Task ClaimGold(Hero hero, int goldToClaim);
 }
