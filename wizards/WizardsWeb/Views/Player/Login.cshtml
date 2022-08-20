@@ -4,33 +4,66 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-<hr/>
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<section class="h-100 gradient-form">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                    <div class="col-lg-6">
+                        <div class="card-body p-md-5 mx-md-4">
 
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+                            <div class="text-center">
+                                <img src="~/Images/logo.png" class="img-responsive" alt="Site Logo" style="height:30%; width:30%" />
+                                <h4 class="mt-1 mb-5 pb-1">We are The Wizards Team</h4>
+                            </div>
+
+                            <form asp-action="Login">
+                                <p>Please login to your account</p>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Password" class="control-label"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+
+                                <div class="text-center pt-1 mb-5 pb-1">
+                                    <input type="submit" class="btn btn-outline-primary btn-block mb-4" value="Login" />
+
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-center pb-4">
+                                    <p class="mb-0 me-2 mx-2">Don't have an account?</p>
+                                    <br />
+                                    <div>
+                                        <a class="btn btn-outline-warning" id="register" asp-controller="Player" asp-action="Create">Register</a>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                        <img src="~/Images/Tapeta-1B.jpg" alt="Site Logo" style="height:100%; width: 100%;" />
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
+
+
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

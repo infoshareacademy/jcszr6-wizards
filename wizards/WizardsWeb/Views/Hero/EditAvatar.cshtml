@@ -4,34 +4,76 @@
     ViewData["Title"] = "Edit Avatar";
 }
 
-<h3>Edit Hero's Avatar</h3>
-<form asp-action="EditAvatar">
-    <hr/>
-    <span>This operation costs: </span><span class="font-weight-bold">@($"{Model.Cost:##,##0}")</span><span> gold!</span><br />
-    <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br/>
-    <span asp-validation-for="AvatarImageNumber" class="text-danger font-weight-bold"></span>
-    <hr/>
-    <div class="row">
-        @for (int i = 1; i <= 7; i++)
-        {
-            var image = $"Images/Hero/Avatars/Wizard-{i}.png";
-            <div class="col-sm-3">
-                <div class="row" align="center">
-                    <img src="~/@image" width="210" height="280"/>
-                </div>
-                <div class="row">
-                    <div align="center"><input asp-for="AvatarImageNumber" type="radio" value="@i"/></div>
-                </div>
-            </div>
+<header>
+    <style>
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 3px solid #f00;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</header>
+
+<div class="row">
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h4 class="my-0 font-weight-bold">
+                        Edit Hero's Avatar
+                    </h4>
+                </div>
+            </li>
+        </ul>
+        <br />
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <form asp-action="EditAvatar">
+                    <hr />
+                    <span>This operation costs: </span><span class="font-weight-bold">@($"{Model.Cost:##,##0}")</span><span> gold!</span><br />
+                    <span>Your balance: </span><span class="font-weight-bold">@($"{Model.Gold:##,##0}")</span><span> gold</span><br />
+                    <span asp-validation-for="AvatarImageNumber" class="text-danger font-weight-bold"></span>
+                    <hr />
+                    <div class="row">
+                        @for (int i = 1; i <= 7; i++)
+                        {
+                            var image = $"Images/Hero/Avatars/Wizard-{i}.png";
+                            <div class="col-sm-3">
+                                <div>
+                                    <label>
+                                        <input asp-for="AvatarImageNumber" type="radio" value="@i"/>
+                                        <img class="p-1" src="~/@image" width="80%" height="80%"/>
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <hr />
+                    <div class="btn-group btn-block">
+                        <a type="button" class="btn btn-outline-warning" asp-action="Details">Back to Details</a>
+                        <input type="submit" value="Set Avatar" class="btn btn-outline-primary" />
+                    </div>
+                </form>
+            </li>
+        </ul>
     </div>
-    <hr/>
-    <div class="btn-group">
-        <a type="button" class="btn btn-warning" asp-action="Details">Back to Details</a>
-        <input type="submit" value="Set Avatar" class="btn btn-primary"/>
-    </div>
-</form>
+</div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

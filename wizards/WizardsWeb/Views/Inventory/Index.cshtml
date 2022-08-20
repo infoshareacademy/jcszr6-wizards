@@ -4,42 +4,66 @@
     ViewData["Title"] = "Inventory";
 }
 
-<h2>@(Model.HeroNickName)'s Inventory</h2>
-<hr />
 <div class="row">
-    <div class="col-6">
-        <div class="btn-group">
-            <a class="btn btn-warning" asp-controller="Hero" asp-action="Details">Back to Hero</a>
-            <a class="btn btn-warning" asp-controller="Merchant" asp-action="Index">Go to Merchant</a>
-        </div>
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item justify-content-between bg-paper-color">
+                <div>
+                    <h4 class="my-0 font-weight-bold text-center">
+                        @(Model.HeroNickName)'s Inventory
+                    </h4>
+                </div>
+            </li>
+            <li class="list-group-item justify-content-between bg-paper-color">
+                <div class="btn-group btn-block">
+                    <a class="btn btn-outline-warning" asp-controller="Hero" asp-action="Details">Back to Hero</a>
+                    <a class="btn btn-outline-warning" asp-controller="Merchant" asp-action="Index">Go to Merchant</a>
+                </div>
+            </li>
+        </ul>
+        <br />
     </div>
 </div>
-<hr />
+
+
 <div class="row">
     <div asp-validation-summary="ModelOnly" id="myCustomSummary" class="col-12 alert alert-danger h2 text-center p-3" style="list-style-type: none;"></div>
 </div>
 
+
 <div class="row">
-    <div class="col-8">
-        <h3>Equipment</h3>
-        <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Equipped"/>
-        <hr/>
-        <partial name="_Inventory" model="@Model"/>
-        <hr/>
+    <div class="col-md-8">
+        <ul class="list-group">
+            <li class="list-group-item justify-content-between">
+                <div>
+                    <h4>Equipment</h4>
+                    <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Equipped" />
+                    <hr />
+                    <partial name="_Inventory" model="@Model" />
+                    <hr />
+                </div>
+            </li>
+        </ul>
     </div>
-    <div class="col-4">
-        <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary"/>
-        <br/>
-        <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes"/>
+
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item justify-content-between">
+                <div>
+                    <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary"/>
+                    <br/>
+                    <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes"/>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 
-<script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" 
-    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" 
-    crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous">
 </script>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+<partial name="_ValidationScriptsPartial" />
+        }

@@ -18,4 +18,20 @@ public class HeroAttributesModelView
     public int MaxHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
+
+    public string GetAttributeValueColor(int value)
+    {
+        var color = "text-dark";
+
+        if (value > 0)
+        {
+            color = "text-success";
+        }
+        else if (value < 0)
+        {
+            color = "text-danger";
+        }
+
+        return color;
+    }
 }

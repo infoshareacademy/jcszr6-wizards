@@ -5,52 +5,69 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete Player's Account</h2>
-<br />
-<div class="alert alert-danger font-weight-bold">
-    <h3>Are you sure you want to delete your Player account?</h3>
-    <h4>All created characters and progress made on this account will be lost!</h4>
-</div>
-<hr />
-<div class="col-md-5">
-    <dl class="row">
-        <dt class="col-sm-5">
-            <label asp-for="UserName"></label>
-        </dt>
-        <dd class="col-sm-5">
-            @Model.UserName
-        </dd>
-        <dt class="col-sm-5">
-            <label asp-for="Email"></label>
-        </dt>
-        <dd class="col-sm-5">
-            @Model.Email
-        </dd>
-        <dt class="col-sm-5">
-            <label asp-for="DateOfBirth"></label>
-        </dt>
-        <dd class="col-sm-5">
-            @Model.DateOfBirth.Date.ToString("d")
-        </dd>
-        <dt class="col-sm-5">
-            <label asp-for="HeroesCount"></label>
-        </dt>
-        <dd class="col-sm-5">
-            @Model.HeroesCount
-        </dd>
+<div class="row">
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h4 class="my-0 font-weight-bold">
+                        Delete Player's Account
+                    </h4>
+                </div>
+            </li>
+        </ul>
+        <br />
 
-    </dl>
-</div>
-<div class="col-md-5">
-    <form asp-action="Delete">
-        <div class="form-group">
-            <label asp-for="PasswordConfirm" class="control-label"></label>
-            <input asp-for="PasswordConfirm" class="form-control" />
-            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+        <div class="alert alert-danger text-danger font-weight-bold text-center">
+            <h3>Are you sure you want to delete your Player account?</h3>
+            <h4>All created characters and progress made on this account will be lost!</h4>
         </div>
-        <div class="btn-group">
-            <a type="button" class="btn btn-success" asp-action="Edit">Cancel</a>
-            <input type="submit" value="Delete Account" class="btn btn-danger" />
-        </div>
-    </form>
+
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div class="col-md-5">
+                    <dl class="row">
+                        <dt class="col-sm-5">
+                            <label asp-for="UserName"></label>
+                        </dt>
+                        <dd class="col-sm-5">
+                            @Model.UserName
+                        </dd>
+                        <dt class="col-sm-5">
+                            <label asp-for="Email"></label>
+                        </dt>
+                        <dd class="col-sm-5">
+                            @Model.Email
+                        </dd>
+                        <dt class="col-sm-5">
+                            <label asp-for="DateOfBirth"></label>
+                        </dt>
+                        <dd class="col-sm-5">
+                            @Model.DateOfBirth.Date.ToString("d")
+                        </dd>
+                        <dt class="col-sm-5">
+                            <label asp-for="HeroesCount"></label>
+                        </dt>
+                        <dd class="col-sm-5">
+                            @Model.HeroesCount
+                        </dd>
+
+                    </dl>
+                </div>
+                <div class="col-md-5">
+                    <form asp-action="Delete">
+                        <div class="form-group">
+                            <label asp-for="PasswordConfirm" class="control-label font-weight-bold"></label>
+                            <input asp-for="PasswordConfirm" class="form-control" />
+                            <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                        </div>
+                        <div class="btn-group btn-block">
+                            <a type="button" class="btn btn-outline-success" asp-action="Edit">Cancel</a>
+                            <input type="submit" value="Delete Account" class="btn btn-outline-danger" />
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>

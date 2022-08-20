@@ -76,3 +76,24 @@ body {
 .flex-shrink-0 {
     flex-shrink: 0 !important;
 }
+
+
+/*******/
+
+/* HIDE RADIO */
+/*[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+     IMAGE STYLES 
+    [type=radio] + png {
+        cursor: pointer;
+    }
+
+     CHECKED STYLES 
+    [type=radio]:checked + png {
+        outline: 2px solid #f00;
+    }*/

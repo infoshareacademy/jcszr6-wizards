@@ -28,6 +28,7 @@ public class HeroController : Controller
         {
             var hero = await _heroService.Get(User);
             var heroDetails = _mapper.Map<HeroDetailsModelView>(hero);
+            heroDetails.Basics.ShowButtons = true;
             return View(heroDetails);
         }
         catch
@@ -39,7 +40,7 @@ public class HeroController : Controller
     // GET: HeroController/Create
     public ActionResult StartCreation()
     {
-        var model = new HeroCreateModelView();
+        var model = new HeroCreateModelView(){AvatarImageNumber = 1};
         return View("SetProfession", model);
     }
 
@@ -168,7 +169,7 @@ public class HeroController : Controller
 
         heroEdit = _mapper.Map<HeroEditModelView>(originalHero);
         heroEdit.AvatarImageNumber = newAvatarNumber;
-        heroEdit.Cost = _heroService.GetChangeNickNameCost();
+        heroEdit.Cost = _heroService.GetChangeAvatarCost();
 
         ModelState.Clear();
 

@@ -1,35 +1,56 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model WizardsWeb.ModelViews.PlayerModelViews.PlayerEditModelView
 
-<h3>Edit Player's Profile</h3>
-<h5>@Model.UserName</h5>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
-        <a type="button" class="btn btn-primary" asp-action="EditPassword">Edit Password</a><br/><br/>
-        <a type="button" class="btn btn-danger" asp-action="Delete">Delete Account</a><br/><br/>
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control"/>
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control"/>
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="btn-group">
-                <a class="btn btn-warning" asp-action="Details">Back To Details</a>
-                <input type="submit" value="Save Changes" class="btn btn-primary"/>
-            </div>
-        </form>
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h4 class="my-0 font-weight-bold">
+                        Edit Player's Profile
+                    </h4>
+                    <hr />
+                    <h3>@Model.UserName</h3>
+                </div>
+            </li>
+        </ul>
+        <br />
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div class="col-md-12">
+                    <form asp-action="Edit">
+                        <div class="col-md-4">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label font-weight-bold"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DateOfBirth" class="control-label font-weight-bold"></label>
+                                <input asp-for="DateOfBirth" class="form-control" />
+                                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="btn-group btn-block">
+                            <a type="button" class="btn btn-outline-primary" asp-action="EditPassword">Edit Password</a>
+                            <a type="button" class="btn btn-outline-danger" asp-action="Delete">Delete Account</a>
+                            <a class="btn btn-outline-warning" asp-action="Details">Back to Players card information</a>
+                            <input type="submit" value="Save Changes" class="btn btn-outline-info" />
+                        </div>
+
+                    </form>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
-<br/>
-<hr/>
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -4,53 +4,108 @@
 @{
     ViewData["Title"] = "Set Profession";
 }
+<header>
+    <style>
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
 
-<h1>Create New Hero</h1>
-<br />
-<h3>Choose Profession of your hero</h3>
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
 
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 4px solid #f00;
+            height: 120px;
+            width: 120px;
+        }
+    </style>
+</header>
 
-<form asp-action="SetProfession">
-    <input asp-for="AvatarImageNumber" hidden="true"/>
-    <hr/>
-    <div class="row">
-        <div class="col-md-1" align="center">
-            <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer"/>
-        </div>
-        <div class="col-md-2" align="center">
-            <img src="~/Images/Hero/Professions/Sorcerer.png" width="100" height="100"/>
-        </div>
-        <div class="col-md-7">
-            <h5>Sorcerer</h5>
-            <p>
-                Sorcerers are using the power of natural elements to deal high damage and protect themselves.
-                They are using staffs, spell-books or scepters as weapons.
-                Theirs power is as wild as element they use.
-            </p>
-        </div>
+<div class="row">
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h4 class="my-0 font-weight-bold">
+                        Create New Hero
+                    </h4>
+                </div>
+            </li>
+        </ul>
+
+        <br />
+
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h5 class="my-0 font-weight-bold">
+                        Choose profession of your hero
+                    </h5>
+                </div>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <form asp-action="SetProfession">
+                        <input asp-for="AvatarImageNumber" hidden="true" />
+
+                        <div class="row">
+                            <div class="col-md-1" align="center"></div>
+                            <div class="col-md-2" align="center">
+                                <div>
+                                    <label>
+                                        <input asp-for="Profession" type="radio" value="@HeroProfession.Sorcerer" />
+                                        <img class="p-1" src="~/Images/Hero/Professions/Sorcerer.png" width="100" height="100" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <h5 class="font-weight-bold">Sorcerer</h5>
+                                <p class="font-weight-bold">
+                                    Sorcerers are using the power of natural elements to deal high damage and protect themselves.
+                                    They are using staffs, spell-books or scepters as weapons.
+                                    Theirs power is as wild as element they use.
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-1" align="center">
+                            </div>
+                            <div class="col-md-2" align="center">
+                                <div>
+                                    <label>
+                                        <input asp-for="Profession" type="radio" value="@HeroProfession.Necromancer" disabled=""/>
+                                        <img class="p-1" src="~/Images/Hero/Professions/Necromancer.png" width="100" height="100" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <h5 class="font-weight-bold text-secondary">Necromancer</h5>
+                                <p class="font-weight-bold text-secondary">Coming soon...</p>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="btn-group btn-block">
+                                <input type="submit" asp-action="SetProfession" value="Set profession" class="btn btn-outline-primary" />
+                                <a class="btn btn-outline-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
     </div>
-    <hr/>
-    <div class="row">
-        <div class="col-md-1" align="center">
-            <input asp-for="Profession" type="radio" value="@HeroProfession.Necromancer" disabled="true"/>
-        </div>
-        <div class="col-md-2" align="center">
-            <img src="~/Images/Hero/Professions/Necromancer.png" width="100" height="100"/>
-        </div>
-        <div class="col-md-7">
-            <h5>Necromancer</h5>
-            <p>Coming soon...</p>
-        </div>
-    </div>
-    <hr/>
-    <div class="form-group">
-        <input type="submit" asp-action="SetProfession" value="Set profession" class="btn btn-primary"/>
-    </div>
-</form>
-
-<div>
-    <a class="btn btn-danger"asp-controller="Player" asp-action="Details">Leave Creator</a>
 </div>
+
 
 @section Scripts {
     @{

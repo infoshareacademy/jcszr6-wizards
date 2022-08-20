@@ -1,48 +1,41 @@
 ﻿@model WizardsWeb.ModelViews.HeroModelViews.Properties.StatisticsModelView
 
-<h4>Statistics</h4>
-<hr />
-<div class="col-md-12">
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="RankPoints"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.RankPoints:##,##0}")
-        </div>
-    </div>
-    <hr/>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="TotalMatchPlayed"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.TotalMatchPlayed:##,##0}")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="TotalMatchWin"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.TotalMatchWin:##,##0}")
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="TotalMatchLoose"></label>
-        </div>
-        <div class="col-md-4">
-            @($"{Model.TotalMatchLoose:##,##0}")
-        </div>
-    </div>
-    <hr/>
-    <div class="row">
-        <div class="col-md-8">
-            <label asp-for="WinRatio"></label>
-        </div>
-        <div class="col-md-4">
-            @Model.WinRatio
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <ul class="list-group">
+            <li class="list-group-item justify-content-center bg-paper-header">
+                <div class="text-center">
+                    <h4 class="my-0 font-weight-bold">
+                        Hero statistics
+                    </h4>
+                </div>
+            </li>
+
+            <li class="list-group-item bg-paper-color">
+                <div class="d-flex justify-content-between">
+                    <label class="font-weight-bolder h5" asp-for="RankPoints"></label>
+                    <span class="font-weight-bolder h5">@($"{Model.RankPoints:##,##0}")</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <label class="font-weight-bolder h5" asp-for="WinRatio"></label>
+                    <span class="font-weight-bolder h5">@Model.WinRatio</span>
+                </div>
+            </li>
+
+            <li class="list-group-item bg-paper-color">
+                <div class="d-flex justify-content-between">
+                    <label asp-for="TotalMatchPlayed"></label>
+                    <span class="text-black font-weight-bold">@($"{Model.TotalMatchPlayed:##,##0}")</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <label asp-for="TotalMatchWin"></label>
+                    <span class="text-success font-weight-bold">@($"{Model.TotalMatchWin:##,##0}")</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <label asp-for="TotalMatchLoose"></label>
+                    <span class="text-danger font-weight-bold">@($"{Model.TotalMatchLoose:##,##0}")</span>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

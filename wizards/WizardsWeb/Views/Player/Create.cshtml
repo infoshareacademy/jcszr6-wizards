@@ -5,46 +5,90 @@
     ViewData["Title"] = "Create new Player";
 }
 
-<h1>Create new Player's Account</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UserName" class="control-label"></label>
-                <input asp-for="UserName" class="form-control" />
-                <span asp-validation-for="UserName" class="text-danger"></span>
+<section class="h-100 gradient-form">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-xl-10">
+            <div class="card rounded-3 text-black">
+                <div class="row g-0">
+
+                    <div class="col-lg-6">
+                        <img src="~/Images/Tapeta-2B.jpg" alt="Site Logo" style="height: 100%; width: 100%"/>
+                    </div>
+
+                    <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                        <div class="card-body p-md-5 mx-md-4">
+
+                            <div class="text-center">
+                                <img src="~/Images/logo.png" class="img-responsive" alt="Site Logo" style="height: 20%; width: 20%"/>
+                                <h4 class="mt-1 mb-5 pb-1">We are The Wizards Team</h4>
+                            </div>
+
+                            <form asp-action="Create">
+                                <p>Please login to your account</p>
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-outline mb-4">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control"/>
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Password" class="control-label"></label>
+                                    <input asp-for="Password" class="form-control"/>
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                                    <input asp-for="ConfirmPassword" class="form-control"/>
+                                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control"/>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label asp-for="DateOfBirth" class="control-label"></label>
+                                    <input asp-for="DateOfBirth" class="form-control"/>
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="text-center pt-1 mb-5 pb-1">
+
+                                    <input type="submit" value="Create" class="btn btn-outline-warning btn-block"/>
+
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-center pb-4">
+                                    <p class="mb-0 me-2">You already have an account?</p>
+
+                                    <div>
+                                        <a class="btn btn-outline-primary mx-2" id="login" asp-controller="Player" asp-action="Login">Login</a>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <a class="btn btn-outline-info btn-block mx-2" asp-controller="Home" asp-action="Index">Back to Home Page</a>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control"/>
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-            <div class="btn-group">
-                <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Abort</a>
-                <input type="submit" value="Create" class="btn btn-primary"/>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
+
+
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
