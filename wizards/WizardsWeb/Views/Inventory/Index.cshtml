@@ -7,14 +7,14 @@
 <div class="row">
     <div class="col">
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item justify-content-between bg-paper-color">
                 <div>
-                    <h5 class="my-0 font-weight-bold">
+                    <h4 class="my-0 font-weight-bold text-center">
                         @(Model.HeroNickName)'s Inventory
-                    </h5>
+                    </h4>
                 </div>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item justify-content-between bg-paper-color">
                 <div class="btn-group btn-block">
                     <a class="btn btn-outline-warning" asp-controller="Hero" asp-action="Details">Back to Hero</a>
                     <a class="btn btn-outline-warning" asp-controller="Merchant" asp-action="Index">Go to Merchant</a>
@@ -33,28 +33,29 @@
 
 <div class="row">
     <div class="col-md-8">
-
-
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item justify-content-between">
                 <div>
-                    <h5>Equipment</h5>
+                    <h4>Equipment</h4>
                     <partial name="~/Views/Item/_ItemIndexDetails.cshtml" model="@Model.Equipped" />
                     <hr />
                     <partial name="_Inventory" model="@Model" />
                     <hr />
                 </div>
             </li>
-
         </ul>
     </div>
 
     <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item justify-content-between">
                 <div>
-                    <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary" />
-                    <br />
-                    <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes" />
+                    <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary"/>
+                    <br/>
+                    <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes"/>
                 </div>
+            </li>
+        </ul>
     </div>
 </div>
 
@@ -64,5 +65,5 @@
 </script>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
         }

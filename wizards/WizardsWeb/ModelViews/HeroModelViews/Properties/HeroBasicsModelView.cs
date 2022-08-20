@@ -10,6 +10,13 @@ public class HeroBasicsModelView
     public string AvatarImageAddress => GetAvatarImageAddres();
     public string ProfessionImageAddress => GetProfessionImageAddres();
 
+    public bool ShowButtons { get; set; }
+
+    public HeroBasicsModelView()
+    {
+        ShowButtons = false;
+    }
+
     private string GetAvatarImageAddres()
     {
         return $"Images/Hero/Avatars/Wizard-{AvatarImageNumber}.png";

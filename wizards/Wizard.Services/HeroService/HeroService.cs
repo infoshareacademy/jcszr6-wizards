@@ -161,7 +161,7 @@ public class HeroService : IHeroService
         if (!CanChangeAvatar(heroToUpdate))
         {
             var message = new Dictionary<string, string>();
-            message.Add("NickName", "You don't have enough gold!");
+            message.Add("AvatarImageNumber", "You don't have enough gold!");
             throw new InvalidModelException(message);
         }
 

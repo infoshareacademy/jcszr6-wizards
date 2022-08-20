@@ -4,29 +4,6 @@
     ViewData["Title"] = "Login";
 }
 
-@*<form asp-action="Login">
-    <!-- UserName input -->
-    <div class="form-outline mb-4">
-        <label asp-for="UserName" class="control-label"></label>
-        <input asp-for="UserName" class="form-control" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
-    </div>
-
-    <!-- Password input -->
-    <div class="form-outline mb-4">
-        <label asp-for="Password" class="control-label"></label>
-        <input asp-for="Password" class="form-control" />
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
-
-    <!-- Submit button -->
-    <input type="submit" class="btn btn-primary btn-block mb-4" value="Login" />
-
-    <!-- Register buttons -->
-    <div class="text-center">
-        <p>Not a member? <a class="btn btn-primary" id="register" asp-controller="Player" asp-action="Create">Register</a></p>
-    </div>
-</form>*@
 
 <section class="h-100 gradient-form">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -75,10 +52,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-@*                        <img src="~/Images/Hero/Avatars/Wizard-1.png" class="img-responsive" alt="Site Logo" style="height:100%; width: 100%" />
-*@                    
-                        <img src="~/Images/Tapeta-1.jpg" alt="Site Logo" style="height:100%; width: 100%" />
-</div>
+                        <img src="~/Images/Tapeta-1B.jpg" alt="Site Logo" style="height:100%; width: 100%;" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,4 +66,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}
