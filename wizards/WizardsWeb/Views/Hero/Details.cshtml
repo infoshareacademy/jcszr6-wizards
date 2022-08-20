@@ -5,26 +5,6 @@
 }
 
 <div class="row">
-    @*    <div class="col-md-4">
-    <partial name="_HeroBasicPresentation" model="@Model.Basics" /><br />
-    <div class="btn-group">
-    <a class="btn btn-primary" asp-action="EditNickName">
-    Edit Name
-    </a>
-    <a class="btn btn-primary" asp-action="EditAvatar">
-    Edit Avatar
-    </a>
-    </div>
-    </div>
-    <div class="col-md-4">
-    <partial name="_HeroSummary" model="Model.Summary" />
-    <br /><br />
-    <a type="button" class="btn btn-warning" asp-controller="Inventory" asp-action="Index">Equipment</a><br /><br />
-    <a type="button" class="btn btn-warning" asp-controller="Merchant" asp-action="Index">Merchant</a><br /><br />
-    <a type="button" class="btn btn-warning" asp-controller="Player" asp-action="Details">Back to Hero choice</a><br /><br />
-    <a type="button" class="btn btn-warning disabled" asp-action="ArenaPvP">PvP Arena</a><br /><br />
-    </div>*@
-
 
     <div class="col-md-4">
         <partial name="_HeroBasicPresentation" model="@Model.Basics" />
@@ -37,6 +17,8 @@
             </div>
 
             <div class="col-md-6">
+                <partial name="_HeroSummary" model="Model.Summary" />
+                <br/>
                 <partial name="_HeroStatistics" model="Model.Statistics" />
             </div>
         </div>
@@ -44,22 +26,16 @@
         <br />
 
         <div class="flex-md-row">
-                    <partial name="_HeroSummary" model="Model.Summary" />
-        </div>
-
-        <br />
-
-        <div class="flex-md-row">
             <ul class="list-group btn-block">
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <div>
-                        <h5 class="my-0 font-weight-bold">
+                <li class="list-group-item bg-paper-header">
+                    <div class="text-center">
+                        <h4 class="my-0 font-weight-bold">
                             Hero actions
-                        </h5>
+                        </h4>
                     </div>
                 </li>
 
-                <li class="list-group-item d-flex justify-content-between btn-group lh-sm d-block">
+                <li class="list-group-item d-flex justify-content-between btn-group d-block bg-paper-color">
                     <a type="button" class="btn btn-outline-secondary" asp-controller="Inventory" asp-action="Index">Equipment</a>
                     <a type="button" class="btn btn-outline-primary" asp-controller="Merchant" asp-action="Index">Merchant</a><br />
                     <a type="button" class="btn btn-outline-info" asp-controller="Player" asp-action="Details">Back to Hero choice</a>
@@ -67,7 +43,5 @@
                 </li>
             </ul>
         </div>
-
     </div>
-
 </div>

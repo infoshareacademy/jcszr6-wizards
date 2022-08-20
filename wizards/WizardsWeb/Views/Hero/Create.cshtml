@@ -6,9 +6,8 @@
 
 <div class="row">
     <div class="col">
-
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <div>
                     <h4 class="my-0 font-weight-bold">
                         Create
@@ -16,7 +15,7 @@
                 </div>
             </li>
 
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <div>
                     <h5 class="my-0 font-weight-bold">
                         Name your hero
@@ -32,7 +31,7 @@
 <div class="row">
     <div class="col-md-12">
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input asp-for="AvatarImageNumber" hidden="true" />
@@ -50,7 +49,7 @@
             </li>
 
 
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <form asp-action="SetAvatarView">
                     <div class="form-group">
                         <input asp-for="AvatarImageNumber" hidden="true" />
@@ -65,39 +64,6 @@
         </ul>
     </div>
 </div>
-
-
-
-@*<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="AvatarImageNumber" hidden="true" />
-            <input asp-for="Profession" hidden="true" />
-            <div class="form-group">
-                <label asp-for="NickName" class="control-label"></label>
-                <input asp-for="NickName" class="form-control" />
-                <span asp-validation-for="NickName" class="text-danger"></span>
-            </div>
-            <hr />
-            <div class="form-group">
-                <input type="submit" value="Create Hero" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <form asp-action="SetAvatarView">
-        <input asp-for="AvatarImageNumber" hidden="true" />
-        <input asp-for="Profession" hidden="true" />
-        <div class="btn-group">
-            <input type="submit" value="Back" class="btn btn-warning" />
-            <a class="btn btn-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
-        </div>
-    </form>
-</div>*@
 
 @section Scripts {
     @{

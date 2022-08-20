@@ -4,99 +4,101 @@
 
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            <label asp-for="FirstOrDefault().Name"></label>
-        </th>
-        <th>
-            <label asp-for="FirstOrDefault().Type"></label>
-        </th>
-        <th>
-            <label asp-for="FirstOrDefault().Tier"></label>
-        </th>
-        <th>
-            @if (Model.CanShowEndurance())
+        <tr>
+            <th>
+                <label asp-for="FirstOrDefault().Name"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().Type"></label>
+            </th>
+            <th>
+                <label asp-for="FirstOrDefault().Tier"></label>
+            </th>
+            @if (Model.Any())
             {
-                <label asp-for="FirstOrDefault().Endurance"></label>
+                <th>
+                    @if (Model.CanShowEndurance())
+                    {
+                        <label asp-for="FirstOrDefault().Endurance"></label>
+                    }
+                    else if (Model.CanShowBuyPrice())
+                    {
+                        <label asp-for="FirstOrDefault().BuyPrice"></label>
+                    }
+                    else if (Model.CanShowSellPrice())
+                    {
+                        <label asp-for="FirstOrDefault().SellPrice"></label>
+                    }
+                </th>
             }
-            else if(Model.CanShowBuyPrice())
-            {
-                <label asp-for="FirstOrDefault().BuyPrice"></label>
-            }
-            else if (Model.CanShowSellPrice())
-            {
-                <label asp-for="FirstOrDefault().SellPrice"></label>
-            }
-        </th>
-        <th>
-            @if (Model.CanShowRepairEquipmentButton())
-            {
-                <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#repair-equipped">
-                    Repair all equipped
-                </button>
-            }
-        </th>
-    </tr>
+            <th>
+                @if (Model.CanShowRepairEquipmentButton())
+                {
+                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#repair-equipped">
+                        Repair all equipped
+                    </button>
+                }
+            </th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr class="table table-@item.GetItemTierColor()">
-            <td>
-                <span class="font-weight-bold">@item.Name</span>
-            </td>
-            <td>
-                <span class="text-center">@item.Type.ToString()</span>
-            </td>
-            <td>
-                <span class="text-center">@item.Tier</span>
-            </td>
-            @if (Model.CanShowEndurance())
-            {
-                <td><partial name="~/Views/Item/_ItemEnduranceBar.cshtml" model="@item"/></td>
-            }
-            else if(Model.CanShowBuyPrice())
-            {
-                <td>@($"{item.BuyPrice:#,##0}")</td>
-            }
-            else if (Model.CanShowSellPrice())
-            {
-                <td>@($"{item.SellPrice:#,##0}")</td>
-            }
-            <td>
-                <div class="btn-group">
-                    <!-- Button trigger modal for Details -->
+        @foreach (var item in Model)
+        {
+            <tr class="table table-@item.GetItemTierColor()">
+                <td>
+                    <span class="font-weight-bold">@item.Name</span>
+                </td>
+                <td>
+                    <span class="text-center">@item.Type.ToString()</span>
+                </td>
+                <td>
+                    <span class="text-center">@item.Tier</span>
+                </td>
+                @if (Model.CanShowEndurance())
+                {
+                    <td><partial name="~/Views/Item/_ItemEnduranceBar.cshtml" model="@item" /></td>
+                }
+                else if (Model.CanShowBuyPrice())
+                {
+                    <td>@($"{item.BuyPrice:#,##0}")</td>
+                }
+                else if (Model.CanShowSellPrice())
+                {
+                    <td>@($"{item.SellPrice:#,##0}")</td>
+                }
+                <td>
+                    <div class="btn-group">
+                        <!-- Button trigger modal for Details -->
                     <a class="btn btn-primary btn-sm" data-bs-toggle="modal" href="#details-@item.Id">Details</a>
 
-                    @if (item.IsEquipped && !item.IsInMerchantMode && !item.IsMerchantItem)
-                    {
-                        <a class="btn btn-warning btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
-                    }
-                    else if (!item.IsEquipped && !item.IsInMerchantMode && !item.IsMerchantItem)
-                    {
-                        <a class="btn btn-success btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
-                    }
-                    else if (item.IsInMerchantMode && !item.IsMerchantItem)
-                    {
-                        <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#sell-item-@item.Id">Sell</a>
-                    }
-                    else if (item.IsMerchantItem)
-                    {
-                        <a class="btn btn-success btn-sm" data-bs-toggle="modal" href="#buy-item-@item.CoreItemId">Buy</a>
-                        
-                        @if (User.IsInRole($"{UserRoles.Admin.ToString()}") || User.IsInRole($"{UserRoles.Moderator.ToString()}"))
+                        @if (item.IsEquipped && !item.IsInMerchantMode && !item.IsMerchantItem)
                         {
-                            <a class="btn btn-secondary btn-sm" asp-controller="Item" asp-action="Edit" asp-route-id="@item.CoreItemId">
-                                Edit
-                            </a>
+                            <a class="btn btn-warning btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
                         }
-                    }
-                </div>
-            </td>
-        </tr>
+                        else if (!item.IsEquipped && !item.IsInMerchantMode && !item.IsMerchantItem)
+                        {
+                            <a class="btn btn-success btn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
+                        }
+                        else if (item.IsInMerchantMode && !item.IsMerchantItem)
+                        {
+                            <a class="btn btn-danger btn-sm" data-bs-toggle="modal" href="#sell-item-@item.Id">Sell</a>
+                        }
+                        else if (item.IsMerchantItem)
+                        {
+                            <a class="btn btn-success btn-sm" data-bs-toggle="modal" href="#buy-item-@item.CoreItemId">Buy</a>
 
-        <partial name="~/Views/Item/_ModalsForItemIndexDetails.cshtml" model="@item"/>
+                            @if (User.IsInRole($"{UserRoles.Admin.ToString()}") || User.IsInRole($"{UserRoles.Moderator.ToString()}"))
+                            {
+                                <a class="btn btn-secondary btn-sm" asp-controller="Item" asp-action="Edit" asp-route-id="@item.CoreItemId">
+                                    Edit
+                                </a>
+                            }
+                        }
+                    </div>
+                </td>
+            </tr>
 
-    }
+            <partial name="~/Views/Item/_ModalsForItemIndexDetails.cshtml" model="@item" />
+        }
     </tbody>
 </table>
