@@ -4,10 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    table.table-bordered{
+        border:1px solid goldenrod;
+        margin-top:20px;
+    }
+    table.table-bordered > thead > tr > th{
+        border:1px solid goldenrod;
+    }
+    table.table-bordered > tbody > tr > td{
+        border:1px solid goldenrod;
+    }
+</style>
+
 <div class="row">
     <div class="col">
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <div>
                     <h4 class="my-0 font-weight-bold">
                         Search user
@@ -17,7 +30,7 @@
         </ul>
         <br />
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <div class="col-md-4">
                     <form asp-action="Index">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -73,14 +86,14 @@
                     </form>
                 </div>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <a type="button" class="btn btn-outline-danger btn-block" asp-action="Index">All Players</a>
             </li>
         </ul>
         <br />
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-                <table class="table">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>
@@ -99,7 +112,6 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
                             </th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
