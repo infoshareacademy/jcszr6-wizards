@@ -1,0 +1,72 @@
+﻿@model WizardsWeb.ModelViews.ItemModelViews.Properties.ItemAttributesDetailsModelView
+
+<div class="row p-2">
+    <div class="col-12">
+        <h5>Attributes</h5>
+        <hr/>
+    </div>
+    @if (Model.Damage != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Damage"></label>
+        </div>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Damage)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Damage)</label>
+        </div>
+    }
+
+    @if (Model.Precision != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Precision"></label>
+        </div>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Precision)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Precision)</label>
+        </div>
+    }
+
+    @if (Model.Specialization != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Specialization"></label>
+        </div>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Specialization)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Specialization)</label>
+        </div>
+    }
+
+    @if (Model.MaxHealth != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="MaxHealth"></label>
+        </div>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.MaxHealth)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.MaxHealth)</label>
+        </div>
+    }
+
+    @if (Model.Reflex != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Reflex"></label>
+        </div>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Reflex)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Reflex)</label>
+
+        </div>
+    }
+
+    @if (Model.Defense != 0)
+    {
+        <div class="col-md-8 text-left">
+            <label class="m-0 p-0" asp-for="Defense"></label>
+        </div>
+        <div class="col-md-4 text-left @Model.GetAttributeValueColor(Model.Defense)">
+            <label class="m-0 p-0 font-weight-bold">@Model.AttributeValueToString(Model.Defense)</label>
+        </div>
+    }
+    <div class="col-12">
+        <hr />
+        <br class="p-0 m-0"/>
+    </div>
+</div>

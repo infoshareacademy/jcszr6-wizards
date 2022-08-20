@@ -1,0 +1,102 @@
+﻿@model WizardsWeb.ModelViews.HeroModelViews.HeroCreateModelView
+
+@{
+    ViewData["Title"] = "Set Avatar";
+}
+
+<header>
+    <style>
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+            /* IMAGE STYLES */
+            [type=radio] + img {
+                cursor: pointer;
+            }
+
+            /* CHECKED STYLES */
+            [type=radio]:checked + img {
+                outline: 3px solid #f00;
+                height: 100%;
+                width: 100%;
+            }
+    </style>
+</header>
+
+<div class="row">
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h4 class="my-0 font-weight-bold">
+                        Create New Hero
+                    </h4>
+                </div>
+            </li>
+        </ul>
+
+        <br />
+
+        <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h5 class="my-0 font-weight-bold">
+                        Choose avatar of your hero
+                    </h5>
+                </div>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <form asp-action="SetAvatar">
+                        <input asp-for="Profession" hidden="true" />
+                        <div class="row">
+                            @for (int i = 1; i <= 7; i++)
+                            {
+                                var image = $"Images/Hero/Avatars/Wizard-{i}.png";
+                                <div class="col-sm-3">
+                                    <div>
+                                        <label>
+                                            <input asp-for="AvatarImageNumber" type="radio" value="@i"/>
+                                            <img class="p-1" src="~/@image" width="80%" height="80%"/>
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <input type="submit" value="Set Avatar" class="btn btn-outline-primary" />
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <form asp-action="SetProfessionView">
+                        <input asp-for="Profession" hidden="true" />
+                        <input asp-for="AvatarImageNumber" hidden="true" />
+
+                        <div class="btn-group btn-block">
+                            <input type="submit" asp-controller="Hero" asp-action="SetProfessionView" value="Back" class="btn btn-outline-warning" />
+                            <a class="btn btn-outline-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
+                        </div>
+
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

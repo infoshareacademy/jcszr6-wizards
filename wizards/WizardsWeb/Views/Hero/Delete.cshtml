@@ -1,0 +1,49 @@
+﻿@model WizardsWeb.ModelViews.HeroModelViews.HeroDeleteModelView
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="alert alert-danger text-center text-danger">
+            <h2 class="my-0 font-weight-bold">Delete Hero</h2>
+            <br/>
+            <h3 class="font-weight-bold">Are you sure you want to delete @Model.Basics.NickName?</h3>
+            <h4 class="font-weight-bold">All progress made on this character will be lost!</h4>
+        </div>
+
+        <br />
+
+        <div>
+            <div class="row">
+                <div class="col-md-4">
+                    <partial name="_HeroBasicPresentation" model="@Model.Basics" />
+                </div>
+                <div class="col-md-4">
+                    <partial name="_HeroSummary" model="Model.Summary" />
+                    <br />
+                    <partial name="_HeroStatistics" model="@Model.Statistics" />
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                            <form class="bg-paper-color" asp-action="Delete">
+                                <div class="form-group">
+                                    <label asp-for="ConfirmNickName" class="font-weight-bold"></label>
+                                    <input asp-for="ConfirmNickName" class="form-control" />
+                                    <span asp-validation-for="ConfirmNickName" class="text-danger"></span>
+                                </div>
+                                <div class="btn-group btn-block">
+                                    <a type="button" class="btn btn-outline-success" asp-action="Details" asp-controller="Player">Cancel</a>
+                                    <input type="submit" value="Delete" class="btn btn-outline-danger" />
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

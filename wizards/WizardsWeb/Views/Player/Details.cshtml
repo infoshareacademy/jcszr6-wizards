@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WizardsWeb.ModelViews.PlayerModelViews.PlayerDetailsModelView
+
+@{
+    ViewData["Title"] = $"Player: {Model.UserName}";
+}
+
+
+<div class="row">
+    <div class="col-3">
+        <partial name="_PlayerInfo" model="Model" />
+    </div>
+    <div class="col-9">
+        <partial name="_PlayersHeroes" model="Model" />
+    </div>
+</div>

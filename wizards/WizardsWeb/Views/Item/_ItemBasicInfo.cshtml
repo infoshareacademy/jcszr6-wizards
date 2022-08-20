@@ -1,0 +1,34 @@
+﻿@model WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView
+@using Wizards.Core.Model.Enums
+
+<div class="row p-0 m-0">
+    <div class="col-12 text-center">
+        <h4 class="font-weight-bolder">@Model.Name</h4>
+    </div>
+    <div class="col-12 text-center">
+        <span class="font-weight-bold">@Model.Type.ToString()</span>
+    </div>
+    <div class="col-12 text-center">
+        @if (Model.Restriction == ProfessionRestriction.All)
+        {
+            <span class="font-italic font-weight-light">For All Professions</span>
+        }
+        else
+        {
+            <span class="font-italic font-weight-light">@Model.Restriction.ToString() Exclusive</span>
+        }
+    </div>
+    <div class="col-12 text-right h5">
+        <br class="p-0 m-0"/>
+        <label class="m-0 p-0 font-weight-bolder" asp-for="Tier"></label>
+        <label class="m-0 p-0 font-weight-bolder">@Model.Tier</label>
+    </div>
+    <div class="col-md-12 text-right">
+        @if (Model.IsEquipped && !Model.IsMerchantItem && !Model.IsInMerchantMode)
+        {
+            <hr class="p-0 m-0"/>
+            <span class="font-italic font-weight-light">Equipped</span>
+            <br />
+        }
+    </div>
+</div>

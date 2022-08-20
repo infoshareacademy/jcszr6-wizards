@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model WizardsWeb.ModelViews.PlayerModelViews.PlayerDetailsModelView
+
+<div class="row">
+    <div class="col-12">
+        <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h5 class="my-0 font-weight-bold text-center">
+                        PLAYER ACCOUNT INFORMATION
+                    </h5>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+
+    <div class="col-12">
+        <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h6 class="my-0">User name:</h6>
+                    <small class="font-weight-bold">
+                        <label>@Model.UserName</label>
+                    </small>
+                    <hr />
+                    <a class="btn btn-outline-danger btn-block" asp-action="Edit">Edit Player's Profile</a>
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h6 class="my-0">Email:</h6>
+                    <small class="text-muted">
+                        <label>@Model.Email</label>
+                    </small>
+                </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <div>
+                    <h6 class="my-0">Date of birth:</h6>
+                    <small class="text-muted">
+                        <label>@Model.DateOfBirth.Date.ToString("d")</label>
+                    </small>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

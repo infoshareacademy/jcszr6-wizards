@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Wizards.Core.Model
+
+@inject SignInManager<Player> SignInManager
+@inject UserManager<Player> UserManager
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item btn-group">
+        <a id="manage" class="btn btn-outline-light" asp-controller="Player" asp-action="Details">@UserManager.GetUserName(User)</a>
+        <a id="logout" class="btn btn-outline-warning" asp-controller="Player" asp-action="Logout">Logout</a>
+    </li>
+}
+else
+{
+    <li class="nav-item btn-group">
+        <a class="btn btn-outline-primary" id="login" asp-controller="Player" asp-action="Login">Login</a>
+        <a class="btn btn-outline-warning" id="register" asp-controller="Player" asp-action="Create">Register</a>
+    </li>
+}
+</ul>

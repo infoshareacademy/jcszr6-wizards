@@ -1,0 +1,48 @@
+﻿@model WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView
+
+<div class="row p-2">
+    <div class="col-12 text-left">
+        <label class="m-0 p-0 font-weight-lighter" asp-for="Endurance"></label>
+    </div>
+    <div class="col-12">
+        <partial name="~/Views/Item/_ItemEnduranceBar.cshtml" model="@Model"/>
+    </div>
+    @if (Model.NeedsRepair() && Model.CanShowRepairElements())
+    {
+        <div class="col-md-6 text-left">
+            <label class="m-0 p-0" asp-for="RepairCost"></label>
+        </div>
+        <div class="col-md-6 text-right">
+            <label class="m-0 p-0 font-weight-bold">@($"{Model.RepairCost:##,##0} Gold")</label>
+        </div>
+        <div class="col-12 p-1">
+            <button class="btn btn-info btn-sm btn-block" data-bs-target="#repair-item-@Model.Id" data-bs-toggle="modal">Repair Item</button>
+        </div>
+    }
+    <div class="col-12">
+        <hr />
+    </div>
+    <div class="col-md-6 text-left">
+        @if (!Model.IsMerchantItem)
+        {
+            <label class="m-0 p-0" asp-for="SellPrice"></label>
+        }
+        else
+        {
+            <label class="m-0 p-0" asp-for="BuyPrice"></label>
+        }
+    </div>
+    <div class="col-md-6 text-right">
+        @if (!Model.IsMerchantItem)
+        {
+            <label class="m-0 p-0 font-weight-bold">@($"{Model.SellPrice:##,##0} Gold")</label>
+        }
+        else
+        {
+            <label class="m-0 p-0 font-weight-bold">@($"{Model.BuyPrice:##,##0} Gold")</label>
+        }
+    </div>
+    <div class="col-12">
+        <hr />
+    </div>
+</div>

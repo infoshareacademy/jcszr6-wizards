@@ -1,0 +1,44 @@
+﻿@model WizardsWeb.ModelViews.HeroModelViews.Properties.HeroBasicsModelView
+
+<div class="row">
+    <div class="col">
+        <ul class="list-group">
+            <li class="list-group-item justify-content-center bg-paper-header">
+                <div class="text-center">
+                    <h2 class="my-0 font-weight-bold">
+                        @Model.NickName
+                    </h2>
+                </div>
+            </li>
+
+            <li class="list-group-item bg-paper-color">
+                <div class="justify-content-start">
+                    <img class="p-0 m-0" src="~/@Model.ProfessionImageAddress" width="70" height="70" />
+                    <span class="pt-4 px-3 h4 font-weight-bold">@Model.Profession.ToString()</span>
+                </div>
+            </li>
+
+            <li class="list-group-item bg-paper-color justify-content-center">
+                <div class="col-md-12">
+                    <img class="p-0 m-0" src="~/@Model.AvatarImageAddress" width="100%" height="100%" />
+                </div>
+            </li>
+
+            @if (Model.ShowButtons)
+            {
+                <li class="list-group-item bg-paper-color justify-content-center">
+                    <div class="col-md-12">
+                        <div class="btn-group btn-block">
+                            <a class="btn btn-outline-primary" asp-action="EditNickName">
+                                Edit Name
+                            </a>
+                            <a class="btn btn-outline-primary" asp-action="EditAvatar">
+                                Edit Avatar
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

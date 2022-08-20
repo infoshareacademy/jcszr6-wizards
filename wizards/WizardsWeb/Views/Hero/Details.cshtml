@@ -1,0 +1,47 @@
+﻿@model WizardsWeb.ModelViews.HeroModelViews.HeroDetailsModelView
+
+@{
+    ViewData["Title"] = $"{Model.Basics.NickName}";
+}
+
+<div class="row">
+
+    <div class="col-md-4">
+        <partial name="_HeroBasicPresentation" model="@Model.Basics" />
+    </div>
+
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-6">
+                <partial name="_HeroAttributes" model="Model.Attributes" />
+            </div>
+
+            <div class="col-md-6">
+                <partial name="_HeroSummary" model="Model.Summary" />
+                <br/>
+                <partial name="_HeroStatistics" model="Model.Statistics" />
+            </div>
+        </div>
+
+        <br />
+
+        <div class="flex-md-row">
+            <ul class="list-group btn-block">
+                <li class="list-group-item bg-paper-header">
+                    <div class="text-center">
+                        <h4 class="my-0 font-weight-bold">
+                            Hero actions
+                        </h4>
+                    </div>
+                </li>
+
+                <li class="list-group-item d-flex justify-content-between btn-group d-block bg-paper-color">
+                    <a type="button" class="btn btn-outline-secondary" asp-controller="Inventory" asp-action="Index">Equipment</a>
+                    <a type="button" class="btn btn-outline-primary" asp-controller="Merchant" asp-action="Index">Merchant</a><br />
+                    <a type="button" class="btn btn-outline-info" asp-controller="Player" asp-action="Details">Back to Hero choice</a>
+                    <a type="button" class="btn btn-outline-danger disabled" asp-action="ArenaPvP">PvP Arena</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
