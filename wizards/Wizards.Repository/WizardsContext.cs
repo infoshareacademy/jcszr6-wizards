@@ -12,17 +12,9 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
 
     private readonly bool _useLazyLoading;
 
-    public WizardsContext()
-    {
-    }
-
-    public WizardsContext(bool useLazyLoading)
-    {
-        _useLazyLoading = useLazyLoading;
-    }
-    public WizardsContext(DbContextOptions<WizardsContext> options) : base(options)
-    {
-    }
+    public WizardsContext() { }
+    public WizardsContext(DbContextOptions<WizardsContext> options) : base(options) { }
+    public WizardsContext(bool useLazyLoading) { _useLazyLoading = useLazyLoading; }
 
     public DbSet<Player> Players { get; set; }
     public DbSet<Hero> Heroes { get; set; }
@@ -36,11 +28,6 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-
-        if (_useLazyLoading)
-        {
-            //optionsBuilder.UseLazyLoadingProxies();
-        }
 
         optionsBuilder
             .UseSqlServer("Server=localhost; Database=WizardsDB; Trusted_Connection=True; MultipleActiveResultSets=True;");

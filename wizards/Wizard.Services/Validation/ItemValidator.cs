@@ -136,6 +136,15 @@ public class ItemValidator : IItemValidator
             }
         }
     }
+    private void ValidateAttributes(ItemAttributes attributes)
+    {
+        ValidateSingleAttribute(attributes.Damage, _settings.DamageTasks, "Damage");
+        ValidateSingleAttribute(attributes.Precision, _settings.PrecisionTasks, "Precision");
+        ValidateSingleAttribute(attributes.Specialization, _settings.SpecializationTasks, "Specialization");
+        ValidateSingleAttribute(attributes.MaxHealth, _settings.MaxHealthTasks, "Max Health");
+        ValidateSingleAttribute(attributes.Reflex, _settings.ReflexTasks, "Reflex");
+        ValidateSingleAttribute(attributes.Defense, _settings.DefenseTasks, "Defense");
+    }
     private void ValidateSingleAttribute(int value, List<INumberValidationTask> singleAttributeTasks, string propertyName)
     {
         foreach (var task in singleAttributeTasks)
@@ -149,15 +158,6 @@ public class ItemValidator : IItemValidator
                 return;
             }
         }
-    }
-    private void ValidateAttributes(ItemAttributes attributes)
-    {
-        ValidateSingleAttribute(attributes.Damage, _settings.DamageTasks, "Damage");
-        ValidateSingleAttribute(attributes.Precision, _settings.PrecisionTasks, "Precision");
-        ValidateSingleAttribute(attributes.Specialization, _settings.SpecializationTasks, "Specialization");
-        ValidateSingleAttribute(attributes.MaxHealth, _settings.MaxHealthTasks, "Max Health");
-        ValidateSingleAttribute(attributes.Reflex, _settings.ReflexTasks, "Reflex");
-        ValidateSingleAttribute(attributes.Defense, _settings.DefenseTasks, "Defense");
     }
     private async Task ValidateNameInUse(string name)
     {

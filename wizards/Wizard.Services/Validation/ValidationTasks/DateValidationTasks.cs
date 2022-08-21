@@ -63,3 +63,18 @@ public class RestrictedAge : IDateValidationTask
         return new ValidationState(true);
     }
 }
+
+public class DateIsNotNull : IDateValidationTask
+{
+    public DateIsNotNull() { }
+
+    public ValidationState Validate(DateTime value)
+    {
+        if (value == null)
+        {
+            return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.IsNull)}");
+        }
+
+        return new ValidationState(true);
+    }
+}

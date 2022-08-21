@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.Enums;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;
@@ -9,25 +7,23 @@ namespace Wizards.Repository.InitialData;
 
 public class InitialDataInjector : IInitialDataInjector
 {
-    private readonly IInitialDataUsersFactory _usersFactory;
     private readonly IInitialDataRolesFactory _rolesFactory;
+    private readonly IInitialDataUsersFactory _usersFactory;
+    private readonly IInitialDataHeroesFactory _heroesFactory;
     private readonly RoleManager<IdentityRole<int>> _roleManager;
     private readonly UserManager<Player> _userManager;
-    private readonly IInitialDataHeroesFactory _heroesFactory;
-    private readonly IHeroRepository _heroRepository;
     private readonly WizardsContext _context;
 
     public InitialDataInjector(
-        IInitialDataRolesFactory rolesFactory, IInitialDataUsersFactory usersFactory, 
+        IInitialDataRolesFactory rolesFactory, IInitialDataUsersFactory usersFactory,
         RoleManager<IdentityRole<int>> roleManager, UserManager<Player> userManager,
-        IInitialDataHeroesFactory heroesFactory, IHeroRepository heroRepository, WizardsContext context) 
+        IInitialDataHeroesFactory heroesFactory, WizardsContext context)
     {
         _rolesFactory = rolesFactory;
         _usersFactory = usersFactory;
         _roleManager = roleManager;
         _userManager = userManager;
         _heroesFactory = heroesFactory;
-        _heroRepository = heroRepository;
         _context = context;
     }
     public async Task InjectDevelopmentDataAsync()
@@ -37,27 +33,24 @@ public class InitialDataInjector : IInitialDataInjector
             var roles = _rolesFactory.GetRolesAsync();
             await AddRoles(roles);
         }
-        
-        var adminUsers = _usersFactory.GetAdminUsersAsync();
-        await AddUsers(adminUsers, UserRoles.Admin);
 
-        var moderatorUsers = _usersFactory.GetModeratorUsersAsync();
-        await AddUsers(moderatorUsers, UserRoles.Moderator);
+        var adminUsers = _usersFactory.GetAdminUsers();
+        var adminHeroes = _heroesFactory.GetAdminHeroesWithEquipment();
+        await AddUsers(adminUsers, UserRoles.Admin, adminHeroes);
 
-        if (_context.Players.Count() < 105)
+        var moderatorUsers = _usersFactory.GetModeratorUsers();
+        var moderatorHeroes = _heroesFactory.GetModeratorHeroesWithEquipment();
+        await AddUsers(moderatorUsers, UserRoles.Moderator, moderatorHeroes);
+
+        if (_context.Players.Count() < 90)
         {
-            var randomUsers = _usersFactory.GetRandomUsersForTestsAsync();
-            await AddUsers(randomUsers, UserRoles.RegularUser);
+            var randomUsers = _usersFactory.GetRandomUsersForTests();
+            var randomHeroes = _heroesFactory.GetRandomTestHeroesWithEquipment();
+            await AddUsers(randomUsers, UserRoles.RegularUser, randomHeroes);
         }
 
-        if (_context.Heroes.Count() < 240)
-        {
-            var adminsHeroes = _heroesFactory.GetAdminModeratorsHeroesWithEquipment();
-            await AddHeroes(adminsHeroes);
-
-            var heroes = _heroesFactory.GetRandomTestHeroesWithEquipment();
-            await AddHeroes(heroes);
-        }
+        var testerPlayers = _usersFactory.GetTesterUsers();
+        await AddUsers(testerPlayers, UserRoles.RegularUser);
     }
 
     private async Task AddRoles(List<IdentityRole<int>> roles)
@@ -82,19 +75,23 @@ public class InitialDataInjector : IInitialDataInjector
             }
         }
     }
-
-    private async Task AddHeroes(List<Hero> heroes)
+    private async Task AddUsers(Dictionary<Player, string> usersData, UserRoles role, Dictionary<Hero, string> heroes)
     {
-        var existingHeroesNames = await _heroRepository.GetAllNickNames();
-
-        foreach (var hero in heroes)
+        foreach (var userData in usersData)
         {
-            if (!existingHeroesNames.Contains(hero.NickName))
+            if (await _userManager.FindByNameAsync(userData.Key.UserName) == null)
             {
-                await _context.Heroes.AddAsync(hero);
+                var user = userData.Key;
+                var password = userData.Value;
+                var heroesToAdd = heroes
+                    .Where(h=>h.Value == user.UserName)
+                    .Select(h => h.Key)
+                    .ToList();
+                user.Heroes=heroesToAdd;
+
+                await _userManager.CreateAsync(user, password);
+                await _userManager.AddToRoleAsync(user, role.ToString());
             }
         }
-
-        await _context.SaveChangesAsync();
     }
 }

@@ -37,11 +37,6 @@ namespace Wizards.Services.ItemService
             return await _itemRepository.GetAll();
         }
 
-        public async Task Remove(Item item)
-        {
-            await _itemRepository.Remove(item);
-        }
-
         public async Task Update(Item item)
         {
             await _itemValidator.Validate(item);

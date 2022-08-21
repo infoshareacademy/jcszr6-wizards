@@ -13,6 +13,7 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
     {
         _itemRepository = itemRepository;
     }
+
     public Statistics GetStatistics()
     {
         return new Statistics()

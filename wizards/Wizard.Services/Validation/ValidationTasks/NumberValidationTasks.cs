@@ -41,3 +41,37 @@ public class NumberRange : INumberValidationTask
         return Validate(decimalValue);
     }
 }
+
+public class NumberNotNull : INumberValidationTask
+{
+    public NumberNotNull() { }
+
+    public ValidationState Validate(decimal value)
+    {
+        if (value == null)
+        {
+            return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.IsNull)}");
+        }
+
+        return new ValidationState(true);
+    }
+    public ValidationState Validate(int value)
+    {
+        if (value == null)
+        {
+            return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.IsNull)}");
+        }
+
+        return new ValidationState(true);
+    }
+
+    public ValidationState Validate(double value)
+    {
+        if (value == null)
+        {
+            return new ValidationState(false, $"{TextRepository.Get(ValueErrorsMsg.IsNull)}");
+        }
+
+        return new ValidationState(true);
+    }
+}

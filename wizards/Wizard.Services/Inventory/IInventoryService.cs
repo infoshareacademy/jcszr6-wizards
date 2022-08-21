@@ -5,7 +5,6 @@ namespace Wizards.Services.Inventory;
 
 public interface IInventoryService
 {
-    Task<List<HeroItem>> GetHeroInventory(ClaimsPrincipal user);
     Task<HeroItem> GetHeroItem(ClaimsPrincipal user);
     Task RepairItem(ClaimsPrincipal user);
     Task RepairAllItems(ClaimsPrincipal user, bool equippedOnly = false);

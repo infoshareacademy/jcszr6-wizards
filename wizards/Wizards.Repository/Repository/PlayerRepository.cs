@@ -102,16 +102,6 @@ public class PlayerRepository : IPlayerRepository
             .ToListAsync();
     }
 
-    public async Task<List<Player>> GetByYearRange(int startYear, int endYear)
-    {
-        return await _wizardsContext.Players.Where(p =>
-            p.DateOfBirth.Year >= startYear &&
-            p.DateOfBirth.Year <= endYear)
-            .Include(p => p.Heroes)
-            .ThenInclude(x => x.Statistics)
-            .ToListAsync();
-    }
-
     public async Task<List<Player>> GetByRankPointsRange(int lowRankPoints, int highRankPoints)
     {
         return await _wizardsContext.Players.Where(p =>

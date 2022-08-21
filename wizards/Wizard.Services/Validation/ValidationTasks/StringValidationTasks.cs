@@ -4,7 +4,7 @@ using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;
 
 namespace Wizards.Services.Validation.ValidationTasks;
-public class IsNull : IStringValidationTask
+public class IsNotNull : IStringValidationTask
 {
     public ValidationState Validate(string value)
     {

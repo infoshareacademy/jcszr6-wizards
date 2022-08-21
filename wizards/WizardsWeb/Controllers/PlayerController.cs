@@ -85,7 +85,7 @@ public class PlayerController : Controller
             return RedirectToAction(nameof(Details));
         }
 
-        ModelState.AddModelError(string.Empty, "Invalid login attempt!");
+        ModelState.AddModelError("", "Invalid login attempt!");
 
         return View(playerLogIn);
     }

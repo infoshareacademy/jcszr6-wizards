@@ -23,8 +23,5 @@ public class RankingModelViews
         PlayerDetailsDto = playerDetailsDto;
     }
 
-    public RankingModelViews()
-    {
-        
-    }
+    public RankingModelViews() { }
 }

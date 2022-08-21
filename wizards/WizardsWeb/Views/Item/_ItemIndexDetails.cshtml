@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<WizardsWeb.ModelViews.ItemModelViews.ItemDetailsModelView>
-@using WizardsWeb.Helpers
 @using Wizards.Core.Model.Enums
+@using WizardsWeb.Extensions
 
 <table class="table">
     <thead>
@@ -97,7 +97,6 @@
                     </div>
                 </td>
             </tr>
-
             <partial name="~/Views/Item/_ModalsForItemIndexDetails.cshtml" model="@item" />
         }
     </tbody>

@@ -10,6 +10,5 @@ public interface IHeroRepository
     Task Update(Hero hero);
     Task Remove(Hero hero);
     Task<List<string>> GetAllNickNames();
-    Task<bool> Exist(int id);
     Task<bool> Exist(int id, string nickName);
 }

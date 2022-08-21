@@ -21,8 +21,8 @@ public class SelectorController : Controller
     {
         _authorizationService = authorizationService;
         _selector = selector;
-        _allowedHeroActions = GetAllowedActions(typeof(HeroController));
         
+        _allowedHeroActions = GetAllowedActions(typeof(HeroController));
         _allowedMerchantActions = GetAllowedActions(typeof(MerchantController));
         _allowedInventoryActions = GetAllowedActions(typeof(InventoryController)); 
     }

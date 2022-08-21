@@ -20,11 +20,6 @@ public class InventoryService : IInventoryService
         _heroService = heroService;
         _playerService = playerService;
     }
-    public async Task<List<HeroItem>> GetHeroInventory(ClaimsPrincipal user)
-    {
-        var inventory = (await _heroService.Get(user)).Inventory;
-        return inventory;
-    }
 
     public async Task<HeroItem> GetHeroItem(ClaimsPrincipal user)
     {
@@ -67,8 +62,8 @@ public class InventoryService : IInventoryService
 
     public async Task RepairAllItems(ClaimsPrincipal user, bool equippedOnly = false)
     {
-        var inventory = await GetHeroInventory(user);
         var hero = await _heroService.Get(user);
+        var inventory = hero.Inventory;
 
         var itemsToRepair = new List<HeroItem>();
 
