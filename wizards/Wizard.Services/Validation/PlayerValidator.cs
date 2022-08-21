@@ -20,7 +20,6 @@ public class PlayerValidator : IPlayerValidator
         _playerRepository = playerRepository;
         _userManager = userManager;
         _isValid = true;
-
     }
 
     public async Task Validate(Player player)

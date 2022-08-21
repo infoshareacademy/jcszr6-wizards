@@ -1,11 +1,13 @@
 ﻿using Wizards.Core.Model;
+using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.Properties;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 public class InitialDataUsersFactory : IInitialDataUsersFactory
 {
-    public Dictionary<Player, string> GetAdminUsersAsync()
+    public Dictionary<Player, string> GetAdminUsers()
     {
         var result = new Dictionary<Player, string>();
 
@@ -18,7 +20,7 @@ public class InitialDataUsersFactory : IInitialDataUsersFactory
         return result;
     }
 
-    public Dictionary<Player, string> GetModeratorUsersAsync()
+    public Dictionary<Player, string> GetModeratorUsers()
     {
         var result = new Dictionary<Player, string>();
 
@@ -28,7 +30,42 @@ public class InitialDataUsersFactory : IInitialDataUsersFactory
         return result;
     }
 
-    public Dictionary<Player, string> GetRandomUsersForTestsAsync()
+    public Dictionary<Player, string> GetTesterUsers()
+    {
+        var result = new Dictionary<Player, string>();
+
+        result.Add(new Player()
+        {
+            UserName = "Tester", Email = "tester@wizard.com", DateOfBirth = new DateTime(1999, 09, 27), Heroes = new List<Hero>()
+            {
+                new Hero(){NickName = "Diablo Pablo", Gold = 25000, AvatarImageNumber = 4, Profession = HeroProfession.Sorcerer, 
+                    Attributes = new HeroAttributes(){DailyRewardEnergy = 10, Damage = 10, Precision = 5, Specialization = 0, CurrentHealth = 25, MaxHealth = 25, Reflex = 0, Defense = 0},
+                    Statistics = new Statistics(){ RankPoints = 7200, TotalMatchPlayed = 943, TotalMatchWin = 672, TotalMatchLoose = 943-672},
+                    Inventory = new List<HeroItem>()
+                    {
+                        new HeroItem(){ItemId = 5, InUse = true, ItemEndurance = 99.00d},
+                        new HeroItem(){ItemId = 20, InUse = true, ItemEndurance = 98.99d},
+                        new HeroItem(){ItemId = 10, InUse = false, ItemEndurance = 72.52d},
+                        new HeroItem(){ItemId = 15, InUse = false, ItemEndurance = 37.00d},
+                        new HeroItem(){ItemId = 25, InUse = false, ItemEndurance = 2.91d},
+                        new HeroItem(){ItemId = 30, InUse = false, ItemEndurance = 4.99d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 100.00d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 99.00d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 98.99d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 66.00d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 65.99d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 33.00d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 32.99d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 0.01d},
+                    }
+                }
+            }
+        }, "Pa$$word2022");
+
+        return result;
+    }
+
+    public Dictionary<Player, string> GetRandomUsersForTests()
     {
         var result = new Dictionary<Player, string>();
 

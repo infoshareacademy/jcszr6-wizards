@@ -47,7 +47,7 @@ namespace Wizards.Services.PlayerService
             if (!await _userManager.CheckPasswordAsync(player, passwordConfirm))
             {
                 var message = new Dictionary<string, string>();
-                message.Add("ConfirmPassword", "Password is not correct!");
+                message.Add("PasswordConfirm", "Password is not correct!");
                 throw new InvalidModelException(message);
             }
 

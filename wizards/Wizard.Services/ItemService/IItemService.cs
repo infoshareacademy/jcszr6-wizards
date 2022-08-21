@@ -8,6 +8,5 @@ namespace Wizards.Services.ItemService
         Task<Item> Get(int id);
         Task Add(Item item);
         Task Update(Item item);
-        Task Remove(Item item);
     }
 }

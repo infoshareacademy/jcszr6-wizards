@@ -54,11 +54,6 @@ public class HeroRepository : IHeroRepository
         return _wizardsContext.Heroes.Select(h => h.NickName).ToListAsync();
     }
 
-    public async Task<bool> Exist(int id)
-    {
-        return await _wizardsContext.Heroes.AnyAsync(h => h.Id == id);
-    }
-
     public async Task<bool> Exist(int id, string nickName)
     {
         return await _wizardsContext.Heroes.AnyAsync(h => h.Id == id && h.NickName == nickName);

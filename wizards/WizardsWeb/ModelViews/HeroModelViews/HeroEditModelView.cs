@@ -15,7 +15,6 @@ public class HeroEditModelView
     [Required]
     public int AvatarImageNumber { get; set; }
 
-    
     public int Cost { get; set; }
     public int Gold { get; set; }
 }
