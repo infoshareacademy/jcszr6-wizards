@@ -288,7 +288,7 @@ public class InitialDataHeroesFactory : IInitialDataHeroesFactory
         var result = new Dictionary<Hero, string>();
 
         // Data for Moderator Users
-        result.Add(new Hero { NickName = "Sorcerer A", AvatarImageNumber = 4, Profession = (HeroProfession)1, Gold = 2000000, Attributes = GetNecroAttr(), Statistics = new Statistics() { RankPoints = 0, TotalMatchPlayed = 0, TotalMatchLoose = 0, TotalMatchWin = 0 } }, "Moderator");
+        result.Add(new Hero { NickName = "Sorcerer A", AvatarImageNumber = 3, Profession = (HeroProfession)0, Gold = 2000000, Attributes = GetSorcerersAttr(), Statistics = new Statistics() { RankPoints = 0, TotalMatchPlayed = 0, TotalMatchLoose = 0, TotalMatchWin = 0 } }, "Moderator");
         result.Add(new Hero { NickName = "Necromancer A", AvatarImageNumber = 4, Profession = (HeroProfession)1, Gold = 2000000, Attributes = GetNecroAttr(), Statistics = new Statistics() { RankPoints = 0, TotalMatchPlayed = 0, TotalMatchLoose = 0, TotalMatchWin = 0 } }, "Moderator");
 
         return result;
