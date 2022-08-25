@@ -13,6 +13,7 @@ namespace Wizards.Core.Model.WorldModels
         public int Tier { get; set; }
         
         public EnemyAttributes EnemyAttributes { get; set; }
+        public object AttributesId { get; set; }
         
         public int GoldReward { get; set; }
         
