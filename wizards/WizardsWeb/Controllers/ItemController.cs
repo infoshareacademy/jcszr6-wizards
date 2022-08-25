@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 using Wizards.Services.ItemService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.ItemModelViews;

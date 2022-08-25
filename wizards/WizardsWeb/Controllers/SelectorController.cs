@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 using Wizards.Services.AuthorizationElements.Selector;
 
 namespace WizardsWeb.Controllers;

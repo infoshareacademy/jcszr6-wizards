@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Wizard.Services\Wizards.Services.csproj" />
+    <ProjectReference Include="..\Wizards.GamePlay\Wizards.GamePlay.csproj" />
   </ItemGroup>
 
   <ItemGroup>

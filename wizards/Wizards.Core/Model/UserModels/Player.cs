@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Wizards.Core.Model;
+namespace Wizards.Core.Model.UserModels;
 
 public class Player : IdentityUser<int>
 {

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 using Wizards.Services.PlayerService;
 using Wizards.Services.Helpers;
 using WizardsWeb.ModelViews.PlayerModelViews;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 namespace Wizards.Repository.InitialData.SeedFactories.Implementations;

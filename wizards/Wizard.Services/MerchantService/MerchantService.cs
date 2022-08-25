@@ -1,7 +1,8 @@
 ﻿using System.Security.Claims;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Helpers;
 using Wizards.Services.HeroService;
 using Wizards.Services.Inventory;

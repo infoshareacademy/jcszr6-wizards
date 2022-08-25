@@ -16,6 +16,7 @@ using Wizards.Services.SearchService;
 using Wizards.Services.ItemService;
 using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
+using Wizards.Core.Model.UserModels;
 using Wizards.Repository.InitialData;
 using Wizards.Services.AuthorizationElements;
 using Wizards.Services.AuthorizationElements.Selector;

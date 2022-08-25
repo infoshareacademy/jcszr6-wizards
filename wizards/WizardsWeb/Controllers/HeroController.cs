@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 using Wizards.Services.HeroService;
 using Wizards.Services.Helpers;
 using WizardsWeb.ModelViews.HeroModelViews;

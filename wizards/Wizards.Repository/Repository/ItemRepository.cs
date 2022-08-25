@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
 
 namespace Wizards.Repository.Repository;
 

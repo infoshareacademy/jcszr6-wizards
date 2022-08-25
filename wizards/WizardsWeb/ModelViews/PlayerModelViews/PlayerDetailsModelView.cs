@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 
 namespace WizardsWeb.ModelViews.PlayerModelViews;
 

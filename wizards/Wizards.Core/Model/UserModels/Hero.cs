@@ -1,7 +1,7 @@
-﻿using Wizards.Core.Model.Enums;
-using Wizards.Core.Model.Properties;
+﻿using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.Model.UserModels.Properties;
 
-namespace Wizards.Core.Model;
+namespace Wizards.Core.Model.UserModels;
 
 public class Hero
 {
@@ -13,6 +13,7 @@ public class Hero
 
     public HeroAttributes Attributes { get; set; }
     public int AttributesId { get; set; }
+    public List<HeroSkill> Skills { get; set; }
 
     // Economic
     public int Gold { get; set; }

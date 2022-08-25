@@ -1,6 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 using WizardsWeb.ModelViews.PlayerModelViews;
 using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.RankingModelViews;

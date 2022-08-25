@@ -1,7 +1,7 @@
-﻿using Wizards.Core.Model.Enums;
-using Wizards.Core.Model.Properties;
+﻿using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.Model.UserModels.Properties;
 
-namespace Wizards.Core.Model;
+namespace Wizards.Core.Model.UserModels;
 
 public class Item
 {

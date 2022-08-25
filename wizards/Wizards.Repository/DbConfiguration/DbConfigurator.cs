@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Properties;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Repository.InitialData.SeedFactories.Implementations;
 
 namespace Wizards.Repository.DbConfiguration;

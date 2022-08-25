@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Helpers;
 using Wizards.Services.HeroService;
 using Wizards.Services.MerchantService;

@@ -1,7 +1,8 @@
 ﻿using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
-using Wizards.Core.Model.Properties;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.Settings;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;

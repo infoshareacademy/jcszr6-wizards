@@ -1,4 +1,4 @@
-﻿namespace Wizards.Core.Model.Enums;
+﻿namespace Wizards.Core.Model.UserModels.Enums;
 
 public enum UserRoles
 {

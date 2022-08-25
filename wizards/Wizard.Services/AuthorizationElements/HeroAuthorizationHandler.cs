@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 using Wizards.Services.Helpers;
 
 namespace Wizards.Services.AuthorizationElements;
