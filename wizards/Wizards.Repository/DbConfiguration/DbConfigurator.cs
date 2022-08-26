@@ -23,12 +23,10 @@ public static class DbConfigurator
 
         SetHeroItemConfiguration(modelBuilder);
 
+
         SetEnemyConfiguration(modelBuilder);
-
         SetEnemyAttributesConfiguration(modelBuilder);
-
         SetEnemySkillConfiguration(modelBuilder);
-
         SetEnemyBehaviorPatternConfiguration(modelBuilder);
 
 
@@ -162,6 +160,11 @@ public static class DbConfigurator
             .Property(e => e.Name)
             .IsRequired()
             .HasMaxLength(50);
+
+        modelBuilder.Entity<Enemy>()
+            .Property(e => e.EnemyStageName)
+            .IsRequired()
+            .HasMaxLength(80);
 
         modelBuilder.Entity<Enemy>()
             .Property(e => e.Description)

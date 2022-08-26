@@ -11,7 +11,8 @@ public class Skill
         
         public string SkillName { get; set; }
         public HeroSkillType SkillType { get; set; }
-
+        public ProfessionRestriction ProfessionRestriction { get; set; }
+        
         public double DamageFactor { get; set; }
         public int BaseHitChange { get; set; }
         public int ArmorPenetrationPercent { get; set; }

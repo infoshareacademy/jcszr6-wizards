@@ -3,7 +3,6 @@
 public enum HeroSkillType
 {
     Attack,
-    StrongAttack,
     CounterAttack,
     Block,
     Heal
