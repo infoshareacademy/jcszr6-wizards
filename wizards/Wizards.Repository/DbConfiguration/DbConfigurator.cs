@@ -23,12 +23,133 @@ public static class DbConfigurator
 
         SetHeroItemConfiguration(modelBuilder);
 
-
         SetEnemyConfiguration(modelBuilder);
         SetEnemyAttributesConfiguration(modelBuilder);
         SetEnemySkillConfiguration(modelBuilder);
         SetEnemyBehaviorPatternConfiguration(modelBuilder);
+        SetCobatStageConfiguration(modelBuilder);
+        SetSkillConfiguration(modelBuilder);
+        SetHeroSkillConfiguration(modelBuilder);
+    }
 
+    private static void SetHeroSkillConfiguration(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<HeroSkill>()
+            .HasKey(hs => hs.Id);
+
+        modelBuilder.Entity<Hero>()
+            .HasMany(h => h.Skills)
+            .WithOne(hs => hs.Hero)
+            .HasForeignKey(hs => hs.HeroId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Skill>()
+            .HasMany(s => s.Hero)
+            .WithOne(hs => hs.Skill)
+            .HasForeignKey(hs => hs.SkillId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+
+    private static void SetSkillConfiguration(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Skill>()
+            .HasKey(s => s.Id);
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.SkillName)
+            .HasMaxLength(50)
+            .IsRequired();
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.SkillType)
+            .IsRequired();
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.ProfessionRestriction)
+            .IsRequired();
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.DamageFactor)
+            .HasDefaultValue(1d);
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.BaseHitChange)
+            .HasDefaultValue(80);
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.ArmorPenetrationPercent)
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<Skill>()
+            .Property(s => s.HealingFactor)
+            .HasDefaultValue(0.01d);
+    }
+
+    private static void SetCobatStageConfiguration(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<CombatStage>()
+            .HasKey(cs => cs.Id);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.StageName)
+            .IsRequired(false)
+            .HasMaxLength(80);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.InUse);
+
+        modelBuilder.Entity<CombatStage>()
+            .HasOne(cs => cs.Player)
+            .WithOne(p => p.CombatStage)
+            .HasForeignKey<CombatStage>(cs => cs.PlayerId);
+
+        modelBuilder.Entity<CombatStage>()
+          .Property(cs => cs.HeroId)
+          .IsRequired()
+          .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Ignore(cs => cs.Hero);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.IsHeroStunned);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.CurrentEnemyHealth)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.HeroSelectedSkillId)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.EnemyId)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+              .Ignore(cs => cs.Enemy);
+
+        modelBuilder.Entity<CombatStage>()
+              .Property(cs => cs.IsEnemyStunned);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.CurrentEnemyHealth)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.EnemySelectedSkillId)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.RoundLogs)
+            .HasConversion(
+                s => string.Join(';', s),
+                v => v.Split(';', StringSplitOptions.RemoveEmptyEntries).ToList());
 
 
     }
@@ -55,9 +176,10 @@ public static class DbConfigurator
             .Property(bp => bp.EnemySkillId)
             .HasConversion(
             i => string.Join(';', i),
-            s => string.IsNullOrWhiteSpace(s) ? 
-                new List<int>() : 
-                s.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(v => int.Parse(v)).ToList());
+            s => string.IsNullOrWhiteSpace(s) ?
+                new List<int>() :
+                s.Split(';', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(v => int.Parse(v)).ToList());
     }
 
     private static void SetEnemySkillConfiguration(ModelBuilder modelBuilder)
@@ -246,6 +368,10 @@ public static class DbConfigurator
             .Property(p => p.ActiveItemId)
             .IsRequired()
             .HasDefaultValue(0);
+        modelBuilder.Entity<Player>()
+            .HasOne(p => p.CombatStage)
+            .WithOne(cs => cs.Player)
+            .HasForeignKey<CombatStage>(cs => cs.PlayerId);
     }
 
     private static void SetHeroConfiguration(ModelBuilder modelBuilder)

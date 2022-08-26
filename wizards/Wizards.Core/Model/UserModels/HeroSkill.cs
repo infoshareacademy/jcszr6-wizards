@@ -10,5 +10,5 @@ public class HeroSkill
     public Hero Hero { get; set; }
 
     public int SkillId { get; set; }
-    public Skill Item { get; set; }
+    public Skill Skill { get; set; }
 }

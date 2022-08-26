@@ -155,7 +155,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,7 +237,30 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("HeroItems");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroSkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("HeroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HeroId");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("HeroSkills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -608,7 +631,7 @@ namespace Wizards.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Player", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -697,7 +720,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.HeroAttributes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -734,7 +757,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("HeroAttributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.ItemAttributes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1067,7 +1090,7 @@ namespace Wizards.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.Statistics", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1100,6 +1123,288 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Statistics");
                 });
 
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArmorPenetrationPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BaseHitChange")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(80);
+
+                    b.Property<double>("DamageFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(1.0);
+
+                    b.Property<double>("HealingFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.01);
+
+                    b.Property<int>("HeroId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfessionRestriction")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SkillName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SkillType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.CombatStage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CurrentEnemyHealth")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("CurrentHeroHealth")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EnemyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("EnemySelectedSkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("HeroId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("HeroSelectedSkillId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<bool>("InUse")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEnemyStunned")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHeroStunned")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoundLogs")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StageName")
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId")
+                        .IsUnique();
+
+                    b.ToTable("CombatStages");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AttributesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AvatarImageEnemy")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("EnemyStageName")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<int>("EnemyType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoldReward")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Tier")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributesId")
+                        .IsUnique();
+
+                    b.ToTable("Enemies");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EnemySkillId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TriggerHealthIntervalMax")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TriggerHealthIntervalMin")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("BehaviorPatterns");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CurrentHealth")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Damage")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Defense")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("MaxHealth")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Precision")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Reflex")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Specialization")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EnemiesAtribiutes");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArmorPenetrationPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BaseHitChange")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(80);
+
+                    b.Property<double>("DamageFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("HealingFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.01);
+
+                    b.Property<string>("SkillName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("SkillType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Stunning")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("EnemiesSkills");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -1111,7 +1416,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1120,7 +1425,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1135,7 +1440,7 @@ namespace Wizards.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1144,30 +1449,30 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Properties.HeroAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.HeroAttributes", "Attributes")
                         .WithOne("Hero")
-                        .HasForeignKey("Wizards.Core.Model.Hero", "AttributesId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Hero", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Player", "Player")
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", "Player")
                         .WithMany("Heroes")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Properties.Statistics", "Statistics")
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.Statistics", "Statistics")
                         .WithOne("Hero")
-                        .HasForeignKey("Wizards.Core.Model.Hero", "StatisticsId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Hero", "StatisticsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1178,15 +1483,15 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Statistics");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroItem", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Hero", "Hero")
+                    b.HasOne("Wizards.Core.Model.UserModels.Hero", "Hero")
                         .WithMany("Inventory")
                         .HasForeignKey("HeroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Item", "Item")
+                    b.HasOne("Wizards.Core.Model.UserModels.Item", "Item")
                         .WithMany("Heroes")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1197,47 +1502,133 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroSkill", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Properties.ItemAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.UserModels.Hero", "Hero")
+                        .WithMany("Skills")
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wizards.Core.Model.UserModels.Skill", "Skill")
+                        .WithMany("Hero")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hero");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.ItemAttributes", "Attributes")
                         .WithOne("Item")
-                        .HasForeignKey("Wizards.Core.Model.Item", "AttributesId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Item", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Attributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.CombatStage", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", "Player")
+                        .WithOne("CombatStage")
+                        .HasForeignKey("Wizards.Core.Model.WorldModels.CombatStage", "PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", "EnemyAttributes")
+                        .WithOne("Enemy")
+                        .HasForeignKey("Wizards.Core.Model.WorldModels.Enemy", "AttributesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EnemyAttributes");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Enemy", "Enemy")
+                        .WithMany("BehaviorPatterns")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Enemy");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Enemy", "Enemy")
+                        .WithMany("Skills")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Enemy");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
                     b.Navigation("Inventory");
+
+                    b.Navigation("Skills");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
                 {
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Player", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
+                    b.Navigation("CombatStage")
+                        .IsRequired();
+
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.HeroAttributes", b =>
                 {
                     b.Navigation("Hero")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.ItemAttributes", b =>
                 {
                     b.Navigation("Item")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.Statistics", b =>
                 {
                     b.Navigation("Hero")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Skill", b =>
+                {
+                    b.Navigation("Hero");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.Navigation("BehaviorPatterns");
+
+                    b.Navigation("Skills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
+                {
+                    b.Navigation("Enemy")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -54,6 +54,25 @@ namespace Wizards.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EnemiesAtribiutes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Damage = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Precision = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Specialization = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    MaxHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    CurrentHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Reflex = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Defense = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnemiesAtribiutes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HeroAttributes",
                 columns: table => new
                 {
@@ -89,6 +108,26 @@ namespace Wizards.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItemAttributes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Skills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HeroId = table.Column<int>(type: "int", nullable: false),
+                    SkillName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SkillType = table.Column<int>(type: "int", nullable: false),
+                    ProfessionRestriction = table.Column<int>(type: "int", nullable: false),
+                    DamageFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 1.0),
+                    BaseHitChange = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
+                    ArmorPenetrationPercent = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    HealingFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.01)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Skills", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -214,6 +253,62 @@ namespace Wizards.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CombatStages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StageName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    InUse = table.Column<bool>(type: "bit", nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: false),
+                    HeroId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    IsHeroStunned = table.Column<bool>(type: "bit", nullable: false),
+                    CurrentHeroHealth = table.Column<int>(type: "int", nullable: false),
+                    HeroSelectedSkillId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    EnemyId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    IsEnemyStunned = table.Column<bool>(type: "bit", nullable: false),
+                    CurrentEnemyHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    EnemySelectedSkillId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    RoundLogs = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CombatStages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CombatStages_AspNetUsers_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Enemies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    EnemyType = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Tier = table.Column<int>(type: "int", nullable: false),
+                    AvatarImageEnemy = table.Column<int>(type: "int", nullable: false),
+                    EnemyStageName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    GoldReward = table.Column<int>(type: "int", nullable: false),
+                    AttributesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Enemies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Enemies_EnemiesAtribiutes_AttributesId",
+                        column: x => x.AttributesId,
+                        principalTable: "EnemiesAtribiutes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
@@ -276,6 +371,54 @@ namespace Wizards.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BehaviorPatterns",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EnemyId = table.Column<int>(type: "int", nullable: false),
+                    EnemySkillId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TriggerHealthIntervalMin = table.Column<int>(type: "int", nullable: false),
+                    TriggerHealthIntervalMax = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BehaviorPatterns", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BehaviorPatterns_Enemies_EnemyId",
+                        column: x => x.EnemyId,
+                        principalTable: "Enemies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EnemiesSkills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EnemyId = table.Column<int>(type: "int", nullable: false),
+                    SkillName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    SkillType = table.Column<int>(type: "int", nullable: false),
+                    DamageFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
+                    BaseHitChange = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
+                    ArmorPenetrationPercent = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    HealingFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.01),
+                    Stunning = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EnemiesSkills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EnemiesSkills_Enemies_EnemyId",
+                        column: x => x.EnemyId,
+                        principalTable: "Enemies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HeroItems",
                 columns: table => new
                 {
@@ -299,6 +442,32 @@ namespace Wizards.Repository.Migrations
                         name: "FK_HeroItems_Items_ItemId",
                         column: x => x.ItemId,
                         principalTable: "Items",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HeroSkills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HeroId = table.Column<int>(type: "int", nullable: false),
+                    SkillId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HeroSkills", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HeroSkills_Heroes_HeroId",
+                        column: x => x.HeroId,
+                        principalTable: "Heroes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HeroSkills_Skills_SkillId",
+                        column: x => x.SkillId,
+                        principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -429,6 +598,28 @@ namespace Wizards.Repository.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BehaviorPatterns_EnemyId",
+                table: "BehaviorPatterns",
+                column: "EnemyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CombatStages_PlayerId",
+                table: "CombatStages",
+                column: "PlayerId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Enemies_AttributesId",
+                table: "Enemies",
+                column: "AttributesId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EnemiesSkills_EnemyId",
+                table: "EnemiesSkills",
+                column: "EnemyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Heroes_AttributesId",
                 table: "Heroes",
                 column: "AttributesId",
@@ -462,6 +653,16 @@ namespace Wizards.Repository.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HeroSkills_HeroId",
+                table: "HeroSkills",
+                column: "HeroId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HeroSkills_SkillId",
+                table: "HeroSkills",
+                column: "SkillId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Items_AttributesId",
                 table: "Items",
                 column: "AttributesId",
@@ -486,16 +687,40 @@ namespace Wizards.Repository.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "BehaviorPatterns");
+
+            migrationBuilder.DropTable(
+                name: "CombatStages");
+
+            migrationBuilder.DropTable(
+                name: "EnemiesSkills");
+
+            migrationBuilder.DropTable(
                 name: "HeroItems");
+
+            migrationBuilder.DropTable(
+                name: "HeroSkills");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Heroes");
+                name: "Enemies");
 
             migrationBuilder.DropTable(
                 name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "Heroes");
+
+            migrationBuilder.DropTable(
+                name: "Skills");
+
+            migrationBuilder.DropTable(
+                name: "EnemiesAtribiutes");
+
+            migrationBuilder.DropTable(
+                name: "ItemAttributes");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
@@ -505,9 +730,6 @@ namespace Wizards.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Statistics");
-
-            migrationBuilder.DropTable(
-                name: "ItemAttributes");
         }
     }
 }
