@@ -5,11 +5,10 @@ namespace Wizards.Core.Model.WorldModels
 {
     public class CombatStage
     {
+        // General
         public int Id { get; set; }
         public string StageName { get; set; }
         public bool InUse { get; set; }
-        public Player Player { get; set; }
-        public int PlayerId { get; set; }
 
         // Actual Hero status in Combat
         [NotMapped]
@@ -27,8 +26,11 @@ namespace Wizards.Core.Model.WorldModels
         public int CurrentEnemyHealth { get; set; }
         public int EnemySelectedSkillId { get; set; }
 
-
         // Rounds information
         public List<string> RoundLogs { get; set; }
+
+        // Db relations properties
+        public Player Player { get; set; }
+        public int PlayerId { get; set; }
     }
 }

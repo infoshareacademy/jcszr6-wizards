@@ -75,7 +75,6 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Precision = 5,
             Specialization = 0,
             MaxHealth = 25,
-            CurrentHealth = 25,
             Reflex = 0,
             Defense = 0
         };
@@ -89,7 +88,6 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Precision = 0,
             Specialization = 10,
             MaxHealth = 25,
-            CurrentHealth = 25,
             Reflex = 0,
             Defense = 0
         };
@@ -104,7 +102,6 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Precision = 0,
             Specialization = 0,
             MaxHealth = 0,
-            CurrentHealth = 0,
             Reflex = 0,
             Defense = 0
         };

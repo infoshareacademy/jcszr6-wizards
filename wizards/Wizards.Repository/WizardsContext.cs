@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Core.Model.WorldModels;
