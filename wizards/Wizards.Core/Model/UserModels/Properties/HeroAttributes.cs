@@ -2,7 +2,7 @@
 
 public class HeroAttributes
 {
-    public Hero Hero { get; set; }
+    // General
     public int Id { get; set; }
  
     public int DailyRewardEnergy { get; set; }
@@ -14,7 +14,9 @@ public class HeroAttributes
 
     // Defensive
     public int MaxHealth { get; set; }
-    public int CurrentHealth { get; set; }
     public int Reflex { get; set; }
     public int Defense { get; set; }
+
+    // Db relations properties
+    public Hero Hero { get; set; }
 }

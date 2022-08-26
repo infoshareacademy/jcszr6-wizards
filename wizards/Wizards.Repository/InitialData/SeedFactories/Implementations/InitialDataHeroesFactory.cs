@@ -297,11 +297,11 @@ public class InitialDataHeroesFactory : IInitialDataHeroesFactory
 
     private HeroAttributes GetNecroAttr()
     {
-        return new HeroAttributes() { DailyRewardEnergy = 10, Damage = 10, Precision = 0, Specialization = 5, MaxHealth = 25, CurrentHealth = 25, Defense = 0, Reflex = 0 };
+        return new HeroAttributes() { DailyRewardEnergy = 10, Damage = 10, Precision = 0, Specialization = 5, MaxHealth = 25, Defense = 0, Reflex = 0 };
     }
     private HeroAttributes GetSorcerersAttr()
     {
-        return new HeroAttributes() { DailyRewardEnergy = 10, Damage = 10, Precision = 5, Specialization = 0, MaxHealth = 25, CurrentHealth = 25, Defense = 0, Reflex = 0 };
+        return new HeroAttributes() { DailyRewardEnergy = 10, Damage = 10, Precision = 5, Specialization = 0, MaxHealth = 25, Defense = 0, Reflex = 0 };
     }
 
     private List<HeroItem> GetAdminInventory(Random rnd)

@@ -54,7 +54,7 @@ namespace Wizards.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EnemiesAtribiutes",
+                name: "EnemiesAttributes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -63,7 +63,6 @@ namespace Wizards.Repository.Migrations
                     Precision = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Specialization = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     MaxHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    CurrentHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Reflex = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     Defense = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
                 },
@@ -83,7 +82,6 @@ namespace Wizards.Repository.Migrations
                     Precision = table.Column<int>(type: "int", nullable: false),
                     Specialization = table.Column<int>(type: "int", nullable: false),
                     MaxHealth = table.Column<int>(type: "int", nullable: false),
-                    CurrentHealth = table.Column<int>(type: "int", nullable: false),
                     Reflex = table.Column<int>(type: "int", nullable: false),
                     Defense = table.Column<int>(type: "int", nullable: false)
                 },
@@ -116,12 +114,11 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HeroId = table.Column<int>(type: "int", nullable: false),
-                    SkillName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SkillType = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     ProfessionRestriction = table.Column<int>(type: "int", nullable: false),
                     DamageFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 1.0),
-                    BaseHitChange = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
+                    BaseHitChance = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
                     ArmorPenetrationPercent = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     HealingFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.01)
                 },
@@ -258,18 +255,18 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StageName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: true),
+                    StageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     InUse = table.Column<bool>(type: "bit", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false),
                     HeroId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     IsHeroStunned = table.Column<bool>(type: "bit", nullable: false),
-                    CurrentHeroHealth = table.Column<int>(type: "int", nullable: false),
+                    CurrentHeroHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     HeroSelectedSkillId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     EnemyId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     IsEnemyStunned = table.Column<bool>(type: "bit", nullable: false),
                     CurrentEnemyHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     EnemySelectedSkillId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
-                    RoundLogs = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    RoundLogs = table.Column<string>(type: "nvarchar(max)", maxLength: 30000, nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -290,10 +287,10 @@ namespace Wizards.Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EnemyType = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     Tier = table.Column<int>(type: "int", nullable: false),
                     AvatarImageEnemy = table.Column<int>(type: "int", nullable: false),
-                    EnemyStageName = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
+                    EnemysStageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     GoldReward = table.Column<int>(type: "int", nullable: false),
                     AttributesId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -303,7 +300,7 @@ namespace Wizards.Repository.Migrations
                     table.ForeignKey(
                         name: "FK_Enemies_EnemiesAtribiutes_AttributesId",
                         column: x => x.AttributesId,
-                        principalTable: "EnemiesAtribiutes",
+                        principalTable: "EnemiesAttributes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -318,9 +315,9 @@ namespace Wizards.Repository.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     Restriction = table.Column<int>(type: "int", nullable: false),
                     Tier = table.Column<int>(type: "int", nullable: false),
-                    AttributesId = table.Column<int>(type: "int", nullable: false),
                     BuyPrice = table.Column<int>(type: "int", nullable: false),
-                    SellPrice = table.Column<int>(type: "int", nullable: false)
+                    SellPrice = table.Column<int>(type: "int", nullable: false),
+                    AttributesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -342,8 +339,8 @@ namespace Wizards.Repository.Migrations
                     NickName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Profession = table.Column<int>(type: "int", nullable: false),
                     AvatarImageNumber = table.Column<int>(type: "int", nullable: false),
-                    AttributesId = table.Column<int>(type: "int", nullable: false),
                     Gold = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    AttributesId = table.Column<int>(type: "int", nullable: false),
                     StatisticsId = table.Column<int>(type: "int", nullable: false),
                     PlayerId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -376,10 +373,10 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EnemyId = table.Column<int>(type: "int", nullable: false),
-                    EnemySkillId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TriggerHealthIntervalMin = table.Column<int>(type: "int", nullable: false),
-                    TriggerHealthIntervalMax = table.Column<int>(type: "int", nullable: false)
+                    MinHealthPercentToTrigger = table.Column<int>(type: "int", nullable: false),
+                    MaxHealthPercentToTrigger = table.Column<int>(type: "int", nullable: false),
+                    SkillsIdPattern = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    EnemyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -398,14 +395,14 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EnemyId = table.Column<int>(type: "int", nullable: false),
                     SkillName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     SkillType = table.Column<int>(type: "int", nullable: false),
-                    DamageFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
-                    BaseHitChange = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
+                    DamageFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 1.0),
+                    BaseHitChance = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
                     ArmorPenetrationPercent = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     HealingFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.01),
-                    Stunning = table.Column<bool>(type: "bit", nullable: false)
+                    Stunning = table.Column<bool>(type: "bit", nullable: false),
+                    EnemyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -424,10 +421,10 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HeroId = table.Column<int>(type: "int", nullable: false),
-                    ItemId = table.Column<int>(type: "int", nullable: false),
                     InUse = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    ItemEndurance = table.Column<double>(type: "float", nullable: false, defaultValue: 100.0)
+                    ItemEndurance = table.Column<double>(type: "float", nullable: false, defaultValue: 100.0),
+                    HeroId = table.Column<int>(type: "int", nullable: false),
+                    ItemId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -653,9 +650,10 @@ namespace Wizards.Repository.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HeroSkills_HeroId",
+                name: "IX_HeroSkills_HeroId_SkillId",
                 table: "HeroSkills",
-                column: "HeroId");
+                columns: new[] { "HeroId", "SkillId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_HeroSkills_SkillId",
@@ -666,6 +664,12 @@ namespace Wizards.Repository.Migrations
                 name: "IX_Items_AttributesId",
                 table: "Items",
                 column: "AttributesId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Skills_Name",
+                table: "Skills",
+                column: "Name",
                 unique: true);
         }
 
@@ -717,7 +721,7 @@ namespace Wizards.Repository.Migrations
                 name: "Skills");
 
             migrationBuilder.DropTable(
-                name: "EnemiesAtribiutes");
+                name: "EnemiesAttributes");
 
             migrationBuilder.DropTable(
                 name: "ItemAttributes");

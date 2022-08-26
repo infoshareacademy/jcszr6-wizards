@@ -57,8 +57,6 @@ public static class HeroExtensions
             calculatedAttributes.Defense += heroItem.Item.Attributes.Defense;
         }
 
-        calculatedAttributes.CurrentHealth = calculatedAttributes.MaxHealth;
-
         return calculatedAttributes;
     }
 

@@ -4,17 +4,18 @@ namespace Wizards.Core.Model.UserModels;
 
 public class Skill
 {
+        // General
         public int Id { get; set; }
-        
-        public List<HeroSkill> Hero { get; set; }
-        public int HeroId { get; set; }
-        
-        public string SkillName { get; set; }
-        public HeroSkillType SkillType { get; set; }
+        public string Name { get; set; }
+        public HeroSkillType Type { get; set; }
         public ProfessionRestriction ProfessionRestriction { get; set; }
         
+        // Combat
         public double DamageFactor { get; set; }
-        public int BaseHitChange { get; set; }
+        public int BaseHitChance { get; set; }
         public int ArmorPenetrationPercent { get; set; }
         public double HealingFactor { get; set; }
+        
+        // Db relations properties
+        public List<HeroSkill> Hero { get; set; }
 }

@@ -253,9 +253,10 @@ namespace Wizards.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HeroId");
-
                     b.HasIndex("SkillId");
+
+                    b.HasIndex("HeroId", "SkillId")
+                        .IsUnique();
 
                     b.ToTable("HeroSkills");
                 });
@@ -728,9 +729,6 @@ namespace Wizards.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CurrentHealth")
-                        .HasColumnType("int");
-
                     b.Property<int>("DailyRewardEnergy")
                         .HasColumnType("int");
 
@@ -1136,7 +1134,7 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int>("BaseHitChange")
+                    b.Property<int>("BaseHitChance")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(80);
@@ -1151,21 +1149,21 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.01);
 
-                    b.Property<int>("HeroId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProfessionRestriction")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SkillName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("SkillType")
+                    b.Property<int>("ProfessionRestriction")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Skills");
                 });
@@ -1184,7 +1182,9 @@ namespace Wizards.Repository.Migrations
                         .HasDefaultValue(0);
 
                     b.Property<int>("CurrentHeroHealth")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.Property<int>("EnemyId")
                         .ValueGeneratedOnAdd()
@@ -1220,11 +1220,12 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<string>("RoundLogs")
                         .IsRequired()
+                        .HasMaxLength(30000)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StageName")
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
@@ -1250,16 +1251,16 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("EnemyStageName")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("nvarchar(80)");
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
 
                     b.Property<int>("EnemyType")
                         .HasColumnType("int");
+
+                    b.Property<string>("EnemysStageName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("GoldReward")
                         .HasColumnType("int");
@@ -1291,15 +1292,16 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("EnemyId")
                         .HasColumnType("int");
 
-                    b.Property<string>("EnemySkillId")
+                    b.Property<int>("MaxHealthPercentToTrigger")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinHealthPercentToTrigger")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SkillsIdPattern")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TriggerHealthIntervalMax")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TriggerHealthIntervalMin")
-                        .HasColumnType("int");
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.HasKey("Id");
 
@@ -1315,11 +1317,6 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentHealth")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
 
                     b.Property<int>("Damage")
                         .ValueGeneratedOnAdd()
@@ -1353,7 +1350,7 @@ namespace Wizards.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EnemiesAtribiutes");
+                    b.ToTable("EnemiesAttributes");
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
@@ -1369,7 +1366,7 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<int>("BaseHitChange")
+                    b.Property<int>("BaseHitChance")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(80);
@@ -1377,7 +1374,7 @@ namespace Wizards.Repository.Migrations
                     b.Property<double>("DamageFactor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
-                        .HasDefaultValue(0.0);
+                        .HasDefaultValue(1.0);
 
                     b.Property<int>("EnemyId")
                         .HasColumnType("int");

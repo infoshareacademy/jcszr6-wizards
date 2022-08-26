@@ -2,6 +2,7 @@
 
 public class ItemAttributes
 {
+    // General
     public int Id { get; set; }
 
     // Offensive
@@ -14,5 +15,6 @@ public class ItemAttributes
     public int Reflex { get; set; }
     public int Defense { get; set; }
 
+    // Db relations properties
     public Item Item { get; set; }
 }
