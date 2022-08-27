@@ -12,7 +12,7 @@ public class RoundResult
     public int HeroDamageTaken { get; set; }
     public bool HeroWillBeStunned { get; set; }
     public bool HeroMissesAttack { get; set; }
-    public bool HeroWasUnableToAct { get; set; }
+    public bool HeroWasStunned { get; set; }
 
     // Enemy report
     public string EnemyName { get; set; }
@@ -20,7 +20,7 @@ public class RoundResult
     
     public int EnemyDamageTaken { get; set; }
     public bool EnemyMissesAttack { get; set; }
-    public bool EnemyWasBlocked { get; set; }
-    public bool EnemyWasCountered { get; set; }
-    public bool EnemyWasUnableToAct { get; set; }
+    public bool EnemyBlocked { get; set; }
+    public bool EnemyCountered { get; set; }
+    public bool EnemyWasStunned { get; set; }
 }

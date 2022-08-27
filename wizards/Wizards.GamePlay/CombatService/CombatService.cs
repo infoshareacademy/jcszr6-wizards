@@ -5,78 +5,146 @@ using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Core.ModelExtensions;
+using Wizards.GamePlay.RandomNumberProvider;
 
 namespace Wizards.GamePlay.CombatService;
 
 public class CombatService : ICombatService
 {
-    private HeroSkill HeroSelectedSkill { get; set; }
-    private EnemySkill EnemySelectedSkill { get; set; }
-    private HeroAttributes CalculatedHeroAttributes { get; set; }
+    private readonly IRandomNumberProvider _randomProvider;
+
+    private CombatStage Stage { get; set; }
     private RoundResult RoundResult { get; set; } = new RoundResult();
 
+    public CombatService(IRandomNumberProvider randomProvider)
+    {
+        _randomProvider = randomProvider;
+    }
 
-    public Task<RoundResult> CalculateRoundAsync(CombatStage stage)
+    public async Task<RoundResult> CalculateRoundAsync(CombatStage stage)
     {
         CheckIsStageCorrect(stage);
-        SetProperties(stage);
+        Stage = stage;
 
-        RoundResult.HeroNickName = stage.Hero.NickName;
-        RoundResult.HeroSkillType = HeroSelectedSkill.Skill.Type;
-        RoundResult.EnemyName = stage.Enemy.Name;
-        RoundResult.EnemySkillType = EnemySelectedSkill.SkillType;
+        SetGeneralInRoundResult();
+        
+        var number = await _randomProvider.GetRandomNumberAsync(1, 100);
 
-        RoundResult.EnemyWasUnableToAct = stage.IsEnemyStunned;
-        RoundResult.HeroWasUnableToAct = stage.IsHeroStunned;
+        RoundResult.EnemyWasStunned = Stage.IsEnemyStunned;
+        RoundResult.HeroWasStunned = Stage.IsHeroStunned;
 
-        RoundResult.EnemyWasCountered = (
-            !stage.IsEnemyStunned &&
-            !stage.IsHeroStunned &&
-            EnemySelectedSkill.SkillType == EnemySkillType.Charge &&
-            HeroSelectedSkill.Skill.Type == HeroSkillType.CounterAttack);
+        RoundResult.EnemyCountered = EnemyCountered();
+        RoundResult.EnemyBlocked = EnemyBlocked();
 
-        RoundResult.EnemyWasBlocked = (
-            !stage.IsEnemyStunned &&
-            !stage.IsHeroStunned &&
-            EnemySelectedSkill.SkillType != EnemySkillType.Charge &&
-            HeroSelectedSkill.Skill.Type == HeroSkillType.Block);
+        RoundResult.EnemyMissesAttack = EnemyMissesAttack(number);
 
-        RoundResult.EnemyMissesAttack = EnemyMissesAttack(stage);
+        RoundResult.HeroDamageTaken = GetHeroDamageTaken();
 
-
-        return Task.FromResult(RoundResult);
+        return RoundResult;
     }
 
-    private bool EnemyMissesAttack(CombatStage stage)
+    private void SetGeneralInRoundResult()
     {
-        var rnd = new Random();
+        RoundResult.HeroNickName = Stage.Hero.NickName;
+        RoundResult.EnemyName = Stage.Enemy.Name;
+        RoundResult.HeroSkillType = GetSelectedHeroSkill().Skill.Type;
+        RoundResult.EnemySkillType = GetSelectedEnemySkill().SkillType;
+    }
 
-        var randomNumber = rnd.Next();
+    private bool EnemyCountered()
+    {
+        return (
+            !Stage.IsEnemyStunned &&
+            !Stage.IsHeroStunned &&
+            GetSelectedEnemySkill().SkillType == EnemySkillType.Charge &&
+            GetSelectedHeroSkill().Skill.Type == HeroSkillType.CounterAttack);
+    }
 
-        var finalHitChance = stage.Enemy.EnemyAttributes.Precision + EnemySelectedSkill.BaseHitChance - CalculatedHeroAttributes.Reflex;
+    private bool EnemyBlocked()
+    {
+        return (
+            !Stage.IsEnemyStunned &&
+            !Stage.IsHeroStunned &&
+            GetSelectedEnemySkill().SkillType != EnemySkillType.Charge &&
+            GetSelectedHeroSkill().Skill.Type == HeroSkillType.Block);
+    }
 
+    private bool EnemyMissesAttack(int randomNumber)
+    {
+        var enemyPrecision = Stage.Enemy.EnemyAttributes.Precision;
+        var enemySkillBaseHitChance = GetSelectedEnemySkill().BaseHitChance;
+        var heroCalculatedReflex = Stage.Hero.GetCalculatedAttributes().Reflex;
+        
+        var finalHitChance = enemyPrecision + enemySkillBaseHitChance - heroCalculatedReflex;
+        
         var hasNoChanceToHit = finalHitChance <= 0 || randomNumber > finalHitChance;
 
-        var result = (
-                !stage.IsHeroStunned &&
-                !RoundResult.EnemyWasBlocked &&
-                !RoundResult.EnemyWasCountered &&
-                EnemySelectedSkill.SkillType != EnemySkillType.Deadly &&
-                hasNoChanceToHit) || stage.IsEnemyStunned;
+        var enemyMissesAttack =
+            (Stage.IsEnemyStunned || EnemyCountered() || EnemyBlocked()) ||
+            (hasNoChanceToHit && !Stage.IsHeroStunned && GetSelectedEnemySkill().SkillType != EnemySkillType.Deadly);
         
-        return result;
+        return enemyMissesAttack;
     }
 
-    private void SetProperties(CombatStage stage)
+    private int GetHeroDamageTaken()
     {
-        HeroSelectedSkill = stage.Hero.Skills.SingleOrDefault(s => s.Id == stage.HeroSelectedSkillId);
-        EnemySelectedSkill = stage.Enemy.Skills.SingleOrDefault(s => s.Id == stage.EnemySelectedSkillId);
-        CalculatedHeroAttributes = stage.Hero.GetCalculatedAttributes();
+        var EnemyDamage = Stage.Enemy.GetCalculatedSkillDamage(GetSelectedEnemySkill());
 
-        if (HeroSelectedSkill == null || EnemySelectedSkill == null)
+        var finalDamageFactor = 100d;
+        finalDamageFactor += GetSelectedEnemySkill().ArmorPenetrationPercent;
+        finalDamageFactor -= Stage.Hero.GetCalculatedAttributes().Defense;
+        finalDamageFactor /= 100d;
+
+        if (finalDamageFactor >= 1.10d)
         {
-            throw new ArgumentException("Stage has wrong selected actions!", nameof(stage));
+            finalDamageFactor = 1.10;
         }
+        else if (finalDamageFactor <= 0)
+        {
+            finalDamageFactor = 0d;
+        }
+
+        var finalEnemyDamage = (int)Math.Round(EnemyDamage * finalDamageFactor, 0 , MidpointRounding.AwayFromZero);
+
+        if (RoundResult.EnemyMissesAttack && !Stage.IsHeroStunned && finalEnemyDamage > 0)
+        {
+            return finalEnemyDamage;
+        }
+        
+        if (RoundResult.EnemyMissesAttack && Stage.IsHeroStunned && finalEnemyDamage > 0)
+        {
+            return finalEnemyDamage * 2;
+        }
+
+        return 0;
+    }
+
+
+
+    
+
+    private HeroSkill GetSelectedHeroSkill()
+    {
+        var selectedHeroSkill = Stage.Hero.Skills.SingleOrDefault(s => s.Id == Stage.HeroSelectedSkillId);
+
+        if (selectedHeroSkill == null)
+        {
+            throw new ArgumentException("Hero has wrong selected actions!", nameof(Stage.HeroSelectedSkillId));
+        }
+
+        return selectedHeroSkill;
+    }
+
+    private EnemySkill GetSelectedEnemySkill()
+    {
+        var selectedEnemySkill = Stage.Enemy.Skills.SingleOrDefault(s => s.Id == Stage.EnemySelectedSkillId);
+
+        if (selectedEnemySkill == null)
+        {
+            throw new ArgumentException("Enemy has wrong selected actions!", nameof(Stage.EnemySelectedSkillId));
+        }
+
+        return selectedEnemySkill;
     }
 
     private void CheckIsStageCorrect(CombatStage stage)
