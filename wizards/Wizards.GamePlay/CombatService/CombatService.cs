@@ -1,6 +1,5 @@
 ﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
@@ -28,16 +27,19 @@ public class CombatService : ICombatService
 
         SetGeneralInRoundResult();
         
-        var number = await _randomProvider.GetRandomNumberAsync(1, 100);
-
         RoundResult.EnemyWasStunned = Stage.IsEnemyStunned;
         RoundResult.HeroWasStunned = Stage.IsHeroStunned;
 
+        var number = await _randomProvider.GetRandomNumberAsync(1, 100);
         RoundResult.EnemyCountered = EnemyCountered();
         RoundResult.EnemyBlocked = EnemyBlocked();
-
         RoundResult.EnemyMissesAttack = EnemyMissesAttack(number);
 
+        number = await _randomProvider.GetRandomNumberAsync(1, 100);
+        RoundResult.HeroWillBeStunned = HeroWillBeStunned();
+        RoundResult.HeroMissesAttack = HeroMissesAttack(number);
+
+        RoundResult.EnemyDamageTaken = EnemyDamageTaken();
         RoundResult.HeroDamageTaken = GetHeroDamageTaken();
 
         return RoundResult;
@@ -90,28 +92,18 @@ public class CombatService : ICombatService
     {
         var EnemyDamage = Stage.Enemy.GetCalculatedSkillDamage(GetSelectedEnemySkill());
 
-        var finalDamageFactor = 100d;
-        finalDamageFactor += GetSelectedEnemySkill().ArmorPenetrationPercent;
-        finalDamageFactor -= Stage.Hero.GetCalculatedAttributes().Defense;
-        finalDamageFactor /= 100d;
-
-        if (finalDamageFactor >= 1.10d)
-        {
-            finalDamageFactor = 1.10;
-        }
-        else if (finalDamageFactor <= 0)
-        {
-            finalDamageFactor = 0d;
-        }
+        var finalDamageFactor = GetFinalDamageFactor(
+            Stage.Enemy.GetCalculatedSkillArmorPenetrationPercent(GetSelectedEnemySkill()), 
+            Stage.Hero.GetCalculatedAttributes().Defense);
 
         var finalEnemyDamage = (int)Math.Round(EnemyDamage * finalDamageFactor, 0 , MidpointRounding.AwayFromZero);
 
-        if (RoundResult.EnemyMissesAttack && !Stage.IsHeroStunned && finalEnemyDamage > 0)
+        if (!RoundResult.EnemyMissesAttack && !Stage.IsHeroStunned && finalEnemyDamage > 0)
         {
             return finalEnemyDamage;
         }
         
-        if (RoundResult.EnemyMissesAttack && Stage.IsHeroStunned && finalEnemyDamage > 0)
+        if (!RoundResult.EnemyMissesAttack && Stage.IsHeroStunned && finalEnemyDamage > 0)
         {
             return finalEnemyDamage * 2;
         }
@@ -119,9 +111,71 @@ public class CombatService : ICombatService
         return 0;
     }
 
+    private bool HeroWillBeStunned()
+    {
+        return (
+            !RoundResult.EnemyMissesAttack && 
+            GetSelectedEnemySkill().Stunning);
+    }
 
+    private bool HeroMissesAttack(int number)
+    {
+        var heroSkillHitChance = Stage.Hero.GetCalculatedSkillHitChance(GetSelectedHeroSkill().Skill);
+        var enemyReflex = Stage.Enemy.EnemyAttributes.Reflex;
 
+        var finalHitChance = heroSkillHitChance - enemyReflex;
+
+        var hasNoChanceToHit = number > finalHitChance || finalHitChance <= 0;
+
+        var heroMissesAttack =
+            (hasNoChanceToHit && Stage.IsEnemyStunned) ||
+            (Stage.IsHeroStunned);
+
+        return heroMissesAttack;
+    }
     
+    private int EnemyDamageTaken()
+    {
+        var heroDamage = Stage.Enemy.GetCalculatedSkillDamage(GetSelectedEnemySkill());
+
+        var finalDamageFactor = GetFinalDamageFactor(
+            Stage.Hero.GetCalculatedSkillArmorPenetrationPercent(GetSelectedHeroSkill().Skill),
+            Stage.Enemy.EnemyAttributes.Defense);
+
+        var finalHeroDamage = (int)Math.Round(heroDamage * finalDamageFactor, 0, MidpointRounding.AwayFromZero);
+
+        if (!RoundResult.HeroMissesAttack && !Stage.IsEnemyStunned && finalHeroDamage > 0)
+        {
+            return finalHeroDamage;
+        }
+
+        if (!RoundResult.HeroMissesAttack && Stage.IsEnemyStunned && finalHeroDamage > 0)
+        {
+            return finalHeroDamage * 2;
+        }
+
+        return 0;
+    }
+
+
+    // Second Tier Helpers
+    private double GetFinalDamageFactor(int attackersArmorPenetrationPercent, int defendersTotalDefense)
+    {
+        var finalDamageFactor = (100d
+                                 + attackersArmorPenetrationPercent
+                                 - defendersTotalDefense) / 100d;
+
+        if (finalDamageFactor >= 1.10d)
+        {
+            finalDamageFactor = 1.10d;
+        }
+        else if (finalDamageFactor <= 0d)
+        {
+            finalDamageFactor = 0d;
+        }
+
+        return finalDamageFactor;
+    }
 
     private HeroSkill GetSelectedHeroSkill()
     {
