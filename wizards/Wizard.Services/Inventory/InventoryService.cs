@@ -2,7 +2,7 @@
 using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
-using Wizards.Services.Helpers;
+using Wizards.Core.ModelExtensions;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 using Wizards.Services.Validation.Elements;
