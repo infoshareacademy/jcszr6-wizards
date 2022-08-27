@@ -9,10 +9,10 @@ namespace Wizards.Core.Interfaces
 {
     public interface IHeroSkillsRepository
     {
-        Task<List<HeroSkill>> GetAll();
-        Task<HeroSkill?> Get(int id);
-        Task Add(HeroSkill heroSkill);
-        Task Update(HeroSkill heroSkill);
-        Task Remove(HeroSkill heroSkill);
+        Task<List<HeroSkill>> GetAllAsync();
+        Task<HeroSkill?> GetAsync(int id);
+        Task AddAsync(HeroSkill heroSkill);
+        Task UpdateAsync(HeroSkill heroSkill);
+        Task RemoveAsync(HeroSkill heroSkill);
     }
 }

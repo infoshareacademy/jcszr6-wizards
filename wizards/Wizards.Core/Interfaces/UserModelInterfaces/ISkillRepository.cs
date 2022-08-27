@@ -9,10 +9,10 @@ namespace Wizards.Core.Interfaces
 {
     public interface ISkillRepository
     {
-        Task<List<Skill>> GetAll();
-        Task<Skill?> Get(int id);
-        Task Add(Skill skill);
-        Task Update(Skill skill);
-        Task Remove(Skill skill);
+        Task<List<Skill>> GetAllAsync();
+        Task<Skill?> GetAsync(int id);
+        Task AddAsync(Skill skill);
+        Task UpdateAsync(Skill skill);
+        Task RemoveAsync(Skill skill);
     }
 }

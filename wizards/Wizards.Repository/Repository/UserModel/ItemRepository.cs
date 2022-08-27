@@ -4,7 +4,7 @@ using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
 
-namespace Wizards.Repository.Repository;
+namespace Wizards.Repository.Repository.UserModel;
 
 public class ItemRepository : IItemRepository
 

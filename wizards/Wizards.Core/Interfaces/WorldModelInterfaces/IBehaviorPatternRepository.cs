@@ -10,10 +10,10 @@ namespace Wizards.Core.Interfaces
 {
     public interface IBehaviorPatternRepository
     {
-        Task<List<BehaviorPattern>> GetAll();
-        Task<BehaviorPattern?> Get(int id);
-        Task Add(Enemy enemy, BehaviorPattern behaviorPattern);
-        Task Update(BehaviorPattern behaviorPattern);
-        Task Remove(BehaviorPattern behaviorPattern);
+        Task<List<BehaviorPattern>> GetAllAsync();
+        Task<BehaviorPattern?> GetAsync(int id);
+        Task AddAsync(Enemy enemy, BehaviorPattern behaviorPattern);
+        Task UpdateAsync(BehaviorPattern behaviorPattern);
+        Task RemoveAsync(BehaviorPattern behaviorPattern);
     }
 }
