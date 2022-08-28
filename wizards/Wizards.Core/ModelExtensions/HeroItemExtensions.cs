@@ -1,7 +1,6 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Services.Helpers;
+namespace Wizards.Core.ModelExtensions;
 
 public static class HeroItemExtensions
 {

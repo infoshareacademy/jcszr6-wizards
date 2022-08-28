@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Services.Helpers;
+using Wizards.Services.Extentions;
 using Wizards.Services.HeroService;
 using Wizards.Services.MerchantService;
 using Wizards.Services.Validation.Elements;

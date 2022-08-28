@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Wizards.Services.Validation.Elements;
 
-namespace Wizards.Services.Helpers;
+namespace Wizards.Services.Extentions;
 
 public static class ControllerHelpers
 {

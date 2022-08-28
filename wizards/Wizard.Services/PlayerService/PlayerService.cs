@@ -4,7 +4,7 @@ using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Services.Helpers;
+using Wizards.Services.Extentions;
 using Wizards.Services.Validation;
 using Wizards.Services.Validation.Elements;
 

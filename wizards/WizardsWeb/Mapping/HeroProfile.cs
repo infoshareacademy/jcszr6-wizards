@@ -2,7 +2,7 @@
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
-using Wizards.Services.Helpers;
+using Wizards.Core.ModelExtensions;
 using WizardsWeb.ModelViews.HeroModelViews;
 using WizardsWeb.ModelViews.HeroModelViews.Properties;
 
@@ -19,7 +19,7 @@ public class HeroProfile : Profile
             .ForMember(dto => dto.Gold,
                 exp=>exp.MapFrom(s=>s.Gold))
             .ForMember(dto => dto.HerosAvargeItemTier,
-                exp=>exp.MapFrom(s=>s.GetAvargeItemTier()));
+                exp=>exp.MapFrom(s=>s.GetAverageItemTier()));
 
         CreateMap<HeroCreateModelView, Hero>();
         
