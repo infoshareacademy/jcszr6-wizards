@@ -28,18 +28,18 @@ public class CombatService : ICombatService
         HeroSelectedSkill = stage.GetHeroSelectedSkill();
 
         var roundResult = new RoundResult();
-        var randomNumbers = (await _randomProvider.GetManyRandomNumbersAsync(1, 100, 2));
+        var hitChanceRandomNumbers = (await _randomProvider.GetManyRandomNumbersAsync(1, 100, 2));
 
         SetGeneralInfo(roundResult, stage);
 
         roundResult.EnemyWasStunned = stage.IsEnemyStunned;
         roundResult.EnemyCountered = EnemyCountered(stage);
         roundResult.EnemyBlocked = EnemyBlocked(stage);
-        roundResult.EnemyMissesAttack = EnemyMissesAttack(stage, randomNumbers[1]);
+        roundResult.EnemyMissesAttack = EnemyMissesAttack(stage, hitChanceRandomNumbers.Dequeue());
 
         roundResult.HeroWasStunned = stage.IsHeroStunned;
         roundResult.HeroWillBeStunned = HeroWillBeStunned(EnemySelectedSkill.Stunning, roundResult.EnemyMissesAttack);
-        roundResult.HeroMissesAttack = HeroMissesAttack(stage, randomNumbers[2]);
+        roundResult.HeroMissesAttack = HeroMissesAttack(stage, hitChanceRandomNumbers.Dequeue());
 
         roundResult.EnemyDamageTaken = EnemyDamageTaken(stage, roundResult.HeroMissesAttack);
         roundResult.HeroDamageTaken = GetHeroDamageTaken(stage, roundResult.EnemyMissesAttack);

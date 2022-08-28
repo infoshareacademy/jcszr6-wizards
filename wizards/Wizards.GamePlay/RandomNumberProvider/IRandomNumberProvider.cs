@@ -3,5 +3,5 @@
 public interface IRandomNumberProvider
 {
     Task<int> GetRandomNumberAsync(int min, int max);
-    Task<List<int>> GetManyRandomNumbersAsync(int min, int max, int count);
+    Task<Queue<int>> GetManyRandomNumbersAsync(int min, int max, int count);
 }

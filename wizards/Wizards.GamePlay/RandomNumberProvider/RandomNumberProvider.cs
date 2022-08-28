@@ -15,9 +15,9 @@ public class RandomNumberProvider : IRandomNumberProvider
         return Task.FromResult(result);
     }
 
-    public Task<List<int>> GetManyRandomNumbersAsync(int min, int max, int count)
+    public Task<Queue<int>> GetManyRandomNumbersAsync(int min, int max, int count)
     {
-        var result = new List<int>();
+        var result = new Queue<int>();
 
         if (count <= 0)
         {
@@ -27,7 +27,7 @@ public class RandomNumberProvider : IRandomNumberProvider
         for (int i = 0; i < count; i++)
         {
             var number = _randomizer.Next(min, max + 1);
-            result.Add(number);
+            result.Enqueue(number);
         }
 
         return Task.FromResult(result);
