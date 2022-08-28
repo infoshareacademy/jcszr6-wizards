@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Wizards.Services.AuthorizationElements;
 using Wizards.Services.AuthorizationElements.Selector;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
@@ -33,5 +35,25 @@ public static class ServiceRegistration
         services.AddTransient<IPlayerValidator, PlayerValidator>();
         services.AddTransient<IHeroValidator, HeroValidator>();
         services.AddTransient<IItemValidator, ItemValidator>();
+    }
+
+    public static void AddAuthorizationElements(this IServiceCollection services)
+    {
+        // Policy for Resource-Based Authorization configuration
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("HeroOwnerPolicy", policy =>
+                policy.Requirements.Add(new HeroOwnerRequirement()));
+        });
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("ItemOwnerPolicy", policy =>
+                policy.Requirements.Add(new ItemOwnerRequirement()));
+        });
+
+        // Resource-Based Authorization Handler Configuration
+        services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
+        services.AddTransient<IAuthorizationHandler, ItemAuthorizationHandler>();
     }
 }
