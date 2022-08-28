@@ -87,7 +87,7 @@ public class CombatService : ICombatService
 
         var hasNoChanceToHit = CombatLogicHelpers.AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
-        var enemyMissesAttack =
+        var enemyMissesAttack = 
             (stage.IsEnemyStunned || EnemyCountered(stage) || EnemyBlocked(stage)) ||
             (hasNoChanceToHit && !stage.IsHeroStunned && !CombatLogicHelpers.GetEnemySkillsTypesThatCannotMiss().Contains(EnemySelectedSkill.SkillType));
 

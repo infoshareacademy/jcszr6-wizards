@@ -14,14 +14,15 @@ using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
 using Wizards.Services.SearchService;
 using Wizards.Services.ItemService;
-using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Model.UserModels;
+using Wizards.GamePlay.ServicesRegistration;
 using Wizards.Repository.InitialData;
 using Wizards.Services.AuthorizationElements;
 using Wizards.Services.AuthorizationElements.Selector;
 using Wizards.Services.Inventory;
 using Wizards.Services.MerchantService;
+using Wizards.Services.ServiceRegistration;
 
 
 namespace WizardsWeb;
@@ -41,28 +42,17 @@ public class Startup
         services.AddControllersWithViews();
 
         // Busines Logic Services Configuration
+
         services.AddTransient<IPlayerRepository, PlayerRepository>();
-        services.AddTransient<IPlayerService, PlayerService>();
-        services.AddTransient<IPlayerValidator, PlayerValidator>();
-
         services.AddTransient<IHeroRepository, HeroRepository>();
-        services.AddTransient<IHeroService, HeroService>();
-        services.AddTransient<IHeroValidator, HeroValidator>();
-        services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
-
-        services.AddTransient<ISelector, Selector>();
-        
-        services.AddTransient<ISearchService, SearchService>();
-
         services.AddTransient<IItemRepository, ItemRepository>();
-        services.AddTransient<IItemService, ItemService>();
-        services.AddTransient<IItemValidator, ItemValidator>();
-
         services.AddTransient<IHeroItemRepository, HeroItemRepository>();
-        services.AddTransient<IMerchantService, MerchantService>();
-        services.AddTransient<IInventoryService, InventoryService>();
-
         services.AddDataInitializer();
+
+        services.AddValidators();
+        services.AddModelServices();
+        
+        services.AddGamePlayServices();
 
         // External Packages Configuration
         var connectionString = Configuration.GetConnectionString("WizardDatabase");

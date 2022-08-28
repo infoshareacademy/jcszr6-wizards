@@ -9,7 +9,7 @@ public static class Params
     public const double PercentDivider = 100d;
 
     public const int MinOutgoingDamage = 0;
-    public const double BonusDamageFactor = 2;
+    public const double BonusDamageFactor = 2d;
 
     public const double MaxHealingFactor = 1.25;
     public const double MinHealingFactor = 0.9;
