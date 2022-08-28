@@ -10,6 +10,7 @@ public class RoundResult
     public HeroSkillType HeroSkillType { get; set; }
 
     public int HeroDamageTaken { get; set; }
+    public int HeroHealthRecovered { get; set; }
     public bool HeroWillBeStunned { get; set; }
     public bool HeroMissesAttack { get; set; }
     public bool HeroWasStunned { get; set; }
@@ -19,6 +20,7 @@ public class RoundResult
     public EnemySkillType EnemySkillType { get; set; }
     
     public int EnemyDamageTaken { get; set; }
+    public int EnemyHealthRecovered { get; set; }
     public bool EnemyMissesAttack { get; set; }
     public bool EnemyBlocked { get; set; }
     public bool EnemyCountered { get; set; }

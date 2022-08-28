@@ -59,7 +59,7 @@ public static class HeroExtensions
         return calculatedAttributes;
     }
 
-    public static int GetCalculatedSkillDamage(this Hero hero, Skill skill)
+    public static int CalculateSkillDamage(this Hero hero, Skill skill)
     {
         if (hero == null || skill == null)
         {
@@ -74,7 +74,7 @@ public static class HeroExtensions
         return result;
     }
 
-    public static int GetCalculatedSkillHitChance(this Hero hero, Skill skill)
+    public static int CalculateSkillHitChance(this Hero hero, Skill skill)
     {
         if (hero == null || skill == null)
         {
@@ -89,7 +89,7 @@ public static class HeroExtensions
         return result;
     }
 
-    public static int GetCalculatedSkillArmorPenetrationPercent(this Hero hero, Skill skill)
+    public static int CalculateSkillArmorPenetrationPercent(this Hero hero, Skill skill)
     {
         if (hero == null || skill == null)
         {
@@ -104,7 +104,7 @@ public static class HeroExtensions
         return result;
     }
 
-    public static int GetCalculatedSkillHealing(this Hero hero, Skill skill)
+    public static int CalculateSkillHealing(this Hero hero, Skill skill)
     {
         if (hero == null || skill == null)
         {

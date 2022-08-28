@@ -5,8 +5,7 @@ namespace Wizards.Core.ModelExtensions;
 
 public static class EnemyExtensions
 {
-
-    public static int GetCalculatedSkillDamage(this Enemy enemy, EnemySkill enemySkill)
+    public static int CalculateSkillDamage(this Enemy enemy, EnemySkill enemySkill)
     {
         if (enemy == null || enemySkill == null)
         {
@@ -22,7 +21,7 @@ public static class EnemyExtensions
         return result;
     }
 
-    public static int GetCalculatedSkillHitChance(this Enemy enemy, EnemySkill enemySkill)
+    public static int CalculateSkillHitChance(this Enemy enemy, EnemySkill enemySkill)
     {
         if (enemy == null || enemySkill == null)
         {
@@ -38,7 +37,7 @@ public static class EnemyExtensions
         return result;
     }
 
-    public static int GetCalculatedSkillArmorPenetrationPercent(this Enemy enemy, EnemySkill enemySkill)
+    public static int CalculateSkillArmorPenetrationPercent(this Enemy enemy, EnemySkill enemySkill)
     {
         if (enemy == null || enemySkill == null)
         {
@@ -54,7 +53,7 @@ public static class EnemyExtensions
         return result;
     }
 
-    public static int GetCalculatedSkillHealing(this Enemy enemy, EnemySkill enemySkill)
+    public static int CalculateSkillHealing(this Enemy enemy, EnemySkill enemySkill)
     {
         if (enemy == null || enemySkill == null)
         {
