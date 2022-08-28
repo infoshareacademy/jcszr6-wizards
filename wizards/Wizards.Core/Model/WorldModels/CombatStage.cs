@@ -26,6 +26,8 @@ namespace Wizards.Core.Model.WorldModels
         public bool IsEnemyStunned { get; set; }
         public int CurrentEnemyHealth { get; set; }
         public int EnemySelectedSkillId { get; set; }
+        public int EnemyBehaviorPatternId { get; set; }
+        public int EnemyPatternStepId { get; set; }
 
         // Rounds information
         public List<RoundLog> RoundLogs { get; set; }

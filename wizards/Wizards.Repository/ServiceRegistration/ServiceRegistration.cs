@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Wizards.Core.Interfaces;
+using Wizards.Repository.InitialData;
+using Wizards.Repository.InitialData.SeedFactories.Implementations;
+using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 using Wizards.Repository.Repository.UserModel;
 using Wizards.Repository.Repository.WorldModel;
 
@@ -20,7 +23,16 @@ namespace Wizards.Repository.ServiceRegistration
             services.AddTransient<ICombatStageRepository, CombatStageRepository>();
             services.AddTransient<IEnemySkillsRepository, EnemySkillsRepository>();
             services.AddTransient<IBehaviorPatternRepository, BehaviorPatternRepository>();
+        }
 
-        }               
+        public static void AddDataInitializer(this IServiceCollection services)
+        {
+            services.AddTransient<IInitialDataRolesFactory, InitialDataRolesFactory>();
+            services.AddTransient<IInitialDataUsersFactory, InitialDataUsersFactory>();
+            services.AddTransient<IInitialDataHeroesFactory, InitialDataHeroesFactory>();
+            services.AddTransient<IInitialDataItemsFactory, InitialDataItemsFactory>();
+
+            services.AddTransient<IInitialDataInjector, InitialDataInjector>();
+        }
     }
 }

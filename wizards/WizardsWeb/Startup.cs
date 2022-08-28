@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wizards.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Model.UserModels;
 using Wizards.GamePlay.ServicesRegistration;
+using Wizards.Repository;
 using Wizards.Repository.InitialData;
 using Wizards.Services.ServiceRegistration;
 using Wizards.Repository.ServiceRegistration;
@@ -28,9 +28,8 @@ public class Startup
     {
         services.AddControllersWithViews();
 
-        // Busines Logic Services Configuration
+        // Business Logic Services Configuration
         services.AddRepositories();
-
         services.AddDataInitializer();
 
         services.AddValidators();

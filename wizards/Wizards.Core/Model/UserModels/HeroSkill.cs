@@ -1,6 +1,4 @@
-﻿using Wizards.Core.Model.UserModels.Properties;
-
-namespace Wizards.Core.Model.UserModels;
+﻿namespace Wizards.Core.Model.UserModels;
 
 public class HeroSkill
 {

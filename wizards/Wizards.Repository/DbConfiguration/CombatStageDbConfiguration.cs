@@ -66,6 +66,16 @@ internal static class CombatStageDbConfiguration
             .Property(cs => cs.EnemySelectedSkillId)
             .IsRequired()
             .HasDefaultValue(0);
+        
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.EnemyBehaviorPatternId)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Property(cs => cs.EnemyPatternStepId)
+            .IsRequired()
+            .HasDefaultValue(0);
 
         modelBuilder.Entity<CombatStage>()
             .Property(cs => cs.RoundLogs)
