@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Xml.Serialization;
 using Wizards.Core.Model.WorldModels;
+using Wizards.Core.Model.WorldModels.Properties;
 
 namespace Wizards.Repository.DbConfiguration;
 
@@ -68,8 +70,30 @@ internal static class CombatStageDbConfiguration
         modelBuilder.Entity<CombatStage>()
             .Property(cs => cs.RoundLogs)
             .HasConversion(
-                s => string.Join("<NextLog>", s),
-                v => v.Split("<NextLog>", StringSplitOptions.RemoveEmptyEntries).ToList())
+                rl => rl.RoundLogsToXml(),
+                v => v.XmlToRoundLogs())
             .HasMaxLength(30_000);
+    }
+    private static string RoundLogsToXml(this List<RoundLog> roundLogs)
+    {
+        var serializer = new XmlSerializer(typeof(List<RoundLog>));
+        var writer = new StringWriter();
+        serializer.Serialize(writer, roundLogs);
+        var xmlText = writer.ToString();
+        return xmlText;
+    }
+
+    private static List<RoundLog> XmlToRoundLogs(this string xmlValue)
+    {
+        var serializer = new XmlSerializer(typeof(List<RoundLog>));
+        var reader = new StringReader(xmlValue);
+        var result = (List<RoundLog>)serializer.Deserialize(reader);
+
+        if (result == null)
+        {
+            result = new List<RoundLog>();
+        }
+
+        return result;
     }
 }

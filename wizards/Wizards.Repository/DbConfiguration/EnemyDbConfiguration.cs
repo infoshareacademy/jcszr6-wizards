@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Xml.Serialization;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Properties;
 
@@ -169,27 +170,31 @@ internal static class EnemyDbConfiguration
         modelBuilder.Entity<BehaviorPattern>()
             .Property(bp => bp.SkillsIdPattern)
             .HasConversion(
-                i => i.EnemySkillIdToString(),
-                s => s.EnemySkillIdToProperty())
+                i => i.SkillsIdPatternToXml(),
+                s => s.XmlToSkillIdPattern())
             .HasMaxLength(1024);
     }
 
-    private static string EnemySkillIdToString(this List<int> numbers)
+    private static string SkillsIdPatternToXml(this Dictionary<int, int> skillsIdPattern)
     {
-        return string.Join(';', numbers);
+        var serializer = new XmlSerializer(typeof(Dictionary<int, int>));
+        var writer = new StringWriter();
+        serializer.Serialize(writer, skillsIdPattern);
+        var xmlText = writer.ToString();
+        return xmlText;
     }
 
-    private static List<int> EnemySkillIdToProperty(this string value)
+    private static Dictionary<int, int> XmlToSkillIdPattern(this string xmlValue)
     {
-        var result = new List<int>();
+        var serializer = new XmlSerializer(typeof(Dictionary<int, int>));
+        var reader = new StringReader(xmlValue);
+        var result = (Dictionary<int, int>)serializer.Deserialize(reader);
 
-        if (!string.IsNullOrWhiteSpace(value))
+        if (result == null)
         {
-            result = value.Split(';', StringSplitOptions.RemoveEmptyEntries)
-                .Select(v => int.Parse(v))
-                .ToList();
+            result = new Dictionary<int, int>();
         }
-        
+
         return result;
     }
 }

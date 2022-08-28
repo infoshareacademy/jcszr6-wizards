@@ -8,7 +8,7 @@
         // Patterns
         public int MinHealthPercentToTrigger { get; set; }
         public int MaxHealthPercentToTrigger { get; set; }
-        public List<int> SkillsIdPattern { get; set; }
+        public Dictionary<int, int> SkillsIdPattern { get; set; }
 
         // Db relations properties
         public Enemy Enemy { get; set; }

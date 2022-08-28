@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.WorldModels.Properties;
 
 namespace Wizards.Core.Model.WorldModels
 {
@@ -27,7 +28,7 @@ namespace Wizards.Core.Model.WorldModels
         public int EnemySelectedSkillId { get; set; }
 
         // Rounds information
-        public List<string> RoundLogs { get; set; }
+        public List<RoundLog> RoundLogs { get; set; }
 
         // Db relations properties
         public Player Player { get; set; }
