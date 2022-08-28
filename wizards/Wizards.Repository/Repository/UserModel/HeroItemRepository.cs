@@ -3,7 +3,7 @@ using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Repository.Repository;
+namespace Wizards.Repository.Repository.UserModel;
 
 public class HeroItemRepository : IHeroItemRepository
 {

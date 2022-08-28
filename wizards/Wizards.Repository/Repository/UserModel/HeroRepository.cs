@@ -3,7 +3,7 @@ using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Repository.Repository;
+namespace Wizards.Repository.Repository.UserModel;
 
 public class HeroRepository : IHeroRepository
 {
@@ -26,7 +26,9 @@ public class HeroRepository : IHeroRepository
             .Include(h => h.Statistics)
             .Include(h => h.Inventory)
                 .ThenInclude(hi => hi.Item)
-                .ThenInclude(i => i.Attributes)
+                    .ThenInclude(i => i.Attributes)
+            .Include(h => h.Skills)
+                .ThenInclude(hs => hs.Skill)
             .SingleOrDefaultAsync(h => h.Id == id);
     }
 

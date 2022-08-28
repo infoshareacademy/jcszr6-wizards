@@ -8,7 +8,6 @@ using Wizards.Services.Validation;
 using Wizards.Repository;
 using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces;
-using Wizards.Repository.Repository;
 using Wizards.Services.Factories;
 using Wizards.Services.HeroService;
 using Wizards.Services.PlayerService;
@@ -23,6 +22,7 @@ using Wizards.Services.AuthorizationElements.Selector;
 using Wizards.Services.Inventory;
 using Wizards.Services.MerchantService;
 using Wizards.Services.ServiceRegistration;
+using Wizards.Repository.Repository.UserModel;
 
 
 namespace WizardsWeb;

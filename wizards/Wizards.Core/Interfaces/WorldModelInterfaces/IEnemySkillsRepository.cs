@@ -10,11 +10,11 @@ namespace Wizards.Core.Interfaces
 {
     public interface IEnemySkillsRepository
     {
-        Task<List<EnemySkill>> GetAll();
-        Task<EnemySkill?> Get(int id);
-        Task Add(Enemy enemy,EnemySkill enemySkill);
-        Task Update(EnemySkill enemySkill);
-        Task Remove(EnemySkill enemySkill);
+        Task<List<EnemySkill>> GetAllAsync();
+        Task<EnemySkill?> GetAsync(int id);
+        Task AddAsync(Enemy enemy,EnemySkill enemySkill);
+        Task UpdateAsync(EnemySkill enemySkill);
+        Task RemoveAsync(EnemySkill enemySkill);
     }
 }
 

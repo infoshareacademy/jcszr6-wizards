@@ -3,7 +3,7 @@ using Wizards.Core.Interfaces;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Repository.Repository;
+namespace Wizards.Repository.Repository.UserModel;
 
 public class PlayerRepository : IPlayerRepository
 {
@@ -18,7 +18,8 @@ public class PlayerRepository : IPlayerRepository
     {
         return await _wizardsContext.Players
             .Include(p => p.Heroes)
-            .ThenInclude(x => x.Statistics)
+                .ThenInclude(x => x.Statistics)
+            .Include(p => p.CombatStage)
             .ToListAsync();
     }
 
@@ -40,22 +41,22 @@ public class PlayerRepository : IPlayerRepository
         foreach (var hero in player.Heroes)
         {
             var statistics = await _wizardsContext.Statistics.SingleOrDefaultAsync(s => s.Id == hero.StatisticsId);
-            
+
             if (statistics != null)
             {
                 _wizardsContext.Statistics.Remove(statistics);
             }
-            
+
             var attributes = await _wizardsContext.HeroAttributes.SingleOrDefaultAsync(ha => ha.Id == hero.AttributesId);
-            
-            if (attributes!= null)
+
+            if (attributes != null)
             {
                 _wizardsContext.HeroAttributes.Remove(attributes);
             }
         }
 
         _wizardsContext.Players.Remove(player);
-        
+
         await _wizardsContext.SaveChangesAsync();
     }
 
