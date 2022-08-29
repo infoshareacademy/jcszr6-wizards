@@ -5,5 +5,4 @@ namespace Wizards.GamePlay.CombatService;
 public interface ICombatService
 {
     Task<RoundResult> CalculateRoundAsync(CombatStage stage);
-
 }

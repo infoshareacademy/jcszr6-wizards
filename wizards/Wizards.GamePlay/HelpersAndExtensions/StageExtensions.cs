@@ -6,16 +6,21 @@ namespace Wizards.GamePlay.HelpersAndExtensions;
 
 public static class StageExtensions
 {
-    public static HeroSkill GetHeroSelectedSkill(this CombatStage stage)
+    public static Skill GetHeroSelectedSkill(this CombatStage stage)
     {
         var selectedHeroSkill = stage.Hero.Skills.SingleOrDefault(s => s.Id == stage.HeroSelectedSkillId);
 
         if (selectedHeroSkill == null)
         {
-            throw new ArgumentException("Hero has wrong selected actions!", nameof(stage.HeroSelectedSkillId));
+            throw new ArgumentNullException(nameof(stage.HeroSelectedSkillId), "Hero has wrong selected actions!");
         }
 
-        return selectedHeroSkill;
+        if (selectedHeroSkill.Skill == null)
+        {
+            throw new ArgumentException("HeroSKill has no Skill object!", nameof(stage.HeroSelectedSkillId));
+        }
+
+        return selectedHeroSkill.Skill;
     }
 
     public static EnemySkill GetEnemySelectedSkill(this CombatStage stage)
@@ -24,7 +29,7 @@ public static class StageExtensions
 
         if (selectedEnemySkill == null)
         {
-            throw new ArgumentException("Enemy has wrong selected actions!", nameof(stage.EnemySelectedSkillId));
+            throw new ArgumentNullException(nameof(stage.HeroSelectedSkillId), "Enemy has wrong selected actions!");
         }
 
         return selectedEnemySkill;
