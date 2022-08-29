@@ -18,7 +18,8 @@ internal static class CombatStageDbConfiguration
             .HasMaxLength(50);
 
         modelBuilder.Entity<CombatStage>()
-            .Property(cs => cs.InUse);
+            .Property(cs => cs.Status)
+            .IsRequired();
 
         modelBuilder.Entity<CombatStage>()
             .HasOne(cs => cs.Player)
@@ -47,6 +48,9 @@ internal static class CombatStageDbConfiguration
             .HasDefaultValue(0);
 
         modelBuilder.Entity<CombatStage>()
+            .Ignore(cs => cs.HeroSelectedSkill);
+
+        modelBuilder.Entity<CombatStage>()
             .Property(cs => cs.EnemyId)
             .IsRequired()
             .HasDefaultValue(0);
@@ -66,6 +70,9 @@ internal static class CombatStageDbConfiguration
             .Property(cs => cs.EnemySelectedSkillId)
             .IsRequired()
             .HasDefaultValue(0);
+
+        modelBuilder.Entity<CombatStage>()
+            .Ignore(cs => cs.EnemySelectedSkill);
         
         modelBuilder.Entity<CombatStage>()
             .Property(cs => cs.EnemyBehaviorPatternId)

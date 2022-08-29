@@ -1,20 +1,15 @@
-﻿using Wizards.Core.Model.UserModels;
-using Wizards.Core.Model.UserModels.Enums;
+﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
-using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Core.ModelExtensions;
-using Wizards.GamePlay.HelpersAndExtensions;
 using Wizards.GamePlay.RandomNumberProvider;
+using static Wizards.GamePlay.HelpersAndExtensions.CombatLogicHelpers;
 
 namespace Wizards.GamePlay.CombatService;
 
 public class CombatService : ICombatService
 {
     private readonly IRandomNumberProvider _randomProvider;
-
-    private HeroSkill HeroSelectedSkill { get; set; }
-    private EnemySkill EnemySelectedSkill { get; set; }
 
     public CombatService(IRandomNumberProvider randomProvider)
     {
@@ -24,8 +19,6 @@ public class CombatService : ICombatService
     public async Task<RoundResult> CalculateRoundAsync(CombatStage stage)
     {
         CheckIsStageCorrect(stage);
-        EnemySelectedSkill = stage.GetEnemySelectedSkill();
-        HeroSelectedSkill = stage.GetHeroSelectedSkill();
 
         var roundResult = new RoundResult();
         var hitChanceRandomNumbers = (await _randomProvider.GetManyRandomNumbersAsync(1, 100, 2));
@@ -38,7 +31,7 @@ public class CombatService : ICombatService
         roundResult.EnemyMissesAttack = EnemyMissesAttack(stage, hitChanceRandomNumbers.Dequeue());
 
         roundResult.HeroWasStunned = stage.IsHeroStunned;
-        roundResult.HeroWillBeStunned = HeroWillBeStunned(EnemySelectedSkill.Stunning, roundResult.EnemyMissesAttack);
+        roundResult.HeroWillBeStunned = HeroWillBeStunned(stage.EnemySelectedSkill.Stunning, roundResult.EnemyMissesAttack);
         roundResult.HeroMissesAttack = HeroMissesAttack(stage, hitChanceRandomNumbers.Dequeue());
 
         roundResult.EnemyDamageTaken = EnemyDamageTaken(stage, roundResult.HeroMissesAttack);
@@ -54,8 +47,8 @@ public class CombatService : ICombatService
     {
         roundResult.HeroNickName = stage.Hero.NickName;
         roundResult.EnemyName = stage.Enemy.Name;
-        roundResult.HeroSkillType = HeroSelectedSkill.Skill.Type;
-        roundResult.EnemySkillType = EnemySelectedSkill.SkillType;
+        roundResult.HeroSkillType = stage.HeroSelectedSkill.Type;
+        roundResult.EnemySkillType = stage.EnemySelectedSkill.SkillType;
     }
 
     private bool AreBothStunned(CombatStage stage)
@@ -67,29 +60,29 @@ public class CombatService : ICombatService
     {
         return (
             !AreBothStunned(stage) &&
-            EnemySelectedSkill.SkillType == EnemySkillType.Charge &&
-            HeroSelectedSkill.Skill.Type == HeroSkillType.CounterAttack);
+            stage.EnemySelectedSkill.SkillType == EnemySkillType.Charge &&
+            stage.HeroSelectedSkill.Type == HeroSkillType.CounterAttack);
     }
 
     private bool EnemyBlocked(CombatStage stage)
     {
         return (
             !AreBothStunned(stage) &&
-            EnemySelectedSkill.SkillType != EnemySkillType.Charge &&
-            HeroSelectedSkill.Skill.Type == HeroSkillType.Block);
+            stage.EnemySelectedSkill.SkillType != EnemySkillType.Charge &&
+            stage.HeroSelectedSkill.Type == HeroSkillType.Block);
     }
 
     private bool EnemyMissesAttack(CombatStage stage, int randomNumber)
     {
-        var finalHitChance = CombatLogicHelpers.CalculateFinalHitChance(
-            stage.Enemy.CalculateSkillHitChance(EnemySelectedSkill),
+        var finalHitChance = CalculateFinalHitChance(
+            stage.Enemy.CalculateSkillHitChance(stage.EnemySelectedSkill),
             stage.Hero.GetCalculatedAttributes().Reflex);
 
-        var hasNoChanceToHit = CombatLogicHelpers.AttackerHasNoChanceToHit(randomNumber, finalHitChance);
+        var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
         var enemyMissesAttack = 
             (stage.IsEnemyStunned || EnemyCountered(stage) || EnemyBlocked(stage)) ||
-            (hasNoChanceToHit && !stage.IsHeroStunned && !CombatLogicHelpers.GetEnemySkillsTypesThatCannotMiss().Contains(EnemySelectedSkill.SkillType));
+            (hasNoChanceToHit && !stage.IsHeroStunned && !GetEnemySkillsTypesThatCannotMiss().Contains(stage.EnemySelectedSkill.SkillType));
 
         return enemyMissesAttack;
     }
@@ -101,65 +94,65 @@ public class CombatService : ICombatService
 
     private bool HeroMissesAttack(CombatStage stage, int randomNumber)
     {
-        var finalHitChance = CombatLogicHelpers.CalculateFinalHitChance(
-            stage.Hero.CalculateSkillHitChance(HeroSelectedSkill.Skill),
+        var finalHitChance = CalculateFinalHitChance(
+            stage.Hero.CalculateSkillHitChance(stage.HeroSelectedSkill),
             stage.Enemy.EnemyAttributes.Reflex);
 
-        var hasNoChanceToHit = CombatLogicHelpers.AttackerHasNoChanceToHit(randomNumber, finalHitChance);
+        var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
         var heroMissesAttack =
             (stage.IsHeroStunned) ||
-            (hasNoChanceToHit && !stage.IsEnemyStunned && CombatLogicHelpers.GetHeroSkillsTypesThatCannotMiss().Contains(HeroSelectedSkill.Skill.Type));
+            (hasNoChanceToHit && !stage.IsEnemyStunned && GetHeroSkillsTypesThatCannotMiss().Contains(stage.HeroSelectedSkill.Type));
 
         return heroMissesAttack;
     }
 
     private int GetHeroDamageTaken(CombatStage stage, bool enemyMissesAttack)
     {
-        var enemySkillDamage = stage.Enemy.CalculateSkillDamage(EnemySelectedSkill);
+        var enemySkillDamage = stage.Enemy.CalculateSkillDamage(stage.EnemySelectedSkill);
 
-        var finalDamageFactor = CombatLogicHelpers.CalculateFinalDamageFactor(
-            stage.Enemy.CalculateSkillArmorPenetrationPercent(EnemySelectedSkill),
+        var finalDamageFactor = CalculateFinalDamageFactor(
+            stage.Enemy.CalculateSkillArmorPenetrationPercent(stage.EnemySelectedSkill),
             stage.Hero.GetCalculatedAttributes().Defense);
 
-        var finalEnemyDamage = CombatLogicHelpers.CalculateAttackersDamage(enemySkillDamage, finalDamageFactor);
+        var finalEnemyDamage = CalculateAttackersDamage(enemySkillDamage, finalDamageFactor);
 
-        return CombatLogicHelpers.CalculateDefendersDamageTaken(finalEnemyDamage, enemyMissesAttack, stage.IsHeroStunned);
+        return CalculateDefendersDamageTaken(finalEnemyDamage, enemyMissesAttack, stage.IsHeroStunned);
     }
 
     private int EnemyDamageTaken(CombatStage stage, bool heroMissesAttack)
     {
-        var heroDamage = stage.Hero.CalculateSkillDamage(HeroSelectedSkill.Skill);
+        var heroDamage = stage.Hero.CalculateSkillDamage(stage.HeroSelectedSkill);
 
-        var finalDamageFactor = CombatLogicHelpers.CalculateFinalDamageFactor(
-            stage.Hero.CalculateSkillArmorPenetrationPercent(HeroSelectedSkill.Skill),
+        var finalDamageFactor = CalculateFinalDamageFactor(
+            stage.Hero.CalculateSkillArmorPenetrationPercent(stage.HeroSelectedSkill),
             stage.Enemy.EnemyAttributes.Defense);
 
-        var finalHeroDamage = CombatLogicHelpers.CalculateAttackersDamage(heroDamage, finalDamageFactor);
+        var finalHeroDamage = CalculateAttackersDamage(heroDamage, finalDamageFactor);
 
-        return CombatLogicHelpers.CalculateDefendersDamageTaken(finalHeroDamage, heroMissesAttack, stage.IsEnemyStunned);
+        return CalculateDefendersDamageTaken(finalHeroDamage, heroMissesAttack, stage.IsEnemyStunned);
     }
 
     private int HeroHealthRecovered(CombatStage stage)
     {
-        var heroSkillHealing = stage.Hero.CalculateSkillHealing(HeroSelectedSkill.Skill);
+        var heroSkillHealing = stage.Hero.CalculateSkillHealing(stage.HeroSelectedSkill);
 
-        var finalHealingFactor = CombatLogicHelpers.CalculateFinalHealingFactor(stage.Hero.GetCalculatedAttributes().Specialization);
+        var finalHealingFactor = CalculateFinalHealingFactor(stage.Hero.GetCalculatedAttributes().Specialization);
 
-        var healersHealing =  CombatLogicHelpers.CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
+        var healersHealing =  CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
 
-        return CombatLogicHelpers.CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
+        return CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
     }
 
     private int EnemyHealthRecovered(CombatStage stage)
     {
-        var heroSkillHealing = stage.Enemy.CalculateSkillHealing(EnemySelectedSkill);
+        var heroSkillHealing = stage.Enemy.CalculateSkillHealing(stage.EnemySelectedSkill);
 
-        var finalHealingFactor = CombatLogicHelpers.CalculateFinalHealingFactor(stage.Enemy.EnemyAttributes.Specialization);
+        var finalHealingFactor = CalculateFinalHealingFactor(stage.Enemy.EnemyAttributes.Specialization);
 
-        var healersHealing = CombatLogicHelpers.CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
+        var healersHealing = CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
 
-        return CombatLogicHelpers.CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
+        return CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
     }
 
     private void CheckIsStageCorrect(CombatStage stage)
@@ -169,9 +162,9 @@ public class CombatService : ICombatService
             throw new ArgumentNullException(nameof(stage));
         }
 
-        if (!stage.InUse)
+        if (stage.Status != StageStatus.DuringCombat)
         {
-            throw new ArgumentException("Stage is not in use!");
+            throw new ArgumentException("Stage is not in combat!");
         }
 
         if (stage.Hero == null)
@@ -192,6 +185,16 @@ public class CombatService : ICombatService
         if (stage.Enemy.EnemyAttributes == null || stage.Enemy.Skills == null)
         {
             throw new ArgumentNullException(nameof(stage.Enemy), "Enemy is not completed!");
+        }
+
+        if (stage.HeroSelectedSkill == null)
+        {
+            throw new ArgumentNullException(nameof(stage.HeroSelectedSkill), "There is no Hero skill selected!");
+        }
+
+        if (stage.EnemySelectedSkill == null)
+        {
+            throw new ArgumentNullException(nameof(stage.EnemySelectedSkill), "There is no Enemy skill selected!");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
 
 namespace Wizards.Core.Model.WorldModels
@@ -9,7 +10,7 @@ namespace Wizards.Core.Model.WorldModels
         // General
         public int Id { get; set; }
         public string StageName { get; set; }
-        public bool InUse { get; set; }
+        public StageStatus Status { get; set; }
 
         // Actual Hero status in Combat
         [NotMapped]
@@ -17,6 +18,8 @@ namespace Wizards.Core.Model.WorldModels
         public int HeroId { get; set; }
         public bool IsHeroStunned { get; set; }
         public int CurrentHeroHealth { get; set; }
+        [NotMapped]
+        public Skill HeroSelectedSkill { get; set; }
         public int HeroSelectedSkillId { get; set; }
 
         // Actual Enemy status in combat
@@ -25,6 +28,8 @@ namespace Wizards.Core.Model.WorldModels
         public int EnemyId { get; set; }
         public bool IsEnemyStunned { get; set; }
         public int CurrentEnemyHealth { get; set; }
+        [NotMapped] 
+        public EnemySkill EnemySelectedSkill { get; set; }
         public int EnemySelectedSkillId { get; set; }
         public int EnemyBehaviorPatternId { get; set; }
         public int EnemyPatternStepId { get; set; }

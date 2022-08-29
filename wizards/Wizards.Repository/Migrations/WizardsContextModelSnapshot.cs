@@ -1186,7 +1186,17 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
+                    b.Property<int>("EnemyBehaviorPatternId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
                     b.Property<int>("EnemyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("EnemyPatternStepId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(0);
@@ -1206,9 +1216,6 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<bool>("InUse")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsEnemyStunned")
                         .HasColumnType("bit");
 
@@ -1226,6 +1233,9 @@ namespace Wizards.Repository.Migrations
                     b.Property<string>("StageName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

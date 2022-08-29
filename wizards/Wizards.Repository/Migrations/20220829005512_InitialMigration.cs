@@ -68,7 +68,7 @@ namespace Wizards.Repository.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EnemiesAtribiutes", x => x.Id);
+                    table.PrimaryKey("PK_EnemiesAttributes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -256,7 +256,7 @@ namespace Wizards.Repository.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    InUse = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     HeroId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     IsHeroStunned = table.Column<bool>(type: "bit", nullable: false),
                     CurrentHeroHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
@@ -265,6 +265,8 @@ namespace Wizards.Repository.Migrations
                     IsEnemyStunned = table.Column<bool>(type: "bit", nullable: false),
                     CurrentEnemyHealth = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     EnemySelectedSkillId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    EnemyBehaviorPatternId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    EnemyPatternStepId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     RoundLogs = table.Column<string>(type: "nvarchar(max)", maxLength: 30000, nullable: false),
                     PlayerId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -298,7 +300,7 @@ namespace Wizards.Repository.Migrations
                 {
                     table.PrimaryKey("PK_Enemies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Enemies_EnemiesAtribiutes_AttributesId",
+                        name: "FK_Enemies_EnemiesAttributes_AttributesId",
                         column: x => x.AttributesId,
                         principalTable: "EnemiesAttributes",
                         principalColumn: "Id",
