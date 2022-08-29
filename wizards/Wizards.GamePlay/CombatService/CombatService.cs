@@ -2,6 +2,7 @@
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.ModelExtensions;
+using Wizards.GamePlay.CombatService.Enums;
 using Wizards.GamePlay.RandomNumberProvider;
 using static Wizards.GamePlay.HelpersAndExtensions.CombatLogicHelpers;
 
@@ -25,22 +26,60 @@ public class CombatService : ICombatService
 
         SetGeneralInfo(roundResult, stage);
 
-        roundResult.EnemyWasStunned = stage.IsEnemyStunned;
-        roundResult.EnemyCountered = EnemyCountered(stage);
-        roundResult.EnemyBlocked = EnemyBlocked(stage);
-        roundResult.EnemyMissesAttack = EnemyMissesAttack(stage, hitChanceRandomNumbers.Dequeue());
+        roundResult.EnemyCombatStatus = GetEnemyCombatStatus(stage, hitChanceRandomNumbers.Dequeue());
+        roundResult.HeroCombatStatus = GetHeroCombatStatus(stage, hitChanceRandomNumbers.Dequeue());
 
-        roundResult.HeroWasStunned = stage.IsHeroStunned;
-        roundResult.HeroWillBeStunned = HeroWillBeStunned(stage.EnemySelectedSkill.Stunning, roundResult.EnemyMissesAttack);
-        roundResult.HeroMissesAttack = HeroMissesAttack(stage, hitChanceRandomNumbers.Dequeue());
+        roundResult.EnemyWillBeStunned = EnemyCountered(stage);
+        roundResult.HeroWillBeStunned = HeroWillBeStunned(stage.EnemySelectedSkill.Stunning, roundResult.EnemyCombatStatus);
 
-        roundResult.EnemyDamageTaken = EnemyDamageTaken(stage, roundResult.HeroMissesAttack);
-        roundResult.HeroDamageTaken = GetHeroDamageTaken(stage, roundResult.EnemyMissesAttack);
+        roundResult.EnemyDamageTaken = EnemyDamageTaken(stage, roundResult.HeroCombatStatus);
+        roundResult.HeroDamageTaken = GetHeroDamageTaken(stage, roundResult.EnemyCombatStatus);
 
         roundResult.EnemyHealthRecovered = EnemyHealthRecovered(stage);
         roundResult.HeroHealthRecovered = HeroHealthRecovered(stage);
 
         return roundResult;
+    }
+
+    private EnemyCombatStatus GetEnemyCombatStatus(CombatStage stage, int randomNumberForHitChance)
+    {
+        var result = EnemyCombatStatus.HitsSuccessfully;
+
+        if (stage.IsEnemyStunned)
+        {
+            result = EnemyCombatStatus.WasStunned;
+        }
+        else if (EnemyCountered(stage))
+        {
+            result = EnemyCombatStatus.Countered;
+        }
+        else if (EnemyBlocked(stage))
+        {
+            result = EnemyCombatStatus.Blocked;
+        }
+        else if (EnemyMissesAttack(stage, randomNumberForHitChance))
+        {
+            result = EnemyCombatStatus.MissesAttack;
+        }
+
+        return result;
+    }
+
+    private HeroCombatStatus GetHeroCombatStatus(CombatStage stage, int randomNumberForHitChance)
+    {
+        var result = HeroCombatStatus.HitsSuccessfully;
+
+        if (stage.IsHeroStunned)
+        {
+            result = HeroCombatStatus.WasStunned;
+        }
+
+        if (HeroMissesAttack(stage, randomNumberForHitChance))
+        {
+            result = HeroCombatStatus.MissesAttack;
+        }
+
+        return result;
     }
 
     private void SetGeneralInfo(RoundResult roundResult, CombatStage stage)
@@ -80,15 +119,16 @@ public class CombatService : ICombatService
 
         var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
-        var enemyMissesAttack = 
-            (stage.IsEnemyStunned || EnemyCountered(stage) || EnemyBlocked(stage)) ||
+        var enemyMissesAttack =
             (hasNoChanceToHit && !stage.IsHeroStunned && !GetEnemySkillsTypesThatCannotMiss().Contains(stage.EnemySelectedSkill.SkillType));
 
         return enemyMissesAttack;
     }
 
-    private bool HeroWillBeStunned(bool isEnemySkillStunning, bool enemyMissesAttack)
+    private bool HeroWillBeStunned(bool isEnemySkillStunning, EnemyCombatStatus enemyCombatStatus)
     {
+        var enemyMissesAttack = enemyCombatStatus != EnemyCombatStatus.HitsSuccessfully;
+        
         return (!enemyMissesAttack && isEnemySkillStunning);
     }
 
@@ -101,14 +141,14 @@ public class CombatService : ICombatService
         var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
         var heroMissesAttack =
-            (stage.IsHeroStunned) ||
             (hasNoChanceToHit && !stage.IsEnemyStunned && GetHeroSkillsTypesThatCannotMiss().Contains(stage.HeroSelectedSkill.Type));
 
         return heroMissesAttack;
     }
 
-    private int GetHeroDamageTaken(CombatStage stage, bool enemyMissesAttack)
+    private int GetHeroDamageTaken(CombatStage stage, EnemyCombatStatus enemyCombatStatus)
     {
+        var enemyMissesAttack = enemyCombatStatus != EnemyCombatStatus.HitsSuccessfully;
         var enemySkillDamage = stage.Enemy.CalculateSkillDamage(stage.EnemySelectedSkill);
 
         var finalDamageFactor = CalculateFinalDamageFactor(
@@ -120,14 +160,15 @@ public class CombatService : ICombatService
         return CalculateDefendersDamageTaken(finalEnemyDamage, enemyMissesAttack, stage.IsHeroStunned);
     }
 
-    private int EnemyDamageTaken(CombatStage stage, bool heroMissesAttack)
+    private int EnemyDamageTaken(CombatStage stage, HeroCombatStatus heroCombatStatus)
     {
+        var heroMissesAttack = heroCombatStatus != HeroCombatStatus.HitsSuccessfully;
         var heroDamage = stage.Hero.CalculateSkillDamage(stage.HeroSelectedSkill);
-
+        
         var finalDamageFactor = CalculateFinalDamageFactor(
             stage.Hero.CalculateSkillArmorPenetrationPercent(stage.HeroSelectedSkill),
             stage.Enemy.EnemyAttributes.Defense);
-
+        
         var finalHeroDamage = CalculateAttackersDamage(heroDamage, finalDamageFactor);
 
         return CalculateDefendersDamageTaken(finalHeroDamage, heroMissesAttack, stage.IsEnemyStunned);
@@ -136,10 +177,8 @@ public class CombatService : ICombatService
     private int HeroHealthRecovered(CombatStage stage)
     {
         var heroSkillHealing = stage.Hero.CalculateSkillHealing(stage.HeroSelectedSkill);
-
         var finalHealingFactor = CalculateFinalHealingFactor(stage.Hero.GetCalculatedAttributes().Specialization);
-
-        var healersHealing =  CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
+        var healersHealing = CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
 
         return CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
     }
@@ -147,9 +186,7 @@ public class CombatService : ICombatService
     private int EnemyHealthRecovered(CombatStage stage)
     {
         var heroSkillHealing = stage.Enemy.CalculateSkillHealing(stage.EnemySelectedSkill);
-
         var finalHealingFactor = CalculateFinalHealingFactor(stage.Enemy.EnemyAttributes.Specialization);
-
         var healersHealing = CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
 
         return CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
