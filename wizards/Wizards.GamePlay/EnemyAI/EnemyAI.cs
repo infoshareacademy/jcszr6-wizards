@@ -4,26 +4,53 @@ namespace Wizards.GamePlay.EnemiesAI;
 
 public class EnemyAI : IEnemyAI
 {
-    public Task<int> GetEnemySelectedSkillIdAsync(CombatStage stage)
+    public Task GetEnemySelectedSkillIdAsync(CombatStage stage)
     {
-        // TODO: Wyciągnąć Enemy z CombatStage
 
-        // TODO: Wyciągamy Patterny z Enemy
+        var enemy = stage.Enemy;
 
-        // TODO: Pobierz poziom życa Enemy
+        int currentHealthPercent = GetEnemyCurrentHealthPercent(stage, enemy);
 
-        // TODO: Wybrać Patern Pasujący do poziomu (procentowego) życia Enemy
+        var nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.MinHealthPercentToTrigger > currentHealthPercent && p.MaxHealthPercentToTrigger <= currentHealthPercent);
 
-        // TODO: Pobrać Numer Patternu z CombatStage'a użytego w poprzedniej rundzie
+        var previousEnemyPatternId = stage.EnemyBehaviorPatternId;
 
-        // Jeśli patterny są różne to bierze pierwszy skill z nowego patternu
+        if (previousEnemyPatternId != nextEnemyPattern.Id)
+        {
+            SetNewStageStatus(stage, nextEnemyPattern, 0);
+            return Task.CompletedTask;
+        }
+        nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.Id == previousEnemyPatternId);
 
-        // TODO: Pobrać kolejność skilla z CombatStage'a użytego w poprzedniej rundzie
+        var previousEnemyPatternSequenceStepId = stage.EnemyPatternSequenceStepId;
 
-        // Jeśli kolejność skilla z poprzedniej rundy jest maxem z patternu to bierze pierwszy skill z obecnego patternu
+        var isMaxStep = previousEnemyPatternSequenceStepId == nextEnemyPattern.SequenceOfSkillsId.Keys.Max();
 
-        // W przeciwnym wypadku Bierze następny skill z obecnego patternu
+        if (isMaxStep)
+        {
+            SetNewStageStatus(stage, nextEnemyPattern, 0);
+            return Task.CompletedTask;
+        }
 
-        throw new NotImplementedException();
+        var newEnemyPatternSequenceStepId = previousEnemyPatternSequenceStepId + 1;
+
+        SetNewStageStatus(stage, nextEnemyPattern, newEnemyPatternSequenceStepId);
+
+        return Task.CompletedTask;
+    }
+
+    private static void SetNewStageStatus(CombatStage stage, Core.Model.WorldModels.Properties.BehaviorPattern? nextEnemyPattern, int newEnemyPatternSequenceStepId)
+    {
+        stage.EnemySelectedSkillId = nextEnemyPattern.SequenceOfSkillsId[newEnemyPatternSequenceStepId];
+        stage.EnemyPatternSequenceStepId = nextEnemyPattern.Id;
+        stage.EnemyBehaviorPatternId = newEnemyPatternSequenceStepId;
+    }
+
+    private static int GetEnemyCurrentHealthPercent(CombatStage stage, Enemy enemy)
+    {
+        var currentEnemyHealth = stage.CurrentEnemyHealth;
+        var maxEnemyHealth = enemy.Attributes.MaxHealth;
+        var currentHealthPercent = (int)Math.Round((((double)currentEnemyHealth / maxEnemyHealth) * 100), 0);
+        return currentHealthPercent;
     }
 }

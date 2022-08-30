@@ -4,6 +4,6 @@ namespace Wizards.GamePlay.EnemiesAI
 {
     public interface IEnemyAI
     {
-        public Task<int> GetEnemySelectedSkillIdAsync(CombatStage stage);
+        public Task GetEnemySelectedSkillIdAsync(CombatStage stage);
     }
 }

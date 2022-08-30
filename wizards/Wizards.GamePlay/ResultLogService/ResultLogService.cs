@@ -1,5 +1,8 @@
-﻿using Wizards.Core.Model.WorldModels.Properties;
+﻿using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.Model.WorldModels.Enums;
+using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.GamePlay.CombatService;
+using Wizards.GamePlay.CombatService.Enums;
 
 namespace Wizards.GamePlay.ResultLogService;
 
@@ -7,30 +10,134 @@ public class ResultLogService : IResultLogService
 {
     public Task<RoundLog> CreateRoundLogAsync(RoundResult roundResult)
     {
-        // TODO: Najpierw trzeba ustalić koncepcję jak piszemy komunikat graczowi
-        // [Kto] [co zrobił] [komu] [ile zadał obrażeń] ? czy tak czy inaczej?
-        // Trzymamy sie konwencji czasu (albo cały czas przeszły albo cały czas teraźniejszy)
+        // TODO: Healing value for Hero and Enemy
 
-        // TODO: Wygenerować komunikat CO GRACZ ZROBIŁ ENEMY:
+        var heroMessage = GetMessageForHero(roundResult);
+        var enemyMessage = GetMessageForEnemy(roundResult);
 
-        // Czy Hero Był Zestunowany jesli tak to [cały komunika] ustawiamy na Hero is Stunned
-        // Czy Skontrował przeciwnika? Jeśli tak to [co zrobił] ustawiamy na "Counters"
-        // Czy Zablokował przeciwnika? Jeśli tak to [co zrobił] ustawiamy na "Blocks"
-        // Jeśli nie trafił przeciwnika? To [co zrobił] ustawiamy na "Mishits"
+        var roundLog = new RoundLog();
 
-        // Jeśli Trafił przeciwnika. To: [co zrobił] ustawiamy na 'hits' oraz [ile zadał obrażeń] ustawiamy na wartość obrażeń.
+        roundLog.HeroActionLog = heroMessage;
+        roundLog.EnemyActionLog = enemyMessage;
+
+        return Task.FromResult(roundLog);
+
+    }
+
+    private string GetMessageForEnemy(RoundResult roundResult)
+    {
+        var enemy = "";
+        var whatDid = "";
+        var hero = "";
+        var howMuchDamage = "";
+
+        var message = "";
+
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.WasStunned)
+        {
+            message = $"{enemy} was stunned";
+        }
+
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
+        {
+            message = $"{enemy} has been blocked";
+        }
+
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
+        {
+            message = $"{enemy} has been countered";
+        }
+
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.MissesAttack)
+        {
+            message = $"{enemy} has missed attack";
+        }
+
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.HitsSuccessfully)
+        {
+            whatDid = $"hit with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
+            howMuchDamage = $"and deals {roundResult.EnemyDamageTaken} damage";
+        }
+
+        return message;
+    }
+
+    private static string GetMessageForHero(RoundResult roundResult)
+    {
+        var attacker = "";
+        var whatDid = "";
+        var defender = "";
+        var howMuchDamage = "";
+
+        var message = "";
+
+        if (roundResult.HeroCombatStatus == HeroCombatStatus.WasStunned)
+        {
+            message = $"{attacker} was stunned";
+        }
 
 
-        // TODO: Wygenerować komunikat CO ENEMY ZROBIŁ GRACZOWI:
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
+        {
+            whatDid = "countred";
+        }
 
-        // Czy Enemy Był Zestunowany. Jesli tak to [cały komunika] ustawiamy na Enemy is Stunned
-        // Czy Enemy Był Zablokowany. Jesli tak to [cały komunika] ustawiamy na Enemy is Blocked
-        // Czy Enemy Był Skontrowany. Jesli tak to [cały komunika] ustawiamy na Enemy is Contered
-        // Jeśli nie trafił bohatera? To [co zrobił] ustawiamy na "Mishits"
-
-        // Czy Enemy Trafił bohatera? Jeśli tak to [co zrobił] ustawiamy na 'hits' oraz [ile zadał obrażeń] ustawiamy na wartość obrażeń.
+        if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
+        {
+            whatDid = "blocked";
+        }
 
 
-        throw new NotImplementedException();
+        if (roundResult.HeroCombatStatus == HeroCombatStatus.MissesAttack)
+        {
+            whatDid = "missed hit";
+        }
+
+        if (roundResult.HeroCombatStatus == HeroCombatStatus.HitsSuccessfully)
+        {
+            whatDid = $"hit with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            howMuchDamage = $"and deals {roundResult.EnemyDamageTaken} damage";
+        }
+
+        if (message == "")
+        {
+            message = $"{attacker} {whatDid} {defender} {howMuchDamage}";
+        }
+
+        return message;
+    }
+
+    private static string HeroSkillTypeToString(HeroSkillType heroSkillType)
+    {
+        switch (heroSkillType)
+        {
+            case HeroSkillType.Block:
+                return "block";
+            case HeroSkillType.Attack:
+                return "attack";
+            case HeroSkillType.CounterAttack:
+                return "counter attack";
+            case HeroSkillType.Heal:
+                return "heal";
+            default:
+                return heroSkillType.ToString();
+        }
+    }
+
+    private static string EnemySkillTypeToString(EnemySkillType enemySkillType)
+    {
+        switch (enemySkillType)
+        {
+            case EnemySkillType.Attack:
+                return "attack";
+            case EnemySkillType.StrongAttack:
+                return "strong attack";
+            case EnemySkillType.Charge:
+                return "charge";
+            case EnemySkillType.Deadly:
+                return "deadly attack";
+            default:
+                return enemySkillType.ToString();
+        }
     }
 }
