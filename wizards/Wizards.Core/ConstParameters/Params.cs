@@ -2,6 +2,18 @@
 
 public static class Params
 {
+    public const double ItemFullyRepairedMax = 100.00d;
+    public const double ItemFullyRepairedMin = 99.00d;
+    
+    public const double ItemInGoodConditionMin = 66.00d;
+    public const double ItemDamagedMin = 33.00d;
+    public const double ItemCrashedMin = 0.00d;
+    
+    public const double ItemInGoodConditionAttrFactor = 1.00d;
+    public const double ItemDamagedAttrFactor = 0.75d;
+    public const double ItemCrashedAttrFactor = 0.50d;
+    
+
     public const double MaxDamageFactor = 1.10d;
     public const double MinDamageFactor = 0d;
 

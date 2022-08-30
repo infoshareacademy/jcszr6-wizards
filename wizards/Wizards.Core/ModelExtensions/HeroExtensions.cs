@@ -1,5 +1,6 @@
 ﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
+using static Wizards.Core.ConstParameters.Params;
 
 namespace Wizards.Core.ModelExtensions;
 
@@ -47,16 +48,38 @@ public static class HeroExtensions
 
         foreach (var heroItem in heroEquippedItems)
         {
-            calculatedAttributes.Damage += heroItem.Item.Attributes.Damage;
-            calculatedAttributes.Precision += heroItem.Item.Attributes.Precision;
-            calculatedAttributes.Specialization += heroItem.Item.Attributes.Specialization;
+            var attrFactor= CalculateItemUsageAttributesFactor(heroItem);
 
-            calculatedAttributes.MaxHealth += heroItem.Item.Attributes.MaxHealth;
-            calculatedAttributes.Reflex += heroItem.Item.Attributes.Reflex;
-            calculatedAttributes.Defense += heroItem.Item.Attributes.Defense;
+            calculatedAttributes.Damage += (int)Math.Round(heroItem.Item.Attributes.Damage * attrFactor, 0, MidpointRounding.AwayFromZero);
+            calculatedAttributes.Precision += (int)Math.Round(heroItem.Item.Attributes.Precision * attrFactor, 0, MidpointRounding.AwayFromZero);
+            calculatedAttributes.Specialization += (int)Math.Round(heroItem.Item.Attributes.Specialization * attrFactor, 0, MidpointRounding.AwayFromZero);
+
+            calculatedAttributes.MaxHealth += (int)Math.Round(heroItem.Item.Attributes.MaxHealth * attrFactor, 0, MidpointRounding.AwayFromZero);
+            calculatedAttributes.Reflex += (int)Math.Round(heroItem.Item.Attributes.Reflex * attrFactor, 0, MidpointRounding.AwayFromZero);
+            calculatedAttributes.Defense += (int)Math.Round(heroItem.Item.Attributes.Defense * attrFactor, 0, MidpointRounding.AwayFromZero);
         }
 
         return calculatedAttributes;
+    }
+
+    private static double CalculateItemUsageAttributesFactor(HeroItem heroItem)
+    {
+        double result = 0d;
+
+        if (heroItem.ItemEndurance >= ItemInGoodConditionMin)
+        {
+            result = ItemInGoodConditionAttrFactor;
+        }
+        else if (heroItem.ItemEndurance >= ItemDamagedMin)
+        {
+            result = ItemDamagedAttrFactor;
+        }
+        else if (heroItem.ItemEndurance >= ItemCrashedMin)
+        {
+            result = ItemCrashedAttrFactor;
+        }
+
+        return result;
     }
 
     public static int CalculateSkillDamage(this Hero hero, Skill skill)
