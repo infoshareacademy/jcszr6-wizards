@@ -22,6 +22,7 @@ namespace Wizards.Repository.ServiceRegistration
             services.AddTransient<IEnemyRepository, EnemyRepository>();
             services.AddTransient<IEnemySkillsRepository, EnemySkillsRepository>();
             services.AddTransient<IBehaviorPatternRepository, BehaviorPatternRepository>();
+            services.AddTransient<ICombatStageInstancesRepository, CombatStageInstancesRepository>();
         }
 
         public static void AddDataInitializer(this IServiceCollection services)

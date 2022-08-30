@@ -3,11 +3,11 @@ using Wizards.Core.Model.WorldModels.Enums;
 
 namespace Wizards.Repository.WorldInstancesRepository;
 
-public static class CombatStageInstancesRepository
+public static class CombatStageInstancesContainer
 {
     private static Dictionary<int, CombatStage> CombatStages { get; set; }
 
-    static CombatStageInstancesRepository()
+    static CombatStageInstancesContainer()
     {
         CombatStages = new Dictionary<int, CombatStage>();
     }
@@ -56,5 +56,10 @@ public static class CombatStageInstancesRepository
         CombatStages.Remove(playerId);
 
         return Task.CompletedTask;
+    }
+
+    public static Task<int> GetCurrentInstancesCount()
+    {
+        return Task.FromResult(CombatStages.Count);
     }
 }
