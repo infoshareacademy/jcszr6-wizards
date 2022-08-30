@@ -47,12 +47,5 @@ internal static class PlayerDbConfiguration
             .Property(p => p.ActiveItemId)
             .IsRequired()
             .HasDefaultValue(0);
-
-        modelBuilder.Entity<Player>()
-            .HasOne(p => p.CombatStage)
-            .WithOne(cs => cs.Player)
-            .HasForeignKey<CombatStage>(cs => cs.PlayerId)
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Cascade);
     }
 }

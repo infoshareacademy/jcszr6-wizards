@@ -19,7 +19,6 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players
             .Include(p => p.Heroes)
                 .ThenInclude(x => x.Statistics)
-            .Include(p => p.CombatStage)
             .ToListAsync();
     }
 

@@ -20,7 +20,6 @@ namespace Wizards.Repository.ServiceRegistration
             services.AddTransient<IHeroSkillsRepository, HeroSkillsRepository>();
 
             services.AddTransient<IEnemyRepository, EnemyRepository>();
-            services.AddTransient<ICombatStageRepository, CombatStageRepository>();
             services.AddTransient<IEnemySkillsRepository, EnemySkillsRepository>();
             services.AddTransient<IBehaviorPatternRepository, BehaviorPatternRepository>();
         }

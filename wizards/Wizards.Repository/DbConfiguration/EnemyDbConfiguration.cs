@@ -168,7 +168,7 @@ internal static class EnemyDbConfiguration
             .IsRequired();
 
         modelBuilder.Entity<BehaviorPattern>()
-            .Property(bp => bp.SkillsIdPattern)
+            .Property(bp => bp.SkillsIdSequence)
             .HasConversion(
                 i => i.SkillsIdPatternToXml(),
                 s => s.XmlToSkillIdPattern())

@@ -31,8 +31,7 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
     public DbSet<EnemyAttributes> EnemiesAttributes { get; set; }
     public DbSet<EnemySkill> EnemiesSkills { get; set; }
     public DbSet<BehaviorPattern> BehaviorPatterns { get; set; }
-    public DbSet<CombatStage> CombatStages { get; set; }
-
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);

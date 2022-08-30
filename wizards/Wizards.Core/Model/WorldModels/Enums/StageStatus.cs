@@ -2,7 +2,6 @@
 
 public enum StageStatus
 {
-    NotUsed = 0,
-    DuringCombat,
+    DuringCombat = 0,
     Concluded,
 }

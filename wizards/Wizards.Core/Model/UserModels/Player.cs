@@ -11,6 +11,4 @@ public class Player : IdentityUser<int>
     public DateTime DateOfBirth { get; set; }
 
     public List<Hero> Heroes = new();
-
-    public CombatStage CombatStage { get; set; }
 }

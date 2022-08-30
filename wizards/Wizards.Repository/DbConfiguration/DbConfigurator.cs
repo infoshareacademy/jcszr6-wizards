@@ -26,8 +26,6 @@ internal static class DbConfigurator
         modelBuilder.SetEnemyAttributesConfiguration();
         modelBuilder.SetEnemySkillConfiguration();
         modelBuilder.SetEnemyBehaviorPatternConfiguration();
-
-        modelBuilder.SetCobatStageConfiguration();
     }
     
     internal static void DataSeed(this ModelBuilder modelBuilder)

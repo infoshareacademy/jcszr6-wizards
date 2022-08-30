@@ -1168,83 +1168,6 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Skills");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.WorldModels.CombatStage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentEnemyHealth")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("CurrentHeroHealth")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("EnemyBehaviorPatternId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("EnemyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("EnemyPatternStepId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("EnemySelectedSkillId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("HeroId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<int>("HeroSelectedSkillId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasDefaultValue(0);
-
-                    b.Property<bool>("IsEnemyStunned")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsHeroStunned")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("RoundLogs")
-                        .IsRequired()
-                        .HasMaxLength(30000)
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("StageName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlayerId")
-                        .IsUnique();
-
-                    b.ToTable("CombatStages");
-                });
-
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
                 {
                     b.Property<int>("Id")
@@ -1308,7 +1231,7 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("MinHealthPercentToTrigger")
                         .HasColumnType("int");
 
-                    b.Property<string>("SkillsIdPattern")
+                    b.Property<string>("SkillsIdSequence")
                         .IsRequired()
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
@@ -1539,17 +1462,6 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Attributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.WorldModels.CombatStage", b =>
-                {
-                    b.HasOne("Wizards.Core.Model.UserModels.Player", "Player")
-                        .WithOne("CombatStage")
-                        .HasForeignKey("Wizards.Core.Model.WorldModels.CombatStage", "PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Player");
-                });
-
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
                 {
                     b.HasOne("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", "EnemyAttributes")
@@ -1597,9 +1509,6 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
-                    b.Navigation("CombatStage")
-                        .IsRequired();
-
                     b.Navigation("Heroes");
                 });
 
