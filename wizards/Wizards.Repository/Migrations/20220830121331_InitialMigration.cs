@@ -256,11 +256,11 @@ namespace Wizards.Repository.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    EnemyType = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(2048)", maxLength: 2048, nullable: false),
                     Tier = table.Column<int>(type: "int", nullable: false),
-                    AvatarImageEnemy = table.Column<int>(type: "int", nullable: false),
-                    EnemysStageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    AvatarImageNumber = table.Column<int>(type: "int", nullable: false),
+                    EnemyStageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     GoldReward = table.Column<int>(type: "int", nullable: false),
                     AttributesId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -345,7 +345,7 @@ namespace Wizards.Repository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MinHealthPercentToTrigger = table.Column<int>(type: "int", nullable: false),
                     MaxHealthPercentToTrigger = table.Column<int>(type: "int", nullable: false),
-                    SkillsIdSequence = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    SequenceOfSkillsId = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
                     EnemyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -365,8 +365,8 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SkillName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SkillType = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
                     DamageFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 1.0),
                     BaseHitChance = table.Column<int>(type: "int", nullable: false, defaultValue: 80),
                     ArmorPenetrationPercent = table.Column<int>(type: "int", nullable: false, defaultValue: 0),

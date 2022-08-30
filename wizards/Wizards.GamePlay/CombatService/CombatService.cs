@@ -87,7 +87,7 @@ public class CombatService : ICombatService
         roundResult.HeroNickName = stage.Hero.NickName;
         roundResult.EnemyName = stage.Enemy.Name;
         roundResult.HeroSkillType = stage.HeroSelectedSkill.Type;
-        roundResult.EnemySkillType = stage.EnemySelectedSkill.SkillType;
+        roundResult.EnemySkillType = stage.EnemySelectedSkill.Type;
     }
 
     private bool AreBothStunned(CombatStage stage)
@@ -99,7 +99,7 @@ public class CombatService : ICombatService
     {
         return (
             !AreBothStunned(stage) &&
-            stage.EnemySelectedSkill.SkillType == EnemySkillType.Charge &&
+            stage.EnemySelectedSkill.Type == EnemySkillType.Charge &&
             stage.HeroSelectedSkill.Type == HeroSkillType.CounterAttack);
     }
 
@@ -107,7 +107,7 @@ public class CombatService : ICombatService
     {
         return (
             !AreBothStunned(stage) &&
-            stage.EnemySelectedSkill.SkillType != EnemySkillType.Charge &&
+            stage.EnemySelectedSkill.Type != EnemySkillType.Charge &&
             stage.HeroSelectedSkill.Type == HeroSkillType.Block);
     }
 
@@ -120,7 +120,7 @@ public class CombatService : ICombatService
         var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
         var enemyMissesAttack =
-            (hasNoChanceToHit && !stage.IsHeroStunned && !GetEnemySkillsTypesThatCannotMiss().Contains(stage.EnemySelectedSkill.SkillType));
+            (hasNoChanceToHit && !stage.IsHeroStunned && !GetEnemySkillsTypesThatCannotMiss().Contains(stage.EnemySelectedSkill.Type));
 
         return enemyMissesAttack;
     }
@@ -136,7 +136,7 @@ public class CombatService : ICombatService
     {
         var finalHitChance = CalculateFinalHitChance(
             stage.Hero.CalculateSkillHitChance(stage.HeroSelectedSkill),
-            stage.Enemy.EnemyAttributes.Reflex);
+            stage.Enemy.Attributes.Reflex);
 
         var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
@@ -167,7 +167,7 @@ public class CombatService : ICombatService
         
         var finalDamageFactor = CalculateFinalDamageFactor(
             stage.Hero.CalculateSkillArmorPenetrationPercent(stage.HeroSelectedSkill),
-            stage.Enemy.EnemyAttributes.Defense);
+            stage.Enemy.Attributes.Defense);
         
         var finalHeroDamage = CalculateAttackersDamage(heroDamage, finalDamageFactor);
 
@@ -186,7 +186,7 @@ public class CombatService : ICombatService
     private int EnemyHealthRecovered(CombatStage stage)
     {
         var heroSkillHealing = stage.Enemy.CalculateSkillHealing(stage.EnemySelectedSkill);
-        var finalHealingFactor = CalculateFinalHealingFactor(stage.Enemy.EnemyAttributes.Specialization);
+        var finalHealingFactor = CalculateFinalHealingFactor(stage.Enemy.Attributes.Specialization);
         var healersHealing = CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
 
         return CalculateRecoveredHealth(healersHealing, stage.IsHeroStunned, stage.IsEnemyStunned);
@@ -219,7 +219,7 @@ public class CombatService : ICombatService
             throw new ArgumentNullException(nameof(stage.Hero), "Hero is not completed!");
         }
 
-        if (stage.Enemy.EnemyAttributes == null || stage.Enemy.Skills == null)
+        if (stage.Enemy.Attributes == null || stage.Enemy.Skills == null)
         {
             throw new ArgumentNullException(nameof(stage.Enemy), "Enemy is not completed!");
         }

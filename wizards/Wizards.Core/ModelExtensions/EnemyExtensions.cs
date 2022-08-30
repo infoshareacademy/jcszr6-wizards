@@ -12,7 +12,7 @@ public static class EnemyExtensions
             throw new ArgumentNullException();
         }
 
-        var enemyAttributes = enemy.EnemyAttributes;
+        var enemyAttributes = enemy.Attributes;
 
         var baseDamage = enemyAttributes.Damage;
         
@@ -28,7 +28,7 @@ public static class EnemyExtensions
             throw new ArgumentNullException();
         }
 
-        var enemyAttributes = enemy.EnemyAttributes;
+        var enemyAttributes = enemy.Attributes;
 
         var basePrecision = enemyAttributes.Precision;
 
@@ -44,7 +44,7 @@ public static class EnemyExtensions
             throw new ArgumentNullException();
         }
 
-        var enemyAttributes = enemy.EnemyAttributes;
+        var enemyAttributes = enemy.Attributes;
 
         var basePercent = enemyAttributes.Specialization;
 
@@ -60,7 +60,7 @@ public static class EnemyExtensions
             throw new ArgumentNullException();
         }
 
-        var enemyAttributes = enemy.EnemyAttributes;
+        var enemyAttributes = enemy.Attributes;
 
         var maxHealth = enemyAttributes.MaxHealth;
 

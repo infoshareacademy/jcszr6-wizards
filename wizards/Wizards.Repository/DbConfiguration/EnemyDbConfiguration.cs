@@ -18,7 +18,7 @@ internal static class EnemyDbConfiguration
             .HasMaxLength(50);
 
         modelBuilder.Entity<Enemy>()
-            .Property(e => e.EnemysStageName)
+            .Property(e => e.EnemyStageName)
             .IsRequired()
             .HasMaxLength(50);
 
@@ -28,11 +28,11 @@ internal static class EnemyDbConfiguration
             .HasMaxLength(2048);
 
         modelBuilder.Entity<Enemy>()
-            .Property(e => e.AvatarImageEnemy)
+            .Property(e => e.AvatarImageNumber)
             .IsRequired();
 
         modelBuilder.Entity<Enemy>()
-            .Property(e => e.EnemyType)
+            .Property(e => e.Type)
             .IsRequired();
 
         modelBuilder.Entity<Enemy>()
@@ -40,7 +40,7 @@ internal static class EnemyDbConfiguration
             .IsRequired();
 
         modelBuilder.Entity<Enemy>()
-            .HasOne(e => e.EnemyAttributes)
+            .HasOne(e => e.Attributes)
             .WithOne(ea => ea.Enemy)
             .HasForeignKey<Enemy>(e => e.AttributesId)
             .IsRequired();
@@ -67,7 +67,7 @@ internal static class EnemyDbConfiguration
 
         modelBuilder.Entity<EnemyAttributes>()
             .HasOne(ea => ea.Enemy)
-            .WithOne(e => e.EnemyAttributes)
+            .WithOne(e => e.Attributes)
             .HasForeignKey<Enemy>(e => e.AttributesId)
             .IsRequired();
 
@@ -114,12 +114,12 @@ internal static class EnemyDbConfiguration
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<EnemySkill>()
-            .Property(es => es.SkillName)
+            .Property(es => es.Name)
             .IsRequired()
             .HasMaxLength(50);
 
         modelBuilder.Entity<EnemySkill>()
-            .Property(es => es.SkillType)
+            .Property(es => es.Type)
             .IsRequired();
 
         modelBuilder.Entity<EnemySkill>()
@@ -168,7 +168,7 @@ internal static class EnemyDbConfiguration
             .IsRequired();
 
         modelBuilder.Entity<BehaviorPattern>()
-            .Property(bp => bp.SkillsIdSequence)
+            .Property(bp => bp.SequenceOfSkillsId)
             .HasConversion(
                 i => i.SkillsIdPatternToXml(),
                 s => s.XmlToSkillIdPattern())

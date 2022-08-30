@@ -1179,7 +1179,7 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("AttributesId")
                         .HasColumnType("int");
 
-                    b.Property<int>("AvatarImageEnemy")
+                    b.Property<int>("AvatarImageNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -1187,10 +1187,7 @@ namespace Wizards.Repository.Migrations
                         .HasMaxLength(2048)
                         .HasColumnType("nvarchar(2048)");
 
-                    b.Property<int>("EnemyType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("EnemysStageName")
+                    b.Property<string>("EnemyStageName")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -1204,6 +1201,9 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Tier")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -1231,7 +1231,7 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("MinHealthPercentToTrigger")
                         .HasColumnType("int");
 
-                    b.Property<string>("SkillsIdSequence")
+                    b.Property<string>("SequenceOfSkillsId")
                         .IsRequired()
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
@@ -1317,16 +1317,16 @@ namespace Wizards.Repository.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.01);
 
-                    b.Property<string>("SkillName")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("SkillType")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Stunning")
                         .HasColumnType("bit");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -1464,13 +1464,13 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", "EnemyAttributes")
+                    b.HasOne("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", "Attributes")
                         .WithOne("Enemy")
                         .HasForeignKey("Wizards.Core.Model.WorldModels.Enemy", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("EnemyAttributes");
+                    b.Navigation("Attributes");
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>

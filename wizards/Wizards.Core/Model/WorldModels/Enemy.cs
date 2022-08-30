@@ -8,18 +8,18 @@ namespace Wizards.Core.Model.WorldModels
         // General
         public int Id { get; set; }
         public string Name { get; set; }
-        public EnemyType EnemyType { get; set; }
+        public EnemyType Type { get; set; }
         public string Description { get; set; }
         public int Tier { get; set; }
-        public int AvatarImageEnemy { get; set; }
-        public string EnemysStageName { get; set; }
+        public int AvatarImageNumber { get; set; }
+        public string EnemyStageName { get; set; }
         
         // Economy
         public int GoldReward { get; set; }
         
         
         // Combat and Behavior
-        public EnemyAttributes EnemyAttributes { get; set; }
+        public EnemyAttributes Attributes { get; set; }
         public List<EnemySkill> Skills  { get; set; }
         public List<BehaviorPattern> BehaviorPatterns { get; set; }
 

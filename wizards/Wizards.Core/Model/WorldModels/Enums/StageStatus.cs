@@ -2,6 +2,8 @@
 
 public enum StageStatus
 {
-    DuringCombat = 0,
+    FreshOpened = 0,
+    DuringCombat,
     Concluded,
+    ReadyToClose
 }

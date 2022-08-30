@@ -27,7 +27,7 @@ namespace Wizards.Repository.Repository.WorldModel
         {
             return await _wizardsContext.Enemies
             .Include(e => e.Skills)
-            .Include(e => e.EnemyAttributes)
+            .Include(e => e.Attributes)
             .Include(e => e.BehaviorPatterns)
             .SingleOrDefaultAsync(e => e.Id == id);
         }
