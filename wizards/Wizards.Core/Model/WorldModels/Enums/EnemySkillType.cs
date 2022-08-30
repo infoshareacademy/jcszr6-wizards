@@ -6,5 +6,6 @@
         StrongAttack,
         Charge,
         Deadly,
+        Heal
     }
 }
