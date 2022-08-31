@@ -6,35 +6,24 @@ public class EnemyAI : IEnemyAI
 {
     public Task GetEnemySelectedSkillIdAsync(CombatStage stage)
     {
-
         var enemy = stage.Enemy;
 
-        int currentHealthPercent = GetEnemyCurrentHealthPercent(stage, enemy);
+        int currentEnemyHealthPercent = GetEnemyCurrentHealthPercent(stage, enemy);
 
-        var nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.MinHealthPercentToTrigger > currentHealthPercent && p.MaxHealthPercentToTrigger <= currentHealthPercent);
-
-        var previousEnemyPatternId = stage.EnemyBehaviorPatternId;
-
-        if (previousEnemyPatternId != nextEnemyPattern.Id)
-        {
-            SetNewStageStatus(stage, nextEnemyPattern, 0);
-            return Task.CompletedTask;
-        }
-        nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.Id == previousEnemyPatternId);
+        var previousEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(bp => bp.Id == stage.EnemyBehaviorPatternId);
+        var nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.MinHealthPercentToTrigger > currentEnemyHealthPercent && p.MaxHealthPercentToTrigger <= currentEnemyHealthPercent);
 
         var previousEnemyPatternSequenceStepId = stage.EnemyPatternSequenceStepId;
+        var nextEnemyPatternSequenceStepId = 0;
 
-        var isMaxStep = previousEnemyPatternSequenceStepId == nextEnemyPattern.SequenceOfSkillsId.Keys.Max();
+        var arePaternsTheSame = previousEnemyPattern.Id == nextEnemyPattern.Id;
 
-        if (isMaxStep)
+        if (previousEnemyPatternSequenceStepId < nextEnemyPattern.SequenceOfSkillsId.Keys.Max() && arePaternsTheSame)
         {
-            SetNewStageStatus(stage, nextEnemyPattern, 0);
-            return Task.CompletedTask;
+            nextEnemyPatternSequenceStepId = previousEnemyPatternSequenceStepId + 1;          
         }
 
-        var newEnemyPatternSequenceStepId = previousEnemyPatternSequenceStepId + 1;
-
-        SetNewStageStatus(stage, nextEnemyPattern, newEnemyPatternSequenceStepId);
+        SetNewStageStatus(stage, nextEnemyPattern, nextEnemyPatternSequenceStepId);
 
         return Task.CompletedTask;
     }
