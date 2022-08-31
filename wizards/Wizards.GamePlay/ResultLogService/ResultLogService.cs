@@ -10,13 +10,6 @@ public class ResultLogService : IResultLogService
 {
     public Task<RoundLog> CreateRoundLogAsync(RoundResult roundResult)
     {
-        // TODO: Healing value for Hero and Enemy (uwaga trzeba wtedy ustawić defendera na pusty string)
-        // TODO: Połączona wiadomość dla Enemy na końcu metody message = "{kto} {komu} ..."
-        // TODO: Dodać przypisanie do "attacker" oraz "defender" w obu metodach
-        // TODO: Dodać sytuację w której skill przeciwnika stunnuje bohatera
-        // TODO: Przy efektach na Enemy typu Countered dodać "by {hero}"
-        // TODO: Korekta Spacji w mergu stringa!
-        // TODO: Kiedy hero Kontruje Enemy trzeba dodać do wiadomości zadane obrażenia!
 
         var heroMessage = GetMessageForHero(roundResult);
         var enemyMessage = GetMessageForEnemy(roundResult);
@@ -31,9 +24,10 @@ public class ResultLogService : IResultLogService
 
     private string GetMessageForEnemy(RoundResult roundResult)
     {
-        var enemy = "";
+        var enemy = roundResult.EnemyName;
         var whatDid = "";
-        var hero = "";
+        var hero = $" {roundResult.HeroNickName}";
+        var withWhat = "";
         var howMuchDamage = "";
 
         var message = "";
@@ -45,12 +39,12 @@ public class ResultLogService : IResultLogService
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
         {
-            message = $"{enemy} has been blocked";
+            message = $"{enemy} has been blocked by {hero}";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
         {
-            message = $"{enemy} has been countered";
+            message = $"{enemy} has been countered by {hero}";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.MissesAttack)
@@ -60,8 +54,23 @@ public class ResultLogService : IResultLogService
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.HitsSuccessfully)
         {
-            whatDid = $"hits with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
-            howMuchDamage = $"and deals {roundResult.EnemyDamageTaken} damage"; // KOREKTA! HeroDamageTaken bo to Enemy zadaje obrażenia Hero!
+            whatDid = " hits";
+            withWhat = $" with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
+            howMuchDamage = roundResult.HeroWillBeStunned ? " stunns" : "";
+            howMuchDamage += $" and deals {roundResult.HeroDamageTaken} damage";
+
+        }
+
+        if (roundResult.EnemySkillType == EnemySkillType.Heal)
+        {
+            whatDid = $" heals himself with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
+            hero = "";
+            howMuchDamage = $" and recovers {roundResult.EnemyHealthRecovered} health points";
+        }
+
+        if (message == "")
+        {
+            message = $"{enemy}{whatDid}{hero}{withWhat}{howMuchDamage}";
         }
 
         return message;
@@ -69,42 +78,53 @@ public class ResultLogService : IResultLogService
 
     private static string GetMessageForHero(RoundResult roundResult)
     {
-        var attacker = "";
+        var hero = roundResult.HeroNickName;
         var whatDid = "";
-        var defender = "";
+        var enemy = $" {roundResult.EnemyName}";
+        var withWhat = "";
         var howMuchDamage = "";
-
         var message = "";
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.WasStunned)
         {
-            message = $"{attacker} was stunned";
+            message = $"{hero} was stunned";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
         {
-            whatDid = "countered";
+            whatDid = " countered";
+            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            howMuchDamage = $" and deals {roundResult.EnemyDamageTaken} damage";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
         {
-            whatDid = "blocked";
+            whatDid = " blocked";
+            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
         }
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.MissesAttack)
         {
-            whatDid = "missed attack";
+            message = $"{hero} missed attack";
         }
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.HitsSuccessfully)
         {
-            whatDid = $"hits with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
-            howMuchDamage = $"and deals {roundResult.EnemyDamageTaken} damage";
+            whatDid = roundResult.HeroSkillType != HeroSkillType.Block ? " hits" : " did nothing to";
+            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            howMuchDamage = $" and deals {roundResult.EnemyDamageTaken} damage";
+        }
+
+        if (roundResult.HeroSkillType == HeroSkillType.Heal)
+        {
+            whatDid = $" heals himself with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            enemy = "";
+            howMuchDamage = $" and recovers {roundResult.HeroHealthRecovered}";
         }
 
         if (message == "")
         {
-            message = $"{attacker} {whatDid} {defender} {howMuchDamage}";
+            message = $"{hero}{whatDid}{enemy}{withWhat}{howMuchDamage}";
         }
 
         return message;
