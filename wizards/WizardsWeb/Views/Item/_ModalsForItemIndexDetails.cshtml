@@ -35,10 +35,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-target="#details-@Model.Id" data-bs-toggle="modal">
+                        <button class="gbtn gbtn-action" data-bs-target="#details-@Model.Id" data-bs-toggle="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
+                        <a class="gbtn gbtn-accept" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
                             Yes
                         </a>
                     </div>
@@ -65,10 +65,10 @@ else if (Model.IsMerchantItem)
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                        <button class="gbtn gbtn-action" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Merchant" asp-action="BuyItem" asp-route-id="@Model.CoreItemId">
+                        <a class="gbtn gbtn-accept" asp-controller="Merchant" asp-action="BuyItem" asp-route-id="@Model.CoreItemId">
                             Yes
                         </a>
                     </div>
@@ -95,10 +95,10 @@ else if (Model.IsInMerchantMode && !Model.IsMerchantItem)
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                        <button class="gbtn gbtn-action" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem" asp-route-controllerName="Merchant">
+                        <a class="gbtn gbtn-accept" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem" asp-route-controllerName="Merchant">
                             Yes
                         </a>
                     </div>

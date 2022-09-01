@@ -9,7 +9,7 @@
         @if (User.IsInRole($"{UserRoles.Admin.ToString()}") || User.IsInRole($"{UserRoles.Moderator.ToString()}"))
         {
             <div class="btn-group">
-                <a class="btn btn-secondary btn-sm" asp-controller="Item" asp-action="Create">Create New Item</a>
+                <a class="gbtn gbtn-technical gbtn-sm" asp-controller="Item" asp-action="Create">Create New Item</a>
             </div>
         }
     </div>

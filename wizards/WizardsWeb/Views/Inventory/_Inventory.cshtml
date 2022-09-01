@@ -9,7 +9,7 @@
         <div class="col-3">
             @if (Model.GetRepairCostForAllItems() >= 1)
             {
-                <button type="button" class="btn btn-info btn-sm align-content-end" data-bs-toggle="modal" data-bs-target="#repair-all">
+                <button type="button" class="gbtn gbtn-technical gbtn-sm align-content-end" data-bs-toggle="modal" data-bs-target="#repair-all">
                     Repair all items
                 </button>
             }
@@ -61,10 +61,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                        <button class="gbtn gbtn-danger" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Inventory" asp-action="RepairAll">
+                        <a class="gbtn gbtn-accept" asp-controller="Inventory" asp-action="RepairAll">
                             Yes
                         </a>
                     </div>
@@ -96,10 +96,10 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                        <button class="gbtn gbtn-danger" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Inventory" asp-action="RepairEquipped">
+                        <a class="gbtn gbtn-accept" asp-controller="Inventory" asp-action="RepairEquipped">
                             Yes
                         </a>
                     </div>
