@@ -10,7 +10,6 @@ public class ResultLogService : IResultLogService
 {
     public Task<RoundLog> CreateRoundLogAsync(RoundResult roundResult)
     {
-
         var heroMessage = GetMessageForHero(roundResult);
         var enemyMessage = GetMessageForEnemy(roundResult);
 
@@ -49,22 +48,22 @@ public class ResultLogService : IResultLogService
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.MissesAttack)
         {
-            message = $"{enemy} misses attack";
+            message = $"{enemy} misses";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.HitsSuccessfully)
         {
             whatDid = " hits";
             withWhat = $" with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
-            howMuchDamage = roundResult.HeroWillBeStunned ? " stunns" : "";
-            howMuchDamage += $" and deals {roundResult.HeroDamageTaken} damage";
-
+            var stuns = roundResult.HeroWillBeStunned ? ", stuns" : "";
+            howMuchDamage = $"{stuns} and deals {roundResult.HeroDamageTaken} damage";
         }
 
         if (roundResult.EnemySkillType == EnemySkillType.Heal)
         {
-            whatDid = $" heals himself with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
-            hero = "";
+            whatDid = " heals";
+            hero = " himself";
+            withWhat = $" with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
             howMuchDamage = $" and recovers {roundResult.EnemyHealthRecovered} health points";
         }
 
@@ -105,7 +104,7 @@ public class ResultLogService : IResultLogService
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.MissesAttack)
         {
-            message = $"{hero} missed attack";
+            message = $"{hero} misses";
         }
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.HitsSuccessfully)
@@ -117,8 +116,9 @@ public class ResultLogService : IResultLogService
 
         if (roundResult.HeroSkillType == HeroSkillType.Heal)
         {
-            whatDid = $" heals himself with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
-            enemy = "";
+            whatDid = " heals";
+            enemy = " himself";
+            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
             howMuchDamage = $" and recovers {roundResult.HeroHealthRecovered}";
         }
 
