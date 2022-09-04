@@ -45,12 +45,6 @@
     <Content Update="wwwroot\Images\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\Images\Tapeta-1B.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Images\Tapeta-2B.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Update="wwwroot\Images\Tapeta-3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
