@@ -1,4 +1,5 @@
 ﻿using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Repository.WorldInstancesRepository;
 

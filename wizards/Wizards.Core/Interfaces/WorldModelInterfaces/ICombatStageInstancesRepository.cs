@@ -1,6 +1,6 @@
 ﻿using Wizards.Core.Model.WorldModels;
 
-namespace Wizards.Core.Interfaces;
+namespace Wizards.Core.Interfaces.WorldModelInterfaces;
 
 public interface ICombatStageInstancesRepository
 {

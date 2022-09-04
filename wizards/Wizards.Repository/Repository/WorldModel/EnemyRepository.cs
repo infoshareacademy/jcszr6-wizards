@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Core.Model.WorldModels;
 
 namespace Wizards.Repository.Repository.WorldModel

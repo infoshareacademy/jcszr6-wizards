@@ -11,8 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CombatService\Enums\" />
+    <Folder Include="Mapping\" />
     <Folder Include="ServicesRegistration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
 </Project>

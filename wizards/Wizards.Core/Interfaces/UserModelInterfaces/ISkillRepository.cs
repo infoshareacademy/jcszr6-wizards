@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Core.Interfaces
+namespace Wizards.Core.Interfaces.UserModelInterfaces
 {
     public interface ISkillRepository
     {

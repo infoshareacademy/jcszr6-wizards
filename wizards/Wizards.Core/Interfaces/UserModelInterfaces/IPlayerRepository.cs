@@ -1,7 +1,6 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Core.Interfaces;
+namespace Wizards.Core.Interfaces.UserModelInterfaces;
 
 public interface IPlayerRepository
 {

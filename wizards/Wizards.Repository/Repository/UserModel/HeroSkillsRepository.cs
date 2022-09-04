@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Model.UserModels;
 
 namespace Wizards.Repository.Repository.UserModel

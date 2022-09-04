@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Repository.InitialData;
 using Wizards.Repository.InitialData.SeedFactories.Implementations;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;

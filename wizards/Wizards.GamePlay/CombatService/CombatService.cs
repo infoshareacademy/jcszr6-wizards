@@ -1,8 +1,9 @@
 ﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
+using Wizards.Core.Model.WorldModels.Properties;
+using Wizards.Core.Model.WorldModels.Properties.Enums;
 using Wizards.Core.ModelExtensions;
-using Wizards.GamePlay.CombatService.Enums;
 using Wizards.GamePlay.RandomNumberProvider;
 using static Wizards.GamePlay.HelpersAndExtensions.CombatLogicHelpers;
 

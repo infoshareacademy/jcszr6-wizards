@@ -1,8 +1,8 @@
 ﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
-using Wizards.GamePlay.CombatService;
-using Wizards.GamePlay.CombatService.Enums;
+using Wizards.Core.Model.WorldModels.Properties.Enums;
+
 
 namespace Wizards.GamePlay.ResultLogService;
 
