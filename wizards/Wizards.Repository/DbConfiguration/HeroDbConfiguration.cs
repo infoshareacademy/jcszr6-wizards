@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.UserModels.Properties;
 
 namespace Wizards.Repository.DbConfiguration;
@@ -167,5 +168,15 @@ internal static class HeroDbConfiguration
             .WithOne(hs => hs.Skill)
             .HasForeignKey(hs => hs.SkillId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<HeroSkill>()
+            .Property(hs => hs.InUse)
+            .IsRequired()
+            .HasDefaultValue(false);
+
+        modelBuilder.Entity<HeroSkill>()
+            .Property(hs => hs.SlotNumber)
+            .IsRequired()
+            .HasDefaultValue(SkillSlotNumber.None);
     }
 }

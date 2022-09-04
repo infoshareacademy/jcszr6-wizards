@@ -419,6 +419,8 @@ namespace Wizards.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    InUse = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    SlotNumber = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     HeroId = table.Column<int>(type: "int", nullable: false),
                     SkillId = table.Column<int>(type: "int", nullable: false)
                 },

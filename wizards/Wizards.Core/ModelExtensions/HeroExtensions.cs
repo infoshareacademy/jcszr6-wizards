@@ -1,5 +1,6 @@
 ﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
+using Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 using static Wizards.Core.ConstParameters.Params;
 
 namespace Wizards.Core.ModelExtensions;
@@ -48,7 +49,7 @@ public static class HeroExtensions
 
         foreach (var heroItem in heroEquippedItems)
         {
-            var attrFactor= CalculateItemUsageAttributesFactor(heroItem);
+            var attrFactor = CalculateItemUsageAttributesFactor(heroItem);
 
             calculatedAttributes.Damage += (int)Math.Round(heroItem.Item.Attributes.Damage * attrFactor, 0, MidpointRounding.AwayFromZero);
             calculatedAttributes.Precision += (int)Math.Round(heroItem.Item.Attributes.Precision * attrFactor, 0, MidpointRounding.AwayFromZero);
@@ -140,5 +141,42 @@ public static class HeroExtensions
         var result = (int)Math.Round(skill.HealingFactor * maxHealth, 0, MidpointRounding.AwayFromZero);
 
         return result;
+    }
+
+    public static List<CombatHeroSkillDto> GetCombatHeroSkills(this Hero hero)
+    {
+        var combatSkills = new List<CombatHeroSkillDto>();
+        
+        if (hero == null)
+        {
+            return combatSkills;
+        }
+
+        var skills = hero.Skills.Where(hs => hs.InUse);
+
+        if (!skills.Any())
+        {
+            return combatSkills;
+        }
+
+        foreach (var heroSkill in skills)
+        {
+            var combatSkill = new CombatHeroSkillDto()
+            {
+                Id = heroSkill.Id,
+                Name = heroSkill.Skill.Name,
+                Type = heroSkill.Skill.Type,
+                SlotNumber = heroSkill.SlotNumber,
+
+                Damage = hero.CalculateSkillDamage(heroSkill.Skill),
+                HitChance = hero.CalculateSkillHitChance(heroSkill.Skill),
+                ArmorPenetrationPercent = hero.CalculateSkillArmorPenetrationPercent(heroSkill.Skill),
+                Healing = hero.CalculateSkillHealing(heroSkill.Skill)
+            };
+
+            combatSkills.Add(combatSkill);
+        }
+
+        return combatSkills;
     }
 }

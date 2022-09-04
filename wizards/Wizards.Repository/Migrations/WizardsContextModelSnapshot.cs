@@ -248,8 +248,18 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("HeroId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("InUse")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<int>("SkillId")
                         .HasColumnType("int");
+
+                    b.Property<int>("SlotNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
