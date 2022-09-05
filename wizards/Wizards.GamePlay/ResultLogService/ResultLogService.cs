@@ -2,6 +2,7 @@
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Core.Model.WorldModels.Properties.Enums;
+using Wizards.GamePlay.CombatService;
 
 
 namespace Wizards.GamePlay.ResultLogService;

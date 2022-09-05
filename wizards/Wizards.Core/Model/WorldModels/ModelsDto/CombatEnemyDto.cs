@@ -14,13 +14,13 @@ public class CombatEnemyDto
     public CombatEnemyAttributesDto Attributes { get; set; }
     public List<CombatEnemySkillDto> Skills { get; set; }
     public List<CombatBehaviorPatternDto> BehaviorPatterns { get; set; }
-
+    public CombatEnemySkillDto EnemySelectedSkill { get; set; }
+    public int EnemySelectedSkillId { get; set; }
 
     public bool IsEnemyStunned { get; set; }
     public int CurrentEnemyHealth { get; set; }
 
 
-    public int EnemySelectedSkillId { get; set; }
     public int EnemyBehaviorPatternId { get; set; }
     public int EnemyPatternSequenceStepId { get; set; }
 }

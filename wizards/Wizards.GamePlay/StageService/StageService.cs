@@ -1,10 +1,11 @@
 ﻿using Wizards.Core.Model.WorldModels;
+using Wizards.GamePlay.CombatService;
 
 namespace Wizards.GamePlay.StageService;
 
 public class StageService : IStageService
 {
-    public Task CreateNewMatchAsync(CombatStage stage, int enemyId, int heroId)
+    public async Task<CombatStage> CreateNewMatchAsync(int playerId, int enemyId)
     {
         // TODO: Zamiast przyjmować w argumencie CombatStage'a przyjmujemy PlayerId jako int
         // TODO: Zmienić metodę tak żeby zwracała obiekt typu CombatStage (nadal asynchronicznie)
@@ -22,7 +23,7 @@ public class StageService : IStageService
         throw new NotImplementedException();
     }
 
-    public Task CommitRoundAsync(CombatStage stage)
+    public Task<RoundResult> CommitRoundAsync(CombatStage stage, int selectedSkillId)
     {
         // TODO: Obliczyc rezultat runy przy pomocy Combat Serwisu
         // TODO: Obliczony rezultat przekazać do ResultLogService żeby otrzymać log z rundy.
@@ -43,7 +44,7 @@ public class StageService : IStageService
         throw new NotImplementedException();
     }
 
-    public Task FinishMatchAsync(CombatStage stage)
+    public async Task FinishMatchAsync(CombatStage stage)
     {
         throw new NotImplementedException();
     }

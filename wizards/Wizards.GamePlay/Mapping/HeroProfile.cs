@@ -15,8 +15,8 @@ public class HeroProfile : Profile
         CreateMap<HeroAttributes, CombatHeroAttributesDto>();
 
         CreateMap<Hero, CombatHeroDto>()
-            .ForMember(dto => dto.CurrentHeroHealth, expr => expr.Ignore())
-            .ForMember(dto => dto.IsHeroStunned, expr => expr.Ignore())
+            .ForMember(dto => dto.CurrentHeroHealth, expr => expr.MapFrom(s => s.GetCalculatedAttributes().MaxHealth))
+            .ForMember(dto => dto.IsHeroStunned, expr => expr.MapFrom(s => false))
             .ForMember(dto => dto.HeroSelectedSkill, expr => expr.Ignore())
             .ForMember(dto => dto.HeroSelectedSkillId, expr => expr.Ignore())
             .ForMember(dto => dto.ArmorUsage, expr => expr.MapFrom(s => 0d))

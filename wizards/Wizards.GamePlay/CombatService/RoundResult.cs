@@ -2,7 +2,7 @@
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties.Enums;
 
-namespace Wizards.Core.Model.WorldModels.Properties;
+namespace Wizards.GamePlay.CombatService;
 
 public class RoundResult
 {

@@ -1,5 +1,6 @@
 ﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
+using Wizards.Core.Model.WorldModels.ModelsDto;
 using Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 using static Wizards.Core.ConstParameters.Params;
 
@@ -178,5 +179,17 @@ public static class HeroExtensions
         }
 
         return combatSkills;
+    }
+
+    public static CombatHeroSkillDto GetHeroSelectedSkill(this CombatHeroDto hero)
+    {
+        var selectedHeroSkill = hero.HeroSkills.SingleOrDefault(s => s.Id == hero.HeroSelectedSkillId);
+
+        if (selectedHeroSkill == null)
+        {
+            throw new ArgumentNullException(nameof(hero.HeroSelectedSkillId), "Hero has wrong selected actions!");
+        }
+
+        return selectedHeroSkill;
     }
 }

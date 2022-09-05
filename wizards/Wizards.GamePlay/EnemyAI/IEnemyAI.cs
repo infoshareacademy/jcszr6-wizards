@@ -1,6 +1,6 @@
 ﻿using Wizards.Core.Model.WorldModels;
 
-namespace Wizards.GamePlay.EnemiesAI
+namespace Wizards.GamePlay.EnemyAI
 {
     public interface IEnemyAI
     {
