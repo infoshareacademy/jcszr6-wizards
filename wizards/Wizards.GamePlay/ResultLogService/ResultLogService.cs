@@ -1,8 +1,8 @@
 ﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
-using Wizards.Core.Model.WorldModels.Properties.Enums;
 using Wizards.GamePlay.CombatService;
+using Wizards.GamePlay.CombatService.Enums;
 
 
 namespace Wizards.GamePlay.ResultLogService;
@@ -55,7 +55,7 @@ public class ResultLogService : IResultLogService
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.HitsSuccessfully)
         {
             whatDid = " hits";
-            withWhat = $" with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
+            withWhat = $" with {roundResult.EnemySkillName} ({EnemySkillTypeToString(roundResult.EnemySkillType)})";
             var stuns = roundResult.HeroWillBeStunned ? ", stuns" : "";
             howMuchDamage = $"{stuns} and deals {roundResult.HeroDamageTaken} damage";
         }
@@ -64,7 +64,7 @@ public class ResultLogService : IResultLogService
         {
             whatDid = " heals";
             hero = " himself";
-            withWhat = $" with {EnemySkillTypeToString(roundResult.EnemySkillType)}";
+            withWhat = $" with {roundResult.EnemySkillName} ({EnemySkillTypeToString(roundResult.EnemySkillType)})";
             howMuchDamage = $" and recovers {roundResult.EnemyHealthRecovered} health points";
         }
 
@@ -93,14 +93,14 @@ public class ResultLogService : IResultLogService
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
         {
             whatDid = " countered";
-            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
             howMuchDamage = $" and deals {roundResult.EnemyDamageTaken} damage";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
         {
             whatDid = " blocked";
-            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
         }
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.MissesAttack)
@@ -111,7 +111,7 @@ public class ResultLogService : IResultLogService
         if (roundResult.HeroCombatStatus == HeroCombatStatus.HitsSuccessfully)
         {
             whatDid = roundResult.HeroSkillType != HeroSkillType.Block ? " hits" : " did nothing to";
-            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
             howMuchDamage = $" and deals {roundResult.EnemyDamageTaken} damage";
         }
 
@@ -119,7 +119,7 @@ public class ResultLogService : IResultLogService
         {
             whatDid = " heals";
             enemy = " himself";
-            withWhat = $" with {HeroSkillTypeToString(roundResult.HeroSkillType)}";
+            withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
             howMuchDamage = $" and recovers {roundResult.HeroHealthRecovered}";
         }
 

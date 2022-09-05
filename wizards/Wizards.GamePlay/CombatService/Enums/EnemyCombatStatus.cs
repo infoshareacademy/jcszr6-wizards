@@ -1,4 +1,4 @@
-﻿namespace Wizards.Core.Model.WorldModels.Properties.Enums;
+﻿namespace Wizards.GamePlay.CombatService.Enums;
 
 public enum EnemyCombatStatus
 {

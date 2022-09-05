@@ -1,6 +1,6 @@
 ﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels.Enums;
-using Wizards.Core.Model.WorldModels.Properties.Enums;
+using Wizards.GamePlay.CombatService.Enums;
 
 namespace Wizards.GamePlay.CombatService;
 
@@ -8,6 +8,7 @@ public class RoundResult
 {
     // Hero report
     public string HeroNickName { get; set; }
+    public string HeroSkillName { get; set; }
     public HeroSkillType HeroSkillType { get; set; }
 
     public int HeroDamageTaken { get; set; }
@@ -17,6 +18,7 @@ public class RoundResult
 
     // Enemy report
     public string EnemyName { get; set; }
+    public string EnemySkillName { get; set; }
     public EnemySkillType EnemySkillType { get; set; }
     
     public int EnemyDamageTaken { get; set; }
