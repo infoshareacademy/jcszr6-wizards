@@ -7,13 +7,11 @@ public class StageService : IStageService
 {
     public async Task<CombatStage> CreateNewMatchAsync(int playerId, int enemyId)
     {
-        // TODO: Wykorzystać pomocniczą fabrykę (do napisania) i uzyskać od niej "wyprodukowanego" pustego CombatStage'a.
-        // TODO: Pobrać hero z bazy danych (na podstawie Id wyciągniętego z Playera którego Id przyjęto w metodzie).
-        // TODO: Pobrać Enemy z bazy danych (na podstawie Id przyjętego w metodzie).
-        // TODO: Zmapować obu i wstawić jako uczestników na stage.
+        // TODO: Wykorzystać pomocniczą fabrykę i uzyskać od niej "wyprodukowanego" nową instancję CombatStage'a.
 
-        // TODO: Dodać tak utworzony stage do jego repozytorium przypisując go do tego konkretnego PlayerId (które już przyjmujemy w metodzie)
         // TODO: Przygotować pierwszą akcję Enemy przy pomocy EnemyAI!
+        // TODO: Dodać otrzymany stage do jego repozytorium przypisując go do konkretnego PlayerId (które już przyjmujemy w metodzie)
+        
         // TODO: Zwrócić nowo utworzony stage!
 
         throw new NotImplementedException();
@@ -28,7 +26,7 @@ public class StageService : IStageService
         // - Odebrać obu uczestnikom punkty życia które utracili w skutek ataków (uwaga żeby nikomu nie spadło poniżej 0!!!);
         // - Ustawić ich status na następną rundę: (czy są zestunowani ...)
         // - Dodać obu uczestnikom punkty życia, które odzyskali w skutek leczenia.
-        // - Dodać stopień uszkodzenia broni i zbroi (obliczony przez pomocniczny serwisik).
+        // - Dodać stopień uszkodzenia broni i zbroi (obliczony przez pomocniczny serwisik który robi to na podstawie RoundResult'u).
         //
         // TODO: Trzeba sprawdzić czy walka się zakończyła. (czy ktoś ma 0 CurrentHealth).
         // Jeśli nie to:
@@ -46,6 +44,13 @@ public class StageService : IStageService
 
     public async Task FinishMatchAsync(int playerId)
     {
+        // TODO: Wręczenie nagród bohaterowi
+        // Pobieramy nagrodę z enemy (najlepiej tego z bazy danych) i dodajemy ja do naszego Hero.
+        // TODO: Uszkodzenie ekwipunku bohaterowi.
+        // Tutaj zależnie od wyniku meczu albo psujemy ekwipunek tym co zostało naliczone (wygrana bohatera) albo naliczamy to podwójnie (przegrana).
+        // TODO: Ustawiamy status areny na "ReadyToClose"
+        // TODO: Usuwamy instancję CombatStage'a z repozytorium.
+
         throw new NotImplementedException();
     }
 }

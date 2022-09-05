@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Mapping\" />
+    <Folder Include="Factories\" />
     <Folder Include="ServicesRegistration\" />
   </ItemGroup>
 
