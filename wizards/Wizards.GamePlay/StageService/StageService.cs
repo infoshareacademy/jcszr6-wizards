@@ -1,20 +1,43 @@
-﻿using Wizards.Core.Model.WorldModels;
+﻿using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Core.Interfaces.WorldModelInterfaces;
+using Wizards.Core.Model.WorldModels;
+using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.GamePlay.CombatService;
+using Wizards.GamePlay.EnemyAI;
+using Wizards.GamePlay.Factories;
 
 namespace Wizards.GamePlay.StageService;
 
 public class StageService : IStageService
 {
+    private readonly ICombatStageFactory _combatStageFactory;
+    private readonly ICombatService _combatService;
+    private readonly IPlayerRepository _playerRepository;
+    private readonly IEnemyAI _enemyAI;
+    private readonly ICombatStageInstancesRepository _combatStageInstancesRepository;
+
+    public StageService(ICombatService combatService, ICombatStageFactory combatStageFactory, IPlayerRepository playerRepository, 
+        IEnemyAI enemyAI, ICombatStageInstancesRepository combatStageInstancesRepository )
+    {
+        _combatService = combatService;
+        _combatStageFactory = combatStageFactory;
+        _playerRepository = playerRepository;
+        _enemyAI = enemyAI;
+        _combatStageInstancesRepository = combatStageInstancesRepository;
+    }
     public async Task<CombatStage> CreateNewMatchAsync(int playerId, int enemyId)
     {
-        // TODO: Wykorzystać pomocniczą fabrykę i uzyskać od niej "wyprodukowanego" nową instancję CombatStage'a.
+        var player = await _playerRepository.Get(playerId);
+        var heroId = player.ActiveHeroId;
+        var combatStage = await _combatStageFactory.CreateCombatStageAsync(heroId, enemyId, false);
 
-        // TODO: Przygotować pierwszą akcję Enemy przy pomocy EnemyAI!
-        // TODO: Dodać otrzymany stage do jego repozytorium przypisując go do konkretnego PlayerId (które już przyjmujemy w metodzie)
-        
-        // TODO: Zwrócić nowo utworzony stage!
+        await _enemyAI.GetEnemySelectedSkillIdAsync(combatStage);
 
-        throw new NotImplementedException();
+        await _combatStageInstancesRepository.AddAsync(combatStage, playerId);
+
+        combatStage.Status = StageStatus.DuringCombat;
+
+        return combatStage;
     }
 
     public Task<RoundResult> CommitRoundAsync(int playerId, int selectedSkillId)
