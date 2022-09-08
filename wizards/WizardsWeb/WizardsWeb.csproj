@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <Folder Include="ModelViews\HeroModelViews\Properties\" />
-    <Folder Include="Views\WorldExploration\" />
+    <Folder Include="ModelViews\ExplorationModelViews\" />
     <Folder Include="wwwroot\Images\Buttons\" />
   </ItemGroup>
 
