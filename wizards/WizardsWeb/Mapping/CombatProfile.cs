@@ -19,7 +19,9 @@ public class CombatProfile :Profile
 
         CreateMap<CombatEnemyDto, EnemySectionModelView>()
             .ForMember(destination => destination.EnemySelectedSkillType, 
-                expr => expr.MapFrom(source => source.EnemySelectedSkill.Type));
+                expr => expr.MapFrom(source => source.EnemySelectedSkill.Type))
+            .ForMember(destination => destination.EnemySelectedSkillStunning, 
+                expr => expr.MapFrom(source => source.EnemySelectedSkill.Stunning));
 
         CreateMap<CombatStage, CombatStageModelView>()
             .ForMember(destination => destination.HeroSelectedSkillId, 

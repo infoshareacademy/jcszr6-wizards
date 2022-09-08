@@ -1,2 +1,50 @@
-﻿@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
+﻿@using Wizards.Core.Model.WorldModels.Properties.Enums
+@using Wizards.Core.Model.WorldModels.Enums
+@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
+<div class="col-12 text-center bg-paper py-2 h4">@Model.EnemySection.Name</div>
+<div class="col-12 participant-container">
+    
+    @{
+        var imgAddress = $"BossesCards/{Model.EnemySection.AvatarImageNumber}-Manticora.png";
+        <img class="not-dragable-image" src="BossesCards/2-Manticora.png" width="100%" height="100%">
+    }
+    
+    @if (Model.EnemySection.IsEnemyStunned)
+    {
+        <div class="round-results-info-text stunned-participant-text">STUNNED</div>
+    }
+
+    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
+    {
+        <div class="round-results-info-text boss-countered-text">COUNTERED</div>
+    }
+
+    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
+    {
+        <div class="round-results-info-text boss-blocked-text">BLOCKED</div>
+    }
+    
+    <div class="round-results-info-text on-boss-damage-text">Model.LastRoundResult.EnemyDamageTaken</div>
+    
+    @if (Model.LastRoundResult.EnemyHealthRecovered > 0)
+    {
+        <div class="round-results-info-text boss-heal-text">Model.LastRoundResult.EnemyHealthRecovered</div>
+    }
+    
+    @if (Model.EnemySection.EnemySelectedSkillType == EnemySkillType.Charge)
+    {
+        <img class="enemy-skill-icon" src="BattleGui/enemy-charge.png">
+    }
+    else if (Model.EnemySection.EnemySelectedSkillType == EnemySkillType.Deadly)
+    {
+        <img class="enemy-skill-icon" src="BattleGui/enemy-deadly.png">
+    }
+    else if (Model.EnemySection.EnemySelectedSkillStunning)
+    {
+        <img class="enemy-skill-icon" src="BattleGui/enemy-stunning.png">
+    }
+</div>
+<div class="col-12 text-center" style="color: #ffffff;">
+    EXIT BUTTON
+</div>
