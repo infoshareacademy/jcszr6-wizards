@@ -1,4 +1,5 @@
 ﻿using Wizards.Core.Model.WorldModels;
+using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.GamePlay.CombatService;
 
 namespace Wizards.GamePlay.StageService;

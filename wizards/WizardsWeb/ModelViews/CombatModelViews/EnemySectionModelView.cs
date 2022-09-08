@@ -1,9 +1,9 @@
 ﻿using System;
 using Wizards.Core.Model.WorldModels.Enums;
 
-namespace WizardsWeb.ModelViews.ExplorationModelViews;
+namespace WizardsWeb.ModelViews.CombatModelViews;
 
-public class EnemySection
+public class EnemySectionModelView
 {
     public string Name { get; set; }
     public EnemyType Type { get; set; }

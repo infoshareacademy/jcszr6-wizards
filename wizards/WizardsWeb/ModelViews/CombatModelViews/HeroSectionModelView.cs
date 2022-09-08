@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 
-namespace WizardsWeb.ModelViews.ExplorationModelViews;
+namespace WizardsWeb.ModelViews.CombatModelViews;
 
-public class HeroSection
+public class HeroSectionModelView
 {
     public string NickName { get; set; }
     public HeroProfession Profession { get; set; }

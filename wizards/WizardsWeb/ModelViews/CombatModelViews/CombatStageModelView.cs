@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
-using Wizards.GamePlay.CombatService;
 
-namespace WizardsWeb.ModelViews.ExplorationModelViews;
+namespace WizardsWeb.ModelViews.CombatModelViews;
 
-public class BattleStageModelView
+public class CombatStageModelView
 {
     // CombatHero z CombatStage
-    public HeroSection HeroSection { get; set; }
+    public HeroSectionModelView HeroSection { get; set; }
     
     // Enemy z CombatStage
-    public EnemySection EnemySection { get; set; }
+    public EnemySectionModelView EnemySection { get; set; }
 
     // Last RoundResult
     public RoundResult LastRoundResult { get; set; }
+    public bool WasResultShown { get; set; }
 
     // Pozostałe elementy z CombatStage
     public string Name { get; set; }

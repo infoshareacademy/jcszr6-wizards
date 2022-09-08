@@ -20,5 +20,6 @@ namespace Wizards.Core.Model.WorldModels
 
         // Rounds information
         public List<RoundLog> RoundLogs { get; set; }
+        public RoundResult LastRoundResult { get; set; }
     }
 }
