@@ -17,9 +17,16 @@ public class StageService : IStageService
     private readonly IEnemyAI _enemyAI;
     private readonly ICombatStageInstancesRepository _combatStageInstancesRepository;
     private readonly IResultLogService _resultLogService;
+    private readonly IHeroRepository _heroRepository;
 
-    public StageService(ICombatService combatService, ICombatStageFactory combatStageFactory, IPlayerRepository playerRepository,
-        IEnemyAI enemyAI, ICombatStageInstancesRepository combatStageInstancesRepository, IResultLogService resultLogService)
+    public StageService(ICombatService combatService,
+                        ICombatStageFactory combatStageFactory,
+                        IPlayerRepository playerRepository,
+                        IEnemyAI enemyAI,
+                        ICombatStageInstancesRepository combatStageInstancesRepository,
+                        IResultLogService resultLogService,
+                        IHeroRepository heroRepository
+                        )
     {
         _combatService = combatService;
         _combatStageFactory = combatStageFactory;
@@ -27,6 +34,7 @@ public class StageService : IStageService
         _enemyAI = enemyAI;
         _combatStageInstancesRepository = combatStageInstancesRepository;
         _resultLogService = resultLogService;
+        _heroRepository = heroRepository;
     }
     public async Task<CombatStage> CreateNewMatchAsync(int playerId, int enemyId)
     {
@@ -45,22 +53,13 @@ public class StageService : IStageService
 
     public async Task<RoundResult> CommitRoundAsync(int playerId, int selectedSkillId)
     {
-        // TODO: Należy zwrócic się do repozytorium po CombatStage przypisany do gracza o Id = playerId
 
         var combatStage = await _combatStageInstancesRepository.GetAsync(playerId);
 
-
-        // TODO: Obliczyc rezultat rundy przy pomocy Combat Serwisu;
-
         var roundResult = await _combatService.CalculateRoundAsync(combatStage);
 
-
-        //
-        // TODO: Trzeba wprowadzić rezultat rundy do obecnego stanu stage'a:
-        // - Odebrać obu uczestnikom punkty życia które utracili w skutek ataków (uwaga żeby nikomu nie spadło poniżej 0!!!);
-
         combatStage.CombatHero.CurrentHeroHealth -= roundResult.HeroDamageTaken;
-        
+
         if (combatStage.CombatHero.CurrentHeroHealth < 0)
         {
             combatStage.CombatHero.CurrentHeroHealth = 0;
@@ -73,13 +72,9 @@ public class StageService : IStageService
             combatStage.CombatEnemy.CurrentEnemyHealth = 0;
         }
 
-        // - Ustawić ich status na następną rundę: (czy są zestunowani ...)
-
         combatStage.CombatHero.IsHeroStunned = roundResult.HeroWillBeStunned;
         combatStage.CombatEnemy.IsEnemyStunned = roundResult.EnemyWillBeStunned;
 
-
-        // - Dodać obu uczestnikom punkty życia, które odzyskali w skutek leczenia.
         combatStage.CombatHero.CurrentHeroHealth += roundResult.HeroHealthRecovered;
         if (combatStage.CombatHero.CurrentHeroHealth > combatStage.CombatHero.Attributes.MaxHealth)
         {
@@ -92,25 +87,18 @@ public class StageService : IStageService
             combatStage.CombatEnemy.CurrentEnemyHealth = combatStage.CombatEnemy.Attributes.MaxHealth;
         }
 
-
-        // - Dodać stopień uszkodzenia broni i zbroi (obliczony przez pomocniczny serwisik który robi to na podstawie RoundResult'u).
-
-        var armorDamage = CalculateArmorDamage();
-        var weaponDamage = CalculateWeaponDamage();
+        var armorDamage = CalculateArmorDamage(roundResult.EnemyCombatStatus == CombatService.Enums.EnemyCombatStatus.MissesAttack);
+        var weaponDamage = CalculateWeaponDamage(roundResult.EnemyCombatStatus == CombatService.Enums.EnemyCombatStatus.MissesAttack);
 
         combatStage.CombatHero.ArmorUsage += armorDamage;
         combatStage.CombatHero.WeaponUsage += weaponDamage;
-
-
-        //
-        // TODO: Trzeba sprawdzić czy walka się zakończyła. (czy ktoś ma 0 CurrentHealth).
 
         if (combatStage.CombatEnemy.CurrentEnemyHealth == 0 && combatStage.CombatHero.CurrentHeroHealth == 0)
         {
             combatStage.CombatHero.CurrentHeroHealth = 1;
         }
-        
-        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0 )
+
+        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0)
         {
             combatStage.Status = StageStatus.ConcludedHeroWins;
         }
@@ -122,20 +110,7 @@ public class StageService : IStageService
 
         await _enemyAI.GetEnemySelectedSkillIdAsync(combatStage);
 
-
-        // Jeśli nie to:
-        // TODO: Należy przy pomocy EnemyAI ustalić następną akcję przeciwnika.
-        // Jeśli tak to:
-        // TODO: Ustawić na Stage'u status "ConcludedHeroWins" lub "ConcludedEnemyWins" zależnie od tego kto wygrał (kto ma jeszcze punkty życia).
-        // Uwaga może pojawić się sytuacja w której obaj uczestnicy mają 0 punktów życia. W takim przypadku mecz jest rostrzygany jako wygrana gracza,
-        // a jego Healt jest ustawiany na 1 punkt życia (tak zwany cios ostatniej szansy).
-        // 
-        // TODO: Obliczony rezultat przekazać do ResultLogService żeby otrzymać log z rundy.
-
-        var resultLog = await _resultLogService.CreateRoundLogAsync(roundResult); 
-
-
-        // TODO: Otrzymanemu logowi trzeba nadać numer rundy (na podstawie już zawartych logów w stage'u) i dodać nowy log do listy w stage'u
+        var resultLog = await _resultLogService.CreateRoundLogAsync(roundResult);
 
         var numberRound = combatStage.RoundLogs.Count + 1;
 
@@ -146,25 +121,110 @@ public class StageService : IStageService
         throw new NotImplementedException();
     }
 
-    private double CalculateWeaponDamage()
+    private double CalculateWeaponDamage(bool heroMissedAttack)
     {
-        throw new NotImplementedException();
+        if (!heroMissedAttack)
+        {
+            return 0.05;
+        }
+        else
+        {
+            return 0.1;
+        };
     }
 
-    private double CalculateArmorDamage()
+    private double CalculateArmorDamage(bool enemyMissedAttack)
     {
-        throw new NotImplementedException();
+        if (!enemyMissedAttack)
+        {
+            return 0.1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
     public async Task FinishMatchAsync(int playerId)
     {
-        // TODO: Wręczenie nagród bohaterowi
-        // Pobieramy nagrodę z enemy (najlepiej tego z bazy danych) i dodajemy ja do naszego Hero.
-        // TODO: Uszkodzenie ekwipunku bohaterowi.
-        // Tutaj zależnie od wyniku meczu albo psujemy ekwipunek tym co zostało naliczone (wygrana bohatera) albo naliczamy to podwójnie (przegrana).
-        // TODO: Ustawiamy status areny na "ReadyToClose"
-        // TODO: Usuwamy instancję CombatStage'a z repozytorium.
 
-        throw new NotImplementedException();
+        var combatStage = await _combatStageInstancesRepository.GetAsync(playerId);
+        var hero = await _heroRepository.Get(combatStage.CombatHero.Id);
+        if (combatStage.Status == StageStatus.ConcludedHeroWins)
+        {
+            if (hero.Attributes.DailyRewardEnergy > 0)
+            {
+                hero.Gold += combatStage.CombatEnemy.GoldReward;
+            }
+            var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
+            var heroArmorId = combatStage.CombatHero.EquippedArmorId;
+
+            var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
+            var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
+
+            heroWeapon.ItemEndurance -= combatStage.CombatHero.WeaponUsage;
+            if (heroWeapon.ItemEndurance < 0)
+            {
+                heroWeapon.ItemEndurance = 0;
+            }
+
+            heroArmor.ItemEndurance -= combatStage.CombatHero.ArmorUsage;
+            if (heroArmor.ItemEndurance < 0)
+            {
+                heroArmor.ItemEndurance = 0;
+            }
+        }
+        else if (combatStage.Status == StageStatus.ConcludedEnemyWins)
+        {
+            var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
+            var heroArmorId = combatStage.CombatHero.EquippedArmorId;
+
+            var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
+            var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
+
+            heroWeapon.ItemEndurance -= combatStage.CombatHero.WeaponUsage * 2;
+            if (heroWeapon.ItemEndurance < 0)
+            {
+                heroWeapon.ItemEndurance = 0;
+            }
+
+            heroArmor.ItemEndurance -= combatStage.CombatHero.ArmorUsage * 2;
+            if (heroArmor.ItemEndurance < 0)
+            {
+                heroArmor.ItemEndurance = 0;
+            }
+        }
+        else
+        {
+            var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
+            var heroArmorId = combatStage.CombatHero.EquippedArmorId;
+
+            var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
+            var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
+
+            heroWeapon.ItemEndurance -= combatStage.CombatHero.WeaponUsage * 4;
+            if (heroWeapon.ItemEndurance < 0)
+            {
+                heroWeapon.ItemEndurance = 0;
+            }
+
+            heroArmor.ItemEndurance -= combatStage.CombatHero.ArmorUsage * 4;
+            if (heroArmor.ItemEndurance < 0)
+            {
+                heroArmor.ItemEndurance = 0;
+            }
+        }
+
+
+        if (hero.Attributes.DailyRewardEnergy > 0)
+        {
+            hero.Attributes.DailyRewardEnergy -= 1;
+        }
+
+        await _heroRepository.Update(hero);
+
+        combatStage.Status = StageStatus.ReadyToClose;
+        await _combatStageInstancesRepository.RemoveAsync(playerId);
+
     }
 }

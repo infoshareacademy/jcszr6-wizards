@@ -23,4 +23,6 @@ public class CombatEnemyDto
 
     public int EnemyBehaviorPatternId { get; set; }
     public int EnemyPatternSequenceStepId { get; set; }
+
+    public int GoldReward { get; set; }
 }
