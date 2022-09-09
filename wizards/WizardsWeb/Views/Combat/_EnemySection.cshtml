@@ -15,19 +15,22 @@
         <div class="round-results-info-text stunned-participant-text">STUNNED</div>
     }
 
-    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
+    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered && !Model.WasResultShown)
     {
         <div class="round-results-info-text boss-countered-text">COUNTERED</div>
     }
 
-    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
+    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered && !Model.WasResultShown)
     {
         <div class="round-results-info-text boss-blocked-text">BLOCKED</div>
     }
     
-    <div class="round-results-info-text on-boss-damage-text">Model.LastRoundResult.EnemyDamageTaken</div>
+    @if (!Model.WasResultShown)
+    {
+        <div class="round-results-info-text on-boss-damage-text">Model.LastRoundResult.EnemyDamageTaken</div>
+    }
     
-    @if (Model.LastRoundResult.EnemyHealthRecovered > 0)
+    @if (Model.LastRoundResult.EnemyHealthRecovered > 0 && !Model.WasResultShown)
     {
         <div class="round-results-info-text boss-heal-text">Model.LastRoundResult.EnemyHealthRecovered</div>
     }
@@ -45,6 +48,7 @@
         <img class="enemy-skill-icon" src="BattleGui/enemy-stunning.png">
     }
 </div>
+
 <div class="col-12 text-center" style="color: #ffffff;">
     EXIT BUTTON
 </div>

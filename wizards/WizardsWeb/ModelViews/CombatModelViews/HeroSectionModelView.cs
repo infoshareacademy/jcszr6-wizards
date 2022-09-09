@@ -11,7 +11,7 @@ public class HeroSectionModelView
     public HeroProfession Profession { get; set; }
     public int AvatarImageNumber { get; set; }
 
-    public List<CombatHeroSkillDto> HeroSkills { get; set; }
+    public List<HeroSkillModelView> HeroSkills { get; set; }
 
     public bool IsHeroStunned { get; set; }
     public int MaxHeroHealth { get; set; }

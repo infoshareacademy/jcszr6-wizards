@@ -1,2 +1,24 @@
-﻿@model IEnumerable<Wizards.Core.Model.WorldModels.Properties.RoundLog>
+﻿@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
+
+<div class="col-12 bg-paper-semi-transparent p-3 table-section">
+    <table class="table-container">
+        <thead>
+            <tr>
+                <th>Round</th>
+                <th>@Model.HeroSection.NickName</th>
+                <th>@Model.EnemySection.Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var row in Model.RoundLogs)
+        {
+            <tr>
+                <th>@row.RoundNumber</th>
+                <td>@row.HeroActionLog</td>
+                <td>@row.EnemyActionLog</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

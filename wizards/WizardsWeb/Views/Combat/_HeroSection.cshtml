@@ -11,10 +11,13 @@
     {
         <div class="round-results-info-text stunned-participant-text">STUNNED</div>
     }
-
-    <div class="round-results-info-text on-hero-damage-text">@Model.LastRoundResult.HeroDamageTaken</div>
     
-    @if (Model.LastRoundResult.HeroHealthRecovered > 0)
+    @if (!Model.WasResultShown)
+    {
+        <div class="round-results-info-text on-hero-damage-text">@Model.LastRoundResult.HeroDamageTaken</div>
+    }
+    
+    @if (Model.LastRoundResult.HeroHealthRecovered > 0 && !Model.WasResultShown)
     {
         <div class="round-results-info-text hero-heal-text">Model.LastRoundResult.HeroHealthRecovered</div>
     }

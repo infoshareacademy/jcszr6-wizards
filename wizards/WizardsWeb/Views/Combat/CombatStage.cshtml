@@ -1,23 +1,29 @@
 ﻿@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
 <body class="bg-arena not-selectable" 
-      style="background-image: url(ArenaBackground/Arena-2.jpg);">
+      style="background-image: url(ArenaBackground/@(Model.Name.Replace(" ", "-")).jpg);">
     <div class="col-12 p-4">
         <div class="row">
 
             <!-- HERO Left Section -->
             <div class="col-1 p-1" style="width: 420px;">
-                
+                <partial name="_HeroSection" model="@Model"/>
             </div>
 
             <!-- REPORT/ACTIONS Center Section -->
             <div class="col p-1">
-                
+                <div class="col-12 text-center bg-paper py-2 h4">@Model.Name</div>
+                <div class="center-section">
+                    <partial name="_EnemyHPBar" model="@Model.EnemySection"/>
+                    <partial name="_LogTable" model="@Model"/>
+                    <partial name="_HeroHPBar" model="Model.HeroSection"/>
+                    <partial name="_HeroSkillBar" model="Model"/>
+                </div>
             </div>
 
             <!-- ENEMY Right Section -->
             <div class="col-1 p-1" style="width: 477px;">
-
+                <partial name="_EnemySection" model="@Model"/>
             </div>
         </div>
     </div>
