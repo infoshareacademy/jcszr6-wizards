@@ -78,11 +78,11 @@ public class CombatController : Controller
         {
             Name = "Legendary Dupa",
             AvatarImageNumber = 1,
-            CurrentEnemyHealth = 300,
+            CurrentEnemyHealth = 250,
             MaxEnemyHealth = 500,
             EnemySelectedSkillStunning = false,
             EnemySelectedSkillType = EnemySkillType.Charge,
-            IsEnemyStunned = false,
+            IsEnemyStunned = true,
             Type = EnemyType.Boss
         };
         var skills = new List<HeroSkillModelView>()
@@ -99,7 +99,7 @@ public class CombatController : Controller
         {
             NickName = "Dupa Slayer",
             AvatarImageNumber = 3,
-            CurrentHeroHealth = 225,
+            CurrentHeroHealth = 200,
             MaxHeroHealth = 250,
             IsHeroStunned = false,
             Profession = HeroProfession.Sorcerer,

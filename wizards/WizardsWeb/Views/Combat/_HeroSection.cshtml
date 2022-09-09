@@ -3,7 +3,7 @@
 <div class="col-12 text-center bg-paper py-2 h4">@Model.HeroSection.NickName</div>
 <div class="col-12 participant-container">
     @{
-        var imgAddress = $"Wizards/Wizard-{Model.HeroSection.AvatarImageNumber}.png";
+        var imgAddress = $"/Images/Hero/Avatars/Wizard-{Model.HeroSection.AvatarImageNumber}.png";
         <img class="not-dragable-image" src="@imgAddress" width="100%" height="100%">
     }
     
@@ -19,6 +19,6 @@
     
     @if (Model.LastRoundResult.HeroHealthRecovered > 0 && !Model.WasResultShown)
     {
-        <div class="round-results-info-text hero-heal-text">Model.LastRoundResult.HeroHealthRecovered</div>
+        <div class="round-results-info-text hero-heal-text">@Model.LastRoundResult.HeroHealthRecovered</div>
     }
 </div>

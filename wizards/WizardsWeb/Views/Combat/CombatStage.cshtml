@@ -1,12 +1,12 @@
 ﻿@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
 <body class="bg-arena not-selectable" 
-      style="background-image: url(ArenaBackground/@(Model.Name.Replace(" ", "-")).jpg);">
+      style="background-image: url(/GraphicAssets/ArenaBackground/@(Model.Name.Replace(" ", "-")).jpg);">
     <div class="col-12 p-4">
         <div class="row">
 
             <!-- HERO Left Section -->
-            <div class="col-1 p-1" style="width: 420px;">
+            <div class="col-1 p-1 hero-section-width" style="width: 420px;">
                 <partial name="_HeroSection" model="@Model"/>
             </div>
 

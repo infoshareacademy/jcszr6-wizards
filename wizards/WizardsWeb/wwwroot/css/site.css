@@ -85,7 +85,7 @@ body {
     user-select: none;
     margin: 0px;
     padding: 8px 20px;
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-action.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
     background-size: 100% 100%;
     background-repeat: space;
     background-attachment: inherit;
@@ -132,31 +132,31 @@ body {
 
 /* formating background classes for different occasions */
 .gbtn-action {
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-action.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
     color: white;
 }
 
 .gbtn-accept {
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-accept.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-accept.png);
     color: white;
 }
 
 .gbtn-danger {
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-danger.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-danger.png);
     color: white;
 }
 
 .gbtn-magical {
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-premium.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-premium.png);
     color: white;
 }
 
 .gbtn-premium {
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-magical.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-magical.png);
     color: white;
 }
 
 .gbtn-technical {
-    background-image: url(/Images/StyleAssets/Buttons/game-btn-technical.png);
+    background-image: url(/GraphicAssets/Buttons/game-btn-technical.png);
     color: white;
 }

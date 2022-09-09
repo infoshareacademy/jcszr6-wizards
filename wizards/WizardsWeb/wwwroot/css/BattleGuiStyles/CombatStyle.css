@@ -1,0 +1,51 @@
+/* Background and locking elements */
+
+.bg-arena {
+    background-color: #2e210f;
+    background-image: url(/GraphicAssets/ArenaBackground/Arena-2.jpg);
+    background-position: 0%;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    min-width: 1600px;
+    min-height: 864px;
+}
+
+.bg-paper {
+    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
+    background-position: 0%;
+    background-size: 100% auto;
+    background-attachment: scroll;
+    background-repeat: space;
+    border-radius: 4px;
+}
+
+.bg-paper-semi-transparent {
+    background-image: url(/GraphicAssets/Textures/bg-paper-semi-transparent.png);
+    background-position: 0%;
+    background-size: 100% 100%;
+    background-attachment: inherit;
+    background-repeat: no-repeat;
+    border-radius: 4px;
+}
+
+.not-selectable{
+    user-select: none;
+}
+
+.not-dragable-image{
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.center-section{
+    position: relative;
+    height: 740px;
+}
+
+.hero-section-width {
+    width: 420px;
+}

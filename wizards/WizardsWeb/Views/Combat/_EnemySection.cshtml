@@ -7,7 +7,7 @@
     
     @{
         var imgAddress = $"BossesCards/{Model.EnemySection.AvatarImageNumber}-Manticora.png";
-        <img class="not-dragable-image" src="BossesCards/2-Manticora.png" width="100%" height="100%">
+        <img class="not-dragable-image" src="~/Images/Bosses/@(Model.EnemySection.Name.Replace(" ", "-")).png" width="100%" height="100%">
     }
     
     @if (Model.EnemySection.IsEnemyStunned)
@@ -20,32 +20,32 @@
         <div class="round-results-info-text boss-countered-text">COUNTERED</div>
     }
 
-    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered && !Model.WasResultShown)
+    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked && !Model.WasResultShown)
     {
         <div class="round-results-info-text boss-blocked-text">BLOCKED</div>
     }
     
     @if (!Model.WasResultShown)
     {
-        <div class="round-results-info-text on-boss-damage-text">Model.LastRoundResult.EnemyDamageTaken</div>
+        <div class="round-results-info-text on-boss-damage-text">@Model.LastRoundResult.EnemyDamageTaken</div>
     }
     
     @if (Model.LastRoundResult.EnemyHealthRecovered > 0 && !Model.WasResultShown)
     {
-        <div class="round-results-info-text boss-heal-text">Model.LastRoundResult.EnemyHealthRecovered</div>
+        <div class="round-results-info-text boss-heal-text">@Model.LastRoundResult.EnemyHealthRecovered</div>
     }
     
     @if (Model.EnemySection.EnemySelectedSkillType == EnemySkillType.Charge)
     {
-        <img class="enemy-skill-icon" src="BattleGui/enemy-charge.png">
+        <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-charge.png">
     }
     else if (Model.EnemySection.EnemySelectedSkillType == EnemySkillType.Deadly)
     {
-        <img class="enemy-skill-icon" src="BattleGui/enemy-deadly.png">
+        <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-deadly.png">
     }
     else if (Model.EnemySection.EnemySelectedSkillStunning)
     {
-        <img class="enemy-skill-icon" src="BattleGui/enemy-stunning.png">
+        <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-stunning.png">
     }
 </div>
 
