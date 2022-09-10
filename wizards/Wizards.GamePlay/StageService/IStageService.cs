@@ -5,8 +5,8 @@ namespace Wizards.GamePlay.StageService
 {
     public interface IStageService
     {
-        public Task<CombatStage> CreateNewMatchAsync(int playerId, int enemyId);
-        public Task<RoundResult> CommitRoundAsync(int playerId, int selectedSkillId);
+        public Task CreateNewMatchAsync(int playerId, int enemyId, bool isTraining);
+        public Task CommitRoundAsync(int playerId, int selectedSkillId);
         public Task FinishMatchAsync(int playerId);
     }
 }

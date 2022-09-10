@@ -1,7 +1,10 @@
 ﻿using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
+using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
+using Wizards.Core.Model.WorldModels.Properties;
+using Wizards.Core.Model.WorldModels.Properties.Enums;
 using Wizards.GamePlay.CombatService;
 using Wizards.GamePlay.EnemyAI;
 using Wizards.GamePlay.Factories;
@@ -15,7 +18,7 @@ public class StageService : IStageService
     private readonly ICombatService _combatService;
     private readonly IPlayerRepository _playerRepository;
     private readonly IEnemyAI _enemyAI;
-    private readonly ICombatStageInstancesRepository _combatStageInstancesRepository;
+    private readonly ICombatStageInstancesRepository _combatStageRepository;
     private readonly IResultLogService _resultLogService;
     private readonly IHeroRepository _heroRepository;
 
@@ -23,7 +26,7 @@ public class StageService : IStageService
                         ICombatStageFactory combatStageFactory,
                         IPlayerRepository playerRepository,
                         IEnemyAI enemyAI,
-                        ICombatStageInstancesRepository combatStageInstancesRepository,
+                        ICombatStageInstancesRepository combatStageRepository,
                         IResultLogService resultLogService,
                         IHeroRepository heroRepository
                         )
@@ -32,84 +35,135 @@ public class StageService : IStageService
         _combatStageFactory = combatStageFactory;
         _playerRepository = playerRepository;
         _enemyAI = enemyAI;
-        _combatStageInstancesRepository = combatStageInstancesRepository;
+        _combatStageRepository = combatStageRepository;
         _resultLogService = resultLogService;
         _heroRepository = heroRepository;
     }
-    public async Task<CombatStage> CreateNewMatchAsync(int playerId, int enemyId)
+
+    public async Task CreateNewMatchAsync(int playerId, int enemyId, bool isTraining)
     {
         var player = await _playerRepository.Get(playerId);
+
+        if (player == null)
+        {
+            throw new NullReferenceException($"There is no player with id: {playerId}");
+        }
+
         var heroId = player.ActiveHeroId;
-        var combatStage = await _combatStageFactory.CreateCombatStageAsync(heroId, enemyId, false);
+        var combatStage = await _combatStageFactory.CreateCombatStageAsync(heroId, enemyId, isTraining);
 
-        await _enemyAI.GetEnemySelectedSkillIdAsync(combatStage);
+        await _enemyAI.SelectNextEnemyActionAsync(combatStage);
 
-        await _combatStageInstancesRepository.AddAsync(combatStage, playerId);
+        await _combatStageRepository.AddAsync(combatStage, playerId);
 
         combatStage.Status = StageStatus.DuringCombat;
-
-        return combatStage;
     }
 
-    public async Task<RoundResult> CommitRoundAsync(int playerId, int selectedSkillId)
+    public async Task CommitRoundAsync(int playerId, int selectedSkillId)
     {
-
-        var combatStage = await _combatStageInstancesRepository.GetAsync(playerId);
-
+        var combatStage = await _combatStageRepository.GetAsync(playerId);
         var roundResult = await _combatService.CalculateRoundAsync(combatStage);
 
-        combatStage.CombatHero.CurrentHeroHealth -= roundResult.HeroDamageTaken;
-
-        if (combatStage.CombatHero.CurrentHeroHealth < 0)
-        {
-            combatStage.CombatHero.CurrentHeroHealth = 0;
-        }
-
-        combatStage.CombatEnemy.CurrentEnemyHealth -= roundResult.EnemyDamageTaken;
-
-        if (combatStage.CombatEnemy.CurrentEnemyHealth < 0)
-        {
-            combatStage.CombatEnemy.CurrentEnemyHealth = 0;
-        }
+        SubtractHeroHealth(combatStage, roundResult);
+        SubtractEnemyHealth(combatStage, roundResult);
 
         combatStage.CombatHero.IsHeroStunned = roundResult.HeroWillBeStunned;
         combatStage.CombatEnemy.IsEnemyStunned = roundResult.EnemyWillBeStunned;
 
-        combatStage.CombatHero.CurrentHeroHealth += roundResult.HeroHealthRecovered;
-        if (combatStage.CombatHero.CurrentHeroHealth > combatStage.CombatHero.Attributes.MaxHealth)
-        {
-            combatStage.CombatHero.CurrentHeroHealth = combatStage.CombatHero.Attributes.MaxHealth;
-        }
+        RecoverHeroHealth(combatStage, roundResult);
+        RecoverEnemyHealth(combatStage, roundResult);
+        LastChanceHitMechanic(combatStage);
 
-        combatStage.CombatEnemy.CurrentEnemyHealth += roundResult.EnemyHealthRecovered;
-        if (combatStage.CombatEnemy.CurrentEnemyHealth > combatStage.CombatEnemy.Attributes.MaxHealth)
-        {
-            combatStage.CombatEnemy.CurrentEnemyHealth = combatStage.CombatEnemy.Attributes.MaxHealth;
-        }
-
-        var armorDamage = CalculateArmorDamage(roundResult.EnemyCombatStatus == CombatService.Enums.EnemyCombatStatus.MissesAttack);
-        var weaponDamage = CalculateWeaponDamage(roundResult.EnemyCombatStatus == CombatService.Enums.EnemyCombatStatus.MissesAttack);
-
+        var armorDamage = CalculateArmorDamage(roundResult.EnemyCombatStatus == EnemyCombatStatus.MissesAttack);
+        var weaponDamage = CalculateWeaponDamage(roundResult.EnemyCombatStatus == EnemyCombatStatus.MissesAttack);
         combatStage.CombatHero.ArmorUsage += armorDamage;
         combatStage.CombatHero.WeaponUsage += weaponDamage;
 
-        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0 && combatStage.CombatHero.CurrentHeroHealth == 0)
+        SetNewStageStatus(combatStage);
+
+        await _enemyAI.SelectNextEnemyActionAsync(combatStage);
+
+        await AddResultLog(roundResult, combatStage);
+
+        combatStage.LastRoundResult = roundResult;
+    }
+
+    public async Task FinishMatchAsync(int playerId)
+    {
+        var combatStage = await _combatStageRepository.GetAsync(playerId);
+        var hero = await _heroRepository.Get(combatStage.CombatHero.Id);
+
+        
+        GiveHeroReward(hero, combatStage);
+
+        if (!combatStage.IsTraining)
         {
-            combatStage.CombatHero.CurrentHeroHealth = 1;
+            DamageHeroEquipment(combatStage, hero);
+        }
+        
+        if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining)
+        {
+            hero.Attributes.DailyRewardEnergy -= 1;
         }
 
-        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0)
+        await _heroRepository.Update(hero);
+
+        combatStage.Status = StageStatus.ReadyToClose;
+        await _combatStageRepository.RemoveAsync(playerId);
+    }
+
+    private static void DamageHeroEquipment(CombatStage combatStage, Hero hero)
+    {
+        var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
+        var heroArmorId = combatStage.CombatHero.EquippedArmorId;
+
+        var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
+        var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
+
+        var heroWeaponUsage = combatStage.CombatHero.WeaponUsage;
+        var heroArmorUsage = combatStage.CombatHero.ArmorUsage;
+
+        if (combatStage.Status == StageStatus.ConcludedEnemyWins)
         {
-            combatStage.Status = StageStatus.ConcludedHeroWins;
+            heroArmorUsage *= 2;
+            heroWeaponUsage *= 2;
+        }
+        
+        if (combatStage.Status == StageStatus.DuringCombat)
+        {
+            heroArmorUsage *= 4;
+            heroWeaponUsage *= 4;
         }
 
-        else if (combatStage.CombatHero.CurrentHeroHealth == 0)
+        if (heroWeapon.ItemEndurance - heroWeaponUsage <= 0)
         {
-            combatStage.Status = StageStatus.ConcludedEnemyWins;
+            heroWeapon.ItemEndurance = 0;
+        }
+        else
+        {
+            heroWeapon.ItemEndurance -= heroWeaponUsage;
         }
 
-        await _enemyAI.GetEnemySelectedSkillIdAsync(combatStage);
+        if (heroArmor.ItemEndurance - heroArmorUsage <= 0)
+        {
+            heroArmor.ItemEndurance = 0;
+        }
+        else
+        {
+            heroArmor.ItemEndurance -= heroArmorUsage;
+        }
+    }
 
+    private static void GiveHeroReward(Hero? hero, CombatStage combatStage)
+    {
+        if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining && combatStage.Status == StageStatus.ConcludedHeroWins)
+        {
+            hero.Gold += combatStage.CombatEnemy.GoldReward;
+        }
+    }
+
+    private async Task AddResultLog(RoundResult roundResult, CombatStage combatStage)
+    {
         var resultLog = await _resultLogService.CreateRoundLogAsync(roundResult);
 
         var numberRound = combatStage.RoundLogs.Count + 1;
@@ -117,8 +171,80 @@ public class StageService : IStageService
         resultLog.RoundNumber = numberRound;
 
         combatStage.RoundLogs.Add(resultLog);
+    }
 
-        throw new NotImplementedException();
+    private static void SetNewStageStatus(CombatStage combatStage)
+    {
+        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0)
+        {
+            combatStage.Status = StageStatus.ConcludedHeroWins;
+        }
+        else if (combatStage.CombatHero.CurrentHeroHealth == 0)
+        {
+            combatStage.Status = StageStatus.ConcludedEnemyWins;
+        }
+        else
+        {
+            combatStage.Status = StageStatus.DuringCombat;
+        }
+    }
+
+    private static void LastChanceHitMechanic(CombatStage combatStage)
+    {
+        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0 && combatStage.CombatHero.CurrentHeroHealth == 0)
+        {
+            combatStage.CombatHero.CurrentHeroHealth = 1;
+        }
+    }
+
+    private static void RecoverHeroHealth(CombatStage combatStage, RoundResult roundResult)
+    {
+        var currentHealth = combatStage.CombatHero.CurrentHeroHealth;
+        var maxHealth = combatStage.CombatHero.Attributes.MaxHealth;
+
+        if (currentHealth + roundResult.HeroHealthRecovered > maxHealth)
+        {
+            combatStage.CombatHero.CurrentHeroHealth = maxHealth;
+        }
+
+        combatStage.CombatHero.CurrentHeroHealth += roundResult.HeroHealthRecovered;
+    }
+
+    private static void RecoverEnemyHealth(CombatStage combatStage, RoundResult roundResult)
+    {
+        var currentHealth = combatStage.CombatEnemy.CurrentEnemyHealth;
+        var maxHealth = combatStage.CombatEnemy.Attributes.MaxHealth;
+
+        if (currentHealth + roundResult.EnemyHealthRecovered > maxHealth)
+        {
+            combatStage.CombatEnemy.CurrentEnemyHealth = maxHealth;
+        }
+
+        combatStage.CombatEnemy.CurrentEnemyHealth += roundResult.EnemyHealthRecovered;
+    }
+
+    private static void SubtractHeroHealth(CombatStage combatStage, RoundResult roundResult)
+    {
+        var currentHealth = combatStage.CombatHero.CurrentHeroHealth;
+
+        if (currentHealth - roundResult.HeroDamageTaken <= 0)
+        {
+            combatStage.CombatHero.CurrentHeroHealth = 0;
+        }
+
+        combatStage.CombatHero.CurrentHeroHealth -= roundResult.HeroDamageTaken;
+    }
+
+    private static void SubtractEnemyHealth(CombatStage combatStage, RoundResult roundResult)
+    {
+        var currentHealth = combatStage.CombatEnemy.CurrentEnemyHealth;
+
+        if (currentHealth - roundResult.EnemyDamageTaken <= 0)
+        {
+            combatStage.CombatEnemy.CurrentEnemyHealth = 0;
+        }
+
+        combatStage.CombatEnemy.CurrentEnemyHealth -= roundResult.EnemyDamageTaken;
     }
 
     private double CalculateWeaponDamage(bool heroMissedAttack)
@@ -143,88 +269,5 @@ public class StageService : IStageService
         {
             return 0;
         }
-    }
-
-    public async Task FinishMatchAsync(int playerId)
-    {
-
-        var combatStage = await _combatStageInstancesRepository.GetAsync(playerId);
-        var hero = await _heroRepository.Get(combatStage.CombatHero.Id);
-        if (combatStage.Status == StageStatus.ConcludedHeroWins)
-        {
-            if (hero.Attributes.DailyRewardEnergy > 0)
-            {
-                hero.Gold += combatStage.CombatEnemy.GoldReward;
-            }
-            var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
-            var heroArmorId = combatStage.CombatHero.EquippedArmorId;
-
-            var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
-            var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
-
-            heroWeapon.ItemEndurance -= combatStage.CombatHero.WeaponUsage;
-            if (heroWeapon.ItemEndurance < 0)
-            {
-                heroWeapon.ItemEndurance = 0;
-            }
-
-            heroArmor.ItemEndurance -= combatStage.CombatHero.ArmorUsage;
-            if (heroArmor.ItemEndurance < 0)
-            {
-                heroArmor.ItemEndurance = 0;
-            }
-        }
-        else if (combatStage.Status == StageStatus.ConcludedEnemyWins)
-        {
-            var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
-            var heroArmorId = combatStage.CombatHero.EquippedArmorId;
-
-            var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
-            var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
-
-            heroWeapon.ItemEndurance -= combatStage.CombatHero.WeaponUsage * 2;
-            if (heroWeapon.ItemEndurance < 0)
-            {
-                heroWeapon.ItemEndurance = 0;
-            }
-
-            heroArmor.ItemEndurance -= combatStage.CombatHero.ArmorUsage * 2;
-            if (heroArmor.ItemEndurance < 0)
-            {
-                heroArmor.ItemEndurance = 0;
-            }
-        }
-        else
-        {
-            var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
-            var heroArmorId = combatStage.CombatHero.EquippedArmorId;
-
-            var heroWeapon = hero.Inventory.SingleOrDefault(i => i.Id == heroWeaponId);
-            var heroArmor = hero.Inventory.SingleOrDefault(a => a.Id == heroArmorId);
-
-            heroWeapon.ItemEndurance -= combatStage.CombatHero.WeaponUsage * 4;
-            if (heroWeapon.ItemEndurance < 0)
-            {
-                heroWeapon.ItemEndurance = 0;
-            }
-
-            heroArmor.ItemEndurance -= combatStage.CombatHero.ArmorUsage * 4;
-            if (heroArmor.ItemEndurance < 0)
-            {
-                heroArmor.ItemEndurance = 0;
-            }
-        }
-
-
-        if (hero.Attributes.DailyRewardEnergy > 0)
-        {
-            hero.Attributes.DailyRewardEnergy -= 1;
-        }
-
-        await _heroRepository.Update(hero);
-
-        combatStage.Status = StageStatus.ReadyToClose;
-        await _combatStageInstancesRepository.RemoveAsync(playerId);
-
     }
 }

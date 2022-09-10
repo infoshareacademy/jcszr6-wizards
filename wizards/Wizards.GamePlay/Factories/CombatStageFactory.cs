@@ -29,6 +29,11 @@ public class CombatStageFactory : ICombatStageFactory
         var hero = await _heroRepository.Get(heroId);
         var enemy = await _enemyRepository.GetAsync(enemyId);
 
+        if (hero == null || enemy == null)
+        {
+            throw new NullReferenceException("Invalid models of participants");
+        }
+
         var combatHero = _mapper.Map<CombatHeroDto>(hero);
         var combatEnemy = _mapper.Map<CombatEnemyDto>(enemy);
 
