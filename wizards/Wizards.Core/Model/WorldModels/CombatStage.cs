@@ -7,9 +7,10 @@ namespace Wizards.Core.Model.WorldModels
     public class CombatStage
     {
         // General
-        public string StageName { get; set; }
+        public string Name { get; set; }
         public StageStatus Status { get; set; }
         public bool IsTraining { get; set; }
+        public int BackgroundImageNumber { get; set; }
 
         // Actual Hero status in Combat
         public CombatHeroDto CombatHero { get; set; }

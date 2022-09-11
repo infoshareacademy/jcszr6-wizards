@@ -41,7 +41,8 @@ public class CombatStageFactory : ICombatStageFactory
         combatStage.CombatEnemy = combatEnemy;
 
         combatStage.IsTraining = isTraining;
-        combatStage.StageName = enemy.EnemyStageName;
+        combatStage.Name = enemy.EnemyStageName;
+        combatStage.BackgroundImageNumber = enemy.StageBackgroundImageNumber;
         combatStage.Status = StageStatus.FreshOpened;
         combatStage.RoundLogs = new List<RoundLog>();
 

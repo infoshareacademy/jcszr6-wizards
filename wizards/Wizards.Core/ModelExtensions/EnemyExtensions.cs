@@ -108,11 +108,11 @@ public static class EnemyExtensions
 
     public static CombatEnemySkillDto GetEnemySelectedSkill(this CombatEnemyDto enemy)
     {
-        var selectedEnemySkill = enemy.Skills.SingleOrDefault(s => s.Id == enemy.EnemySelectedSkillId);
+        var selectedEnemySkill = enemy.Skills.SingleOrDefault(s => s.Id == enemy.SelectedSkillId);
 
         if (selectedEnemySkill == null)
         {
-            throw new ArgumentNullException(nameof(enemy.EnemySelectedSkill), "Enemy has wrong selected actions!");
+            throw new ArgumentNullException(nameof(enemy.SelectedSkill), "Enemy has wrong selected actions!");
         }
 
         return selectedEnemySkill;

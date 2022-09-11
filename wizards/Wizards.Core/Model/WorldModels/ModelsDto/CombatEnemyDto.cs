@@ -10,19 +10,17 @@ public class CombatEnemyDto
     public EnemyType Type { get; set; }
     public int AvatarImageNumber { get; set; }
 
-
     public CombatEnemyAttributesDto Attributes { get; set; }
     public List<CombatEnemySkillDto> Skills { get; set; }
     public List<CombatBehaviorPatternDto> BehaviorPatterns { get; set; }
-    public CombatEnemySkillDto EnemySelectedSkill { get; set; }
-    public int EnemySelectedSkillId { get; set; }
+    public CombatEnemySkillDto SelectedSkill { get; set; }
+    public int SelectedSkillId { get; set; }
 
-    public bool IsEnemyStunned { get; set; }
-    public int CurrentEnemyHealth { get; set; }
+    public bool IsStunned { get; set; }
+    public int CurrentHealth { get; set; }
 
-
-    public int EnemyBehaviorPatternId { get; set; }
-    public int EnemyPatternSequenceStepId { get; set; }
+    public int CurrentBehaviorPatternId { get; set; }
+    public int CurrentPatternSequenceStepId { get; set; }
 
     public int GoldReward { get; set; }
 }

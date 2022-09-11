@@ -23,6 +23,10 @@ internal static class EnemyDbConfiguration
             .HasMaxLength(50);
 
         modelBuilder.Entity<Enemy>()
+            .Property(e => e.StageBackgroundImageNumber)
+            .IsRequired();
+        
+        modelBuilder.Entity<Enemy>()
             .Property(e => e.Description)
             .IsRequired()
             .HasMaxLength(2048);

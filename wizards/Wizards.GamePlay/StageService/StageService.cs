@@ -67,8 +67,8 @@ public class StageService : IStageService
         SubtractHeroHealth(combatStage, roundResult);
         SubtractEnemyHealth(combatStage, roundResult);
 
-        combatStage.CombatHero.IsHeroStunned = roundResult.HeroWillBeStunned;
-        combatStage.CombatEnemy.IsEnemyStunned = roundResult.EnemyWillBeStunned;
+        combatStage.CombatHero.IsStunned = roundResult.HeroWillBeStunned;
+        combatStage.CombatEnemy.IsStunned = roundResult.EnemyWillBeStunned;
 
         RecoverHeroHealth(combatStage, roundResult);
         RecoverEnemyHealth(combatStage, roundResult);
@@ -93,18 +93,11 @@ public class StageService : IStageService
         var combatStage = await _combatStageRepository.GetAsync(playerId);
         var hero = await _heroRepository.Get(combatStage.CombatHero.Id);
 
-        
         GiveHeroReward(hero, combatStage);
 
-        if (!combatStage.IsTraining)
-        {
-            DamageHeroEquipment(combatStage, hero);
-        }
-        
-        if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining)
-        {
-            hero.Attributes.DailyRewardEnergy -= 1;
-        }
+        DamageHeroEquipment(combatStage, hero);
+
+        SubtractHeroRewardEnergy(hero, combatStage);
 
         await _heroRepository.Update(hero);
 
@@ -112,8 +105,21 @@ public class StageService : IStageService
         await _combatStageRepository.RemoveAsync(playerId);
     }
 
+    private static void GiveHeroReward(Hero? hero, CombatStage combatStage)
+    {
+        if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining && combatStage.Status == StageStatus.ConcludedHeroWins)
+        {
+            hero.Gold += combatStage.CombatEnemy.GoldReward;
+        }
+    }
+
     private static void DamageHeroEquipment(CombatStage combatStage, Hero hero)
     {
+        if (combatStage.IsTraining)
+        {
+            return;
+        }
+
         var heroWeaponId = combatStage.CombatHero.EquippedWeaponId;
         var heroArmorId = combatStage.CombatHero.EquippedArmorId;
 
@@ -154,11 +160,11 @@ public class StageService : IStageService
         }
     }
 
-    private static void GiveHeroReward(Hero? hero, CombatStage combatStage)
+    private static void SubtractHeroRewardEnergy(Hero? hero, CombatStage combatStage)
     {
-        if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining && combatStage.Status == StageStatus.ConcludedHeroWins)
+        if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining)
         {
-            hero.Gold += combatStage.CombatEnemy.GoldReward;
+            hero.Attributes.DailyRewardEnergy -= 1;
         }
     }
 
@@ -175,11 +181,11 @@ public class StageService : IStageService
 
     private static void SetNewStageStatus(CombatStage combatStage)
     {
-        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0)
+        if (combatStage.CombatEnemy.CurrentHealth == 0)
         {
             combatStage.Status = StageStatus.ConcludedHeroWins;
         }
-        else if (combatStage.CombatHero.CurrentHeroHealth == 0)
+        else if (combatStage.CombatHero.CurrentHealth == 0)
         {
             combatStage.Status = StageStatus.ConcludedEnemyWins;
         }
@@ -191,60 +197,60 @@ public class StageService : IStageService
 
     private static void LastChanceHitMechanic(CombatStage combatStage)
     {
-        if (combatStage.CombatEnemy.CurrentEnemyHealth == 0 && combatStage.CombatHero.CurrentHeroHealth == 0)
+        if (combatStage.CombatEnemy.CurrentHealth == 0 && combatStage.CombatHero.CurrentHealth == 0)
         {
-            combatStage.CombatHero.CurrentHeroHealth = 1;
+            combatStage.CombatHero.CurrentHealth = 1;
         }
     }
 
     private static void RecoverHeroHealth(CombatStage combatStage, RoundResult roundResult)
     {
-        var currentHealth = combatStage.CombatHero.CurrentHeroHealth;
+        var currentHealth = combatStage.CombatHero.CurrentHealth;
         var maxHealth = combatStage.CombatHero.Attributes.MaxHealth;
 
         if (currentHealth + roundResult.HeroHealthRecovered > maxHealth)
         {
-            combatStage.CombatHero.CurrentHeroHealth = maxHealth;
+            combatStage.CombatHero.CurrentHealth = maxHealth;
         }
 
-        combatStage.CombatHero.CurrentHeroHealth += roundResult.HeroHealthRecovered;
+        combatStage.CombatHero.CurrentHealth += roundResult.HeroHealthRecovered;
     }
 
     private static void RecoverEnemyHealth(CombatStage combatStage, RoundResult roundResult)
     {
-        var currentHealth = combatStage.CombatEnemy.CurrentEnemyHealth;
+        var currentHealth = combatStage.CombatEnemy.CurrentHealth;
         var maxHealth = combatStage.CombatEnemy.Attributes.MaxHealth;
 
         if (currentHealth + roundResult.EnemyHealthRecovered > maxHealth)
         {
-            combatStage.CombatEnemy.CurrentEnemyHealth = maxHealth;
+            combatStage.CombatEnemy.CurrentHealth = maxHealth;
         }
 
-        combatStage.CombatEnemy.CurrentEnemyHealth += roundResult.EnemyHealthRecovered;
+        combatStage.CombatEnemy.CurrentHealth += roundResult.EnemyHealthRecovered;
     }
 
     private static void SubtractHeroHealth(CombatStage combatStage, RoundResult roundResult)
     {
-        var currentHealth = combatStage.CombatHero.CurrentHeroHealth;
+        var currentHealth = combatStage.CombatHero.CurrentHealth;
 
         if (currentHealth - roundResult.HeroDamageTaken <= 0)
         {
-            combatStage.CombatHero.CurrentHeroHealth = 0;
+            combatStage.CombatHero.CurrentHealth = 0;
         }
 
-        combatStage.CombatHero.CurrentHeroHealth -= roundResult.HeroDamageTaken;
+        combatStage.CombatHero.CurrentHealth -= roundResult.HeroDamageTaken;
     }
 
     private static void SubtractEnemyHealth(CombatStage combatStage, RoundResult roundResult)
     {
-        var currentHealth = combatStage.CombatEnemy.CurrentEnemyHealth;
+        var currentHealth = combatStage.CombatEnemy.CurrentHealth;
 
         if (currentHealth - roundResult.EnemyDamageTaken <= 0)
         {
-            combatStage.CombatEnemy.CurrentEnemyHealth = 0;
+            combatStage.CombatEnemy.CurrentHealth = 0;
         }
 
-        combatStage.CombatEnemy.CurrentEnemyHealth -= roundResult.EnemyDamageTaken;
+        combatStage.CombatEnemy.CurrentHealth -= roundResult.EnemyDamageTaken;
     }
 
     private double CalculateWeaponDamage(bool heroMissedAttack)
@@ -253,10 +259,8 @@ public class StageService : IStageService
         {
             return 0.05;
         }
-        else
-        {
-            return 0.1;
-        };
+
+        return 0.1;
     }
 
     private double CalculateArmorDamage(bool enemyMissedAttack)
@@ -265,9 +269,7 @@ public class StageService : IStageService
         {
             return 0.1;
         }
-        else
-        {
-            return 0;
-        }
+
+        return 0;
     }
 }

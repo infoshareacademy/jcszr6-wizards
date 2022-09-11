@@ -1210,6 +1210,9 @@ namespace Wizards.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("StageBackgroundImageNumber")
+                        .HasColumnType("int");
+
                     b.Property<int>("Tier")
                         .HasColumnType("int");
 

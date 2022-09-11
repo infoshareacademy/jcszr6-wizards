@@ -14,14 +14,14 @@ public class EnemyProfile : Profile
         CreateMap<EnemyAttributes, CombatEnemyAttributesDto>();
 
         CreateMap<Enemy, CombatEnemyDto>()
-            .ForMember(dto => dto.CurrentEnemyHealth, expr => expr.MapFrom(s => s.Attributes.MaxHealth))
-            .ForMember(dto => dto.IsEnemyStunned, expr => expr.MapFrom(s => false))
+            .ForMember(dto => dto.CurrentHealth, expr => expr.MapFrom(s => s.Attributes.MaxHealth))
+            .ForMember(dto => dto.IsStunned, expr => expr.MapFrom(s => false))
             .ForMember(dto => dto.Attributes, expr => expr.MapFrom(s => s.Attributes))
             .ForMember(dto => dto.BehaviorPatterns, expr => expr.MapFrom(s => s.BehaviorPatterns))
             .ForMember(dto => dto.Skills, expr => expr.MapFrom(s => s.GetEnemyCombatSkills()))
-            .ForMember(dto => dto.EnemySelectedSkill, expr => expr.Ignore())
-            .ForMember(dto => dto.EnemySelectedSkillId, expr => expr.Ignore())
-            .ForMember(dto => dto.EnemyPatternSequenceStepId, expr => expr.Ignore())
-            .ForMember(dto => dto.EnemyBehaviorPatternId, expr => expr.Ignore());
+            .ForMember(dto => dto.SelectedSkill, expr => expr.Ignore())
+            .ForMember(dto => dto.SelectedSkillId, expr => expr.Ignore())
+            .ForMember(dto => dto.CurrentPatternSequenceStepId, expr => expr.Ignore())
+            .ForMember(dto => dto.CurrentBehaviorPatternId, expr => expr.Ignore());
     }
 }
