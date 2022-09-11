@@ -2,10 +2,8 @@
 
 <div class="col-12 text-center bg-paper py-2 h4">@Model.HeroSection.NickName</div>
 <div class="col-12 participant-container">
-    @{
-        var imgAddress = $"/Images/Hero/Avatars/Wizard-{Model.HeroSection.AvatarImageNumber}.png";
-        <img class="not-dragable-image" src="@imgAddress" width="100%" height="100%">
-    }
+    
+    <img class="not-dragable-image" src="/Images/Hero/Avatars/Wizard-@(Model.HeroSection.AvatarImageNumber).png" width="100%" height="100%">
     
     @if (Model.HeroSection.IsStunned)
     {
