@@ -1,4 +1,4 @@
-﻿using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.WorldModels;

@@ -1,3 +1,13 @@
-﻿@{
-    Layout = "_Layout";
+﻿@using System.Net
+@{
+    string controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+
+    if (controller == "Combat")
+    {
+        Layout = "~/Views/Combat/_CombatLayout.cshtml";
+    }
+    else
+    {
+        Layout = "_Layout";
+    }
 }

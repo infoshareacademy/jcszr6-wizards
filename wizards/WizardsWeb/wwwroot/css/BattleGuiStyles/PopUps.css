@@ -1,0 +1,42 @@
+.pop-up-trigger{
+    position: absolute;
+    
+    height: 80px;
+    width: 80px;
+    top: 0px;
+
+    opacity: 0;
+
+    border: none;
+    background: transparent;
+
+    overflow: visible;
+}
+
+.pop-up-container {
+    position: absolute;
+    width: 275px;
+    height: 325px;
+    pointer-events: none;
+    padding: 20px;
+    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
+    background-size: 100% 100%;
+    border: 2px solid #800000;
+    border-radius: 8px;
+    top: -340px;
+    left: -10%;
+    font-size: 13px;
+    font-weight: 550;
+    z-index: 1000;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+}
+
+.pop-up-trigger:hover{
+    opacity: 100;
+    cursor: pointer;
+}
+
+.pop-up-container:hover{
+    opacity: 0;
+    cursor: auto;
+}

@@ -1,0 +1,85 @@
+:root{
+    --skill-width: 93px;
+    --base-left-offset: 35px;
+    --separator: 25px;
+}
+
+.skill-bar {
+    position: absolute;
+    left: -2%;
+    top: 76%;
+    width: 640px;
+    height: 120px;
+    pointer-events: all;
+    background-image: url(/GraphicAssets/BattleGui/skill-container.png);
+    background-size: 100% 100%;
+}
+
+.skill-bar-disabled{
+    pointer-events: none;
+    filter:invert(80%);
+}
+
+.skill-slot{
+    position: absolute;
+    display: inline-block;
+    
+    top: 17px;
+    left: 30px;
+
+    width: 80px;
+    height: 80px;
+
+    background-color: #a8a8a8;
+    border: 4px solid gray;
+}
+
+.slot-1{
+    left: var(--base-left-offset);
+}
+
+.slot-2{
+    left: calc(var(--base-left-offset) + var(--skill-width) * 1);
+}
+
+.slot-3{
+    left: calc(var(--base-left-offset) + var(--skill-width) * 2);
+}
+
+.slot-4{
+    left: calc(var(--base-left-offset) + var(--skill-width) * 3);
+}
+
+.slot-5{
+    left: calc(var(--base-left-offset) + var(--separator) + var(--skill-width) * 4)
+}
+
+.slot-6{
+    left: calc(var(--base-left-offset) + var(--separator) + var(--skill-width) * 5);
+}
+
+.selected-skill-slot{
+    width: 96px;
+    height: 96px;
+    transform: translate(-8px, -8px);
+}
+
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
+    /* IMAGE STYLES */
+    [type=radio] + img {
+        cursor: pointer;
+    }
+
+    /* CHECKED STYLES */
+    [type=radio]:checked + img {
+        width: 96px;
+        height: 96px;
+        transform: translate(-12px, -12px);
+        border: 4px solid gray;
+    }

@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="ModelViews\PlayerDetailsDto\**" />
+    <Compile Remove="wwwroot\Images\Buttons\**" />
     <Content Remove="ModelViews\PlayerDetailsDto\**" />
+    <Content Remove="wwwroot\Images\Buttons\**" />
     <EmbeddedResource Remove="ModelViews\PlayerDetailsDto\**" />
+    <EmbeddedResource Remove="wwwroot\Images\Buttons\**" />
     <None Remove="ModelViews\PlayerDetailsDto\**" />
+    <None Remove="wwwroot\Images\Buttons\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,7 +42,7 @@
 
   <ItemGroup>
     <Folder Include="ModelViews\HeroModelViews\Properties\" />
-    <Folder Include="wwwroot\Images\Buttons\" />
+    <Folder Include="ModelViews\ExplorationModelViews\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,111 @@
+/* Style for disapearing round results on participants images */
+
+.participant-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-top: 35px;
+}
+
+.round-results-info-text {
+    position: absolute;
+    top: 50%;
+    left: 51%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center;
+    background-image: url(/GraphicAssets/BattleGui/info-text-bg.png);
+    background-size: 100% 100%;
+    padding: 40px 60px;
+    text-shadow: 0 0 4px black, 0 0 5px black;
+    animation-name: disapearing-damage-text;
+    animation-duration: 11s;
+    opacity: 0;
+}
+
+.stunned-participant-text{
+    color: #8c00ff;
+    filter: brightness(150%);
+    animation: none;
+    opacity: 100;
+    top: 28%;
+    font-size: 45px;
+}
+
+.boss-countered-text{
+    color: #00a2ff;
+    font-size: 35px;
+    animation-name: disapearing-effects-text;
+    animation-duration: 7s;
+    top: 75%;
+    filter: brightness(130%);
+}
+
+.boss-blocked-text{
+    color: #ff8800;
+    font-size: 35px;
+    animation-name: disapearing-effects-text;
+    animation-duration: 7s;
+    top: 75%;
+    filter: brightness(120%);
+}
+
+.on-boss-damage-text{
+    color: #ffcf00;
+    left: 30%;
+    font-size: 55px;
+    filter: brightness(105%);
+}
+
+.boss-heal-text{
+    color: #15ff00;
+    animation-duration: 8s;
+    left: 65%;
+    font-size: 35px;
+}
+
+.on-hero-damage-text{
+    color: #ff0000;
+    font-size: 55px;
+    left: 70%;
+}
+
+.hero-heal-text{
+    color: #15ff00;
+    animation-duration: 8s;
+    left: 30%;
+    font-size: 35px;
+}
+
+.effect-disabled{
+    opacity: 0;
+    animation: none;
+}
+
+/* Animations for disapearing */
+@keyframes disapearing-damage-text {
+    0% {
+        opacity: 100;
+        top: 58%;
+    }
+    65% {
+        opacity: 90;
+    }
+    100%{
+        opacity: 0;
+        top: 50%
+    }
+}
+
+@keyframes disapearing-effects-text {
+    0% {
+        opacity: 100;
+    }
+    55% {
+        opacity: 75;
+    }
+    100% {
+        opacity: 0;
+    }
+}

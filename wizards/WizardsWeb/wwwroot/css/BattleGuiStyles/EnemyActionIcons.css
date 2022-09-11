@@ -1,0 +1,71 @@
+.enemy-skill-icon{
+    position: absolute;
+    display: inline-block;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    width: 70px;
+    height: 84px;
+    
+    animation-name: blinks-and-desapear;
+    animation-duration: 12s;
+
+    animation-iteration-count: infinite;
+
+    user-select: none;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+@keyframes blinks-and-desapear{
+    0%{
+        filter: brightness(50%);
+        width: 63px;
+        height: 75px;
+    }
+    4%{
+        filter: brightness(120%);
+        width: 84px;
+        height: 100px;
+    }
+    8%{
+        filter: brightness(50%);
+        width: 63px;
+        height: 75px;
+    }
+    12%{
+        filter: brightness(120%);
+        width: 84px;
+        height: 100px;
+    }
+    16%{
+        filter: brightness(50%);
+        width: 63px;
+        height: 75px;
+    }
+    20%{
+        filter: brightness(120%);
+        width: 84px;
+        height: 100px;
+    }
+    24%{
+        filter: brightness(100%);
+        width: 70px;
+        height: 84px;
+    }
+    96%{
+        filter: brightness(100%);
+        width: 70px;
+        height: 84px;
+    }
+    100%{
+        filter: brightness(50%);
+        width: 63px;
+        height: 75px;   
+    }
+}
