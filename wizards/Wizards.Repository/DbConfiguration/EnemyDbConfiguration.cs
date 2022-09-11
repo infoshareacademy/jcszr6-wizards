@@ -179,24 +179,24 @@ internal static class EnemyDbConfiguration
             .HasMaxLength(1024);
     }
 
-    private static string SkillsIdPatternToXml(this List<SkillSequence> skillsIdPattern)
+    private static string SkillsIdPatternToXml(this List<SkillSequenceStep> skillsIdPattern)
     {
-        var serializer = new XmlSerializer(typeof(List<SkillSequence>));
+        var serializer = new XmlSerializer(typeof(List<SkillSequenceStep>));
         var writer = new StringWriter();
         serializer.Serialize(writer, skillsIdPattern);
         var xmlText = writer.ToString();
         return xmlText;
     }
 
-    private static List<SkillSequence> XmlToSkillIdPattern(this string xmlValue)
+    private static List<SkillSequenceStep> XmlToSkillIdPattern(this string xmlValue)
     {
-        var serializer = new XmlSerializer(typeof(List<SkillSequence>));
+        var serializer = new XmlSerializer(typeof(List<SkillSequenceStep>));
         var reader = new StringReader(xmlValue);
-        var result = (List<SkillSequence>)serializer.Deserialize(reader);
+        var result = (List<SkillSequenceStep>)serializer.Deserialize(reader);
 
         if (result == null)
         {
-            result = new List<SkillSequence>();
+            result = new List<SkillSequenceStep>();
         }
 
         return result;

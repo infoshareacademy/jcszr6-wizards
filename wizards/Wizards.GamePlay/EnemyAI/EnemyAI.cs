@@ -21,7 +21,7 @@ public class EnemyAI : IEnemyAI
 
         var arePatternsTheSame = previousEnemyPattern.Id == nextEnemyPattern.Id;
 
-        if (previousEnemyPatternSequenceStepId < nextEnemyPattern.SequenceOfSkillsId.Keys.Max() && arePatternsTheSame)
+        if (previousEnemyPatternSequenceStepId < nextEnemyPattern.SequenceOfSkillsId.Max(seq => seq.SkillId) && arePatternsTheSame)
         {
             nextEnemyPatternSequenceStepId = previousEnemyPatternSequenceStepId + 1;          
         }
@@ -33,7 +33,13 @@ public class EnemyAI : IEnemyAI
 
     private static void SetNewStageStatus(CombatEnemyDto enemy, CombatBehaviorPatternDto nextEnemyPattern, int nextEnemyPatternSequenceStepId)
     {
-        enemy.SelectedSkillId = nextEnemyPattern.SequenceOfSkillsId[nextEnemyPatternSequenceStepId];
+        var step = nextEnemyPattern.SequenceOfSkillsId.SingleOrDefault(seq => seq.SequenceStepId == nextEnemyPatternSequenceStepId);
+
+        if (step is null)
+        {
+            throw new NullReferenceException("Skill Step Sequence Not Found");
+        }
+        enemy.SelectedSkillId = step.SkillId;
         enemy.CurrentPatternSequenceStepId = nextEnemyPattern.Id;
         enemy.CurrentBehaviorPatternId = nextEnemyPatternSequenceStepId;
         enemy.SelectedSkill = enemy.GetEnemySelectedSkill();

@@ -1,7 +1,7 @@
 ﻿namespace Wizards.Core.Model.WorldModels.Properties;
 
-public class SkillSequence
+public class SkillSequenceStep
 {
-    public int SequenceStep { get; set; }
+    public int SequenceStepId { get; set; }
     public int SkillId { get; set; }
 }

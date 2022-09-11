@@ -48,22 +48,22 @@ public class InitialDataEnemiesFactory : IInitialDataEnemiesFactory
     {
         var result = new List<BehaviorPattern>();
 
-        var sequenceOne = new List<SkillSequence>();
-        var sequenceTwo = new List<SkillSequence>();
-        sequenceOne.Add(new SkillSequence(){SequenceStep = 1, SkillId = 1});
-        sequenceOne.Add(new SkillSequence() { SequenceStep = 2, SkillId = 1 });
-        sequenceOne.Add(new SkillSequence() { SequenceStep =3, SkillId = 2 });
-        sequenceOne.Add(new SkillSequence() { SequenceStep = 4, SkillId = 3 });
-        sequenceOne.Add(new SkillSequence() { SequenceStep = 5, SkillId = 4 });
+        var sequenceOne = new List<SkillSequenceStep>();
+        var sequenceTwo = new List<SkillSequenceStep>();
+        sequenceOne.Add(new SkillSequenceStep(){SequenceStepId = 1, SkillId = 1});
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 1 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId =3, SkillId = 2 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 3 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 4 });
 
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 1, SkillId = 1 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 2, SkillId = 2 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 3, SkillId = 1 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 4, SkillId = 1 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 5, SkillId = 3 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 6, SkillId = 4 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 7, SkillId = 3 });
-        sequenceTwo.Add(new SkillSequence() { SequenceStep = 8, SkillId = 4 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 1, SkillId = 1 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 2 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 3, SkillId = 1 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 1 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 3 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 4 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 7, SkillId = 3 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 8, SkillId = 4 });
         
         result.Add(new BehaviorPattern()
         {

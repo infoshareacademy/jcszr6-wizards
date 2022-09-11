@@ -1,4 +1,6 @@
-﻿namespace Wizards.Core.Model.WorldModels.ModelsDto.Properties;
+﻿using Wizards.Core.Model.WorldModels.Properties;
+
+namespace Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 
 public class CombatBehaviorPatternDto
 {
@@ -8,5 +10,5 @@ public class CombatBehaviorPatternDto
     // Patterns
     public int MinHealthPercentToTrigger { get; set; }
     public int MaxHealthPercentToTrigger { get; set; }
-    public Dictionary<int, int> SequenceOfSkillsId { get; set; }
+    public List<SkillSequenceStep> SequenceOfSkillsId { get; set; }
 }
