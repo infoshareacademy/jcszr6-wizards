@@ -43,7 +43,7 @@ public class CombatController : Controller
 
     public async Task<IActionResult> CreateNewMatch(int enemyId)
     {
-        await _stageService.CreateNewMatchAsync(User.GetId(), enemyId);
+        await _stageService.CreateNewMatchAsync(User.GetId(), enemyId, false);
 
         return RedirectToAction("Index");
     }
@@ -78,11 +78,11 @@ public class CombatController : Controller
         {
             Name = "Legendary Dupa",
             AvatarImageNumber = 1,
-            CurrentEnemyHealth = 250,
-            MaxEnemyHealth = 500,
-            EnemySelectedSkillStunning = false,
-            EnemySelectedSkillType = EnemySkillType.Charge,
-            IsEnemyStunned = true,
+            CurrentHealth = 250,
+            MaxHealth = 500,
+            SelectedSkillStunning = false,
+            SelectedSkillType = EnemySkillType.Charge,
+            IsStunned = true,
             Type = EnemyType.Boss
         };
         var skills = new List<HeroSkillModelView>()
@@ -99,11 +99,11 @@ public class CombatController : Controller
         {
             NickName = "Dupa Slayer",
             AvatarImageNumber = 3,
-            CurrentHeroHealth = 200,
-            MaxHeroHealth = 250,
-            IsHeroStunned = false,
+            CurrentHealth = 200,
+            MaxHealth = 250,
+            IsStunned = false,
             Profession = HeroProfession.Sorcerer,
-            HeroSkills = skills
+            Skills = skills
         };
         var lastResult = new RoundResult()
         {

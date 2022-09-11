@@ -9,15 +9,15 @@ public class EnemySectionModelView
     public EnemyType Type { get; set; }
     public int AvatarImageNumber { get; set; }
 
-    public EnemySkillType EnemySelectedSkillType { get; set; }
-    public bool EnemySelectedSkillStunning { get; set; }
+    public EnemySkillType SelectedSkillType { get; set; }
+    public bool SelectedSkillStunning { get; set; }
 
-    public bool IsEnemyStunned { get; set; }
-    public int MaxEnemyHealth { get; set; }
-    public int CurrentEnemyHealth { get; set; }
+    public bool IsStunned { get; set; }
+    public int MaxHealth { get; set; }
+    public int CurrentHealth { get; set; }
 
     public int GetCurrentHealthPercent()
     {
-        return (int)Math.Round((CurrentEnemyHealth / (double)MaxEnemyHealth) * 100, 0);
+        return (int)Math.Round((CurrentHealth / (double)MaxHealth) * 100, 0);
     }
 }

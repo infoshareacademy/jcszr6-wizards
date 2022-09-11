@@ -14,26 +14,23 @@ public class CombatProfile :Profile
         CreateMap<CombatHeroSkillDto, HeroSkillModelView>();
 
         CreateMap<CombatHeroDto, HeroSectionModelView>()
-            .ForMember(destination => destination.HeroSkills, 
-                expr => expr.MapFrom(source => source.HeroSkills));
+            .ForMember(destination => destination.Skills, 
+                expr => expr.MapFrom(source => source.Skills));
 
         CreateMap<CombatEnemyDto, EnemySectionModelView>()
-            .ForMember(destination => destination.EnemySelectedSkillType, 
-                expr => expr.MapFrom(source => source.EnemySelectedSkill.Type))
-            .ForMember(destination => destination.EnemySelectedSkillStunning, 
-                expr => expr.MapFrom(source => source.EnemySelectedSkill.Stunning));
+            .ForMember(destination => destination.SelectedSkillType, 
+                expr => expr.MapFrom(source => source.SelectedSkill.Type))
+            .ForMember(destination => destination.SelectedSkillStunning, 
+                expr => expr.MapFrom(source => source.SelectedSkill.Stunning));
 
         CreateMap<CombatStage, CombatStageModelView>()
             .ForMember(destination => destination.HeroSelectedSkillId, 
-                expr => expr.MapFrom(source => source.CombatHero.HeroSelectedSkill.Id))
+                expr => expr.MapFrom(source => source.CombatHero.SelectedSkill.Id))
             .ForMember(destination => destination.RoundLogs,
                 expr => expr.MapFrom(source => source.RoundLogs))
             .ForMember(destination => destination.LastRoundResult,
                 expr => expr.MapFrom(source => source.LastRoundResult))
             .ForMember(destination => destination.WasResultShown,
                 expr => expr.MapFrom(source => (source.LastRoundResult == null)));
-            ;
-
     }
-
 }

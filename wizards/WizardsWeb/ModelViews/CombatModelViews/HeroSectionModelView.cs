@@ -11,14 +11,14 @@ public class HeroSectionModelView
     public HeroProfession Profession { get; set; }
     public int AvatarImageNumber { get; set; }
 
-    public List<HeroSkillModelView> HeroSkills { get; set; }
+    public List<HeroSkillModelView> Skills { get; set; }
 
-    public bool IsHeroStunned { get; set; }
-    public int MaxHeroHealth { get; set; }
-    public int CurrentHeroHealth { get; set; }
+    public bool IsStunned { get; set; }
+    public int MaxHealth { get; set; }
+    public int CurrentHealth { get; set; }
 
     public int GetCurrentHealthPercent()
     {
-        return (int)Math.Round((CurrentHeroHealth / (double)MaxHeroHealth) * 100, 0);
+        return (int)Math.Round((CurrentHealth / (double)MaxHealth) * 100, 0);
     }
 }

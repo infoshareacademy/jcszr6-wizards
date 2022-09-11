@@ -20,6 +20,7 @@ public class CombatStageModelView
     public string Name { get; set; }
     public StageStatus Status { get; set; }
     public bool IsTraining { get; set; }
+    public int BackgroundImageNumber { get; set; }
 
     public List<RoundLog> RoundLogs { get; set; }
 
