@@ -33,6 +33,7 @@ namespace Wizards.Repository.ServiceRegistration
             services.AddTransient<IInitialDataUsersFactory, InitialDataUsersFactory>();
             services.AddTransient<IInitialDataHeroesFactory, InitialDataHeroesFactory>();
             services.AddTransient<IInitialDataItemsFactory, InitialDataItemsFactory>();
+            services.AddTransient<IInitialDataSkillsFactory, InitialDataSkillsFactory>();
 
             services.AddTransient<IInitialDataInjector, InitialDataInjector>();
         }

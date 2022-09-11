@@ -1176,6 +1176,140 @@ namespace Wizards.Repository.Migrations
                         .IsUnique();
 
                     b.ToTable("Skills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 80,
+                            DamageFactor = 1.0,
+                            HealingFactor = 0.0,
+                            Name = "Fireball",
+                            ProfessionRestriction = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 120,
+                            DamageFactor = 0.75,
+                            HealingFactor = 0.0,
+                            Name = "Ice Shard",
+                            ProfessionRestriction = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArmorPenetrationPercent = 15,
+                            BaseHitChance = 60,
+                            DamageFactor = 1.25,
+                            HealingFactor = 0.0,
+                            Name = "Lighting Strike",
+                            ProfessionRestriction = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArmorPenetrationPercent = 10,
+                            BaseHitChance = 40,
+                            DamageFactor = 1.75,
+                            HealingFactor = 0.0,
+                            Name = "Inferno",
+                            ProfessionRestriction = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.0,
+                            HealingFactor = 0.089999999999999997,
+                            Name = "Reneval Fountain",
+                            ProfessionRestriction = 1,
+                            Type = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.0,
+                            HealingFactor = 0.0,
+                            Name = "Magnetic Shield",
+                            ProfessionRestriction = 1,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 85,
+                            DamageFactor = 1.0,
+                            HealingFactor = 0.0,
+                            Name = "Necro1",
+                            ProfessionRestriction = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ArmorPenetrationPercent = 30,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.5,
+                            HealingFactor = 0.0,
+                            Name = "Necro2",
+                            ProfessionRestriction = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ArmorPenetrationPercent = 40,
+                            BaseHitChance = 70,
+                            DamageFactor = 1.1000000000000001,
+                            HealingFactor = 0.0,
+                            Name = "Necro3",
+                            ProfessionRestriction = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ArmorPenetrationPercent = 40,
+                            BaseHitChance = 55,
+                            DamageFactor = 1.5,
+                            HealingFactor = 0.0,
+                            Name = "Necro4",
+                            ProfessionRestriction = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.0,
+                            HealingFactor = 0.11,
+                            Name = "Necro5",
+                            ProfessionRestriction = 2,
+                            Type = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.0,
+                            HealingFactor = 0.0,
+                            Name = "Necro6",
+                            ProfessionRestriction = 2,
+                            Type = 2
+                        });
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
@@ -1225,6 +1359,21 @@ namespace Wizards.Repository.Migrations
                         .IsUnique();
 
                     b.ToTable("Enemies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AttributesId = 1,
+                            AvatarImageNumber = 1,
+                            Description = "Dangeroud enemy thats has very high reflex and strong attacks",
+                            EnemyStageName = "Lair of Crystalline Hydra",
+                            GoldReward = 1250,
+                            Name = "Crystalline Hydra",
+                            StageBackgroundImageNumber = 1,
+                            Tier = 5,
+                            Type = 0
+                        });
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
@@ -1254,6 +1403,24 @@ namespace Wizards.Repository.Migrations
                     b.HasIndex("EnemyId");
 
                     b.ToTable("BehaviorPatterns");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EnemyId = 1,
+                            MaxHealthPercentToTrigger = 100,
+                            MinHealthPercentToTrigger = 50,
+                            SequenceOfSkillsId = "<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfSkillSequence xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SkillSequence><SequenceStep>1</SequenceStep><SkillId>1</SkillId></SkillSequence><SkillSequence><SequenceStep>2</SequenceStep><SkillId>1</SkillId></SkillSequence><SkillSequence><SequenceStep>3</SequenceStep><SkillId>2</SkillId></SkillSequence><SkillSequence><SequenceStep>4</SequenceStep><SkillId>3</SkillId></SkillSequence><SkillSequence><SequenceStep>5</SequenceStep><SkillId>4</SkillId></SkillSequence></ArrayOfSkillSequence>"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EnemyId = 1,
+                            MaxHealthPercentToTrigger = 50,
+                            MinHealthPercentToTrigger = 0,
+                            SequenceOfSkillsId = "<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfSkillSequence xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SkillSequence><SequenceStep>1</SequenceStep><SkillId>1</SkillId></SkillSequence><SkillSequence><SequenceStep>2</SequenceStep><SkillId>2</SkillId></SkillSequence><SkillSequence><SequenceStep>3</SequenceStep><SkillId>1</SkillId></SkillSequence><SkillSequence><SequenceStep>4</SequenceStep><SkillId>1</SkillId></SkillSequence><SkillSequence><SequenceStep>5</SequenceStep><SkillId>3</SkillId></SkillSequence><SkillSequence><SequenceStep>6</SequenceStep><SkillId>4</SkillId></SkillSequence><SkillSequence><SequenceStep>7</SequenceStep><SkillId>3</SkillId></SkillSequence><SkillSequence><SequenceStep>8</SequenceStep><SkillId>4</SkillId></SkillSequence></ArrayOfSkillSequence>"
+                        });
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
@@ -1297,6 +1464,18 @@ namespace Wizards.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EnemiesAttributes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Damage = 50,
+                            Defense = 0,
+                            MaxHealth = 1750,
+                            Precision = 0,
+                            Reflex = 30,
+                            Specialization = 50
+                        });
                 });
 
             modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
@@ -1346,6 +1525,56 @@ namespace Wizards.Repository.Migrations
                     b.HasIndex("EnemyId");
 
                     b.ToTable("EnemiesSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArmorPenetrationPercent = 10,
+                            BaseHitChance = 40,
+                            DamageFactor = 0.14999999999999999,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Attack",
+                            Stunning = false,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArmorPenetrationPercent = 20,
+                            BaseHitChance = 60,
+                            DamageFactor = 0.5,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Strong Attack",
+                            Stunning = true,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArmorPenetrationPercent = 10,
+                            BaseHitChance = 40,
+                            DamageFactor = 0.25,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Charge Attack",
+                            Stunning = false,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArmorPenetrationPercent = 10,
+                            BaseHitChance = 40,
+                            DamageFactor = 2.75,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Deadly Attack",
+                            Stunning = false,
+                            Type = 3
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
