@@ -261,6 +261,7 @@ namespace Wizards.Repository.Migrations
                     Tier = table.Column<int>(type: "int", nullable: false),
                     AvatarImageNumber = table.Column<int>(type: "int", nullable: false),
                     EnemyStageName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StageBackgroundImageNumber = table.Column<int>(type: "int", nullable: false),
                     GoldReward = table.Column<int>(type: "int", nullable: false),
                     AttributesId = table.Column<int>(type: "int", nullable: false)
                 },

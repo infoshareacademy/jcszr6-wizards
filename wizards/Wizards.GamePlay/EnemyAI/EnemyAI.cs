@@ -7,16 +7,16 @@ namespace Wizards.GamePlay.EnemyAI;
 
 public class EnemyAI : IEnemyAI
 {
-    public Task GetEnemySelectedSkillIdAsync(CombatStage stage)
+    public Task SelectNextEnemyActionAsync(CombatStage stage)
     {
         var enemy = stage.CombatEnemy;
 
         int currentEnemyHealthPercent = GetEnemyCurrentHealthPercent(enemy);
 
-        var previousEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(bp => bp.Id == enemy.EnemyBehaviorPatternId);
+        var previousEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(bp => bp.Id == enemy.CurrentBehaviorPatternId);
         var nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.MinHealthPercentToTrigger > currentEnemyHealthPercent && p.MaxHealthPercentToTrigger <= currentEnemyHealthPercent);
 
-        var previousEnemyPatternSequenceStepId = enemy.EnemyPatternSequenceStepId;
+        var previousEnemyPatternSequenceStepId = enemy.CurrentPatternSequenceStepId;
         var nextEnemyPatternSequenceStepId = 0;
 
         var arePatternsTheSame = previousEnemyPattern.Id == nextEnemyPattern.Id;
@@ -33,15 +33,15 @@ public class EnemyAI : IEnemyAI
 
     private static void SetNewStageStatus(CombatEnemyDto enemy, CombatBehaviorPatternDto nextEnemyPattern, int nextEnemyPatternSequenceStepId)
     {
-        enemy.EnemySelectedSkillId = nextEnemyPattern.SequenceOfSkillsId[nextEnemyPatternSequenceStepId];
-        enemy.EnemyPatternSequenceStepId = nextEnemyPattern.Id;
-        enemy.EnemyBehaviorPatternId = nextEnemyPatternSequenceStepId;
-        enemy.EnemySelectedSkill = enemy.GetEnemySelectedSkill();
+        enemy.SelectedSkillId = nextEnemyPattern.SequenceOfSkillsId[nextEnemyPatternSequenceStepId];
+        enemy.CurrentPatternSequenceStepId = nextEnemyPattern.Id;
+        enemy.CurrentBehaviorPatternId = nextEnemyPatternSequenceStepId;
+        enemy.SelectedSkill = enemy.GetEnemySelectedSkill();
     }
 
     private static int GetEnemyCurrentHealthPercent(CombatEnemyDto enemy)
     {
-        var currentEnemyHealth = enemy.CurrentEnemyHealth;
+        var currentEnemyHealth = enemy.CurrentHealth;
         var maxEnemyHealth = enemy.Attributes.MaxHealth;
         var currentHealthPercent = (int)Math.Round((((double)currentEnemyHealth / maxEnemyHealth) * 100), 0);
         return currentHealthPercent;

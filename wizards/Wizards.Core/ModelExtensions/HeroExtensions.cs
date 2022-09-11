@@ -183,11 +183,11 @@ public static class HeroExtensions
 
     public static CombatHeroSkillDto GetHeroSelectedSkill(this CombatHeroDto hero)
     {
-        var selectedHeroSkill = hero.HeroSkills.SingleOrDefault(s => s.Id == hero.HeroSelectedSkillId);
+        var selectedHeroSkill = hero.Skills.SingleOrDefault(s => s.Id == hero.SelectedSkillId);
 
         if (selectedHeroSkill == null)
         {
-            throw new ArgumentNullException(nameof(hero.HeroSelectedSkillId), "Hero has wrong selected actions!");
+            throw new ArgumentNullException(nameof(hero.SelectedSkillId), "Hero has wrong selected actions!");
         }
 
         return selectedHeroSkill;

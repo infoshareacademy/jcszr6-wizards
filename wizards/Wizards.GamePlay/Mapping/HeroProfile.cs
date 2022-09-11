@@ -15,10 +15,10 @@ public class HeroProfile : Profile
         CreateMap<HeroAttributes, CombatHeroAttributesDto>();
 
         CreateMap<Hero, CombatHeroDto>()
-            .ForMember(dto => dto.CurrentHeroHealth, expr => expr.MapFrom(s => s.GetCalculatedAttributes().MaxHealth))
-            .ForMember(dto => dto.IsHeroStunned, expr => expr.MapFrom(s => false))
-            .ForMember(dto => dto.HeroSelectedSkill, expr => expr.Ignore())
-            .ForMember(dto => dto.HeroSelectedSkillId, expr => expr.Ignore())
+            .ForMember(dto => dto.CurrentHealth, expr => expr.MapFrom(s => s.GetCalculatedAttributes().MaxHealth))
+            .ForMember(dto => dto.IsStunned, expr => expr.MapFrom(s => false))
+            .ForMember(dto => dto.SelectedSkill, expr => expr.Ignore())
+            .ForMember(dto => dto.SelectedSkillId, expr => expr.Ignore())
             .ForMember(dto => dto.ArmorUsage, expr => expr.MapFrom(s => 0d))
             .ForMember(dto => dto.WeaponUsage, expr => expr.MapFrom(s => 0d))
             .ForMember(dto => dto.EquippedArmorId,
@@ -27,7 +27,7 @@ public class HeroProfile : Profile
             .ForMember(dto => dto.EquippedWeaponId,
                 expr => expr.MapFrom(s =>
                     s.Inventory.SingleOrDefault(hi => hi.Item.Type == ItemType.Weapon && hi.InUse).Id))
-            .ForMember(dto => dto.HeroSkills, expr => expr.MapFrom(s => s.GetCombatHeroSkills()))
+            .ForMember(dto => dto.Skills, expr => expr.MapFrom(s => s.GetCombatHeroSkills()))
             .ForMember(dto => dto.Attributes, expr => expr.MapFrom(s => s.GetCalculatedAttributes()));
     }
 }

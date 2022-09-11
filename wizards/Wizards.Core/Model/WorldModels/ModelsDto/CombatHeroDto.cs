@@ -16,10 +16,10 @@ public class CombatHeroDto
     public double ArmorUsage { get; set; }
 
     public CombatHeroAttributesDto Attributes { get; set; }
-    public List<CombatHeroSkillDto> HeroSkills { get; set; }
+    public List<CombatHeroSkillDto> Skills { get; set; }
 
-    public bool IsHeroStunned { get; set; }
-    public int CurrentHeroHealth { get; set; }
-    public CombatHeroSkillDto HeroSelectedSkill { get; set; }
-    public int HeroSelectedSkillId { get; set; }
+    public bool IsStunned { get; set; }
+    public int CurrentHealth { get; set; }
+    public CombatHeroSkillDto SelectedSkill { get; set; }
+    public int SelectedSkillId { get; set; }
 }

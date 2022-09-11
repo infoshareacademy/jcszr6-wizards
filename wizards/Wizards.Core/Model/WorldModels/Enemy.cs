@@ -13,7 +13,8 @@ namespace Wizards.Core.Model.WorldModels
         public int Tier { get; set; }
         public int AvatarImageNumber { get; set; }
         public string EnemyStageName { get; set; }
-        
+        public int StageBackgroundImageNumber { get; set; }
+
         // Economy
         public int GoldReward { get; set; }
         

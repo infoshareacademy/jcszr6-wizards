@@ -12,7 +12,7 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    [Migration("20220904220845_InitialMigration")]
+    [Migration("20220911165815_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1211,6 +1211,9 @@ namespace Wizards.Repository.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("StageBackgroundImageNumber")
+                        .HasColumnType("int");
 
                     b.Property<int>("Tier")
                         .HasColumnType("int");

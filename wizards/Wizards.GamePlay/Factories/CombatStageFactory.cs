@@ -1,18 +1,51 @@
-﻿using Wizards.Core.Model.WorldModels;
+﻿using AutoMapper;
+using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Core.Interfaces.WorldModelInterfaces;
+using Wizards.Core.Model.WorldModels;
+using Wizards.Core.Model.WorldModels.Enums;
+using Wizards.Core.Model.WorldModels.ModelsDto;
+using Wizards.Core.Model.WorldModels.Properties;
 
 namespace Wizards.GamePlay.Factories;
 
 public class CombatStageFactory : ICombatStageFactory
 {
+    private readonly IHeroRepository _heroRepository;
+    private readonly IEnemyRepository _enemyRepository;
+    private readonly IMapper _mapper;
+   
+
+    public CombatStageFactory(IHeroRepository heroRepository, IEnemyRepository enemyRepository, IMapper mapper)
+    {
+        _heroRepository = heroRepository;
+        _enemyRepository = enemyRepository;
+        _mapper = mapper;
+    }
+
     public async Task<CombatStage> CreateCombatStageAsync(int heroId, int enemyId, bool isTraining)
     {
-        // TODO: Tworzymy nową pustą instancję CombatStage.
-        // TODO: Znajdujemy Hero i Enemy w bazie danych przy pomocy HeroRepository oraz EnemyRepository
-        // TODO: Mapujemy i wstawiamy uczestników na arenę
-        // TODO: Wypełniamy pozostałe pola areny odpowiednimi danymi (nazwa areny, czy jest reningiem itp...)
+        var combatStage = new CombatStage();
 
-        // TODO: Zwracamy przygotowaną arenę!
+        var hero = await _heroRepository.Get(heroId);
+        var enemy = await _enemyRepository.GetAsync(enemyId);
 
-        throw new NotImplementedException();
+        if (hero == null || enemy == null)
+        {
+            throw new NullReferenceException("Invalid models of participants");
+        }
+
+        var combatHero = _mapper.Map<CombatHeroDto>(hero);
+        var combatEnemy = _mapper.Map<CombatEnemyDto>(enemy);
+
+        combatStage.CombatHero = combatHero;
+        combatStage.CombatEnemy = combatEnemy;
+
+        combatStage.IsTraining = isTraining;
+        combatStage.Name = enemy.EnemyStageName;
+        combatStage.BackgroundImageNumber = enemy.StageBackgroundImageNumber;
+        combatStage.Status = StageStatus.FreshOpened;
+        combatStage.RoundLogs = new List<RoundLog>();
+
+        return combatStage;
     }
 }
