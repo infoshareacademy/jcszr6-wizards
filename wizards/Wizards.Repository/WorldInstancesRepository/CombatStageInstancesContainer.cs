@@ -48,7 +48,7 @@ public static class CombatStageInstancesContainer
             throw new Exception("There is No Combat Stage instance opened for this player!");
         }
 
-        if (CombatStages[playerId].Status == StageStatus.ReadyToClose)
+        if (CombatStages[playerId].Status != StageStatus.ReadyToClose)
         {
             throw new Exception($"Cannot remove CombatStage with status: {CombatStages[playerId].Status}");
         }

@@ -26,4 +26,9 @@ public static class CombatExtensions
     {
         return skills.SingleOrDefault(s => s.SlotNumber == number);
     }
+
+    public static bool ShowSkillAttributes(this HeroSkillModelView heroSkill)
+    {
+        return (heroSkill.Type != HeroSkillType.Block && heroSkill.Type != HeroSkillType.Heal);
+    }
 }

@@ -101,6 +101,8 @@ public static class EnemyExtensions
                 Healing = enemy.CalculateSkillHealing(enemySkill),
                 Stunning = enemySkill.Stunning
             };
+            
+            combatSkills.Add(combatSkill);
         }
 
         return combatSkills;

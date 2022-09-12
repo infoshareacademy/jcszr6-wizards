@@ -87,9 +87,12 @@ body {
     padding: 8px 20px;
     background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
     background-size: 100% 100%;
-    background-repeat: space;
+    background-repeat: no-repeat;
     background-attachment: inherit;
+    
     border-radius: 2px;
+    border: none;
+
     color: white;
     text-decoration: none;
     text-align: center;

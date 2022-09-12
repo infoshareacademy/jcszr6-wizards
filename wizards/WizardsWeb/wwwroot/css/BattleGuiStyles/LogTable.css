@@ -11,15 +11,16 @@
     height: 345px;
     margin: 0px;
     padding: 5px;
-    overflow-y: auto;
+    overflow-y:auto;
 }
 
 .table-container{
+    display:inline-list-item;
     border: 1px solid var(--border-color);
     font-size: 13px; 
     font-weight: 600;
     width: 100%;
-    height: auto;
+    height:auto;
     padding: 2px;
 }
 

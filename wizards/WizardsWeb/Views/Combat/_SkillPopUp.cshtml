@@ -1,4 +1,5 @@
 ﻿@using Wizards.Core.Model.UserModels.Enums
+@using WizardsWeb.Extensions
 @model WizardsWeb.ModelViews.CombatModelViews.HeroSkillModelView
 
 <div class="pop-up-trigger">
@@ -8,34 +9,34 @@
             <h6>@Model.Type</h6>
         </div>
         <hr>
-        @if (Model.Description.Length > 0)
+        @if (Model.Description is not null)
         {
             <p>@Model.Description</p>
             <hr>
         }
 
-        @if (Model.Damage > 0)
+        @if (Model.Damage > 0 && Model.ShowSkillAttributes())
         {
             <div class="row">
                 <div class="col-8">Damage</div>
                 <div class="col-4">@Model.Damage</div>
             </div>
         }
-        @if (Model.HitChance > 0)
+        @if (Model.HitChance > 0 && Model.ShowSkillAttributes())
         {
             <div class="row">
                 <div class="col-8">Chance to hit</div>
                 <div class="col-4">@($"{Model.HitChance}%")</div>
             </div>
         }
-        @if (Model.ArmorPenetrationPercent > 0)
+        @if (Model.ArmorPenetrationPercent > 0 && Model.ShowSkillAttributes())
         {
             <div class="row">
                 <div class="col-8">Armor overpass</div>
                 <div class="col-4">@($"{Model.ArmorPenetrationPercent}%")</div>
             </div>
         }
-        @if (Model.Healing > 0)
+        @if (Model.Healing > 0 && Model.Type == HeroSkillType.Heal)
         {
             <div class="row">
                 <div class="col-8">Healing</div>
@@ -57,7 +58,7 @@
                 <div class="col-12">Countering skill</div>
             </div>
             <div class="row">
-                <div class="col-12">Stuns if successfully counters enemy charge</div>
+                <div class="col-12">Stuns Enemy if successfully counter</div>
             </div>
         }
         <hr>

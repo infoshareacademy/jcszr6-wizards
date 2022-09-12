@@ -5,6 +5,7 @@ using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Core.Model.WorldModels.Properties.Enums;
+using Wizards.Core.ModelExtensions;
 using Wizards.GamePlay.CombatService;
 using Wizards.GamePlay.EnemyAI;
 using Wizards.GamePlay.Factories;
@@ -62,6 +63,9 @@ public class StageService : IStageService
     public async Task CommitRoundAsync(int playerId, int selectedSkillId)
     {
         var combatStage = await _combatStageRepository.GetAsync(playerId);
+        combatStage.CombatHero.SelectedSkillId = selectedSkillId;
+        combatStage.CombatHero.SelectedSkill = combatStage.CombatHero.GetHeroSelectedSkill();
+        
         var roundResult = await _combatService.CalculateRoundAsync(combatStage);
 
         SubtractHeroHealth(combatStage, roundResult);
@@ -81,7 +85,10 @@ public class StageService : IStageService
 
         SetNewStageStatus(combatStage);
 
-        await _enemyAI.SelectNextEnemyActionAsync(combatStage);
+        if (combatStage.Status == StageStatus.DuringCombat)
+        {
+            await _enemyAI.SelectNextEnemyActionAsync(combatStage);
+        }
 
         await AddResultLog(roundResult, combatStage);
 
@@ -134,7 +141,7 @@ public class StageService : IStageService
             heroArmorUsage *= 2;
             heroWeaponUsage *= 2;
         }
-        
+
         if (combatStage.Status == StageStatus.DuringCombat)
         {
             heroArmorUsage *= 4;
@@ -177,6 +184,7 @@ public class StageService : IStageService
         resultLog.RoundNumber = numberRound;
 
         combatStage.RoundLogs.Add(resultLog);
+        combatStage.RoundLogs = combatStage.RoundLogs.OrderByDescending(x => x.RoundNumber).ToList();
     }
 
     private static void SetNewStageStatus(CombatStage combatStage)
@@ -212,8 +220,10 @@ public class StageService : IStageService
         {
             combatStage.CombatHero.CurrentHealth = maxHealth;
         }
-
-        combatStage.CombatHero.CurrentHealth += roundResult.HeroHealthRecovered;
+        else
+        {
+            combatStage.CombatHero.CurrentHealth += roundResult.HeroHealthRecovered;
+        }
     }
 
     private static void RecoverEnemyHealth(CombatStage combatStage, RoundResult roundResult)
@@ -225,8 +235,10 @@ public class StageService : IStageService
         {
             combatStage.CombatEnemy.CurrentHealth = maxHealth;
         }
-
-        combatStage.CombatEnemy.CurrentHealth += roundResult.EnemyHealthRecovered;
+        else
+        {
+            combatStage.CombatEnemy.CurrentHealth += roundResult.EnemyHealthRecovered;
+        }
     }
 
     private static void SubtractHeroHealth(CombatStage combatStage, RoundResult roundResult)
@@ -237,8 +249,10 @@ public class StageService : IStageService
         {
             combatStage.CombatHero.CurrentHealth = 0;
         }
-
-        combatStage.CombatHero.CurrentHealth -= roundResult.HeroDamageTaken;
+        else
+        {
+            combatStage.CombatHero.CurrentHealth -= roundResult.HeroDamageTaken;
+        }
     }
 
     private static void SubtractEnemyHealth(CombatStage combatStage, RoundResult roundResult)
@@ -249,8 +263,10 @@ public class StageService : IStageService
         {
             combatStage.CombatEnemy.CurrentHealth = 0;
         }
-
-        combatStage.CombatEnemy.CurrentHealth -= roundResult.EnemyDamageTaken;
+        else
+        {
+            combatStage.CombatEnemy.CurrentHealth -= roundResult.EnemyDamageTaken;
+        }
     }
 
     private double CalculateWeaponDamage(bool heroMissedAttack)

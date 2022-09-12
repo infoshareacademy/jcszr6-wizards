@@ -30,17 +30,17 @@ public class CombatController : Controller
 
     public async Task<IActionResult> Index()
     {
-        //var combatStage = await _stageRepository.GetAsync(User.GetId());
+        var combatStage = await _stageRepository.GetAsync(User.GetId());
 
-        //var battleStage = _mapper.Map<CombatStageModelView>(combatStage);
+        var battleStage = _mapper.Map<CombatStageModelView>(combatStage);
+        
+        combatStage.LastRoundResult = null;
 
-        //combatStage.LastRoundResult = null;
-
-        var battleStage = GetSpecialStageForTests();
+        //var battleStage = GetSpecialStageForTests();
 
         return View("CombatStage", battleStage);
     }
-
+    
     public async Task<IActionResult> CreateNewMatch(int enemyId)
     {
         await _stageService.CreateNewMatchAsync(User.GetId(), enemyId, false);
