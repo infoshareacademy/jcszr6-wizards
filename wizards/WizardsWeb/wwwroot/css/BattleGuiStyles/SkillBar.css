@@ -17,7 +17,27 @@
 
 .skill-bar-disabled{
     pointer-events: none;
-    filter:invert(80%);
+}
+
+.skill-bar-dead {
+    pointer-events: none;
+    filter: grayscale(100%);
+}
+
+.special-disable-message-container {
+    position: absolute;
+    left: -2%;
+    top: 76%;
+    width: 640px;
+    height: 120px;
+    pointer-events: none;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    z-index: 1000;
+    padding: 15px;
+    background-color: #c7158540;
+    filter: drop-shadow(0px 0px 7px #000)
 }
 
 .skill-slot{

@@ -7,6 +7,10 @@
     margin-top: 35px;
 }
 
+.participant-dead {
+    filter: grayscale(100%);
+}
+
 .round-results-info-text {
     position: absolute;
     top: 50%;
@@ -22,6 +26,16 @@
     animation-name: disapearing-damage-text;
     animation-duration: 11s;
     opacity: 0;
+}
+
+.dead-participant-text {
+    color: #ff0000;
+    filter: brightness(150%);
+    animation: none;
+    background-image: none;
+    opacity: 100;
+    top: 37%;
+    font-size: 50px;
 }
 
 .stunned-participant-text{

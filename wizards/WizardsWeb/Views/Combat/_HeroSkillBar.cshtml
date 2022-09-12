@@ -1,9 +1,31 @@
 ﻿@using Wizards.Core.Model.UserModels.Enums
+@using Wizards.Core.Model.WorldModels.Enums
 @using WizardsWeb.Extensions
 @model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
 <form asp-action="CommitRound">
-    <div class="skill-bar">
+    @{
+        var additionalClasses = "";
+        if (Model.HeroSection.IsStunned && Model.Status == StageStatus.DuringCombat)
+        {
+            additionalClasses = " skill-bar-disabled";
+            <div class="special-disable-message-container">
+                You are STUNNED! You cannot select action. Just commit round!
+            </div>
+        }
+        if (Model.Status == StageStatus.ConcludedHeroWins)
+        {
+            additionalClasses = " skill-bar-disabled";
+            Model.HeroSelectedSkillId = 0;
+        }
+        if (Model.Status == StageStatus.ConcludedEnemyWins)
+        {
+            additionalClasses = " skill-bar-dead";
+            Model.HeroSelectedSkillId = 0;
+        }
+    }
+
+    <div class="skill-bar @additionalClasses">
 
         <label class="skill-slot slot-1">
             @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.First))
@@ -15,7 +37,7 @@
                 <partial name="_SkillPopUp" model="firstSkill"/>
             }
         </label>
-        
+
         <label class="skill-slot slot-2">
             @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Second))
             {
@@ -26,7 +48,7 @@
                 <partial name="_SkillPopUp" model="secondSkill"/>
             }
         </label>
-        
+
         <label class="skill-slot slot-3">
             @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Third))
             {
@@ -37,7 +59,7 @@
                 <partial name="_SkillPopUp" model="thirdSkill"/>
             }
         </label>
-        
+
         <label class="skill-slot slot-4">
             @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Fourth))
             {
@@ -48,7 +70,7 @@
                 <partial name="_SkillPopUp" model="fourthSkill"/>
             }
         </label>
-        
+
         <label class="skill-slot slot-5">
             @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Fifth))
             {
@@ -59,7 +81,7 @@
                 <partial name="_SkillPopUp" model="fifthSkill"/>
             }
         </label>
-        
+
         <label class="skill-slot slot-6">
             @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Sixth))
             {
@@ -74,7 +96,18 @@
     </div>
 
     <div class="commit-button-container">
-        <input class="gbtn gbtn-action" type="submit" value="CommitRound"/>
+        @if (Model.Status == StageStatus.DuringCombat)
+        {
+            <input class="gbtn gbtn-action gbtn-lg" type="submit" value="Commit Round"
+                   style="width: 300px; height: 80px; font-weight: bold; font-size: 25px;"/>
+        }
+        @if (Model.Status == StageStatus.ConcludedHeroWins || Model.Status == StageStatus.ConcludedEnemyWins)
+        {
+            <a class="gbtn gbtn-accept gbtn-lg" asp-controller="Combat" asp-action="FinishMatch"
+               style="width: 300px; height: 80px; padding-top: 20px; font-weight: bold; font-size: 25px;">
+                Leave Location
+            </a>
+        }
     </div>
 
 </form>

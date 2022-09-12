@@ -91,15 +91,15 @@ public class CombatService : ICombatService
         roundResult.EnemySkillName = stage.CombatEnemy.SelectedSkill.Name;
     }
 
-    private bool AreBothStunned(CombatStage stage)
+    private bool IsAnyoneOfThemStunned(CombatStage stage)
     {
-        return stage.CombatEnemy.IsStunned && stage.CombatHero.IsStunned;
+        return stage.CombatEnemy.IsStunned || stage.CombatHero.IsStunned;
     }
 
     private bool EnemyCountered(CombatStage stage)
     {
         return (
-            !AreBothStunned(stage) &&
+            !IsAnyoneOfThemStunned(stage) &&
             stage.CombatEnemy.SelectedSkill.Type == EnemySkillType.Charge &&
             stage.CombatHero.SelectedSkill.Type == HeroSkillType.CounterAttack);
     }
@@ -107,7 +107,7 @@ public class CombatService : ICombatService
     private bool EnemyBlocked(CombatStage stage)
     {
         return (
-            !AreBothStunned(stage) &&
+            !IsAnyoneOfThemStunned(stage) &&
             stage.CombatEnemy.SelectedSkill.Type != EnemySkillType.Charge &&
             stage.CombatHero.SelectedSkill.Type == HeroSkillType.Block);
     }

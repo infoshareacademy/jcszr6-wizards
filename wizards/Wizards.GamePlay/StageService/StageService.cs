@@ -184,6 +184,7 @@ public class StageService : IStageService
         resultLog.RoundNumber = numberRound;
 
         combatStage.RoundLogs.Add(resultLog);
+        combatStage.RoundLogs = combatStage.RoundLogs.OrderByDescending(x => x.RoundNumber).ToList();
     }
 
     private static void SetNewStageStatus(CombatStage combatStage)

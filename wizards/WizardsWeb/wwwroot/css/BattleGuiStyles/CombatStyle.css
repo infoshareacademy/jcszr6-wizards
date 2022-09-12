@@ -49,3 +49,19 @@
 .hero-section-width {
     width: 420px;
 }
+
+.exit-match-button-container {
+    position: relative;
+    width: 300px;
+    height: 80px;
+    top: 15px;
+    left: 100px;
+}
+
+.commit-button-container {
+    position: absolute;
+    width: 300px;
+    height: 80px;
+    top: 584px;
+    left: -361px;
+}
