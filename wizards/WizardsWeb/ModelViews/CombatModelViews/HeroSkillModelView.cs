@@ -11,6 +11,7 @@ public class HeroSkillModelView
     public string Name { get; set; }
     public HeroSkillType Type { get; set; }
     public string Description { get; set; }
+    public int SkillIconNumber { get; set; }
 
     [Display(Name = "Damage")]
     public int Damage { get; set; }

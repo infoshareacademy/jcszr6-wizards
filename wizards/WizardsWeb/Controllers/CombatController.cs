@@ -74,6 +74,7 @@ public class CombatController : Controller
         stage.WasResultShown = false;
         stage.Status = StageStatus.DuringCombat;
         stage.IsTraining = false;
+        stage.BackgroundImageNumber = 1;
         stage.EnemySection = new EnemySectionModelView()
         {
             Name = "Legendary Dupa",
@@ -87,13 +88,13 @@ public class CombatController : Controller
         };
         var skills = new List<HeroSkillModelView>()
         {
-            new HeroSkillModelView(){Id = 10, Name = "Dupa Ognia", Type = HeroSkillType.Attack, SlotNumber = SkillSlotNumber.First, Description = "Throws fiery Dupa", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 50, Healing = 0},
-            new HeroSkillModelView(){Id = 20, Name = "Dupa Lodu", Type = HeroSkillType.CounterAttack, SlotNumber = SkillSlotNumber.Second, Description = "Throws Icy Dupa", Damage = 50, HitChance = 200, ArmorPenetrationPercent = 0, Healing = 0},
-            new HeroSkillModelView(){Id = 30, Name = "Dupa Burzy", Type = HeroSkillType.Attack, SlotNumber = SkillSlotNumber.Third, Description = "Throws thunder Dupa", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 75, Healing = 0},
-            new HeroSkillModelView(){Id = 40, Name = "Dupa Blada", Type = HeroSkillType.Attack, SlotNumber = SkillSlotNumber.Fourth, Description = "Create Dupa's inferno", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 0, Healing = 0},
+            new HeroSkillModelView(){Id = 10, SkillIconNumber = 1, Name = "Dupa Ognia", Type = HeroSkillType.Attack, SlotNumber = SkillSlotNumber.First, Description = "Throws fiery Dupa", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 50, Healing = 0},
+            new HeroSkillModelView(){Id = 20, SkillIconNumber = 2, Name = "Dupa Lodu", Type = HeroSkillType.CounterAttack, SlotNumber = SkillSlotNumber.Second, Description = "Throws Icy Dupa", Damage = 50, HitChance = 200, ArmorPenetrationPercent = 0, Healing = 0},
+            new HeroSkillModelView(){Id = 30, SkillIconNumber = 3, Name = "Dupa Burzy", Type = HeroSkillType.Attack, SlotNumber = SkillSlotNumber.Third, Description = "Throws thunder Dupa", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 75, Healing = 0},
+            new HeroSkillModelView(){Id = 40, SkillIconNumber = 4, Name = "Dupa Blada", Type = HeroSkillType.Attack, SlotNumber = SkillSlotNumber.Fourth, Description = "Create Dupa's inferno", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 0, Healing = 0},
 
-            new HeroSkillModelView(){Id = 50, Name = "Dupa Leczenia", Type = HeroSkillType.Heal, SlotNumber = SkillSlotNumber.Fifth, Description = "Throws fiery Dupa", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 50, Healing = 50},
-            new HeroSkillModelView(){Id = 60, Name = "Dupa Tarczy", Type = HeroSkillType.Block, SlotNumber = SkillSlotNumber.Sixth, Description = "Blocks Dupa's Attack", Damage = 0, HitChance = 100, ArmorPenetrationPercent = 0, Healing = 0}
+            new HeroSkillModelView(){Id = 50, SkillIconNumber = 5, Name = "Dupa Leczenia", Type = HeroSkillType.Heal, SlotNumber = SkillSlotNumber.Fifth, Description = "Throws fiery Dupa", Damage = 150, HitChance = 80, ArmorPenetrationPercent = 50, Healing = 50},
+            new HeroSkillModelView(){Id = 60, SkillIconNumber = 6, Name = "Dupa Tarczy", Type = HeroSkillType.Block, SlotNumber = SkillSlotNumber.Sixth, Description = "Blocks Dupa's Attack", Damage = 0, HitChance = 100, ArmorPenetrationPercent = 0, Healing = 0}
         };
         stage.HeroSection = new HeroSectionModelView()
         {
@@ -128,6 +129,14 @@ public class CombatController : Controller
             new RoundLog(){RoundNumber = 1, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
             new RoundLog(){RoundNumber = 2, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
             new RoundLog(){RoundNumber = 3, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
+            new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
             new RoundLog(){RoundNumber = 4, HeroActionLog = "Dupa Slayer hits Legendary Dupa with Dupa Blada (attack) and deals 200 damage.", EnemyActionLog = "Legendary Dupa mishits Dupa Slayer"},
         };
         return stage;
