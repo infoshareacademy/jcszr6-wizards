@@ -13,6 +13,8 @@ public class EnemyProfile : Profile
     {
         CreateMap<EnemyAttributes, CombatEnemyAttributesDto>();
 
+        CreateMap<BehaviorPattern, CombatBehaviorPatternDto>();
+
         CreateMap<Enemy, CombatEnemyDto>()
             .ForMember(dto => dto.CurrentHealth, expr => expr.MapFrom(s => s.Attributes.MaxHealth))
             .ForMember(dto => dto.IsStunned, expr => expr.MapFrom(s => false))

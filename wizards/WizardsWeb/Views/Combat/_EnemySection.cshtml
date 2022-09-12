@@ -12,12 +12,12 @@
         <div class="round-results-info-text stunned-participant-text">STUNNED</div>
     }
 
-    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered && !Model.WasResultShown)
+    @if (!Model.WasResultShown && Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
     {
         <div class="round-results-info-text boss-countered-text">COUNTERED</div>
     }
 
-    @if (Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked && !Model.WasResultShown)
+    @if (!Model.WasResultShown && Model.LastRoundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
     {
         <div class="round-results-info-text boss-blocked-text">BLOCKED</div>
     }
@@ -27,7 +27,7 @@
         <div class="round-results-info-text on-boss-damage-text">@Model.LastRoundResult.EnemyDamageTaken</div>
     }
     
-    @if (Model.LastRoundResult.EnemyHealthRecovered > 0 && !Model.WasResultShown)
+    @if (!Model.WasResultShown && Model.LastRoundResult.EnemyHealthRecovered > 0)
     {
         <div class="round-results-info-text boss-heal-text">@Model.LastRoundResult.EnemyHealthRecovered</div>
     }

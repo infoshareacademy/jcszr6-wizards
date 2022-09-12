@@ -34,7 +34,16 @@ public static class HeroExtensions
             throw new ArgumentNullException();
         }
 
-        var calculatedAttributes = hero.Attributes;
+        var calculatedAttributes = new HeroAttributes()
+        {
+            DailyRewardEnergy = hero.Attributes.DailyRewardEnergy,
+            Damage = hero.Attributes.Damage,
+            Precision = hero.Attributes.Precision,
+            Specialization = hero.Attributes.Specialization,
+            MaxHealth = hero.Attributes.MaxHealth,
+            Reflex = hero.Attributes.Reflex,
+            Defense = hero.Attributes.Defense,
+        };
 
         if (hero.Inventory.Count == 0)
         {
@@ -108,8 +117,8 @@ public static class HeroExtensions
 
         var calculatedAttributes = hero.GetCalculatedAttributes();
 
-        var HitChanceImprovement = calculatedAttributes.Precision;
-        var result = skill.BaseHitChance + HitChanceImprovement;
+        var hitChanceImprovement = calculatedAttributes.Precision;
+        var result = skill.BaseHitChance + hitChanceImprovement;
 
         return result;
     }
@@ -147,7 +156,7 @@ public static class HeroExtensions
     public static List<CombatHeroSkillDto> GetCombatHeroSkills(this Hero hero)
     {
         var combatSkills = new List<CombatHeroSkillDto>();
-        
+
         if (hero == null)
         {
             return combatSkills;

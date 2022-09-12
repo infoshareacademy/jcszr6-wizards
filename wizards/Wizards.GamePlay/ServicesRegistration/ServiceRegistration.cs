@@ -2,6 +2,7 @@
 using Wizards.GamePlay.CombatService;
 using Wizards.GamePlay.EnemyAI;
 using Wizards.GamePlay.Factories;
+using Wizards.GamePlay.Mapping;
 using Wizards.GamePlay.RandomNumberProvider;
 using Wizards.GamePlay.ResultLogService;
 using Wizards.GamePlay.StageService;
@@ -18,5 +19,7 @@ public static class ServiceRegistration
         services.AddTransient<IResultLogService, ResultLogService.ResultLogService>();
         services.AddTransient<IStageService, StageService.StageService>();
         services.AddTransient<ICombatStageFactory, CombatStageFactory>();
+        services.AddAutoMapper(typeof(EnemyProfile).Assembly);
+        services.AddAutoMapper(typeof(HeroProfile).Assembly);
     }
 }

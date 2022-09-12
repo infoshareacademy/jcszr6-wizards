@@ -30,7 +30,7 @@ public class CombatService : ICombatService
         roundResult.HeroCombatStatus = GetHeroCombatStatus(stage, hitChanceRandomNumbers.Dequeue());
 
         roundResult.EnemyWillBeStunned = EnemyCountered(stage);
-        roundResult.HeroWillBeStunned = HeroWillBeStunned(stage.CombatEnemy.SelectedSkill.Stunning, roundResult.EnemyCombatStatus);
+        roundResult.HeroWillBeStunned = HeroWillBeStunned(stage, roundResult.EnemyCombatStatus);
 
         roundResult.EnemyDamageTaken = EnemyDamageTaken(stage, roundResult.HeroCombatStatus);
         roundResult.HeroDamageTaken = GetHeroDamageTaken(stage, roundResult.EnemyCombatStatus);
@@ -73,8 +73,7 @@ public class CombatService : ICombatService
         {
             result = HeroCombatStatus.WasStunned;
         }
-
-        if (HeroMissesAttack(stage, randomNumberForHitChance))
+        else if (HeroMissesAttack(stage, randomNumberForHitChance))
         {
             result = HeroCombatStatus.MissesAttack;
         }
@@ -127,11 +126,13 @@ public class CombatService : ICombatService
         return enemyMissesAttack;
     }
 
-    private bool HeroWillBeStunned(bool isEnemySkillStunning, EnemyCombatStatus enemyCombatStatus)
+    private bool HeroWillBeStunned(CombatStage stage, EnemyCombatStatus enemyCombatStatus)
     {
-        var enemyMissesAttack = enemyCombatStatus != EnemyCombatStatus.HitsSuccessfully;
-        
-        return (!enemyMissesAttack && isEnemySkillStunning);
+        var hits = enemyCombatStatus == EnemyCombatStatus.HitsSuccessfully;
+        var skillStunning = stage.CombatEnemy.SelectedSkill.Stunning;
+        var skillIsCharge = stage.CombatEnemy.SelectedSkill.Type == EnemySkillType.Charge;
+
+        return (hits && (skillStunning || skillIsCharge));
     }
 
     private bool HeroMissesAttack(CombatStage stage, int randomNumber)
@@ -143,7 +144,7 @@ public class CombatService : ICombatService
         var hasNoChanceToHit = AttackerHasNoChanceToHit(randomNumber, finalHitChance);
 
         var heroMissesAttack =
-            (hasNoChanceToHit && !stage.CombatEnemy.IsStunned && GetHeroSkillsTypesThatCannotMiss().Contains(stage.CombatHero.SelectedSkill.Type));
+            (hasNoChanceToHit && !stage.CombatEnemy.IsStunned && !GetHeroSkillsTypesThatCannotMiss().Contains(stage.CombatHero.SelectedSkill.Type));
 
         return heroMissesAttack;
     }

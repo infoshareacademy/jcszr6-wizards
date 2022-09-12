@@ -13,15 +13,20 @@ public class EnemyAI : IEnemyAI
 
         int currentEnemyHealthPercent = GetEnemyCurrentHealthPercent(enemy);
 
-        var previousEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(bp => bp.Id == enemy.CurrentBehaviorPatternId);
-        var nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.MinHealthPercentToTrigger > currentEnemyHealthPercent && p.MaxHealthPercentToTrigger <= currentEnemyHealthPercent);
+        var previousEnemyPatternId = enemy.CurrentBehaviorPatternId;
+        var nextEnemyPattern = enemy.BehaviorPatterns.SingleOrDefault(p => p.MinHealthPercentToTrigger < currentEnemyHealthPercent && p.MaxHealthPercentToTrigger >= currentEnemyHealthPercent);
+
+        if (nextEnemyPattern is null)
+        {
+            throw new NullReferenceException("There is no correct pattern!");
+        }
 
         var previousEnemyPatternSequenceStepId = enemy.CurrentPatternSequenceStepId;
-        var nextEnemyPatternSequenceStepId = 0;
+        var nextEnemyPatternSequenceStepId = 1;
 
-        var arePatternsTheSame = previousEnemyPattern.Id == nextEnemyPattern.Id;
+        var arePatternsTheSame = previousEnemyPatternId == nextEnemyPattern.Id;
 
-        if (previousEnemyPatternSequenceStepId < nextEnemyPattern.SequenceOfSkillsId.Max(seq => seq.SkillId) && arePatternsTheSame)
+        if (previousEnemyPatternSequenceStepId < nextEnemyPattern.SequenceOfSkillsId.Max(seq => seq.SequenceStepId) && arePatternsTheSame)
         {
             nextEnemyPatternSequenceStepId = previousEnemyPatternSequenceStepId + 1;          
         }
@@ -40,8 +45,8 @@ public class EnemyAI : IEnemyAI
             throw new NullReferenceException("Skill Step Sequence Not Found");
         }
         enemy.SelectedSkillId = step.SkillId;
-        enemy.CurrentPatternSequenceStepId = nextEnemyPattern.Id;
-        enemy.CurrentBehaviorPatternId = nextEnemyPatternSequenceStepId;
+        enemy.CurrentPatternSequenceStepId = nextEnemyPatternSequenceStepId;
+        enemy.CurrentBehaviorPatternId = nextEnemyPattern.Id;
         enemy.SelectedSkill = enemy.GetEnemySelectedSkill();
     }
 

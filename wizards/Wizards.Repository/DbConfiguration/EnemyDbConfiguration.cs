@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using System.Xml.Serialization;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Properties;
@@ -181,24 +182,19 @@ internal static class EnemyDbConfiguration
 
     private static string SkillsIdPatternToXml(this List<SkillSequenceStep> skillsIdPattern)
     {
-        var serializer = new XmlSerializer(typeof(List<SkillSequenceStep>));
-        var writer = new StringWriter();
-        serializer.Serialize(writer, skillsIdPattern);
-        var xmlText = writer.ToString();
-        return xmlText;
+        var json = JsonSerializer.Serialize(skillsIdPattern);
+        return json;
     }
 
-    private static List<SkillSequenceStep> XmlToSkillIdPattern(this string xmlValue)
+    private static List<SkillSequenceStep> XmlToSkillIdPattern(this string jsonValue)
     {
-        var serializer = new XmlSerializer(typeof(List<SkillSequenceStep>));
-        var reader = new StringReader(xmlValue);
-        var result = (List<SkillSequenceStep>)serializer.Deserialize(reader);
+        var patterns = JsonSerializer.Deserialize<List<SkillSequenceStep>>(jsonValue);
 
-        if (result == null)
+        if (patterns is null)
         {
-            result = new List<SkillSequenceStep>();
+            patterns=new List<SkillSequenceStep>();
         }
 
-        return result;
+        return patterns;
     }
 }

@@ -34,8 +34,8 @@ public class CombatStageFactory : ICombatStageFactory
             throw new NullReferenceException("Invalid models of participants");
         }
 
-        var combatHero = _mapper.Map<CombatHeroDto>(hero);
         var combatEnemy = _mapper.Map<CombatEnemyDto>(enemy);
+        var combatHero = _mapper.Map<CombatHeroDto>(hero);
 
         combatStage.CombatHero = combatHero;
         combatStage.CombatEnemy = combatEnemy;

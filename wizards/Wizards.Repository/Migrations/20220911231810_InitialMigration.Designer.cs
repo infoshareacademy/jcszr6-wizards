@@ -12,7 +12,7 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    [Migration("20220911185853_InitialMigration")]
+    [Migration("20220911231810_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1413,7 +1413,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             MaxHealthPercentToTrigger = 100,
                             MinHealthPercentToTrigger = 50,
-                            SequenceOfSkillsId = "<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfSkillSequence xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SkillSequenceStep><SequenceStepId>1</SequenceStepId><SkillId>1</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>2</SequenceStepId><SkillId>1</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>3</SequenceStepId><SkillId>2</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>4</SequenceStepId><SkillId>3</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>5</SequenceStepId><SkillId>4</SkillId></SkillSequenceStep></ArrayOfSkillSequence>"
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":3},{\"SequenceStepId\":5,\"SkillId\":4}]"
                         },
                         new
                         {
@@ -1421,7 +1421,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             MaxHealthPercentToTrigger = 50,
                             MinHealthPercentToTrigger = 0,
-                            SequenceOfSkillsId = "<?xml version=\"1.0\" encoding=\"utf-16\"?><ArrayOfSkillSequence xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><SkillSequenceStep><SequenceStepId>1</SequenceStepId><SkillId>1</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>2</SequenceStepId><SkillId>2</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>3</SequenceStepId><SkillId>1</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>4</SequenceStepId><SkillId>1</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>5</SequenceStepId><SkillId>3</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>6</SequenceStepId><SkillId>4</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>7</SequenceStepId><SkillId>3</SkillId></SkillSequenceStep><SkillSequenceStep><SequenceStepId>8</SequenceStepId><SkillId>4</SkillId></SkillSequenceStep></ArrayOfSkillSequence>"
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":2},{\"SequenceStepId\":3,\"SkillId\":1},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":4}]"
                         });
                 });
 

@@ -15,7 +15,7 @@
         <div class="round-results-info-text on-hero-damage-text">@Model.LastRoundResult.HeroDamageTaken</div>
     }
     
-    @if (Model.LastRoundResult.HeroHealthRecovered > 0 && !Model.WasResultShown)
+    @if (!Model.WasResultShown && Model.LastRoundResult.HeroHealthRecovered > 0)
     {
         <div class="round-results-info-text hero-heal-text">@Model.LastRoundResult.HeroHealthRecovered</div>
     }

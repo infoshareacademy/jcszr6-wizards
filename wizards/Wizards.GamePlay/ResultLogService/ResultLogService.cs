@@ -92,15 +92,17 @@ public class ResultLogService : IResultLogService
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Countered)
         {
-            whatDid = " countered";
+            whatDid = " counters";
             withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
             howMuchDamage = $" and deals {roundResult.EnemyDamageTaken} damage";
+            message = $"{hero}{whatDid}{enemy}{withWhat}{howMuchDamage}";
         }
 
         if (roundResult.EnemyCombatStatus == EnemyCombatStatus.Blocked)
         {
-            whatDid = " blocked";
+            whatDid = " blocks";
             withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
+            message = $"{hero}{whatDid}{enemy}{withWhat}{howMuchDamage}";
         }
 
         if (roundResult.HeroCombatStatus == HeroCombatStatus.MissesAttack)

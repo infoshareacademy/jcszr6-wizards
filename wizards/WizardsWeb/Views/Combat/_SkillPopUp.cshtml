@@ -8,7 +8,7 @@
             <h6>@Model.Type</h6>
         </div>
         <hr>
-        @if (Model.Description.Length > 0)
+        @if (Model.Description is not null)
         {
             <p>@Model.Description</p>
             <hr>
