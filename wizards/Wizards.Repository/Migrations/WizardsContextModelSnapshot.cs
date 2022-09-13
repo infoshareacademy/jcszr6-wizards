@@ -1147,17 +1147,22 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("BaseHitChance")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(80);
+                        .HasDefaultValue(0);
 
                     b.Property<double>("DamageFactor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
-                        .HasDefaultValue(1.0);
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<double>("HealingFactor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
-                        .HasDefaultValue(0.01);
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1184,6 +1189,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 0,
                             BaseHitChance = 80,
                             DamageFactor = 1.0,
+                            Description = "Hit enemy with sphere of fire",
                             HealingFactor = 0.0,
                             Name = "Fireball",
                             ProfessionRestriction = 1,
@@ -1193,8 +1199,9 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 2,
                             ArmorPenetrationPercent = 0,
-                            BaseHitChance = 120,
+                            BaseHitChance = 125,
                             DamageFactor = 0.75,
+                            Description = "Throw ice shard that deals damage and stops enemy movement",
                             HealingFactor = 0.0,
                             Name = "Ice Shard",
                             ProfessionRestriction = 1,
@@ -1204,8 +1211,9 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 3,
                             ArmorPenetrationPercent = 15,
-                            BaseHitChance = 60,
-                            DamageFactor = 1.25,
+                            BaseHitChance = 50,
+                            DamageFactor = 1.3999999999999999,
+                            Description = "Summon lighting strike that breaks enemy defense and deal lot of damage",
                             HealingFactor = 0.0,
                             Name = "Lighting Strike",
                             ProfessionRestriction = 1,
@@ -1215,8 +1223,9 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 4,
                             ArmorPenetrationPercent = 10,
-                            BaseHitChance = 40,
+                            BaseHitChance = 30,
                             DamageFactor = 1.75,
+                            Description = "Create fire field under enemy that deals very high damage to enemy",
                             HealingFactor = 0.0,
                             Name = "Inferno",
                             ProfessionRestriction = 1,
@@ -1226,10 +1235,11 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 5,
                             ArmorPenetrationPercent = 0,
-                            BaseHitChance = 100,
+                            BaseHitChance = 200,
                             DamageFactor = 0.0,
-                            HealingFactor = 0.089999999999999997,
-                            Name = "Reneval Fountain",
+                            Description = "Create spring that recovers your health",
+                            HealingFactor = 0.10000000000000001,
+                            Name = "Renewal Fountain",
                             ProfessionRestriction = 1,
                             Type = 3
                         },
@@ -1237,8 +1247,9 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 6,
                             ArmorPenetrationPercent = 0,
-                            BaseHitChance = 100,
+                            BaseHitChance = 300,
                             DamageFactor = 0.0,
+                            Description = "Create magnetic barrier in front of you that protect you from enemy attacks",
                             HealingFactor = 0.0,
                             Name = "Magnetic Shield",
                             ProfessionRestriction = 1,
@@ -1250,6 +1261,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 0,
                             BaseHitChance = 85,
                             DamageFactor = 1.0,
+                            Description = "",
                             HealingFactor = 0.0,
                             Name = "Necro1",
                             ProfessionRestriction = 2,
@@ -1261,6 +1273,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 30,
                             BaseHitChance = 100,
                             DamageFactor = 0.5,
+                            Description = "",
                             HealingFactor = 0.0,
                             Name = "Necro2",
                             ProfessionRestriction = 2,
@@ -1272,6 +1285,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 40,
                             BaseHitChance = 70,
                             DamageFactor = 1.1000000000000001,
+                            Description = "",
                             HealingFactor = 0.0,
                             Name = "Necro3",
                             ProfessionRestriction = 2,
@@ -1283,6 +1297,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 40,
                             BaseHitChance = 55,
                             DamageFactor = 1.5,
+                            Description = "",
                             HealingFactor = 0.0,
                             Name = "Necro4",
                             ProfessionRestriction = 2,
@@ -1294,6 +1309,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 0,
                             BaseHitChance = 100,
                             DamageFactor = 0.0,
+                            Description = "",
                             HealingFactor = 0.11,
                             Name = "Necro5",
                             ProfessionRestriction = 2,
@@ -1305,6 +1321,7 @@ namespace Wizards.Repository.Migrations
                             ArmorPenetrationPercent = 0,
                             BaseHitChance = 100,
                             DamageFactor = 0.0,
+                            Description = "",
                             HealingFactor = 0.0,
                             Name = "Necro6",
                             ProfessionRestriction = 2,
@@ -1333,22 +1350,25 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<string>("EnemyStageName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<int>("GoldReward")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
 
                     b.Property<int>("StageBackgroundImageNumber")
                         .HasColumnType("int");
 
                     b.Property<int>("Tier")
                         .HasColumnType("int");
+
+                    b.Property<bool>("TrainingEnemy")
+                        .HasColumnType("bit");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -1366,12 +1386,13 @@ namespace Wizards.Repository.Migrations
                             Id = 1,
                             AttributesId = 1,
                             AvatarImageNumber = 1,
-                            Description = "Dangeroud enemy thats has very high reflex and strong attacks",
+                            Description = "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge!",
                             EnemyStageName = "Lair of Crystalline Hydra",
-                            GoldReward = 1250,
+                            GoldReward = 2000,
                             Name = "Crystalline Hydra",
                             StageBackgroundImageNumber = 1,
                             Tier = 5,
+                            TrainingEnemy = false,
                             Type = 0
                         });
                 });
@@ -1395,8 +1416,8 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<string>("SequenceOfSkillsId")
                         .IsRequired()
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
+                        .HasMaxLength(4096)
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1410,16 +1431,24 @@ namespace Wizards.Repository.Migrations
                             Id = 1,
                             EnemyId = 1,
                             MaxHealthPercentToTrigger = 100,
-                            MinHealthPercentToTrigger = 50,
-                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":3},{\"SequenceStepId\":5,\"SkillId\":4}]"
+                            MinHealthPercentToTrigger = 66,
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4}]"
                         },
                         new
                         {
                             Id = 2,
                             EnemyId = 1,
-                            MaxHealthPercentToTrigger = 50,
-                            MinHealthPercentToTrigger = 0,
+                            MaxHealthPercentToTrigger = 66,
+                            MinHealthPercentToTrigger = 33,
                             SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":2},{\"SequenceStepId\":3,\"SkillId\":1},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":4}]"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EnemyId = 1,
+                            MaxHealthPercentToTrigger = 33,
+                            MinHealthPercentToTrigger = 0,
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":2},{\"SequenceStepId\":2,\"SkillId\":4},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":3},{\"SequenceStepId\":5,\"SkillId\":4},{\"SequenceStepId\":6,\"SkillId\":4}]"
                         });
                 });
 
@@ -1471,9 +1500,9 @@ namespace Wizards.Repository.Migrations
                             Id = 1,
                             Damage = 50,
                             Defense = 0,
-                            MaxHealth = 1750,
+                            MaxHealth = 2500,
                             Precision = 0,
-                            Reflex = 30,
+                            Reflex = 35,
                             Specialization = 50
                         });
                 });
@@ -1494,12 +1523,12 @@ namespace Wizards.Repository.Migrations
                     b.Property<int>("BaseHitChance")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(80);
+                        .HasDefaultValue(0);
 
                     b.Property<double>("DamageFactor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
-                        .HasDefaultValue(1.0);
+                        .HasDefaultValue(0.0);
 
                     b.Property<int>("EnemyId")
                         .HasColumnType("int");
@@ -1507,7 +1536,7 @@ namespace Wizards.Repository.Migrations
                     b.Property<double>("HealingFactor")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
-                        .HasDefaultValue(0.01);
+                        .HasDefaultValue(0.0);
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1530,48 +1559,48 @@ namespace Wizards.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            ArmorPenetrationPercent = 10,
-                            BaseHitChance = 40,
-                            DamageFactor = 0.14999999999999999,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 85,
+                            DamageFactor = 0.12,
                             EnemyId = 1,
                             HealingFactor = 0.0,
-                            Name = "Attack",
+                            Name = "Bite",
                             Stunning = false,
                             Type = 0
                         },
                         new
                         {
                             Id = 2,
-                            ArmorPenetrationPercent = 20,
+                            ArmorPenetrationPercent = 0,
                             BaseHitChance = 60,
-                            DamageFactor = 0.5,
+                            DamageFactor = 0.40000000000000002,
                             EnemyId = 1,
                             HealingFactor = 0.0,
-                            Name = "Strong Attack",
+                            Name = "Tail swipe",
                             Stunning = true,
                             Type = 1
                         },
                         new
                         {
                             Id = 3,
-                            ArmorPenetrationPercent = 10,
-                            BaseHitChance = 40,
-                            DamageFactor = 0.25,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 200,
+                            DamageFactor = 0.29999999999999999,
                             EnemyId = 1,
                             HealingFactor = 0.0,
-                            Name = "Charge Attack",
+                            Name = "Raging run",
                             Stunning = false,
                             Type = 2
                         },
                         new
                         {
                             Id = 4,
-                            ArmorPenetrationPercent = 10,
-                            BaseHitChance = 40,
-                            DamageFactor = 2.75,
+                            ArmorPenetrationPercent = 150,
+                            BaseHitChance = 300,
+                            DamageFactor = 2.0,
                             EnemyId = 1,
                             HealingFactor = 0.0,
-                            Name = "Deadly Attack",
+                            Name = "Deadly blast",
                             Stunning = false,
                             Type = 3
                         });

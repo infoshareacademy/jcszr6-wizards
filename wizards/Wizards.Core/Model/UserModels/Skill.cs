@@ -9,7 +9,8 @@ public class Skill
         public string Name { get; set; }
         public HeroSkillType Type { get; set; }
         public ProfessionRestriction ProfessionRestriction { get; set; }
-        
+        public string Description { get; set; }
+
         // Combat
         public double DamageFactor { get; set; }
         public int BaseHitChance { get; set; }

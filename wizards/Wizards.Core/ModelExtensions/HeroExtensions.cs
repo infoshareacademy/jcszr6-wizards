@@ -178,6 +178,7 @@ public static class HeroExtensions
                 Type = heroSkill.Skill.Type,
                 SlotNumber = heroSkill.SlotNumber,
                 SkillIconNumber = heroSkill.Skill.Id,
+                Description = heroSkill.Skill.Description,
 
                 Damage = hero.CalculateSkillDamage(heroSkill.Skill),
                 HitChance = hero.CalculateSkillHitChance(heroSkill.Skill),

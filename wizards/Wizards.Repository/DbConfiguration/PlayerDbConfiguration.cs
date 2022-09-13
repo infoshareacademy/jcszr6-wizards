@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Model.UserModels;
-using Wizards.Core.Model.WorldModels;
 
 namespace Wizards.Repository.DbConfiguration;
 

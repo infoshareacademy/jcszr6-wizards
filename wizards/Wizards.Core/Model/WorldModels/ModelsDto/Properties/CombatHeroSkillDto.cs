@@ -9,6 +9,7 @@ public class CombatHeroSkillDto
     public HeroSkillType Type { get; set; }
     public SkillSlotNumber SlotNumber { get; set; }
     public int SkillIconNumber { get; set; }
+    public string Description { get; set; }
 
 
     public int Damage { get; set; }

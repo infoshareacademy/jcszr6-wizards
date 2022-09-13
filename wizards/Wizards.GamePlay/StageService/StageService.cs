@@ -141,13 +141,16 @@ public class StageService : IStageService
             heroArmorUsage *= 2;
             heroWeaponUsage *= 2;
         }
-
         if (combatStage.Status == StageStatus.DuringCombat)
         {
             heroArmorUsage *= 4;
             heroWeaponUsage *= 4;
         }
 
+        if (heroWeapon is null)
+        {
+            return;
+        }
         if (heroWeapon.ItemEndurance - heroWeaponUsage <= 0)
         {
             heroWeapon.ItemEndurance = 0;
@@ -157,6 +160,10 @@ public class StageService : IStageService
             heroWeapon.ItemEndurance -= heroWeaponUsage;
         }
 
+        if (heroArmor is null)
+        {
+            return;
+        }
         if (heroArmor.ItemEndurance - heroArmorUsage <= 0)
         {
             heroArmor.ItemEndurance = 0;
@@ -273,17 +280,17 @@ public class StageService : IStageService
     {
         if (!heroMissedAttack)
         {
-            return 0.05;
+            return 0.01;
         }
 
-        return 0.1;
+        return 0.02;
     }
 
     private double CalculateArmorDamage(bool enemyMissedAttack)
     {
         if (!enemyMissedAttack)
         {
-            return 0.1;
+            return 0.01;
         }
 
         return 0;

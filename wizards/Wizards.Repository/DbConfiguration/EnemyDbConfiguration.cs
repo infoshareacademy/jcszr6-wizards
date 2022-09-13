@@ -16,15 +16,19 @@ internal static class EnemyDbConfiguration
         modelBuilder.Entity<Enemy>()
             .Property(e => e.Name)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(64);
 
         modelBuilder.Entity<Enemy>()
             .Property(e => e.EnemyStageName)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(128);
 
         modelBuilder.Entity<Enemy>()
             .Property(e => e.StageBackgroundImageNumber)
+            .IsRequired();
+
+        modelBuilder.Entity<Enemy>()
+            .Property(e => e.TrainingEnemy)
             .IsRequired();
         
         modelBuilder.Entity<Enemy>()
@@ -130,12 +134,12 @@ internal static class EnemyDbConfiguration
         modelBuilder.Entity<EnemySkill>()
             .Property(es => es.DamageFactor)
             .IsRequired()
-            .HasDefaultValue(1d);
+            .HasDefaultValue(0d);
 
         modelBuilder.Entity<EnemySkill>()
             .Property(es => es.BaseHitChance)
             .IsRequired()
-            .HasDefaultValue(80);
+            .HasDefaultValue(0);
 
         modelBuilder.Entity<EnemySkill>()
             .Property(es => es.ArmorPenetrationPercent)
@@ -145,7 +149,7 @@ internal static class EnemyDbConfiguration
         modelBuilder.Entity<EnemySkill>()
             .Property(es => es.HealingFactor)
             .IsRequired()
-            .HasDefaultValue(0.01d);
+            .HasDefaultValue(0d);
 
         modelBuilder.Entity<EnemySkill>()
             .Property(es => es.Stunning)
@@ -177,7 +181,7 @@ internal static class EnemyDbConfiguration
             .HasConversion(
                 i => i.SkillsIdPatternToXml(),
                 s => s.XmlToSkillIdPattern())
-            .HasMaxLength(1024);
+            .HasMaxLength(4096);
     }
 
     private static string SkillsIdPatternToXml(this List<SkillSequenceStep> skillsIdPattern)

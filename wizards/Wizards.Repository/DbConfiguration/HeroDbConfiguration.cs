@@ -124,6 +124,10 @@ internal static class HeroDbConfiguration
             .IsUnique();
 
         modelBuilder.Entity<Skill>()
+            .Property(s => s.Description)
+            .HasMaxLength(256);
+
+        modelBuilder.Entity<Skill>()
             .Property(s => s.Type)
             .IsRequired();
 
@@ -133,11 +137,11 @@ internal static class HeroDbConfiguration
 
         modelBuilder.Entity<Skill>()
             .Property(s => s.DamageFactor)
-            .HasDefaultValue(1d);
+            .HasDefaultValue(0d);
 
         modelBuilder.Entity<Skill>()
             .Property(s => s.BaseHitChance)
-            .HasDefaultValue(80);
+            .HasDefaultValue(0);
 
         modelBuilder.Entity<Skill>()
             .Property(s => s.ArmorPenetrationPercent)
@@ -145,7 +149,7 @@ internal static class HeroDbConfiguration
 
         modelBuilder.Entity<Skill>()
             .Property(s => s.HealingFactor)
-            .HasDefaultValue(0.01d);
+            .HasDefaultValue(0d);
     }
 
     internal static void SetHeroSkillConfiguration(this ModelBuilder modelBuilder)

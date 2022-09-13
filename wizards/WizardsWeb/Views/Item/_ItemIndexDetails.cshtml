@@ -73,11 +73,11 @@
 
                         @if (item.IsEquipped && !item.IsInMerchantMode && !item.IsMerchantItem)
                         {
-                            <a class="gbtn gbtn-accept gbtn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
+                            <a class="gbtn gbtn-danger gbtn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Unequip">Unequip</a>
                         }
                         else if (!item.IsEquipped && !item.IsInMerchantMode && !item.IsMerchantItem)
                         {
-                            <a class="gbtn gbtn-action gbtn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
+                            <a class="gbtn gbtn-accept gbtn-sm" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@item.Id" asp-route-actionName="Equip">Equip</a>
                         }
                         else if (item.IsInMerchantMode && !item.IsMerchantItem)
                         {
