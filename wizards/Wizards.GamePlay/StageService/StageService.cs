@@ -101,6 +101,7 @@ public class StageService : IStageService
         var hero = await _heroRepository.Get(combatStage.CombatHero.Id);
 
         GiveHeroReward(hero, combatStage);
+        UpdateHeroStatistics(hero, combatStage);
 
         DamageHeroEquipment(combatStage, hero);
 
@@ -112,11 +113,40 @@ public class StageService : IStageService
         await _combatStageRepository.RemoveAsync(playerId);
     }
 
+    public async Task AbortMatchAsync(int playerId)
+    {
+        var combatStage = await _combatStageRepository.GetAsync(playerId);
+
+        combatStage.Status = StageStatus.ConcludedEnemyWins;
+        combatStage.CombatHero.CurrentHealth = 0;
+    }
+
+    private void UpdateHeroStatistics(Hero hero, CombatStage combatStage)
+    {
+        if (combatStage.IsTraining)
+        {
+            return;
+        }
+        
+        if (combatStage.Status == StageStatus.ConcludedHeroWins)
+        {
+            hero.Statistics.TotalMatchPlayed += 1;
+            hero.Statistics.TotalMatchWin += 1;
+        }
+
+        if (combatStage.Status == StageStatus.ConcludedEnemyWins)
+        {
+            hero.Statistics.TotalMatchPlayed += 1;
+            hero.Statistics.TotalMatchLoose += 1;
+        }
+    }
+
     private static void GiveHeroReward(Hero? hero, CombatStage combatStage)
     {
         if (hero.Attributes.DailyRewardEnergy > 0 && !combatStage.IsTraining && combatStage.Status == StageStatus.ConcludedHeroWins)
         {
             hero.Gold += combatStage.CombatEnemy.GoldReward;
+            hero.Statistics.RankPoints += combatStage.CombatEnemy.RankPointsReward;
         }
     }
 
@@ -141,12 +171,7 @@ public class StageService : IStageService
             heroArmorUsage *= 2;
             heroWeaponUsage *= 2;
         }
-        if (combatStage.Status == StageStatus.DuringCombat)
-        {
-            heroArmorUsage *= 4;
-            heroWeaponUsage *= 4;
-        }
-
+        
         if (heroWeapon is null)
         {
             return;

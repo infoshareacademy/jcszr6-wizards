@@ -265,6 +265,7 @@ namespace Wizards.Repository.Migrations
                     StageBackgroundImageNumber = table.Column<int>(type: "int", nullable: false),
                     TrainingEnemy = table.Column<bool>(type: "bit", nullable: false),
                     GoldReward = table.Column<int>(type: "int", nullable: false),
+                    RankPointsReward = table.Column<int>(type: "int", nullable: false),
                     AttributesId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -541,8 +542,8 @@ namespace Wizards.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "Enemies",
-                columns: new[] { "Id", "AttributesId", "AvatarImageNumber", "Description", "EnemyStageName", "GoldReward", "Name", "StageBackgroundImageNumber", "Tier", "TrainingEnemy", "Type" },
-                values: new object[] { 1, 1, 1, "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge!", "Lair of Crystalline Hydra", 2000, "Crystalline Hydra", 1, 5, false, 0 });
+                columns: new[] { "Id", "AttributesId", "AvatarImageNumber", "Description", "EnemyStageName", "GoldReward", "Name", "RankPointsReward", "StageBackgroundImageNumber", "Tier", "TrainingEnemy", "Type" },
+                values: new object[] { 1, 1, 1, "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge. Below 33% health hydra has to be defeated in less than 16 rounds so you have to be perfect at your damage!", "Lair of Crystalline Hydra", 3000, "Crystalline Hydra", 100, 1, 5, false, 0 });
 
             migrationBuilder.InsertData(
                 table: "Items",
@@ -586,9 +587,9 @@ namespace Wizards.Repository.Migrations
                 columns: new[] { "Id", "EnemyId", "MaxHealthPercentToTrigger", "MinHealthPercentToTrigger", "SequenceOfSkillsId" },
                 values: new object[,]
                 {
-                    { 1, 1, 100, 66, "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4}]" },
-                    { 2, 1, 66, 33, "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":2},{\"SequenceStepId\":3,\"SkillId\":1},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":4}]" },
-                    { 3, 1, 33, 0, "[{\"SequenceStepId\":1,\"SkillId\":2},{\"SequenceStepId\":2,\"SkillId\":4},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":3},{\"SequenceStepId\":5,\"SkillId\":4},{\"SequenceStepId\":6,\"SkillId\":4}]" }
+                    { 1, 1, 100, 66, "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":1},{\"SequenceStepId\":6,\"SkillId\":7},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":2}]" },
+                    { 2, 1, 66, 33, "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":4},{\"SequenceStepId\":3,\"SkillId\":4},{\"SequenceStepId\":4,\"SkillId\":5},{\"SequenceStepId\":5,\"SkillId\":2},{\"SequenceStepId\":6,\"SkillId\":2},{\"SequenceStepId\":7,\"SkillId\":5},{\"SequenceStepId\":8,\"SkillId\":7},{\"SequenceStepId\":9,\"SkillId\":8},{\"SequenceStepId\":10,\"SkillId\":2},{\"SequenceStepId\":11,\"SkillId\":4},{\"SequenceStepId\":12,\"SkillId\":5},{\"SequenceStepId\":13,\"SkillId\":7},{\"SequenceStepId\":14,\"SkillId\":9}]" },
+                    { 3, 1, 33, 0, "[{\"SequenceStepId\":1,\"SkillId\":4},{\"SequenceStepId\":2,\"SkillId\":5},{\"SequenceStepId\":3,\"SkillId\":4},{\"SequenceStepId\":4,\"SkillId\":4},{\"SequenceStepId\":5,\"SkillId\":7},{\"SequenceStepId\":6,\"SkillId\":9},{\"SequenceStepId\":7,\"SkillId\":4},{\"SequenceStepId\":8,\"SkillId\":5},{\"SequenceStepId\":9,\"SkillId\":5},{\"SequenceStepId\":10,\"SkillId\":7},{\"SequenceStepId\":11,\"SkillId\":9},{\"SequenceStepId\":12,\"SkillId\":4},{\"SequenceStepId\":13,\"SkillId\":7},{\"SequenceStepId\":14,\"SkillId\":9},{\"SequenceStepId\":15,\"SkillId\":6},{\"SequenceStepId\":16,\"SkillId\":10}]" }
                 });
 
             migrationBuilder.InsertData(
@@ -596,15 +597,28 @@ namespace Wizards.Repository.Migrations
                 columns: new[] { "Id", "BaseHitChance", "DamageFactor", "EnemyId", "Name", "Stunning", "Type" },
                 values: new object[,]
                 {
-                    { 1, 85, 0.12, 1, "Bite", false, 0 },
-                    { 2, 60, 0.40000000000000002, 1, "Tail swipe", true, 1 },
-                    { 3, 200, 0.29999999999999999, 1, "Raging run", false, 2 }
+                    { 1, 100, 0.14999999999999999, 1, "Bite", false, 0 },
+                    { 2, 85, 0.25, 1, "Triple bite", false, 0 },
+                    { 3, 70, 0.55000000000000004, 1, "Tail swipe", true, 1 },
+                    { 4, 105, 0.20000000000000001, 1, "Scratch", false, 0 },
+                    { 5, 90, 0.29999999999999999, 1, "Sneaky claw", false, 0 },
+                    { 6, 85, 0.55000000000000004, 1, "Smashing tail", true, 1 },
+                    { 7, 200, 0.65000000000000002, 1, "Rage", false, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "EnemiesSkills",
+                columns: new[] { "Id", "BaseHitChance", "EnemyId", "HealingFactor", "Name", "Stunning", "Type" },
+                values: new object[] { 8, 300, 1, 0.14999999999999999, "Roar!", false, 4 });
+
+            migrationBuilder.InsertData(
+                table: "EnemiesSkills",
                 columns: new[] { "Id", "ArmorPenetrationPercent", "BaseHitChance", "DamageFactor", "EnemyId", "Name", "Stunning", "Type" },
-                values: new object[] { 4, 150, 300, 2.0, 1, "Deadly blast", false, 3 });
+                values: new object[,]
+                {
+                    { 9, 150, 300, 2.0, 1, "Deadly blast", false, 3 },
+                    { 10, 150, 300, 5.0, 1, "Destructive shock wave", false, 3 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

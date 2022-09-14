@@ -15,7 +15,9 @@ public class EnemySectionModelView
     public bool IsStunned { get; set; }
     public int MaxHealth { get; set; }
     public int CurrentHealth { get; set; }
+    
     public int GoldReward { get; set; }
+    public int RankPointsReward { get; set; }
 
     public int GetCurrentHealthPercent()
     {

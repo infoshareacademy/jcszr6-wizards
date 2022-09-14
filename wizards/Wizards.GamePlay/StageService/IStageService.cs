@@ -9,5 +9,6 @@ namespace Wizards.GamePlay.StageService
         public Task CreateNewMatchAsync(int playerId, int enemyId, bool isTraining);
         public Task CommitRoundAsync(int playerId, int selectedSkillId);
         public Task FinishMatchAsync(int playerId);
+        public Task AbortMatchAsync(int playerId);
     }
 }

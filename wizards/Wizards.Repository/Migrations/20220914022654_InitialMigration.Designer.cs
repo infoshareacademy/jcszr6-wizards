@@ -12,7 +12,7 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    [Migration("20220913003603_InitialMigration")]
+    [Migration("20220914022654_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1363,6 +1363,9 @@ namespace Wizards.Repository.Migrations
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
 
+                    b.Property<int>("RankPointsReward")
+                        .HasColumnType("int");
+
                     b.Property<int>("StageBackgroundImageNumber")
                         .HasColumnType("int");
 
@@ -1388,10 +1391,11 @@ namespace Wizards.Repository.Migrations
                             Id = 1,
                             AttributesId = 1,
                             AvatarImageNumber = 1,
-                            Description = "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge!",
+                            Description = "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge. Below 33% health hydra has to be defeated in less than 16 rounds so you have to be perfect at your damage!",
                             EnemyStageName = "Lair of Crystalline Hydra",
-                            GoldReward = 2000,
+                            GoldReward = 3000,
                             Name = "Crystalline Hydra",
+                            RankPointsReward = 100,
                             StageBackgroundImageNumber = 1,
                             Tier = 5,
                             TrainingEnemy = false,
@@ -1434,7 +1438,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             MaxHealthPercentToTrigger = 100,
                             MinHealthPercentToTrigger = 66,
-                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4}]"
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":1},{\"SequenceStepId\":6,\"SkillId\":7},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":2}]"
                         },
                         new
                         {
@@ -1442,7 +1446,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             MaxHealthPercentToTrigger = 66,
                             MinHealthPercentToTrigger = 33,
-                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":2},{\"SequenceStepId\":3,\"SkillId\":1},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":3},{\"SequenceStepId\":6,\"SkillId\":4},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":4}]"
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":4},{\"SequenceStepId\":3,\"SkillId\":4},{\"SequenceStepId\":4,\"SkillId\":5},{\"SequenceStepId\":5,\"SkillId\":2},{\"SequenceStepId\":6,\"SkillId\":2},{\"SequenceStepId\":7,\"SkillId\":5},{\"SequenceStepId\":8,\"SkillId\":7},{\"SequenceStepId\":9,\"SkillId\":8},{\"SequenceStepId\":10,\"SkillId\":2},{\"SequenceStepId\":11,\"SkillId\":4},{\"SequenceStepId\":12,\"SkillId\":5},{\"SequenceStepId\":13,\"SkillId\":7},{\"SequenceStepId\":14,\"SkillId\":9}]"
                         },
                         new
                         {
@@ -1450,7 +1454,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             MaxHealthPercentToTrigger = 33,
                             MinHealthPercentToTrigger = 0,
-                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":2},{\"SequenceStepId\":2,\"SkillId\":4},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":3},{\"SequenceStepId\":5,\"SkillId\":4},{\"SequenceStepId\":6,\"SkillId\":4}]"
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":4},{\"SequenceStepId\":2,\"SkillId\":5},{\"SequenceStepId\":3,\"SkillId\":4},{\"SequenceStepId\":4,\"SkillId\":4},{\"SequenceStepId\":5,\"SkillId\":7},{\"SequenceStepId\":6,\"SkillId\":9},{\"SequenceStepId\":7,\"SkillId\":4},{\"SequenceStepId\":8,\"SkillId\":5},{\"SequenceStepId\":9,\"SkillId\":5},{\"SequenceStepId\":10,\"SkillId\":7},{\"SequenceStepId\":11,\"SkillId\":9},{\"SequenceStepId\":12,\"SkillId\":4},{\"SequenceStepId\":13,\"SkillId\":7},{\"SequenceStepId\":14,\"SkillId\":9},{\"SequenceStepId\":15,\"SkillId\":6},{\"SequenceStepId\":16,\"SkillId\":10}]"
                         });
                 });
 
@@ -1562,8 +1566,8 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 1,
                             ArmorPenetrationPercent = 0,
-                            BaseHitChance = 85,
-                            DamageFactor = 0.12,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.14999999999999999,
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Bite",
@@ -1574,8 +1578,20 @@ namespace Wizards.Repository.Migrations
                         {
                             Id = 2,
                             ArmorPenetrationPercent = 0,
-                            BaseHitChance = 60,
-                            DamageFactor = 0.40000000000000002,
+                            BaseHitChance = 85,
+                            DamageFactor = 0.25,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Triple bite",
+                            Stunning = false,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 70,
+                            DamageFactor = 0.55000000000000004,
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Tail swipe",
@@ -1584,25 +1600,85 @@ namespace Wizards.Repository.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             ArmorPenetrationPercent = 0,
-                            BaseHitChance = 200,
+                            BaseHitChance = 105,
+                            DamageFactor = 0.20000000000000001,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Scratch",
+                            Stunning = false,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 90,
                             DamageFactor = 0.29999999999999999,
                             EnemyId = 1,
                             HealingFactor = 0.0,
-                            Name = "Raging run",
+                            Name = "Sneaky claw",
+                            Stunning = false,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 85,
+                            DamageFactor = 0.55000000000000004,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Smashing tail",
+                            Stunning = true,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 200,
+                            DamageFactor = 0.65000000000000002,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Rage",
                             Stunning = false,
                             Type = 2
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 8,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 300,
+                            DamageFactor = 0.0,
+                            EnemyId = 1,
+                            HealingFactor = 0.14999999999999999,
+                            Name = "Roar!",
+                            Stunning = false,
+                            Type = 4
+                        },
+                        new
+                        {
+                            Id = 9,
                             ArmorPenetrationPercent = 150,
                             BaseHitChance = 300,
                             DamageFactor = 2.0,
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Deadly blast",
+                            Stunning = false,
+                            Type = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ArmorPenetrationPercent = 150,
+                            BaseHitChance = 300,
+                            DamageFactor = 5.0,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Destructive shock wave",
                             Stunning = false,
                             Type = 3
                         });

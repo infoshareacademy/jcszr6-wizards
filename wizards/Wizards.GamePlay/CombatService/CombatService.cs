@@ -109,6 +109,7 @@ public class CombatService : ICombatService
         return (
             !IsAnyoneOfThemStunned(stage) &&
             stage.CombatEnemy.SelectedSkill.Type != EnemySkillType.Charge &&
+            stage.CombatEnemy.SelectedSkill.Type != EnemySkillType.Deadly && 
             stage.CombatHero.SelectedSkill.Type == HeroSkillType.Block);
     }
 
@@ -192,7 +193,7 @@ public class CombatService : ICombatService
         var finalHealingFactor = CalculateFinalHealingFactor(stage.CombatEnemy.Attributes.Specialization);
         var healersHealing = CalculateHealersHealing(heroSkillHealing, finalHealingFactor);
 
-        return CalculateRecoveredHealth(healersHealing, stage.CombatHero.IsStunned, stage.CombatEnemy.IsStunned);
+        return CalculateRecoveredHealth(healersHealing, stage.CombatEnemy.IsStunned, stage.CombatHero.IsStunned);
     }
 
     private void CheckIsStageCorrect(CombatStage stage)

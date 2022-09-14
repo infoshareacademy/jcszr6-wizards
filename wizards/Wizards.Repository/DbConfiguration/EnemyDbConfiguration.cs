@@ -67,6 +67,10 @@ internal static class EnemyDbConfiguration
         modelBuilder.Entity<Enemy>()
             .Property(e => e.GoldReward)
             .IsRequired();
+
+        modelBuilder.Entity<Enemy>()
+            .Property(e => e.RankPointsReward)
+            .IsRequired();
     }
 
     internal static void SetEnemyAttributesConfiguration(this ModelBuilder modelBuilder)
@@ -110,6 +114,7 @@ internal static class EnemyDbConfiguration
             .IsRequired()
             .HasDefaultValue(0);
     }
+
     internal static void SetEnemySkillConfiguration(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<EnemySkill>()

@@ -18,6 +18,7 @@ namespace Wizards.Core.Model.WorldModels
 
         // Economy
         public int GoldReward { get; set; }
+        public int RankPointsReward { get; set; }
         
         
         // Combat and Behavior

@@ -23,4 +23,5 @@ public class CombatEnemyDto
     public int CurrentPatternSequenceStepId { get; set; }
 
     public int GoldReward { get; set; }
+    public int RankPointsReward { get; set; }
 }

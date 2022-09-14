@@ -20,10 +20,18 @@ public class InitialDataEnemiesFactory : IInitialDataEnemiesFactory
     {
         var result = new List<EnemySkill>();
 
-        result.Add(new EnemySkill() { Id = 1, EnemyId = 1, Name = "Bite", Type = EnemySkillType.Attack, DamageFactor = 0.12d, BaseHitChance = 85, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 2, EnemyId = 1, Name = "Tail swipe", Type = EnemySkillType.StrongAttack, DamageFactor = 0.40d, BaseHitChance = 60, ArmorPenetrationPercent = 0, Stunning = true, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 3, EnemyId = 1, Name = "Raging run", Type = EnemySkillType.Charge, DamageFactor = 0.30d, BaseHitChance = 200, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 4, EnemyId = 1, Name = "Deadly blast", Type = EnemySkillType.Deadly, DamageFactor = 2.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 1, EnemyId = 1, Name = "Bite", Type = EnemySkillType.Attack, DamageFactor = 0.15d, BaseHitChance = 100, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 2, EnemyId = 1, Name = "Triple bite", Type = EnemySkillType.Attack, DamageFactor = 0.25d, BaseHitChance = 85, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 3, EnemyId = 1, Name = "Tail swipe", Type = EnemySkillType.StrongAttack, DamageFactor = 0.55d, BaseHitChance = 70, ArmorPenetrationPercent = 0, Stunning = true, HealingFactor = 0d });
+
+        result.Add(new EnemySkill() { Id = 4, EnemyId = 1, Name = "Scratch", Type = EnemySkillType.Attack, DamageFactor = 0.20d, BaseHitChance = 105, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 5, EnemyId = 1, Name = "Sneaky claw", Type = EnemySkillType.Attack, DamageFactor = 0.30d, BaseHitChance = 90, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 6, EnemyId = 1, Name = "Smashing tail", Type = EnemySkillType.StrongAttack, DamageFactor = 0.55d, BaseHitChance = 85, ArmorPenetrationPercent = 0, Stunning = true, HealingFactor = 0d });
+
+        result.Add(new EnemySkill() { Id = 7, EnemyId = 1, Name = "Rage", Type = EnemySkillType.Charge, DamageFactor = 0.65d, BaseHitChance = 200, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 8, EnemyId = 1, Name = "Roar!", Type = EnemySkillType.Heal, DamageFactor = 0d, BaseHitChance = 300, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0.15d });
+        result.Add(new EnemySkill() { Id = 9, EnemyId = 1, Name = "Deadly blast", Type = EnemySkillType.Deadly, DamageFactor = 2.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 10, EnemyId = 1, Name = "Destructive shock wave", Type = EnemySkillType.Deadly, DamageFactor = 5.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, Stunning = false, HealingFactor = 0d });
 
         return result;
     }
@@ -39,24 +47,42 @@ public class InitialDataEnemiesFactory : IInitialDataEnemiesFactory
         sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 1 });
         sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 3, SkillId = 2 });
         sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 1 });
-        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 3 });
-        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 4 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 1 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 7 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 7, SkillId = 3 });
+        sequenceOne.Add(new SkillSequenceStep() { SequenceStepId = 8, SkillId = 2 });
 
         sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 1, SkillId = 1 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 2 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 3, SkillId = 1 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 1 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 3 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 4 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 7, SkillId = 3 });
-        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 8, SkillId = 4 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 4 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 3, SkillId = 4 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 5 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 2 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 2 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 7, SkillId = 5 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 8, SkillId = 7 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 9, SkillId = 8 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 10, SkillId = 2 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 11, SkillId = 4 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 12, SkillId = 5 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 13, SkillId = 7 });
+        sequenceTwo.Add(new SkillSequenceStep() { SequenceStepId = 14, SkillId = 9 });
 
-        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 1, SkillId = 2});
-        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 4});
-        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 3, SkillId = 2});
-        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 3});
-        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 4});
-        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 4});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 1, SkillId = 4});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 2, SkillId = 5});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 3, SkillId = 4});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 4, SkillId = 4});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 5, SkillId = 7});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 6, SkillId = 9});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 7, SkillId = 4});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 8, SkillId = 5});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 9, SkillId = 5});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 10, SkillId = 7});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 11, SkillId = 9});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 12, SkillId = 4});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 13, SkillId = 7});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 14, SkillId = 9});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 15, SkillId = 6});
+        sequenceThree.Add(new SkillSequenceStep() { SequenceStepId = 16, SkillId = 10});
 
         result.Add(new BehaviorPattern()
         {
@@ -96,9 +122,13 @@ public class InitialDataEnemiesFactory : IInitialDataEnemiesFactory
             AttributesId = 1,
             AvatarImageNumber = 1,
             Name = "Crystalline Hydra",
-            Description = "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge!",
+            Description = "Dangerous enemy with high reflex and strong attacks that overpass armor. " +
+                          "Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! " +
+                          "Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge. " +
+                          "Below 33% health hydra has to be defeated in less than 16 rounds so you have to be perfect at your damage!",
             EnemyStageName = "Lair of Crystalline Hydra",
-            GoldReward = 2000,
+            GoldReward = 3000,
+            RankPointsReward = 100,
             StageBackgroundImageNumber = 1,
             Tier = 5,
             Type = EnemyType.Boss, 
