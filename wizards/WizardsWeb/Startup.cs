@@ -11,6 +11,8 @@ using Wizards.Repository;
 using Wizards.Repository.InitialData;
 using Wizards.Services.ServiceRegistration;
 using Wizards.Repository.ServiceRegistration;
+using WizardsWeb.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace WizardsWeb;
 
