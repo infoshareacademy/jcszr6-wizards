@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GamePlayTests\" />
     <Folder Include="WebTests\" />
     <Folder Include="ServicesTests\" />
     <Folder Include="RepositoryTests\" />
