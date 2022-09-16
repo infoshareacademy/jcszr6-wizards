@@ -29,7 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Wizard.Services\Wizards.Services.csproj" />
     <ProjectReference Include="..\Wizards.Core\Wizards.Core.csproj" />
+    <ProjectReference Include="..\Wizards.GamePlay\Wizards.GamePlay.csproj" />
+    <ProjectReference Include="..\Wizards.Repository\Wizards.Repository.csproj" />
+    <ProjectReference Include="..\WizardsWeb\WizardsWeb.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Wizards.Core.Model.WorldModels;
+using Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Core.ModelExtensions;
 
@@ -100,17 +101,17 @@ namespace Wizards.Tests.CoreTests
 
         }
 
-        //[Fact]
-        //public void GetEnemyCombatSkills_WithNullAsEnemy_ThrowException()
-        //{
-        //    var enemySkill = new EnemySkill();
-        //    Enemy enemy = null;
-        //    var result = () => enemy.GetEnemyCombatSkills(enemy);
+        [Fact]
+        public void GetEnemyCombatSkills_WithNullAsEnemy_ThrowException()
+        {
+            var enemySkill = new EnemySkill();
+            Enemy enemy = null;
+            var result = enemy.GetEnemyCombatSkills();
 
-        //    result.Should().Throw<ArgumentNullException>();
+            result.Count.Should().Be(0);
 
-        //}
+        }
 
-        
+
     }
 }
