@@ -1,0 +1,57 @@
+﻿@model WizardsWeb.ModelViews.ExplorationModelViews.EnemyIndexModelView
+
+<hr class="m-0 p-0" />
+<div class="row">
+    <div class="col-6 text-center p-1">
+        <h4 class="p-0">@Model.Name</h4>
+        <h6 class="font-italic">@Model.Type.ToString()</h6>
+    </div>
+    <div class="col-6 text-center p-1">
+        <h6>Location</h6>
+        <h5>@Model.EnemyStageName</h5>
+    </div>
+</div>
+<hr class="m-0 p-0"/>
+<div class="row">
+    <div class="col-6">
+        <img src="/Images/Bosses/Enemy-@(Model.AvatarImageNumber).png" width="100%" height="auto" />
+    </div>
+    <div class="col-6">
+        <div class="row">
+            <div class="col-12 px-3 py-2 pb-1">
+                <h6>Description:</h6>
+                <p class="text-justify">@Model.Description</p>
+            </div>
+        </div>
+        <hr class="m-0 p-0"/>
+        <div class="row">
+            <div class="col-12 px-3 py-2 text-center">
+                <h4>Rewards: </h4>
+                @if (Model.TrainingEnemy)
+                {
+                    <span class="h6">Training enemies gives no rewards</span>
+                }
+                else
+                {
+                    <span class="font-weight-bold">Gold: @Model.GoldReward</span>
+                    <br />
+                    <span class="font-weight-bold">RankPoints: @Model.RankPointsReward</span>
+                }
+            </div>
+        </div>
+        <hr class="m-0 p-0"/>
+        <div class="row">
+            <div class="col-12 pt-4 pb-2 text-center" style="padding-left: 25%; padding-right: 25%;">
+                <a class="gbtn gbtn-action gbtn-lg @(Model.CanPlayerConquer ? "" : "gbtn-disabled")" style="display: block; width: 100%; height: auto; align-content: center"
+                   asp-controller="Combat" asp-action="CreateNewMatch" asp-route-enemyId="@Model.Id">
+                    Start Match!
+                </a>
+                @if (!Model.CanPlayerConquer)
+                {
+                    <label class="p-1" style="font-size: 12px; color: #aa0000;">Your Item Tier is to low to conquer this enemy</label>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="m-0 p-0"/>
