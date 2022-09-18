@@ -88,7 +88,6 @@ body {
     background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-attachment: inherit;
     
     border-radius: 2px;
     border: none;
@@ -105,12 +104,14 @@ body {
         cursor: pointer;
         color: white;
         filter: brightness(130%);
+        text-decoration: none;
     }
 
     .gbtn:active {
         cursor: pointer;
         color: white;
         filter: brightness(60%);
+        text-decoration: none;
     }
 
 /* special disabled class */
@@ -162,4 +163,19 @@ body {
 .gbtn-technical {
     background-image: url(/GraphicAssets/Buttons/game-btn-technical.png);
     color: white;
+}
+
+.bg-paper-color {
+    background-image: url(/GraphicAssets/Textures/bg-paper-semi-transparent.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+
+}
+
+.bg-paper-header {
+    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }

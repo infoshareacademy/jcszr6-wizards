@@ -7,10 +7,10 @@
             <div class="modal-header table-@Model.GetItemTierColor()">
                 <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="Model" />
             </div>
-            <div class="modal-body">
+            <div class="modal-body bg-paper-color">
                 <partial name="~/Views/Item/_ItemAttributesInfo.cshtml" model="@Model.Attributes" />
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer bg-paper-color">
                 <partial name="~/Views/Item/_ItemEconomyInfo.cshtml" model="Model" />
             </div>
         </div>
@@ -26,14 +26,14 @@
                 <div class="modal-header table-@Model.GetItemTierColor()">
                     <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
                 </div>
-                <div class="modal-body alert alert-warning">
+                <div class="modal-body bg-paper-color">
                     <div class="h3 text-center text-dark">
                         <span>Do you want to repair this item for </span>
                         <span class="font-weight-bold">@($"{Model.RepairCost:#,##0}")</span>
                         <span> Gold?</span>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-paper-color">
                     <div class="btn-group col-12">
                         <button class="gbtn gbtn-action" data-bs-target="#details-@Model.Id" data-bs-toggle="modal">
                             No
@@ -56,14 +56,14 @@ else if (Model.IsMerchantItem)
                 <div class="modal-header table-@Model.GetItemTierColor()">
                     <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
                 </div>
-                <div class="modal-body alert alert-warning">
+                <div class="modal-body bg-paper-color">
                     <div class="h3 text-center text-dark">
                         <span>Do you want to buy this item for </span>
                         <span class="font-weight-bold">@($"{Model.BuyPrice:#,##0}")</span>
                         <span> Gold?</span>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-paper-color">
                     <div class="btn-group col-12">
                         <button class="gbtn gbtn-action" data-bs-dismiss="modal">
                             No
@@ -86,14 +86,14 @@ else if (Model.IsInMerchantMode && !Model.IsMerchantItem)
                 <div class="modal-header table-@Model.GetItemTierColor()">
                     <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
                 </div>
-                <div class="modal-body alert alert-danger">
+                <div class="modal-body bg-paper-color">
                     <div class="h3 text-center text-dark">
                         <span>Do you want to sell this item for </span>
                         <span class="font-weight-bold">@($"{Model.SellPrice:#,##0}")</span>
                         <span> Gold?</span>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-paper-color">
                     <div class="btn-group col-12">
                         <button class="gbtn gbtn-action" data-bs-dismiss="modal">
                             No

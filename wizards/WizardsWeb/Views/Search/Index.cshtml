@@ -6,14 +6,14 @@
 
 <style>
     table.table-bordered{
-        border:1px solid goldenrod;
+        border:1px solid black;
         margin-top:20px;
     }
     table.table-bordered > thead > tr > th{
-        border:1px solid goldenrod;
+        border:1px solid black;
     }
     table.table-bordered > tbody > tr > td{
-        border:1px solid goldenrod;
+        border:1px solid black;
     }
 </style>
 
@@ -41,7 +41,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Search by name" class="btn btn-outline-success btn-block" />
+                            <input type="submit" value="Search by name" class="gbtn gbtn-accept" />
                         </div>
                     </form>
                 </div>
@@ -56,9 +56,8 @@
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
 
-
                         <div class="form-group">
-                            <input type="submit" value="Search by email" class="btn btn-outline-success btn-block" />
+                            <input type="submit" value="Search by email" class="gbtn gbtn-accept" />
                         </div>
                     </form>
                 </div>
@@ -72,22 +71,20 @@
                             <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
                             <span asp-validation-for="FromRankPoints" class="text-danger"></span>
                         </div>
-
                         <div class="form-group">
-
                             <input asp-for="ToRankPoints" class="form-control" placeholder="To" />
                             <span asp-validation-for="ToRankPoints" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group">
-                            <input type="submit" value="Search by rank points" class="btn btn-outline-success btn-block" />
+                            <input type="submit" value="Search by rank points" class="gbtn gbtn-accept" />
                         </div>
                     </form>
                 </div>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <a type="button" class="btn btn-outline-danger btn-block" asp-action="Index">All Players</a>
+                <a type="button" class="gbtn gbtn-action" asp-action="Index">Show All Players</a>
             </li>
         </ul>
         <br />
@@ -101,7 +98,6 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
-
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)

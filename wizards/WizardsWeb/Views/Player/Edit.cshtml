@@ -19,25 +19,28 @@
             <li class="list-group-item d-flex justify-content-between bg-paper-color">
                 <div class="col-md-12">
                     <form asp-action="Edit">
+                        <div class="px-3 py-2">
+                            <a type="button" class="gbtn gbtn-action" asp-action="EditPassword">Edit Password</a>
+                        </div>
+                        <div class="px-3 py-2 pb-4">
+                            <a type="button" class="gbtn gbtn-danger" asp-action="Delete">Delete Account</a>
+                        </div>
                         <div class="col-md-4">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
                                 <label asp-for="Email" class="control-label font-weight-bold"></label>
-                                <input asp-for="Email" class="form-control" />
+                                <input asp-for="Email" class="form-control"/>
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="DateOfBirth" class="control-label font-weight-bold"></label>
-                                <input asp-for="DateOfBirth" class="form-control" />
+                                <input asp-for="DateOfBirth" class="form-control"/>
                                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                             </div>
-                        </div>
-
-                        <div class="btn-group btn-block">
-                            <a type="button" class="btn btn-outline-primary" asp-action="EditPassword">Edit Password</a>
-                            <a type="button" class="btn btn-outline-danger" asp-action="Delete">Delete Account</a>
-                            <a class="btn btn-outline-warning" asp-action="Details">Back to Players card information</a>
-                            <input type="submit" value="Save Changes" class="btn btn-outline-info" />
+                            <div class="form-group btn-group">
+                                <input type="submit" value="Save Changes" class="gbtn gbtn-accept"/>
+                                <a type="button" class="gbtn gbtn-action" asp-action="Details">Back to Player</a>
+                            </div>
                         </div>
 
                     </form>
