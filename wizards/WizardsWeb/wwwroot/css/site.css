@@ -175,7 +175,7 @@ body {
 
 .bg-paper-color {
     background-color: #ffefd8;
-    background-image: url(/GraphicAssets/Textures/bg-paper-semi-transparent.png);
+    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-attachment:fixed;
@@ -183,7 +183,7 @@ body {
 
 .bg-paper-header {
     background-color: #ffe0a3;
-    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
+    background-image: url(/GraphicAssets/Textures/bg-paper-header.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;

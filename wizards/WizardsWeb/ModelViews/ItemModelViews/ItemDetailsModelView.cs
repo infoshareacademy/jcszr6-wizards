@@ -16,7 +16,7 @@ public class ItemDetailsModelView
     public ItemType Type { get; set; }
     public ProfessionRestriction Restriction { get; set; }
     
-    [Display(Name = "Item Tier")]
+    [Display(Name = "Tier")]
     public int Tier { get; set; }
     public bool IsEquipped { get; set; }
 
