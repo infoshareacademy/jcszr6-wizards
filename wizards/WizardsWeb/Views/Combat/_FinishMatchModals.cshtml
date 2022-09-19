@@ -13,12 +13,12 @@
         victoryOrDeath = "victory";
     }
 
+    <audio id="Famfare" autoplay="true">
+        <source src="Sound/Match-@(victoryOrDeath).mp3">
+    </audio>
     <div class="concluded-match-container">
-        <img class="match-result" src="GraphicAssets/BattleGui/Conclude-@(victoryOrDeath).png" width="100%" height="100%"/>
+        <img class="match-result static-image-not-dragable" src="GraphicAssets/BattleGui/Conclude-@(victoryOrDeath).png" width="100%" height="100%"/>
         
-        <audio id="Famfare" autoplay="true">
-            <source src="Sound/Match-@(victoryOrDeath).mp3">
-        </audio>
 
         @if (Model.Status == StageStatus.ConcludedHeroWins)
         {
@@ -42,7 +42,7 @@
 
     <script>
         function audioVolume() {
-            document.getElementById("Famfare").volume = 0.15;
+            document.getElementById("Famfare").volume = 0.25;
         }
         window.onload = audioVolume;
     </script>

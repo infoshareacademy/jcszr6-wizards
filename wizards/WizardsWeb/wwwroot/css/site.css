@@ -165,17 +165,39 @@ body {
     color: white;
 }
 
+.bg-brown {
+    background-color: #482001;
+}
+
+.bg-leather {
+    background-color: #341d0b;
+}
+
 .bg-paper-color {
+    background-color: #ffefd8;
     background-image: url(/GraphicAssets/Textures/bg-paper-semi-transparent.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-attachment:fixed;
-
 }
 
 .bg-paper-header {
+    background-color: #ffe0a3;
     background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
+}
+
+.text-golden-dark {
+    color: #a47c01;
+}
+
+.static-image-not-dragable {
+    pointer-events: none;
+    user-select: none;
+}
+
+.select-blocked {
+    user-select: none;
 }

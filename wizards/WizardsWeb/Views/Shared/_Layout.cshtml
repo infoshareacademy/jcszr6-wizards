@@ -11,40 +11,22 @@
 
 </head>
 
-<style>
-    .bg-brown {
-        background-color: #482001;
+@{
+    string controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var notSelectable = "";
+    if (controller!="Home")
+    {
+        notSelectable = "select-blocked";
     }
+}
 
-    .bg-leather {
-        background-color: #341d0b;
-    }
-
-    .bg-paper-color {
-        background-color: #ffefd8;
-    }
-
-    .bg-paper-header {
-        background-color: #ffe0a3;
-    }
-
-    .text-golden-dark {
-        color: #a47c01;
-    }
-
-    .btn-outline-warning {
-        color: #cd9500;
-    }
-</style>
-
-
-<body class="bg-leather">
+<body class="bg-leather @notSelectable">
     <div class="cover-container d-flex w-100 h-100 mx-auto bg-brown flex-column">
         <header>
             <nav class="navbar navbar-expand-sm navbar-light bg-brown text-white box-shadow">
                 <div class="container">
 
-                    <img src="~/Images/logo.png" class="img-responsive" alt="Site Logo" style="height:75px; width: auto" />
+                    <img src="~/Images/logo.png" class="static-image-not-dragable" alt="Site Logo" style="height:75px; width: auto" />
 
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -54,19 +36,19 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1 ">
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-secondary disabled" asp-area="" asp-controller="News" asp-action="Index">News</a>
+                                <a class="nav-link text-secondary disabled" asp-controller="Home" asp-action="News">News</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-secondary disabled" asp-area="" asp-controller="About" asp-action="Index">About</a>
+                                <a class="nav-link text-secondary disabled" asp-controller="Home" asp-action="AboutGame">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-secondary disabled" asp-area="" asp-controller="Authors" asp-action="Index">Authors</a>
+                                <a class="nav-link text-secondary disabled" asp-controller="Home" asp-action="Authors">Authors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Search" asp-action="Index">Ranking</a>
+                                <a class="nav-link text-white" asp-controller="Search" asp-action="Index">Ranking</a>
                             </li>
                         </ul>
 

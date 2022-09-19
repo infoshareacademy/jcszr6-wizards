@@ -4,6 +4,10 @@
     ViewData["Title"] = "Titan Raids";
 }
 
+<audio id="Titan-Raids-Music" loop="true">
+    <source src="~/Sound/Character-select-music-1.mp3">
+</audio>
+
 <div class="row">
     <div class="col-12 p-1 mb-3 bg-paper-color rounded">
         <div class="row">
@@ -71,4 +75,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous">
+</script>
+
+<script>
+    function audioVolume() {
+        document.getElementById("Titan-Raids-Music").volume = 0.08;
+        document.getElementById("Titan-Raids-Music").play();
+    }
+    window.onload = audioVolume;
 </script>
