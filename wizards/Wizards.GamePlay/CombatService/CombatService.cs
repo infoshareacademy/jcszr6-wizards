@@ -130,7 +130,7 @@ public class CombatService : ICombatService
     private bool HeroWillBeStunned(CombatStage stage, EnemyCombatStatus enemyCombatStatus)
     {
         var hits = enemyCombatStatus == EnemyCombatStatus.HitsSuccessfully;
-        var skillStunning = stage.CombatEnemy.SelectedSkill.Stunning;
+        var skillStunning = stage.CombatEnemy.SelectedSkill.Type == EnemySkillType.Stunning;
         var skillIsCharge = stage.CombatEnemy.SelectedSkill.Type == EnemySkillType.Charge;
 
         return (hits && (skillStunning || skillIsCharge));

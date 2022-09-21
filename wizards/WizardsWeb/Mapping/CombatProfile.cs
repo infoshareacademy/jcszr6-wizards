@@ -17,13 +17,13 @@ public class CombatProfile : Profile
             .ForMember(destination => destination.Skills,
                 expr => expr.MapFrom(source => source.Skills))
             .ForMember(destination => destination.MaxHealth, 
-                expr => expr.MapFrom(source => source.Attributes.MaxHealth));
+                expr => expr.MapFrom(source => source.Attributes.MaxHealth))
+            .ForMember(destination => destination.DailyRewardEnergy, 
+                expr => expr.MapFrom(source => source.Attributes.DailyRewardEnergy));
 
         CreateMap<CombatEnemyDto, EnemySectionModelView>()
             .ForMember(destination => destination.SelectedSkillType,
                 expr => expr.MapFrom(source => source.SelectedSkill.Type))
-            .ForMember(destination => destination.SelectedSkillStunning,
-                expr => expr.MapFrom(source => source.SelectedSkill.Stunning))
             .ForMember(destination => destination.MaxHealth, 
                 expr => expr.MapFrom(source => source.Attributes.MaxHealth));
 

@@ -52,17 +52,25 @@
     
     @if (!Model.EnemySection.IsStunned)
     {
-        @if (Model.EnemySection.SelectedSkillType == EnemySkillType.Charge && Model.Status == StageStatus.DuringCombat)
+        @if (Model.EnemySection.SelectedSkillType == EnemySkillType.StrongAttack && Model.Status == StageStatus.DuringCombat)
+        {
+            <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-strong.png">
+        }
+        else if (Model.EnemySection.SelectedSkillType == EnemySkillType.Stunning && Model.Status == StageStatus.DuringCombat)
+        {
+            <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-stunning.png">
+        }
+        else if (Model.EnemySection.SelectedSkillType == EnemySkillType.Charge && Model.Status == StageStatus.DuringCombat)
         {
             <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-charge.png">
+        }
+        else if (Model.EnemySection.SelectedSkillType == EnemySkillType.Heal && Model.Status == StageStatus.DuringCombat)
+        {
+            <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-heal.png">
         }
         else if (Model.EnemySection.SelectedSkillType == EnemySkillType.Deadly && Model.Status == StageStatus.DuringCombat)
         {
             <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-deadly.png">
-        }
-        else if (Model.EnemySection.SelectedSkillStunning && Model.Status == StageStatus.DuringCombat)
-        {
-            <img class="enemy-skill-icon" src="~/GraphicAssets/BattleGui/enemy-stunning.png">
         }
     }
 </div>

@@ -99,7 +99,6 @@ public static class EnemyExtensions
                 HitChance = enemy.CalculateSkillHitChance(enemySkill),
                 ArmorPenetrationPercent = enemy.CalculateSkillArmorPenetrationPercent(enemySkill),
                 Healing = enemy.CalculateSkillHealing(enemySkill),
-                Stunning = enemySkill.Stunning
             };
             
             combatSkills.Add(combatSkill);

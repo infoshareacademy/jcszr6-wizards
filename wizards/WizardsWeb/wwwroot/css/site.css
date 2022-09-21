@@ -88,7 +88,6 @@ body {
     background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-attachment: inherit;
     
     border-radius: 2px;
     border: none;
@@ -105,12 +104,14 @@ body {
         cursor: pointer;
         color: white;
         filter: brightness(130%);
+        text-decoration: none;
     }
 
     .gbtn:active {
         cursor: pointer;
         color: white;
         filter: brightness(60%);
+        text-decoration: none;
     }
 
 /* special disabled class */
@@ -162,4 +163,41 @@ body {
 .gbtn-technical {
     background-image: url(/GraphicAssets/Buttons/game-btn-technical.png);
     color: white;
+}
+
+.bg-brown {
+    background-color: #482001;
+}
+
+.bg-leather {
+    background-color: #341d0b;
+}
+
+.bg-paper-color {
+    background-color: #ffefd8;
+    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+}
+
+.bg-paper-header {
+    background-color: #ffe0a3;
+    background-image: url(/GraphicAssets/Textures/bg-paper-header.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.text-golden-dark {
+    color: #a47c01;
+}
+
+.static-image-not-dragable {
+    pointer-events: none;
+    user-select: none;
+}
+
+.select-blocked {
+    user-select: none;
 }
