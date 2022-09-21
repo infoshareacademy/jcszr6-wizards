@@ -40,9 +40,11 @@ public class ExplorationController : Controller
 
         var indexEnemies = _mapper.Map<List<EnemyIndexModelView>>(enemies);
 
-        //var indexEnemies = GetDummyData();
-
-        indexEnemies.ForEach(e => e.CanPlayerConquer = e.Tier <= hero.GetAverageItemTier());
+        indexEnemies.ForEach(e =>
+        {
+            e.CanPlayerConquer = e.Tier <= hero.GetAverageItemTier();
+            e.CanClaimReward = hero.Attributes.DailyRewardEnergy > 0;
+        });
 
         var groupedEnemies = indexEnemies.GroupBy(e => e.Tier);
 
@@ -76,40 +78,5 @@ public class ExplorationController : Controller
         explorationCenter.HeroSummary = _mapper.Map<HeroSummaryModelView>(hero);
 
         return View(explorationCenter);
-    }
-
-    private List<EnemyIndexModelView> GetDummyData()
-    {
-        var result = new List<EnemyIndexModelView>();
-
-        var counter = 0;
-
-        for (int i = 1; i <= 5; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                counter++;
-                
-                var enemy = new EnemyIndexModelView();
-                
-                enemy.Id = counter;
-                enemy.Name = $"Enemy-T{i}-NR{j}";
-                enemy.Description =
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " +
-                    "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in " +
-                    "reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in " +
-                    "culpa qui officia deserunt mollit anim id est laborum. ";
-                enemy.AvatarImageNumber = 1;
-                enemy.EnemyStageName = $"Lair of {enemy.Name}";
-                enemy.GoldReward = 500 * i + j;
-                enemy.RankPointsReward = 20 * i;
-                enemy.Tier = i;
-                enemy.Type = EnemyType.Boss;
-
-                result.Add(enemy);
-            }
-        }
-        
-        return result;
     }
 }

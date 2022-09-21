@@ -25,11 +25,17 @@
             <div class="claimed-rewards">
                 <span style="font-weight: bold; font-size: 35px">Claimed Rewards</span>
                 <hr/>
-                @if (!Model.IsTraining)
+                @if (!Model.IsTraining && Model.HeroSection.DailyRewardEnergy > 0)
                 {
                     <span class="reward-text">Gold: @Model.EnemySection.GoldReward</span>
                     <br/>
                     <span class="reward-text">Rank Points: @Model.EnemySection.RankPointsReward</span>
+                }
+                else if (!Model.IsTraining && Model.HeroSection.DailyRewardEnergy == 0)
+                {
+                    <span class="p-0 m-0 font-italic text-danger font-weight-bold" style="font-size: 20px">You have no more Daily Reward Energy!</span>
+                    <br class="p-0 m-0"/>
+                    <span class="p-0 m-0 font-italic text-danger font-weight-bold" style="font-size: 20px">You cannot claim more rewards today!</span>
                 }
                 else
                 {

@@ -36,6 +36,13 @@
                     <span class="font-weight-bold">Gold: @Model.GoldReward</span>
                     <br />
                     <span class="font-weight-bold">RankPoints: @Model.RankPointsReward</span>
+                    if (!Model.CanClaimReward)
+                    {
+                        <br/>
+                        <span class="p-0 m-0 font-italic text-danger font-weight-bold" style="font-size: 14px">You have no more Daily Reward Energy!</span>
+                        <br class="p-0 m-0"/>
+                        <span class="p-0 m-0 font-italic text-danger font-weight-bold" style="font-size: 14px">You cannot claim more rewards today!</span>
+                    }
                 }
             </div>
         </div>

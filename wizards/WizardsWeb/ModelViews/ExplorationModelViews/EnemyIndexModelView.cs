@@ -24,4 +24,5 @@ public class EnemyIndexModelView
     public int RankPointsReward { get; set; }
 
     public bool CanPlayerConquer { get; set; }
+    public bool CanClaimReward { get; set; }
 }
