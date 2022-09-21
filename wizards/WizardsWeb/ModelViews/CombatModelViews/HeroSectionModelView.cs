@@ -10,6 +10,7 @@ public class HeroSectionModelView
     public string NickName { get; set; }
     public HeroProfession Profession { get; set; }
     public int AvatarImageNumber { get; set; }
+    public int DailyRewardEnergy { get; set; }
 
     public List<HeroSkillModelView> Skills { get; set; }
 

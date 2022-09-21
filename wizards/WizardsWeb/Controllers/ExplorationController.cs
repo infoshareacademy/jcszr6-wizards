@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using Wizards.Core.Interfaces.WorldModelInterfaces;
+using Wizards.Core.Model.WorldModels.Enums;
+using Wizards.Core.ModelExtensions;
 using Wizards.Services.HeroService;
 using WizardsWeb.ModelViews.ExplorationModelViews;
 using WizardsWeb.ModelViews.HeroModelViews.Properties;
@@ -26,11 +28,23 @@ public class ExplorationController : Controller
         _mapper = mapper;
     }
 
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> TitanRaids()
     {
         var enemies = await _enemyRepository.GetAllAsync();
+        var hero = await _heroService.Get(User);
 
         var indexEnemies = _mapper.Map<List<EnemyIndexModelView>>(enemies);
+
+        indexEnemies.ForEach(e =>
+        {
+            e.CanPlayerConquer = e.Tier <= hero.GetAverageItemTier();
+            e.CanClaimReward = hero.Attributes.DailyRewardEnergy > 0;
+        });
 
         var groupedEnemies = indexEnemies.GroupBy(e => e.Tier);
 
@@ -61,11 +75,8 @@ public class ExplorationController : Controller
             .SelectMany(ge => ge)
             .ToList();
 
-        var hero = await _heroService.Get(User);
-
         explorationCenter.HeroSummary = _mapper.Map<HeroSummaryModelView>(hero);
 
         return View(explorationCenter);
     }
-
 }

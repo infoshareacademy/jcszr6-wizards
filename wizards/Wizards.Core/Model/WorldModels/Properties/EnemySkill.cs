@@ -15,9 +15,6 @@ public class EnemySkill
     public int ArmorPenetrationPercent { get; set; }
     public double HealingFactor { get; set; }
 
-    // Another effects
-    public bool Stunning { get; set; }
-
     // Db relations properties
     public Enemy Enemy { get; set; }
     public int EnemyId { get; set; }

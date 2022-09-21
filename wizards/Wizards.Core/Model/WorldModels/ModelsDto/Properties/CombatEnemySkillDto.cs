@@ -14,7 +14,4 @@ public class CombatEnemySkillDto
     public int HitChance { get; set; }
     public int ArmorPenetrationPercent { get; set; }
     public int Healing { get; set; }
-
-    // Another effects
-    public bool Stunning { get; set; }
 }

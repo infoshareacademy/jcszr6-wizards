@@ -10,7 +10,6 @@ public class EnemySectionModelView
     public int AvatarImageNumber { get; set; }
 
     public EnemySkillType SelectedSkillType { get; set; }
-    public bool SelectedSkillStunning { get; set; }
 
     public bool IsStunned { get; set; }
     public int MaxHealth { get; set; }

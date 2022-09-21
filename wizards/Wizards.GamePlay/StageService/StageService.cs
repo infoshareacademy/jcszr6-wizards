@@ -1,6 +1,7 @@
 using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
@@ -55,6 +56,8 @@ public class StageService : IStageService
 
         await _enemyAI.SelectNextEnemyActionAsync(combatStage);
 
+        SelectHeroFirstSkill(combatStage);
+
         await _combatStageRepository.AddAsync(combatStage, playerId);
 
         combatStage.Status = StageStatus.DuringCombat;
@@ -68,14 +71,15 @@ public class StageService : IStageService
         
         var roundResult = await _combatService.CalculateRoundAsync(combatStage);
 
-        SubtractHeroHealth(combatStage, roundResult);
-        SubtractEnemyHealth(combatStage, roundResult);
-
         combatStage.CombatHero.IsStunned = roundResult.HeroWillBeStunned;
         combatStage.CombatEnemy.IsStunned = roundResult.EnemyWillBeStunned;
 
         RecoverHeroHealth(combatStage, roundResult);
         RecoverEnemyHealth(combatStage, roundResult);
+
+        SubtractHeroHealth(combatStage, roundResult);
+        SubtractEnemyHealth(combatStage, roundResult);
+        
         LastChanceHitMechanic(combatStage);
 
         var armorDamage = CalculateArmorDamage(roundResult.EnemyCombatStatus == EnemyCombatStatus.MissesAttack);
@@ -85,7 +89,7 @@ public class StageService : IStageService
 
         SetNewStageStatus(combatStage);
 
-        if (combatStage.Status == StageStatus.DuringCombat)
+        if (combatStage.CombatEnemy.CurrentHealth > 0)
         {
             await _enemyAI.SelectNextEnemyActionAsync(combatStage);
         }
@@ -119,6 +123,20 @@ public class StageService : IStageService
 
         combatStage.Status = StageStatus.ConcludedEnemyWins;
         combatStage.CombatHero.CurrentHealth = 0;
+    }
+
+    private void SelectHeroFirstSkill(CombatStage combatStage)
+    {
+        var skills = combatStage.CombatHero.Skills;
+        var skill = skills.MinBy(s => (int)s.SlotNumber);
+
+        if (skill is null)
+        {
+            return;
+        }
+
+        combatStage.CombatHero.SelectedSkill = skill;
+        combatStage.CombatHero.SelectedSkillId = skill.Id;
     }
 
     private void UpdateHeroStatistics(Hero hero, CombatStage combatStage)
@@ -305,17 +323,17 @@ public class StageService : IStageService
     {
         if (!heroMissedAttack)
         {
-            return 0.01;
+            return 0.020;
         }
 
-        return 0.02;
+        return 0.045;
     }
 
     private double CalculateArmorDamage(bool enemyMissedAttack)
     {
         if (!enemyMissedAttack)
         {
-            return 0.01;
+            return 0.035;
         }
 
         return 0;

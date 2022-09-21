@@ -55,7 +55,7 @@ public class CombatController : Controller
     {
         await _stageService.FinishMatchAsync(User.GetId());
 
-        return RedirectToAction("Details", "Hero");
+        return RedirectToAction("Index", "Exploration");
     }
 
     public async Task<IActionResult> AbortMatch()
