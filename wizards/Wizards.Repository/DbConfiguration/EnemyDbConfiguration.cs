@@ -155,10 +155,6 @@ internal static class EnemyDbConfiguration
             .Property(es => es.HealingFactor)
             .IsRequired()
             .HasDefaultValue(0d);
-
-        modelBuilder.Entity<EnemySkill>()
-            .Property(es => es.Stunning)
-            .IsRequired();
     }
 
     internal static void SetEnemyBehaviorPatternConfiguration(this ModelBuilder modelBuilder)

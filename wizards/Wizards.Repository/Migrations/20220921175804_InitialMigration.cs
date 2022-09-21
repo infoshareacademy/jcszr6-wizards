@@ -375,7 +375,6 @@ namespace Wizards.Repository.Migrations
                     BaseHitChance = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     ArmorPenetrationPercent = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
                     HealingFactor = table.Column<double>(type: "float", nullable: false, defaultValue: 0.0),
-                    Stunning = table.Column<bool>(type: "bit", nullable: false),
                     EnemyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -594,30 +593,30 @@ namespace Wizards.Repository.Migrations
 
             migrationBuilder.InsertData(
                 table: "EnemiesSkills",
-                columns: new[] { "Id", "BaseHitChance", "DamageFactor", "EnemyId", "Name", "Stunning", "Type" },
+                columns: new[] { "Id", "BaseHitChance", "DamageFactor", "EnemyId", "Name", "Type" },
                 values: new object[,]
                 {
-                    { 1, 100, 0.14999999999999999, 1, "Bite", false, 0 },
-                    { 2, 85, 0.25, 1, "Triple bite", false, 0 },
-                    { 3, 70, 0.55000000000000004, 1, "Tail swipe", true, 1 },
-                    { 4, 105, 0.20000000000000001, 1, "Scratch", false, 0 },
-                    { 5, 90, 0.29999999999999999, 1, "Sneaky claw", false, 0 },
-                    { 6, 85, 0.55000000000000004, 1, "Smashing tail", true, 1 },
-                    { 7, 200, 0.65000000000000002, 1, "Rage", false, 2 }
+                    { 1, 100, 0.14999999999999999, 1, "Bite", 0 },
+                    { 2, 85, 0.25, 1, "Triple bite", 0 },
+                    { 3, 70, 0.55000000000000004, 1, "Tail swipe", 1 },
+                    { 4, 105, 0.20000000000000001, 1, "Scratch", 0 },
+                    { 5, 90, 0.29999999999999999, 1, "Sneaky claw", 0 },
+                    { 6, 85, 0.55000000000000004, 1, "Smashing tail", 4 },
+                    { 7, 200, 0.65000000000000002, 1, "Rage", 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "EnemiesSkills",
-                columns: new[] { "Id", "BaseHitChance", "EnemyId", "HealingFactor", "Name", "Stunning", "Type" },
-                values: new object[] { 8, 300, 1, 0.14999999999999999, "Roar!", false, 4 });
+                columns: new[] { "Id", "BaseHitChance", "EnemyId", "HealingFactor", "Name", "Type" },
+                values: new object[] { 8, 300, 1, 0.14999999999999999, "Roar!", 5 });
 
             migrationBuilder.InsertData(
                 table: "EnemiesSkills",
-                columns: new[] { "Id", "ArmorPenetrationPercent", "BaseHitChance", "DamageFactor", "EnemyId", "Name", "Stunning", "Type" },
+                columns: new[] { "Id", "ArmorPenetrationPercent", "BaseHitChance", "DamageFactor", "EnemyId", "Name", "Type" },
                 values: new object[,]
                 {
-                    { 9, 150, 300, 2.0, 1, "Deadly blast", false, 3 },
-                    { 10, 150, 300, 5.0, 1, "Destructive shock wave", false, 3 }
+                    { 9, 150, 300, 2.0, 1, "Deadly blast", 3 },
+                    { 10, 150, 300, 5.0, 1, "Destructive shock wave", 3 }
                 });
 
             migrationBuilder.CreateIndex(

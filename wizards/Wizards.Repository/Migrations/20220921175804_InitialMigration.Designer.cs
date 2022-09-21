@@ -12,7 +12,7 @@ using Wizards.Repository;
 namespace Wizards.Repository.Migrations
 {
     [DbContext(typeof(WizardsContext))]
-    [Migration("20220914022654_InitialMigration")]
+    [Migration("20220921175804_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1549,9 +1549,6 @@ namespace Wizards.Repository.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("Stunning")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -1571,7 +1568,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Bite",
-                            Stunning = false,
                             Type = 0
                         },
                         new
@@ -1583,7 +1579,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Triple bite",
-                            Stunning = false,
                             Type = 0
                         },
                         new
@@ -1595,7 +1590,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Tail swipe",
-                            Stunning = true,
                             Type = 1
                         },
                         new
@@ -1607,7 +1601,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Scratch",
-                            Stunning = false,
                             Type = 0
                         },
                         new
@@ -1619,7 +1612,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Sneaky claw",
-                            Stunning = false,
                             Type = 0
                         },
                         new
@@ -1631,8 +1623,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Smashing tail",
-                            Stunning = true,
-                            Type = 1
+                            Type = 4
                         },
                         new
                         {
@@ -1643,7 +1634,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Rage",
-                            Stunning = false,
                             Type = 2
                         },
                         new
@@ -1655,8 +1645,7 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.14999999999999999,
                             Name = "Roar!",
-                            Stunning = false,
-                            Type = 4
+                            Type = 5
                         },
                         new
                         {
@@ -1667,7 +1656,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Deadly blast",
-                            Stunning = false,
                             Type = 3
                         },
                         new
@@ -1679,7 +1667,6 @@ namespace Wizards.Repository.Migrations
                             EnemyId = 1,
                             HealingFactor = 0.0,
                             Name = "Destructive shock wave",
-                            Stunning = false,
                             Type = 3
                         });
                 });

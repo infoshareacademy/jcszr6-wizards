@@ -24,8 +24,6 @@ public class CombatProfile : Profile
         CreateMap<CombatEnemyDto, EnemySectionModelView>()
             .ForMember(destination => destination.SelectedSkillType,
                 expr => expr.MapFrom(source => source.SelectedSkill.Type))
-            .ForMember(destination => destination.SelectedSkillStunning,
-                expr => expr.MapFrom(source => source.SelectedSkill.Stunning))
             .ForMember(destination => destination.MaxHealth, 
                 expr => expr.MapFrom(source => source.Attributes.MaxHealth));
 

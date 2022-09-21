@@ -20,18 +20,18 @@ public class InitialDataEnemiesFactory : IInitialDataEnemiesFactory
     {
         var result = new List<EnemySkill>();
 
-        result.Add(new EnemySkill() { Id = 1, EnemyId = 1, Name = "Bite", Type = EnemySkillType.Attack, DamageFactor = 0.15d, BaseHitChance = 100, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 2, EnemyId = 1, Name = "Triple bite", Type = EnemySkillType.Attack, DamageFactor = 0.25d, BaseHitChance = 85, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 3, EnemyId = 1, Name = "Tail swipe", Type = EnemySkillType.StrongAttack, DamageFactor = 0.55d, BaseHitChance = 70, ArmorPenetrationPercent = 0, Stunning = true, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 1, EnemyId = 1, Name = "Bite", Type = EnemySkillType.Attack, DamageFactor = 0.15d, BaseHitChance = 100, ArmorPenetrationPercent = 0, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 2, EnemyId = 1, Name = "Triple bite", Type = EnemySkillType.Attack, DamageFactor = 0.25d, BaseHitChance = 85, ArmorPenetrationPercent = 0, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 3, EnemyId = 1, Name = "Tail swipe", Type = EnemySkillType.StrongAttack, DamageFactor = 0.55d, BaseHitChance = 70, ArmorPenetrationPercent = 0, HealingFactor = 0d });
 
-        result.Add(new EnemySkill() { Id = 4, EnemyId = 1, Name = "Scratch", Type = EnemySkillType.Attack, DamageFactor = 0.20d, BaseHitChance = 105, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 5, EnemyId = 1, Name = "Sneaky claw", Type = EnemySkillType.Attack, DamageFactor = 0.30d, BaseHitChance = 90, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 6, EnemyId = 1, Name = "Smashing tail", Type = EnemySkillType.StrongAttack, DamageFactor = 0.55d, BaseHitChance = 85, ArmorPenetrationPercent = 0, Stunning = true, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 4, EnemyId = 1, Name = "Scratch", Type = EnemySkillType.Attack, DamageFactor = 0.20d, BaseHitChance = 105, ArmorPenetrationPercent = 0, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 5, EnemyId = 1, Name = "Sneaky claw", Type = EnemySkillType.Attack, DamageFactor = 0.30d, BaseHitChance = 90, ArmorPenetrationPercent = 0, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 6, EnemyId = 1, Name = "Smashing tail", Type = EnemySkillType.Stunning, DamageFactor = 0.55d, BaseHitChance = 85, ArmorPenetrationPercent = 0, HealingFactor = 0d });
 
-        result.Add(new EnemySkill() { Id = 7, EnemyId = 1, Name = "Rage", Type = EnemySkillType.Charge, DamageFactor = 0.65d, BaseHitChance = 200, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 8, EnemyId = 1, Name = "Roar!", Type = EnemySkillType.Heal, DamageFactor = 0d, BaseHitChance = 300, ArmorPenetrationPercent = 0, Stunning = false, HealingFactor = 0.15d });
-        result.Add(new EnemySkill() { Id = 9, EnemyId = 1, Name = "Deadly blast", Type = EnemySkillType.Deadly, DamageFactor = 2.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, Stunning = false, HealingFactor = 0d });
-        result.Add(new EnemySkill() { Id = 10, EnemyId = 1, Name = "Destructive shock wave", Type = EnemySkillType.Deadly, DamageFactor = 5.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, Stunning = false, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 7, EnemyId = 1, Name = "Rage", Type = EnemySkillType.Charge, DamageFactor = 0.65d, BaseHitChance = 200, ArmorPenetrationPercent = 0, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 8, EnemyId = 1, Name = "Roar!", Type = EnemySkillType.Heal, DamageFactor = 0d, BaseHitChance = 300, ArmorPenetrationPercent = 0, HealingFactor = 0.15d });
+        result.Add(new EnemySkill() { Id = 9, EnemyId = 1, Name = "Deadly blast", Type = EnemySkillType.Deadly, DamageFactor = 2.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, HealingFactor = 0d });
+        result.Add(new EnemySkill() { Id = 10, EnemyId = 1, Name = "Destructive shock wave", Type = EnemySkillType.Deadly, DamageFactor = 5.0d, BaseHitChance = 300, ArmorPenetrationPercent = 150, HealingFactor = 0d });
 
         return result;
     }
