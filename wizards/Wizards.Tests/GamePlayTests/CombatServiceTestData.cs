@@ -7,7 +7,7 @@ using Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 namespace Wizards.Tests.GamePlayTests
 {
     public class CombatServiceTestData : IEnumerable<object[]>
-    {     
+    {
         public IEnumerator<object[]> GetEnumerator()
         {
             var combatStage = new CombatStage()
@@ -83,10 +83,8 @@ namespace Wizards.Tests.GamePlayTests
             yield return new object[] { combatStage6, new ArgumentNullException() };
             yield return new object[] { combatStage7, new ArgumentException("Stage is not in combat!") };
             yield return new object[] { null, new ArgumentNullException() };
-          
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-        
     }
 }
