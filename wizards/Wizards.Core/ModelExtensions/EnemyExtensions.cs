@@ -100,7 +100,7 @@ public static class EnemyExtensions
                 ArmorPenetrationPercent = enemy.CalculateSkillArmorPenetrationPercent(enemySkill),
                 Healing = enemy.CalculateSkillHealing(enemySkill),
             };
-            
+
             combatSkills.Add(combatSkill);
         }
 
