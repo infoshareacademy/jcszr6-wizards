@@ -51,6 +51,46 @@ public class EnemyAITestsData : IEnumerable<object[]>
         combatEnemyDto.SelectedSkill.Id = 1;
 
         yield return new object[] { combatStage, combatEnemyDto };
+
+        combatStage.CombatEnemy.CurrentHealth = 99;
+        combatStage.CombatEnemy.CurrentBehaviorPatternId = 1;
+        combatStage.CombatEnemy.CurrentPatternSequenceStepId = 1;
+        combatEnemyDto.CurrentBehaviorPatternId = 1;
+        combatEnemyDto.CurrentPatternSequenceStepId = 2;
+        combatEnemyDto.SelectedSkillId = 2;
+        combatEnemyDto.SelectedSkill.Id = 2;
+
+        yield return new object[] { combatStage, combatEnemyDto };
+
+        combatStage.CombatEnemy.CurrentHealth = 51;
+        combatStage.CombatEnemy.CurrentBehaviorPatternId = 1;
+        combatStage.CombatEnemy.CurrentPatternSequenceStepId = 1;
+        combatEnemyDto.CurrentBehaviorPatternId = 1;
+        combatEnemyDto.CurrentPatternSequenceStepId = 2;
+        combatEnemyDto.SelectedSkillId = 2;
+        combatEnemyDto.SelectedSkill.Id = 2;
+
+        yield return new object[] { combatStage, combatEnemyDto };
+
+        combatStage.CombatEnemy.CurrentHealth = 50;
+        combatStage.CombatEnemy.CurrentBehaviorPatternId = 1;
+        combatStage.CombatEnemy.CurrentPatternSequenceStepId = 1;
+        combatEnemyDto.CurrentBehaviorPatternId = 2;
+        combatEnemyDto.CurrentPatternSequenceStepId = 1;
+        combatEnemyDto.SelectedSkillId = 3;
+        combatEnemyDto.SelectedSkill.Id = 3;
+
+        yield return new object[] { combatStage, combatEnemyDto };
+
+        combatStage.CombatEnemy.CurrentHealth = 30;
+        combatStage.CombatEnemy.CurrentBehaviorPatternId = 2;
+        combatStage.CombatEnemy.CurrentPatternSequenceStepId = 1;
+        combatEnemyDto.CurrentBehaviorPatternId = 2;
+        combatEnemyDto.CurrentPatternSequenceStepId = 2;
+        combatEnemyDto.SelectedSkillId = 4;
+        combatEnemyDto.SelectedSkill.Id = 4;
+
+        yield return new object[] { combatStage, combatEnemyDto };
     }
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
