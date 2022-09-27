@@ -7,6 +7,7 @@ using Wizards.Core.Model.UserModels;
 using Wizards.Services.ItemService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.ItemModelViews;
+using Microsoft.Extensions.Logging;
 
 namespace WizardsWeb.Controllers;
 
@@ -15,11 +16,13 @@ public class ItemController : Controller
 {
     private readonly IItemService _itemService;
     private readonly IMapper _mapper;
+    private readonly ILogger<ItemController> _logger;
 
-    public ItemController(IItemService itemService, IMapper mapper)
+    public ItemController(IItemService itemService, IMapper mapper, ILogger<ItemController> logger)
     {
         _itemService = itemService;
         _mapper = mapper;
+        _logger = logger;
     }
 
     // GET: ItemController/Create
@@ -35,6 +38,7 @@ public class ItemController : Controller
     {
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation($"{itemCreate.Name} item create failed", ModelState);
             return View(itemCreate);
         }
 
@@ -43,6 +47,7 @@ public class ItemController : Controller
         try
         {
             await _itemService.Add(item);
+            _logger.LogInformation($"{itemCreate.Name} item create failed", ModelState);
             return RedirectToAction("Index", "Merchant");
         }
         catch (InvalidModelException exception)
