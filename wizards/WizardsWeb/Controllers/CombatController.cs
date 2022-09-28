@@ -28,12 +28,10 @@ public class CombatController : Controller
         var combatStage = await _stageRepository.GetAsync(User.GetId());
 
         var battleStage = _mapper.Map<CombatStageModelView>(combatStage);
-        
         combatStage.LastRoundResult = null;
 
         return View("CombatStage", battleStage);
     }
-    
     public async Task<IActionResult> CreateNewMatch(int enemyId)
     {
         await _stageService.CreateNewMatchAsync(User.GetId(), enemyId, false);

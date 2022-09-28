@@ -57,6 +57,7 @@ public class ItemController : Controller
                 ModelState.AddModelError(data.Key, data.Value);
             }
 
+            _logger.LogInformation($"Item {itemCreate.Name} create successful");
             return View(itemCreate);
         }
     }
@@ -75,6 +76,7 @@ public class ItemController : Controller
     {
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation($"Item {itemEdit.Name} edit failed");
             return View(itemEdit);
         }
 
@@ -83,6 +85,7 @@ public class ItemController : Controller
         try
         {
             await _itemService.Update(item);
+            _logger.LogInformation($"Item {itemEdit.Name} edit successful");
             return RedirectToAction("Index", "Merchant");
         }
         catch (InvalidModelException exception)
