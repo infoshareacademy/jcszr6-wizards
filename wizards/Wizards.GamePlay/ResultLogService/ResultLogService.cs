@@ -122,7 +122,7 @@ public class ResultLogService : IResultLogService
             whatDid = " heals";
             enemy = " himself";
             withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
-            howMuchDamage = $" and recovers {roundResult.HeroHealthRecovered}";
+            howMuchDamage = $" and recovers {roundResult.HeroHealthRecovered} health points";
         }
 
         if (message == "")
