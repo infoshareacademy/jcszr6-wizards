@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Extentions;
 using Wizards.Services.HeroService;
+using Wizards.Services.Inventory;
+using Wizards.Services.ItemService;
 using Wizards.Services.MerchantService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.ItemModelViews;
@@ -20,13 +22,22 @@ public class MerchantController : Controller
     private readonly IMapper _mapper;
     private readonly IMerchantService _merchantService;
     private readonly IHeroService _heroService;
+    private readonly IItemService _itemService;
+    private readonly IInventoryService _inventoryService;
     private readonly ILogger<MerchantController> _logger;
 
-    public MerchantController(IMapper mapper, IMerchantService merchantService, IHeroService heroService, ILogger<MerchantController> logger)
+    public MerchantController(IMapper mapper,
+                              IMerchantService merchantService,
+                              IHeroService heroService,
+                              IItemService itemService,
+                              IInventoryService inventoryService,
+                              ILogger<MerchantController> logger)
     {
         _mapper = mapper;
         _merchantService = merchantService;
         _heroService = heroService;
+        _itemService = itemService;
+        _inventoryService = inventoryService;
         _logger = logger;
     }
 
@@ -45,10 +56,12 @@ public class MerchantController : Controller
 
     public async Task<ActionResult> BuyItem(int id)
     {
+        var hero = await _heroService.Get(User);
+        var item = await _itemService.Get(id);
         try
         {
             await _merchantService.BuyItemAsync(id, User);
-            _logger.LogInformation($"{} bought a {}");
+            _logger.LogInformation($"{hero.NickName} bought a {item.Name}", hero, item);
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidModelException exception)
@@ -57,11 +70,11 @@ public class MerchantController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{} buy item failed {exception.GetType()}", ModelState);
+                _logger.LogInformation($"{hero.NickName} failed to buy an item {exception.GetType()}", ModelState);
             }
             else
             {
-                _logger.LogError($"{} buy item failed {exception.GetType()}", ModelState);
+                _logger.LogError($"{hero.NickName} failed to buy an item  {exception.GetType()}", exception);
             }
             return View(nameof(Index), merchantModel);
         }
@@ -69,9 +82,12 @@ public class MerchantController : Controller
 
     public async Task<ActionResult> SellItem()
     {
+        var hero = await _heroService.Get(User);
+        var heroItem = await _inventoryService.GetHeroItem(User);
         try
         {
             await _merchantService.SellItemAsync(User);
+            _logger.LogInformation($"{hero.NickName} sold item {heroItem.Item.Name} successful");
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidModelException exception)
@@ -80,11 +96,11 @@ public class MerchantController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{} sell item failed {exception.GetType()}", ModelState);
+                _logger.LogInformation($"{hero.NickName} sell item failed {exception.GetType()}", ModelState);
             }
             else
             {
-                _logger.LogError($"{} sell item failed {exception.GetType()}", ModelState);
+                _logger.LogError($"{hero.NickName} sell item failed {exception.GetType()}", exception);
             }
 
             return View(nameof(Index), merchantModel);

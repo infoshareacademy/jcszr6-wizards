@@ -8,6 +8,7 @@ using Wizards.Services.ItemService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.ItemModelViews;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace WizardsWeb.Controllers;
 
@@ -47,7 +48,7 @@ public class ItemController : Controller
         try
         {
             await _itemService.Add(item);
-            _logger.LogInformation($"{itemCreate.Name} item create failed", ModelState);
+            _logger.LogInformation($"{itemCreate.Name} item create successful");
             return RedirectToAction("Index", "Merchant");
         }
         catch (InvalidModelException exception)
@@ -57,8 +58,14 @@ public class ItemController : Controller
                 ModelState.AddModelError(data.Key, data.Value);
             }
 
-            _logger.LogInformation($"Item {itemCreate.Name} create successful");
+            _logger.LogInformation($"Item {itemCreate.Name} create failed {exception.GetType()}", ModelState);
             return View(itemCreate);
+
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"Item {itemCreate.Name} create failed {exception.GetType()}", exception);
+            return RedirectToAction("Home", "Error500");
         }
     }
     // GET: ItemController/Edit/5
@@ -94,8 +101,13 @@ public class ItemController : Controller
             {
                 ModelState.AddModelError(data.Key, data.Value);
             }
-
+            _logger.LogInformation($"Item {item.Name} edit failed {exception.GetType()}", ModelState);
             return View(itemEdit);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError($"Item {item.Name} edit failed {exception.GetType()}", exception);
+            return RedirectToAction("Home", "Error500");
         }
     }
 }
