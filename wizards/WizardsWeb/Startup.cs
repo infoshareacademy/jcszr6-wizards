@@ -95,7 +95,7 @@ public class Startup
                 await next();
             }
         });
-        
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
