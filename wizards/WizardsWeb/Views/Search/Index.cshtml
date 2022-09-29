@@ -1,20 +1,29 @@
-﻿@model WizardsWeb.ModelViews.RankingModelViews.RankingModelViews
+﻿@using Microsoft.AspNetCore.Identity
+@using Wizards.Core.Model
+@using Wizards.Core.Model.UserModels
+@using Wizards.Core.Model.UserModels.Enums
+@model WizardsWeb.ModelViews.RankingModelViews.RankingModelViews
+
+@inject SignInManager<Player> SignInManager
+@inject UserManager<Player> UserManager
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <style>
-    table.table-bordered{
-        border:1px solid black;
-        margin-top:20px;
+    table.table-bordered {
+        border: 1px solid black;
+        margin-top: 20px;
     }
-    table.table-bordered > thead > tr > th{
-        border:1px solid black;
-    }
-    table.table-bordered > tbody > tr > td{
-        border:1px solid black;
-    }
+
+        table.table-bordered > thead > tr > th {
+            border: 1px solid black;
+        }
+
+        table.table-bordered > tbody > tr > td {
+            border: 1px solid black;
+        }
 </style>
 
 <div class="row">
@@ -30,110 +39,213 @@
         </ul>
         <br />
         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <div class="col-md-4">
-                    <form asp-action="Index">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="UserName" class="control-label"></label>
-                            <input asp-for="UserName" class="form-control" placeholder="User name" />
-                            <span asp-validation-for="UserName" class="text-danger"></span>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                    @if (User.IsInRole(UserRoles.Admin.ToString()))
+                    {
+
+                        <div class="col-md-4">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control" placeholder="User name" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Search by name" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
                         </div>
 
-                        <div class="form-group">
-                            <input type="submit" value="Search by name" class="gbtn gbtn-accept" />
-                        </div>
-                    </form>
-                </div>
+                        <div class="col-md-4">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="col-md-4">
-                    <form asp-action="Index">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="Email" class="control-label"></label>
+                                    <input asp-for="Email" class="form-control" placeholder="mail@wizard.com" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
 
-                        <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control" placeholder="mail@wizard.com" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <input type="submit" value="Search by email" class="gbtn gbtn-accept" />
-                        </div>
-                    </form>
-                </div>
-
-                <div class="col-md-4">
-                    <form asp-action="Index">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <div class="form-group">
-                            <label asp-for="FromRankPoints" class="control-label"></label>
-                            <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
-                            <span asp-validation-for="FromRankPoints" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input asp-for="ToRankPoints" class="form-control" placeholder="To" />
-                            <span asp-validation-for="ToRankPoints" class="text-danger"></span>
+                                <div class="form-group">
+                                    <input type="submit" value="Search by email" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
                         </div>
 
+                        <div class="col-md-4">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div class="form-group">
-                            <input type="submit" value="Search by rank points" class="gbtn gbtn-accept" />
+                                <div class="form-group">
+                                    <label asp-for="FromRankPoints" class="control-label"></label>
+                                    <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
+                                    <span asp-validation-for="FromRankPoints" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="ToRankPoints" class="form-control" placeholder="To" />
+                                    <span asp-validation-for="ToRankPoints" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="submit" value="Search by rank points" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <a type="button" class="gbtn gbtn-action" asp-action="Index">Show All Players</a>
-            </li>
-        </ul>
-        <br />
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.PlayerDetailsDto)
+                    }
+                </li>
+            }
+            else
+            {
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                        <div class="col-md-6">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="UserName" class="control-label"></label>
+                                    <input asp-for="UserName" class="form-control" placeholder="User name" />
+                                    <span asp-validation-for="UserName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Search by name" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-6">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                <div class="form-group">
+                                    <label asp-for="FromRankPoints" class="control-label"></label>
+                                    <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
+                                    <span asp-validation-for="FromRankPoints" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input asp-for="ToRankPoints" class="form-control" placeholder="To" />
+                                    <span asp-validation-for="ToRankPoints" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <input type="submit" value="Search by rank points" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+
+
+                    <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                        <a type="button" class="gbtn gbtn-action" asp-action="Index">Show All Players</a>
+                    </li>
+                </ul>
+            }
+
+            <br />
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                        @if (User.IsInRole(UserRoles.Admin.ToString()))
                         {
-                            <tr>
-                                <td>
-                                    @item.UserName
-                                </td>
-                                <td>
-                                    @item.Email
-                                </td>
-                                <td>
-                                    @item.HeroNumber
-                                </td>
-                                <td>
-                                    @item.RankNumber
-                                </td>
-                                <td>
-                                    @item.GoldHeroNumber
-                                </td>
-                            </tr>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.PlayerDetailsDto)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item.UserName
+                                            </td>
+                                            <td>
+                                                @item.Email
+                                            </td>
+                                            <td>
+                                                @item.HeroNumber
+                                            </td>
+                                            <td>
+                                                @item.RankNumber
+                                            </td>
+                                            <td>
+                                                @item.GoldHeroNumber
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
                         }
-                    </tbody>
-                </table>
-            </li>
-        </ul>
+                    </li>
+                </ul>
+            }
+            else
+            {
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between bg-paper-color">
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PlayerDetailsDto)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.UserName
+                                    </td>
+                                    <td>
+                                        @item.HeroNumber
+                                    </td>
+                                    <td>
+                                        @item.RankNumber
+                                    </td>
+                                    <td>
+                                        @item.GoldHeroNumber
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </li>
+            </ul>
+            }
     </div>
 </div>
