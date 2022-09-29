@@ -1,7 +1,9 @@
 ﻿using System.Security.Claims;
 using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Model;
-using Wizards.Services.Helpers;
+using Wizards.Core.Model.UserModels;
+using Wizards.Services.Extentions;
 
 namespace Wizards.Services.AuthorizationElements.Selector;
 

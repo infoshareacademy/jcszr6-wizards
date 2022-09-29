@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Wizards.Core.Model
-@using Wizards.Core.Model.Enums
+@using Wizards.Core.Model.UserModels
+@using Wizards.Core.Model.UserModels.Enums
 
 @inject SignInManager<Player> SignInManager
 @inject UserManager<Player> UserManager
@@ -9,32 +10,32 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item btn-group">
-                @if (User.IsInRole(UserRoles.Admin.ToString()))
-                {
-                    <a id="manage" class="btn btn-outline-light" asp-controller="Player" asp-action="Details">
-                        @UserManager.GetUserName(User) (Admin)
-                    </a>
-                }
-                else if (User.IsInRole(UserRoles.Moderator.ToString()))
-                {
-                    <a id="manage" class="btn btn-outline-light" asp-controller="Player" asp-action="Details">
-                        @UserManager.GetUserName(User) (Moderator)
-                    </a>
-                }
-                else
-                {
-                    <a id="manage" class="btn btn-outline-light" asp-controller="Player" asp-action="Details">
-                        @UserManager.GetUserName(User)
-                    </a>
-                }
-            <a id="logout" class="btn btn-outline-warning" asp-controller="Player" asp-action="Logout">Logout</a>
+            @if (User.IsInRole(UserRoles.Admin.ToString()))
+            {
+                <a id="manage" class="gbtn gbtn-technical" asp-controller="Player" asp-action="Details">
+                    @UserManager.GetUserName(User) (Admin)
+                </a>
+            }
+            else if (User.IsInRole(UserRoles.Moderator.ToString()))
+            {
+                <a id="manage" class="gbtn gbtn-technical" asp-controller="Player" asp-action="Details">
+                    @UserManager.GetUserName(User) (Moderator)
+                </a>
+            }
+            else
+            {
+                <a id="manage" class="gbtn gbtn-magical" asp-controller="Player" asp-action="Details">
+                    @UserManager.GetUserName(User)
+                </a>
+            }
+            <a id="logout" class="gbtn gbtn-danger" asp-controller="Player" asp-action="Logout">Logout</a>
         </li>
     }
     else
     {
         <li class="nav-item btn-group">
-            <a class="btn btn-outline-primary" id="login" asp-controller="Player" asp-action="Login">Login</a>
-            <a class="btn btn-outline-warning" id="register" asp-controller="Player" asp-action="Create">Register</a>
+            <a class="gbtn gbtn-accept" id="login" asp-controller="Player" asp-action="Login">Login</a>
+            <a class="gbtn gbtn-action" id="register" asp-controller="Player" asp-action="Create">Register</a>
         </li>
     }
 </ul>

@@ -1,4 +1,4 @@
-﻿using Wizards.Core.Model.Enums;
+﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.ValidationTasks;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;

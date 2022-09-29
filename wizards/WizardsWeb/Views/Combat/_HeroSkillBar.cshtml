@@ -1,0 +1,113 @@
+﻿@using Wizards.Core.Model.UserModels.Enums
+@using Wizards.Core.Model.WorldModels.Enums
+@using WizardsWeb.Extensions
+@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
+
+<form asp-action="CommitRound">
+    @{
+        var additionalClasses = "";
+        if (Model.HeroSection.IsStunned && Model.Status == StageStatus.DuringCombat)
+        {
+            additionalClasses = " skill-bar-disabled";
+            <div class="special-disable-message-container">
+                You are STUNNED! You cannot select action. Just commit round!
+            </div>
+        }
+        if (Model.Status == StageStatus.ConcludedHeroWins)
+        {
+            additionalClasses = " skill-bar-disabled";
+            Model.HeroSelectedSkillId = 0;
+        }
+        if (Model.Status == StageStatus.ConcludedEnemyWins)
+        {
+            additionalClasses = " skill-bar-dead";
+            Model.HeroSelectedSkillId = 0;
+        }
+    }
+
+    <div class="skill-bar @additionalClasses">
+
+        <label class="skill-slot slot-1">
+            @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.First))
+            {
+                var firstSkill = Model.HeroSection.Skills.GetSkill(SkillSlotNumber.First);
+
+                <input type="radio" value="@firstSkill.Id" asp-for="HeroSelectedSkillId">
+                <img src="~/Images/Hero/Skills/Skill-@(firstSkill.SkillIconNumber).png" width="100%" height="100%">
+                <partial name="_SkillPopUp" model="firstSkill"/>
+            }
+        </label>
+
+        <label class="skill-slot slot-2">
+            @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Second))
+            {
+                var secondSkill = Model.HeroSection.Skills.GetSkill(SkillSlotNumber.Second);
+
+                <input type="radio" value="@secondSkill.Id" asp-for="HeroSelectedSkillId">
+                <img src="~/Images/Hero/Skills/Skill-@(secondSkill.SkillIconNumber).png" width="100%" height="100%">
+                <partial name="_SkillPopUp" model="secondSkill"/>
+            }
+        </label>
+
+        <label class="skill-slot slot-3">
+            @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Third))
+            {
+                var thirdSkill = Model.HeroSection.Skills.GetSkill(SkillSlotNumber.Third);
+
+                <input type="radio" value="@thirdSkill.Id" asp-for="HeroSelectedSkillId">
+                <img src="~/Images/Hero/Skills/Skill-@(thirdSkill.SkillIconNumber).png" width="100%" height="100%">
+                <partial name="_SkillPopUp" model="thirdSkill"/>
+            }
+        </label>
+
+        <label class="skill-slot slot-4">
+            @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Fourth))
+            {
+                var fourthSkill = Model.HeroSection.Skills.GetSkill(SkillSlotNumber.Fourth);
+
+                <input type="radio" value="@fourthSkill.Id" asp-for="HeroSelectedSkillId">
+                <img src="~/Images/Hero/Skills/Skill-@(fourthSkill.SkillIconNumber).png" width="100%" height="100%">
+                <partial name="_SkillPopUp" model="fourthSkill"/>
+            }
+        </label>
+
+        <label class="skill-slot slot-5">
+            @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Fifth))
+            {
+                var fifthSkill = Model.HeroSection.Skills.GetSkill(SkillSlotNumber.Fifth);
+
+                <input type="radio" value="@fifthSkill.Id" asp-for="HeroSelectedSkillId">
+                <img src="~/Images/Hero/Skills/Skill-@(fifthSkill.SkillIconNumber).png" width="100%" height="100%">
+                <partial name="_SkillPopUp" model="fifthSkill"/>
+            }
+        </label>
+
+        <label class="skill-slot slot-6">
+            @if (Model.HeroSection.Skills.ExistsSkill(SkillSlotNumber.Sixth))
+            {
+                var sixthSkill = Model.HeroSection.Skills.GetSkill(SkillSlotNumber.Sixth);
+
+                <input type="radio" value="@sixthSkill.Id" asp-for="HeroSelectedSkillId">
+                <img src="~/Images/Hero/Skills/Skill-@(sixthSkill.SkillIconNumber).png" width="100%" height="100%">
+                <partial name="_SkillPopUp" model="sixthSkill"/>
+            }
+        </label>
+
+    </div>
+
+    <div class="commit-button-container">
+        @if (Model.Status == StageStatus.DuringCombat)
+        {
+            <input class="gbtn gbtn-action gbtn-lg" type="submit" value="Commit Round"
+                   style="width: 300px; height: 80px; font-weight: bold; font-size: 25px;"/>
+        }
+        @if (Model.Status == StageStatus.ConcludedHeroWins || Model.Status == StageStatus.ConcludedEnemyWins)
+        {
+            <a class="gbtn gbtn-accept gbtn-lg" asp-controller="Combat" asp-action="FinishMatch"
+               style="width: 300px; height: 80px; padding-top: 20px; font-weight: bold; font-size: 25px;">
+                Leave Location
+            </a>
+        }
+    </div>
+
+</form>

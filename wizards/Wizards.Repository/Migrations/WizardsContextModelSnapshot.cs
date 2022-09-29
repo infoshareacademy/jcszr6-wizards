@@ -155,7 +155,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,7 +237,41 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("HeroItems");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroSkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("HeroId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("InUse")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SlotNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkillId");
+
+                    b.HasIndex("HeroId", "SkillId")
+                        .IsUnique();
+
+                    b.ToTable("HeroSkills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -608,7 +642,7 @@ namespace Wizards.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Player", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -697,16 +731,13 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.HeroAttributes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentHealth")
-                        .HasColumnType("int");
 
                     b.Property<int>("DailyRewardEnergy")
                         .HasColumnType("int");
@@ -734,7 +765,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("HeroAttributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.ItemAttributes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1067,7 +1098,7 @@ namespace Wizards.Repository.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.Statistics", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1100,6 +1131,544 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Statistics");
                 });
 
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArmorPenetrationPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BaseHitChance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<double>("DamageFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<double>("HealingFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("ProfessionRestriction")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Skills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 80,
+                            DamageFactor = 1.0,
+                            Description = "Hit enemy with sphere of fire",
+                            HealingFactor = 0.0,
+                            Name = "Fireball",
+                            ProfessionRestriction = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 125,
+                            DamageFactor = 0.75,
+                            Description = "Throw ice shard that deals damage and stops enemy movement",
+                            HealingFactor = 0.0,
+                            Name = "Ice Shard",
+                            ProfessionRestriction = 1,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArmorPenetrationPercent = 15,
+                            BaseHitChance = 50,
+                            DamageFactor = 1.3999999999999999,
+                            Description = "Summon lighting strike that breaks enemy defense and deal lot of damage",
+                            HealingFactor = 0.0,
+                            Name = "Lighting Strike",
+                            ProfessionRestriction = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArmorPenetrationPercent = 10,
+                            BaseHitChance = 30,
+                            DamageFactor = 1.75,
+                            Description = "Create fire field under enemy that deals very high damage to enemy",
+                            HealingFactor = 0.0,
+                            Name = "Inferno",
+                            ProfessionRestriction = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 200,
+                            DamageFactor = 0.0,
+                            Description = "Create spring that recovers your health",
+                            HealingFactor = 0.10000000000000001,
+                            Name = "Renewal Fountain",
+                            ProfessionRestriction = 1,
+                            Type = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 300,
+                            DamageFactor = 0.0,
+                            Description = "Create magnetic barrier in front of you that protect you from enemy attacks",
+                            HealingFactor = 0.0,
+                            Name = "Magnetic Shield",
+                            ProfessionRestriction = 1,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 85,
+                            DamageFactor = 1.0,
+                            Description = "",
+                            HealingFactor = 0.0,
+                            Name = "Necro1",
+                            ProfessionRestriction = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ArmorPenetrationPercent = 30,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.5,
+                            Description = "",
+                            HealingFactor = 0.0,
+                            Name = "Necro2",
+                            ProfessionRestriction = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ArmorPenetrationPercent = 40,
+                            BaseHitChance = 70,
+                            DamageFactor = 1.1000000000000001,
+                            Description = "",
+                            HealingFactor = 0.0,
+                            Name = "Necro3",
+                            ProfessionRestriction = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ArmorPenetrationPercent = 40,
+                            BaseHitChance = 55,
+                            DamageFactor = 1.5,
+                            Description = "",
+                            HealingFactor = 0.0,
+                            Name = "Necro4",
+                            ProfessionRestriction = 2,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.0,
+                            Description = "",
+                            HealingFactor = 0.11,
+                            Name = "Necro5",
+                            ProfessionRestriction = 2,
+                            Type = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.0,
+                            Description = "",
+                            HealingFactor = 0.0,
+                            Name = "Necro6",
+                            ProfessionRestriction = 2,
+                            Type = 2
+                        });
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AttributesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AvatarImageNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("EnemyStageName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("GoldReward")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("RankPointsReward")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StageBackgroundImageNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tier")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("TrainingEnemy")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributesId")
+                        .IsUnique();
+
+                    b.ToTable("Enemies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AttributesId = 1,
+                            AvatarImageNumber = 1,
+                            Description = "Dangerous enemy with high reflex and strong attacks that overpass armor. Many of attacks can be dodge if you have high reflex. To hit this boss you must be precise! Hydra from time to time will charge on you and after it will cast deadly attack so very important is to successfully counter it's charge. Below 33% health hydra has to be defeated in less than 16 rounds so you have to be perfect at your damage!",
+                            EnemyStageName = "Lair of Crystalline Hydra",
+                            GoldReward = 3000,
+                            Name = "Crystalline Hydra",
+                            RankPointsReward = 100,
+                            StageBackgroundImageNumber = 1,
+                            Tier = 5,
+                            TrainingEnemy = false,
+                            Type = 0
+                        });
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxHealthPercentToTrigger")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinHealthPercentToTrigger")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SequenceOfSkillsId")
+                        .IsRequired()
+                        .HasMaxLength(4096)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("BehaviorPatterns");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EnemyId = 1,
+                            MaxHealthPercentToTrigger = 100,
+                            MinHealthPercentToTrigger = 66,
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":1},{\"SequenceStepId\":3,\"SkillId\":2},{\"SequenceStepId\":4,\"SkillId\":1},{\"SequenceStepId\":5,\"SkillId\":1},{\"SequenceStepId\":6,\"SkillId\":7},{\"SequenceStepId\":7,\"SkillId\":3},{\"SequenceStepId\":8,\"SkillId\":2}]"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EnemyId = 1,
+                            MaxHealthPercentToTrigger = 66,
+                            MinHealthPercentToTrigger = 33,
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":1},{\"SequenceStepId\":2,\"SkillId\":4},{\"SequenceStepId\":3,\"SkillId\":4},{\"SequenceStepId\":4,\"SkillId\":5},{\"SequenceStepId\":5,\"SkillId\":2},{\"SequenceStepId\":6,\"SkillId\":2},{\"SequenceStepId\":7,\"SkillId\":5},{\"SequenceStepId\":8,\"SkillId\":7},{\"SequenceStepId\":9,\"SkillId\":8},{\"SequenceStepId\":10,\"SkillId\":2},{\"SequenceStepId\":11,\"SkillId\":4},{\"SequenceStepId\":12,\"SkillId\":5},{\"SequenceStepId\":13,\"SkillId\":7},{\"SequenceStepId\":14,\"SkillId\":9}]"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EnemyId = 1,
+                            MaxHealthPercentToTrigger = 33,
+                            MinHealthPercentToTrigger = 0,
+                            SequenceOfSkillsId = "[{\"SequenceStepId\":1,\"SkillId\":4},{\"SequenceStepId\":2,\"SkillId\":5},{\"SequenceStepId\":3,\"SkillId\":4},{\"SequenceStepId\":4,\"SkillId\":4},{\"SequenceStepId\":5,\"SkillId\":7},{\"SequenceStepId\":6,\"SkillId\":9},{\"SequenceStepId\":7,\"SkillId\":4},{\"SequenceStepId\":8,\"SkillId\":5},{\"SequenceStepId\":9,\"SkillId\":5},{\"SequenceStepId\":10,\"SkillId\":7},{\"SequenceStepId\":11,\"SkillId\":9},{\"SequenceStepId\":12,\"SkillId\":4},{\"SequenceStepId\":13,\"SkillId\":7},{\"SequenceStepId\":14,\"SkillId\":9},{\"SequenceStepId\":15,\"SkillId\":6},{\"SequenceStepId\":16,\"SkillId\":10}]"
+                        });
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Damage")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Defense")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("MaxHealth")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Precision")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Reflex")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Specialization")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EnemiesAttributes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Damage = 50,
+                            Defense = 0,
+                            MaxHealth = 2500,
+                            Precision = 0,
+                            Reflex = 35,
+                            Specialization = 50
+                        });
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArmorPenetrationPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BaseHitChance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<double>("DamageFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("HealingFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("EnemiesSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 100,
+                            DamageFactor = 0.14999999999999999,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Bite",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 85,
+                            DamageFactor = 0.25,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Triple bite",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 70,
+                            DamageFactor = 0.55000000000000004,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Tail swipe",
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 105,
+                            DamageFactor = 0.20000000000000001,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Scratch",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 90,
+                            DamageFactor = 0.29999999999999999,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Sneaky claw",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 85,
+                            DamageFactor = 0.55000000000000004,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Smashing tail",
+                            Type = 4
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 200,
+                            DamageFactor = 0.65000000000000002,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Rage",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ArmorPenetrationPercent = 0,
+                            BaseHitChance = 300,
+                            DamageFactor = 0.0,
+                            EnemyId = 1,
+                            HealingFactor = 0.14999999999999999,
+                            Name = "Roar!",
+                            Type = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ArmorPenetrationPercent = 150,
+                            BaseHitChance = 300,
+                            DamageFactor = 2.0,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Deadly blast",
+                            Type = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ArmorPenetrationPercent = 150,
+                            BaseHitChance = 300,
+                            DamageFactor = 5.0,
+                            EnemyId = 1,
+                            HealingFactor = 0.0,
+                            Name = "Destructive shock wave",
+                            Type = 3
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -1111,7 +1680,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1120,7 +1689,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1135,7 +1704,7 @@ namespace Wizards.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1144,30 +1713,30 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Properties.HeroAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.HeroAttributes", "Attributes")
                         .WithOne("Hero")
-                        .HasForeignKey("Wizards.Core.Model.Hero", "AttributesId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Hero", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Player", "Player")
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", "Player")
                         .WithMany("Heroes")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Properties.Statistics", "Statistics")
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.Statistics", "Statistics")
                         .WithOne("Hero")
-                        .HasForeignKey("Wizards.Core.Model.Hero", "StatisticsId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Hero", "StatisticsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1178,15 +1747,15 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Statistics");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroItem", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Hero", "Hero")
+                    b.HasOne("Wizards.Core.Model.UserModels.Hero", "Hero")
                         .WithMany("Inventory")
                         .HasForeignKey("HeroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Item", "Item")
+                    b.HasOne("Wizards.Core.Model.UserModels.Item", "Item")
                         .WithMany("Heroes")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1197,47 +1766,119 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroSkill", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Properties.ItemAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.UserModels.Hero", "Hero")
+                        .WithMany("Skills")
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wizards.Core.Model.UserModels.Skill", "Skill")
+                        .WithMany("Hero")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hero");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.ItemAttributes", "Attributes")
                         .WithOne("Item")
-                        .HasForeignKey("Wizards.Core.Model.Item", "AttributesId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Item", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Attributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", "Attributes")
+                        .WithOne("Enemy")
+                        .HasForeignKey("Wizards.Core.Model.WorldModels.Enemy", "AttributesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attributes");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Enemy", "Enemy")
+                        .WithMany("BehaviorPatterns")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Enemy");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Enemy", "Enemy")
+                        .WithMany("Skills")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Enemy");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
                     b.Navigation("Inventory");
+
+                    b.Navigation("Skills");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
                 {
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Player", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.HeroAttributes", b =>
                 {
                     b.Navigation("Hero")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.ItemAttributes", b =>
                 {
                     b.Navigation("Item")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.Statistics", b =>
                 {
                     b.Navigation("Hero")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Skill", b =>
+                {
+                    b.Navigation("Hero");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.Navigation("BehaviorPatterns");
+
+                    b.Navigation("Skills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
+                {
+                    b.Navigation("Enemy")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

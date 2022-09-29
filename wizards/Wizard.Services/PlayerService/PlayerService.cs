@@ -1,9 +1,11 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
-using Wizards.Services.Helpers;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Services.Extentions;
 using Wizards.Services.Validation;
 using Wizards.Services.Validation.Elements;
 

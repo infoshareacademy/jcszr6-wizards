@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.UserModels.Enums;
 using WizardsWeb.ModelViews.ItemModelViews.Properties;
 
 namespace WizardsWeb.ModelViews.ItemModelViews;
@@ -16,7 +16,7 @@ public class ItemDetailsModelView
     public ItemType Type { get; set; }
     public ProfessionRestriction Restriction { get; set; }
     
-    [Display(Name = "Item Tier")]
+    [Display(Name = "Tier")]
     public int Tier { get; set; }
     public bool IsEquipped { get; set; }
 

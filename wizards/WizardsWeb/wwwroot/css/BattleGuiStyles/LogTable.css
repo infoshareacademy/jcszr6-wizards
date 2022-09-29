@@ -1,0 +1,48 @@
+:root{
+    --border-color: #414141;
+}
+
+.table-section{
+    position: absolute;
+    top: 16%;
+    left: 50%;
+    transform: translate(-50% , 0%);
+    
+    height: 345px;
+    margin: 0px;
+    padding: 5px;
+    overflow-y:auto;
+}
+
+.table-container{
+    display:inline-list-item;
+    border: 1px solid var(--border-color);
+    font-size: 13px; 
+    font-weight: 600;
+    width: 100%;
+    height:auto;
+    padding: 2px;
+}
+
+.table-container > thead{
+    height: 35px;
+}
+
+.table-container > thead > tr > th,
+.table-container > tbody > tr > th {
+    border: 1px solid var(--border-color);
+    text-align: center;
+    padding: 5px;
+}
+
+.table-container > tbody{
+    height: 272px;
+    overflow-y: scroll;
+}
+
+.table-container > tbody > tr > td,
+.table-container > thead > tr > td{
+    border: 1px solid var(--border-color);
+    text-align: left;
+    padding: 5px;
+}

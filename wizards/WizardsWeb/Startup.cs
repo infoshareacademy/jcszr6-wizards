@@ -1,27 +1,18 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Wizards.Services.Validation;
-using Wizards.Repository;
 using Microsoft.EntityFrameworkCore;
-using Wizards.Core.Interfaces;
-using Wizards.Repository.Repository;
-using Wizards.Services.Factories;
-using Wizards.Services.HeroService;
-using Wizards.Services.PlayerService;
-using Wizards.Services.SearchService;
-using Wizards.Services.ItemService;
-using Wizards.Core.Model;
 using Microsoft.AspNetCore.Identity;
+using Wizards.Core.Model.UserModels;
+using Wizards.GamePlay.ServicesRegistration;
+using Wizards.Repository;
 using Wizards.Repository.InitialData;
-using Wizards.Services.AuthorizationElements;
-using Wizards.Services.AuthorizationElements.Selector;
-using Wizards.Services.Inventory;
-using Wizards.Services.MerchantService;
-
+using Wizards.Services.ServiceRegistration;
+using Wizards.Repository.ServiceRegistration;
+using WizardsWeb.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace WizardsWeb;
 
@@ -39,29 +30,13 @@ public class Startup
     {
         services.AddControllersWithViews();
 
-        // Busines Logic Services Configuration
-        services.AddTransient<IPlayerRepository, PlayerRepository>();
-        services.AddTransient<IPlayerService, PlayerService>();
-        services.AddTransient<IPlayerValidator, PlayerValidator>();
-
-        services.AddTransient<IHeroRepository, HeroRepository>();
-        services.AddTransient<IHeroService, HeroService>();
-        services.AddTransient<IHeroValidator, HeroValidator>();
-        services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
-
-        services.AddTransient<ISelector, Selector>();
-        
-        services.AddTransient<ISearchService, SearchService>();
-
-        services.AddTransient<IItemRepository, ItemRepository>();
-        services.AddTransient<IItemService, ItemService>();
-        services.AddTransient<IItemValidator, ItemValidator>();
-
-        services.AddTransient<IHeroItemRepository, HeroItemRepository>();
-        services.AddTransient<IMerchantService, MerchantService>();
-        services.AddTransient<IInventoryService, InventoryService>();
-
+        // Business Logic Services Configuration
+        services.AddRepositories();
         services.AddDataInitializer();
+
+        services.AddValidators();
+        services.AddModelServices();
+        services.AddGamePlayServices();
 
         // External Packages Configuration
         var connectionString = Configuration.GetConnectionString("WizardDatabase");
@@ -87,22 +62,7 @@ public class Startup
             options.LogoutPath = "/Home/Index/";
         });
 
-        // Policy for Resource-Based Authorization configuration
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("HeroOwnerPolicy", policy =>
-                policy.Requirements.Add(new HeroOwnerRequirement()));
-        });
-
-        services.AddAuthorization(options =>
-        {
-            options.AddPolicy("ItemOwnerPolicy", policy =>
-                policy.Requirements.Add(new ItemOwnerRequirement()));
-        });
-
-        // Resource-Based Authorization Handler Configuration
-        services.AddTransient<IAuthorizationHandler, HeroAuthorizationHandler>();
-        services.AddTransient<IAuthorizationHandler, ItemAuthorizationHandler>();
+        services.AddAuthorizationElements();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -119,11 +79,23 @@ public class Startup
         }
         else
         {
-            app.UseExceptionHandler("/Home/Error");
+            // app.UseExceptionHandler("/Home/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-        
+
+        app.UseMiddleware<MyExceptionHandler>();
+
+        app.Use(async (context, next) =>
+        {
+            await next();
+            if (context.Response.StatusCode == StatusCodes.Status404NotFound)
+            {
+                context.Request.Path = "/Home/Error404";
+                await next();
+            }
+        });
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 

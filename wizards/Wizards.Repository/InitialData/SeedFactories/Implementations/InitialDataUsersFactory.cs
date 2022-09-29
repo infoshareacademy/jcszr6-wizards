@@ -1,6 +1,7 @@
 ﻿using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
-using Wizards.Core.Model.Properties;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
 namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
@@ -39,7 +40,7 @@ public class InitialDataUsersFactory : IInitialDataUsersFactory
             UserName = "Tester", Email = "tester@wizard.com", DateOfBirth = new DateTime(1999, 09, 27), Heroes = new List<Hero>()
             {
                 new Hero(){NickName = "Diablo Pablo", Gold = 25000, AvatarImageNumber = 4, Profession = HeroProfession.Sorcerer, 
-                    Attributes = new HeroAttributes(){DailyRewardEnergy = 10, Damage = 10, Precision = 5, Specialization = 0, CurrentHealth = 25, MaxHealth = 25, Reflex = 0, Defense = 0},
+                    Attributes = new HeroAttributes(){DailyRewardEnergy = 10, Damage = 10, Precision = 5, Specialization = 0, MaxHealth = 25, Reflex = 0, Defense = 0},
                     Statistics = new Statistics(){ RankPoints = 7200, TotalMatchPlayed = 943, TotalMatchWin = 672, TotalMatchLoose = 943-672},
                     Inventory = new List<HeroItem>()
                     {

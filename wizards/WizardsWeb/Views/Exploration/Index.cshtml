@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Exploration Center";
+}
+
+<div class="row">
+    <div class="col-12 bg-paper-color mb-4">
+        <div class="row">
+            <div class="col-9 px-3 py-1">
+                <h1>Exploration Center</h1>
+            </div>
+            <div class="col-3 p-3">
+                <a class="gbtn gbtn-action" asp-controller="Hero" asp-action="Details">Exit Exploration Center</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="card bg-paper-color">
+        <div class="row" >
+            <div class="col-3">
+                <img src="/Images/Exploration/CenterIcons/Titan-Raids.png" class="rounded-left static-image-not-dragable" width="100%" height="100%">
+            </div>
+            <div class="col-9">
+                <div class="card-body">
+                    <h5 class="card-title">Titan Raids</h5>
+                    <p class="card-text">
+                        Conquer legendary mystic creatures around the world! Reach the Lairs of most dangerous enemies and fight with them for glory and theirs treasures!
+                    </p>
+                    <br/>
+                    <a class="gbtn gbtn-action" asp-controller="Exploration" asp-action="TitanRaids">Select Your Enemy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="row">
+    <div class="card bg-paper-color">
+        <div class="row" >
+            <div class="col-3">
+                <img src="/Images/Exploration/CenterIcons/Dungeons.png" class="rounded-left static-image-not-dragable" width="100%" height="100%">
+            </div>
+            <div class="col-9">
+                <div class="card-body">
+                    <h5 class="card-title">Dungeons</h5>
+                    <p class="card-text">
+                        Coming soon...
+                    </p>
+                    <br/>
+                    <a class="gbtn gbtn-action gbtn-disabled" asp-controller="Exploration" asp-action="TitanRaids">Select Dungeon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

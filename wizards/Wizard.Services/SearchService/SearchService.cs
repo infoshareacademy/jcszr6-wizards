@@ -1,5 +1,7 @@
 ﻿using Wizards.Core.Interfaces;
+using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 
 namespace Wizards.Services.SearchService;
 

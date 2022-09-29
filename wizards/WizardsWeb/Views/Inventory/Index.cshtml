@@ -16,8 +16,8 @@
             </li>
             <li class="list-group-item justify-content-between bg-paper-color">
                 <div class="btn-group btn-block">
-                    <a class="btn btn-outline-warning" asp-controller="Hero" asp-action="Details">Back to Hero</a>
-                    <a class="btn btn-outline-warning" asp-controller="Merchant" asp-action="Index">Go to Merchant</a>
+                    <a class="gbtn gbtn-action" asp-controller="Hero" asp-action="Details">Back to Hero</a>
+                    <a class="gbtn gbtn-action" asp-controller="Merchant" asp-action="Index">Go to Merchant</a>
                 </div>
             </li>
         </ul>
@@ -47,15 +47,9 @@
     </div>
 
     <div class="col-md-4">
-        <ul class="list-group">
-            <li class="list-group-item bg-transparent border-0 justify-content-between">
-                <div>
-                    <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary"/>
-                    <br/>
-                    <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes"/>
-                </div>
-            </li>
-        </ul>
+        <partial name="~/Views/Hero/_HeroSummary.cshtml" model="@Model.HeroSummary" />
+        <br />
+        <partial name="~/Views/Hero/_HeroAttributes.cshtml" model="@Model.Attributes" />
     </div>
 </div>
 
@@ -65,5 +59,5 @@
 </script>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

@@ -53,8 +53,7 @@ button.accept-policy {
     line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+
 html {
     position: relative;
     min-height: 100%;
@@ -75,4 +74,130 @@ body {
 
 .flex-shrink-0 {
     flex-shrink: 0 !important;
+}
+
+/* Custom buttons
+-------------------------------------------------- */
+
+/* General declaration of game button */
+.gbtn {
+    display: inline-block;
+    user-select: none;
+    margin: 0px;
+    padding: 8px 20px;
+    background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    
+    border-radius: 2px;
+    border: none;
+
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 100%;
+    filter: brightness(100%);
+}
+
+    /* extension of general game button class for behaviors */
+    .gbtn:hover {
+        cursor: pointer;
+        color: white;
+        filter: brightness(130%);
+        text-decoration: none;
+    }
+
+    .gbtn:active {
+        cursor: pointer;
+        color: white;
+        filter: brightness(60%);
+        text-decoration: none;
+    }
+
+/* special disabled class */
+.gbtn-disabled {
+    color: white;
+    pointer-events: none;
+    filter: grayscale(1) brightness(110%) contrast(40%);
+}
+
+/* sizing classes sm => small  lg => large*/
+.gbtn-sm {
+    margin: 0px;
+    padding: 5px 12px;
+    font-size: 90%;
+}
+
+.gbtn-lg {
+    margin: 0px;
+    padding: 12px 28px;
+    font-size: 120%;
+}
+
+/* formating background classes for different occasions */
+.gbtn-action {
+    background-image: url(/GraphicAssets/Buttons/game-btn-action.png);
+    color: white;
+}
+
+.gbtn-accept {
+    background-image: url(/GraphicAssets/Buttons/game-btn-accept.png);
+    color: white;
+}
+
+.gbtn-danger {
+    background-image: url(/GraphicAssets/Buttons/game-btn-danger.png);
+    color: white;
+}
+
+.gbtn-magical {
+    background-image: url(/GraphicAssets/Buttons/game-btn-premium.png);
+    color: white;
+}
+
+.gbtn-premium {
+    background-image: url(/GraphicAssets/Buttons/game-btn-magical.png);
+    color: white;
+}
+
+.gbtn-technical {
+    background-image: url(/GraphicAssets/Buttons/game-btn-technical.png);
+    color: white;
+}
+
+.bg-brown {
+    background-color: #482001;
+}
+
+.bg-leather {
+    background-color: #341d0b;
+}
+
+.bg-paper-color {
+    background-color: #ffefd8;
+    background-image: url(/GraphicAssets/Textures/bg-paper.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+}
+
+.bg-paper-header {
+    background-color: #ffe0a3;
+    background-image: url(/GraphicAssets/Textures/bg-paper-header.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.text-golden-dark {
+    color: #a47c01;
+}
+
+.static-image-not-dragable {
+    pointer-events: none;
+    user-select: none;
+}
+
+.select-blocked {
+    user-select: none;
 }

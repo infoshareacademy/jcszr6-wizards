@@ -14,6 +14,7 @@
     <Folder Include="HeroService\" />
     <Folder Include="AuthorizationElements\Selector\" />
     <Folder Include="Inventory\" />
+    <Folder Include="ServiceRegistration\" />
   </ItemGroup>
 
 </Project>

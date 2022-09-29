@@ -1,0 +1,39 @@
+﻿.concluded-match-container {
+    position: absolute;
+    width: 1000px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-52.5%, -50%);
+    animation-name: show-match-result;
+    animation-duration: 500ms;
+
+    filter: drop-shadow(0px 0px 50px #000000)
+}
+
+.claimed-rewards {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: transparent;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.reward-text {
+    font-size: 20px;
+}
+
+@keyframes show-match-result {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}

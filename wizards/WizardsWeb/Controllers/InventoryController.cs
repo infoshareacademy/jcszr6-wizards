@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Wizards.Core.Model.Enums;
-using Wizards.Services.Helpers;
+using Microsoft.Extensions.Logging;
+using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.ModelExtensions;
+using Wizards.Services.Extentions;
 using Wizards.Services.HeroService;
 using Wizards.Services.Inventory;
 using Wizards.Services.Validation.Elements;
@@ -21,12 +23,15 @@ public class InventoryController : Controller
     private readonly IInventoryService _inventoryService;
     private readonly IMapper _mapper;
     private readonly IHeroService _heroService;
+    private readonly ILogger<InventoryController> _logger;
 
-    public InventoryController(IInventoryService inventoryService, IMapper mapper, IHeroService heroService)
+
+    public InventoryController(IInventoryService inventoryService, IMapper mapper, IHeroService heroService, ILogger<InventoryController> logger)
     {
         _inventoryService = inventoryService;
         _mapper = mapper;
         _heroService = heroService;
+        _logger = logger;
     }
 
     // /Inventory/Index/
@@ -76,12 +81,14 @@ public class InventoryController : Controller
         try
         {
             await _inventoryService.RepairItem(User);
+            _logger.LogInformation($"{User} repaired item");
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidModelException exception)
         {
             var inventoryModelView = await InventoryModelView();
             ModelState.AddModelErrorByException(exception);
+            _logger.LogInformation($"{User} failed to repair item {exception.GetType()}", ModelState);
             return View(nameof(Index), inventoryModelView);
         }
     }
@@ -90,12 +97,14 @@ public class InventoryController : Controller
     {
         try
         {
+            _logger.LogInformation($"{User} repaired all items");
             await _inventoryService.RepairAllItems(User);
         }
         catch (InvalidModelException exception)
         {
             var inventoryModelView = await InventoryModelView();
             ModelState.AddModelErrorByException(exception);
+            _logger.LogInformation($"{User} failed to repair all items {exception.GetType()}", ModelState);
             return View(nameof(Index), inventoryModelView);
         }
 
@@ -106,12 +115,14 @@ public class InventoryController : Controller
     {
         try
         {
+            _logger.LogInformation($"{User} repaired equipment items");
             await _inventoryService.RepairAllItems(User, true);
         }
         catch (InvalidModelException exception)
         {
             var inventoryModelView = await InventoryModelView();
             ModelState.AddModelErrorByException(exception);
+            _logger.LogInformation($"{User} failed to repair equipment items {exception.GetType()}", ModelState);
             return View(nameof(Index), inventoryModelView);
         }
 
@@ -149,7 +160,7 @@ public class InventoryController : Controller
             .Where(hi => hi.Type != ItemType.Armor && hi.Type != ItemType.Weapon)
             .OrderByDescending(hi => hi.Tier)
             .ThenBy(hi => hi.Name));
-        
+
         return inventoryModelView;
     }
 }

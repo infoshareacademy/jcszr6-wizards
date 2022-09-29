@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Wizards.Core.Model;
-using Wizards.Core.Model.Properties;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Properties;
+using Wizards.Core.Model.WorldModels;
+using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Repository.DbConfiguration;
 
 namespace Wizards.Repository;
@@ -23,8 +25,13 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
     public DbSet<Item> Items { get; set; }
     public DbSet<ItemAttributes> ItemAttributes { get; set; }
     public DbSet<HeroItem> HeroItems { get; set; }
-
-
+    public DbSet<Skill> Skills { get; set; }
+    public DbSet<HeroSkill> HeroSkills { get; set; }
+    public DbSet<Enemy> Enemies { get; set; }
+    public DbSet<EnemyAttributes> EnemiesAttributes { get; set; }
+    public DbSet<EnemySkill> EnemiesSkills { get; set; }
+    public DbSet<BehaviorPattern> BehaviorPatterns { get; set; }
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
