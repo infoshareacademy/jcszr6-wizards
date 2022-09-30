@@ -13,4 +13,18 @@ public class PlayerDetailsDto
     public int RankNumber { get; set; }
     [Display(Name = "Total Gold")]
     public int GoldHeroNumber { get; set; }
+
+    [Display(Name = "Average Win Ratio")]
+    public double PlayerWinRatio { get; set; }
+
+    [Display(Name = "Total Match Played")]
+    public double TotalMatchPlayed { get; set; }
+
+    [Display(Name = "Max Item Tier")]
+    public double MaxTier { get; set; }
+
+    [Display(Name = "The Best Hero")]
+    public string BestHero { get; set; }
+
 }
+

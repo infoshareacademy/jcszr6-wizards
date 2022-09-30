@@ -138,6 +138,9 @@
                                 </div>
                             </form>
                         </div>
+
+
+
                     </li>
 
 
@@ -172,6 +175,18 @@
                                         <th>
                                             @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
                                         </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().PlayerWinRatio)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().TotalMatchPlayed)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().MaxTier)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().BestHero)
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -193,6 +208,18 @@
                                             <td>
                                                 @item.GoldHeroNumber
                                             </td>
+                                            <td>
+                                                @($"{item.PlayerWinRatio:P}")
+                                            </td>
+                                            <td>
+                                                @item.TotalMatchPlayed
+                                            </td>
+                                            <td>
+                                                @($"{item.MaxTier:F}")
+                                            </td>
+                                            <td>
+                                                @item.BestHero
+                                            </td>
                                         </tr>
                                     }
                                 </tbody>
@@ -203,49 +230,73 @@
             }
             else
             {
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between bg-paper-color">
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.PlayerDetailsDto)
-                            {
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        @item.UserName
-                                    </td>
-                                    <td>
-                                        @item.HeroNumber
-                                    </td>
-                                    <td>
-                                        @item.RankNumber
-                                    </td>
-                                    <td>
-                                        @item.GoldHeroNumber
-                                    </td>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().PlayerWinRatio)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().TotalMatchPlayed)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().MaxTier)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().BestHero)
+                                    </th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.PlayerDetailsDto)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.UserName
+                                        </td>
+                                        <td>
+                                            @item.HeroNumber
+                                        </td>
+                                        <td>
+                                            @item.RankNumber
+                                        </td>
+                                        <td>
+                                            @item.GoldHeroNumber
+                                        </td>
+                                        <td>
+                                            @($"{item.PlayerWinRatio:P}")
+                                        </td>
+                                        <td>
+                                            @item.TotalMatchPlayed
+                                        </td>
+                                        <td>
+                                            @($"{item.MaxTier:F}")
+                                        </td>
+                                        <td>
+                                            @item.BestHero
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
 
-                </li>
-            </ul>
+                    </li>
+                </ul>
             }
     </div>
 </div>

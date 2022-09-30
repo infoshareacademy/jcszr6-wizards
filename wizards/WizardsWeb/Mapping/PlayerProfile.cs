@@ -2,6 +2,8 @@ using System.Linq;
 using AutoMapper;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
+using Wizards.Core.ModelExtensions;
+using WizardsWeb.Extensions;
 using WizardsWeb.ModelViews.PlayerModelViews;
 using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.RankingModelViews;
@@ -35,6 +37,11 @@ public class PlayerProfile : Profile
             .ForMember(dto => dto.UserName, expr => expr.MapFrom(x => x.UserName))
             .ForMember(dto => dto.HeroNumber, expr => expr.MapFrom(x => x.Heroes.Count))
             .ForMember(dto => dto.RankNumber, expr => expr.MapFrom(x => x.Heroes.Sum(x => x.Statistics.RankPoints)))
-            .ForMember(dto => dto.GoldHeroNumber, expr => expr.MapFrom(x => x.Heroes.Sum(x => x.Gold)));
+            .ForMember(dto => dto.GoldHeroNumber, expr => expr.MapFrom(x => x.Heroes.Sum(x => x.Gold)))
+            .ForMember(dto => dto.PlayerWinRatio, expr => expr.MapFrom(x=> x.Heroes.Average(x =>x.GetWinRatio())))
+            .ForMember(dto => dto.TotalMatchPlayed, expr => expr.MapFrom(x=> x.Heroes.Sum(x=>x.Statistics.TotalMatchPlayed)))
+            .ForMember(dto => dto.MaxTier, expr =>expr.MapFrom(x=>x.Heroes.Max(x=>x.GetAverageItemTier())))
+            .ForMember(dto => dto.BestHero, expr =>expr.MapFrom(p => p.GetBestHeroNickName()))
+            ;
     }
 }
