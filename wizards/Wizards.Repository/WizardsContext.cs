@@ -11,12 +11,8 @@ namespace Wizards.Repository;
 
 public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
 {
-
-    private readonly bool _useLazyLoading;
-
     public WizardsContext() { }
     public WizardsContext(DbContextOptions<WizardsContext> options) : base(options) { }
-    public WizardsContext(bool useLazyLoading) { _useLazyLoading = useLazyLoading; }
 
     public DbSet<Player> Players { get; set; }
     public DbSet<Hero> Heroes { get; set; }
@@ -32,11 +28,6 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
     public DbSet<EnemySkill> EnemiesSkills { get; set; }
     public DbSet<BehaviorPattern> BehaviorPatterns { get; set; }
     
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        base.OnConfiguring(optionsBuilder);
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
