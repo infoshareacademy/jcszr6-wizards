@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -68,10 +69,19 @@ public class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector)
     {
-        wizardsContext.Database.Migrate();
-
         if (env.IsDevelopment())
         {
+            try
+            {
+                wizardsContext.Database.Migrate();
+            }
+            catch (Exception)
+            {
+                wizardsContext.Database.CloseConnection();
+                wizardsContext.Database.EnsureDeleted();
+                wizardsContext.Database.Migrate();
+            }
+
             app.UseDeveloperExceptionPage();
 
             var result = injector.InjectDevelopmentDataAsync();
@@ -79,6 +89,7 @@ public class Startup
         }
         else
         {
+            wizardsContext.Database.Migrate();
             // app.UseExceptionHandler("/Home/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();

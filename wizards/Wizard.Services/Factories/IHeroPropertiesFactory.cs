@@ -10,4 +10,5 @@ public interface IHeroPropertiesFactory
     Statistics GetStatistics();
     HeroAttributes GetHeroAttributes(HeroProfession profession);
     List<HeroItem> GetStartupEquipment(HeroProfession profession);
+    List<HeroSkill> GetSkills(HeroProfession profession);
 }

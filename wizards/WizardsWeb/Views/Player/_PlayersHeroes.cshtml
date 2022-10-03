@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Wizards.Core.ModelExtensions
 @model WizardsWeb.ModelViews.PlayerModelViews.PlayerDetailsModelView
 
 <div class="row">
@@ -53,7 +54,7 @@
                                 @hero.NickName
                             </td>
                             <td class="align-middle">
-                                <span>Remaining energy: @hero.Attributes.DailyRewardEnergy</span>
+                                <span>Remaining daily rewards: @hero.Attributes.DailyRewardEnergy</span>
                                 <br class="px-1 m-0"/>
                                 <span>Gold: @($"{hero.Gold:#,##0}")</span>
                                 <br class="px-1 m-0"/>

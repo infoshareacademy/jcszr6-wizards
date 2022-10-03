@@ -19,8 +19,10 @@ public static class ServiceRegistration
     {
         services.AddTransient<IPlayerService, PlayerService.PlayerService>();
         services.AddTransient<IHeroService, HeroService.HeroService>();
+        
         services.AddTransient<IHeroPropertiesFactory, HeroPropertiesFactory>();
-
+        services.AddTransient<INewHeroFactory, NewHeroFactory>();
+        
         services.AddTransient<ISelector, Selector>();
 
         services.AddTransient<ISearchService, SearchService.SearchService>();

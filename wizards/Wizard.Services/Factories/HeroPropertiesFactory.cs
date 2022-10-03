@@ -10,10 +10,12 @@ namespace Wizards.Services.Factories;
 public class HeroPropertiesFactory : IHeroPropertiesFactory
 {
     private readonly IItemRepository _itemRepository;
+    private readonly ISkillRepository _skillRepository;
 
-    public HeroPropertiesFactory(IItemRepository itemRepository)
+    public HeroPropertiesFactory(IItemRepository itemRepository, ISkillRepository skillRepository)
     {
         _itemRepository = itemRepository;
+        _skillRepository = skillRepository;
     }
 
     public Statistics GetStatistics()
@@ -22,8 +24,8 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
         {
             RankPoints = 0,
             TotalMatchPlayed = 0,
+            TotalMatchWin = 0,
             TotalMatchLoose = 0,
-            TotalMatchWin = 0
         };
     }
 
@@ -66,7 +68,32 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
 
         return result;
     }
-    
+
+    public List<HeroSkill> GetSkills(HeroProfession profession)
+    {
+        var skills = _skillRepository.GetAllAsync().Result
+            .Where(s => s.ProfessionRestriction == Enum.Parse<ProfessionRestriction>(profession.ToString()))
+            .OrderBy(s => s.Id);
+
+        var heroSkills = new List<HeroSkill>();
+
+        var counter = 1;
+        foreach (var skill in skills)
+        {
+            var heroSkill = new HeroSkill();
+
+            heroSkill.SlotNumber = (SkillSlotNumber)counter;
+            heroSkill.InUse = true;
+            heroSkill.SkillId = skill.Id;
+
+            heroSkills.Add(heroSkill);
+
+            counter++;
+        }
+
+        return heroSkills;
+    }
+
     private HeroAttributes CreateSorcerersAttributes()
     {
         return new HeroAttributes()
@@ -93,7 +120,6 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Defense = 0
         };
     }
-
     private HeroAttributes CreateDefaultAttributes()
     {
         return new HeroAttributes()
