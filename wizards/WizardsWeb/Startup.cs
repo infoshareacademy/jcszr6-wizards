@@ -13,6 +13,8 @@ using Wizards.Services.ServiceRegistration;
 using Wizards.Repository.ServiceRegistration;
 using WizardsWeb.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace WizardsWeb;
 
@@ -66,9 +68,18 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector, ILoggerFactory loggerFactory)
     {
         wizardsContext.Database.Migrate();
+
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true).Build();
+
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(configuration)
+            .CreateLogger();
+
+        loggerFactory.AddSerilog();
 
         if (env.IsDevelopment())
         {
@@ -95,7 +106,7 @@ public class Startup
                 await next();
             }
         });
-        
+
         app.UseHttpsRedirection();
         app.UseStaticFiles();
 
