@@ -84,7 +84,6 @@ public class Startup
 
         loggerFactory.AddSerilog();
 
-
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();

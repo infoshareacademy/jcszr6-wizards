@@ -35,9 +35,6 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-
-        optionsBuilder
-            .UseSqlServer("Server=localhost; Database=WizardsDB; Trusted_Connection=True; MultipleActiveResultSets=True;");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
