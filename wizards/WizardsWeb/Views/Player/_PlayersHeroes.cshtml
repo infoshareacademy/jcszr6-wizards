@@ -40,7 +40,7 @@
                 <tbody> 
                     @foreach (var hero in Model.Heroes)
                     {
-                        var avatar = $"Images/Hero/Avatars/Wizard-{hero.AvatarImageNumber}.png";
+                        var avatar = $"Images/Hero/Avatars/{hero.Profession.ToString()}-{hero.AvatarImageNumber}.png";
                         <tr>
                             <td class="align-middle">
                                 <img src="~/@avatar" class="static-image-not-dragable" width="150px" height="auto" />
