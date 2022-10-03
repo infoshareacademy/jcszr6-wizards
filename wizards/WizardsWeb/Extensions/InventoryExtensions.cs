@@ -69,6 +69,30 @@ public static class InventoryExtensions
         {
             stringBuilder.Append("Vestments");
         }
+        else if (item.Name.ToLower().Contains("cup"))
+        {
+            stringBuilder.Append("RitualCup");
+        }
+        else if (item.Name.ToLower().Contains("scythe"))
+        {
+            stringBuilder.Append("Scythe");
+        }
+        else if (item.Name.ToLower().Contains("urn"))
+        {
+            stringBuilder.Append("Urn");
+        }
+        else if (item.Name.ToLower().Contains("hood"))
+        {
+            stringBuilder.Append("Hood");
+        }
+        else if (item.Name.ToLower().Contains("livery"))
+        {
+            stringBuilder.Append("RitualLivery");
+        }
+        else if (item.Name.ToLower().Contains("shroud"))
+        {
+            stringBuilder.Append("Shroud");
+        }
         else if (item.Type == ItemType.Weapon)
         {
             stringBuilder.Append("Staff");
