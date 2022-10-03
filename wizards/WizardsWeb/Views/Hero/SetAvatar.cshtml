@@ -55,7 +55,7 @@
                     <form asp-action="SetAvatar">
                         <input asp-for="Profession" hidden="true" />
                         <div class="row">
-                            @for (int i = 1; i <= 7; i++)
+                            @for (int i = 1; i <= 8; i++)
                             {
                                 var imageAddress = $"Images/Hero/Avatars/{Model.Profession.ToString()}-{i}.png";
                                 <div class="col-sm-3">
