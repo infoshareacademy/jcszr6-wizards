@@ -127,9 +127,9 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
     {
         var necromancersBasicItems = _itemRepository.GetAll(ProfessionRestriction.Necromancer).Result.Where(hi => hi.Tier == 1);
 
-        var EquippedStartupWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("skull")).Id;
-        var EquippedStartupArmorId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("shroud")).Id;
-        var AdditionalWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("doll")).Id;
+        var EquippedStartupWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("scythe")).Id;
+        var EquippedStartupArmorId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("hood")).Id;
+        var AdditionalWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("urn")).Id;
 
         return new List<HeroItem>()
         {
