@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Wizards.Core.Model.UserModels;
 
 
@@ -23,6 +24,5 @@ namespace WizardsWeb.Extensions
             }
             return "----";
         }
-
     }
 }

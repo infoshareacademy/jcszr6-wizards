@@ -45,7 +45,7 @@
                     @if (User.IsInRole(UserRoles.Admin.ToString()))
                     {
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <form asp-action="Index">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
@@ -60,7 +60,22 @@
                             </form>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="HeroName" class="control-label"></label>
+                                    <input asp-for="HeroName" class="form-control" placeholder="Hero name" />
+                                    <span asp-validation-for="HeroName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Search by Hero name" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-3">
                             <form asp-action="Index">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -76,7 +91,7 @@
                             </form>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <form asp-action="Index">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -103,7 +118,7 @@
             {
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <form asp-action="Index">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <div class="form-group">
@@ -118,7 +133,22 @@
                             </form>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <form asp-action="Index">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="HeroName" class="control-label"></label>
+                                    <input asp-for="HeroName" class="form-control" placeholder="Hero name" />
+                                    <span asp-validation-for="HeroName" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Search by Hero name" class="gbtn gbtn-accept" />
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-md-4">
                             <form asp-action="Index">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -161,6 +191,9 @@
                                 <thead>
                                     <tr>
                                         <th>
+                                            @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankingPosition)
+                                        </th>
+                                        <th>
                                             @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
                                         </th>
                                         <th>
@@ -193,6 +226,9 @@
                                     @foreach (var item in Model.PlayerDetailsDto)
                                     {
                                         <tr>
+                                            <td>
+                                                @item.RankingPosition
+                                            </td>
                                             <td>
                                                 @item.UserName
                                             </td>
@@ -235,37 +271,43 @@
 
                         <table class="table table-bordered">
                             <thead>
-                                <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().PlayerWinRatio)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().TotalMatchPlayed)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().MaxTier)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().BestHero)
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankingPosition)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().PlayerWinRatio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().TotalMatchPlayed)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().MaxTier)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().BestHero)
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.PlayerDetailsDto)
                                 {
                                     <tr>
+                                        <td>
+                                            @item.RankingPosition
+                                        </td>
                                         <td>
                                             @item.UserName
                                         </td>

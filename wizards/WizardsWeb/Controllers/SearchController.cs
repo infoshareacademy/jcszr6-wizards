@@ -40,10 +40,19 @@ public class SearchController : Controller
 
         if (ranking.UserName != null)
         {
-
-            var filtredPlayers = await _searchService.ByUsername(ranking.UserName);
+            var filtredPlayers = await _searchService.ByUserName(ranking.UserName);
             playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers).OrderByDescending(n => n.RankNumber)
 
+                .ToList();
+
+            ranking.PlayerDetailsDto = playersDetails;
+            return View(ranking);
+        }
+
+        if (ranking.HeroName != null)
+        {
+            var filtredPlayers = await _searchService.ByHeroName(ranking.HeroName);
+            playersDetails = _mapper.Map<List<PlayerDetailsDto>>(filtredPlayers).OrderByDescending(n => n.RankNumber)
                 .ToList();
 
             ranking.PlayerDetailsDto = playersDetails;
@@ -69,4 +78,5 @@ public class SearchController : Controller
 
         return View(ranking);
     }
+    
 }
