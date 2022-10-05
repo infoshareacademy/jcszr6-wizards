@@ -1,0 +1,122 @@
+[
+  {
+    "Name": "Fireball",
+    "Description": "Hit enemy with sphere of fire",
+    "ProfessionRestriction": 1,
+    "Type": 0,
+    "DamageFactor": 1,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 80,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Ice Shard",
+    "Description": "Throw ice shard that deals damage and stops enemy movement",
+    "ProfessionRestriction": 1,
+    "Type": 1,
+    "DamageFactor": 0.75,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 105,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Lighting Strike",
+    "Description": "Summon lighting strike that breaks enemy defense and deal lot of damage",
+    "ProfessionRestriction": 1,
+    "Type": 0,
+    "DamageFactor": 1.35,
+    "ArmorPenetrationPercent": 10,
+    "BaseHitChance": 40,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Inferno",
+    "Description": "Create fire field under enemy that deals him very high damage.",
+    "ProfessionRestriction": 1,
+    "Type": 0,
+    "DamageFactor": 1.75,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 20,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Renewal Fountain",
+    "Description": "Create spring that recovers your health",
+    "ProfessionRestriction": 1,
+    "Type": 3,
+    "DamageFactor": 0,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 200,
+    "HealingFactor": 0.225
+  },
+  {
+    "Name": "Magnetic Shield",
+    "Description": "Create magnetic barrier in front of you that protect you from enemy attacks",
+    "ProfessionRestriction": 1,
+    "Type": 2,
+    "DamageFactor": 0,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 300,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Death Breath",
+    "Description": "Corrupt air around your enemy to deal him damage",
+    "ProfessionRestriction": 2,
+    "Type": 0,
+    "DamageFactor": 1,
+    "ArmorPenetrationPercent": 10,
+    "BaseHitChance": 90,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Terror",
+    "Description": "Fears your enemy, breaks his charge attack and deals damage",
+    "ProfessionRestriction": 2,
+    "Type": 1,
+    "DamageFactor": 0.5,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 110,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Evil Blood",
+    "Description": "Curse enemy's blood to deal damage",
+    "ProfessionRestriction": 2,
+    "Type": 0,
+    "DamageFactor": 1.25,
+    "ArmorPenetrationPercent": 15,
+    "BaseHitChance": 45,
+    "HealingFactor": 0.02
+  },
+  {
+    "Name": "Deadly Shroud",
+    "Description": "Summon Shroud of Death that deals a lot of damage to your foe.",
+    "ProfessionRestriction": 2,
+    "Type": 0,
+    "DamageFactor": 1.55,
+    "ArmorPenetrationPercent": 20,
+    "BaseHitChance": 25,
+    "HealingFactor": 0
+  },
+  {
+    "Name": "Blood Ritual",
+    "Description": "Perform Ritual that steals some health from your enemy and recovers yours.",
+    "ProfessionRestriction": 2,
+    "Type": 3,
+    "DamageFactor": 0.02,
+    "ArmorPenetrationPercent": 25,
+    "BaseHitChance": 200,
+    "HealingFactor": 0.195
+  },
+  {
+    "Name": "Phantom Shield",
+    "Description": "Arise phantom shield that protects you.",
+    "ProfessionRestriction": 2,
+    "Type": 2,
+    "DamageFactor": 0,
+    "ArmorPenetrationPercent": 0,
+    "BaseHitChance": 300,
+    "HealingFactor": 0
+  }
+]

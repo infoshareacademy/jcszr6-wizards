@@ -7,11 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="InitialData\JSON\Enemies.json" />
+    <None Remove="InitialData\JSON\Items.json" />
+    <None Remove="InitialData\JSON\Skills.json" />
     <None Remove="TextRepo\Json\RestrictedWords.json" />
     <None Remove="TextRepo\Json\Value Errors.json" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="InitialData\JSON\Enemies.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="InitialData\JSON\Items.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="InitialData\JSON\Skills.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TextRepo\Json\RestrictedWords.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

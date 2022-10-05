@@ -1,6 +1,5 @@
 ﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Core.Model.UserModels.Properties;
 
 namespace Wizards.Services.Factories;
 

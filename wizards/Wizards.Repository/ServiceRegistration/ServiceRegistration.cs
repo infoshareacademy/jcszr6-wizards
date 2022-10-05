@@ -36,6 +36,8 @@ namespace Wizards.Repository.ServiceRegistration
             services.AddTransient<IInitialDataSkillsFactory, InitialDataSkillsFactory>();
 
             services.AddTransient<IInitialDataInjector, InitialDataInjector>();
+
+            services.AddTransient<IGameDataUpdater, GameDataUpdater>();
         }
     }
 }
