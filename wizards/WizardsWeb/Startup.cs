@@ -83,22 +83,28 @@ public class Startup
                 wizardsContext.Database.Migrate();
             }
 
+            dataUpdater.UpdateSkillsAsync().Wait();
+            dataUpdater.UpdateItemsAsync().Wait();
+            dataUpdater.UpdateEnemiesAsync().Wait();
+            injector.InjectDevelopmentDataAsync().Wait();
+            
             app.UseDeveloperExceptionPage();
-
-            var result = injector.InjectDevelopmentDataAsync();
-            result.Wait();
         }
         else
         {
             wizardsContext.Database.Migrate();
+
+            dataUpdater.UpdateSkillsAsync().Wait();
+            dataUpdater.UpdateItemsAsync().Wait();
+            dataUpdater.UpdateEnemiesAsync().Wait();
+            injector.InjectDevelopmentDataAsync().Wait();
+
             // app.UseExceptionHandler("/Home/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
-        dataUpdater.UpdateSkillsAsync().Wait();
         
-
         app.UseMiddleware<MyExceptionHandler>();
 
         app.Use(async (context, next) =>

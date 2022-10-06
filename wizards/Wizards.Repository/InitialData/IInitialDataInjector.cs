@@ -2,5 +2,6 @@
 
 public interface IInitialDataInjector
 {
-    Task InjectDevelopmentDataAsync();
+    public Task InjectDevelopmentDataAsync();
+    public Task InjectProductionDataAsync();
 }

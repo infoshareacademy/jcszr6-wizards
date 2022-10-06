@@ -23,7 +23,7 @@ public class GameDataUpdater : IGameDataUpdater
     public async Task UpdateSkillsAsync()
     {
         var skills = ReadFromJson<Skill>("Skills").OrderBy(s => s.Id).ToList();
-        
+
         var skillsInDb = (await _skillRepository.GetAllAsync()).OrderBy(s => s.Id).ToList();
 
         foreach (var skill in skills)
@@ -45,11 +45,12 @@ public class GameDataUpdater : IGameDataUpdater
             }
             else
             {
+                skill.Id = 0;
                 await _skillRepository.AddAsync(skill);
             }
         }
     }
-    public async Task UpdateItems()
+    public async Task UpdateItemsAsync()
     {
         var items = ReadFromJson<Item>("Items").OrderBy(i => i.Id).ToList();
 
@@ -79,12 +80,13 @@ public class GameDataUpdater : IGameDataUpdater
             }
             else
             {
+                item.Id = 0;
                 await _itemRepository.Add(item);
             }
         }
     }
 
-    public async Task UpdateEnemies()
+    public async Task UpdateEnemiesAsync()
     {
         var enemies = ReadFromJson<Enemy>("Enemies").OrderBy(e => e.Id).ToList();
 
@@ -92,7 +94,7 @@ public class GameDataUpdater : IGameDataUpdater
 
         foreach (var enemy in enemies)
         {
-            if (enemiesInDb.Any(e =>e.Id == enemy.Id))
+            if (enemiesInDb.Any(e => e.Id == enemy.Id))
             {
                 var enemyToUpdate = enemiesInDb.SingleOrDefault(e => e.Id == enemy.Id);
 
@@ -115,6 +117,10 @@ public class GameDataUpdater : IGameDataUpdater
             }
             else
             {
+                enemy.Id = 0;
+                enemy.Attributes.Id = 0;
+                enemy.Skills.ForEach(s => s.Id = 0);
+                enemy.BehaviorPatterns.ForEach(bp => bp.Id = 0);
                 await _enemyRepository.AddAsync(enemy);
             }
         }
@@ -147,6 +153,7 @@ public class GameDataUpdater : IGameDataUpdater
             }
             else
             {
+                enemySkill.Id = 0;
                 enemyToUpdate.Skills.Add(enemySkill);
             }
         }

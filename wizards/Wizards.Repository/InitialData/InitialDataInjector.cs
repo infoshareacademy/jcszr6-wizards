@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Repository.InitialData.SeedFactories.Interfaces;
@@ -29,19 +28,9 @@ public class InitialDataInjector : IInitialDataInjector
     }
     public async Task InjectDevelopmentDataAsync()
     {
-        if (_roleManager.Roles.Count() != 3)
-        {
-            var roles = _rolesFactory.GetRolesAsync();
-            await AddRoles(roles);
-        }
+        await AddRoles();
 
-        var adminUsers = _usersFactory.GetAdminUsers();
-        var adminHeroes = _heroesFactory.GetAdminHeroesWithEquipment();
-        await AddUsers(adminUsers, UserRoles.Admin, adminHeroes);
-
-        var moderatorUsers = _usersFactory.GetModeratorUsers();
-        var moderatorHeroes = _heroesFactory.GetModeratorHeroesWithEquipment();
-        await AddUsers(moderatorUsers, UserRoles.Moderator, moderatorHeroes);
+        await InjectProductionDataAsync();
 
         if (_context.Players.Count() < 90)
         {
@@ -54,11 +43,27 @@ public class InitialDataInjector : IInitialDataInjector
         await AddUsers(testerPlayers, UserRoles.RegularUser);
     }
 
-    private async Task AddRoles(List<IdentityRole<int>> roles)
+    public async Task InjectProductionDataAsync()
     {
+        var adminUsers = _usersFactory.GetAdminUsers();
+        var adminHeroes = _heroesFactory.GetAdminHeroesWithEquipment();
+        await AddUsers(adminUsers, UserRoles.Admin, adminHeroes);
+
+        var moderatorUsers = _usersFactory.GetModeratorUsers();
+        var moderatorHeroes = _heroesFactory.GetModeratorHeroesWithEquipment();
+        await AddUsers(moderatorUsers, UserRoles.Moderator, moderatorHeroes);
+    }
+
+    private async Task AddRoles()
+    {
+        var roles = _rolesFactory.GetRolesAsync();
+
         foreach (var identityRole in roles)
         {
-            await _roleManager.CreateAsync(identityRole);
+            if (await _roleManager.FindByNameAsync(identityRole.Name) == null)
+            {
+                await _roleManager.CreateAsync(identityRole);
+            }
         }
     }
 
@@ -76,6 +81,7 @@ public class InitialDataInjector : IInitialDataInjector
             }
         }
     }
+
     private async Task AddUsers(Dictionary<Player, string> usersData, UserRoles role, Dictionary<Hero, string> heroes)
     {
         foreach (var userData in usersData)

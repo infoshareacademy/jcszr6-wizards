@@ -35,7 +35,11 @@ namespace Wizards.Repository.Repository.WorldModel
 
         public async Task<List<Enemy>> GetAllAsync()
         {
-            return await _wizardsContext.Enemies.ToListAsync();
+            return await _wizardsContext.Enemies
+                .Include(e =>e.Attributes)
+                .Include(e => e.Skills)
+                .Include(e => e.BehaviorPatterns)
+                .ToListAsync();
         }
 
         public async Task RemoveAsync(Enemy enemy)

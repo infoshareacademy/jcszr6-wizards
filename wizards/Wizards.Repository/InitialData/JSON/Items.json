@@ -1,5 +1,6 @@
 [
   {
+    "Id": 1,
     "Name": "Normal Staff",
     "Attributes": {
       "Damage": 10,
@@ -9,13 +10,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 1,
     "BuyPrice": 100,
     "SellPrice": 80
   },
   {
+    "Id": 2,
     "Name": "Fine Staff",
     "Attributes": {
       "Damage": 20,
@@ -25,13 +27,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 2,
     "BuyPrice": 600,
     "SellPrice": 480
   },
   {
+    "Id": 3,
     "Name": "Great Staff",
     "Attributes": {
       "Damage": 30,
@@ -41,13 +44,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 3,
     "BuyPrice": 3000,
     "SellPrice": 2400
   },
   {
+    "Id": 4,
     "Name": "Enchanted Staff",
     "Attributes": {
       "Damage": 40,
@@ -57,13 +61,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 4,
     "BuyPrice": 12000,
     "SellPrice": 9600
   },
   {
+    "Id": 5,
     "Name": "Masterpiece Staff",
     "Attributes": {
       "Damage": 50,
@@ -73,13 +78,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 5,
     "BuyPrice": 36000,
     "SellPrice": 28800
   },
   {
+    "Id": 6,
     "Name": "Normal Spell-book",
     "Attributes": {
       "Damage": 10,
@@ -89,13 +95,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 1,
     "BuyPrice": 100,
     "SellPrice": 80
   },
   {
+    "Id": 7,
     "Name": "Fine Spell-book",
     "Attributes": {
       "Damage": 20,
@@ -105,13 +112,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 2,
     "BuyPrice": 600,
     "SellPrice": 480
   },
   {
+    "Id": 8,
     "Name": "Great Spell-book",
     "Attributes": {
       "Damage": 30,
@@ -121,13 +129,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 3,
     "BuyPrice": 3000,
     "SellPrice": 2400
   },
   {
+    "Id": 9,
     "Name": "Enchanted Spell-book",
     "Attributes": {
       "Damage": 40,
@@ -137,13 +146,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 4,
     "BuyPrice": 12000,
     "SellPrice": 9600
   },
   {
+    "Id": 10,
     "Name": "Masterpiece Spell-book",
     "Attributes": {
       "Damage": 50,
@@ -153,13 +163,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 5,
     "BuyPrice": 36000,
     "SellPrice": 28800
   },
   {
+    "Id": 11,
     "Name": "Normal Scepter",
     "Attributes": {
       "Damage": 9,
@@ -169,13 +180,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 1,
     "BuyPrice": 100,
     "SellPrice": 80
   },
   {
+    "Id": 12,
     "Name": "Fine Scepter",
     "Attributes": {
       "Damage": 18,
@@ -185,13 +197,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 2,
     "BuyPrice": 600,
     "SellPrice": 480
   },
   {
+    "Id": 13,
     "Name": "Great Scepter",
     "Attributes": {
       "Damage": 27,
@@ -201,13 +214,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 3,
     "BuyPrice": 3000,
     "SellPrice": 2400
   },
   {
+    "Id": 14,
     "Name": "Enchanted Scepter",
     "Attributes": {
       "Damage": 36,
@@ -217,13 +231,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 4,
     "BuyPrice": 12000,
     "SellPrice": 9600
   },
   {
+    "Id": 15,
     "Name": "Masterpiece Scepter",
     "Attributes": {
       "Damage": 45,
@@ -233,13 +248,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Weapon",
+    "Restriction": 1,
+    "Type": 0,
     "Tier": 5,
     "BuyPrice": 36000,
     "SellPrice": 28800
   },
   {
+    "Id": 16,
     "Name": "Normal Vestments",
     "Attributes": {
       "Damage": 0,
@@ -249,13 +265,14 @@
       "Reflex": 26,
       "Defense": 0
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 1,
     "BuyPrice": 50,
     "SellPrice": 40
   },
   {
+    "Id": 17,
     "Name": "Fine Vestments",
     "Attributes": {
       "Damage": 0,
@@ -265,13 +282,14 @@
       "Reflex": 32,
       "Defense": -2
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 2,
     "BuyPrice": 300,
     "SellPrice": 240
   },
   {
+    "Id": 18,
     "Name": "Great Vestments",
     "Attributes": {
       "Damage": 0,
@@ -281,13 +299,14 @@
       "Reflex": 38,
       "Defense": -4
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 3,
     "BuyPrice": 1500,
     "SellPrice": 1200
   },
   {
+    "Id": 19,
     "Name": "Enchanted Vestments",
     "Attributes": {
       "Damage": 0,
@@ -297,13 +316,14 @@
       "Reflex": 44,
       "Defense": -6
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 4,
     "BuyPrice": 6000,
     "SellPrice": 4800
   },
   {
+    "Id": 20,
     "Name": "Masterpiece Vestments",
     "Attributes": {
       "Damage": 0,
@@ -313,13 +333,14 @@
       "Reflex": 50,
       "Defense": -8
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 5,
     "BuyPrice": 18000,
     "SellPrice": 14400
   },
   {
+    "Id": 21,
     "Name": "Normal Mantle",
     "Attributes": {
       "Damage": 0,
@@ -329,13 +350,14 @@
       "Reflex": 0,
       "Defense": 26
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 1,
     "BuyPrice": 50,
     "SellPrice": 40
   },
   {
+    "Id": 22,
     "Name": "Fine Mantle",
     "Attributes": {
       "Damage": 0,
@@ -345,13 +367,14 @@
       "Reflex": -2,
       "Defense": 32
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 2,
     "BuyPrice": 300,
     "SellPrice": 240
   },
   {
+    "Id": 23,
     "Name": "Great Mantle",
     "Attributes": {
       "Damage": 0,
@@ -361,13 +384,14 @@
       "Reflex": -4,
       "Defense": 38
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 3,
     "BuyPrice": 1500,
     "SellPrice": 1200
   },
   {
+    "Id": 24,
     "Name": "Enchanted Mantle",
     "Attributes": {
       "Damage": 0,
@@ -377,13 +401,14 @@
       "Reflex": -6,
       "Defense": 44
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 4,
     "BuyPrice": 6000,
     "SellPrice": 4800
   },
   {
+    "Id": 25,
     "Name": "Masterpiece Mantle",
     "Attributes": {
       "Damage": 0,
@@ -393,13 +418,14 @@
       "Reflex": -8,
       "Defense": 50
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 5,
     "BuyPrice": 18000,
     "SellPrice": 14400
   },
   {
+    "Id": 26,
     "Name": "Normal Overcoat",
     "Attributes": {
       "Damage": 0,
@@ -409,13 +435,14 @@
       "Reflex": 16,
       "Defense": 18
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 1,
     "BuyPrice": 50,
     "SellPrice": 40
   },
   {
+    "Id": 27,
     "Name": "Fine Overcoat",
     "Attributes": {
       "Damage": 0,
@@ -425,13 +452,14 @@
       "Reflex": 20,
       "Defense": 22
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 2,
     "BuyPrice": 300,
     "SellPrice": 240
   },
   {
+    "Id": 28,
     "Name": "Great Overcoat",
     "Attributes": {
       "Damage": 0,
@@ -441,13 +469,14 @@
       "Reflex": 24,
       "Defense": 26
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 3,
     "BuyPrice": 1500,
     "SellPrice": 1200
   },
   {
+    "Id": 29,
     "Name": "Enchanted Overcoat",
     "Attributes": {
       "Damage": 0,
@@ -457,13 +486,14 @@
       "Reflex": 28,
       "Defense": 30
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 4,
     "BuyPrice": 6000,
     "SellPrice": 4800
   },
   {
+    "Id": 30,
     "Name": "Masterpiece Overcoat",
     "Attributes": {
       "Damage": 0,
@@ -473,13 +503,14 @@
       "Reflex": 32,
       "Defense": 34
     },
-    "Restriction": "Sorcerer",
-    "Type": "Armor",
+    "Restriction": 1,
+    "Type": 1,
     "Tier": 5,
     "BuyPrice": 18000,
     "SellPrice": 14400
   },
   {
+    "Id": 31,
     "Name": "Normal Scythe",
     "Attributes": {
       "Damage": 9,
@@ -489,13 +520,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 1,
     "BuyPrice": 100,
     "SellPrice": 80
   },
   {
+    "Id": 32,
     "Name": "Fine Scythe",
     "Attributes": {
       "Damage": 18,
@@ -505,13 +537,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 2,
     "BuyPrice": 600,
     "SellPrice": 480
   },
   {
+    "Id": 33,
     "Name": "Great Scythe",
     "Attributes": {
       "Damage": 27,
@@ -521,13 +554,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 3,
     "BuyPrice": 3000,
     "SellPrice": 2400
   },
   {
+    "Id": 34,
     "Name": "Enchanted Scythe",
     "Attributes": {
       "Damage": 36,
@@ -537,13 +571,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 4,
     "BuyPrice": 12000,
     "SellPrice": 9600
   },
   {
+    "Id": 35,
     "Name": "Masterpiece Scythe",
     "Attributes": {
       "Damage": 45,
@@ -553,13 +588,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 5,
     "BuyPrice": 36000,
     "SellPrice": 28800
   },
   {
+    "Id": 36,
     "Name": "Normal Urn",
     "Attributes": {
       "Damage": 9,
@@ -569,13 +605,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 1,
     "BuyPrice": 100,
     "SellPrice": 80
   },
   {
+    "Id": 37,
     "Name": "Fine Urn",
     "Attributes": {
       "Damage": 18,
@@ -585,13 +622,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 2,
     "BuyPrice": 600,
     "SellPrice": 480
   },
   {
+    "Id": 38,
     "Name": "Great Urn",
     "Attributes": {
       "Damage": 27,
@@ -601,13 +639,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 3,
     "BuyPrice": 3000,
     "SellPrice": 2400
   },
   {
+    "Id": 39,
     "Name": "Enchanted Urn",
     "Attributes": {
       "Damage": 36,
@@ -617,13 +656,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 4,
     "BuyPrice": 12000,
     "SellPrice": 9600
   },
   {
+    "Id": 40,
     "Name": "Masterpiece Urn",
     "Attributes": {
       "Damage": 45,
@@ -633,13 +673,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 5,
     "BuyPrice": 36000,
     "SellPrice": 28800
   },
   {
+    "Id": 41,
     "Name": "Normal Ritual Cup",
     "Attributes": {
       "Damage": 8,
@@ -649,13 +690,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 1,
     "BuyPrice": 100,
     "SellPrice": 80
   },
   {
+    "Id": 42,
     "Name": "Fine Ritual Cup",
     "Attributes": {
       "Damage": 16,
@@ -665,13 +707,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 2,
     "BuyPrice": 600,
     "SellPrice": 480
   },
   {
+    "Id": 43,
     "Name": "Great Ritual Cup",
     "Attributes": {
       "Damage": 24,
@@ -681,13 +724,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 3,
     "BuyPrice": 3000,
     "SellPrice": 2400
   },
   {
+    "Id": 44,
     "Name": "Enchanted Ritual Cup",
     "Attributes": {
       "Damage": 32,
@@ -697,13 +741,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 4,
     "BuyPrice": 12000,
     "SellPrice": 9600
   },
   {
+    "Id": 45,
     "Name": "Masterpiece Ritual Cup",
     "Attributes": {
       "Damage": 40,
@@ -713,13 +758,14 @@
       "Reflex": 0,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Weapon",
+    "Restriction": 2,
+    "Type": 0,
     "Tier": 5,
     "BuyPrice": 36000,
     "SellPrice": 28800
   },
   {
+    "Id": 46,
     "Name": "Normal Hood",
     "Attributes": {
       "Damage": 0,
@@ -729,13 +775,14 @@
       "Reflex": 26,
       "Defense": 0
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 1,
     "BuyPrice": 50,
     "SellPrice": 40
   },
   {
+    "Id": 47,
     "Name": "Fine Hood",
     "Attributes": {
       "Damage": 0,
@@ -745,13 +792,14 @@
       "Reflex": 32,
       "Defense": -1
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 2,
     "BuyPrice": 300,
     "SellPrice": 240
   },
   {
+    "Id": 48,
     "Name": "Great Hood",
     "Attributes": {
       "Damage": 0,
@@ -761,13 +809,14 @@
       "Reflex": 38,
       "Defense": -2
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 3,
     "BuyPrice": 1500,
     "SellPrice": 1200
   },
   {
+    "Id": 49,
     "Name": "Enchanted Hood",
     "Attributes": {
       "Damage": 0,
@@ -777,13 +826,14 @@
       "Reflex": 44,
       "Defense": -3
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 4,
     "BuyPrice": 6000,
     "SellPrice": 4800
   },
   {
+    "Id": 50,
     "Name": "Masterpiece Hood",
     "Attributes": {
       "Damage": 0,
@@ -793,13 +843,14 @@
       "Reflex": 50,
       "Defense": -4
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 5,
     "BuyPrice": 18000,
     "SellPrice": 14400
   },
   {
+    "Id": 51,
     "Name": "Normal Shroud",
     "Attributes": {
       "Damage": 0,
@@ -809,13 +860,14 @@
       "Reflex": 0,
       "Defense": 26
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 1,
     "BuyPrice": 50,
     "SellPrice": 40
   },
   {
+    "Id": 52,
     "Name": "Fine Shroud",
     "Attributes": {
       "Damage": 0,
@@ -825,13 +877,14 @@
       "Reflex": -1,
       "Defense": 32
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 2,
     "BuyPrice": 300,
     "SellPrice": 240
   },
   {
+    "Id": 53,
     "Name": "Great Shroud",
     "Attributes": {
       "Damage": 0,
@@ -841,13 +894,14 @@
       "Reflex": -2,
       "Defense": 38
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 3,
     "BuyPrice": 1500,
     "SellPrice": 1200
   },
   {
+    "Id": 54,
     "Name": "Enchanted Shroud",
     "Attributes": {
       "Damage": 0,
@@ -857,13 +911,14 @@
       "Reflex": -3,
       "Defense": 44
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 4,
     "BuyPrice": 6000,
     "SellPrice": 4800
   },
   {
+    "Id": 55,
     "Name": "Masterpiece Shroud",
     "Attributes": {
       "Damage": 0,
@@ -873,13 +928,14 @@
       "Reflex": -4,
       "Defense": 50
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 5,
     "BuyPrice": 18000,
     "SellPrice": 14400
   },
   {
+    "Id": 56,
     "Name": "Normal Ritual Livery",
     "Attributes": {
       "Damage": 0,
@@ -889,13 +945,14 @@
       "Reflex": 16,
       "Defense": 20
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 1,
     "BuyPrice": 50,
     "SellPrice": 40
   },
   {
+    "Id": 57,
     "Name": "Fine Ritual Livery",
     "Attributes": {
       "Damage": 0,
@@ -905,13 +962,14 @@
       "Reflex": 20,
       "Defense": 24
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 2,
     "BuyPrice": 300,
     "SellPrice": 240
   },
   {
+    "Id": 58,
     "Name": "Great Ritual Livery",
     "Attributes": {
       "Damage": 0,
@@ -921,13 +979,14 @@
       "Reflex": 24,
       "Defense": 28
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 3,
     "BuyPrice": 1500,
     "SellPrice": 1200
   },
   {
+    "Id": 59,
     "Name": "Enchanted Ritual Livery",
     "Attributes": {
       "Damage": 0,
@@ -937,13 +996,14 @@
       "Reflex": 28,
       "Defense": 32
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 4,
     "BuyPrice": 6000,
     "SellPrice": 4800
   },
   {
+    "Id": 60,
     "Name": "Masterpiece Ritual Livery",
     "Attributes": {
       "Damage": 0,
@@ -953,8 +1013,8 @@
       "Reflex": 32,
       "Defense": 36
     },
-    "Restriction": "Necromancer",
-    "Type": "Armor",
+    "Restriction": 2,
+    "Type": 1,
     "Tier": 5,
     "BuyPrice": 18000,
     "SellPrice": 14400
