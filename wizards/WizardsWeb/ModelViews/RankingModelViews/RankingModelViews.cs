@@ -10,6 +10,9 @@ public class RankingModelViews
     [Display(Name = "User Name")]
     public string UserName { get; set; }
 
+    [Display(Name = "Hero Name")]
+    public string HeroName { get; set; }
+
     [Display(Name = "Email")]
     public string Email { get; set; }
   

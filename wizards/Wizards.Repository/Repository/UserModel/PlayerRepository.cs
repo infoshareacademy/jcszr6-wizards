@@ -20,6 +20,9 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players
             .Include(p => p.Heroes)
                 .ThenInclude(x => x.Statistics)
+            .Include(p => p.Heroes)
+                .ThenInclude(x => x.Inventory)
+                    .ThenInclude(x=>x.Item)
             .ToListAsync();
     }
 
@@ -92,7 +95,23 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players
             .Where(p => p.UserName.ToLower().Contains(userName.ToLower()))
             .Include(p => p.Heroes)
-            .ThenInclude(x => x.Statistics)
+                .ThenInclude(x => x.Statistics)
+            .Include(p => p.Heroes)
+                .ThenInclude(x => x.Inventory)
+                    .ThenInclude(x => x.Item)
+            .ToListAsync();
+    }
+
+    public async Task<List<Player>> GetByHeroName(string heroName)
+    {
+        return await _wizardsContext.Players
+            .Include(p => p.Heroes)
+            .Where(p =>p.Heroes.Any(h=>h.NickName.ToLower().Contains(heroName.ToLower())))
+            .Include(p => p.Heroes)
+                 .ThenInclude(x => x.Statistics)
+            .Include(p => p.Heroes)
+                 .ThenInclude(x => x.Inventory)
+                     .ThenInclude(x => x.Item)
             .ToListAsync();
     }
 
@@ -101,8 +120,12 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players
             .Where(p => p.Email.ToLower().Contains(addressEmail.ToLower()))
             .Include(p => p.Heroes)
-            .ThenInclude(x => x.Statistics)
+                .ThenInclude(x => x.Statistics)
+            .Include(p => p.Heroes)
+                .ThenInclude(x => x.Inventory)
+                    .ThenInclude(x => x.Item)
             .ToListAsync();
+            
     }
 
     public async Task<List<Player>> GetByRankPointsRange(int lowRankPoints, int highRankPoints)
@@ -111,7 +134,10 @@ public class PlayerRepository : IPlayerRepository
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() >= lowRankPoints &&
             p.Heroes.Select(h => h.Statistics.RankPoints).Sum() <= highRankPoints)
             .Include(p => p.Heroes)
-            .ThenInclude(x => x.Statistics)
+                .ThenInclude(x => x.Statistics)
+            .Include(p => p.Heroes)
+                .ThenInclude(x => x.Inventory)
+                    .ThenInclude(x => x.Item)
             .ToListAsync();
     }
 

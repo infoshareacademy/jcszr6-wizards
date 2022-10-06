@@ -6,10 +6,10 @@ namespace Wizards.Services.SearchService;
 public interface ISearchService
 {
 
-    Task<List<Player>> GetAll();
-    Task<List<Player>> ByUsername(string username);
-
-    Task<List<Player>> ByRankPoints(int fromRankPoints, int toRankPoints);
-    Task<List<Player>> ByEmail(string email);
+    Task<List<PlayerForRankingDto>> GetAll();
+    Task<List<PlayerForRankingDto>> ByUserName(string userName);
+    Task<List<PlayerForRankingDto>> ByHeroName(string heroName);
+    Task<List<PlayerForRankingDto>> ByRankPoints(int fromRankPoints, int toRankPoints);
+    Task<List<PlayerForRankingDto>> ByEmail(string email);
 
 }

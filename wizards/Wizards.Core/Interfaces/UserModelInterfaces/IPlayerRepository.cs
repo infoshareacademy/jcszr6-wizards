@@ -16,6 +16,7 @@ public interface IPlayerRepository
     Task<bool> Exist(int id, string email);
 
     Task<List<Player>> GetByUserName(string userName);
+    Task<List<Player>> GetByHeroName(string heroName);
     Task<List<Player>> GetByEmailAddress(string addressEmail);
     Task<List<Player>> GetByRankPointsRange(int lowRankPoints, int highRankPoints);
 
