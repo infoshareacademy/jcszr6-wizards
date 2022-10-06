@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.Services", "Wizard.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.GamePlay", "Wizards.GamePlay\Wizards.GamePlay.csproj", "{5269839B-33A4-4DE5-BE2E-A6FEB2F90799}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.Tests", "Wizards.Tests\Wizards.Tests.csproj", "{A55CE4DC-2E53-4E99-AAC0-AFDC0CD760AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.Tests", "Wizards.Tests\Wizards.Tests.csproj", "{A55CE4DC-2E53-4E99-AAC0-AFDC0CD760AE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0E42EF92-848E-4624-95C0-21710431FA90} = {0E42EF92-848E-4624-95C0-21710431FA90}
 		{5269839B-33A4-4DE5-BE2E-A6FEB2F90799} = {5269839B-33A4-4DE5-BE2E-A6FEB2F90799}
@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.Tests", "Wizards.Te
 		{A9933089-DC4C-4B51-9E0D-893AF1588484} = {A9933089-DC4C-4B51-9E0D-893AF1588484}
 		{E7A6468F-DE00-4805-8B71-6916C31A3A98} = {E7A6468F-DE00-4805-8B71-6916C31A3A98}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.RankingAPI", "Wizards.RankingAPI\Wizards.RankingAPI.csproj", "{3A58C274-6D2A-4E33-BB19-26F148436125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,10 @@ Global
 		{A55CE4DC-2E53-4E99-AAC0-AFDC0CD760AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A55CE4DC-2E53-4E99-AAC0-AFDC0CD760AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A55CE4DC-2E53-4E99-AAC0-AFDC0CD760AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A58C274-6D2A-4E33-BB19-26F148436125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A58C274-6D2A-4E33-BB19-26F148436125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A58C274-6D2A-4E33-BB19-26F148436125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A58C274-6D2A-4E33-BB19-26F148436125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

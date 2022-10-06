@@ -15,6 +15,7 @@ using WizardsWeb.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Wizards.RankingAPI.ServicesRegistration;
 
 namespace WizardsWeb;
 
@@ -39,6 +40,7 @@ public class Startup
         services.AddValidators();
         services.AddModelServices();
         services.AddGamePlayServices();
+        services.AddApi();
 
         // External Packages Configuration
         var connectionString = Configuration.GetConnectionString("WizardDatabase");
