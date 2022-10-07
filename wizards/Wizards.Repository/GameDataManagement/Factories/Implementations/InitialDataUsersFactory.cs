@@ -1,10 +1,9 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.UserModels.Properties;
-using Wizards.Repository.InitialData.SeedFactories.Interfaces;
+using Wizards.Repository.GameDataManagement.Factories.Interfaces;
 
-namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
+namespace Wizards.Repository.GameDataManagement.Factories.Implementations;
 
 public class InitialDataUsersFactory : IInitialDataUsersFactory
 {

@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "DailyRewardEnergy": 10,
+    "Damage": 10,
+    "Precision": 5,
+    "Specialization": 0,
+    "MaxHealth": 25,
+    "Reflex": 0,
+    "Defense": 0
+  },
+  {
+    "Id": 2,
+    "DailyRewardEnergy": 10,
+    "Damage": 10,
+    "Precision": 0,
+    "Specialization": 5,
+    "MaxHealth": 30,
+    "Reflex": 0,
+    "Defense": 5
+  },
+  {
+    "Id": 3,
+    "DailyRewardEnergy": 10,
+    "Damage": 5,
+    "Precision": 5,
+    "Specialization": 0,
+    "MaxHealth": 20,
+    "Reflex": 5,
+    "Defense": 5
+  }
+]

@@ -2,27 +2,38 @@
 using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Core.Model.WorldModels;
-using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 
-namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
+namespace Wizards.Repository.GameDataManagement.Updaters;
 
-public class GameDataUpdater : IGameDataUpdater
+public class GameDataUploader : IGameDataUploader
 {
     private readonly ISkillRepository _skillRepository;
     private readonly IItemRepository _itemRepository;
     private readonly IEnemyRepository _enemyRepository;
+    private readonly IHeroRepository _heroRepository;
 
-    public GameDataUpdater(ISkillRepository skillRepository, IItemRepository itemRepository, IEnemyRepository enemyRepository)
+    public GameDataUploader(
+        ISkillRepository skillRepository, IItemRepository itemRepository,
+        IEnemyRepository enemyRepository, IHeroRepository heroRepository)
     {
         _skillRepository = skillRepository;
         _itemRepository = itemRepository;
         _enemyRepository = enemyRepository;
+        _heroRepository = heroRepository;
     }
 
-    public async Task UpdateSkillsAsync()
+    public async Task AddOrUpdateSkillsFromFileAsync(bool forceUpdate = false)
     {
-        var skills = ReadFromJson<Skill>("Skills").OrderBy(s => s.Id).ToList();
+        var path = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "Skills.json");
+        
+        if (IsUpToDate(path) && !forceUpdate)
+        {
+            return;
+        }
+
+        var skills = ReadJsonDataFile<List<Skill>>(path).OrderBy(s => s.Id).ToList();
 
         var skillsInDb = (await _skillRepository.GetAllAsync()).OrderBy(s => s.Id).ToList();
 
@@ -49,10 +60,19 @@ public class GameDataUpdater : IGameDataUpdater
                 await _skillRepository.AddAsync(skill);
             }
         }
+
+        SetUpToDate(path);
     }
-    public async Task UpdateItemsAsync()
+
+    public async Task AddOrUpdateItemsFromFileAsync(bool forceUpdate = false)
     {
-        var items = ReadFromJson<Item>("Items").OrderBy(i => i.Id).ToList();
+        var path = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "Items.json");
+        if (IsUpToDate(path) && !forceUpdate)
+        {
+            return;
+        }
+
+        var items = ReadJsonDataFile<List<Item>>(path).OrderBy(i => i.Id).ToList();
 
         var itemsInDb = (await _itemRepository.GetAll()).OrderBy(i => i.Id).ToList();
 
@@ -84,11 +104,19 @@ public class GameDataUpdater : IGameDataUpdater
                 await _itemRepository.Add(item);
             }
         }
+
+        SetUpToDate(path);
     }
 
-    public async Task UpdateEnemiesAsync()
+    public async Task AddOrUpdateEnemiesFromFileAsync(bool forceUpdate = false)
     {
-        var enemies = ReadFromJson<Enemy>("Enemies").OrderBy(e => e.Id).ToList();
+        var path = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "Enemies.json");
+        if (IsUpToDate(path) && !forceUpdate)
+        {
+            return;
+        }
+
+        var enemies = ReadJsonDataFile<List<Enemy>>(path).OrderBy(e => e.Id).ToList();
 
         var enemiesInDb = (await _enemyRepository.GetAllAsync()).OrderBy(e => e.Id).ToList();
 
@@ -110,8 +138,8 @@ public class GameDataUpdater : IGameDataUpdater
                 enemyToUpdate.RankPointsReward = enemy.RankPointsReward;
 
                 UpdateEnemyAttributes(enemyToUpdate, enemy);
-                UpdateEnemySkills(enemy, enemyToUpdate);
-                UpdateBehaviorPatterns(enemy, enemyToUpdate);
+                AddOrUpdateEnemySkills(enemy, enemyToUpdate);
+                AddOrUpdateBehaviorPatterns(enemy, enemyToUpdate);
 
                 await _enemyRepository.UpdateAsync(enemyToUpdate);
             }
@@ -123,6 +151,45 @@ public class GameDataUpdater : IGameDataUpdater
                 enemy.BehaviorPatterns.ForEach(bp => bp.Id = 0);
                 await _enemyRepository.AddAsync(enemy);
             }
+        }
+        
+        SetUpToDate(path);
+    }
+
+    public async Task UpdateHeroAttributes(bool balanceOrFixUpdate, bool noDailyRewards = false)
+    {
+        var path = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "CoreAttributes.json");
+
+        var attributes = ReadJsonDataFile<List<HeroAttributes>>(path).OrderBy(e => e.Id).ToList();
+
+        var heroes = await _heroRepository.GetAll();
+
+        foreach (var hero in heroes)
+        {
+            var heroAttributes = attributes.SingleOrDefault(a => a.Id == (int)hero.Profession);
+
+            if (heroAttributes == null)
+            {
+                break;
+            }
+
+            if (!noDailyRewards)
+            {
+                hero.Attributes.DailyRewardEnergy = heroAttributes.DailyRewardEnergy;
+            }
+
+            if (balanceOrFixUpdate)
+            {
+                hero.Attributes.Damage = heroAttributes.Damage;
+                hero.Attributes.Precision = heroAttributes.Precision;
+                hero.Attributes.Specialization = heroAttributes.Specialization;
+
+                hero.Attributes.MaxHealth = heroAttributes.MaxHealth;
+                hero.Attributes.Reflex = heroAttributes.Reflex;
+                hero.Attributes.Defense = heroAttributes.Defense;
+            }
+
+            await _heroRepository.Update(hero);
         }
     }
 
@@ -136,7 +203,7 @@ public class GameDataUpdater : IGameDataUpdater
         enemyToUpdate.Attributes.Defense = enemy.Attributes.Defense;
     }
 
-    private static void UpdateEnemySkills(Enemy enemy, Enemy enemyToUpdate)
+    private static void AddOrUpdateEnemySkills(Enemy enemy, Enemy enemyToUpdate)
     {
         foreach (var enemySkill in enemy.Skills)
         {
@@ -159,7 +226,7 @@ public class GameDataUpdater : IGameDataUpdater
         }
     }
 
-    private static void UpdateBehaviorPatterns(Enemy enemy, Enemy enemyToUpdate)
+    private static void AddOrUpdateBehaviorPatterns(Enemy enemy, Enemy enemyToUpdate)
     {
         foreach (var behaviorPattern in enemy.BehaviorPatterns)
         {
@@ -196,10 +263,62 @@ public class GameDataUpdater : IGameDataUpdater
         }
     }
 
-    private static List<T> ReadFromJson<T>(string fileName)
+    private static T ReadJsonDataFile<T>(string path)
     {
-        string path = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "InitialData", "JSON", $"{fileName}.json");
-        var deserializedObjects = JsonSerializer.Deserialize<List<T>>(File.ReadAllText(path));
-        return deserializedObjects;
+        try
+        {
+            var deserializedObjects = JsonSerializer.Deserialize<T>(File.ReadAllText(path));
+            return deserializedObjects;
+        }
+        catch (Exception)
+        {
+            throw new FileLoadException("Invalid File Format!");
+        }
     }
+
+    private bool IsUpToDate(string path)
+    {
+        var evidenceFilePath = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "FilesEvidence.json");
+
+        var fileInformation = ReadJsonDataFile<List<FileInformation>>(evidenceFilePath).SingleOrDefault(f => f.FileName == Path.GetFileNameWithoutExtension(path));
+
+        var realFileModifyData = File.GetLastWriteTimeUtc(path);
+
+        if (fileInformation != null && fileInformation.LastUpdate >= realFileModifyData)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void SetUpToDate(string path)
+    {
+        var evidenceFilePath = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "FilesEvidence.json");
+        var filesInformation = ReadJsonDataFile<List<FileInformation>>(evidenceFilePath);
+
+        var realFileModifyData = File.GetLastWriteTimeUtc(path);
+
+        var fileInformation = filesInformation.SingleOrDefault(f => f.FileName == Path.GetFileNameWithoutExtension(path));
+
+        if (fileInformation == null)
+        {
+            var newInfo = new FileInformation()
+            {
+                FileName = Path.GetFileNameWithoutExtension(path),
+                LastUpdate = realFileModifyData
+            };
+
+            filesInformation.Add(newInfo);
+        }
+        else
+        {
+            fileInformation.LastUpdate = realFileModifyData;
+        }
+
+        var json = JsonSerializer.Serialize(filesInformation);
+
+        File.WriteAllText(evidenceFilePath, json);
+    }
+
 }

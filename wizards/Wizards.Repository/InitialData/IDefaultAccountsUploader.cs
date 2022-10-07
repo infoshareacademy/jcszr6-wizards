@@ -1,6 +1,6 @@
 ﻿namespace Wizards.Repository.InitialData;
 
-public interface IInitialDataInjector
+public interface IDefaultAccountsUploader
 {
     public Task InjectDevelopmentDataAsync();
     public Task InjectProductionDataAsync();

@@ -1,10 +1,9 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.UserModels.Properties;
-using Wizards.Repository.InitialData.SeedFactories.Interfaces;
+using Wizards.Repository.GameDataManagement.Factories.Interfaces;
 
-namespace Wizards.Repository.InitialData.SeedFactories.Implementations;
+namespace Wizards.Repository.GameDataManagement.Factories.Implementations;
 
 public class InitialDataHeroesFactory : IInitialDataHeroesFactory
 {
@@ -250,15 +249,15 @@ public class InitialDataHeroesFactory : IInitialDataHeroesFactory
         {
             var hero = item.Key;
             hero.Inventory = new();
-            hero.Inventory.Add(new HeroItem() { ItemId = rnd.Next(1, 15), InUse = true, ItemEndurance = rnd.Next(3000, 10000) / 100d });
-            hero.Inventory.Add(new HeroItem() { ItemId = rnd.Next(16, 30), InUse = true, ItemEndurance = rnd.Next(7000, 10000) / 100d });
-            hero.Inventory.Add(new HeroItem() { ItemId = rnd.Next(1, 15), InUse = false, ItemEndurance = rnd.Next(300, 2000) / 100d });
+            hero.Inventory.Add(new HeroItem() { ItemId = rnd.Next(1, 15), InUse = true, ItemEndurance = rnd.Next(5000, 10000) / 100d });
+            hero.Inventory.Add(new HeroItem() { ItemId = rnd.Next(16, 30), InUse = true, ItemEndurance = rnd.Next(5000, 10000) / 100d });
+            hero.Inventory.Add(new HeroItem() { ItemId = rnd.Next(1, 15), InUse = false, ItemEndurance = rnd.Next(5000, 10000) / 100d });
 
-            var itemCount = rnd.Next(1, 7);
+            var itemCount = rnd.Next(1, 5);
 
             for (int j = 1; j <= itemCount; j++)
             {
-                hero.Inventory.Add(new HeroItem() { HeroId = hero.Id, ItemId = rnd.Next(1, 30), InUse = false, ItemEndurance = rnd.Next(500, 10000) / 100d });
+                hero.Inventory.Add(new HeroItem() { HeroId = hero.Id, ItemId = rnd.Next(1, 30), InUse = false, ItemEndurance = rnd.Next(7000, 10000) / 100d });
             }
         }
 

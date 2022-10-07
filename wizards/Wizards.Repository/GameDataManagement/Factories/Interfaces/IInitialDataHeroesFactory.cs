@@ -1,7 +1,6 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Model.UserModels;
 
-namespace Wizards.Repository.InitialData.SeedFactories.Interfaces;
+namespace Wizards.Repository.GameDataManagement.Factories.Interfaces;
 
 public interface IInitialDataHeroesFactory
 {

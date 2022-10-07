@@ -96,7 +96,7 @@
     "DamageFactor": 1.25,
     "ArmorPenetrationPercent": 15,
     "BaseHitChance": 45,
-    "HealingFactor": 0.0151
+    "HealingFactor": 0.011
   },
   {
     "Id": 10,

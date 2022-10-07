@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Repository.InitialData.SeedFactories.Interfaces;
+using Wizards.Repository.GameDataManagement.Factories.Interfaces;
 
 namespace Wizards.Repository.InitialData;
 
-public class InitialDataInjector : IInitialDataInjector
+public class DefaultAccountsUploader : IDefaultAccountsUploader
 {
     private readonly IInitialDataRolesFactory _rolesFactory;
     private readonly IInitialDataUsersFactory _usersFactory;
@@ -14,7 +14,7 @@ public class InitialDataInjector : IInitialDataInjector
     private readonly UserManager<Player> _userManager;
     private readonly WizardsContext _context;
 
-    public InitialDataInjector(
+    public DefaultAccountsUploader(
         IInitialDataRolesFactory rolesFactory, IInitialDataUsersFactory usersFactory,
         RoleManager<IdentityRole<int>> roleManager, UserManager<Player> userManager,
         IInitialDataHeroesFactory heroesFactory, WizardsContext context)
@@ -26,6 +26,7 @@ public class InitialDataInjector : IInitialDataInjector
         _heroesFactory = heroesFactory;
         _context = context;
     }
+
     public async Task InjectDevelopmentDataAsync()
     {
         await AddRoles();
@@ -36,22 +37,22 @@ public class InitialDataInjector : IInitialDataInjector
         {
             var randomUsers = _usersFactory.GetRandomUsersForTests();
             var randomHeroes = _heroesFactory.GetRandomTestHeroesWithEquipment();
-            await AddUsers(randomUsers, UserRoles.RegularUser, randomHeroes);
+            await AddOrUpdateUserAccounts(randomUsers, UserRoles.RegularUser, randomHeroes);
         }
 
         var testerPlayers = _usersFactory.GetTesterUsers();
-        await AddUsers(testerPlayers, UserRoles.RegularUser);
+        await AddOrUpdateUserAccounts(testerPlayers, UserRoles.RegularUser);
     }
 
     public async Task InjectProductionDataAsync()
     {
         var adminUsers = _usersFactory.GetAdminUsers();
         var adminHeroes = _heroesFactory.GetAdminHeroesWithEquipment();
-        await AddUsers(adminUsers, UserRoles.Admin, adminHeroes);
+        await AddOrUpdateUserAccounts(adminUsers, UserRoles.Admin, adminHeroes);
 
         var moderatorUsers = _usersFactory.GetModeratorUsers();
         var moderatorHeroes = _heroesFactory.GetModeratorHeroesWithEquipment();
-        await AddUsers(moderatorUsers, UserRoles.Moderator, moderatorHeroes);
+        await AddOrUpdateUserAccounts(moderatorUsers, UserRoles.Moderator, moderatorHeroes);
     }
 
     private async Task AddRoles()
@@ -67,7 +68,7 @@ public class InitialDataInjector : IInitialDataInjector
         }
     }
 
-    private async Task AddUsers(Dictionary<Player, string> usersData, UserRoles role)
+    private async Task AddOrUpdateUserAccounts(Dictionary<Player, string> usersData, UserRoles role)
     {
         foreach (var userData in usersData)
         {
@@ -82,7 +83,7 @@ public class InitialDataInjector : IInitialDataInjector
         }
     }
 
-    private async Task AddUsers(Dictionary<Player, string> usersData, UserRoles role, Dictionary<Hero, string> heroes)
+    private async Task AddOrUpdateUserAccounts(Dictionary<Player, string> usersData, UserRoles role, Dictionary<Hero, string> heroes)
     {
         foreach (var userData in usersData)
         {

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,12 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using Wizards.Core.Model.UserModels;
 using Wizards.GamePlay.ServicesRegistration;
 using Wizards.Repository;
-using Wizards.Repository.InitialData;
 using Wizards.Services.ServiceRegistration;
 using Wizards.Repository.ServiceRegistration;
 using WizardsWeb.Extensions;
 using Microsoft.AspNetCore.Http;
-using Wizards.Repository.InitialData.SeedFactories.Interfaces;
+using Wizards.Repository.GameDataManagement;
 
 namespace WizardsWeb;
 
@@ -68,42 +66,20 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WizardsContext wizardsContext, IInitialDataInjector injector, IGameDataUpdater dataUpdater)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IGameDataManager gameDataManager)
     {
         if (env.IsDevelopment())
         {
-            try
-            {
-                wizardsContext.Database.Migrate();
-            }
-            catch (Exception)
-            {
-                wizardsContext.Database.CloseConnection();
-                wizardsContext.Database.EnsureDeleted();
-                wizardsContext.Database.Migrate();
-            }
-
-            dataUpdater.UpdateSkillsAsync().Wait();
-            dataUpdater.UpdateItemsAsync().Wait();
-            dataUpdater.UpdateEnemiesAsync().Wait();
-            injector.InjectDevelopmentDataAsync().Wait();
-            
             app.UseDeveloperExceptionPage();
         }
         else
         {
-            wizardsContext.Database.Migrate();
-
-            dataUpdater.UpdateSkillsAsync().Wait();
-            dataUpdater.UpdateItemsAsync().Wait();
-            dataUpdater.UpdateEnemiesAsync().Wait();
-            injector.InjectDevelopmentDataAsync().Wait();
-
             // app.UseExceptionHandler("/Home/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
 
+        gameDataManager.ApplicationStartupScheduleAsync(env.IsDevelopment()).Wait();
         
         app.UseMiddleware<MyExceptionHandler>();
 
