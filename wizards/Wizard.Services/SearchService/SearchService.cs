@@ -7,7 +7,6 @@ namespace Wizards.Services.SearchService;
 
 public class SearchService : ISearchService
 {
-
     private readonly IPlayerRepository _playerRepository;
 
     private readonly IHeroRepository _heroRepository;
@@ -21,7 +20,7 @@ public class SearchService : ISearchService
     public async Task<List<PlayerForRankingDto>> GetAll()
     {
         var players = await _playerRepository.GetAll();
-        var orderPlayers = players.OrderByDescending(n => n.Heroes.Sum(h=>h.Statistics.RankPoints)).ToList(); 
+        var orderPlayers = players.OrderByDescending(n => n.Heroes.Sum(h => h.Statistics.RankPoints)).ToList();
         var result = new List<PlayerForRankingDto>();
         int counter = 1;
         foreach (var player in orderPlayers)
@@ -51,7 +50,7 @@ public class SearchService : ISearchService
         var orderPlayers = await GetAll();
         var result = orderPlayers
             .Where(p => p.Player.Heroes
-                .Any(h=>h.NickName
+                .Any(h => h.NickName
                     .ToLower()
                     .Contains(heroName.ToLower()))).ToList();
 
@@ -70,7 +69,7 @@ public class SearchService : ISearchService
 
         return result;
     }
-    
+
     public async Task<List<PlayerForRankingDto>> ByEmail(string email)
     {
         var orderPlayers = await GetAll();
@@ -80,5 +79,16 @@ public class SearchService : ISearchService
                 .Contains(email.ToLower())).ToList();
 
         return result;
+    }
+
+    public async Task<List<PlayerForRankingDto>> FilteringForApi(string? userName, string? heroName, int? fromRankingPoints, int? toRankingPoints)
+    {
+        var allPlayers = await GetAll();
+        var filtering = allPlayers;
+
+        if (!String.IsNullOrEmpty(userName))
+        {
+            filtering = filtering.Where(u => u.Player.UserName.Contains(userName, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
     }
 }

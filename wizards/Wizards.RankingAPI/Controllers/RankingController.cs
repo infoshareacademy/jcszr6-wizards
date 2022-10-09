@@ -19,19 +19,15 @@ namespace Wizards.RankingAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllAsync(
+            [FromQuery] string? userName,
+            [FromQuery] string? heroName,
+            [FromQuery] int? fromRankingPoints,
+            [FromQuery] int? toRankingPoints)
         {
             var allPlayers = await _searchService.GetAll();
             var allPlayersDto = _mapper.Map<List<RankingRecordDto>>(allPlayers);
             return Ok(allPlayersDto);
-        }
-
-        [HttpGet("api/ranking/search-by-userName/{userName}")]
-        public async Task<IActionResult> GetAllAsync(string userName)
-        {
-            var players = await _searchService.ByUserName(userName);
-            var playersDto = _mapper.Map<List<RankingRecordDto>>(players);
-            return Ok(playersDto);
         }
     }
 }
