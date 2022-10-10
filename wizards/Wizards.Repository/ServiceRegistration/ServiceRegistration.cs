@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Wizards.Core.Interfaces;
 using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
+using Wizards.Repository.GameDataManagement;
+using Wizards.Repository.GameDataManagement.Factories.Implementations;
+using Wizards.Repository.GameDataManagement.Factories.Interfaces;
+using Wizards.Repository.GameDataManagement.Updaters;
 using Wizards.Repository.InitialData;
-using Wizards.Repository.InitialData.SeedFactories.Implementations;
-using Wizards.Repository.InitialData.SeedFactories.Interfaces;
 using Wizards.Repository.Repository.UserModel;
 using Wizards.Repository.Repository.WorldModel;
 
@@ -32,10 +33,11 @@ namespace Wizards.Repository.ServiceRegistration
             services.AddTransient<IInitialDataRolesFactory, InitialDataRolesFactory>();
             services.AddTransient<IInitialDataUsersFactory, InitialDataUsersFactory>();
             services.AddTransient<IInitialDataHeroesFactory, InitialDataHeroesFactory>();
-            services.AddTransient<IInitialDataItemsFactory, InitialDataItemsFactory>();
-            services.AddTransient<IInitialDataSkillsFactory, InitialDataSkillsFactory>();
 
-            services.AddTransient<IInitialDataInjector, InitialDataInjector>();
+            services.AddTransient<IDefaultAccountsUploader, DefaultAccountsUploader>();
+            services.AddTransient<IGameDataUploader, GameDataUploader>();
+            services.AddTransient<IGameDataManager, GameDataManager>();
+
         }
     }
 }

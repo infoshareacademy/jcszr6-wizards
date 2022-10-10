@@ -1,0 +1,2169 @@
+[
+  {
+    "Id": 1,
+    "Name": "Minotaur",
+    "Description": "Minotaur is great fighter. His attacks can easly overpass your armor, but are also very slow, so it will be easy to avoid them with some reflex. Minotaur also has some reflex so it is not easy to hit him. This enemy is vulnerable to damage because of his weak armor. Minotaur has dangerous Strong attacks so you should block them as often as you can.",
+    "Type": 0,
+    "EnemyStageName": "Great Forest of Anumer",
+    "Tier": 1,
+    "AvatarImageNumber": 11,
+    "StageBackgroundImageNumber": 11,
+    "GoldReward": 20,
+    "RankPointsReward": 5,
+    "Attributes": {
+      "Damage": 10,
+      "Precision": 0,
+      "Specialization": 20,
+      "MaxHealth": 200,
+      "Reflex": 20,
+      "Defense": -10
+    },
+    "Skills": [
+      {
+        "Id": 1,
+        "Name": "Stroke",
+        "Type": 0,
+        "DamageFactor": 0.28,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 2,
+        "Name": "Cutting Axe",
+        "Type": 1,
+        "DamageFactor": 0.48,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 3,
+        "Name": "Impact",
+        "Type": 0,
+        "DamageFactor": 0.38,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 4,
+        "Name": "Cruel Smash",
+        "Type": 1,
+        "DamageFactor": 0.59,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 1,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 1
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 1
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 2
+          }
+        ]
+      },
+      {
+        "Id": 2,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 3
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 3
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 4
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 3
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 4
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 2,
+    "Name": "Cyclopus",
+    "Description": "This enemy is very slow with his attacks, so with some reflex it will be easy to avoid them. His attacks can easly overpass your armor. Cyclopus is specialized in defense. If you want to deal him lot of damage, you have to maximize your specialization to oveprass his armor. This enemy also has Strong attacks; beware them if you want to keep your healt high.",
+    "Type": 0,
+    "EnemyStageName": "Lonely Island",
+    "Tier": 1,
+    "AvatarImageNumber": 12,
+    "StageBackgroundImageNumber": 12,
+    "GoldReward": 25,
+    "RankPointsReward": 5,
+    "Attributes": {
+      "Damage": 10,
+      "Precision": 0,
+      "Specialization": 20,
+      "MaxHealth": 200,
+      "Reflex": 0,
+      "Defense": 20
+    },
+    "Skills": [
+      {
+        "Id": 5,
+        "Name": "Smash",
+        "Type": 0,
+        "DamageFactor": 0.39,
+        "BaseHitChance": 70,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 6,
+        "Name": "Break Bones",
+        "Type": 1,
+        "DamageFactor": 0.74,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 7,
+        "Name": "Mace hit",
+        "Type": 0,
+        "DamageFactor": 0.48,
+        "BaseHitChance": 75,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 8,
+        "Name": "Destructive lash",
+        "Type": 1,
+        "DamageFactor": 0.95,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 3,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 5
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 5
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 5
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 6
+          }
+        ]
+      },
+      {
+        "Id": 4,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 7
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 7
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 8
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 7
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 8
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 7
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 3,
+    "Name": "Utmar Sneaky Hoof",
+    "Description": "Centarus are great archers. They can easly hit you with his attacks and deals you a lot of damage. The point is to maximize your defense instead of trying to avoid attacs. Utmar is very precise but has not good enough reflex. He has also high defense ability. To be more effective take some specialization for higher damage. You will need Blocking skill to protect yourself from his Strong Attacks",
+    "Type": 0,
+    "EnemyStageName": "Ruins of Verath",
+    "Tier": 1,
+    "AvatarImageNumber": 13,
+    "StageBackgroundImageNumber": 13,
+    "GoldReward": 25,
+    "RankPointsReward": 10,
+    "Attributes": {
+      "Damage": 15,
+      "Precision": 25,
+      "Specialization": 0,
+      "MaxHealth": 250,
+      "Reflex": -7,
+      "Defense": 25
+    },
+    "Skills": [
+      {
+        "Id": 9,
+        "Name": "Quick Shot",
+        "Type": 0,
+        "DamageFactor": 0.3,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 10,
+        "Name": "Double Arrow",
+        "Type": 1,
+        "DamageFactor": 0.54,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 11,
+        "Name": "Sneaky Shot",
+        "Type": 0,
+        "DamageFactor": 0.4,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 12,
+        "Name": "Perfect Arrow",
+        "Type": 1,
+        "DamageFactor": 0.75,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 5,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 9
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 9
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 9
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 10
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 9
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 10
+          }
+        ]
+      },
+      {
+        "Id": 6,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 11
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 12
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 11
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 11
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 12
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 4,
+    "Name": "Overis The Griffon Warrior",
+    "Description": "Griffon is super precise enemy. It is quite impossible to avoid thiers attacks which are also dangerous. If you want to survive battle with him you need as much defense as you can take. Overis has good reflex so it is not easy to hit him. To be more effective fighter you should keep your precision high. That will help you defeat this enemy. Griffon has some Strong Attacks that will deal you very high damage, so good blocking will be the best strategy.",
+    "Type": 0,
+    "EnemyStageName": "Griffon Nest in Leven Highlands",
+    "Tier": 1,
+    "AvatarImageNumber": 14,
+    "StageBackgroundImageNumber": 14,
+    "GoldReward": 30,
+    "RankPointsReward": 10,
+    "Attributes": {
+      "Damage": 15,
+      "Precision": 25,
+      "Specialization": 0,
+      "MaxHealth": 275,
+      "Reflex": 25,
+      "Defense": -10
+    },
+    "Skills": [
+      {
+        "Id": 13,
+        "Name": "Peck",
+        "Type": 0,
+        "DamageFactor": 0.39,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 14,
+        "Name": "Cutting Claw",
+        "Type": 1,
+        "DamageFactor": 0.6,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 15,
+        "Name": "Dangerous Beak",
+        "Type": 1,
+        "DamageFactor": 0.82,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 16,
+        "Name": "Scratch",
+        "Type": 0,
+        "DamageFactor": 0.47,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 17,
+        "Name": "Bloody Claws",
+        "Type": 1,
+        "DamageFactor": 0.95,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 18,
+        "Name": "Triple Scratch",
+        "Type": 1,
+        "DamageFactor": 1.41,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 7,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 13
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 13
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 14
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 13
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 13
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 15
+          }
+        ]
+      },
+      {
+        "Id": 8,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 16
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 16
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 17
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 16
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 18
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 16
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 18
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 5,
+    "Name": "Training Manequin T1 Mechanics",
+    "Description": "This is Training Manequin that shows Strong Attacks and Attack Patterns. Attack Patterns are sequence of skill that boss is repeating. Patterns depends on Enemy's Health percent. Enemies can have up to four diffrent patterns (depends on enemy's tier). This Manequin demonstrate two sequences: First (100%-50%) - two simple attacks with 1 damage and one strong attack with 4 damage; Second (50% - 0%) - three simple attacks with 2 damage and one strong attack with 10 damage. When boss has prepared Strong Attack for round there will be orange icon above his card that signalizes this mechanic. Strong Attacks can be blocked by your Block skill. Start match with this manequin to get safely expirience about this basic Tier 1 mechanics.",
+    "Type": 0,
+    "EnemyStageName": "Training Grounds",
+    "Tier": 1,
+    "AvatarImageNumber": 61,
+    "StageBackgroundImageNumber": 61,
+    "GoldReward": 0,
+    "RankPointsReward": 0,
+    "Attributes": {
+      "Damage": 1,
+      "Precision": 500,
+      "Specialization": 500,
+      "MaxHealth": 100,
+      "Reflex": -100,
+      "Defense": 50
+    },
+    "Skills": [
+      {
+        "Id": 19,
+        "Name": "Simple Attack [pattern I]",
+        "Type": 0,
+        "DamageFactor": 1,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 20,
+        "Name": "Strong Attack [pattern I]",
+        "Type": 1,
+        "DamageFactor": 4,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 21,
+        "Name": "Simple Attack [pattern II]",
+        "Type": 0,
+        "DamageFactor": 2,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 22,
+        "Name": "Strong Attack [pattern II]",
+        "Type": 1,
+        "DamageFactor": 9,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 9,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 19
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 19
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 20
+          }
+        ]
+      },
+      {
+        "Id": 10,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 21
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 21
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 21
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 22
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": true
+  },
+  {
+    "Id": 6,
+    "Name": "Malaur - Ettin King",
+    "Description": "Ettins are known for its strong attacks that crashes armor. Luckly most of Ettins Attacks are easy to avoid if you have enought reflex. Malaures is very slow enemy so it is not hard to succesfully hit him during combat. His thick skin protect him well so to be effective, you will bring Specialization to the fight. This enemy can stun you with one of its special attacks. Beware of it and block it because Ettins like to stun theirs enemies and than land Strong Attack on them without much effort.",
+    "Type": 0,
+    "EnemyStageName": "Old Temple in Caladhorn Wilds",
+    "Tier": 2,
+    "AvatarImageNumber": 21,
+    "StageBackgroundImageNumber": 21,
+    "GoldReward": 50,
+    "RankPointsReward": 25,
+    "Attributes": {
+      "Damage": 20,
+      "Precision": 0,
+      "Specialization": 32,
+      "MaxHealth": 400,
+      "Reflex": -7,
+      "Defense": 25
+    },
+    "Skills": [
+      {
+        "Id": 23,
+        "Name": "Mace strike",
+        "Type": 0,
+        "DamageFactor": 0.34,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 24,
+        "Name": "Cruel Hit",
+        "Type": 1,
+        "DamageFactor": 0.72,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 12,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 25,
+        "Name": "Simple Slug",
+        "Type": 0,
+        "DamageFactor": 0.37,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 8,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 26,
+        "Name": "Agonized Mace Strike",
+        "Type": 1,
+        "DamageFactor": 0.87,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 12,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 27,
+        "Name": "Shocking Strike",
+        "Type": 4,
+        "DamageFactor": 0.2,
+        "BaseHitChance": 122,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 11,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 23
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 23
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 23
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 24
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 23
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 27
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 24
+          }
+        ]
+      },
+      {
+        "Id": 12,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 25
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 25
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 26
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 25
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 25
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 25
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 27
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 26
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 7,
+    "Name": "Cerberus",
+    "Description": "Very quick and precise enemy. Its not so easy to avoid his attacks and succesfully hit him. Reflex would be useless during fight but defense will help to reduce damage. Cerberus is very vulnerable to damage so there is no need for specialization. Cerberus can prepare Terrifying Howl thats will stuns you. It would be better to perfectly Block this attack because Cerberus is much more dangerous when you are Stunned.",
+    "Type": 0,
+    "EnemyStageName": "Gallen-Tum Watchtower",
+    "Tier": 2,
+    "AvatarImageNumber": 22,
+    "StageBackgroundImageNumber": 22,
+    "GoldReward": 60,
+    "RankPointsReward": 25,
+    "Attributes": {
+      "Damage": 20,
+      "Precision": 32,
+      "Specialization": 0,
+      "MaxHealth": 400,
+      "Reflex": 25,
+      "Defense": -10
+    },
+    "Skills": [
+      {
+        "Id": 28,
+        "Name": "Quick Bite",
+        "Type": 0,
+        "DamageFactor": 0.42,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 29,
+        "Name": "Triple Bite",
+        "Type": 1,
+        "DamageFactor": 0.76,
+        "BaseHitChance": 99,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 30,
+        "Name": "Precise Scratch",
+        "Type": 0,
+        "DamageFactor": 0.48,
+        "BaseHitChance": 109,
+        "ArmorPenetrationPercent": -2,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 31,
+        "Name": "Harmful Fangs",
+        "Type": 1,
+        "DamageFactor": 0.92,
+        "BaseHitChance": 94,
+        "ArmorPenetrationPercent": -1,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 32,
+        "Name": "Devouring Howl",
+        "Type": 4,
+        "DamageFactor": 0.33,
+        "BaseHitChance": 120,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 13,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 28
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 29
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 28
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 28
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 28
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 32
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 28
+          }
+        ]
+      },
+      {
+        "Id": 14,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 30
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 30
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 30
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 31
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 30
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 30
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 32
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 31
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 8,
+    "Name": "Volantur",
+    "Description": "Volantur is the Ent King. He is very specialized warrior. His attacks are very dangerous because of high damage and high armor overpassing. To survive tha battle with him you will need reflex to avoid his attacks as often as you can. Volantur is also very quick enemy. to successfully hit him you will need a lot of precision. As a King of Trees and Vines he can Entangle you with one of his abilities that causes Stun. Make shure to Block this attack when its incomeing. Volantur is known for his cruel strategy. He likes Stuns enemies and then hit them with Strong attacks when they cannot move. Beware of it.",
+    "Type": 0,
+    "EnemyStageName": "Sorrow Wetlands",
+    "Tier": 2,
+    "AvatarImageNumber": 23,
+    "StageBackgroundImageNumber": 23,
+    "GoldReward": 60,
+    "RankPointsReward": 50,
+    "Attributes": {
+      "Damage": 25,
+      "Precision": 0,
+      "Specialization": 32,
+      "MaxHealth": 450,
+      "Reflex": 28,
+      "Defense": -15
+    },
+    "Skills": [
+      {
+        "Id": 33,
+        "Name": "Branch Strike",
+        "Type": 0,
+        "DamageFactor": 0.38,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 34,
+        "Name": "Fury Stalks",
+        "Type": 1,
+        "DamageFactor": 0.68,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 35,
+        "Name": "Striking Vines",
+        "Type": 0,
+        "DamageFactor": 0.41,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 36,
+        "Name": "Whirling Sprouts",
+        "Type": 1,
+        "DamageFactor": 0.84,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 37,
+        "Name": "Entangle",
+        "Type": 4,
+        "DamageFactor": 0.26,
+        "BaseHitChance": 130,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 15,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 33
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 33
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 37
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 33
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 33
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 34
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 33
+          }
+        ]
+      },
+      {
+        "Id": 16,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 35
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 35
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 35
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 37
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 36
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 35
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 37
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 35
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 9,
+    "Name": "Chimera",
+    "Description": "One of the most dangerous enemies. Its atacks are very precise and it is quite impossible to avoid them. Luckly damage of its atacks can be easily reduced by defense. Instead of avoiding attacks Chimera has high defense to protect itself. To conquer it effectively you should maximize your specialization. Chimeras tail is double dangerous, because it can hit very hard and also has sneak head that can bite you with Poisoned Teeth's. It would cause you to be Stunned for one round. You have to watch carefully its behavior and block this stunning attack, because after it chimera can easily hit you very strong.",
+    "Type": 0,
+    "EnemyStageName": "Forsaken Morath Caverns",
+    "Tier": 2,
+    "AvatarImageNumber": 24,
+    "StageBackgroundImageNumber": 24,
+    "GoldReward": 75,
+    "RankPointsReward": 50,
+    "Attributes": {
+      "Damage": 25,
+      "Precision": 32,
+      "Specialization": -10,
+      "MaxHealth": 450,
+      "Reflex": -7,
+      "Defense": 28
+    },
+    "Skills": [
+      {
+        "Id": 38,
+        "Name": "Smashing Tail",
+        "Type": 0,
+        "DamageFactor": 0.42,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 39,
+        "Name": "Lions Bite",
+        "Type": 1,
+        "DamageFactor": 0.9,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 40,
+        "Name": "Sneaky Tail Bait",
+        "Type": 0,
+        "DamageFactor": 0.5,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 41,
+        "Name": "Flame Breath",
+        "Type": 1,
+        "DamageFactor": 1.18,
+        "BaseHitChance": 110,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 42,
+        "Name": "Poisoned Teeth",
+        "Type": 4,
+        "DamageFactor": 0.64,
+        "BaseHitChance": 130,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 17,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 38
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 38
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 38
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 39
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 38
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 38
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 42
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 38
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 42
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 39
+          }
+        ]
+      },
+      {
+        "Id": 18,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 40
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 40
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 40
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 42
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 41
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 40
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 40
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 42
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 40
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 42
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 41
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 10,
+    "Name": "Training Manequin T2 Mechanics",
+    "Description": "This is Training Manequin that shows Stunning Attacks. Stunning Attacks, when hits, will make you unable to action in next round. This is dangerous mechanic because when you are stunned the damage you takes are much higher, and enemy cannot miss attack on you (no matter how high is your reflex). Thats why it is very important to use Block skill from your skill bar to block Stunning Attacks. This manequin has special Attacks Pattern as follows: 1x Simple Attack (4 dmg), 1x Strong Attack (8 dmg), 1x Stunning Attack (2 dmg and make you stunn), 1x Strong Attack (8 dmg - if you are not Stunned; 16 dmg if you are Stunned;). When boss has prepared Stunning Attack for round there will be violet icon with blac spiral above his card that signalizes this mechanic. Start match with this manequin to get safely expirience about this Tier 2 new mechanics.",
+    "Type": 0,
+    "EnemyStageName": "Training Grounds",
+    "Tier": 2,
+    "AvatarImageNumber": 61,
+    "StageBackgroundImageNumber": 61,
+    "GoldReward": 0,
+    "RankPointsReward": 0,
+    "Attributes": {
+      "Damage": 1,
+      "Precision": 500,
+      "Specialization": 500,
+      "MaxHealth": 200,
+      "Reflex": -100,
+      "Defense": 50
+    },
+    "Skills": [
+      {
+        "Id": 43,
+        "Name": "Simple Attack [pattern I]",
+        "Type": 0,
+        "DamageFactor": 4,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 44,
+        "Name": "Stunning Attack [pattern I]",
+        "Type": 4,
+        "DamageFactor": 2,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 45,
+        "Name": "Strong Attack [pattern I]",
+        "Type": 1,
+        "DamageFactor": 7,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 19,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 43
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 45
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 44
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 45
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": true
+  },
+  {
+    "Id": 11,
+    "Name": "Harpy",
+    "Description": "Harpies are sneaky enemies with very high precision and perfect ability to avoid attacks. Besides theirs Strong Attacks she can Hypnotize you that makes you Stunned for next round. But the most dangerous is charge attack, because it also makes you Stunned for one round. Remember that when you are stunned you will take much more damage from enemy attacks. But if you counters she's charge, Harpy would be vulnerable to damage and there is no way to miss her so it is important to take chance of it and damage down her faster. ",
+    "Type": 0,
+    "EnemyStageName": "Old Mountain Grotto",
+    "Tier": 3,
+    "AvatarImageNumber": 31,
+    "StageBackgroundImageNumber": 31,
+    "GoldReward": 175,
+    "RankPointsReward": 100,
+    "Attributes": {
+      "Damage": 30,
+      "Precision": 38,
+      "Specialization": 0,
+      "MaxHealth": 800,
+      "Reflex": 32,
+      "Defense": 0
+    },
+    "Skills": [
+      {
+        "Id": 46,
+        "Name": "Scratch",
+        "Type": 0,
+        "DamageFactor": 0.51,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 47,
+        "Name": "Vampire Bait",
+        "Type": 1,
+        "DamageFactor": 1.37,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 48,
+        "Name": "Wing Slap",
+        "Type": 0,
+        "DamageFactor": 0.57,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 49,
+        "Name": "Dangerous Claws",
+        "Type": 1,
+        "DamageFactor": 1.46,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 50,
+        "Name": "Cutting Clutches",
+        "Type": 0,
+        "DamageFactor": 0.61,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 51,
+        "Name": "Puncturing Sting",
+        "Type": 1,
+        "DamageFactor": 1.92,
+        "BaseHitChance": 120,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 52,
+        "Name": "Hypnosis",
+        "Type": 4,
+        "DamageFactor": 0.45,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 53,
+        "Name": "Whirling Wings",
+        "Type": 2,
+        "DamageFactor": 1.14,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 20,
+        "MinHealthPercentToTrigger": 66,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 46
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 46
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 47
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 46
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 52
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 47
+          }
+        ]
+      },
+      {
+        "Id": 21,
+        "MinHealthPercentToTrigger": 33,
+        "MaxHealthPercentToTrigger": 66,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 48
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 48
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 49
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 53
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 49
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 46
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 46
+          }
+        ]
+      },
+      {
+        "Id": 22,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 33,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 50
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 48
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 48
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 53
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 51
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 50
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 48
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 49
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 12,
+    "Name": "Saveriaxen",
+    "Description": "Legendary Demon with high defense and super precised attacks. He has ability to Posses enemies what makes them stunned. Sevariaxen has many dangerous strong attacks and many of them occurs directly after his Stunning abilities. So beware of his Charge, but if you counter it that will make Deamon Stunned for one round and you will deal him much more damage and easily hit him. Dont underestimate his strong attacks and stunning skills because of high damage they deals. If you equipp yourself with proper gear and lern countering enemy charge, you will have chance to beat him. ",
+    "Type": 0,
+    "EnemyStageName": "Crimson Garden",
+    "Tier": 3,
+    "AvatarImageNumber": 32,
+    "StageBackgroundImageNumber": 32,
+    "GoldReward": 180,
+    "RankPointsReward": 100,
+    "Attributes": {
+      "Damage": 30,
+      "Precision": 38,
+      "Specialization": 0,
+      "MaxHealth": 800,
+      "Reflex": -5,
+      "Defense": 32
+    },
+    "Skills": [
+      {
+        "Id": 54,
+        "Name": "Dark Blade",
+        "Type": 0,
+        "DamageFactor": 0.53,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 55,
+        "Name": "Demonic Curse",
+        "Type": 1,
+        "DamageFactor": 1.46,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 56,
+        "Name": "Hunting Daggers",
+        "Type": 0,
+        "DamageFactor": 0.61,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 57,
+        "Name": "Mind Ripping ",
+        "Type": 1,
+        "DamageFactor": 1.85,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 58,
+        "Name": "Cutting Darkness",
+        "Type": 0,
+        "DamageFactor": 0.67,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 59,
+        "Name": "Soul Devastation",
+        "Type": 1,
+        "DamageFactor": 2.12,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 60,
+        "Name": "Possession",
+        "Type": 4,
+        "DamageFactor": 0.51,
+        "BaseHitChance": 130,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 61,
+        "Name": "Demon's Rush",
+        "Type": 2,
+        "DamageFactor": 1.2,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 23,
+        "MinHealthPercentToTrigger": 66,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 54
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 61
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 55
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 54
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 54
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 55
+          }
+        ]
+      },
+      {
+        "Id": 24,
+        "MinHealthPercentToTrigger": 33,
+        "MaxHealthPercentToTrigger": 66,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 56
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 56
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 57
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 54
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 56
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 60
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 57
+          }
+        ]
+      },
+      {
+        "Id": 25,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 33,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 58
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 56
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 61
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 58
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 56
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 58
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 61
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 59
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 13,
+    "Name": "Luperius",
+    "Description": "Great Champion of Werewolfs. His thick skin protects him very well from damage. His claws ar really hard and sharp so he can easily overpass your defense. Luperius is great warrior that fight till end, and when his healt is getting lower he will be much more dangerous. In his Fury he can rush on you and make you stunned. This is how he charges on theirs enemies. Luperius is dangerous enemy so you have to pay attention of his attacks and prepare yourself well before fight. If you take your opportunity to counter his charge attack he will be stunned and you will have one round to deal as much damage as you can without any risk that you miss attack. ",
+    "Type": 0,
+    "EnemyStageName": "Darken Woodlands",
+    "Tier": 3,
+    "AvatarImageNumber": 33,
+    "StageBackgroundImageNumber": 33,
+    "GoldReward": 185,
+    "RankPointsReward": 200,
+    "Attributes": {
+      "Damage": 35,
+      "Precision": 0,
+      "Specialization": 40,
+      "MaxHealth": 1100,
+      "Reflex": -7,
+      "Defense": 35
+    },
+    "Skills": [
+      {
+        "Id": 62,
+        "Name": "Spike",
+        "Type": 0,
+        "DamageFactor": 0.49,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 63,
+        "Name": "Deep Stab",
+        "Type": 1,
+        "DamageFactor": 1.18,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 64,
+        "Name": "Dark Knife",
+        "Type": 0,
+        "DamageFactor": 0.51,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 65,
+        "Name": "Clapper Claw",
+        "Type": 1,
+        "DamageFactor": 1.21,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 66,
+        "Name": "Maul",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 78,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 67,
+        "Name": "Cleaving Fangs",
+        "Type": 1,
+        "DamageFactor": 1.33,
+        "BaseHitChance": 87,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 68,
+        "Name": "Shivering Howl",
+        "Type": 4,
+        "DamageFactor": 0.33,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": -3,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 69,
+        "Name": "Rushing Fury",
+        "Type": 2,
+        "DamageFactor": 0.91,
+        "BaseHitChance": 133,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 26,
+        "MinHealthPercentToTrigger": 66,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 62
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 62
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 63
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 62
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 62
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 69
+          }
+        ]
+      },
+      {
+        "Id": 27,
+        "MinHealthPercentToTrigger": 33,
+        "MaxHealthPercentToTrigger": 66,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 64
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 65
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 62
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 64
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 64
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 68
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 62
+          }
+        ]
+      },
+      {
+        "Id": 28,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 33,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 66
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 69
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 67
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 64
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 66
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 69
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 68
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 67
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 14,
+    "Name": "Arganthula",
+    "Description": "The great legendary spider queen is the most filthy incarnation of all fears. She is very quick so easily can avoid your attacks. Furthermore Arganthula's attacks are so strong that even high defense will not help to reduce them. The only chance you have is maximize your reflex to avoid them which is not so easy. She likes Spiderwebs which can stunn you as she's annother dangerous mechanic - Charge attack. To beat this abomination of nature you should prepare yourself really well with gear and tacticks. The fight will be long and will need your focus. One single mistake may be your last. Beware!",
+    "Type": 0,
+    "EnemyStageName": "Lair of Legendary Spider Queen",
+    "Tier": 3,
+    "AvatarImageNumber": 34,
+    "StageBackgroundImageNumber": 34,
+    "GoldReward": 200,
+    "RankPointsReward": 200,
+    "Attributes": {
+      "Damage": 35,
+      "Precision": 0,
+      "Specialization": 42,
+      "MaxHealth": 1300,
+      "Reflex": 37,
+      "Defense": -20
+    },
+    "Skills": [
+      {
+        "Id": 70,
+        "Name": "Bite",
+        "Type": 0,
+        "DamageFactor": 0.51,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 71,
+        "Name": "Strong Jaws",
+        "Type": 1,
+        "DamageFactor": 0.91,
+        "BaseHitChance": 120,
+        "ArmorPenetrationPercent": 12,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 72,
+        "Name": "Legs Beating",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 73,
+        "Name": "Deep Sting",
+        "Type": 1,
+        "DamageFactor": 0.99,
+        "BaseHitChance": 130,
+        "ArmorPenetrationPercent": 12,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 74,
+        "Name": "Wounding cut",
+        "Type": 0,
+        "DamageFactor": 0.57,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 75,
+        "Name": "Trample",
+        "Type": 1,
+        "DamageFactor": 1.05,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 12,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 76,
+        "Name": "Spiderweb",
+        "Type": 4,
+        "DamageFactor": 0.33,
+        "BaseHitChance": 140,
+        "ArmorPenetrationPercent": 12,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 77,
+        "Name": "Spider Stomp",
+        "Type": 2,
+        "DamageFactor": 0.77,
+        "BaseHitChance": 160,
+        "ArmorPenetrationPercent": 15,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 29,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 77
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 71
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 70
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 70
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 76
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 71
+          }
+        ]
+      },
+      {
+        "Id": 30,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 72
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 72
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 73
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 72
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 70
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 76
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 73
+          }
+        ]
+      },
+      {
+        "Id": 31,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 74
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 77
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 75
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 72
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 76
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 75
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 77
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 76
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 75
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 72
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 74
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 15,
+    "Name": "Training Manequin T3 Mechanics",
+    "Description": "This is Tier 3 Training Mannequin. He Shows how works new special mechanic on Tier 3 bosses - Charge attack. Charge attack is another boss attack that can stunn you. There is a difference between Stunning and Charge. Charge attack cannot be blocked by your Block Skill, it needs to be countered by you Counter Attack skill. Charge attacks are signalized by blue icon above enemy's card. If you don't counter Charge attack you will be Stunned fo next round and you will take a lot of damage from next Boss attack in his Pattern that will never misshits you. But if you counter Enemy Charge attack you will make the Boss Stunned! Stunned enemy also takes a lot of damage, you cannot misshits him and he will not able to perform his next skill. That's why countering Charge attack is so important. Many of Enemies has a lot of Health ant this is perfect chance to cast the most powerfull attacks on them to easily win fight!",
+    "Type": 0,
+    "EnemyStageName": "Training Grounds",
+    "Tier": 3,
+    "AvatarImageNumber": 61,
+    "StageBackgroundImageNumber": 61,
+    "GoldReward": 0,
+    "RankPointsReward": 0,
+    "Attributes": {
+      "Damage": 1,
+      "Precision": 500,
+      "Specialization": 500,
+      "MaxHealth": 300,
+      "Reflex": -100,
+      "Defense": 50
+    },
+    "Skills": [
+      {
+        "Id": 78,
+        "Name": "Simple Attack",
+        "Type": 0,
+        "DamageFactor": 9,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 79,
+        "Name": "Strong Attack",
+        "Type": 1,
+        "DamageFactor": 27,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 80,
+        "Name": "Charge",
+        "Type": 2,
+        "DamageFactor": 18,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 32,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 78
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 78
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 79
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 78
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 80
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 79
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": true
+  }
+]

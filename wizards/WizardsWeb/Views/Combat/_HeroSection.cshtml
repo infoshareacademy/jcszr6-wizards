@@ -13,7 +13,7 @@
 }
 <div class="col-12 participant-container">
 
-    <img class="not-dragable-image@(heroSectionClasses)" src="/Images/Hero/Avatars/Wizard-@(Model.HeroSection.AvatarImageNumber).png" width="100%" height="100%">
+    <img class="not-dragable-image@(heroSectionClasses)" src="/Images/Hero/Avatars/@(Model.HeroSection.Profession.ToString())-@(Model.HeroSection.AvatarImageNumber).png" width="100%" height="100%">
     
     @if (Model.Status == StageStatus.ConcludedEnemyWins)
     {

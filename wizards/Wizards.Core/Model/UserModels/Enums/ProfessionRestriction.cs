@@ -4,6 +4,8 @@ public enum ProfessionRestriction
 {
     All = 0,
     Sorcerer,
-    Necromancer
+    Necromancer,
+    Illusionist,
+    Priest
 }
 

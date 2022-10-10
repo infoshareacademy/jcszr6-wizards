@@ -31,6 +31,11 @@ public class PlayerRepository : IPlayerRepository
         return await _wizardsContext.Players
             .Include(p => p.Heroes)
                 .ThenInclude(h => h.Attributes)
+            .Include(p => p.Heroes)
+                .ThenInclude(h => h.Inventory)
+                    .ThenInclude(hi => hi.Item)
+            .Include(p => p.Heroes)
+                .ThenInclude(h => h.Statistics)
             .SingleOrDefaultAsync(p => p.Id == id);
     }
 

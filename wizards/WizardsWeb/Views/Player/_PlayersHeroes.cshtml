@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Wizards.Core.ModelExtensions
 @model WizardsWeb.ModelViews.PlayerModelViews.PlayerDetailsModelView
 
 <div class="row">
@@ -17,54 +18,38 @@
             </li>
 
             <table class="table table-borderless table-hover bg-paper-color">
-                <thead>
-                    <tr>
-                        <th class="text-center">
-                            <label asp-for="Heroes.First().AvatarImageNumber">Avatar</label>
-                        </th>
-                        <th class="text-center">
-                            <label asp-for="Heroes.First().Profession">Profession</label>
-                        </th>
-                        <th class="text-center">
-                            <label asp-for="Heroes.First().NickName">Nick Name</label>
-                        </th>
-                        <th class="text-center">
-                            <label>Basic information</label>
-                        </th>
-                        <th class="text-center">
-                           <label>Options</label>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody> 
+
+                <tbody>
                     @foreach (var hero in Model.Heroes)
                     {
-                        var avatar = $"Images/Hero/Avatars/Wizard-{hero.AvatarImageNumber}.png";
+                        var avatar = $"Images/Hero/Avatars/{hero.Profession.ToString()}-{hero.AvatarImageNumber}.png";
                         <tr>
                             <td class="align-middle">
                                 <img src="~/@avatar" class="static-image-not-dragable" width="150px" height="auto" />
                             </td>
                             <td class="align-middle text-center">
-                                <img src="~/Images/Hero/Professions/@(hero.Profession).png" class="static-image-not-dragable" width="80px" height="80px"/>
-                                <br class="p-0 m-0"/>
+                                <img src="~/Images/Hero/Professions/@(hero.Profession).png" class="static-image-not-dragable" width="80px" height="80px" />
+                                <br class="p-0 m-0" />
                                 <span>@hero.Profession</span>
                             </td>
                             <td class="align-middle font-weight-bold">
                                 @hero.NickName
                             </td>
                             <td class="align-middle">
-                                <span>Remaining energy: @hero.Attributes.DailyRewardEnergy</span>
-                                <br class="px-1 m-0"/>
+                                <span>Remaining daily rewards: @hero.Attributes.DailyRewardEnergy</span>
+                                <br class="px-1 m-0" />
                                 <span>Gold: @($"{hero.Gold:#,##0}")</span>
-                                <br class="px-1 m-0"/>
+                                <br class="px-1 m-0" />
+                                <span>Item Tier: @($"{hero.GetAverageItemTier():0.00}")</span>
+                                <br class="px-1 m-0" />
                             </td>
                             <td class="align-middle text-right">
-                                    <a type="button" class="gbtn gbtn-magical" asp-controller="Selector" asp-action="SelectHero" asp-route-id="@hero.Id" asp-route-actionName="Details">
-                                        Play Character
-                                    </a>
-                                    <a type="button" class="gbtn gbtn-danger" asp-controller="Selector" asp-action="SelectHero" asp-route-id="@hero.Id" asp-route-actionName="Delete">
-                                        Delete
-                                    </a>
+                                <a type="button" class="gbtn gbtn-magical" asp-controller="Selector" asp-action="SelectHero" asp-route-id="@hero.Id" asp-route-actionName="Details">
+                                    Play Character
+                                </a>
+                                <a type="button" class="gbtn gbtn-danger" asp-controller="Selector" asp-action="SelectHero" asp-route-id="@hero.Id" asp-route-actionName="Delete">
+                                    Delete
+                                </a>
                             </td>
                         </tr>
                     }

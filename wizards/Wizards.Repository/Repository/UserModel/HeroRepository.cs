@@ -17,7 +17,14 @@ public class HeroRepository : IHeroRepository
 
     public async Task<List<Hero>> GetAll()
     {
-        return await _wizardsContext.Heroes.ToListAsync();
+        return await _wizardsContext.Heroes
+            .Include(h => h.Skills)
+            .Include(h => h.Statistics)
+            .Include(h => h.Attributes)
+            .Include(h => h.Inventory)
+                .ThenInclude(hi =>hi.Item)
+                    .ThenInclude(i =>i.Attributes)
+            .ToListAsync();
     }
 
     public async Task<Hero?> Get(int id)

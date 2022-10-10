@@ -34,6 +34,6 @@ public class WizardsContext : IdentityDbContext<Player, IdentityRole<int>, int>
 
         modelBuilder.ConfigureEntities();
 
-        modelBuilder.DataSeed();
+        //modelBuilder.DataSeed();
     }
 }
