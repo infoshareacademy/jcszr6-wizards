@@ -1,27 +1,20 @@
-﻿using Wizards.Core.Interfaces;
-using Wizards.Core.Interfaces.UserModelInterfaces;
-using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Interfaces.UserModelInterfaces;
 
 namespace Wizards.Services.SearchService;
 
 public class SearchService : ISearchService
 {
-
     private readonly IPlayerRepository _playerRepository;
 
-    private readonly IHeroRepository _heroRepository;
-
-    public SearchService(IPlayerRepository playerRepository, IHeroRepository heroRepository)
+    public SearchService(IPlayerRepository playerRepository)
     {
         _playerRepository = playerRepository;
-        _heroRepository = heroRepository;
     }
 
     public async Task<List<PlayerForRankingDto>> GetAll()
     {
         var players = await _playerRepository.GetAll();
-        var orderPlayers = players.OrderByDescending(n => n.Heroes.Sum(h=>h.Statistics.RankPoints)).ToList(); 
+        var orderPlayers = players.OrderByDescending(n => n.Heroes.Sum(h => h.Statistics.RankPoints)).ToList();
         var result = new List<PlayerForRankingDto>();
         int counter = 1;
         foreach (var player in orderPlayers)
@@ -51,7 +44,7 @@ public class SearchService : ISearchService
         var orderPlayers = await GetAll();
         var result = orderPlayers
             .Where(p => p.Player.Heroes
-                .Any(h=>h.NickName
+                .Any(h => h.NickName
                     .ToLower()
                     .Contains(heroName.ToLower()))).ToList();
 
@@ -70,7 +63,7 @@ public class SearchService : ISearchService
 
         return result;
     }
-    
+
     public async Task<List<PlayerForRankingDto>> ByEmail(string email)
     {
         var orderPlayers = await GetAll();
@@ -80,5 +73,37 @@ public class SearchService : ISearchService
                 .Contains(email.ToLower())).ToList();
 
         return result;
+    }
+
+    public async Task<List<PlayerForRankingDto>> FilteringForApi(string? userName, string? heroName, int? fromRankingPoints, int? toRankingPoints)
+    {
+        var allPlayers = await GetAll();
+        var filtredPlayers = allPlayers;
+
+        if (!String.IsNullOrEmpty(userName))
+        {
+            filtredPlayers = filtredPlayers.Where(u => u.Player.UserName
+                .Contains(userName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+        }
+
+        if (!String.IsNullOrEmpty(heroName))
+        {
+            filtredPlayers = filtredPlayers.Where(p => p.Player.Heroes
+                .Any(h => h.NickName
+                    .ToLower()
+                    .Contains(heroName.ToLower())))
+                .ToList();
+        }
+
+        if (fromRankingPoints >= 0 && toRankingPoints >= fromRankingPoints)
+        {
+            filtredPlayers = filtredPlayers.Where(p =>
+                p.Player.Heroes.Select(h => h.Statistics.RankPoints)
+                    .Sum() >= fromRankingPoints &&
+                p.Player.Heroes.Select(h => h.Statistics.RankPoints)
+                    .Sum() <= toRankingPoints).ToList();
+        }
+        return filtredPlayers;
     }
 }
