@@ -16,7 +16,6 @@ public class InitialDataUsersFactory : IInitialDataUsersFactory
         result.Add(new Player() { UserName = "Pawel-Grajnert", Email = "pawel.grajnert@wizard.com", DateOfBirth = new DateTime(1900,01,01) }, "Pa$$word2022");
         result.Add(new Player() { UserName = "Jakub-Oczko", Email = "jakub.oczko@wizard.com", DateOfBirth = new DateTime(1900,01,01) }, "Pa$$word2022");
         result.Add(new Player() { UserName = "Adrian-Zamyslowski", Email = "adrian.zamyslowski@wizard.com", DateOfBirth = new DateTime(1900, 01, 01) }, "Pa$$word2022");
-        
         return result;
     }
 

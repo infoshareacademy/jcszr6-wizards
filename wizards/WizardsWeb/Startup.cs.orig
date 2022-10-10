@@ -12,9 +12,12 @@ using Wizards.Services.ServiceRegistration;
 using Wizards.Repository.ServiceRegistration;
 using WizardsWeb.Extensions;
 using Microsoft.AspNetCore.Http;
+<<<<<<< HEAD
+using Wizards.Repository.GameDataManagement;
+=======
 using Microsoft.Extensions.Logging;
 using Serilog;
-using Wizards.Repository.GameDataManagement;
+>>>>>>> develop-web
 
 namespace WizardsWeb;
 
@@ -70,8 +73,27 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IGameDataManager gameDataManager, ILoggerFactory loggerFactory)
+<<<<<<< HEAD
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IGameDataManager gameDataManager)
     {
+=======
+    public void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env,
+        WizardsContext wizardsContext,
+        IInitialDataInjector injector,
+        ILoggerFactory loggerFactory)
+    {
+        wizardsContext.Database.Migrate();
+
+        Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(Configuration)
+            .Enrich.FromLogContext()
+            .CreateLogger();
+
+        loggerFactory.AddSerilog();
+
+>>>>>>> develop-web
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -84,14 +106,7 @@ public class Startup
         }
 
         gameDataManager.ApplicationStartupScheduleAsync(env.IsDevelopment()).Wait();
-
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(Configuration)
-            .Enrich.FromLogContext()
-            .CreateLogger();
-
-        loggerFactory.AddSerilog();
-
+        
         app.UseMiddleware<MyExceptionHandler>();
 
         app.Use(async (context, next) =>
