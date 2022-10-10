@@ -1,7 +1,4 @@
-﻿using Wizards.Core.Interfaces;
-using Wizards.Core.Interfaces.UserModelInterfaces;
-using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
+﻿using Wizards.Core.Interfaces.UserModelInterfaces;
 
 namespace Wizards.Services.SearchService;
 
@@ -9,12 +6,9 @@ public class SearchService : ISearchService
 {
     private readonly IPlayerRepository _playerRepository;
 
-    private readonly IHeroRepository _heroRepository;
-
-    public SearchService(IPlayerRepository playerRepository, IHeroRepository heroRepository)
+    public SearchService(IPlayerRepository playerRepository)
     {
         _playerRepository = playerRepository;
-        _heroRepository = heroRepository;
     }
 
     public async Task<List<PlayerForRankingDto>> GetAll()
@@ -84,11 +78,32 @@ public class SearchService : ISearchService
     public async Task<List<PlayerForRankingDto>> FilteringForApi(string? userName, string? heroName, int? fromRankingPoints, int? toRankingPoints)
     {
         var allPlayers = await GetAll();
-        var filtering = allPlayers;
+        var filtredPlayers = allPlayers;
 
         if (!String.IsNullOrEmpty(userName))
         {
-            filtering = filtering.Where(u => u.Player.UserName.Contains(userName, StringComparison.OrdinalIgnoreCase)).ToList();
+            filtredPlayers = filtredPlayers.Where(u => u.Player.UserName
+                .Contains(userName, StringComparison.OrdinalIgnoreCase))
+                .ToList();
         }
+
+        if (!String.IsNullOrEmpty(heroName))
+        {
+            filtredPlayers = filtredPlayers.Where(p => p.Player.Heroes
+                .Any(h => h.NickName
+                    .ToLower()
+                    .Contains(heroName.ToLower())))
+                .ToList();
+        }
+
+        if (fromRankingPoints >= 0 && toRankingPoints >= fromRankingPoints)
+        {
+            filtredPlayers = filtredPlayers.Where(p =>
+                p.Player.Heroes.Select(h => h.Statistics.RankPoints)
+                    .Sum() >= fromRankingPoints &&
+                p.Player.Heroes.Select(h => h.Statistics.RankPoints)
+                    .Sum() <= toRankingPoints).ToList();
+        }
+        return filtredPlayers;
     }
 }

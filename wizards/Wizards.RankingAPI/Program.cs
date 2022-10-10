@@ -1,3 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Repository;
+using Wizards.Repository.Repository.UserModel;
+using Wizards.Repository.ServiceRegistration;
+using Wizards.Services.SearchService;
+using Wizards.Services.ServiceRegistration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +15,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddTransient<ISearchService, SearchService>();
+builder.Services.AddTransient<IPlayerRepository, PlayerRepository>();
+
+var connectionString = builder.Configuration.GetConnectionString("WizardDatabase");
+builder.Services.AddDbContext<WizardsContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

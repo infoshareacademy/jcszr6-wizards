@@ -25,7 +25,7 @@ namespace Wizards.RankingAPI.Controllers
             [FromQuery] int? fromRankingPoints,
             [FromQuery] int? toRankingPoints)
         {
-            var allPlayers = await _searchService.GetAll();
+            var allPlayers = await _searchService.FilteringForApi(userName, heroName, fromRankingPoints, toRankingPoints);
             var allPlayersDto = _mapper.Map<List<RankingRecordDto>>(allPlayers);
             return Ok(allPlayersDto);
         }
