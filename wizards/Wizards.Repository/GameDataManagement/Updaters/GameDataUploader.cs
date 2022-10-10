@@ -156,7 +156,7 @@ public class GameDataUploader : IGameDataUploader
         SetUpToDate(path);
     }
 
-    public async Task UpdateHeroAttributes(bool balanceOrFixUpdate, bool noDailyRewards = false)
+    public async Task UpdateHeroAttributes(bool balanceOrFixUpdate, bool resetDailyRewards = true)
     {
         var path = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "CoreAttributes.json");
 
@@ -173,7 +173,7 @@ public class GameDataUploader : IGameDataUploader
                 break;
             }
 
-            if (!noDailyRewards)
+            if (resetDailyRewards)
             {
                 hero.Attributes.DailyRewardEnergy = heroAttributes.DailyRewardEnergy;
             }

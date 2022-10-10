@@ -60,7 +60,7 @@ public class GameDataManager : IGameDataManager
         await _gameDataUploader.AddOrUpdateSkillsFromFileAsync();
         await _gameDataUploader.AddOrUpdateItemsFromFileAsync();
         await _gameDataUploader.AddOrUpdateEnemiesFromFileAsync();
-        await _gameDataUploader.UpdateHeroAttributes(true, true);
+        await _gameDataUploader.UpdateHeroAttributes(true, false);
     }
 
     public async Task FixingUpdateAsync()

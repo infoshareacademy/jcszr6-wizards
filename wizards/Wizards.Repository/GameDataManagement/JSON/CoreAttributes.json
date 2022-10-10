@@ -1,6 +1,6 @@
 [
   {
-    "Id": 1,
+    "Id": 0,
     "DailyRewardEnergy": 10,
     "Damage": 10,
     "Precision": 5,
@@ -10,7 +10,7 @@
     "Defense": 0
   },
   {
-    "Id": 2,
+    "Id": 1,
     "DailyRewardEnergy": 10,
     "Damage": 10,
     "Precision": 0,
@@ -20,7 +20,7 @@
     "Defense": 5
   },
   {
-    "Id": 3,
+    "Id": 2,
     "DailyRewardEnergy": 10,
     "Damage": 5,
     "Precision": 5,

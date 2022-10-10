@@ -36,6 +36,8 @@ public class Startup
 
         services.AddValidators();
         services.AddModelServices();
+        services.AddQuartzSchedule();
+
         services.AddGamePlayServices();
 
         // External Packages Configuration
