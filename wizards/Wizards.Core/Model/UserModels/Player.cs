@@ -9,6 +9,7 @@ public class Player : IdentityUser<int>
     public int ActiveItemId { get; set; }
 
     public DateTime DateOfBirth { get; set; }
+    public int MusicVolume { get; set; }
 
     public List<Hero> Heroes = new();
 }

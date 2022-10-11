@@ -11,5 +11,7 @@ namespace Wizards.Services.PlayerService
         Task Update(Player player);
         Task ChangePassword(ClaimsPrincipal user, string currentPassword, string newPassword);
         Task<Player> Get(ClaimsPrincipal user);
+        Task SetMusicVolume(ClaimsPrincipal user, int volumeValue);
+        Task<int> GetMusicVolume(ClaimsPrincipal user);
     }
 }

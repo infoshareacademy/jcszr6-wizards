@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Wizards.Core.Model.UserModels
+@inject SignInManager<Player> SignInManager
+
+@{
+    string controller = ViewContext.RouteData.Values["Controller"]?.ToString();
+}
+
+@if (SignInManager.IsSignedIn(User) && (controller == "Combat" || controller == "Exploration"))
+{
+    <div style="width: auto ; height: auto;">
+        <form class="p-0 m-0 text-center">
+            <label>Music Volume</label>
+            <input type="range" min="0" max="100" step="1" id="volume-range">
+        </form>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                var audioItems = document.getElementsByTagName("audio");
+                for (var i = 0; i < audioItems.length; i++) {
+                    audioItems[i].volume = this.responseText / 300;
+                }
+                document.getElementById("volume-range").value = this.responseText;
+            }
+            xhttp.open("GET", "/Player/GetVolume", true);
+            xhttp.send();
+        });
+
+        $(document).ready(function(){
+            $("#volume-range").click(function() {
+                var volumeNumber = document.getElementById('volume-range').value;
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", "/Player/SetVolume/" + volumeNumber, true);
+                xhttp.send();
+
+                var audioItems = document.getElementsByTagName("audio");
+                for (var i = 0; i < audioItems.length; i++) {
+                    audioItems[i].volume = volumeNumber / 300;
+                }
+            });
+        });
+    </script>
+}
