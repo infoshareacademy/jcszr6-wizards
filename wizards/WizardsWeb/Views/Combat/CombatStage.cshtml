@@ -1,38 +1,33 @@
 ﻿@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
-<body class="bg-arena not-selectable" 
+<body class="bg-arena not-selectable"
       style="background-image: url(/GraphicAssets/ArenaBackground/StageBackground-@(Model.BackgroundImageNumber).jpg);">
-<div class="col-12 p-4">
-    <div class="row">
+    <audio id="battle-music" loop="true" autoplay="true">
+        <source src="Sound/Titan-battle.mp3">
+    </audio>
+    <audio id="fanfare-win">
+        <source src="Sound/Match-victory.mp3">
+    </audio>
+    <audio id="fanfare-lost">
+        <source src="Sound/Match-failed.mp3">
+    </audio>
 
-        <!-- HERO Left Section -->
-        <div class="col-1 p-1 hero-section-width" style="width: 420px;">
-            <partial name="_HeroSection" model="@Model"/>
-        </div>
 
-        <!-- REPORT/ACTIONS Center Section -->
-        <div class="col p-1">
-            <div class="col-12 text-center bg-paper py-2 h4">@Model.Name</div>
-            <div class="center-section">
-                <partial name="_EnemyHPBar" model="@Model.EnemySection"/>
-                <partial name="_LogTable" model="@Model"/>
-                <partial name="_HeroHPBar" model="Model.HeroSection"/>
-                <partial name="_HeroSkillBar" model="Model"/>
-            </div>
-        </div>
-
-        <!-- ENEMY Right Section -->
-        <div class="col-1 p-1" style="width: 477px;">
-            <partial name="_EnemySection" model="@Model"/>
-        </div>
+    <div id="content-container" class="col-12 p-4">
+        <partial name="_CombatContent" model="@Model" />
     </div>
-</div>
-
-<partial name="_FinishMatchModals" model="Model"/>
-
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous">
+</script>
+
+<script>
+    function combatMusicVolume() {
+        document.getElementById("battle-music").volume = 0.10;
+        document.getElementById("fanfare-win").volume = 0.25;
+        document.getElementById("fanfare-lost").volume = 0.25;
+    }
+    window.onload = combatMusicVolume;
 </script>

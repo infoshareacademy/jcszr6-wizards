@@ -35,6 +35,7 @@ public class CombatController : Controller
 
         return View("CombatStage", battleStage);
     }
+
     public async Task<IActionResult> CreateNewMatch(int enemyId)
     {
         await _stageService.CreateNewMatchAsync(User.GetId(), enemyId, false);
@@ -51,6 +52,24 @@ public class CombatController : Controller
         await _stageService.CommitRoundAsync(User.GetId(), nextHeroSkillId);
 
         return RedirectToAction("Index");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> CommitRoundPartially(int id)
+    {
+        await _stageService.CommitRoundAsync(User.GetId(), id);
+
+        return RedirectToAction("IndexPartial");
+    }
+
+    public async Task<IActionResult> IndexPartial()
+    {
+        var combatStage = await _stageRepository.GetAsync(User.GetId());
+
+        var battleStage = _mapper.Map<CombatStageModelView>(combatStage);
+        combatStage.LastRoundResult = null;
+
+        return PartialView("_CombatContent", battleStage);
     }
 
     public async Task<IActionResult> FinishMatch()
