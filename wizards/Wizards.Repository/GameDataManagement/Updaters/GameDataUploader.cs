@@ -237,24 +237,7 @@ public class GameDataUploader : IGameDataUploader
 
                 behaviorPatternToUpdate.MaxHealthPercentToTrigger = behaviorPattern.MaxHealthPercentToTrigger;
                 behaviorPatternToUpdate.MinHealthPercentToTrigger = behaviorPattern.MinHealthPercentToTrigger;
-
-                foreach (var skillSequenceStep in behaviorPattern.SequenceOfSkillsId)
-                {
-                    if (behaviorPatternToUpdate.SequenceOfSkillsId.Any(ss =>
-                            ss.SequenceStepId == skillSequenceStep.SequenceStepId))
-                    {
-                        var skillSequenceStepToUpdate =
-                            behaviorPatternToUpdate.SequenceOfSkillsId.SingleOrDefault(ss =>
-                                ss.SequenceStepId == skillSequenceStep.SequenceStepId);
-
-                        skillSequenceStepToUpdate.SequenceStepId = skillSequenceStep.SequenceStepId;
-                        skillSequenceStepToUpdate.SkillId = skillSequenceStep.SkillId;
-                    }
-                    else
-                    {
-                        behaviorPatternToUpdate.SequenceOfSkillsId.Add(skillSequenceStep);
-                    }
-                }
+                behaviorPatternToUpdate.SequenceOfSkillsId = behaviorPattern.SequenceOfSkillsId;
             }
             else
             {
