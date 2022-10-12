@@ -1,6 +1,19 @@
 @{
     ViewData["Title"] = "404 - Not found";
 }
-<div style="width: 100%; height: 100%; padding: 0px; margin: 0px;">
-    <img class="static-image-not-dragable" src="~/images/404NotFoundGraphic.jpg" height="100%" width="100%"/>
-</div>
+
+<style>
+    .error-404-card {
+        background-image: url("/Images/404NotFoundGraphic.jpg");
+        background-repeat: no-repeat;
+        background-attachment: inherit;
+        background-size: 80% auto;
+        background-position: center top;
+
+        display: block;
+        width: 100%;
+        height: 800px;
+    }
+</style>
+
+<div class="error-404-card"></div>
