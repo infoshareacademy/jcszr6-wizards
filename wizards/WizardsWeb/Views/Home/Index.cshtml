@@ -1,6 +1,9 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using Wizards.Core.Model.UserModels
+@{
     ViewData["Title"] = "Wizards Home";
 }
+@inject SignInManager<Player> SignInManager
 
 <style>
     .welcome-card {
@@ -21,9 +24,12 @@
         <br />
         <h3 class="font-weight-bolder" style="font-size: 43px">Do you want to become Wizard?</h3>
         <br /><br /><br /><br />
-        <h4 class="font-weight-bolder" style="font-size: 30px">
-            <a style="color: #0048aa" asp-controller="Player" asp-action="Create">Create new account</a> to begin or <br/>
-            <a style="color: #0048aa" asp-controller="Player" asp-action="Login">Login</a> to continue your journey!
-        </h4>
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <h4 class="font-weight-bolder" style="font-size: 30px">
+                <a style="color: #0048aa" asp-controller="Player" asp-action="Create">Create new account</a> to begin or <br/>
+                <a style="color: #0048aa" asp-controller="Player" asp-action="Login">Login</a> to continue your journey!
+            </h4>
+        }
     </div>
 </div>
