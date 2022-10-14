@@ -4,5 +4,5 @@ namespace Wizards.GamePlay.Factories;
 
 public interface ICombatStageFactory
 {
-    public Task<CombatStage> CreateCombatStageAsync(int heroId, int enemyId, bool isTraining);
+    public Task<CombatStage> CreateCombatStageAsync(int heroId, int enemyId);
 }

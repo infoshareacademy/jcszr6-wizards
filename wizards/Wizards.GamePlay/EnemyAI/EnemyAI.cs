@@ -54,7 +54,7 @@ public class EnemyAI : IEnemyAI
     {
         var currentEnemyHealth = enemy.CurrentHealth;
         var maxEnemyHealth = enemy.Attributes.MaxHealth;
-        var currentHealthPercent = (int)Math.Round((((double)currentEnemyHealth / maxEnemyHealth) * 100), 0);
+        var currentHealthPercent = (int)Math.Round((((double)currentEnemyHealth / maxEnemyHealth) * 100), 0, MidpointRounding.ToPositiveInfinity);
         return currentHealthPercent;
     }
 }

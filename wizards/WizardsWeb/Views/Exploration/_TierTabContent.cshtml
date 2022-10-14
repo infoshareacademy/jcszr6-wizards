@@ -12,7 +12,7 @@
                 {
                     count++;
                     <div class="col-12 py-1 px-0">
-                        <button class="nav-link @(count == 1 ? "active" : "")" style="font-size: 15px;"
+                        <button class="nav-link @(count == 1 ? "active" : "")" style="font-size: 15px; width: 100%; text-align: left;"
                                 id="pills-enemy-@(enemy.Id)-tab" data-bs-toggle="pill" data-bs-target="#pills-enemy-@(enemy.Id)" type="button" role="tab" aria-controls="pills-tier1" aria-selected="@(count == 1 ? "true" : "false")">
                             @enemy.Name
                         </button>

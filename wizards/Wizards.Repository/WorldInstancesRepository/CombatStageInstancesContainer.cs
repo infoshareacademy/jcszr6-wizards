@@ -62,4 +62,9 @@ public static class CombatStageInstancesContainer
     {
         return Task.FromResult(CombatStages.Count);
     }
+
+    public static Task<bool> HasPlayerMatchOpened(int playerId)
+    {
+        return Task.FromResult(CombatStages.Any(s => s.Key == playerId));
+    }
 }

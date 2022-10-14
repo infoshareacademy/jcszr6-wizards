@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Repository.Repository.WorldModel;
+using Wizards.Services.Extentions;
 using WizardsWeb.ModelViews.CombatModelViews;
 
 namespace WizardsWeb.Extensions;
@@ -30,5 +33,13 @@ public static class CombatExtensions
     public static bool ShowSkillAttributes(this HeroSkillModelView heroSkill)
     {
         return (heroSkill.Type != HeroSkillType.Block && heroSkill.Type != HeroSkillType.Heal);
+    }
+
+    public static bool HasPlayerMatchOpened(this ClaimsPrincipal userPrincipal)
+    {
+        var stageRepository = new CombatStageInstancesRepository();
+        var userId = userPrincipal.GetId();
+
+        return stageRepository.HasPlayerMatchOpened(userId).Result;
     }
 }

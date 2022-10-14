@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.Tests", "Wizards.Te
 		{E7A6468F-DE00-4805-8B71-6916C31A3A98} = {E7A6468F-DE00-4805-8B71-6916C31A3A98}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizards.RankingAPI", "Wizards.RankingAPI\Wizards.RankingAPI.csproj", "{3A58C274-6D2A-4E33-BB19-26F148436125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wizards.RankingAPI", "Wizards.RankingAPI\Wizards.RankingAPI.csproj", "{3A58C274-6D2A-4E33-BB19-26F148436125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
