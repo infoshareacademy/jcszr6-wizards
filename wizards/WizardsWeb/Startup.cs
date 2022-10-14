@@ -14,6 +14,7 @@ using WizardsWeb.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Wizards.LogsSender.ServiceRegistration;
 using Wizards.Repository.GameDataManagement;
 
 namespace WizardsWeb;
@@ -41,6 +42,7 @@ public class Startup
         services.AddQuartzSchedule();
 
         services.AddGamePlayServices();
+        services.AddWizardLogger();
 
         // External Packages Configuration
         var connectionString = Configuration.GetConnectionString("WizardDatabase");

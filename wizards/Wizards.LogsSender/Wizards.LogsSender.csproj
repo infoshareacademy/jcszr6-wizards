@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WizardsWeb\WizardsWeb.csproj" />
+    <Folder Include="ServiceRegistration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Wizards.Core\Wizards.Core.csproj" />
   </ItemGroup>
 
 </Project>
