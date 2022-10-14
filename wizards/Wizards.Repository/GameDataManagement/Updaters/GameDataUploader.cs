@@ -250,7 +250,7 @@ public class GameDataUploader : IGameDataUploader
     {
         if (!File.Exists(path))
         {
-            return default;
+            File.WriteAllText(path, "[]");
         }
 
         try

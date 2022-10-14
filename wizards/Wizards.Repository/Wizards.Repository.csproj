@@ -9,7 +9,6 @@
   <ItemGroup>
     <None Remove="GameDataManagement\JSON\CoreAttributes.json" />
     <None Remove="GameDataManagement\JSON\Enemies.json" />
-    <None Remove="GameDataManagement\JSON\FilesEvidence.json" />
     <None Remove="GameDataManagement\JSON\Items.json" />
     <None Remove="GameDataManagement\JSON\Skills.json" />
     <None Remove="TextRepo\Json\RestrictedWords.json" />
@@ -24,9 +23,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="GameDataManagement\JSON\CoreAttributes.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="GameDataManagement\JSON\FilesEvidence.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="GameDataManagement\JSON\Skills.json">
