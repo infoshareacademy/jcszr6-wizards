@@ -2,14 +2,13 @@
 using LogCollector.Dto;
 using LogCollector.Models;
 
-namespace LogCollector.Mapping
+namespace LogCollector.Mapping;
+
+public class LogProfile : Profile
 {
-    public class LogProfile : Profile
+    public LogProfile()
     {
-        public LogProfile()
-        {
-            CreateMap<Log, LogDto>()
-                .ReverseMap();
-        }
+        CreateMap<Log, LogDto>()
+            .ReverseMap();
     }
 }

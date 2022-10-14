@@ -20,20 +20,16 @@ namespace LogCollector.Controllers
             _logDbContext = logDbContext;
             _mapper = mapper;
         }
-
-        public async Task<IActionResult> GetAllLogsAsync()
-        {
-            var logs = await _logDbContext.Logs.ToListAsync();
-            return Ok(logs);
-        }
-
+        
+        [HttpGet("api/logs/{id}")]
         public async Task<IActionResult> GetLogAsync(int id)
         {
             var log = await _logDbContext.Logs.SingleOrDefaultAsync(l => l.Id == id);
             var logDto = _mapper.Map<LogDto>(log);
             return Ok(logDto);
         }
-
+        
+        [HttpGet]
         public async Task<IActionResult> GetLogByProperty(
             [FromQuery] DateTime? startTimeStamp,
             [FromQuery] DateTime? endTimeStamp,
