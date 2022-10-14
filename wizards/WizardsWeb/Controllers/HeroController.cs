@@ -4,6 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Model.UserModels;
 using Wizards.Services.Extentions;
 using Wizards.Services.HeroService;
@@ -16,9 +17,9 @@ public class HeroController : Controller
 {
     private readonly IHeroService _heroService;
     private readonly IMapper _mapper;
-    private readonly ILogger<PlayerController> _logger;
+    private readonly IWizardsLogger _logger;
 
-    public HeroController(IHeroService heroService, IMapper mapper, ILogger<PlayerController> logger)
+    public HeroController(IHeroService heroService, IMapper mapper, IWizardsLogger logger)
     {
         _heroService = heroService;
         _mapper = mapper;
@@ -83,7 +84,7 @@ public class HeroController : Controller
     {
         if (!ModelState.IsValid)
         {
-            _logger.LogInformation($"{heroCreate.NickName} hero create failed", ModelState);
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information,$"{heroCreate.NickName} hero create failed", ModelState);
             return View(heroCreate);
         }
 
@@ -92,7 +93,7 @@ public class HeroController : Controller
         try
         {
             await _heroService.Add(User, hero);
-            _logger.LogInformation($"{heroCreate.NickName} hero create successful");
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{heroCreate.NickName} hero create successful");
             return RedirectToAction("SelectHero", "Selector", new { id = hero.Id, actionName = "Details" });
         }
         catch (Exception exception)
@@ -100,11 +101,11 @@ public class HeroController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{heroCreate.NickName} hero create failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{heroCreate.NickName} hero create failed {exception.GetType()}", ModelState);
             }
             else
             {
-                _logger.LogError($"{heroCreate.NickName} hero create failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Error, $"{heroCreate.NickName} hero create failed {exception.GetType()}", ModelState);
             }
             return View(heroCreate);
         }
@@ -140,7 +141,7 @@ public class HeroController : Controller
 
         if (!ModelState.IsValid)
         {
-            _logger.LogInformation($"{heroEdit.NickName} hero edit nick name failed", ModelState);
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{heroEdit.NickName} hero edit nick name failed", ModelState);
             return View(heroEdit);
         }
 
@@ -149,7 +150,7 @@ public class HeroController : Controller
         try
         {
             await _heroService.Update(originalHero.Id, hero);
-            _logger.LogInformation($"{heroEdit.NickName} hero edit nick name successful");
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{heroEdit.NickName} hero edit nick name successful");
             return RedirectToAction(nameof(Details));
         }
         catch (Exception exception)
@@ -157,11 +158,11 @@ public class HeroController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{heroEdit.NickName} hero edit nick name failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{heroEdit.NickName} hero edit nick name failed {exception.GetType()}", ModelState);
             }
             else
             {
-                _logger.LogError($"{heroEdit.NickName} hero edit nick name failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Error, $"{heroEdit.NickName} hero edit nick name failed {exception.GetType()}", ModelState);
             }
             return View(heroEdit);
         }
@@ -202,7 +203,7 @@ public class HeroController : Controller
         try
         {
             await _heroService.Update(originalHero.Id, hero);
-            _logger.LogInformation($"{heroEdit.NickName} hero edit avatar successful");
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero edit avatar successful");
             return RedirectToAction(nameof(Details));
         }
         catch (Exception exception)
@@ -210,11 +211,11 @@ public class HeroController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{heroEdit.NickName} hero edit avatar failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero edit avatar failed {exception.GetType()}", ModelState, exception);
             }
             else
             {
-                _logger.LogError($"{heroEdit.NickName} hero edit avatar failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero edit avatar failed {exception.GetType()}", ModelState, exception);
             }
             return View(heroEdit);
         }
@@ -247,14 +248,14 @@ public class HeroController : Controller
 
         if (!ModelState.IsValid)
         {
-            _logger.LogInformation($"{originalHero.NickName} hero delete failed", ModelState);
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero delete failed (The confirmation NickName not correct)", ModelState);
             return View(heroDelete);
         }
 
         try
         {
             await _heroService.Delete(originalHero.Id, confirmNickName);
-            _logger.LogInformation($"{originalHero.NickName} hero delete successful");
+            await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero delete successful");
             return RedirectToAction(nameof(Details), "Player");
         }
         catch (Exception exception)
@@ -262,11 +263,11 @@ public class HeroController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{originalHero.NickName} hero delete failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero delete failed {exception.GetType()}", ModelState);
             }
             else
             {
-                _logger.LogError($"{originalHero.NickName} hero delete failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<HeroController>(LogLevel.Information, $"{originalHero.NickName} hero delete failed {exception.GetType()}", ModelState);
             }
             return View(heroDelete);
         }

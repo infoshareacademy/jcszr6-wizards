@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Extentions;
 using Wizards.Services.HeroService;
@@ -24,14 +25,15 @@ public class MerchantController : Controller
     private readonly IHeroService _heroService;
     private readonly IItemService _itemService;
     private readonly IInventoryService _inventoryService;
-    private readonly ILogger<MerchantController> _logger;
+    private readonly IWizardsLogger _logger;
+
 
     public MerchantController(IMapper mapper,
                               IMerchantService merchantService,
                               IHeroService heroService,
                               IItemService itemService,
                               IInventoryService inventoryService,
-                              ILogger<MerchantController> logger)
+                              IWizardsLogger logger)
     {
         _mapper = mapper;
         _merchantService = merchantService;
@@ -61,7 +63,7 @@ public class MerchantController : Controller
         try
         {
             await _merchantService.BuyItemAsync(id, User);
-            _logger.LogInformation($"{hero.NickName} bought a {item.Name}", hero, item);
+            await _logger.SendLogAsync<MerchantController>(LogLevel.Information, $"{hero.NickName} bought a {item.Name}", hero, item);
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidModelException exception)
@@ -70,13 +72,15 @@ public class MerchantController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{hero.NickName} failed to buy an item {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<MerchantController>(LogLevel.Information, $"{hero.NickName} failed to buy an item {exception.GetType()}", ModelState, exception);
             }
-            else
-            {
-                _logger.LogError($"{hero.NickName} failed to buy an item  {exception.GetType()}", exception);
-            }
+
             return View(nameof(Index), merchantModel);
+        }
+        catch (Exception exception)
+        {
+            await _logger.SendLogAsync<MerchantController>(LogLevel.Error, $"{hero.NickName} failed to buy an item {exception.GetType()}", exception);
+            return RedirectToAction("Error500", "Home");
         }
     }
 
@@ -87,7 +91,7 @@ public class MerchantController : Controller
         try
         {
             await _merchantService.SellItemAsync(User);
-            _logger.LogInformation($"{hero.NickName} sold item {heroItem.Item.Name} successful");
+            await _logger.SendLogAsync<MerchantController>(LogLevel.Information, $"{hero.NickName} sold item {heroItem.Item.Name} successful");
             return RedirectToAction(nameof(Index));
         }
         catch (InvalidModelException exception)
@@ -96,14 +100,14 @@ public class MerchantController : Controller
             ModelState.AddModelErrorByException(exception);
             if (exception is InvalidModelException)
             {
-                _logger.LogInformation($"{hero.NickName} sell item failed {exception.GetType()}", ModelState);
+                await _logger.SendLogAsync<MerchantController>(LogLevel.Information, $"{hero.NickName} sell item failed {exception.GetType()}", ModelState, exception);
             }
-            else
-            {
-                _logger.LogError($"{hero.NickName} sell item failed {exception.GetType()}", exception);
-            }
-
             return View(nameof(Index), merchantModel);
+        }
+        catch (Exception exception)
+        {
+            await _logger.SendLogAsync<MerchantController>(LogLevel.Error, $"{hero.NickName} failed to buy an item  {exception.GetType()}", exception);
+            return RedirectToAction("Error500", "Home");
         }
     }
 

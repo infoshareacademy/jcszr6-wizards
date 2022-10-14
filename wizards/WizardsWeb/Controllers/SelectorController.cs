@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Services.AuthorizationElements.Selector;
@@ -14,15 +16,17 @@ public class SelectorController : Controller
 {
     private readonly IAuthorizationService _authorizationService;
     private readonly ISelector _selector;
+    private readonly IWizardsLogger _logger;
     private readonly List<string> _allowedHeroActions;
     private readonly List<string> _allowedInventoryActions;
     private readonly List<string> _allowedMerchantActions;
 
-    public SelectorController(IAuthorizationService authorizationService, ISelector selector)
+    public SelectorController(IAuthorizationService authorizationService, ISelector selector, IWizardsLogger logger)
     {
         _authorizationService = authorizationService;
         _selector = selector;
-        
+        _logger = logger;
+
         _allowedHeroActions = GetAllowedActions(typeof(HeroController));
         _allowedMerchantActions = GetAllowedActions(typeof(MerchantController));
         _allowedInventoryActions = GetAllowedActions(typeof(InventoryController)); 
@@ -32,6 +36,7 @@ public class SelectorController : Controller
     {
         if (actionName == null || !_allowedHeroActions.Contains(actionName))
         {
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Error, $"{actionName} is not correct");
             return RedirectToAction("Details", "Player");
         }
 
@@ -43,23 +48,27 @@ public class SelectorController : Controller
         }
         catch
         {
-            return RedirectToAction("Details", "Player");
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Error, $"There is no hero with id: {id}");
+            return RedirectToAction("Error404", "Home");
         }
 
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, hero, "HeroOwnerPolicy");
+        var player = await _selector.GetPlayerAsync(User);
 
         if (authorizationResult.Succeeded)
         {
-            var player = await _selector.GetPlayerAsync(User);
             await _selector.SelectHero(player, id);
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Information, $"Access to hero: {hero.NickName} granted to player {player.UserName}");
             return RedirectToAction(actionName, "Hero");
         }
 
         if (!authorizationResult.Succeeded)
         {
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Information, $"Access to hero: {hero.NickName} denied to player {player.UserName}");
             return RedirectToAction("Details", "Player");
         }
 
+        await _logger.SendLogAsync<PlayerController>(LogLevel.Error, "Unexpected permission result occurs. User redirected to Home/Index page");
         return RedirectToAction("Index", "Home");
     }
 
@@ -74,6 +83,7 @@ public class SelectorController : Controller
 
         if (actionName == null || !allowedActions.Contains(actionName))
         {
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Error, $"{actionName} is not correct");
             return RedirectToAction("Index", controllerName);
         }
 
@@ -85,25 +95,30 @@ public class SelectorController : Controller
         }
         catch
         {
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Error, $"There is no heroItem with id: {id}");
             return RedirectToAction("Index", controllerName);
         }
 
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, heroItem, "ItemOwnerPolicy");
+        var player = await _selector.GetPlayerAsync(User);
 
         if (authorizationResult.Succeeded)
         {
-            var player = await _selector.GetPlayerAsync(User);
             await _selector.SelectItem(player, id);
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Information, $"Access to hero: {heroItem.Item.Name} granted to player {player.UserName}");
             return RedirectToAction(actionName, controllerName);
         }
 
         if (!authorizationResult.Succeeded)
         {
+            await _logger.SendLogAsync<PlayerController>(LogLevel.Information, $"Access to hero: {heroItem.Item.Name} denied to player {player.UserName}");
             return RedirectToAction("Details", "Hero");
         }
 
+        await _logger.SendLogAsync<PlayerController>(LogLevel.Error, "Unexpected permission result occurs. User redirected to Home/Index page");
         return RedirectToAction("Index", "Home");
     }
+
 
     private List<string> GetAllowedActions(Type controllerType)
     {

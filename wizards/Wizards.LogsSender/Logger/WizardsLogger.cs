@@ -25,6 +25,8 @@ public class WizardsLogger : IWizardsLogger
         logRecord.AppName = "Wizards";
         logRecord.Properties = GetSerializedArguments(args);
         
+
+
         return Task.CompletedTask;
     }
 

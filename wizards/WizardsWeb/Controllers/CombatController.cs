@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.GamePlay.StageService;
 using Wizards.Services.Extentions;
@@ -16,9 +17,10 @@ public class CombatController : Controller
     private readonly IStageService _stageService;
     private readonly ICombatStageInstancesRepository _stageRepository;
     private readonly IMapper _mapper;
-    private readonly ILogger<CombatController> _logger;
+    private readonly IWizardsLogger _logger;
 
-    public CombatController(IStageService stageService, ICombatStageInstancesRepository stageRepository, IMapper mapper, ILogger<CombatController> logger)
+
+    public CombatController(IStageService stageService, ICombatStageInstancesRepository stageRepository, IMapper mapper, IWizardsLogger logger)
     {
         _stageService = stageService;
         _stageRepository = stageRepository;
@@ -39,7 +41,7 @@ public class CombatController : Controller
     {
         await _stageService.CreateNewMatchAsync(User.GetId(), enemyId, false);
         var stage = await _stageRepository.GetAsync(User.GetId());
-        _logger.LogInformation($"{stage.CombatHero.NickName} created new match with {stage.CombatEnemy.Name}", stage);
+        await _logger.SendLogAsync<CombatController>(LogLevel.Information, $"{stage.CombatHero.NickName} created new match with {stage.CombatEnemy.Name}", stage);
         return RedirectToAction("Index");
     }
 
@@ -57,15 +59,15 @@ public class CombatController : Controller
     {
         var stage = await _stageRepository.GetAsync(User.GetId());
         await _stageService.FinishMatchAsync(User.GetId());
-        _logger.LogInformation($"{stage.CombatHero.NickName} finished match in state {stage.Status.ToString()}", stage);
+        await _logger.SendLogAsync<CombatController>(LogLevel.Information, $"{stage.CombatHero.NickName} finished match in state {stage.Status}", stage);
         return RedirectToAction("Index", "Exploration");
     }
 
     public async Task<IActionResult> AbortMatch()
     {
         var stage = await _stageRepository.GetAsync(User.GetId());
+        await _logger.SendLogAsync<CombatController>(LogLevel.Information, $"{stage.CombatHero.NickName} aborted match in during combat state {stage.Status}", stage);
         await _stageService.AbortMatchAsync(User.GetId());
-        _logger.LogInformation($"{stage.CombatHero.NickName} aborted match in during combat state {stage.Status.ToString()}", stage);
         return RedirectToAction("Index");
     }
 }
