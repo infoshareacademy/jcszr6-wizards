@@ -43,6 +43,7 @@ public class Startup
 
         services.AddGamePlayServices();
         services.AddWizardLogger();
+        services.RegisterHttpClients();
 
         // External Packages Configuration
         var connectionString = Configuration.GetConnectionString("WizardDatabase");

@@ -1,20 +1,24 @@
-﻿using System.Text.Json;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.LogsSender.Models;
+using Wizards.LogsSender.RestApiClient;
 
 namespace Wizards.LogsSender.Logger;
 
 public class WizardsLogger : IWizardsLogger
 {
     private readonly ILoggerFactory _loggerFactory;
-    
-    public WizardsLogger(ILoggerFactory loggerFactory)
+    private readonly IHttpClientFactory _clientFactory;
+
+    public WizardsLogger(ILoggerFactory loggerFactory, IHttpClientFactory clientFactory)
     {
         _loggerFactory = loggerFactory;
+        _clientFactory = clientFactory;
     }
 
-    public Task SendLogAsync<T>(LogLevel logLevel, string message, params object?[] args)
+    public async Task SendLogAsync<T>(LogLevel logLevel, string message, params object?[] args)
     {
         var logRecord = new LogRecord();
         _loggerFactory.CreateLogger<T>().Log(logLevel, message, args);
@@ -23,11 +27,10 @@ public class WizardsLogger : IWizardsLogger
         logRecord.LogMessage = message;
         logRecord.LogLevel = logLevel.ToString();
         logRecord.AppName = "Wizards";
+        logRecord.Exception = "";
         logRecord.Properties = GetSerializedArguments(args);
-        
 
-
-        return Task.CompletedTask;
+        await SendLogToLogCollector(logRecord);
     }
 
     private string GetSerializedArguments(object?[] args)
@@ -61,4 +64,17 @@ public class WizardsLogger : IWizardsLogger
         var result = JsonSerializer.Serialize(argumentRecords);
         return result;
     }
+
+    private async Task SendLogToLogCollector(LogRecord logRecord)
+    {
+        var response = await _clientFactory.CreateLogCollectorHttpClient().PostAsJsonAsync("/api/logs", logRecord);
+
+        if (response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+
+    }
+
 }
