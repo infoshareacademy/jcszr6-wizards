@@ -94,20 +94,35 @@
         </label>
 
     </div>
-
-    <div class="commit-button-container">
-        @if (Model.Status == StageStatus.DuringCombat)
-        {
-            <input class="gbtn gbtn-action gbtn-lg" type="submit" value="Commit Round"
-                   style="width: 300px; height: 80px; font-weight: bold; font-size: 25px;"/>
-        }
-        @if (Model.Status == StageStatus.ConcludedHeroWins || Model.Status == StageStatus.ConcludedEnemyWins)
-        {
-            <a class="gbtn gbtn-accept gbtn-lg" asp-controller="Combat" asp-action="FinishMatch"
-               style="width: 300px; height: 80px; padding-top: 20px; font-weight: bold; font-size: 25px;">
-                Leave Location
-            </a>
-        }
-    </div>
-
 </form>
+
+<div class="commit-button-container">
+    @if (Model.Status == StageStatus.DuringCombat)
+    {
+        <button id="commit-round-button" class="gbtn gbtn-action gbtn-lg" style="width: 300px; height: 80px; font-weight: bold; font-size: 25px;">
+            Commit Round
+        </button>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                $("#commit-round-button").click(function() {
+                    var skillId = document.querySelector('input[id="HeroSelectedSkillId"]:checked').value;
+                    $("#content-container").load("/Combat/CommitRoundPartially/" + skillId, function(responseTxt, statusTxt, xhr){
+                    });
+
+                });
+            });
+        </script>
+    }
+    @if (Model.Status == StageStatus.ConcludedHeroWins || Model.Status == StageStatus.ConcludedEnemyWins)
+    {
+        <a class="gbtn gbtn-accept gbtn-lg" asp-controller="Combat" asp-action="FinishMatch"
+           style="width: 300px; height: 80px; padding-top: 20px; font-weight: bold; font-size: 25px;">
+            Leave Location
+        </a>
+    }
+</div>

@@ -26,12 +26,12 @@ public class HomeController : Controller
 
     public IActionResult Error404()
     {
-        return View();
+        return View("Error404");
     }
 
     public IActionResult Error500()
     {
-        return View();
+        return View("Error500");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
