@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Wizards.LogsSender.Sender;
+using Wizards.Core.Interfaces.LoggerInterface;
+using Wizards.LogsSender.Logger;
 
 namespace Wizards.LogsSender.ServiceRegistration;
 

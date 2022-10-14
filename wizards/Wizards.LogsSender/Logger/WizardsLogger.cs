@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Text.Json;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Logging;
+using Wizards.Core.Interfaces.LoggerInterface;
+using Wizards.LogsSender.Models;
 
-namespace Wizards.LogsSender.Sender;
+namespace Wizards.LogsSender.Logger;
 
 public class WizardsLogger : IWizardsLogger
 {

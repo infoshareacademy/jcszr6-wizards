@@ -1,4 +1,4 @@
-﻿namespace Wizards.LogsSender;
+﻿namespace Wizards.LogsSender.Models;
 
 public class ArgumentRecord
 {
