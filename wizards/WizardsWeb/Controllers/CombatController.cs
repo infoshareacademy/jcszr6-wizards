@@ -28,44 +28,69 @@ public class CombatController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var combatStage = await _stageRepository.GetAsync(User.GetId());
+        if (await _stageRepository.HasPlayerMatchOpened(User.GetId()))
+        {
+            var combatStage = await _stageRepository.GetAsync(User.GetId());
 
-        var battleStage = _mapper.Map<CombatStageModelView>(combatStage);
-        combatStage.LastRoundResult = null;
+            var battleStage = _mapper.Map<CombatStageModelView>(combatStage);
+            combatStage.LastRoundResult = null;
 
-        return View("CombatStage", battleStage);
+            return View("CombatStage", battleStage);
+        }
+
+        return RedirectToAction("Index", "Exploration");
     }
     public async Task<IActionResult> CreateNewMatch(int enemyId)
     {
-        await _stageService.CreateNewMatchAsync(User.GetId(), enemyId);
-        var stage = await _stageRepository.GetAsync(User.GetId());
-        _logger.LogInformation($"{stage.CombatHero.NickName} created new match with {stage.CombatEnemy.Name}", stage);
+        if (!await _stageRepository.HasPlayerMatchOpened(User.GetId()))
+        {
+            await _stageService.CreateNewMatchAsync(User.GetId(), enemyId);
+            var stage = await _stageRepository.GetAsync(User.GetId());
+            _logger.LogInformation($"{stage.CombatHero.NickName} created new match with {stage.CombatEnemy.Name}", stage);
+        }
+        
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     public async Task<IActionResult> CommitRound(CombatStageModelView battleStage)
     {
-        var nextHeroSkillId = battleStage.HeroSelectedSkillId;
+        if (await _stageRepository.HasPlayerMatchOpened(User.GetId()))
+        {
 
-        await _stageService.CommitRoundAsync(User.GetId(), nextHeroSkillId);
+            var nextHeroSkillId = battleStage.HeroSelectedSkillId;
 
-        return RedirectToAction("Index");
+            await _stageService.CommitRoundAsync(User.GetId(), nextHeroSkillId);
+
+            return RedirectToAction("Index");
+        }
+
+        return RedirectToAction("Index", "Exploration");
     }
 
     public async Task<IActionResult> FinishMatch()
     {
-        var stage = await _stageRepository.GetAsync(User.GetId());
-        await _stageService.FinishMatchAsync(User.GetId());
-        _logger.LogInformation($"{stage.CombatHero.NickName} finished match in state {stage.Status.ToString()}", stage);
+        if (await _stageRepository.HasPlayerMatchOpened(User.GetId()))
+        {
+            var stage = await _stageRepository.GetAsync(User.GetId());
+            await _stageService.FinishMatchAsync(User.GetId());
+            _logger.LogInformation($"{stage.CombatHero.NickName} finished match in state {stage.Status.ToString()}", stage);
+        }
+
         return RedirectToAction("Index", "Exploration");
     }
 
     public async Task<IActionResult> AbortMatch()
     {
-        var stage = await _stageRepository.GetAsync(User.GetId());
-        await _stageService.AbortMatchAsync(User.GetId());
-        _logger.LogInformation($"{stage.CombatHero.NickName} aborted match in during combat state {stage.Status.ToString()}", stage);
-        return RedirectToAction("Index");
+        if (await _stageRepository.HasPlayerMatchOpened(User.GetId()))
+        {
+            var stage = await _stageRepository.GetAsync(User.GetId());
+            await _stageService.AbortMatchAsync(User.GetId());
+            _logger.LogInformation($"{stage.CombatHero.NickName} aborted match in during combat state {stage.Status.ToString()}", stage);
+
+            return RedirectToAction("Index");
+        }
+
+        return RedirectToAction("Index", "Exploration");
     }
 }
