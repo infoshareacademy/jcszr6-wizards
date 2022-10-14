@@ -22,6 +22,11 @@ public class CombatStageInstancesRepository : ICombatStageInstancesRepository
         await CombatStageInstancesContainer.Remove(playerId);
     }
 
+    public async Task<bool> HasPlayerMatchOpened(int playerId)
+    {
+        return await CombatStageInstancesContainer.HasPlayerMatchOpened(playerId);
+    }
+
     public async Task<int> GetCountAsync()
     {
         return await CombatStageInstancesContainer.GetCurrentInstancesCount();

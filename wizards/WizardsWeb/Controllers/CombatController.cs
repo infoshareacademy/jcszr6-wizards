@@ -37,7 +37,7 @@ public class CombatController : Controller
     }
     public async Task<IActionResult> CreateNewMatch(int enemyId)
     {
-        await _stageService.CreateNewMatchAsync(User.GetId(), enemyId, false);
+        await _stageService.CreateNewMatchAsync(User.GetId(), enemyId);
         var stage = await _stageRepository.GetAsync(User.GetId());
         _logger.LogInformation($"{stage.CombatHero.NickName} created new match with {stage.CombatEnemy.Name}", stage);
         return RedirectToAction("Index");

@@ -22,7 +22,7 @@ public class CombatStageFactory : ICombatStageFactory
         _mapper = mapper;
     }
 
-    public async Task<CombatStage> CreateCombatStageAsync(int heroId, int enemyId, bool isTraining)
+    public async Task<CombatStage> CreateCombatStageAsync(int heroId, int enemyId)
     {
         var combatStage = new CombatStage();
 
@@ -40,7 +40,7 @@ public class CombatStageFactory : ICombatStageFactory
         combatStage.CombatHero = combatHero;
         combatStage.CombatEnemy = combatEnemy;
 
-        combatStage.IsTraining = isTraining;
+        combatStage.IsTraining = enemy.TrainingEnemy;
         combatStage.Name = enemy.EnemyStageName;
         combatStage.BackgroundImageNumber = enemy.StageBackgroundImageNumber;
         combatStage.Status = StageStatus.FreshOpened;
