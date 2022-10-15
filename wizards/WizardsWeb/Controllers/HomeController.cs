@@ -22,7 +22,7 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Authors()
     {
         return View();
     }
@@ -30,13 +30,13 @@ public class HomeController : Controller
     public async Task<IActionResult> Error404()
     {
         await _logger.SendLogAsync<HeroController>(LogLevel.Error, "404 Not Found error page was shown");
-        return View();
+        return View("Error404");
     }
 
     public async Task<IActionResult> Error500()
     {
         await _logger.SendLogAsync<HeroController>(LogLevel.Error, "500 Internal Server Error page was shown");
-        return View();
+        return View("Error500");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

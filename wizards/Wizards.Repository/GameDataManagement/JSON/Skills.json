@@ -16,7 +16,7 @@
     "Description": "Throw ice shard that deals damage and stops enemy movement",
     "ProfessionRestriction": 1,
     "Type": 1,
-    "DamageFactor": 0.75,
+    "DamageFactor": 0.65,
     "ArmorPenetrationPercent": 0,
     "BaseHitChance": 105,
     "HealingFactor": 0
@@ -38,7 +38,7 @@
     "Description": "Create fire field under enemy that deals him very high damage.",
     "ProfessionRestriction": 1,
     "Type": 0,
-    "DamageFactor": 1.75,
+    "DamageFactor": 1.8,
     "ArmorPenetrationPercent": 0,
     "BaseHitChance": 20,
     "HealingFactor": 0
@@ -82,8 +82,8 @@
     "Description": "Fears your enemy, breaks his charge attack and deals damage",
     "ProfessionRestriction": 2,
     "Type": 1,
-    "DamageFactor": 0.5,
-    "ArmorPenetrationPercent": 0,
+    "DamageFactor": 0.55,
+    "ArmorPenetrationPercent": 5,
     "BaseHitChance": 110,
     "HealingFactor": 0
   },
@@ -96,7 +96,7 @@
     "DamageFactor": 1.25,
     "ArmorPenetrationPercent": 15,
     "BaseHitChance": 45,
-    "HealingFactor": 0.011
+    "HealingFactor": 0.0151
   },
   {
     "Id": 10,
@@ -104,7 +104,7 @@
     "Description": "Summon Shroud of Death that deals a lot of damage to your foe.",
     "ProfessionRestriction": 2,
     "Type": 0,
-    "DamageFactor": 1.55,
+    "DamageFactor": 1.72,
     "ArmorPenetrationPercent": 20,
     "BaseHitChance": 25,
     "HealingFactor": 0

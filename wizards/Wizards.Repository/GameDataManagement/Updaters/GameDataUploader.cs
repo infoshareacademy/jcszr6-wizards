@@ -131,7 +131,7 @@ public class GameDataUploader : IGameDataUploader
                 enemyToUpdate.Tier = enemy.Tier;
                 enemyToUpdate.Description = enemy.Description;
                 enemyToUpdate.AvatarImageNumber = enemy.AvatarImageNumber;
-                enemyToUpdate.EnemyStageName = enemy.Name;
+                enemyToUpdate.EnemyStageName = enemy.EnemyStageName;
                 enemyToUpdate.StageBackgroundImageNumber = enemy.StageBackgroundImageNumber;
                 enemyToUpdate.TrainingEnemy = enemy.TrainingEnemy;
                 enemyToUpdate.GoldReward = enemy.GoldReward;
@@ -237,24 +237,7 @@ public class GameDataUploader : IGameDataUploader
 
                 behaviorPatternToUpdate.MaxHealthPercentToTrigger = behaviorPattern.MaxHealthPercentToTrigger;
                 behaviorPatternToUpdate.MinHealthPercentToTrigger = behaviorPattern.MinHealthPercentToTrigger;
-
-                foreach (var skillSequenceStep in behaviorPattern.SequenceOfSkillsId)
-                {
-                    if (behaviorPatternToUpdate.SequenceOfSkillsId.Any(ss =>
-                            ss.SequenceStepId == skillSequenceStep.SequenceStepId))
-                    {
-                        var skillSequenceStepToUpdate =
-                            behaviorPatternToUpdate.SequenceOfSkillsId.SingleOrDefault(ss =>
-                                ss.SequenceStepId == skillSequenceStep.SequenceStepId);
-
-                        skillSequenceStepToUpdate.SequenceStepId = skillSequenceStep.SequenceStepId;
-                        skillSequenceStepToUpdate.SkillId = skillSequenceStep.SkillId;
-                    }
-                    else
-                    {
-                        behaviorPatternToUpdate.SequenceOfSkillsId.Add(skillSequenceStep);
-                    }
-                }
+                behaviorPatternToUpdate.SequenceOfSkillsId = behaviorPattern.SequenceOfSkillsId;
             }
             else
             {
@@ -265,6 +248,11 @@ public class GameDataUploader : IGameDataUploader
 
     private static T ReadJsonDataFile<T>(string path)
     {
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "[]");
+        }
+
         try
         {
             var deserializedObjects = JsonSerializer.Deserialize<T>(File.ReadAllText(path));
@@ -279,6 +267,11 @@ public class GameDataUploader : IGameDataUploader
     private bool IsUpToDate(string path)
     {
         var evidenceFilePath = Path.Combine(Environment.CurrentDirectory, "..", "Wizards.Repository", "GameDataManagement", "JSON", "FilesEvidence.json");
+
+        if (!File.Exists(evidenceFilePath) || !File.Exists(path))
+        {
+            return false;
+        }
 
         var fileInformation = ReadJsonDataFile<List<FileInformation>>(evidenceFilePath).SingleOrDefault(f => f.FileName == Path.GetFileNameWithoutExtension(path));
 
@@ -320,5 +313,4 @@ public class GameDataUploader : IGameDataUploader
 
         File.WriteAllText(evidenceFilePath, json);
     }
-
 }

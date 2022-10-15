@@ -2,7 +2,7 @@
   {
     "Id": 1,
     "Name": "Minotaur",
-    "Description": "Minotaur is great fighter. His attacks can easly overpass your armor, but are also very slow, so it will be easy to avoid them with some reflex. Minotaur also has some reflex so it is not easy to hit him. This enemy is vulnerable to damage because of his weak armor. Minotaur has dangerous Strong attacks so you should block them as often as you can.",
+    "Description": "Minotaur is great fighter. His attacks can easily overpass your armor, but are also very slow, so it will be easy to avoid them with some reflex. Minotaur also has some reflex so it is not easy to hit him. This enemy is vulnerable to damage because of his weak armor. Minotaur has dangerous Strong attacks so you should block them as often as you can.",
     "Type": 0,
     "EnemyStageName": "Great Forest of Anumer",
     "Tier": 1,
@@ -109,7 +109,7 @@
   {
     "Id": 2,
     "Name": "Cyclopus",
-    "Description": "This enemy is very slow with his attacks, so with some reflex it will be easy to avoid them. His attacks can easly overpass your armor. Cyclopus is specialized in defense. If you want to deal him lot of damage, you have to maximize your specialization to oveprass his armor. This enemy also has Strong attacks; beware them if you want to keep your healt high.",
+    "Description": "This enemy is very slow with his attacks, so with some reflex it will be easy to avoid them. His attacks can easily overpass your armor. Cyclopus is specialized in defense. If you want to deal him lot of damage, you have to maximize your specialization to overpass his armor. This enemy also has Strong attacks; beware them if you want to keep your health high.",
     "Type": 0,
     "EnemyStageName": "Lonely Island",
     "Tier": 1,
@@ -224,7 +224,7 @@
   {
     "Id": 3,
     "Name": "Utmar Sneaky Hoof",
-    "Description": "Centarus are great archers. They can easly hit you with his attacks and deals you a lot of damage. The point is to maximize your defense instead of trying to avoid attacs. Utmar is very precise but has not good enough reflex. He has also high defense ability. To be more effective take some specialization for higher damage. You will need Blocking skill to protect yourself from his Strong Attacks",
+    "Description": "Centaurs are great archers. They can easily hit you with his attacks and deals you a lot of damage. The point is to maximize your defense instead of trying to avoid attacks. Utmar is very precise but has not good enough reflex. He has also high defense ability. To be more effective take some specialization for higher damage. You will need Blocking skill to protect yourself from his Strong Attacks",
     "Type": 0,
     "EnemyStageName": "Ruins of Verath",
     "Tier": 1,
@@ -343,7 +343,7 @@
   {
     "Id": 4,
     "Name": "Overis The Griffon Warrior",
-    "Description": "Griffon is super precise enemy. It is quite impossible to avoid thiers attacks which are also dangerous. If you want to survive battle with him you need as much defense as you can take. Overis has good reflex so it is not easy to hit him. To be more effective fighter you should keep your precision high. That will help you defeat this enemy. Griffon has some Strong Attacks that will deal you very high damage, so good blocking will be the best strategy.",
+    "Description": "Griffon is super precise enemy. It is quite impossible to avoid theirs attacks which are also dangerous. If you want to survive battle with him you need as much defense as you can take. Overis has good reflex so it is not easy to hit him. To be more effective fighter you should keep your precision high. That will help you defeat this enemy. Griffon has some Strong Attacks that will deal you very high damage, so good blocking will be the best strategy.",
     "Type": 0,
     "EnemyStageName": "Griffon Nest in Leven Highlands",
     "Tier": 1,
@@ -487,10 +487,10 @@
   },
   {
     "Id": 5,
-    "Name": "Training Manequin T1 Mechanics",
-    "Description": "This is Training Manequin that shows Strong Attacks and Attack Patterns. Attack Patterns are sequence of skill that boss is repeating. Patterns depends on Enemy's Health percent. Enemies can have up to four diffrent patterns (depends on enemy's tier). This Manequin demonstrate two sequences: First (100%-50%) - two simple attacks with 1 damage and one strong attack with 4 damage; Second (50% - 0%) - three simple attacks with 2 damage and one strong attack with 10 damage. When boss has prepared Strong Attack for round there will be orange icon above his card that signalizes this mechanic. Strong Attacks can be blocked by your Block skill. Start match with this manequin to get safely expirience about this basic Tier 1 mechanics.",
+    "Name": "Training Mannequin T1 Mechanics",
+    "Description": "This is Training Mannequin that shows Strong Attacks and Attack Patterns. Attack Patterns are sequence of skill that boss is repeating. Patterns depends on Enemy's Health percent. Enemies can have up to four different patterns (depends on enemy's tier). This Mannequin demonstrate two sequences: First (100%-50%) - two simple attacks with 1 damage and one strong attack with 4 damage; Second (50% - 0%) - three simple attacks with 2 damage and one strong attack with 10 damage. When boss has prepared Strong Attack for round there will be orange icon above his card that signalizes this mechanic. Strong Attacks can be blocked by your Block skill. Start match with this mannequin to get safely experience this basic Tier 1 mechanics.",
     "Type": 0,
-    "EnemyStageName": "Training Grounds",
+    "EnemyStageName": "Training Sanctuary Hall",
     "Tier": 1,
     "AvatarImageNumber": 61,
     "StageBackgroundImageNumber": 61,
@@ -591,7 +591,7 @@
   {
     "Id": 6,
     "Name": "Malaur - Ettin King",
-    "Description": "Ettins are known for its strong attacks that crashes armor. Luckly most of Ettins Attacks are easy to avoid if you have enought reflex. Malaures is very slow enemy so it is not hard to succesfully hit him during combat. His thick skin protect him well so to be effective, you will bring Specialization to the fight. This enemy can stun you with one of its special attacks. Beware of it and block it because Ettins like to stun theirs enemies and than land Strong Attack on them without much effort.",
+    "Description": "Ettins are known for its strong attacks that crashes armor. Luckily most of Ettins Attacks are easy to avoid if you have enough reflex. Malaures is very slow enemy so it is not hard to successfully hit him during combat. His thick skin protect him well so to be effective, you will bring Specialization to the fight. This enemy can stun you with one of its special attacks. Beware of it and block it because Ettins like to stun theirs enemies and then land Strong Attack on them without much effort.",
     "Type": 0,
     "EnemyStageName": "Old Temple in Caladhorn Wilds",
     "Tier": 2,
@@ -735,7 +735,7 @@
   {
     "Id": 7,
     "Name": "Cerberus",
-    "Description": "Very quick and precise enemy. Its not so easy to avoid his attacks and succesfully hit him. Reflex would be useless during fight but defense will help to reduce damage. Cerberus is very vulnerable to damage so there is no need for specialization. Cerberus can prepare Terrifying Howl thats will stuns you. It would be better to perfectly Block this attack because Cerberus is much more dangerous when you are Stunned.",
+    "Description": "Very quick and precise enemy. It's not so easy to avoid his attacks and successfully hit him. Reflex would be useless during fight but defense will help to reduce damage. Cerberus is very vulnerable to damage so there is no need for specialization. Cerberus can prepare Terrifying Howl that's will stuns you. It would be better to perfectly Block this attack because Cerberus is much more dangerous when you are Stunned.",
     "Type": 0,
     "EnemyStageName": "Gallen-Tum Watchtower",
     "Tier": 2,
@@ -879,7 +879,7 @@
   {
     "Id": 8,
     "Name": "Volantur",
-    "Description": "Volantur is the Ent King. He is very specialized warrior. His attacks are very dangerous because of high damage and high armor overpassing. To survive tha battle with him you will need reflex to avoid his attacks as often as you can. Volantur is also very quick enemy. to successfully hit him you will need a lot of precision. As a King of Trees and Vines he can Entangle you with one of his abilities that causes Stun. Make shure to Block this attack when its incomeing. Volantur is known for his cruel strategy. He likes Stuns enemies and then hit them with Strong attacks when they cannot move. Beware of it.",
+    "Description": "Volantur is the Ent King. He is very specialized warrior. His attacks are very dangerous because of high damage and high armor overpassing. To survive the battle with him you will need reflex to avoid his attacks as often as you can. Volantur is also very quick enemy. to successfully hit him you will need a lot of precision. As a King of Trees and Vines he can Entangle you with one of his abilities that causes Stun. Make sure to Block this attack when its incoming. Volantur is known for his cruel strategy. He likes Stuns enemies and then hit them with Strong attacks when they cannot move. Beware of it.",
     "Type": 0,
     "EnemyStageName": "Sorrow Wetlands",
     "Tier": 2,
@@ -1023,7 +1023,7 @@
   {
     "Id": 9,
     "Name": "Chimera",
-    "Description": "One of the most dangerous enemies. Its atacks are very precise and it is quite impossible to avoid them. Luckly damage of its atacks can be easily reduced by defense. Instead of avoiding attacks Chimera has high defense to protect itself. To conquer it effectively you should maximize your specialization. Chimeras tail is double dangerous, because it can hit very hard and also has sneak head that can bite you with Poisoned Teeth's. It would cause you to be Stunned for one round. You have to watch carefully its behavior and block this stunning attack, because after it chimera can easily hit you very strong.",
+    "Description": "One of the most dangerous enemies. Its attacks are very precise and it is quite impossible to avoid them. Luckily damage of its attacks can be easily reduced by defense. Instead of avoiding attacks Chimera has high defense to protect itself. To conquer it effectively you should maximize your specialization. Chimeras tail is double dangerous, because it can hit very hard and also has sneak head that can bite you with Poisoned Teeth's. It would cause you to be Stunned for one round. You have to watch carefully its behavior and block this stunning attack, because after it chimera can easily hit you very strong.",
     "Type": 0,
     "EnemyStageName": "Forsaken Morath Caverns",
     "Tier": 2,
@@ -1190,10 +1190,10 @@
   },
   {
     "Id": 10,
-    "Name": "Training Manequin T2 Mechanics",
-    "Description": "This is Training Manequin that shows Stunning Attacks. Stunning Attacks, when hits, will make you unable to action in next round. This is dangerous mechanic because when you are stunned the damage you takes are much higher, and enemy cannot miss attack on you (no matter how high is your reflex). Thats why it is very important to use Block skill from your skill bar to block Stunning Attacks. This manequin has special Attacks Pattern as follows: 1x Simple Attack (4 dmg), 1x Strong Attack (8 dmg), 1x Stunning Attack (2 dmg and make you stunn), 1x Strong Attack (8 dmg - if you are not Stunned; 16 dmg if you are Stunned;). When boss has prepared Stunning Attack for round there will be violet icon with blac spiral above his card that signalizes this mechanic. Start match with this manequin to get safely expirience about this Tier 2 new mechanics.",
+    "Name": "Training Mannequin T2 Mechanics",
+    "Description": "This is Training Mannequin that shows Stunning Attacks. Stunning Attacks, when hits, will make you unable to action in next round. This is dangerous mechanic because when you are stunned the damage you takes are much higher, and enemy cannot miss attack on you (no matter how high is your reflex). That's why it is very important to use Block skill from your skill bar to block Stunning Attacks. This mannequin has special Attacks Pattern as follows: 1x Simple Attack (4 dmg), 1x Strong Attack (8 dmg), 1x Stunning Attack (2 dmg and make you stun), 1x Strong Attack (8 dmg - if you are not Stunned; 16 dmg if you are Stunned;). When boss has prepared Stunning Attack for round there will be violet icon with black spiral above his card that signalizes this mechanic. Start match with this mannequin to get safely experience this Tier 2 new mechanics.",
     "Type": 0,
-    "EnemyStageName": "Training Grounds",
+    "EnemyStageName": "Training Sanctuary Hall",
     "Tier": 2,
     "AvatarImageNumber": 61,
     "StageBackgroundImageNumber": 61,
@@ -1468,7 +1468,7 @@
   {
     "Id": 12,
     "Name": "Saveriaxen",
-    "Description": "Legendary Demon with high defense and super precised attacks. He has ability to Posses enemies what makes them stunned. Sevariaxen has many dangerous strong attacks and many of them occurs directly after his Stunning abilities. So beware of his Charge, but if you counter it that will make Deamon Stunned for one round and you will deal him much more damage and easily hit him. Dont underestimate his strong attacks and stunning skills because of high damage they deals. If you equipp yourself with proper gear and lern countering enemy charge, you will have chance to beat him. ",
+    "Description": "Legendary Demon with high defense and super precise attacks. He has ability to Possess enemies what makes them stunned. Sevariaxen has many dangerous strong attacks and many of them occurs directly after his Stunning abilities. So beware of his Charge, but if you counter it that will make Daemon Stunned for one round and you will deal him much more damage and easily hit him. Don't underestimate his strong attacks and stunning skills because of high damage they deals. If you equip yourself with proper gear and learn countering enemy charge, you will have chance to beat him. ",
     "Type": 0,
     "EnemyStageName": "Crimson Garden",
     "Tier": 3,
@@ -1670,7 +1670,7 @@
   {
     "Id": 13,
     "Name": "Luperius",
-    "Description": "Great Champion of Werewolfs. His thick skin protects him very well from damage. His claws ar really hard and sharp so he can easily overpass your defense. Luperius is great warrior that fight till end, and when his healt is getting lower he will be much more dangerous. In his Fury he can rush on you and make you stunned. This is how he charges on theirs enemies. Luperius is dangerous enemy so you have to pay attention of his attacks and prepare yourself well before fight. If you take your opportunity to counter his charge attack he will be stunned and you will have one round to deal as much damage as you can without any risk that you miss attack. ",
+    "Description": "Great Champion of Werewolves. His thick skin protects him very well from damage. His claws are really hard and sharp so he can easily overpass your defense. Luperius is great warrior that fight till end, and when his health is getting lower he will be much more dangerous. In his Fury he can rush on you and make you stunned. This is how he charges on theirs enemies. Luperius is dangerous enemy so you have to pay attention of his attacks and prepare yourself well before fight. If you take your opportunity to counter his charge attack he will be stunned and you will have one round to deal as much damage as you can without any risk that you miss attack. ",
     "Type": 0,
     "EnemyStageName": "Darken Woodlands",
     "Tier": 3,
@@ -1872,7 +1872,7 @@
   {
     "Id": 14,
     "Name": "Arganthula",
-    "Description": "The great legendary spider queen is the most filthy incarnation of all fears. She is very quick so easily can avoid your attacks. Furthermore Arganthula's attacks are so strong that even high defense will not help to reduce them. The only chance you have is maximize your reflex to avoid them which is not so easy. She likes Spiderwebs which can stunn you as she's annother dangerous mechanic - Charge attack. To beat this abomination of nature you should prepare yourself really well with gear and tacticks. The fight will be long and will need your focus. One single mistake may be your last. Beware!",
+    "Description": "The great legendary spider queen is the most filthy incarnation of all fears. She is very quick so easily can avoid your attacks. Furthermore Arganthula's attacks are so strong that even high defense will not help to reduce them. The only chance you have is maximize your reflex to avoid them which is not so easy. She likes Spiderwebs which can stun you as she's another dangerous mechanic - Charge attack. To beat this abomination of nature you should prepare yourself really well with gear and tactic's. The fight will be long and will need your focus. One single mistake may be your last. Beware!",
     "Type": 0,
     "EnemyStageName": "Lair of Legendary Spider Queen",
     "Tier": 3,
@@ -2085,10 +2085,10 @@
   },
   {
     "Id": 15,
-    "Name": "Training Manequin T3 Mechanics",
-    "Description": "This is Tier 3 Training Mannequin. He Shows how works new special mechanic on Tier 3 bosses - Charge attack. Charge attack is another boss attack that can stunn you. There is a difference between Stunning and Charge. Charge attack cannot be blocked by your Block Skill, it needs to be countered by you Counter Attack skill. Charge attacks are signalized by blue icon above enemy's card. If you don't counter Charge attack you will be Stunned fo next round and you will take a lot of damage from next Boss attack in his Pattern that will never misshits you. But if you counter Enemy Charge attack you will make the Boss Stunned! Stunned enemy also takes a lot of damage, you cannot misshits him and he will not able to perform his next skill. That's why countering Charge attack is so important. Many of Enemies has a lot of Health ant this is perfect chance to cast the most powerfull attacks on them to easily win fight!",
+    "Name": "Training Mannequin T3 Mechanics",
+    "Description": "This is Tier 3 Training Mannequin. He Shows how works new special mechanic on Tier 3 bosses - Charge attack. Charge attack is another boss attack that can stun you. There is a difference between Stunning and Charge. Charge attack cannot be blocked by your Block Skill, it needs to be countered by you Counter Attack skill. Charge attacks are signalized by blue icon above enemy's card. If you don't counter Charge attack you will be Stunned for next round and you will take a lot of damage from next Boss attack in his Pattern that will never mishits you. But if you counter Enemy Charge attack you will make the Boss Stunned! Stunned enemy also takes a lot of damage, you cannot mishits him and he will not able to perform his next skill. That's why countering Charge attack is so important. Many of Enemies has a lot of Health ant this is perfect chance to cast the most powerful attacks on them to easily win fight!",
     "Type": 0,
-    "EnemyStageName": "Training Grounds",
+    "EnemyStageName": "Training Sanctuary Hall",
     "Tier": 3,
     "AvatarImageNumber": 61,
     "StageBackgroundImageNumber": 61,
@@ -2160,6 +2160,2627 @@
           {
             "SequenceStepId": 6,
             "SkillId": 79
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": true
+  },
+  {
+    "Id": 16,
+    "Name": "Devastrena",
+    "Description": "Queen of giant devourers living in Desert. Very dangerous enemy with high ability to overpass armor and very strong defense. There is easy to hit her so much more useful will be specialization. Also taking high armor is pointless. Devastrena can regenerate her health with special actions, but the amount of health is not so high. Devourers prefers to regenerate just after theirs charge attacks so it is easy to prevent this action. Devastrena's attacks are dangerous and should not be underestimated.",
+    "Type": 0,
+    "EnemyStageName": "Arid Badlands",
+    "Tier": 4,
+    "AvatarImageNumber": 41,
+    "StageBackgroundImageNumber": 41,
+    "GoldReward": 500,
+    "RankPointsReward": 300,
+    "Attributes": {
+      "Damage": 40,
+      "Precision": 0,
+      "Specialization": 44,
+      "MaxHealth": 1500,
+      "Reflex": 0,
+      "Defense": 38
+    },
+    "Skills": [
+      {
+        "Id": 81,
+        "Name": "Pinch",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 82,
+        "Name": "Crunch",
+        "Type": 1,
+        "DamageFactor": 0.9,
+        "BaseHitChance": 115,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 83,
+        "Name": "Sting",
+        "Type": 0,
+        "DamageFactor": 0.59,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 84,
+        "Name": "Poisoned Spike",
+        "Type": 1,
+        "DamageFactor": 1.1,
+        "BaseHitChance": 110,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 85,
+        "Name": "Stomp",
+        "Type": 0,
+        "DamageFactor": 0.53,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 86,
+        "Name": "Decapitation",
+        "Type": 1,
+        "DamageFactor": 1.7,
+        "BaseHitChance": 130,
+        "ArmorPenetrationPercent": 20,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 87,
+        "Name": "Sandstorm",
+        "Type": 4,
+        "DamageFactor": 0.45,
+        "BaseHitChance": 150,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 88,
+        "Name": "Terre Moto",
+        "Type": 2,
+        "DamageFactor": 0.95,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 15,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 89,
+        "Name": "Regeneration",
+        "Type": 5,
+        "DamageFactor": 0.15,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.04
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 33,
+        "MinHealthPercentToTrigger": 66,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 81
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 81
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 82
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 88
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 89
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 89
+          }
+        ]
+      },
+      {
+        "Id": 34,
+        "MinHealthPercentToTrigger": 33,
+        "MaxHealthPercentToTrigger": 66,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 88
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 84
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 83
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 83
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 88
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 89
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 89
+          }
+        ]
+      },
+      {
+        "Id": 35,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 33,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 85
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 86
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 88
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 89
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 85
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 89
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 89
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 88
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 86
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 89
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 17,
+    "Name": "Kelaxeria",
+    "Description": "The greatest Basilisk in the world with very precise attacks and high damage resistance. Its attacks are very strong but defense will help to reduce damage that your wizard takes. As for it is very big it is easy to land perfect hit so you can bring more specialization with you. Kelaxeria can regenerate health with special ability that mostly occurs right after charge, but not always. Healing skill occurs more often if match takes more time. The most dangerous are theirs Charge and Stunning skills that makes you petrified and help Boss deal more damage or recover more health. Beware of strong attacks and all special abilities and try to make match as short as you can.",
+    "Type": 0,
+    "EnemyStageName": "Abandoned Temple in Heart of The Jungle",
+    "Tier": 4,
+    "AvatarImageNumber": 42,
+    "StageBackgroundImageNumber": 42,
+    "GoldReward": 600,
+    "RankPointsReward": 300,
+    "Attributes": {
+      "Damage": 40,
+      "Precision": 44,
+      "Specialization": 0,
+      "MaxHealth": 1750,
+      "Reflex": 0,
+      "Defense": 38
+    },
+    "Skills": [
+      {
+        "Id": 90,
+        "Name": "Bite To The Bone",
+        "Type": 0,
+        "DamageFactor": 0.67,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 91,
+        "Name": "Toxic Breath",
+        "Type": 1,
+        "DamageFactor": 1.45,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 92,
+        "Name": "Lash",
+        "Type": 0,
+        "DamageFactor": 0.77,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 93,
+        "Name": "Tear Apart",
+        "Type": 1,
+        "DamageFactor": 1.77,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 94,
+        "Name": "Hunting Thorns",
+        "Type": 0,
+        "DamageFactor": 0.87,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 95,
+        "Name": "Chokehold",
+        "Type": 1,
+        "DamageFactor": 2.99,
+        "BaseHitChance": 110,
+        "ArmorPenetrationPercent": 20,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 96,
+        "Name": "Petrification",
+        "Type": 4,
+        "DamageFactor": 0.77,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 97,
+        "Name": "Waving Tail",
+        "Type": 2,
+        "DamageFactor": 1.3,
+        "BaseHitChance": 150,
+        "ArmorPenetrationPercent": 20,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 98,
+        "Name": "Regenerating Tail",
+        "Type": 5,
+        "DamageFactor": 0.44,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.05
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 36,
+        "MinHealthPercentToTrigger": 66,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 90
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 90
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 96
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 91
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 90
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 91
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 97
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 98
+          }
+        ]
+      },
+      {
+        "Id": 37,
+        "MinHealthPercentToTrigger": 33,
+        "MaxHealthPercentToTrigger": 66,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 92
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 92
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 97
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 93
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 96
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 98
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 97
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 96
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 98
+          }
+        ]
+      },
+      {
+        "Id": 38,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 33,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 94
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 94
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 96
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 95
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 97
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 98
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 97
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 96
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 98
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 94
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 98
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 96
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 98
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 18,
+    "Name": "Synarix",
+    "Description": "Fiery wolf born deep inside the volcano. He can easily avoid attacks and is very specialized in overpassing armor. There is very important to take as much precision and reflex as you can. As for his vulnerability to damage Synarix has ability to recover health commonly right after charge. You can prevent it by perfect counter but sometimes (when battle is to long) Synarix can cast healing skill in other situations than charge. You should care about your health level and high damage to foe if you want to win this fight",
+    "Type": 0,
+    "EnemyStageName": "Lava Fields in South Meriand",
+    "Tier": 4,
+    "AvatarImageNumber": 43,
+    "StageBackgroundImageNumber": 43,
+    "GoldReward": 650,
+    "RankPointsReward": 600,
+    "Attributes": {
+      "Damage": 45,
+      "Precision": 0,
+      "Specialization": 48,
+      "MaxHealth": 1750,
+      "Reflex": 40,
+      "Defense": -10
+    },
+    "Skills": [
+      {
+        "Id": 99,
+        "Name": "Volcanic Claw",
+        "Type": 0,
+        "DamageFactor": 0.4,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 100,
+        "Name": "Summon Meteor",
+        "Type": 1,
+        "DamageFactor": 1.25,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 8,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 101,
+        "Name": "Flame Tongue",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 102,
+        "Name": "Eruption",
+        "Type": 1,
+        "DamageFactor": 1.55,
+        "BaseHitChance": 110,
+        "ArmorPenetrationPercent": 8,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 103,
+        "Name": "Iron Fangs",
+        "Type": 0,
+        "DamageFactor": 0.66,
+        "BaseHitChance": 89,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 104,
+        "Name": "Stone Spike",
+        "Type": 1,
+        "DamageFactor": 2.22,
+        "BaseHitChance": 135,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 105,
+        "Name": "Fiery Chains",
+        "Type": 4,
+        "DamageFactor": 0.22,
+        "BaseHitChance": 125,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 106,
+        "Name": "Tectonic Impulse",
+        "Type": 2,
+        "DamageFactor": 1.25,
+        "BaseHitChance": 150,
+        "ArmorPenetrationPercent": 8,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 107,
+        "Name": "Cleansing Fire",
+        "Type": 5,
+        "DamageFactor": 0.2,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0.055
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 39,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 99
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 99
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 106
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 100
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 99
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 99
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 100
+          }
+        ]
+      },
+      {
+        "Id": 40,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 101
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 102
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 101
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 101
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 106
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 107
+          }
+        ]
+      },
+      {
+        "Id": 41,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 103
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 103
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 106
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 107
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 104
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 107
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 104
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 105
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 106
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 107
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 107
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 19,
+    "Name": "Phoenix",
+    "Description": "Legendary Fiery Bird that lives inside Great Caldera of Arrad Nevereth. His attacks are very precise but it is easy to reduce damage with armor. As for his mobility you cannot hit him perfectly without precision, but if you do Phoenix will take a lot of damage because of his vulnerability. The fight is difficult because of Phoenix Tears that recovers him a lot of health. Luckily for most fight this ability occurs only after charge. In last phase Phoenix will use this ability more often. Beware of his Charge, Stunning and Strong attacks - they are insidious and can make you lost.",
+    "Type": 0,
+    "EnemyStageName": "Great Caldera of Arrad Nevereth",
+    "Tier": 4,
+    "AvatarImageNumber": 44,
+    "StageBackgroundImageNumber": 44,
+    "GoldReward": 750,
+    "RankPointsReward": 600,
+    "Attributes": {
+      "Damage": 45,
+      "Precision": 50,
+      "Specialization": 0,
+      "MaxHealth": 2250,
+      "Reflex": 42,
+      "Defense": -20
+    },
+    "Skills": [
+      {
+        "Id": 108,
+        "Name": "Fiery Sword",
+        "Type": 0,
+        "DamageFactor": 0.66,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": -5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 109,
+        "Name": "Flame Fountain",
+        "Type": 1,
+        "DamageFactor": 1.25,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 110,
+        "Name": "Peck of Ignis",
+        "Type": 0,
+        "DamageFactor": 0.77,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 111,
+        "Name": "Firestorm",
+        "Type": 1,
+        "DamageFactor": 1.37,
+        "BaseHitChance": 94,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 112,
+        "Name": "Lava Kiss",
+        "Type": 0,
+        "DamageFactor": 0.86,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 113,
+        "Name": "Empyreal Blast",
+        "Type": 1,
+        "DamageFactor": 1.99,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 4,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 114,
+        "Name": "Blinding Flare",
+        "Type": 4,
+        "DamageFactor": 0.17,
+        "BaseHitChance": 155,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 115,
+        "Name": "Pyroclastic Wave",
+        "Type": 2,
+        "DamageFactor": 1.33,
+        "BaseHitChance": 150,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 116,
+        "Name": "Phoenix Tears",
+        "Type": 5,
+        "DamageFactor": 0.1,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": -5,
+        "HealingFactor": 0.06
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 42,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 115
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 109
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 108
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 108
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 114
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 108
+          }
+        ]
+      },
+      {
+        "Id": 43,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 110
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 110
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 115
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 116
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 110
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 110
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 116
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 115
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 111
+          }
+        ]
+      },
+      {
+        "Id": 44,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 112
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 113
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 115
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 116
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 112
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 113
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 115
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 116
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 116
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 114
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 112
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 116
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 115
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 20,
+    "Name": "Training Mannequin T4 Mechanics",
+    "Description": "This is Tier 4 Training mannequin that shows new Tier 4 mechanic - Enemy Healing Skill. From Tier 4 your enemies can now restore theirs health with special Healing skills. Most important thing is that when you are stunned the healing is much more effective for enemy (like his damage). Many Enemies in this tier Uses Healing skill after Charge Attacks so it is very easy to prevent theirs health recovery by countering charge. Naturally when enemy is Stunned he cannot do any action including healing. Healing skill is signalized by green icon with three red addition symbols inside. This mannequin has special pattern of skills: Attack,  Healing Skill, Stunning Skill, Healing Skill. You can safely test this mechanic by starting training match with this mannequin.",
+    "Type": 0,
+    "EnemyStageName": "Training Sanctuary Hall",
+    "Tier": 4,
+    "AvatarImageNumber": 61,
+    "StageBackgroundImageNumber": 61,
+    "GoldReward": 0,
+    "RankPointsReward": 0,
+    "Attributes": {
+      "Damage": 1,
+      "Precision": 500,
+      "Specialization": 500,
+      "MaxHealth": 400,
+      "Reflex": -150,
+      "Defense": 60
+    },
+    "Skills": [
+      {
+        "Id": 117,
+        "Name": "Simple Attack",
+        "Type": 0,
+        "DamageFactor": 14,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 118,
+        "Name": "Stunning Skill",
+        "Type": 4,
+        "DamageFactor": 9,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 119,
+        "Name": "Healing Skill",
+        "Type": 5,
+        "DamageFactor": 1,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.02
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 45,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 117
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 119
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 118
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 119
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": true
+  },
+  {
+    "Id": 21,
+    "Name": "Legendary Manticora",
+    "Description": "Most powerful Legendary creature born in Underworld Kingdom. Its attacks crushes any armor and with reflex it can dodge any attack. Besides regular attacks It is able also to perform very dangerous Strong attacks, Charge and Stunning skill. Manticora has four different behavior patterns that depends on its health level. Last phase (under 25% of health) is most dangerous, because you have only 17 rounds to successfully defeat Manticora. In 18th round Manticora will cast it's Deadly Attack that will instantly kill you. There is no way to block or counter it. It is important to prepare right equipment and take perfection in strategy to successfully defeat this enemy.",
+    "Type": 0,
+    "EnemyStageName": "Ruins of Arkmen Hen",
+    "Tier": 5,
+    "AvatarImageNumber": 51,
+    "StageBackgroundImageNumber": 51,
+    "GoldReward": 1400,
+    "RankPointsReward": 500,
+    "Attributes": {
+      "Damage": 50,
+      "Precision": 0,
+      "Specialization": 50,
+      "MaxHealth": 3000,
+      "Reflex": 40,
+      "Defense": -8
+    },
+    "Skills": [
+      {
+        "Id": 120,
+        "Name": "Scratch",
+        "Type": 0,
+        "DamageFactor": 0.5,
+        "BaseHitChance": 92,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 121,
+        "Name": "Clapper Claw",
+        "Type": 1,
+        "DamageFactor": 1.5,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 122,
+        "Name": "Bite",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 87,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 123,
+        "Name": "Thousands Of Fangs",
+        "Type": 1,
+        "DamageFactor": 1.7,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 124,
+        "Name": "Spike",
+        "Type": 0,
+        "DamageFactor": 0.6,
+        "BaseHitChance": 82,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 125,
+        "Name": "Poisoned Sting",
+        "Type": 1,
+        "DamageFactor": 1.85,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 126,
+        "Name": "Tail Lash",
+        "Type": 0,
+        "DamageFactor": 0.7,
+        "BaseHitChance": 110,
+        "ArmorPenetrationPercent": 5,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 127,
+        "Name": "Crushing Tail Strike",
+        "Type": 1,
+        "DamageFactor": 2.15,
+        "BaseHitChance": 120,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 128,
+        "Name": "Paralyzing Roar",
+        "Type": 4,
+        "DamageFactor": 0.1,
+        "BaseHitChance": 150,
+        "ArmorPenetrationPercent": -10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 129,
+        "Name": "Fury",
+        "Type": 2,
+        "DamageFactor": 0.95,
+        "BaseHitChance": 150,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 130,
+        "Name": "Wound Licking",
+        "Type": 5,
+        "DamageFactor": 0,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.048
+      },
+      {
+        "Id": 131,
+        "Name": "Poisoned Cloud",
+        "Type": 3,
+        "DamageFactor": 18.18,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 46,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 120
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 120
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 121
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 120
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 129
+          }
+        ]
+      },
+      {
+        "Id": 47,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 122
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 122
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 123
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 123
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 122
+          }
+        ]
+      },
+      {
+        "Id": 48,
+        "MinHealthPercentToTrigger": 25,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 124
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 124
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 128
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 124
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 125
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 131
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 124
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 125
+          }
+        ]
+      },
+      {
+        "Id": 49,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 25,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 127
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 126
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 126
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 130
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 126
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 126
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 126
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 127
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 128
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 126
+          },
+          {
+            "SequenceStepId": 14,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 15,
+            "SkillId": 127
+          },
+          {
+            "SequenceStepId": 16,
+            "SkillId": 129
+          },
+          {
+            "SequenceStepId": 17,
+            "SkillId": 131
+          },
+          {
+            "SequenceStepId": 18,
+            "SkillId": 131
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 22,
+    "Name": "Legendary Melisandra",
+    "Description": "The sneakiest Human Queen in the world turned into monster by Gods many centuries ago. She is unnaturally agile and terribly precise what makes her really hard to defeat. Luckily she's attacks (even strong) can be easily absorbed by defense, but it is still important to be maximum precise to hit her. She has four different tactics for battle and she chooses them by her health level. You should be aware of last 25% of she's health because she will be preparing to Destroy she's Cavern. It will take some time so you have 18 rounds (from the moment that she's health drops to 25%) to defeat her.",
+    "Type": 0,
+    "EnemyStageName": "Cavern of Sorrow",
+    "Tier": 5,
+    "AvatarImageNumber": 52,
+    "StageBackgroundImageNumber": 52,
+    "GoldReward": 1500,
+    "RankPointsReward": 500,
+    "Attributes": {
+      "Damage": 50,
+      "Precision": 50,
+      "Specialization": -2,
+      "MaxHealth": 3500,
+      "Reflex": 44,
+      "Defense": -18
+    },
+    "Skills": [
+      {
+        "Id": 132,
+        "Name": "Shot",
+        "Type": 0,
+        "DamageFactor": 0.9,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 133,
+        "Name": "Hard Shot",
+        "Type": 1,
+        "DamageFactor": 2.25,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 134,
+        "Name": "Quick Arrow",
+        "Type": 0,
+        "DamageFactor": 1.1,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 135,
+        "Name": "Bolt To The Neck",
+        "Type": 1,
+        "DamageFactor": 2.75,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 136,
+        "Name": "Sharp Arrowhead",
+        "Type": 0,
+        "DamageFactor": 1.15,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 137,
+        "Name": "Powerful Shot",
+        "Type": 1,
+        "DamageFactor": 3.1,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 138,
+        "Name": "Tail Blast",
+        "Type": 0,
+        "DamageFactor": 0.99,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 139,
+        "Name": "Probing Arrow",
+        "Type": 1,
+        "DamageFactor": 3.75,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 140,
+        "Name": "Hallucinations",
+        "Type": 4,
+        "DamageFactor": 0.5,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 141,
+        "Name": "Sneak Dance",
+        "Type": 2,
+        "DamageFactor": 1.75,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 142,
+        "Name": "Styx Water",
+        "Type": 5,
+        "DamageFactor": 0,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.04
+      },
+      {
+        "Id": 143,
+        "Name": "Turn Into The Stone!",
+        "Type": 3,
+        "DamageFactor": 9.09,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 144,
+        "Name": "Cavern Collapse",
+        "Type": 3,
+        "DamageFactor": 18.18,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 1
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 50,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 132
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 133
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 132
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 143
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 142
+          }
+        ]
+      },
+      {
+        "Id": 51,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 134
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 134
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 140
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 135
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 134
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 135
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 142
+          }
+        ]
+      },
+      {
+        "Id": 52,
+        "MinHealthPercentToTrigger": 25,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 136
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 137
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 136
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 143
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 140
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 142
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 136
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 137
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 141
+          }
+        ]
+      },
+      {
+        "Id": 53,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 25,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 138
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 138
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 139
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 138
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 142
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 143
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 138
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 140
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 139
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 139
+          },
+          {
+            "SequenceStepId": 14,
+            "SkillId": 141
+          },
+          {
+            "SequenceStepId": 15,
+            "SkillId": 142
+          },
+          {
+            "SequenceStepId": 16,
+            "SkillId": 144
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 23,
+    "Name": "Legendary Crystalline Hydra",
+    "Description": "Master of regeneration - cut one head and it will regrow. Really hard creature with deadly precision and scales as hard as obsidian. She has four patterns of attacks. The most dangerous are two patterns: second (75%-50% health) and last (25%-0% health). In the second pattern you will have only 17 rounds to bring Hydras Health down to 50% because in 18th round Hydra will cast Regrow Head and recovers Huge amount of health. In the last pattern you have only 16 rounds to kill Hydra, because in 17th round she will cast Eroding Environment that will instantly kill you.",
+    "Type": 0,
+    "EnemyStageName": "Crystal Canyon",
+    "Tier": 5,
+    "AvatarImageNumber": 53,
+    "StageBackgroundImageNumber": 53,
+    "GoldReward": 1550,
+    "RankPointsReward": 750,
+    "Attributes": {
+      "Damage": 55,
+      "Precision": 55,
+      "Specialization": 5,
+      "MaxHealth": 4250,
+      "Reflex": -3,
+      "Defense": 46
+    },
+    "Skills": [
+      {
+        "Id": 145,
+        "Name": "Bite",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 75,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 146,
+        "Name": "Triple Bite",
+        "Type": 1,
+        "DamageFactor": 3.45,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 147,
+        "Name": "Bloody Claw",
+        "Type": 0,
+        "DamageFactor": 0.65,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 148,
+        "Name": "Malicious Scratch",
+        "Type": 1,
+        "DamageFactor": 3.6,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 149,
+        "Name": "Whipping Tail",
+        "Type": 0,
+        "DamageFactor": 0.75,
+        "BaseHitChance": 70,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 150,
+        "Name": "Crystal Daggers",
+        "Type": 1,
+        "DamageFactor": 3.7,
+        "BaseHitChance": 50,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 151,
+        "Name": "Stone Spear",
+        "Type": 0,
+        "DamageFactor": 0.82,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 152,
+        "Name": "Crystal Spikes",
+        "Type": 1,
+        "DamageFactor": 3.9,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 153,
+        "Name": "Crystallization",
+        "Type": 4,
+        "DamageFactor": 0.33,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 154,
+        "Name": "Corrupting Ray",
+        "Type": 2,
+        "DamageFactor": 1.66,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 155,
+        "Name": "Regrowing Head",
+        "Type": 5,
+        "DamageFactor": 0,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.25
+      },
+      {
+        "Id": 156,
+        "Name": "Fiery Breath",
+        "Type": 3,
+        "DamageFactor": 8.265,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 157,
+        "Name": "Eroding Environment",
+        "Type": 3,
+        "DamageFactor": 16.53,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 1
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 54,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 145
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 145
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 146
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 146
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 145
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 145
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 153
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 146
+          }
+        ]
+      },
+      {
+        "Id": 55,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 147
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 148
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 148
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 147
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 155
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 147
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 148
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 153
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 148
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 147
+          },
+          {
+            "SequenceStepId": 14,
+            "SkillId": 147
+          },
+          {
+            "SequenceStepId": 15,
+            "SkillId": 155
+          }
+        ]
+      },
+      {
+        "Id": 56,
+        "MinHealthPercentToTrigger": 25,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 149
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 149
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 150
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 150
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 149
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 153
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 150
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 149
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 156
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 154
+          }
+        ]
+      },
+      {
+        "Id": 57,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 25,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 151
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 152
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 155
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 151
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 152
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 151
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 152
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 154
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 153
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 152
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 151
+          },
+          {
+            "SequenceStepId": 14,
+            "SkillId": 151
+          },
+          {
+            "SequenceStepId": 15,
+            "SkillId": 157
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 24,
+    "Name": "Legendary Aegar",
+    "Description": "Powerful fire dragon borne in flames near the pillars of the world. He was enslaved by Fallen Gods in the first age of Arna, corrupted by the Dark Magic and imprisoned inside Volantris Fortress. His obsidian scales can reduce damage and his attacks turns any armor into ashes. In his four different Battle Tactics the most dangerous are second and last one. In Second pattern you will have only 20 rounds to bring his health from 75% to 50% before Aegar prepares Volcanic Eruption that will instantly kill you. In lats Tactic Pattern you will have 24 rounds to kill Aegar. In 25th round the great Caldera below fortress will explode! If you will have enough reflex and specialization you will defeat this final Legendary Titan.",
+    "Type": 0,
+    "EnemyStageName": "Volantris the Dark Dragon Fortress",
+    "Tier": 5,
+    "AvatarImageNumber": 54,
+    "StageBackgroundImageNumber": 54,
+    "GoldReward": 1650,
+    "RankPointsReward": 1000,
+    "Attributes": {
+      "Damage": 60,
+      "Precision": 5,
+      "Specialization": 55,
+      "MaxHealth": 5750,
+      "Reflex": -8,
+      "Defense": 48
+    },
+    "Skills": [
+      {
+        "Id": 158,
+        "Name": "Fiery Claw",
+        "Type": 0,
+        "DamageFactor": 0.45,
+        "BaseHitChance": 85,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 159,
+        "Name": "Burning Lava",
+        "Type": 1,
+        "DamageFactor": 2.05,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 160,
+        "Name": "Searing Spire",
+        "Type": 0,
+        "DamageFactor": 0.5,
+        "BaseHitChance": 80,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 161,
+        "Name": "Combustion",
+        "Type": 1,
+        "DamageFactor": 2.25,
+        "BaseHitChance": 90,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 162,
+        "Name": "Fire Shot",
+        "Type": 0,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 95,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 163,
+        "Name": "Fire Breath",
+        "Type": 1,
+        "DamageFactor": 2.35,
+        "BaseHitChance": 105,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 164,
+        "Name": "Ignition",
+        "Type": 0,
+        "DamageFactor": 0.6,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 165,
+        "Name": "Storm of Flames",
+        "Type": 1,
+        "DamageFactor": 2.65,
+        "BaseHitChance": 125,
+        "ArmorPenetrationPercent": 10,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 166,
+        "Name": "Knock-Down",
+        "Type": 4,
+        "DamageFactor": 0.55,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 167,
+        "Name": "Wings of Hurricane",
+        "Type": 2,
+        "DamageFactor": 1.75,
+        "BaseHitChance": 175,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 168,
+        "Name": "Recover",
+        "Type": 5,
+        "DamageFactor": 0,
+        "BaseHitChance": 200,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0.0582
+      },
+      {
+        "Id": 169,
+        "Name": "Summon Meteor",
+        "Type": 3,
+        "DamageFactor": 7.575,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 170,
+        "Name": "Volcanic Eruption",
+        "Type": 3,
+        "DamageFactor": 15.15,
+        "BaseHitChance": 500,
+        "ArmorPenetrationPercent": 500,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 58,
+        "MinHealthPercentToTrigger": 75,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 158
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 158
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 158
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 166
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 158
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 159
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 159
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 158
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 167
+          }
+        ]
+      },
+      {
+        "Id": 59,
+        "MinHealthPercentToTrigger": 50,
+        "MaxHealthPercentToTrigger": 75,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 160
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 160
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 161
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 161
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 160
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 166
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 166
+          },
+          {
+            "SequenceStepId": 14,
+            "SkillId": 161
+          },
+          {
+            "SequenceStepId": 15,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 16,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 17,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 18,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 19,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 20,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 21,
+            "SkillId": 170
+          }
+        ]
+      },
+      {
+        "Id": 60,
+        "MinHealthPercentToTrigger": 25,
+        "MaxHealthPercentToTrigger": 50,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 162
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 162
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 162
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 163
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 162
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 166
+          }
+        ]
+      },
+      {
+        "Id": 61,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 25,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 164
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 165
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 165
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 164
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 166
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 164
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 11,
+            "SkillId": 165
+          },
+          {
+            "SequenceStepId": 12,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 13,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 14,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 15,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 16,
+            "SkillId": 164
+          },
+          {
+            "SequenceStepId": 17,
+            "SkillId": 165
+          },
+          {
+            "SequenceStepId": 18,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 19,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 20,
+            "SkillId": 167
+          },
+          {
+            "SequenceStepId": 21,
+            "SkillId": 169
+          },
+          {
+            "SequenceStepId": 22,
+            "SkillId": 164
+          },
+          {
+            "SequenceStepId": 23,
+            "SkillId": 164
+          },
+          {
+            "SequenceStepId": 24,
+            "SkillId": 168
+          },
+          {
+            "SequenceStepId": 25,
+            "SkillId": 170
+          }
+        ]
+      }
+    ],
+    "TrainingEnemy": false
+  },
+  {
+    "Id": 25,
+    "Name": "Training Mannequin T5 Mechanics",
+    "Description": "This is Training Mannequin that shows Tier 5 new two mechanics: Deadly Attack and Rounds Limit. The Deadly Attack is special ability of your enemy that will kill you in one round. This attack cannot be Blocked or Countered, always occurs after charge, so only choosing wrong skill will cause your dead. But here we go to the next mechanic that we called Rounds Limit. Some enemies has special behavior patterns during battle with long sequence of skills which ends with Deadly Attack. Furthermore this attack at the end of sequence will be not preceded by charge attack so the only way to survive Rounds Limit mechanic is to deal enough damage during the sequence to kill foe or achieve health level of next sequence, before Deadly Attack occurs. This mannequin has sequence of 10 attacks where the 10th attack is Deadly. Deadly attack is signalized by red icon with black skull inside above enemy's card. Start Match with this Mannequin to see how both mechanics works.",
+    "Type": 0,
+    "EnemyStageName": "Training Sanctuary Hall",
+    "Tier": 5,
+    "AvatarImageNumber": 61,
+    "StageBackgroundImageNumber": 61,
+    "GoldReward": 0,
+    "RankPointsReward": 0,
+    "Attributes": {
+      "Damage": 1,
+      "Precision": 500,
+      "Specialization": 500,
+      "MaxHealth": 500,
+      "Reflex": -200,
+      "Defense": 75
+    },
+    "Skills": [
+      {
+        "Id": 171,
+        "Name": "Simple Attack",
+        "Type": 0,
+        "DamageFactor": 23,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 172,
+        "Name": "Charge Attack",
+        "Type": 2,
+        "DamageFactor": 9,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      },
+      {
+        "Id": 173,
+        "Name": "Deadly Attack",
+        "Type": 3,
+        "DamageFactor": 454.5,
+        "BaseHitChance": 100,
+        "ArmorPenetrationPercent": 0,
+        "HealingFactor": 0
+      }
+    ],
+    "BehaviorPatterns": [
+      {
+        "Id": 62,
+        "MinHealthPercentToTrigger": 0,
+        "MaxHealthPercentToTrigger": 100,
+        "SequenceOfSkillsId": [
+          {
+            "SequenceStepId": 1,
+            "SkillId": 171
+          },
+          {
+            "SequenceStepId": 2,
+            "SkillId": 172
+          },
+          {
+            "SequenceStepId": 3,
+            "SkillId": 173
+          },
+          {
+            "SequenceStepId": 4,
+            "SkillId": 171
+          },
+          {
+            "SequenceStepId": 5,
+            "SkillId": 171
+          },
+          {
+            "SequenceStepId": 6,
+            "SkillId": 172
+          },
+          {
+            "SequenceStepId": 7,
+            "SkillId": 173
+          },
+          {
+            "SequenceStepId": 8,
+            "SkillId": 171
+          },
+          {
+            "SequenceStepId": 9,
+            "SkillId": 171
+          },
+          {
+            "SequenceStepId": 10,
+            "SkillId": 173
           }
         ]
       }

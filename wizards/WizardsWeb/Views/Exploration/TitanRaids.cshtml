@@ -78,9 +78,8 @@
 </script>
 
 <script>
-    function audioVolume() {
-        document.getElementById("Titan-Raids-Music").volume = 0.08;
+    function lobbyMusicStart() {
         document.getElementById("Titan-Raids-Music").play();
     }
-    window.onload = audioVolume;
+    window.onload = setTimeout(lobbyMusicStart, 10);
 </script>

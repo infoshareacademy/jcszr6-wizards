@@ -12,9 +12,9 @@ public class InitialDataUsersFactory : IInitialDataUsersFactory
         var result = new Dictionary<Player, string>();
 
         // TODO: This content should be loaded from JSON file:
-        result.Add(new Player() { UserName = "Pawel-Dawicki", Email = "pawel.dawicki@wizard.com", DateOfBirth = new DateTime(1900,01,01) }, "Pa$$word2022");
-        result.Add(new Player() { UserName = "Pawel-Grajnert", Email = "pawel.grajnert@wizard.com", DateOfBirth = new DateTime(1900,01,01) }, "Pa$$word2022");
-        result.Add(new Player() { UserName = "Jakub-Oczko", Email = "jakub.oczko@wizard.com", DateOfBirth = new DateTime(1900,01,01) }, "Pa$$word2022");
+        result.Add(new Player() { UserName = "Pawel-Dawicki", Email = "pawel.dawicki@wizard.com", DateOfBirth = new DateTime(1900, 01, 01) }, "Pa$$word2022");
+        result.Add(new Player() { UserName = "Pawel-Grajnert", Email = "pawel.grajnert@wizard.com", DateOfBirth = new DateTime(1900, 01, 01) }, "Pa$$word2022");
+        result.Add(new Player() { UserName = "Jakub-Oczko", Email = "jakub.oczko@wizard.com", DateOfBirth = new DateTime(1900, 01, 01) }, "Pa$$word2022");
         result.Add(new Player() { UserName = "Adrian-Zamyslowski", Email = "adrian.zamyslowski@wizard.com", DateOfBirth = new DateTime(1900, 01, 01) }, "Pa$$word2022");
         return result;
     }
@@ -35,27 +35,106 @@ public class InitialDataUsersFactory : IInitialDataUsersFactory
 
         result.Add(new Player()
         {
-            UserName = "Tester", Email = "tester@wizard.com", DateOfBirth = new DateTime(1999, 09, 27), Heroes = new List<Hero>()
+            UserName = "Test-Account",
+            Email = "tester@wizard.com",
+            DateOfBirth = new DateTime(1999, 09, 27),
+            Heroes = new List<Hero>()
             {
-                new Hero(){NickName = "Diablo Pablo", Gold = 25000, AvatarImageNumber = 4, Profession = HeroProfession.Sorcerer, 
+                new Hero()
+                {
+                    NickName = "Gandalf The White", Gold = 30000, AvatarImageNumber = 5, Profession = HeroProfession.Sorcerer,
                     Attributes = new HeroAttributes(){DailyRewardEnergy = 10, Damage = 10, Precision = 5, Specialization = 0, MaxHealth = 25, Reflex = 0, Defense = 0},
                     Statistics = new Statistics(){ RankPoints = 7200, TotalMatchPlayed = 943, TotalMatchWin = 672, TotalMatchLoose = 943-672},
                     Inventory = new List<HeroItem>()
                     {
                         new HeroItem(){ItemId = 5, InUse = true, ItemEndurance = 99.00d},
                         new HeroItem(){ItemId = 20, InUse = true, ItemEndurance = 98.99d},
-                        new HeroItem(){ItemId = 10, InUse = false, ItemEndurance = 72.52d},
-                        new HeroItem(){ItemId = 15, InUse = false, ItemEndurance = 37.00d},
-                        new HeroItem(){ItemId = 25, InUse = false, ItemEndurance = 2.91d},
-                        new HeroItem(){ItemId = 30, InUse = false, ItemEndurance = 4.99d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 100.00d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 99.00d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 98.99d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 66.00d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 65.99d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 33.00d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 32.99d},
-                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 0.01d},
+                        new HeroItem(){ItemId = 10, InUse = false, ItemEndurance = 90.00d},
+                        new HeroItem(){ItemId = 15, InUse = false, ItemEndurance = 89.00d},
+                        new HeroItem(){ItemId = 25, InUse = false, ItemEndurance = 95.92d},
+                        new HeroItem(){ItemId = 30, InUse = false, ItemEndurance = 97.05d},
+                        new HeroItem(){ItemId = 1, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 2, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 3, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 4, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 6, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 7, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 8, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 9, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 11, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 12, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 13, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 14, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 16, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 17, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 18, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 19, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 21, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 22, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 23, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 24, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 26, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 27, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 28, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 29, InUse = false, ItemEndurance = 100.0d},
+
+                    },
+                    Skills = new List<HeroSkill>()
+                    {
+                        new HeroSkill() { SkillId = 1, SlotNumber = SkillSlotNumber.First, InUse = true },
+                        new HeroSkill() { SkillId = 2, SlotNumber = SkillSlotNumber.Second, InUse = true },
+                        new HeroSkill() { SkillId = 3, SlotNumber = SkillSlotNumber.Third, InUse = true },
+                        new HeroSkill() { SkillId = 4, SlotNumber = SkillSlotNumber.Fourth, InUse = true },
+                        new HeroSkill() { SkillId = 5, SlotNumber = SkillSlotNumber.Fifth, InUse = true },
+                        new HeroSkill() { SkillId = 6, SlotNumber = SkillSlotNumber.Sixth, InUse = true },
+                    },
+                },
+
+                new Hero(){
+                    NickName = "Lord Sauron", Gold = 25000, AvatarImageNumber = 2, Profession = HeroProfession.Necromancer,
+                    Attributes = new HeroAttributes(){DailyRewardEnergy = 2, Damage = 10, Precision = 0, Specialization = 5, MaxHealth = 25, Reflex = 0, Defense = 0},
+                    Statistics = new Statistics(){ RankPoints = 0, TotalMatchPlayed = 0, TotalMatchWin = 0, TotalMatchLoose = 0},
+                    Inventory = new List<HeroItem>()
+                    {
+                        new HeroItem(){ItemId = 35, InUse = true, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 50, InUse = true, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 31, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 32, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 33, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 34, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 36, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 37, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 38, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 39, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 40, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 41, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 42, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 43, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 44, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 45, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 46, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 47, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 48, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 49, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 51, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 52, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 53, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 54, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 55, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 56, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 57, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 58, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 59, InUse = false, ItemEndurance = 100.0d},
+                        new HeroItem(){ItemId = 60, InUse = false, ItemEndurance = 100.0d},
+                    },
+                    Skills = new List<HeroSkill>()
+                    {
+                        new HeroSkill() { SkillId = 7, SlotNumber = SkillSlotNumber.First, InUse = true },
+                        new HeroSkill() { SkillId = 8, SlotNumber = SkillSlotNumber.Second, InUse = true },
+                        new HeroSkill() { SkillId = 9, SlotNumber = SkillSlotNumber.Third, InUse = true },
+                        new HeroSkill() { SkillId = 10, SlotNumber = SkillSlotNumber.Fourth, InUse = true },
+                        new HeroSkill() { SkillId = 11, SlotNumber = SkillSlotNumber.Fifth, InUse = true },
+                        new HeroSkill() { SkillId = 12, SlotNumber = SkillSlotNumber.Sixth, InUse = true },
                     }
                 }
             }

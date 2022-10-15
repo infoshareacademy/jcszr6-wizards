@@ -42,7 +42,7 @@ public class StageService : IStageService
         _heroRepository = heroRepository;
     }
 
-    public async Task CreateNewMatchAsync(int playerId, int enemyId, bool isTraining)
+    public async Task CreateNewMatchAsync(int playerId, int enemyId)
     {
         var player = await _playerRepository.Get(playerId);
 
@@ -52,7 +52,7 @@ public class StageService : IStageService
         }
 
         var heroId = player.ActiveHeroId;
-        var combatStage = await _combatStageFactory.CreateCombatStageAsync(heroId, enemyId, isTraining);
+        var combatStage = await _combatStageFactory.CreateCombatStageAsync(heroId, enemyId);
 
         await _enemyAI.SelectNextEnemyActionAsync(combatStage);
 

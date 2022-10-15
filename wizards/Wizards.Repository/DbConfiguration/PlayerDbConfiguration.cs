@@ -46,5 +46,10 @@ internal static class PlayerDbConfiguration
             .Property(p => p.ActiveItemId)
             .IsRequired()
             .HasDefaultValue(0);
+
+        modelBuilder.Entity<Player>()
+            .Property(p => p.MusicVolume)
+            .IsRequired()
+            .HasDefaultValue(100);
     }
 }

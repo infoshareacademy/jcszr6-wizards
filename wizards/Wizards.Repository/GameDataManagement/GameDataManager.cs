@@ -35,7 +35,8 @@ public class GameDataManager : IGameDataManager
             await _gameDataUploader.AddOrUpdateSkillsFromFileAsync(true);
             await _gameDataUploader.AddOrUpdateItemsFromFileAsync(true);
             await _gameDataUploader.AddOrUpdateEnemiesFromFileAsync(true);
-            
+            await _gameDataUploader.UpdateHeroAttributes(true, false);
+
             await _dataInjector.InjectDevelopmentDataAsync();
         }
         else
@@ -46,7 +47,7 @@ public class GameDataManager : IGameDataManager
             await _gameDataUploader.AddOrUpdateItemsFromFileAsync(true);
             await _gameDataUploader.AddOrUpdateEnemiesFromFileAsync(true);
 
-            await _dataInjector.InjectDevelopmentDataAsync();
+            await _dataInjector.InjectProductionDataAsync();
         }
     }
 

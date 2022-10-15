@@ -1,34 +1,40 @@
-﻿@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
+﻿@using Wizards.Core.Model.WorldModels.Enums
+@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
 
-<body class="bg-arena not-selectable" 
+<body class="bg-arena not-selectable"
       style="background-image: url(/GraphicAssets/ArenaBackground/StageBackground-@(Model.BackgroundImageNumber).jpg);">
-<div class="col-12 p-4">
-    <div class="row">
 
-        <!-- HERO Left Section -->
-        <div class="col-1 p-1 hero-section-width" style="width: 420px;">
-            <partial name="_HeroSection" model="@Model"/>
-        </div>
-
-        <!-- REPORT/ACTIONS Center Section -->
-        <div class="col p-1">
-            <div class="col-12 text-center bg-paper py-2 h4">@Model.Name</div>
-            <div class="center-section">
-                <partial name="_EnemyHPBar" model="@Model.EnemySection"/>
-                <partial name="_LogTable" model="@Model"/>
-                <partial name="_HeroHPBar" model="Model.HeroSection"/>
-                <partial name="_HeroSkillBar" model="Model"/>
+    <audio id="battle-music" loop="true">
+        <source src="Sound/Titan-battle.mp3">
+    </audio>
+    <audio id="fanfare-win">
+        <source src="Sound/Match-victory.mp3">
+    </audio>
+    <audio id="fanfare-lost">
+        <source src="Sound/Match-failed.mp3">
+    </audio>
+    <div style="width: 100%; height: 40px; bottom: 0px; position: absolute;" class="bg-brown text-golden-dark">
+        <div class="row p-0 m-0">
+            <div class="col-10 p-0 m-0"></div>
+            <div class="col-2 p-0 m-0 pt-2">
+                <partial name="_MusicVolumeSettings" />
             </div>
         </div>
-
-        <!-- ENEMY Right Section -->
-        <div class="col-1 p-1" style="width: 477px;">
-            <partial name="_EnemySection" model="@Model"/>
-        </div>
     </div>
-</div>
+    
+    @if (Model.Status == StageStatus.DuringCombat)
+    {
+        <script>
+            function musicStart() {
+                document.getElementById("battle-music").play();
+            }
+            window.onload = setTimeout(musicStart, 100);
+        </script>
+    }
 
-<partial name="_FinishMatchModals" model="Model"/>
+    <div id="content-container" class="col-12 p-4">
+        <partial name="_CombatContent" model="@Model" />
+    </div>
 
 </body>
 

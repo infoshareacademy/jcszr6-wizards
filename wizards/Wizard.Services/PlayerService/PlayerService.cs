@@ -1,8 +1,6 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
-using Wizards.Core.Interfaces;
 using Wizards.Core.Interfaces.UserModelInterfaces;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Extentions;
@@ -98,6 +96,22 @@ namespace Wizards.Services.PlayerService
         public async Task<Player> Get(ClaimsPrincipal user)
         {
             return await _playerRepository.Get(user.GetId());
+        }
+
+        public async Task SetMusicVolume(ClaimsPrincipal user, int volumeValue)
+        {
+            var player = await Get(user);
+
+            player.MusicVolume = volumeValue;
+            
+            await _playerRepository.Update(player);
+        }
+
+        public async Task<int> GetMusicVolume(ClaimsPrincipal user)
+        {
+            var player = await Get(user);
+
+            return player.MusicVolume;
         }
     }
 }

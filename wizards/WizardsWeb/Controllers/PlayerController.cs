@@ -155,6 +155,20 @@ public class PlayerController : Controller
         }
     }
 
+    [HttpGet("Player/SetVolume/{volumeValue:int}")]
+    public async Task<IActionResult> SetMusicVolume(int volumeValue)
+    {
+        await _playerService.SetMusicVolume(User, volumeValue);
+        return Ok();
+    }
+
+    [HttpGet("Player/GetVolume")]
+    public async Task<IActionResult> GetMusicVolume()
+    {
+        var volume = await _playerService.GetMusicVolume(User);
+        return Json(volume);
+    }
+
     // GET: PlayerController/EditPassword
     public async Task<ActionResult> EditPassword()
     {
