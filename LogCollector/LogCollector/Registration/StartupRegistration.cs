@@ -10,9 +10,16 @@ public static class StartupRegistration
         using (var scope = services.CreateScope())
         {
             var context = scope.ServiceProvider.GetRequiredService<LogDbContext>();
-            context.Database.CloseConnection();
-            context.Database.EnsureDeleted();
-            context.Database.Migrate();
+            try
+            {
+                context.Database.Migrate();
+            }
+            catch (Exception exception)
+            {
+                context.Database.CloseConnection();
+                context.Database.EnsureDeleted();
+                context.Database.Migrate();
+            }
         }
     }
 }
