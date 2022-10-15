@@ -13,11 +13,11 @@ public static class LogCollectorApiConfiguration
         httpClientFactory.CreateClient(LogCollectorApiHttpClientName);
 
     public static readonly IAsyncPolicy<HttpResponseMessage> TimeoutPolicy =
-        Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromSeconds(2));
+        Policy.TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(250));
 
     public static readonly IAsyncPolicy<HttpResponseMessage> RetryPolicy = HttpPolicyExtensions
         .HandleTransientHttpError()
         .Or<TimeoutRejectedException>()
         .OrResult(result => result.StatusCode != HttpStatusCode.OK)
-        .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromMilliseconds(100 * retryAttempt));
+        .WaitAndRetryAsync(2, retryAttempt => TimeSpan.FromMilliseconds(100 * retryAttempt));
 }

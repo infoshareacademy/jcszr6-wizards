@@ -18,7 +18,7 @@ public class WizardsLogger : IWizardsLogger
         _clientFactory = clientFactory;
     }
 
-    public async Task SendLogAsync<T>(LogLevel logLevel, string message, params object?[] args)
+    public Task SendLogAsync<T>(LogLevel logLevel, string message, params object?[] args)
     {
         var logRecord = new LogRecord();
         _loggerFactory.CreateLogger<T>().Log(logLevel, message, args);
@@ -30,7 +30,9 @@ public class WizardsLogger : IWizardsLogger
         logRecord.Exception = "";
         logRecord.Properties = GetSerializedArguments(args);
 
-        await SendLogToLogCollector(logRecord);
+        SendLogToLogCollector(logRecord);
+
+        return Task.CompletedTask;
     }
 
     private string GetSerializedArguments(object?[] args)
@@ -67,14 +69,16 @@ public class WizardsLogger : IWizardsLogger
 
     private async Task SendLogToLogCollector(LogRecord logRecord)
     {
-        var response = await _clientFactory.CreateLogCollectorHttpClient().PostAsJsonAsync("/api/logs", logRecord);
-
-        if (response.IsSuccessStatusCode)
+        var httpClient = _clientFactory.CreateLogCollectorHttpClient();
+        
+        try
         {
-            return;
+            var response = await httpClient.PostAsJsonAsync("/api/logs", logRecord);
+            response.EnsureSuccessStatusCode();
         }
-
-
+        catch (Exception exception)
+        {
+            _loggerFactory.CreateLogger<WizardsLogger>().LogError($"Cannot send log record to LogCollector. API [POST]: {httpClient.BaseAddress}/api/logs does not respond", logRecord, exception);
+        }
     }
-
 }
