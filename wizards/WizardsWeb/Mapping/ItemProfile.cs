@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
 using WizardsWeb.ModelViews.ItemModelViews;

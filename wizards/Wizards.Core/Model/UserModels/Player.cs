@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Wizards.Core.Model.WorldModels;
 
 namespace Wizards.Core.Model.UserModels;
 

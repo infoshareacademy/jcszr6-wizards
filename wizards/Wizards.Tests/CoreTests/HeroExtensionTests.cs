@@ -1,103 +1,95 @@
 ﻿using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wizards.Core.Model.UserModels;
-using Wizards.Core.Model.WorldModels;
 using Wizards.Core.ModelExtensions;
 
-namespace Wizards.Tests.CoreTests
+namespace Wizards.Tests.CoreTests;
+public class HeroExtensionTests
 {
-    public class HeroExtensionTests
+    [Fact]
+    public void CalculateSkillDamage_WithNullAsHero_ThrowException()
     {
-        [Fact]
-        public void CalculateSkillDamage_WithNullAsHero_ThrowException()
-        {
-            var skill = new Skill();
-            Hero hero = null;
-            var result = () => hero.CalculateSkillDamage(skill);
+        var skill = new Skill();
+        Hero hero = null;
+        var result = () => hero.CalculateSkillDamage(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillDamage_WithNullHeroSkill_ThrowException()
-        {
-            var hero = new Hero();
-            Skill skill = null;
-            var result = () => hero.CalculateSkillDamage(skill);
+    [Fact]
+    public void CalculateSkillDamage_WithNullHeroSkill_ThrowException()
+    {
+        var hero = new Hero();
+        Skill skill = null;
+        var result = () => hero.CalculateSkillDamage(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillHitChance_WithNullAsHero_ThrowException()
-        {
-            var skill = new Skill();
-            Hero hero = null;
-            var result = () => hero.CalculateSkillHitChance(skill);
+    [Fact]
+    public void CalculateSkillHitChance_WithNullAsHero_ThrowException()
+    {
+        var skill = new Skill();
+        Hero hero = null;
+        var result = () => hero.CalculateSkillHitChance(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillHitChance_WithNullHeroSkill_ThrowException()
-        {
-            var hero = new Hero();
-            Skill skill = null;
-            var result = () => hero.CalculateSkillHitChance(skill);
+    [Fact]
+    public void CalculateSkillHitChance_WithNullHeroSkill_ThrowException()
+    {
+        var hero = new Hero();
+        Skill skill = null;
+        var result = () => hero.CalculateSkillHitChance(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillArmorPenetrationPercent_WithNullAsHero_ThrowException()
-        {
-            var skill = new Skill();
-            Hero hero = null;
-            var result = () => hero.CalculateSkillArmorPenetrationPercent(skill);
+    [Fact]
+    public void CalculateSkillArmorPenetrationPercent_WithNullAsHero_ThrowException()
+    {
+        var skill = new Skill();
+        Hero hero = null;
+        var result = () => hero.CalculateSkillArmorPenetrationPercent(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillArmorPenetrationPercent_WithNullHeroSkill_ThrowException()
-        {
-            var hero = new Hero();
-            Skill skill = null;
-            var result = () => hero.CalculateSkillArmorPenetrationPercent(skill);
+    [Fact]
+    public void CalculateSkillArmorPenetrationPercent_WithNullHeroSkill_ThrowException()
+    {
+        var hero = new Hero();
+        Skill skill = null;
+        var result = () => hero.CalculateSkillArmorPenetrationPercent(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillHealing_WithNullAsHero_ThrowException()
-        {
-            var skill = new Skill();
-            Hero hero = null;
-            var result = () => hero.CalculateSkillHealing(skill);
+    [Fact]
+    public void CalculateSkillHealing_WithNullAsHero_ThrowException()
+    {
+        var skill = new Skill();
+        Hero hero = null;
+        var result = () => hero.CalculateSkillHealing(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
+    }
 
-        [Fact]
-        public void CalculateSkillHealing_WithNullHeroSkill_ThrowException()
-        {
-            var hero = new Hero();
-            Skill skill = null;
-            var result = () => hero.CalculateSkillHealing(skill);
+    [Fact]
+    public void CalculateSkillHealing_WithNullHeroSkill_ThrowException()
+    {
+        var hero = new Hero();
+        Skill skill = null;
+        var result = () => hero.CalculateSkillHealing(skill);
 
-            result.Should().Throw<ArgumentNullException>();
+        result.Should().Throw<ArgumentNullException>();
 
-        }
     }
 }

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wizards.Core.Model.UserModels;
-using Wizards.Services.Extentions;
+using Wizards.Services.Extensions;
 using Wizards.Services.HeroService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.HeroModelViews;

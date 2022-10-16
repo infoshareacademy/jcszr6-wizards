@@ -1,12 +1,9 @@
 using System.Linq;
 using AutoMapper;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.ModelExtensions;
 using Wizards.Services.SearchService;
-using WizardsWeb.Extensions;
 using WizardsWeb.ModelViews.PlayerModelViews;
-using WizardsWeb.ModelViews;
 using WizardsWeb.ModelViews.RankingModelViews;
 
 namespace WizardsWeb.Mapping;

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Wizards.Core.Model.WorldModels;
 using WizardsWeb.ModelViews.HeroModelViews.Properties;
 
 namespace WizardsWeb.ModelViews.ExplorationModelViews;

@@ -1,7 +1,4 @@
-﻿using Wizards.Core.Model;
-using Wizards.Core.Model.UserModels;
-
-namespace Wizards.Services.SearchService;
+﻿namespace Wizards.Services.SearchService;
 
 public interface ISearchService
 {
