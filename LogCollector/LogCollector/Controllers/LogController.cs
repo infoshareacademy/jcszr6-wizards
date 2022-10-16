@@ -21,7 +21,7 @@ namespace LogCollector.Controllers
             _mapper = mapper;
         }
         
-        [HttpGet("api/logs/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetLogAsync(int id)
         {
             var log = await _logDbContext.Logs.SingleOrDefaultAsync(l => l.Id == id);
