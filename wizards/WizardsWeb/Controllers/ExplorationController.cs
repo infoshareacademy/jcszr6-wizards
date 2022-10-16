@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 using Wizards.Core.Interfaces.WorldModelInterfaces;
-using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.ModelExtensions;
 using Wizards.Services.HeroService;
 using WizardsWeb.ModelViews.ExplorationModelViews;

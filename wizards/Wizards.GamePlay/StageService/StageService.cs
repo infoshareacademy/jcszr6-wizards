@@ -1,7 +1,6 @@
 using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.Core.Model.UserModels;
-using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.Model.WorldModels;
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;

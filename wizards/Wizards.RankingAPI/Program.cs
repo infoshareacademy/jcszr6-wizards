@@ -2,9 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Wizards.Core.Interfaces.UserModelInterfaces;
 using Wizards.Repository;
 using Wizards.Repository.Repository.UserModel;
-using Wizards.Repository.ServiceRegistration;
 using Wizards.Services.SearchService;
-using Wizards.Services.ServiceRegistration;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Services.Extentions;
+using Wizards.Services.Extensions;
 using Wizards.Services.HeroService;
 using Wizards.Services.Inventory;
 using Wizards.Services.ItemService;

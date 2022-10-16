@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Wizards.Repository.GameDataManagement.Updaters;
+using Wizards.Repository.GameDataManagement.Uploaders;
 using Wizards.Repository.InitialData;
 
 namespace Wizards.Repository.GameDataManagement;

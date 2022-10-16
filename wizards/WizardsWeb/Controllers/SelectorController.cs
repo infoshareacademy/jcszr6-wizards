@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wizards.Core.Interfaces.LoggerInterface;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Services.AuthorizationElements.Selector;
 

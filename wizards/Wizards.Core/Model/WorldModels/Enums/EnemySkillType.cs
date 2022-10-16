@@ -1,12 +1,11 @@
-﻿namespace Wizards.Core.Model.WorldModels.Enums
+﻿namespace Wizards.Core.Model.WorldModels.Enums;
+
+public enum EnemySkillType
 {
-    public enum EnemySkillType
-    {
-        Attack,
-        StrongAttack,
-        Charge,
-        Deadly,
-        Stunning,
-        Heal
-    }
+    Attack,
+    StrongAttack,
+    Charge,
+    Deadly,
+    Stunning,
+    Heal
 }

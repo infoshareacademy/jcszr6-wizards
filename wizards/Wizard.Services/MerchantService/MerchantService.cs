@@ -1,7 +1,5 @@
 ﻿using System.Security.Claims;
-using Wizards.Core.Interfaces;
 using Wizards.Core.Interfaces.UserModelInterfaces;
-using Wizards.Core.Model;
 using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Core.ModelExtensions;

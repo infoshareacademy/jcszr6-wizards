@@ -2,8 +2,6 @@
 using Wizards.Core.Model.WorldModels.Enums;
 using Wizards.Core.Model.WorldModels.Properties;
 using Wizards.Core.Model.WorldModels.Properties.Enums;
-using Wizards.GamePlay.CombatService;
-
 
 namespace Wizards.GamePlay.ResultLogService;
 
@@ -58,6 +56,7 @@ public class ResultLogService : IResultLogService
             withWhat = $" with {roundResult.EnemySkillName} ({EnemySkillTypeToString(roundResult.EnemySkillType)})";
             var stuns = roundResult.HeroWillBeStunned ? ", stuns" : "";
             howMuchDamage = $"{stuns} and deals {roundResult.HeroDamageTaken} damage";
+            howMuchDamage += roundResult.EnemyHealthRecovered > 0 ? $" and recovers {roundResult.EnemyHealthRecovered} health points" : "";
         }
 
         if (roundResult.EnemySkillType == EnemySkillType.Heal)
@@ -66,6 +65,7 @@ public class ResultLogService : IResultLogService
             hero = " himself";
             withWhat = $" with {roundResult.EnemySkillName} ({EnemySkillTypeToString(roundResult.EnemySkillType)})";
             howMuchDamage = $" and recovers {roundResult.EnemyHealthRecovered} health points";
+            howMuchDamage += roundResult.HeroDamageTaken > 0 ? $" and deals {roundResult.HeroDamageTaken} damage" : "";
         }
 
         if (message == "")
@@ -115,6 +115,7 @@ public class ResultLogService : IResultLogService
             whatDid = roundResult.HeroSkillType != HeroSkillType.Block ? " hits" : " did nothing to";
             withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
             howMuchDamage = $" and deals {roundResult.EnemyDamageTaken} damage";
+            howMuchDamage += roundResult.HeroHealthRecovered > 0 ? $" and recovers {roundResult.HeroHealthRecovered} health points" : "";
         }
 
         if (roundResult.HeroSkillType == HeroSkillType.Heal)
@@ -123,6 +124,7 @@ public class ResultLogService : IResultLogService
             enemy = " himself";
             withWhat = $" with {roundResult.HeroSkillName} ({HeroSkillTypeToString(roundResult.HeroSkillType)})";
             howMuchDamage = $" and recovers {roundResult.HeroHealthRecovered} health points";
+            howMuchDamage += roundResult.EnemyDamageTaken > 0 ? $" and deals {roundResult.EnemyDamageTaken} damage" : "";
         }
 
         if (message == "")

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Security.Claims;
 using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Repository.Repository.WorldModel;
-using Wizards.Services.Extentions;
+using Wizards.Services.Extensions;
 using WizardsWeb.ModelViews.CombatModelViews;
 
 namespace WizardsWeb.Extensions;

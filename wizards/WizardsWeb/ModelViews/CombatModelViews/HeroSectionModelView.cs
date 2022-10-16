@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Wizards.Core.Model.UserModels.Enums;
-using Wizards.Core.Model.WorldModels.ModelsDto.Properties;
 
 namespace WizardsWeb.ModelViews.CombatModelViews;
 

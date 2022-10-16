@@ -1,8 +1,7 @@
-﻿namespace Wizards.Core.Model.WorldModels.Enums
+﻿namespace Wizards.Core.Model.WorldModels.Enums;
+
+public enum EnemyType
 {
-    public enum EnemyType
-    {
-        Boss,
-        Monster,
-    }
+    Boss,
+    Monster,
 }

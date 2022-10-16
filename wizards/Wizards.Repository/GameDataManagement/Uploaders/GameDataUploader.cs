@@ -5,7 +5,7 @@ using Wizards.Core.Model.UserModels;
 using Wizards.Core.Model.UserModels.Properties;
 using Wizards.Core.Model.WorldModels;
 
-namespace Wizards.Repository.GameDataManagement.Updaters;
+namespace Wizards.Repository.GameDataManagement.Uploaders;
 
 public class GameDataUploader : IGameDataUploader
 {

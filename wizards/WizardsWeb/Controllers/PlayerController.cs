@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Model.UserModels;
-using Wizards.Services.Extentions;
+using Wizards.Services.Extensions;
 using Wizards.Services.PlayerService;
 using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.PlayerModelViews;

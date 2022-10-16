@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Wizards.Core.Interfaces.LoggerInterface;
 using Wizards.Core.Interfaces.WorldModelInterfaces;
 using Wizards.GamePlay.StageService;
-using Wizards.Services.Extentions;
+using Wizards.Services.Extensions;
 using WizardsWeb.ModelViews.CombatModelViews;
 
 namespace WizardsWeb.Controllers;

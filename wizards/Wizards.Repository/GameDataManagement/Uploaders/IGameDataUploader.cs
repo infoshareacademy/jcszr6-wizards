@@ -1,4 +1,4 @@
-﻿namespace Wizards.Repository.GameDataManagement.Updaters;
+﻿namespace Wizards.Repository.GameDataManagement.Uploaders;
 
 public interface IGameDataUploader
 {
