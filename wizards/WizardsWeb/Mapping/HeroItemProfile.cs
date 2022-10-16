@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using Wizards.Core.Model;
-using Wizards.Core.Model.Properties;
-using Wizards.Services.Helpers;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Properties;
+using Wizards.Core.ModelExtensions;
 using WizardsWeb.ModelViews.ItemModelViews;
 using WizardsWeb.ModelViews.ItemModelViews.Properties;
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Wizards.Core.Model.UserModels.Enums;
 
 namespace WizardsWeb.ModelViews.HeroModelViews;
 
@@ -14,6 +15,8 @@ public class HeroEditModelView
 
     [Required]
     public int AvatarImageNumber { get; set; }
+
+    public HeroProfession Profession { get; set; }
 
     public int Cost { get; set; }
     public int Gold { get; set; }

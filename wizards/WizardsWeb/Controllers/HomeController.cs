@@ -19,9 +19,19 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Authors()
     {
         return View();
+    }
+
+    public IActionResult Error404()
+    {
+        return View("Error404");
+    }
+
+    public IActionResult Error500()
+    {
+        return View("Error500");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

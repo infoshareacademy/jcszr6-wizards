@@ -1,20 +1,23 @@
-﻿@model WizardsWeb.ModelViews.RankingModelViews.RankingModelViews
+﻿@using Wizards.Core.Model.UserModels.Enums
+@model WizardsWeb.ModelViews.RankingModelViews.RankingModelViews
 
 @{
     ViewData["Title"] = "Index";
 }
 
 <style>
-    table.table-bordered{
-        border:1px solid goldenrod;
-        margin-top:20px;
+    table.table-bordered {
+        border: 1px solid black;
+        margin-top: 20px;
     }
-    table.table-bordered > thead > tr > th{
-        border:1px solid goldenrod;
-    }
-    table.table-bordered > tbody > tr > td{
-        border:1px solid goldenrod;
-    }
+
+        table.table-bordered > thead > tr > th {
+            border: 1px solid black;
+        }
+
+        table.table-bordered > tbody > tr > td {
+            border: 1px solid black;
+        }
 </style>
 
 <div class="row">
@@ -31,7 +34,7 @@
         <br />
         <ul class="list-group">
             <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form asp-action="Index">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
@@ -41,29 +44,45 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" value="Search by name" class="btn btn-outline-success btn-block" />
+                            <input type="submit" value="Search by name" class="gbtn gbtn-accept" />
                         </div>
                     </form>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <form asp-action="Index">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                         <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control" placeholder="mail@wizard.com" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                            <label asp-for="HeroName" class="control-label"></label>
+                            <input asp-for="HeroName" class="form-control" placeholder="Hero name" />
+                            <span asp-validation-for="HeroName" class="text-danger"></span>
                         </div>
 
-
                         <div class="form-group">
-                            <input type="submit" value="Search by email" class="btn btn-outline-success btn-block" />
+                            <input type="submit" value="Search by Hero name" class="gbtn gbtn-accept" />
                         </div>
                     </form>
                 </div>
+                @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Moderator.ToString()))
+                {
+                    <div class="col-md-3">
+                        <form asp-action="Index">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" placeholder="mail@wizard.com" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Search by email" class="gbtn gbtn-accept" />
+                            </div>
+                        </form>
+                    </div>
+                }
+
+                <div class="col-md-3">
                     <form asp-action="Index">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -72,72 +91,104 @@
                             <input asp-for="FromRankPoints" class="form-control" placeholder="For" />
                             <span asp-validation-for="FromRankPoints" class="text-danger"></span>
                         </div>
-
                         <div class="form-group">
-
                             <input asp-for="ToRankPoints" class="form-control" placeholder="To" />
                             <span asp-validation-for="ToRankPoints" class="text-danger"></span>
                         </div>
 
 
                         <div class="form-group">
-                            <input type="submit" value="Search by rank points" class="btn btn-outline-success btn-block" />
+                            <input type="submit" value="Search by rank points" class="gbtn gbtn-accept" />
                         </div>
                     </form>
                 </div>
             </li>
-            <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <a type="button" class="btn btn-outline-danger btn-block" asp-action="Index">All Players</a>
-            </li>
-        </ul>
-        <br />
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between bg-paper-color">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
 
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.PlayerDetailsDto)
-                        {
+            <br />
+            
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between bg-paper-color">
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>
-                                    @item.UserName
-                                </td>
-                                <td>
-                                    @item.Email
-                                </td>
-                                <td>
-                                    @item.HeroNumber
-                                </td>
-                                <td>
-                                    @item.RankNumber
-                                </td>
-                                <td>
-                                    @item.GoldHeroNumber
-                                </td>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankingPosition)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().UserName)
+                                </th>
+                                @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Moderator.ToString()))
+                                {
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().Email)
+                                    </th>
+                                }
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().HeroNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().RankNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().GoldHeroNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().PlayerWinRatio)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().TotalMatchPlayed)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().MaxTier)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PlayerDetailsDto.FirstOrDefault().BestHero)
+                                </th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </li>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PlayerDetailsDto)
+                            {
+                                <tr>
+                                    <td>
+                                        @($"{item.RankingPosition:#,##0}")
+                                    </td>
+                                    <td>
+                                        @item.UserName
+                                    </td>
+                                    @if (User.IsInRole(UserRoles.Admin.ToString()) || User.IsInRole(UserRoles.Moderator.ToString()))
+                                    {
+                                        <td>
+                                            @item.Email
+                                        </td>
+                                    }
+                                    <td>
+                                        @item.HeroNumber
+                                    </td>
+                                    <td>
+                                        @($"{item.RankNumber:#,##0}")
+                                    </td>
+                                    <td>
+                                        @($"{item.GoldHeroNumber:#,##0}")
+                                    </td>
+                                    <td>
+                                        @($"{item.PlayerWinRatio:P}")
+                                    </td>
+                                    <td>
+                                        @($"{item.TotalMatchPlayed:#,##0}")
+                                    </td>
+                                    <td>
+                                        @($"{item.MaxTier:F}")
+                                    </td>
+                                    <td>
+                                        @item.BestHero
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </li>
+            </ul>
         </ul>
     </div>
 </div>

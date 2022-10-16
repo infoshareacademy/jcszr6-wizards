@@ -1,0 +1,53 @@
+﻿@using Wizards.Core.Model.WorldModels.Enums
+@model WizardsWeb.ModelViews.CombatModelViews.CombatStageModelView
+
+@if (Model.Status == StageStatus.ConcludedEnemyWins || Model.Status == StageStatus.ConcludedHeroWins)
+{
+    var victoryOrDeath = "";
+    if (Model.Status == StageStatus.ConcludedEnemyWins)
+    {
+        victoryOrDeath = "failed";
+        <script>
+            document.getElementById("fanfare-lost").play();
+            document.getElementById("battle-music").pause();
+        </script>
+    }
+    if (Model.Status == StageStatus.ConcludedHeroWins)
+    {
+        victoryOrDeath = "victory";
+        <script>
+            document.getElementById("fanfare-win").play();
+            document.getElementById("battle-music").pause();
+        </script>
+    }
+
+    <div class="concluded-match-container">
+        <img class="match-result static-image-not-dragable" src="GraphicAssets/BattleGui/Conclude-@(victoryOrDeath).png" width="100%" height="100%"/>
+        
+
+        @if (Model.Status == StageStatus.ConcludedHeroWins)
+        {
+            <div class="claimed-rewards">
+                <span style="font-weight: bold; font-size: 35px">Claimed Rewards</span>
+                <hr/>
+                @if (!Model.IsTraining && Model.HeroSection.DailyRewardEnergy > 0)
+                {
+                    <span class="reward-text">Gold: @Model.EnemySection.GoldReward</span>
+                    <br/>
+                    <span class="reward-text">Rank Points: @Model.EnemySection.RankPointsReward</span>
+                }
+                else if (!Model.IsTraining && Model.HeroSection.DailyRewardEnergy == 0)
+                {
+                    <span class="p-0 m-0 font-italic text-danger font-weight-bold" style="font-size: 20px">You have no more Daily Reward Energy!</span>
+                    <br class="p-0 m-0"/>
+                    <span class="p-0 m-0 font-italic text-danger font-weight-bold" style="font-size: 20px">You cannot claim more rewards today!</span>
+                }
+                else
+                {
+                    <span class="reward-text">There is no rewards for training match</span>
+                }
+                <hr/>
+            </div>
+        }
+    </div>
+}

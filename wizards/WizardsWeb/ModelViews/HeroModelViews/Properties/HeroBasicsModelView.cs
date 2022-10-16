@@ -1,4 +1,4 @@
-﻿using Wizards.Core.Model.Enums;
+﻿using Wizards.Core.Model.UserModels.Enums;
 
 namespace WizardsWeb.ModelViews.HeroModelViews.Properties;
 
@@ -19,7 +19,7 @@ public class HeroBasicsModelView
 
     private string GetAvatarImageAddres()
     {
-        return $"Images/Hero/Avatars/Wizard-{AvatarImageNumber}.png";
+        return $"Images/Hero/Avatars/{Profession.ToString()}-{AvatarImageNumber}.png";
     }
     public string GetProfessionImageAddres()
     {

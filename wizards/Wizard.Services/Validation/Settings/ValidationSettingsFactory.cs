@@ -1,4 +1,4 @@
-﻿using Wizards.Core.Model.Enums;
+﻿using Wizards.Core.Model.UserModels.Enums;
 using Wizards.Services.Validation.Elements;
 using Wizards.Services.Validation.ValidationTasks;
 using Wizards.Services.Validation.ValidationTasks.Interfaces;
@@ -57,7 +57,7 @@ public static class ValidationSettingsFactory
             AvatarTasks = new List<INumberValidationTask>()
             {
                 new NumberNotNull(),
-                new NumberRange(1, 7)
+                new NumberRange(1, 10)
             },
             ProfessionTasks = new List<INumberValidationTask>()
             {
@@ -112,17 +112,17 @@ public static class ValidationSettingsFactory
             DamageTasks = new List<INumberValidationTask>()
                 {
                     new NumberNotNull(),
-                    new NumberRange(-10, 50)
+                    new NumberRange(-10, 60)
                 },
             PrecisionTasks = new List<INumberValidationTask>()
                 {
                     new NumberNotNull(),
-                    new NumberRange(-10, 50)
+                    new NumberRange(-10, 60)
                 },
             SpecializationTasks = new List<INumberValidationTask>()
                 {
                     new NumberNotNull(),
-                    new NumberRange(-10, 50)
+                    new NumberRange(-10, 60)
                 },
             MaxHealthTasks = new List<INumberValidationTask>()
                 {
@@ -132,12 +132,12 @@ public static class ValidationSettingsFactory
             ReflexTasks = new List<INumberValidationTask>()
                 {
                     new NumberNotNull(),
-                    new NumberRange(-10, 50)
+                    new NumberRange(-10, 60)
                 },
             DefenseTasks = new List<INumberValidationTask>()
                 {
                     new NumberNotNull(),
-                    new NumberRange(-10, 50)
+                    new NumberRange(-10, 60)
                 },
             AlredyInUseTask = new AlredyInUse()
         };

@@ -1,6 +1,6 @@
 ﻿using System.Security.Claims;
-using Wizards.Core.Interfaces;
-using Wizards.Core.Model;
+using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Core.Model.UserModels;
 using Wizards.Services.Factories;
 using Wizards.Services.PlayerService;
 using Wizards.Services.Validation;
@@ -13,28 +13,30 @@ public class HeroService : IHeroService
     private readonly IHeroValidator _heroValidator;
     private readonly IHeroRepository _heroRepository;
     private readonly IPlayerService _playerService;
-    private readonly IHeroPropertiesFactory _propertiesFactory;
+    private readonly INewHeroFactory _newHeroFactory;
 
-    public HeroService(IHeroValidator heroValidator, IHeroRepository heroRepository, IPlayerService playerService, IHeroPropertiesFactory propertiesFactory)
+
+    public HeroService(IHeroValidator heroValidator, IHeroRepository heroRepository, IPlayerService playerService, INewHeroFactory newHeroFactory)
     {
         _heroValidator = heroValidator;
         _heroRepository = heroRepository;
         _playerService = playerService;
-        _propertiesFactory = propertiesFactory;
+        _newHeroFactory = newHeroFactory;
     }
 
     public async Task Add(ClaimsPrincipal user, Hero hero)
     {
         await _heroValidator.Validate(hero);
-        
-        hero.Gold = 100;
-        hero.Inventory = _propertiesFactory.GetStartupEquipment(hero.Profession);
-        hero.Attributes = _propertiesFactory.GetHeroAttributes(hero.Profession);
-        hero.Statistics = _propertiesFactory.GetStatistics();
+        var heroToCreate = await _newHeroFactory.GetNewHero(hero.Profession);
 
+        heroToCreate.AvatarImageNumber = hero.AvatarImageNumber;
+        heroToCreate.NickName = hero.NickName;
+        
         var player = await _playerService.Get(user);
         
-        await _heroRepository.Add(player, hero);
+        await _heroRepository.Add(player, heroToCreate);
+
+        hero.Id = heroToCreate.Id;
     }
 
     public async Task Delete(int id, string confirmNickName)

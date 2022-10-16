@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="ModelViews\PlayerDetailsDto\**" />
+    <Compile Remove="wwwroot\Images\Buttons\**" />
     <Content Remove="ModelViews\PlayerDetailsDto\**" />
+    <Content Remove="wwwroot\Images\Buttons\**" />
     <EmbeddedResource Remove="ModelViews\PlayerDetailsDto\**" />
+    <EmbeddedResource Remove="wwwroot\Images\Buttons\**" />
     <None Remove="ModelViews\PlayerDetailsDto\**" />
+    <None Remove="wwwroot\Images\Buttons\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,30 +32,59 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
+    <PackageReference Include="Serilog.Sinks.MSSqlServer" Version="5.7.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Wizard.Services\Wizards.Services.csproj" />
+    <ProjectReference Include="..\Wizards.GamePlay\Wizards.GamePlay.csproj" />
+    <ProjectReference Include="..\Wizards.RankingAPI\Wizards.RankingAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ModelViews\HeroModelViews\Properties\" />
+    <Folder Include="ModelViews\ExplorationModelViews\" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\css\BattleGuiStyles\CombatStyle.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\BattleGuiStyles\EnemyActionIcons.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\BattleGuiStyles\HealthBarsStyles.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\BattleGuiStyles\LogTable.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\BattleGuiStyles\PopUps.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\BattleGuiStyles\ResultsTextStyles.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\css\BattleGuiStyles\SkillBar.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Images\logo.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Images\Tapeta-1B.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="wwwroot\Images\Tapeta-2B.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="wwwroot\Images\Tapeta-3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Exploration\_TierTabContent.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Exploration\_TierTabContent.cshtml" />
   </ItemGroup>
 
 </Project>

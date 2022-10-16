@@ -1,0 +1,20 @@
+﻿<!-- Modal -->
+<div class="select-blocked modal show" id="matchOpened" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="matchOpenedLabel" aria-modal="true" role="dialog" style="display: block; background: #10101099">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-header bg-paper-header text-dark">
+                <h3>Match in progress</h3>
+            </div>
+            <div class="modal-body bg-paper-color text-dark rounded-bottom">
+                <br/>
+                <span style="color: red; font-size: 20px;">There is Match Instance Opened in your Account! </span>
+                <br/>
+                <span style="color: red; font-size: 20px;">Go back to combat stage to conclude it!</span>
+                <br/>
+                <br/>
+                <hr/>
+                <a class="gbtn gbtn-accept" asp-controller="Combat" asp-action="Index">Go back to Combat Stage</a>
+            </div>
+        </div>
+    </div>
+</div>

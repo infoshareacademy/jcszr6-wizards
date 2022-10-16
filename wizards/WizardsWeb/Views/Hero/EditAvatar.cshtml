@@ -48,14 +48,14 @@
                     <span asp-validation-for="AvatarImageNumber" class="text-danger font-weight-bold"></span>
                     <hr />
                     <div class="row">
-                        @for (int i = 1; i <= 7; i++)
+                        @for (int i = 1; i <= 8; i++)
                         {
-                            var image = $"Images/Hero/Avatars/Wizard-{i}.png";
+                            var imageAddress = $"Images/Hero/Avatars/{Model.Profession.ToString()}-{i}.png";
                             <div class="col-sm-3">
                                 <div>
                                     <label>
                                         <input asp-for="AvatarImageNumber" type="radio" value="@i"/>
-                                        <img class="p-1" src="~/@image" width="80%" height="80%"/>
+                                        <img class="p-1" src="~/@imageAddress" width="80%" height="80%"/>
                                     </label>
                                 </div>
                             </div>
@@ -63,8 +63,8 @@
                     </div>
                     <hr />
                     <div class="btn-group btn-block">
-                        <a type="button" class="btn btn-outline-warning" asp-action="Details">Back to Details</a>
-                        <input type="submit" value="Set Avatar" class="btn btn-outline-primary" />
+                        <a type="button" class="gbtn gbtn-action" asp-action="Details">Back to Details</a>
+                        <input type="submit" value="Set Avatar" class="gbtn gbtn-accept" />
                     </div>
                 </form>
             </li>

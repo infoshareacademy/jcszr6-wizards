@@ -1,5 +1,5 @@
-﻿@model WizardsWeb.ModelViews.HeroModelViews.HeroCreateModelView
-@using Wizards.Core.Model.Enums
+﻿@using Wizards.Core.Model.UserModels.Enums
+@model WizardsWeb.ModelViews.HeroModelViews.HeroCreateModelView
 
 @{
     ViewData["Title"] = "Set Profession";
@@ -65,12 +65,13 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-8">
                                 <h5 class="font-weight-bold">Sorcerer</h5>
                                 <p class="font-weight-bold">
                                     Sorcerers are using the power of natural elements to deal high damage and protect themselves.
-                                    They are using staffs, spell-books or scepters as weapons.
-                                    Theirs power is as wild as element they use.
+                                    They are using staffs, spell-books or scepters to concentrate natural energy. Peace of mind and perfection
+                                    helps Sorcerers to tame wild elements and perform powerful attacks. They are also very precise with actions.
+                                    Theirs power is as wild as elements they uses.
                                 </p>
                             </div>
                         </div>
@@ -82,21 +83,43 @@
                             <div class="col-md-2" align="center">
                                 <div>
                                     <label>
-                                        <input asp-for="Profession" type="radio" value="@HeroProfession.Necromancer" disabled=""/>
+                                        <input asp-for="Profession" type="radio" value="@HeroProfession.Necromancer"/>
                                         <img class="p-1" src="~/Images/Hero/Professions/Necromancer.png" width="100" height="100" />
                                     </label>
                                 </div>
                             </div>
-                            <div class="col-md-7">
-                                <h5 class="font-weight-bold text-secondary">Necromancer</h5>
+                            <div class="col-md-8">
+                                <h5 class="font-weight-bold">Necromancer</h5>
+                                <p class="font-weight-bold">
+                                    Death magic and blood rituals are the most dangerous and powerful aspects of the world. Necromancers specializes in using this mysterious knowledge
+                                    to corrupt enemies and deals damage that can overpass defense. To channel magical force they are using the most powerful artifact: Scythe, Ritual Cups and Urn's.
+                                    Theirs dark art abilities are as dangerous as terrifying.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-1" align="center">
+                            </div>
+                            <div class="col-md-2" align="center">
+                                <div>
+                                    <label>
+                                        <input asp-for="Profession" type="radio" value="@HeroProfession.Illusionist" disabled=""/>
+                                        <img class="p-1" src="~/Images/Hero/Professions/Illusionist.png" width="100" height="100" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h5 class="font-weight-bold text-secondary">Illusionist</h5>
                                 <p class="font-weight-bold text-secondary">Coming soon...</p>
                             </div>
                         </div>
                         <hr />
                         <div class="form-group">
                             <div class="btn-group btn-block">
-                                <input type="submit" asp-action="SetProfession" value="Set profession" class="btn btn-outline-primary" />
-                                <a class="btn btn-outline-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
+                                <input type="submit" asp-action="SetProfession" value="Set profession" class="gbtn gbtn-action" />
+                                <a class="gbtn gbtn-danger" asp-controller="Player" asp-action="Details">Leave Creator</a>
                             </div>
                         </div>
                     </form>

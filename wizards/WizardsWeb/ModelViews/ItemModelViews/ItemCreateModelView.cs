@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Wizards.Core.Model.Enums;
+using Wizards.Core.Model.UserModels.Enums;
 
 namespace WizardsWeb.ModelViews.ItemModelViews;
 

@@ -4,9 +4,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Wizards.Core.Model;
+using Microsoft.Extensions.Logging;
+using Wizards.Core.Model.UserModels;
+using Wizards.Services.Extensions;
 using Wizards.Services.PlayerService;
-using Wizards.Services.Helpers;
+using Wizards.Services.Validation.Elements;
 using WizardsWeb.ModelViews.PlayerModelViews;
 
 namespace WizardsWeb.Controllers;
@@ -17,12 +19,14 @@ public class PlayerController : Controller
     private readonly IPlayerService _playerService;
     private readonly IMapper _mapper;
     private readonly SignInManager<Player> _signInManager;
+    private readonly ILogger<PlayerController> _logger;
 
-    public PlayerController(IPlayerService playerService, IMapper mapper, SignInManager<Player> signInManager)
+    public PlayerController(IPlayerService playerService, IMapper mapper, SignInManager<Player> signInManager, ILogger<PlayerController> logger)
     {
         _playerService = playerService;
         _mapper = mapper;
         _signInManager = signInManager;
+        _logger = logger;
     }
 
     // GET: PlayerController/Details
@@ -49,6 +53,7 @@ public class PlayerController : Controller
     {
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation($"{playerCreate.UserName} player create failed", ModelState);
             return View(playerCreate);
         }
 
@@ -58,11 +63,21 @@ public class PlayerController : Controller
         {
             await _playerService.Create(player, playerCreate.Password);
             await _signInManager.SignInAsync(player, isPersistent: false);
+            _logger.LogInformation($"{playerCreate.UserName} player account create successful");
             return RedirectToAction(nameof(Details));
         }
         catch (Exception exception)
         {
+
             ModelState.AddModelErrorByException(exception);
+            if (exception is InvalidModelException)
+            {
+                _logger.LogInformation($"{playerCreate.UserName} player account create failed {exception.GetType()}", ModelState);
+            }
+            else
+            {
+                _logger.LogError($"{playerCreate.UserName} player account create failed {exception.GetType()}", ModelState);
+            }
             return View(playerCreate);
         }
     }
@@ -82,11 +97,12 @@ public class PlayerController : Controller
 
         if (result.Succeeded)
         {
+            _logger.LogInformation($"Login successful by {playerLogIn.UserName}");
             return RedirectToAction(nameof(Details));
         }
 
         ModelState.AddModelError("", "Invalid login attempt!");
-
+        _logger.LogError($"Login failed by {playerLogIn.UserName}", ModelState);
         return View(playerLogIn);
     }
 
@@ -115,6 +131,7 @@ public class PlayerController : Controller
 
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation($"{playerEdit.UserName} account edit information failed", ModelState);
             return View(playerEdit);
         }
 
@@ -124,13 +141,29 @@ public class PlayerController : Controller
         try
         {
             await _playerService.Update(player);
+            _logger.LogInformation($"{playerEdit.UserName} update success");
             return RedirectToAction(nameof(Details));
         }
         catch (Exception exception)
         {
             ModelState.AddModelErrorByException(exception);
+            _logger.LogInformation($"{playerEdit.UserName} account edit information failed, {exception.GetType()}", ModelState);
             return View(playerEdit);
         }
+    }
+
+    [HttpGet("Player/SetVolume/{volumeValue:int}")]
+    public async Task<IActionResult> SetMusicVolume(int volumeValue)
+    {
+        await _playerService.SetMusicVolume(User, volumeValue);
+        return Ok();
+    }
+
+    [HttpGet("Player/GetVolume")]
+    public async Task<IActionResult> GetMusicVolume()
+    {
+        var volume = await _playerService.GetMusicVolume(User);
+        return Json(volume);
     }
 
     // GET: PlayerController/EditPassword
@@ -153,17 +186,27 @@ public class PlayerController : Controller
 
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation($"{passwordChange.UserName} password change failed", ModelState);
             return View(passwordChange);
         }
 
         try
         {
             await _playerService.ChangePassword(User, passwordChange.CurrentPassword, passwordChange.NewPassword);
+            _logger.LogInformation($"{passwordChange.UserName} password change successful");
             return RedirectToAction(nameof(Edit));
         }
         catch (Exception exception)
         {
             ModelState.AddModelErrorByException(exception);
+            if (exception is InvalidModelException)
+            {
+                _logger.LogInformation($"{passwordChange.UserName} password change failed {exception.GetType()}", ModelState);
+            }
+            else
+            {
+                _logger.LogError($"{passwordChange.UserName} password change failed {exception.GetType()}", ModelState);
+            }
             return View(passwordChange);
         }
     }
@@ -189,17 +232,20 @@ public class PlayerController : Controller
 
         if (!ModelState.IsValid)
         {
+            _logger.LogInformation($"{originalPlayer.UserName} delete user failed", ModelState);
             return View(playerDelete);
         }
 
         try
         {
             await _playerService.Delete(User, passwordConfirm);
+            _logger.LogInformation($"{playerDelete.UserName} deleted successful");
             return RedirectToAction(nameof(Logout));
         }
         catch (Exception exception)
         {
             ModelState.AddModelErrorByException(exception);
+            _logger.LogError($"{playerDelete.UserName} password change failed {exception.GetType()}", ModelState);
             return View(playerDelete);
         }
     }

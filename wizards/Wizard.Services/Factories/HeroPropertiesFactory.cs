@@ -1,17 +1,19 @@
-﻿using Wizards.Core.Interfaces;
-using Wizards.Core.Model;
-using Wizards.Core.Model.Enums;
-using Wizards.Core.Model.Properties;
+﻿using Wizards.Core.Interfaces.UserModelInterfaces;
+using Wizards.Core.Model.UserModels;
+using Wizards.Core.Model.UserModels.Enums;
+using Wizards.Core.Model.UserModels.Properties;
 
 namespace Wizards.Services.Factories;
 
 public class HeroPropertiesFactory : IHeroPropertiesFactory
 {
     private readonly IItemRepository _itemRepository;
+    private readonly ISkillRepository _skillRepository;
 
-    public HeroPropertiesFactory(IItemRepository itemRepository)
+    public HeroPropertiesFactory(IItemRepository itemRepository, ISkillRepository skillRepository)
     {
         _itemRepository = itemRepository;
+        _skillRepository = skillRepository;
     }
 
     public Statistics GetStatistics()
@@ -20,8 +22,8 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
         {
             RankPoints = 0,
             TotalMatchPlayed = 0,
+            TotalMatchWin = 0,
             TotalMatchLoose = 0,
-            TotalMatchWin = 0
         };
     }
 
@@ -64,7 +66,32 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
 
         return result;
     }
-    
+
+    public List<HeroSkill> GetSkills(HeroProfession profession)
+    {
+        var skills = _skillRepository.GetAllAsync().Result
+            .Where(s => s.ProfessionRestriction == Enum.Parse<ProfessionRestriction>(profession.ToString()))
+            .OrderBy(s => s.Id);
+
+        var heroSkills = new List<HeroSkill>();
+
+        var counter = 1;
+        foreach (var skill in skills)
+        {
+            var heroSkill = new HeroSkill();
+
+            heroSkill.SlotNumber = (SkillSlotNumber)counter;
+            heroSkill.InUse = true;
+            heroSkill.SkillId = skill.Id;
+
+            heroSkills.Add(heroSkill);
+
+            counter++;
+        }
+
+        return heroSkills;
+    }
+
     private HeroAttributes CreateSorcerersAttributes()
     {
         return new HeroAttributes()
@@ -74,7 +101,6 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Precision = 5,
             Specialization = 0,
             MaxHealth = 25,
-            CurrentHealth = 25,
             Reflex = 0,
             Defense = 0
         };
@@ -88,12 +114,10 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Precision = 0,
             Specialization = 10,
             MaxHealth = 25,
-            CurrentHealth = 25,
             Reflex = 0,
             Defense = 0
         };
     }
-
     private HeroAttributes CreateDefaultAttributes()
     {
         return new HeroAttributes()
@@ -103,7 +127,6 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
             Precision = 0,
             Specialization = 0,
             MaxHealth = 0,
-            CurrentHealth = 0,
             Reflex = 0,
             Defense = 0
         };
@@ -128,9 +151,9 @@ public class HeroPropertiesFactory : IHeroPropertiesFactory
     {
         var necromancersBasicItems = _itemRepository.GetAll(ProfessionRestriction.Necromancer).Result.Where(hi => hi.Tier == 1);
 
-        var EquippedStartupWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("skull")).Id;
-        var EquippedStartupArmorId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("shroud")).Id;
-        var AdditionalWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("doll")).Id;
+        var EquippedStartupWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("scythe")).Id;
+        var EquippedStartupArmorId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("hood")).Id;
+        var AdditionalWeaponId = necromancersBasicItems.SingleOrDefault(hi => hi.Name.ToLower().Contains("urn")).Id;
 
         return new List<HeroItem>()
         {

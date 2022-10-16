@@ -155,7 +155,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +204,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,7 +237,41 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("HeroItems");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroSkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("HeroId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("InUse")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("SkillId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SlotNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SkillId");
+
+                    b.HasIndex("HeroId", "SkillId")
+                        .IsUnique();
+
+                    b.ToTable("HeroSkills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -274,341 +308,9 @@ namespace Wizards.Repository.Migrations
                         .IsUnique();
 
                     b.ToTable("Items");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AttributesId = 1,
-                            BuyPrice = 100,
-                            Name = "Normal Staff",
-                            Restriction = 1,
-                            SellPrice = 80,
-                            Tier = 1,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AttributesId = 2,
-                            BuyPrice = 600,
-                            Name = "Fine Staff",
-                            Restriction = 1,
-                            SellPrice = 480,
-                            Tier = 2,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AttributesId = 3,
-                            BuyPrice = 3000,
-                            Name = "Great Staff",
-                            Restriction = 1,
-                            SellPrice = 2400,
-                            Tier = 3,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AttributesId = 4,
-                            BuyPrice = 12000,
-                            Name = "Enchanted Staff",
-                            Restriction = 1,
-                            SellPrice = 9600,
-                            Tier = 4,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AttributesId = 5,
-                            BuyPrice = 36000,
-                            Name = "Masterpiece Staff",
-                            Restriction = 1,
-                            SellPrice = 28800,
-                            Tier = 5,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AttributesId = 6,
-                            BuyPrice = 100,
-                            Name = "Normal Spell-book",
-                            Restriction = 1,
-                            SellPrice = 80,
-                            Tier = 1,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AttributesId = 7,
-                            BuyPrice = 600,
-                            Name = "Fine Spell-book",
-                            Restriction = 1,
-                            SellPrice = 480,
-                            Tier = 2,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AttributesId = 8,
-                            BuyPrice = 3000,
-                            Name = "Great Spell-book",
-                            Restriction = 1,
-                            SellPrice = 2400,
-                            Tier = 3,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AttributesId = 9,
-                            BuyPrice = 12000,
-                            Name = "Enchanted Spell-book",
-                            Restriction = 1,
-                            SellPrice = 9600,
-                            Tier = 4,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AttributesId = 10,
-                            BuyPrice = 36000,
-                            Name = "Masterpiece Spell-book",
-                            Restriction = 1,
-                            SellPrice = 28800,
-                            Tier = 5,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AttributesId = 11,
-                            BuyPrice = 100,
-                            Name = "Normal Scepter",
-                            Restriction = 1,
-                            SellPrice = 80,
-                            Tier = 1,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 12,
-                            AttributesId = 12,
-                            BuyPrice = 600,
-                            Name = "Fine Scepter",
-                            Restriction = 1,
-                            SellPrice = 480,
-                            Tier = 2,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 13,
-                            AttributesId = 13,
-                            BuyPrice = 3000,
-                            Name = "Great Scepter",
-                            Restriction = 1,
-                            SellPrice = 2400,
-                            Tier = 3,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 14,
-                            AttributesId = 14,
-                            BuyPrice = 12000,
-                            Name = "Enchanted Scepter",
-                            Restriction = 1,
-                            SellPrice = 9600,
-                            Tier = 4,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 15,
-                            AttributesId = 15,
-                            BuyPrice = 36000,
-                            Name = "Masterpiece Scepter",
-                            Restriction = 1,
-                            SellPrice = 28800,
-                            Tier = 5,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 16,
-                            AttributesId = 16,
-                            BuyPrice = 50,
-                            Name = "Normal Vestments",
-                            Restriction = 1,
-                            SellPrice = 40,
-                            Tier = 1,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            AttributesId = 17,
-                            BuyPrice = 300,
-                            Name = "Fine Vestments",
-                            Restriction = 1,
-                            SellPrice = 240,
-                            Tier = 2,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            AttributesId = 18,
-                            BuyPrice = 1500,
-                            Name = "Great Vestments",
-                            Restriction = 1,
-                            SellPrice = 1200,
-                            Tier = 3,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 19,
-                            AttributesId = 19,
-                            BuyPrice = 6000,
-                            Name = "Enchanted Vestments",
-                            Restriction = 1,
-                            SellPrice = 4800,
-                            Tier = 4,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 20,
-                            AttributesId = 20,
-                            BuyPrice = 18000,
-                            Name = "Masterpiece Vestments",
-                            Restriction = 1,
-                            SellPrice = 14400,
-                            Tier = 5,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 21,
-                            AttributesId = 21,
-                            BuyPrice = 50,
-                            Name = "Normal Mantle",
-                            Restriction = 1,
-                            SellPrice = 40,
-                            Tier = 1,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 22,
-                            AttributesId = 22,
-                            BuyPrice = 300,
-                            Name = "Fine Mantle",
-                            Restriction = 1,
-                            SellPrice = 240,
-                            Tier = 2,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 23,
-                            AttributesId = 23,
-                            BuyPrice = 1500,
-                            Name = "Great Mantle",
-                            Restriction = 1,
-                            SellPrice = 1200,
-                            Tier = 3,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 24,
-                            AttributesId = 24,
-                            BuyPrice = 6000,
-                            Name = "Enchanted Mantle",
-                            Restriction = 1,
-                            SellPrice = 4800,
-                            Tier = 4,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 25,
-                            AttributesId = 25,
-                            BuyPrice = 18000,
-                            Name = "Masterpiece Mantle",
-                            Restriction = 1,
-                            SellPrice = 14400,
-                            Tier = 5,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 26,
-                            AttributesId = 26,
-                            BuyPrice = 50,
-                            Name = "Normal Overcoat",
-                            Restriction = 1,
-                            SellPrice = 40,
-                            Tier = 1,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 27,
-                            AttributesId = 27,
-                            BuyPrice = 300,
-                            Name = "Fine Overcoat",
-                            Restriction = 1,
-                            SellPrice = 240,
-                            Tier = 2,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 28,
-                            AttributesId = 28,
-                            BuyPrice = 1500,
-                            Name = "Great Overcoat",
-                            Restriction = 1,
-                            SellPrice = 1200,
-                            Tier = 3,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 29,
-                            AttributesId = 29,
-                            BuyPrice = 6000,
-                            Name = "Enchanted Overcoat",
-                            Restriction = 1,
-                            SellPrice = 4800,
-                            Tier = 4,
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 30,
-                            AttributesId = 30,
-                            BuyPrice = 18000,
-                            Name = "Masterpiece Overcoat",
-                            Restriction = 1,
-                            SellPrice = 14400,
-                            Tier = 5,
-                            Type = 1
-                        });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Player", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -649,6 +351,11 @@ namespace Wizards.Repository.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("MusicVolume")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(100);
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -697,16 +404,13 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.HeroAttributes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("CurrentHealth")
-                        .HasColumnType("int");
 
                     b.Property<int>("DailyRewardEnergy")
                         .HasColumnType("int");
@@ -734,7 +438,7 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("HeroAttributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.ItemAttributes", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -763,311 +467,9 @@ namespace Wizards.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ItemAttributes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Damage = 7,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 15,
-                            Reflex = 0,
-                            Specialization = -8
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Damage = 14,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 20,
-                            Reflex = 0,
-                            Specialization = -6
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Damage = 21,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 25,
-                            Reflex = 0,
-                            Specialization = -4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Damage = 28,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 30,
-                            Reflex = 0,
-                            Specialization = -2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Damage = 35,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 35,
-                            Reflex = 0,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Damage = 8,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -8,
-                            Reflex = 0,
-                            Specialization = 30
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Damage = 16,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -6,
-                            Reflex = 0,
-                            Specialization = 35
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Damage = 24,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -4,
-                            Reflex = 0,
-                            Specialization = 40
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Damage = 32,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = -2,
-                            Reflex = 0,
-                            Specialization = 45
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Damage = 40,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 0,
-                            Reflex = 0,
-                            Specialization = 50
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Damage = 9,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 12,
-                            Reflex = 0,
-                            Specialization = 3
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Damage = 18,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 14,
-                            Reflex = 0,
-                            Specialization = 6
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Damage = 27,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 16,
-                            Reflex = 0,
-                            Specialization = 9
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Damage = 36,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 18,
-                            Reflex = 0,
-                            Specialization = 12
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Damage = 45,
-                            Defense = 0,
-                            MaxHealth = 0,
-                            Precision = 20,
-                            Reflex = 0,
-                            Specialization = 15
-                        },
-                        new
-                        {
-                            Id = 16,
-                            Damage = 0,
-                            Defense = -8,
-                            MaxHealth = 25,
-                            Precision = 0,
-                            Reflex = 15,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Damage = 0,
-                            Defense = -6,
-                            MaxHealth = 75,
-                            Precision = 0,
-                            Reflex = 20,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Damage = 0,
-                            Defense = -4,
-                            MaxHealth = 125,
-                            Precision = 0,
-                            Reflex = 25,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Damage = 0,
-                            Defense = -2,
-                            MaxHealth = 175,
-                            Precision = 0,
-                            Reflex = 30,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 20,
-                            Damage = 0,
-                            Defense = 0,
-                            MaxHealth = 225,
-                            Precision = 0,
-                            Reflex = 35,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 21,
-                            Damage = 0,
-                            Defense = 30,
-                            MaxHealth = 25,
-                            Precision = 0,
-                            Reflex = -8,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 22,
-                            Damage = 0,
-                            Defense = 35,
-                            MaxHealth = 75,
-                            Precision = 0,
-                            Reflex = -6,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 23,
-                            Damage = 0,
-                            Defense = 40,
-                            MaxHealth = 125,
-                            Precision = 0,
-                            Reflex = -4,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 24,
-                            Damage = 0,
-                            Defense = 45,
-                            MaxHealth = 175,
-                            Precision = 0,
-                            Reflex = -2,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 25,
-                            Damage = 0,
-                            Defense = 50,
-                            MaxHealth = 225,
-                            Precision = 0,
-                            Reflex = 0,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 26,
-                            Damage = 0,
-                            Defense = 15,
-                            MaxHealth = 25,
-                            Precision = 0,
-                            Reflex = 4,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 27,
-                            Damage = 0,
-                            Defense = 20,
-                            MaxHealth = 75,
-                            Precision = 0,
-                            Reflex = 8,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 28,
-                            Damage = 0,
-                            Defense = 25,
-                            MaxHealth = 125,
-                            Precision = 0,
-                            Reflex = 12,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 29,
-                            Damage = 0,
-                            Defense = 30,
-                            MaxHealth = 175,
-                            Precision = 0,
-                            Reflex = 16,
-                            Specialization = 0
-                        },
-                        new
-                        {
-                            Id = 30,
-                            Damage = 0,
-                            Defense = 35,
-                            MaxHealth = 225,
-                            Precision = 0,
-                            Reflex = 20,
-                            Specialization = 0
-                        });
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.Statistics", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1100,6 +502,231 @@ namespace Wizards.Repository.Migrations
                     b.ToTable("Statistics");
                 });
 
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Skill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArmorPenetrationPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BaseHitChance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<double>("DamageFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<double>("HealingFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("ProfessionRestriction")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Skills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AttributesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AvatarImageNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2048)
+                        .HasColumnType("nvarchar(2048)");
+
+                    b.Property<string>("EnemyStageName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("GoldReward")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("RankPointsReward")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StageBackgroundImageNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tier")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("TrainingEnemy")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttributesId")
+                        .IsUnique();
+
+                    b.ToTable("Enemies");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxHealthPercentToTrigger")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinHealthPercentToTrigger")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SequenceOfSkillsId")
+                        .IsRequired()
+                        .HasMaxLength(4096)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("BehaviorPatterns");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Damage")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Defense")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("MaxHealth")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Precision")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Reflex")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("Specialization")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EnemiesAttributes");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArmorPenetrationPercent")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<int>("BaseHitChance")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<double>("DamageFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<int>("EnemyId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("HealingFactor")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("float")
+                        .HasDefaultValue(0.0);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnemyId");
+
+                    b.ToTable("EnemiesSkills");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -1111,7 +738,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1120,7 +747,7 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1135,7 +762,7 @@ namespace Wizards.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1144,30 +771,30 @@ namespace Wizards.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Player", null)
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Properties.HeroAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.HeroAttributes", "Attributes")
                         .WithOne("Hero")
-                        .HasForeignKey("Wizards.Core.Model.Hero", "AttributesId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Hero", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Player", "Player")
+                    b.HasOne("Wizards.Core.Model.UserModels.Player", "Player")
                         .WithMany("Heroes")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Properties.Statistics", "Statistics")
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.Statistics", "Statistics")
                         .WithOne("Hero")
-                        .HasForeignKey("Wizards.Core.Model.Hero", "StatisticsId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Hero", "StatisticsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1178,15 +805,15 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Statistics");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.HeroItem", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroItem", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Hero", "Hero")
+                    b.HasOne("Wizards.Core.Model.UserModels.Hero", "Hero")
                         .WithMany("Inventory")
                         .HasForeignKey("HeroId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wizards.Core.Model.Item", "Item")
+                    b.HasOne("Wizards.Core.Model.UserModels.Item", "Item")
                         .WithMany("Heroes")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1197,47 +824,119 @@ namespace Wizards.Repository.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.HeroSkill", b =>
                 {
-                    b.HasOne("Wizards.Core.Model.Properties.ItemAttributes", "Attributes")
+                    b.HasOne("Wizards.Core.Model.UserModels.Hero", "Hero")
+                        .WithMany("Skills")
+                        .HasForeignKey("HeroId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Wizards.Core.Model.UserModels.Skill", "Skill")
+                        .WithMany("Hero")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hero");
+
+                    b.Navigation("Skill");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.UserModels.Properties.ItemAttributes", "Attributes")
                         .WithOne("Item")
-                        .HasForeignKey("Wizards.Core.Model.Item", "AttributesId")
+                        .HasForeignKey("Wizards.Core.Model.UserModels.Item", "AttributesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Attributes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Hero", b =>
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", "Attributes")
+                        .WithOne("Enemy")
+                        .HasForeignKey("Wizards.Core.Model.WorldModels.Enemy", "AttributesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attributes");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.BehaviorPattern", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Enemy", "Enemy")
+                        .WithMany("BehaviorPatterns")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Enemy");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemySkill", b =>
+                {
+                    b.HasOne("Wizards.Core.Model.WorldModels.Enemy", "Enemy")
+                        .WithMany("Skills")
+                        .HasForeignKey("EnemyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Enemy");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Hero", b =>
                 {
                     b.Navigation("Inventory");
+
+                    b.Navigation("Skills");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Item", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Item", b =>
                 {
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Player", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Player", b =>
                 {
                     b.Navigation("Heroes");
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.HeroAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.HeroAttributes", b =>
                 {
                     b.Navigation("Hero")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.ItemAttributes", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.ItemAttributes", b =>
                 {
                     b.Navigation("Item")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Wizards.Core.Model.Properties.Statistics", b =>
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Properties.Statistics", b =>
                 {
                     b.Navigation("Hero")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.UserModels.Skill", b =>
+                {
+                    b.Navigation("Hero");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Enemy", b =>
+                {
+                    b.Navigation("BehaviorPatterns");
+
+                    b.Navigation("Skills");
+                });
+
+            modelBuilder.Entity("Wizards.Core.Model.WorldModels.Properties.EnemyAttributes", b =>
+                {
+                    b.Navigation("Enemy")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

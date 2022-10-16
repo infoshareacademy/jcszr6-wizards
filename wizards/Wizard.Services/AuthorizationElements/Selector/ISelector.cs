@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Wizards.Core.Model;
+using Wizards.Core.Model.UserModels;
 
 namespace Wizards.Services.AuthorizationElements.Selector;
 

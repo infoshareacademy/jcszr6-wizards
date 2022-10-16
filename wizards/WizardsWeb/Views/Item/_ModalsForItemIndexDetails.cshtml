@@ -7,10 +7,10 @@
             <div class="modal-header table-@Model.GetItemTierColor()">
                 <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="Model" />
             </div>
-            <div class="modal-body">
+            <div class="modal-body bg-paper-color">
                 <partial name="~/Views/Item/_ItemAttributesInfo.cshtml" model="@Model.Attributes" />
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer bg-paper-color">
                 <partial name="~/Views/Item/_ItemEconomyInfo.cshtml" model="Model" />
             </div>
         </div>
@@ -26,19 +26,19 @@
                 <div class="modal-header table-@Model.GetItemTierColor()">
                     <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
                 </div>
-                <div class="modal-body alert alert-warning">
+                <div class="modal-body bg-paper-color">
                     <div class="h3 text-center text-dark">
                         <span>Do you want to repair this item for </span>
                         <span class="font-weight-bold">@($"{Model.RepairCost:#,##0}")</span>
                         <span> Gold?</span>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-paper-color">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-target="#details-@Model.Id" data-bs-toggle="modal">
+                        <button class="gbtn gbtn-action" data-bs-target="#details-@Model.Id" data-bs-toggle="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
+                        <a class="gbtn gbtn-accept" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="Repair">
                             Yes
                         </a>
                     </div>
@@ -56,19 +56,19 @@ else if (Model.IsMerchantItem)
                 <div class="modal-header table-@Model.GetItemTierColor()">
                     <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
                 </div>
-                <div class="modal-body alert alert-warning">
+                <div class="modal-body bg-paper-color">
                     <div class="h3 text-center text-dark">
                         <span>Do you want to buy this item for </span>
                         <span class="font-weight-bold">@($"{Model.BuyPrice:#,##0}")</span>
                         <span> Gold?</span>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-paper-color">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                        <button class="gbtn gbtn-action" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Merchant" asp-action="BuyItem" asp-route-id="@Model.CoreItemId">
+                        <a class="gbtn gbtn-accept" asp-controller="Merchant" asp-action="BuyItem" asp-route-id="@Model.CoreItemId">
                             Yes
                         </a>
                     </div>
@@ -86,19 +86,19 @@ else if (Model.IsInMerchantMode && !Model.IsMerchantItem)
                 <div class="modal-header table-@Model.GetItemTierColor()">
                     <partial name="~/Views/Item/_ItemBasicInfo.cshtml" model="@Model" />
                 </div>
-                <div class="modal-body alert alert-danger">
+                <div class="modal-body bg-paper-color">
                     <div class="h3 text-center text-dark">
                         <span>Do you want to sell this item for </span>
                         <span class="font-weight-bold">@($"{Model.SellPrice:#,##0}")</span>
                         <span> Gold?</span>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer bg-paper-color">
                     <div class="btn-group col-12">
-                        <button class="btn btn-warning" data-bs-dismiss="modal">
+                        <button class="gbtn gbtn-action" data-bs-dismiss="modal">
                             No
                         </button>
-                        <a class="btn btn-success" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem" asp-route-controllerName="Merchant">
+                        <a class="gbtn gbtn-accept" asp-controller="Selector" asp-action="SelectItem" asp-route-id="@Model.Id" asp-route-actionName="SellItem" asp-route-controllerName="Merchant">
                             Yes
                         </a>
                     </div>
